@@ -10,7 +10,26 @@ If you want to make the service more JEE compliant by allocating [JAX-RS spec](h
 
 Testing
 -------
+There are test examples of both controllers and data access objects using the Spring test package. Note that loading demo data is part of the liquibase changelog, and the tests use that data instead of initialising with their own test data.
 
 For AngularJS see http://www.tuesdaydeveloper.com/2013/06/angularjs-testing-with-karma-and-jasmine/
 
 There is a blog post of how to invoke Karma from Maven: http://jamesnavin.net/2014/05/25/maven-karma-webjars/
+
+How to build
+------------
+You need Git to check the code out from the repository and to build you need Java and Maven.  All other dependencies will automatically be downloaded by Maven.
+
+For Windows see the pages on:
+* [Git for Windows](http://git-scm.com/downloads)
+* [Maven for Windows](http://maven.apache.org/guides/getting-started/windows-prerequisites.html).
+
+To build you do:
+```
+git clone https://github.com/eea/eprtr2.git
+cd eprtr2
+mvn.bat install
+```
+
+This will create a `target` subdirectory, build the code, run the tests and put a WAR file in target. You can then deploy this file to Tomcat. It contains an embedded database with demo data.
+
