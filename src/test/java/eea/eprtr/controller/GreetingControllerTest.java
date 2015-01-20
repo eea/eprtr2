@@ -2,6 +2,7 @@ package eea.eprtr.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -42,7 +43,18 @@ public class GreetingControllerTest {
     @Test
     public void testGreeting() throws Exception {
         this.mockMvc.perform(get("/greeting"))
-                .andExpect(status().isOk());
+//              .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().string("{\"id\":1,\"content\":\"Hello, World!\"}"));
     }
-//    .contentType("application/json;charset=UTF-8"))
+
+    @Test
+    public void testGreetingEEA() throws Exception {
+        this.mockMvc.perform(get("/greeting").param("name", "EEA"))
+//              .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("application/json;charset=UTF-8"))
+                .andExpect(content().string("{\"id\":1,\"content\":\"Hello, EEA!\"}"));
+    }
 }
