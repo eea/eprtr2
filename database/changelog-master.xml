@@ -16,5 +16,6 @@
 
  <include file="database/CreateTables.xml"/>
  <include file="database/CMS.xml"/>
+ <include file="database/CreateRDFViews.xml"/>
 
 </databaseChangeLog>

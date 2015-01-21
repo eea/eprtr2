@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+  <!--
+     You can run this change log on your database as many times as you want, it will ignore the
+     changes that are already applied. It also means that you can't modify an existing revision.
+     Always add to the end.
+
+     Use the maven goals: liquibase:update and liquibase:status
+      Potentially with -Dliquibase.dropFirst=true
+ -->
+
+  <changeSet author="roug" id="rev-1" dbms="mssql">
+    <createView viewName="RDF_ACTIVITY">
+SELECT a.ActivityID
+       ,a.FacilityReportID AS inReport
+       ,aia.Code AS annexIActivity
+       ,aia.IPPCCode AS AnnexIActivityIPPCCode
+       ,a.RankingNumeric
+       ,a.MainActivityIndicator
+       ,aia.Code + ' - ' + aia.Name +
+       CASE a.MainActivityIndicator
+              WHEN 1 THEN ' (main)'
+              ELSE ''
+       END AS 'rdfs:label'
+FROM dbo.ACTIVITY AS a INNER JOIN
+       dbo.FACILITYREPORT AS fr ON fr.FacilityReportID = a.FacilityReportID INNER JOIN
+       dbo.vAT_POLLUTANTRELEASEANDTRANSFERREPORT AS prtr ON
+       prtr.PollutantReleaseAndTransferReportID = fr.PollutantReleaseAndTransferReportID
+LEFT OUTER JOIN
+    dbo.LOV_ANNEXIACTIVITY AS aia ON a.LOV_AnnexIActivityID = aia.LOV_AnnexIActivityID
+    </createView>
+  </changeSet>
+
+
+</databaseChangeLog>
