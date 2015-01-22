@@ -23,9 +23,11 @@ module.exports = function(config){
             'karma-jasmine',
             'karma-junit-reporter'
             ],
+            
+    // reporters : ['junit'], // uncomment if junit reports are needed
 
     junitReporter : {
-      outputFile: 'test_out/unit.xml',
+      outputFile: 'test-results.xml',
       suite: 'unit'
     }
 
