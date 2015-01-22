@@ -16,6 +16,11 @@ For AngularJS see http://www.tuesdaydeveloper.com/2013/06/angularjs-testing-with
 
 There is a blog post of how to invoke Karma from Maven: http://jamesnavin.net/2014/05/25/maven-karma-webjars/
 
+Continuous JavaScript testing with Karma:
+```
+npm test
+```
+
 How to build
 ------------
 You need Git to check the code out from the repository and to build you need Java and Maven.  All other dependencies will automatically be downloaded by Maven.
@@ -23,11 +28,16 @@ You need Git to check the code out from the repository and to build you need Jav
 For Windows see the pages on:
 * [Git for Windows](http://git-scm.com/downloads)
 * [Maven for Windows](http://maven.apache.org/guides/getting-started/windows-prerequisites.html).
+* [Node.js](http://nodejs.org/)
+* [Git Shell](https://windows.github.com/)
 
-To build you do:
+Before building you need to install Node.js. 
+
+To build you do (preferably from Git Shell if using Windows):
 ```
 git clone https://github.com/eea/eprtr2.git
 cd eprtr2
+npm install
 mvn.bat install
 ```
 
