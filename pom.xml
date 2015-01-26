@@ -27,14 +27,6 @@
 
     <repositories>
         <repository>
-            <id>org.springframework.maven.release</id>
-            <name>Spring Maven Repository</name>
-            <url>http://maven.springframework.org/release</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-        <repository>
             <id>eea</id>
             <name>EEA Release Repository</name>
             <url>http://archiva.eionet.europa.eu/repository/internal</url>
@@ -251,6 +243,7 @@
                     <!-- 3. Run karma tests -->
                     <execution>
                         <id>javascript tests</id>
+                        <phase>test</phase>
                         <goals>
                             <goal>karma</goal>
                         </goals>
