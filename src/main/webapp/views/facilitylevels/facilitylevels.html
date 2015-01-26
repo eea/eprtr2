@@ -1,0 +1,1344 @@
+<div class="info_area">
+
+
+
+	<script type="text/javasript" src="Charts/charts.js"></script>
+	<script type="text/javascript" src="Scripts/jsValidation.js"></script>
+
+
+	<div class="info_box_search">
+		<h1>Facility level</h1>
+		<p>This report will display the reported releases and transfers of
+			a specific facility. You can also search for a facility by using the
+			map search in the navigation menu.</p>
+	</div>
+
+	<div
+		id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_upSearchControls">
+
+		<div
+			id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_searchForm"
+			class="search_form">
+
+			<div
+				id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_upSearchFacility">
+
+				<div
+					id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_pnlSearch"
+					onkeypress="javascript:return WebForm_FireDefaultButton(event, 'ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_btnSearch')">
+
+
+
+					<div
+						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_infoSearchHelp_divInfo"
+						class="searchHelpIcon infoIcon"
+						onclick="PopupWindowButtonClicked('pgHelpFacilitySeach.aspx' ); return false;">
+						<a
+							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_infoSearchHelp_lnkInfo"
+							href="UserControls/Common/pgHelpFacilitySeach.aspx"
+							target="_blank"><img
+							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_infoSearchHelp_imgInfo"
+							title="Search Help" src="images/help.png"
+							style="border-width: 0px;"></a>
+
+
+					</div>
+
+
+
+					<div class="searchOption_area">
+						Country<br> <select
+							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAreaSearchOption$cbFacilityCountry"
+							onchange="javascript:setTimeout('__doPostBack(\'ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAreaSearchOption$cbFacilityCountry\',\'\')', 0)"
+							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAreaSearchOption_cbFacilityCountry">
+							<option selected="selected" value="-1">All Reporting
+								States for E-PRTR</option>
+							<option value="-2">EU15</option>
+							<option value="-3">EU25</option>
+							<option value="-4">EU27</option>
+							<option value="15">Austria</option>
+							<option value="22">Belgium</option>
+							<option value="34">Bulgaria</option>
+							<option value="57">Cyprus</option>
+							<option value="58">Czech Republic</option>
+							<option value="59">Denmark</option>
+							<option value="68">Estonia</option>
+							<option value="73">Finland</option>
+							<option value="74">France</option>
+							<option value="81">Germany</option>
+							<option value="84">Greece</option>
+							<option value="100">Hungary</option>
+							<option value="101">Iceland</option>
+							<option value="106">Ireland</option>
+							<option value="109">Italy</option>
+							<option value="122">Latvia</option>
+							<option value="127">Liechtenstein</option>
+							<option value="128">Lithuania</option>
+							<option value="129">Luxembourg</option>
+							<option value="137">Malta</option>
+							<option value="156">Netherlands</option>
+							<option value="166">Norway</option>
+							<option value="177">Poland</option>
+							<option value="178">Portugal</option>
+							<option value="182">Romania</option>
+							<option value="197">Serbia</option>
+							<option value="201">Slovakia</option>
+							<option value="202">Slovenia</option>
+							<option value="207">Spain</option>
+							<option value="213">Sweden</option>
+							<option value="214">Switzerland</option>
+							<option value="234">United Kingdom</option>
+
+						</select>
+
+
+						<div>
+							<span
+								id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAreaSearchOption_rblRegionType"><input
+								id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAreaSearchOption_rblRegionType_0"
+								type="radio"
+								name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAreaSearchOption$rblRegionType"
+								value="0"
+								onclick="javascript:setTimeout('__doPostBack(\'ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAreaSearchOption$rblRegionType$0\',\'\')', 0)"><label
+								for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAreaSearchOption_rblRegionType_0">Region</label><input
+								id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAreaSearchOption_rblRegionType_1"
+								type="radio"
+								name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAreaSearchOption$rblRegionType"
+								value="1" checked="checked"><label
+								for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAreaSearchOption_rblRegionType_1">River
+									basin district</label></span>
+						</div>
+
+						<select
+							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAreaSearchOption$cbRegion"
+							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAreaSearchOption_cbRegion"
+							disabled="disabled">
+							<option selected="selected" value="-1">All river basin
+								districts</option>
+
+						</select>
+
+					</div>
+
+
+					<div class="searchOption_year">
+						Year <br> <select
+							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucYearSearchOption$cbReportYear"
+							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucYearSearchOption_cbReportYear">
+							<option value="2007">2007</option>
+							<option value="2008">2008</option>
+							<option value="2009">2009</option>
+							<option value="2010">2010</option>
+							<option value="2011">2011</option>
+							<option selected="selected" value="2012">2012</option>
+
+						</select>
+
+					</div>
+
+
+
+
+
+					<div id="searchOption_facilityname">
+						Facility Name<br> <input
+							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucFacilityLocationSearchOption$txFacilityName"
+							type="text"
+							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucFacilityLocationSearchOption_txFacilityName">
+					</div>
+					<div id="searchOption_town">
+						Town/village<br> <input
+							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucFacilityLocationSearchOption$txFacilityTown"
+							type="text"
+							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucFacilityLocationSearchOption_txFacilityTown">
+					</div>
+
+
+					<div
+						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedActivitySearchOption_upActivity">
+
+
+						<input type="hidden"
+							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedActivitySearchOption$cpeActivity_ClientState"
+							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedActivitySearchOption_cpeActivity_ClientState"
+							value="true">
+
+						<div class="searchOption_activity">
+							<fieldset>
+								<legend> Activity </legend>
+								<div class="panelIcons">
+									<input type="image" class="collapseIcon" ng-src="{{activityPanelToggleButtonImage}}" ng-attr-title="{{activityPanelToggleButtonTitle}}" ng-click="toggleActivityPanel()" style="border-width: 0px;">
+									<div class="infoIcon">
+										<a href="UserControls/Common/PopupLibraryActivities.aspx" target="_blank">
+											<img title="Information about activities" src="images/info.png" style="border-width: 0px;">
+										</a>
+									</div>
+								</div>
+
+								<span class="cpeTextLabel2" ng-hide="activityPanel">Not included</span> 
+								<span class="cpeTextLabel" ng-hide="activityPanel">Expand to include</span>
+
+								<div class="cpeContent" ng-show="activityPanel">
+									<div id="" class="cpeContent">
+										<div>
+											<span
+												id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedActivitySearchOption_ucActivitySearchOption_rblActivityType"><input
+												id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedActivitySearchOption_ucActivitySearchOption_rblActivityType_0"
+												type="radio"
+												name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedActivitySearchOption$ucActivitySearchOption$rblActivityType"
+												value="0" checked="checked"><label
+												for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedActivitySearchOption_ucActivitySearchOption_rblActivityType_0">Industrial
+													activity</label><input
+												id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedActivitySearchOption_ucActivitySearchOption_rblActivityType_1"
+												type="radio"
+												name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedActivitySearchOption$ucActivitySearchOption$rblActivityType"
+												value="1"
+												onclick="javascript:setTimeout('__doPostBack(\'ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedActivitySearchOption$ucActivitySearchOption$rblActivityType$1\',\'\')', 0)"><label
+												for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedActivitySearchOption_ucActivitySearchOption_rblActivityType_1">Economic
+													sector (NACE)</label></span>
+										</div>
+
+										Sector <br> <select size="3"
+											name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedActivitySearchOption$ucActivitySearchOption$lbActivitySector"
+											multiple="multiple"
+											onchange="javascript:setTimeout('__doPostBack(\'ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedActivitySearchOption$ucActivitySearchOption$lbActivitySector\',\'\')', 0)"
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedActivitySearchOption_ucActivitySearchOption_lbActivitySector">
+											<option selected="selected" value="-1">All sectors</option>
+											<option value="1">1 Energy sector</option>
+											<option value="2">2 Production and processing of
+												metals</option>
+											<option value="3">3 Mineral industry</option>
+											<option value="4">4 Chemical industry</option>
+											<option value="5">5 Waste and waste water management</option>
+											<option value="6">6 Paper and wood production
+												processing</option>
+											<option value="7">7 Intensive livestock production
+												and aquaculture</option>
+											<option value="8">8 Animal and vegetable products
+												from the food and beverage sector</option>
+											<option value="9">9 Other activities</option>
+
+										</select> Activities <br> <select size="3"
+											name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedActivitySearchOption$ucActivitySearchOption$lbActivities"
+											multiple="multiple"
+											onchange="javascript:setTimeout('__doPostBack(\'ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedActivitySearchOption$ucActivitySearchOption$lbActivities\',\'\')', 0)"
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedActivitySearchOption_ucActivitySearchOption_lbActivities">
+											<option selected="selected" value="-1">All
+												activities</option>
+
+										</select> Sub-activities <img
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedActivitySearchOption_ucActivitySearchOption_imgAlert"
+											src="images/alert.png"
+											alt="Reporting on sub-activity level is voluntary"
+											style="border-width: 0px;"> <br> <select size="3"
+											name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedActivitySearchOption$ucActivitySearchOption$lbSubActivities"
+											multiple="multiple"
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedActivitySearchOption_ucActivitySearchOption_lbSubActivities">
+											<option selected="selected" value="-1">All
+												sub-activities</option>
+
+										</select>
+
+
+
+									</div>
+								</div>
+
+							</fieldset>
+						</div>
+
+
+					</div>
+
+
+					<div
+						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_upPollutant">
+
+
+
+						<input type="hidden"
+							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$cpePollutant_ClientState"
+							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_cpePollutant_ClientState"
+							value="true">
+
+						<div class="searchOption_pollutant">
+							<fieldset>
+								<legend> Pollutant releases and transfers </legend>
+
+								<div class="panelIcons">
+									<input type="image" class="collapseIcon" ng-src="{{pollutantPanelToggleButtonImage}}" ng-attr-title="{{pollutnatPanelToggleButtonTitle}}" ng-click="togglePollutantPanel()" style="border-width: 0px;">
+									<div class="infoIcon">
+										<a href="UserControls/Common/pgLibraryPollutants.aspx?mpage=pop" target="_blank">
+											<img title="Information about pollutants" src="images/info.png" style="border-width: 0px;">
+										</a>
+									</div>
+								</div>
+								
+								<span class="cpeTextLabel2" ng-hide="pollutantPanel">Not included</span> 
+								<span class="cpeTextLabel" ng-hide="pollutantPanel">Expand to include</span>
+
+								<div class="cpeContent" ng-show="pollutantPanel">
+									<div id="" class="cpeContent">
+
+										Pollutant Group<br> <select
+											name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$ucPollutantSearchOption$cbPollutantGroup"
+											onchange="javascript:setTimeout('__doPostBack(\'ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$ucPollutantSearchOption$cbPollutantGroup\',\'\')', 0)"
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucPollutantSearchOption_cbPollutantGroup">
+											<option selected="selected" value="-1">All pollutant
+												groups</option>
+											<option value="5">Chlorinated organic substances</option>
+											<option value="1">Greenhouse gases</option>
+											<option value="3">Heavy metals</option>
+											<option value="7">Inorganic substances</option>
+											<option value="2">Other gases</option>
+											<option value="6">Other organic substances</option>
+											<option value="4">Pesticides</option>
+
+										</select> Pollutant<br> <select
+											name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$ucPollutantSearchOption$cbPollutant"
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucPollutantSearchOption_cbPollutant">
+											<option selected="selected" value="-1">All
+												pollutants</option>
+
+										</select> Releases to <input
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkAir"
+											type="checkbox"
+											name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$ucMediumSearchOption$chkAir"
+											checked="checked" onclick="PRTValidation();"><label
+											for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkAir">Air</label>
+										<input type="hidden" id="clIDchkAir"
+											value="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkAir">
+										<input
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkWater"
+											type="checkbox"
+											name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$ucMediumSearchOption$chkWater"
+											checked="checked" onclick="PRTValidation();"><label
+											for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkWater">Water</label>
+										<input type="hidden" id="clIDchkWater"
+											value="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkWater">
+										<input
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkSoil"
+											type="checkbox"
+											name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$ucMediumSearchOption$chkSoil"
+											checked="checked" onclick="PRTValidation();"><label
+											for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkSoil">Soil</label>
+										<input type="hidden" id="clIDchkSoil"
+											value="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkSoil">
+
+										<div
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_plTransfers">
+
+											Transfers to <input
+												id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkWasteWater"
+												type="checkbox"
+												name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$ucMediumSearchOption$chkWasteWater"
+												checked="checked" onclick="PRTValidation();"><label
+												for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkWasteWater">Waste
+												water</label> <input type="hidden" id="clIDchkWasteWater"
+												value="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkWasteWater">
+
+										</div>
+
+
+
+
+
+
+
+										<div class="spacer"></div>
+										Accidental only <input
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucAccidentalSearchOption_chkAccidental"
+											type="checkbox"
+											name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$ucAccidentalSearchOption$chkAccidental">
+										<input type="hidden" id="clIDchkAccidental"
+											value="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucAccidentalSearchOption_chkAccidental">
+
+
+
+
+										<div id="msgPRTValidation"
+											style="display: none; width: 280px;"
+											class="resultSheet_alert">
+											<img
+												id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMsgPRT_imgAlert"
+												src="images/alert.png" alt="alert"
+												style="border-width: 0px;"> This search will yield no
+											result
+											<div class="spacer"></div>
+										</div>
+
+										<div class="spacer"></div>
+
+									</div>
+								</div>
+
+
+
+							</fieldset>
+						</div>
+
+
+					</div>
+
+
+					<div
+						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_upWaste">
+
+
+
+						<input type="hidden"
+							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedWasteSearchOption$cpeWaste_ClientState"
+							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_cpeWaste_ClientState"
+							value="true">
+
+						<div class="searchOption_waste">
+							<fieldset>
+								<legend> Waste transfers </legend>
+
+								<div class="panelIcons">
+									<input type="image" class="collapseIcon" ng-src="{{wastePanelToggleButtonImage}}" ng-attr-title="{{wastePanelToggleButtonTitle}}" ng-click="toggleWastePanel()" style="border-width: 0px;">
+									<div class="infoIcon">
+										<a href="UserControls/Common/PopupLibraryWaste.aspx" target="_blank">
+											<img title="Information about waste transfer" src="images/info.png" style="border-width: 0px;">
+										</a>
+									</div>
+								</div>
+
+								<span class="cpeTextLabel2" ng-hide="wastePanel">Not included</span> 
+								<span class="cpeTextLabel" ng-hide="wastePanel">Expand to include</span>
+
+								<div class="cpeContent" ng-show="wastePanel">
+									<div id="" class="cpeContent">
+
+										<div class="searchOption_wasteLegend">Transfer of</div>
+
+										<div class="searchOption_wasteCriteria">
+											<input
+												id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTypeSearchOption_chkWasteNonHazardous"
+												type="checkbox"
+												name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedWasteSearchOption$ucWasteTypeSearchOption$chkWasteNonHazardous"
+												checked="checked" onclick="WTValidation();"><label
+												for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTypeSearchOption_chkWasteNonHazardous">Non
+												Hazardous waste</label> <input type="hidden"
+												id="clIDchkWasteNonHazardous"
+												value="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTypeSearchOption_chkWasteNonHazardous">
+											<br> <input
+												id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTypeSearchOption_chkWasteHazardousCountry"
+												type="checkbox"
+												name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedWasteSearchOption$ucWasteTypeSearchOption$chkWasteHazardousCountry"
+												checked="checked" onclick="WTValidation();"><label
+												for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTypeSearchOption_chkWasteHazardousCountry">Hazardous
+												waste, domestic</label> <input type="hidden"
+												id="clIDchkWasteHazardousCountry"
+												value="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTypeSearchOption_chkWasteHazardousCountry">
+											<br> <input
+												id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTypeSearchOption_chkWasteHazardousTransboundary"
+												type="checkbox"
+												name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedWasteSearchOption$ucWasteTypeSearchOption$chkWasteHazardousTransboundary"
+												checked="checked" onclick="WTValidation();"><label
+												for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTypeSearchOption_chkWasteHazardousTransboundary">Hazardous
+												waste, transboundary</label> <input type="hidden"
+												id="clIDchkWasteHazardousTransboundary"
+												value="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTypeSearchOption_chkWasteHazardousTransboundary">
+											<br>
+
+										</div>
+
+
+
+										<div class="searchOption_wasteLegend">Treatment</div>
+
+
+										<div class="searchOption_wasteCriteria">
+											<input
+												id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTreatmenSearchOption_chkTreatmentRecovery"
+												type="checkbox"
+												name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedWasteSearchOption$ucWasteTreatmenSearchOption$chkTreatmentRecovery"
+												checked="checked" onclick="WTValidation();"><label
+												for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTreatmenSearchOption_chkTreatmentRecovery">Recovery</label>
+											<input type="hidden" id="clIDchkTreatmentRecovery"
+												value="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTreatmenSearchOption_chkTreatmentRecovery">
+
+											<input
+												id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTreatmenSearchOption_chkTreatmentDisposal"
+												type="checkbox"
+												name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedWasteSearchOption$ucWasteTreatmenSearchOption$chkTreatmentDisposal"
+												checked="checked" onclick="WTValidation();"><label
+												for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTreatmenSearchOption_chkTreatmentDisposal">Disposal</label>
+											<input type="hidden" id="clIDchkTreatmentDisposal"
+												value="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTreatmenSearchOption_chkTreatmentDisposal">
+
+											<input
+												id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTreatmenSearchOption_chkTreatmentUnspecified"
+												type="checkbox"
+												name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedWasteSearchOption$ucWasteTreatmenSearchOption$chkTreatmentUnspecified"
+												checked="checked" onclick="WTValidation();"><label
+												for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTreatmenSearchOption_chkTreatmentUnspecified">Unspecified</label>
+											<input type="hidden" id="clIDchkTreatmentUnspecified"
+												value="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteTreatmenSearchOption_chkTreatmentUnspecified">
+
+										</div>
+
+
+
+
+										<div id="searchOption_wasteReceiver">
+											Receiving Country<br> <select
+												name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedWasteSearchOption$ucWasteReceiverSearchOption$cbReceivingCountry"
+												id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucWasteReceiverSearchOption_cbReceivingCountry">
+												<option selected="selected" value="-1">All
+													receiving countries</option>
+												<option value="1">Afghanistan</option>
+												<option value="3">Albania</option>
+												<option value="6">Andorra</option>
+												<option value="10">Antigua and Barbuda</option>
+												<option value="15">Austria</option>
+												<option value="21">Belarus</option>
+												<option value="22">Belgium</option>
+												<option value="25">Bermuda</option>
+												<option value="26">Bhutan</option>
+												<option value="34">Bulgaria</option>
+												<option value="39">Canada</option>
+												<option value="45">China</option>
+												<option value="55">Croatia</option>
+												<option value="57">Cyprus</option>
+												<option value="58">Czech Republic</option>
+												<option value="59">Denmark</option>
+												<option value="60">Djibouti</option>
+												<option value="68">Estonia</option>
+												<option value="73">Finland</option>
+												<option value="74">France</option>
+												<option value="80">Georgia</option>
+												<option value="81">Germany</option>
+												<option value="82">Ghana</option>
+												<option value="83">Gibraltar</option>
+												<option value="84">Greece</option>
+												<option value="100">Hungary</option>
+												<option value="106">Ireland</option>
+												<option value="109">Italy</option>
+												<option value="111">Japan</option>
+												<option value="118">Korea, Republic of</option>
+												<option value="122">Latvia</option>
+												<option value="128">Lithuania</option>
+												<option value="129">Luxembourg</option>
+												<option value="137">Malta</option>
+												<option value="150">Morocco</option>
+												<option value="156">Netherlands</option>
+												<option value="161">Niger</option>
+												<option value="166">Norway</option>
+												<option value="177">Poland</option>
+												<option value="178">Portugal</option>
+												<option value="182">Romania</option>
+												<option value="197">Serbia</option>
+												<option value="201">Slovakia</option>
+												<option value="202">Slovenia</option>
+												<option value="207">Spain</option>
+												<option value="213">Sweden</option>
+												<option value="214">Switzerland</option>
+												<option value="226">Turkey</option>
+												<option value="231">Ukraine</option>
+												<option value="234">United Kingdom</option>
+												<option value="235">United States</option>
+
+											</select>
+										</div>
+
+
+
+
+										<div id="msgWasteValidation"
+											style="display: none; width: 280px;"
+											class="resultSheet_alert">
+											<img
+												id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_ucMsgWaste_imgAlert"
+												src="images/alert.png" alt="alert"
+												style="border-width: 0px;"> This search will yield no
+											result
+											<div class="spacer"></div>
+										</div>
+
+
+									</div>
+								</div>
+
+							</fieldset>
+						</div>
+
+
+					</div>
+
+
+
+					<div
+						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_plButton">
+
+
+						<input type="submit" value="Search" ng-click="search()" class="search_button"> 
+						<img id="waitindicator" class="search_indicator" alt="" src="images/loader.gif">
+
+					</div>
+
+
+				</div>
+
+			</div>
+
+
+
+
+		</div>
+	</div>
+
+	<div
+		id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_upResultArea" ng-show="searchResults">
+
+		<div
+			id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_resultArea"
+			class="layout_resultArea">
+
+
+
+			<div class="look_sheet_level0">
+
+				<div class="layout_sheet_header">
+					<h2>Facility search / Facilities</h2>
+				</div>
+
+
+
+				<div class="layout_sheet_contentsBox look_sheet_contentsBox">
+					<span
+						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetLinks_lbContentsHeader"
+						class="contentsBox_header">Contents:</span> <br> <a
+						onclick="ShowWaitIndicator();"
+						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetLinks_LinkButton0"
+						class="contentsBox_item contentsBox_item_selected"
+						href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucSheetLinks$LinkButton0','')">Facilities</a>
+					<a onclick="ShowWaitIndicator();"
+						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetLinks_LinkButton1"
+						class="contentsBox_item"
+						href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucSheetLinks$LinkButton1','')">Confidentiality</a>
+
+
+
+
+
+
+
+
+				</div>
+
+
+
+
+
+
+
+				<div class="layout_sheet_download_print">
+					<div
+						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucDownloadPrint_dowloadbuttons">
+
+						<input type="image"
+							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucDownloadPrint$btndownload"
+							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucDownloadPrint_btndownload"
+							title="Download" src="images/download.gif"
+							style="border-width: 0px;"> <input type="image"
+							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucDownloadPrint$btnPrint"
+							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucDownloadPrint_btnPrint"
+							title="Print" src="images/ico-print.gif"
+							onclick="window.open('print.aspx?page=global','','height=500px,width=850px,scrollbars=1,resizable=yes,toolbar=no,status=no,replace=true');"
+							style="border-width: 0px;">
+
+					</div>
+
+				</div>
+
+				<div class="layout_sheet_subHeader">
+					<div>
+						<table cellspacing="0" border="0"
+							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetSubHeader_subheadlineGridView"
+							style="border-collapse: collapse;">
+							<tbody>
+								<tr style="border-style: None;">
+									<th class="resultSheet_subHeader_label detailsTitleColor"
+										scope="row">Area:</th>
+									<td class="resultSheet_subHeader_value">All Reporting
+										States for E-PRTR</td>
+								</tr>
+								<tr style="border-style: None;">
+									<th class="resultSheet_subHeader_label detailsTitleColor"
+										scope="row">Year:</th>
+									<td class="resultSheet_subHeader_value">2012</td>
+								</tr>
+								<tr style="border-style: None;">
+									<th class="resultSheet_subHeader_label detailsTitleColor"
+										scope="row">Facilities:</th>
+									<td class="resultSheet_subHeader_value">31,495</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+
+
+
+
+					<div
+						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetSubHeader_ucConfidentialDisclaimer_divContent"
+						class="resultSheet_alert">
+						<img
+							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetSubHeader_ucConfidentialDisclaimer_imgAlert"
+							src="images/alert.png" alt="alert" style="border-width: 0px;">
+						<a onclick="ShowWaitIndicator();"
+							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetSubHeader_ucConfidentialDisclaimer_lnbAlert"
+							href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucSheetSubHeader$ucConfidentialDisclaimer$lnbAlert','')">Confidentiality
+							claims may affect the result. See details &gt;&gt;</a>
+					</div>
+
+
+
+
+
+				</div>
+
+
+				<div class="layout_sheet_content">
+					<span
+						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lbHelpText"
+						class="listHelp">Clicking the column headers will sort
+						results either descending or ascending</span><br>
+					<br>
+
+					<table>
+						<thead>
+							<tr class="generalListStyle_headerRow">
+								<th scope="col"><div id="headerFacility">
+										<a
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lvFacilityResult_lnkFacility"
+											href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$lvFacilityResult$lnkFacility','')">Facility</a>
+										<img
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lvFacilityResult_upFacility"
+											src="images/arrow_up.gif" style="border-width: 0px;">
+									</div></th>
+								<th scope="col"><div id="headerPostalCode">
+										<a
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lvFacilityResult_lnkPostalCode"
+											href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$lvFacilityResult$lnkPostalCode','')">Postal
+											Code</a>
+									</div></th>
+								<th scope="col"><div id="headerAddress">
+										<a
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lvFacilityResult_lnkAddress"
+											href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$lvFacilityResult$lnkAddress','')">Address</a>
+									</div></th>
+								<th scope="col"><div id="headerTownVillage">
+										<a
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lvFacilityResult_lnkTownVillage"
+											href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$lvFacilityResult$lnkTownVillage','')">Town/Village</a>
+									</div></th>
+								<th scope="col"><div id="headerActivity">
+										<a
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lvFacilityResult_lnkActivity"
+											href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$lvFacilityResult$lnkActivity','')">Activity</a>
+									</div></th>
+								<th scope="col"><div id="headerCountry">
+										<a
+											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lvFacilityResult_lnkCountry"
+											href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$lvFacilityResult$lnkCountry','')">Country</a>
+									</div></th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=139059&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">8647</div></td>
+								<td title=""><div id="Address">Zavelhoek 5</div></td>
+								<td title=""><div id="TownVillage">Lo-Reninge</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=138845&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">8820</div></td>
+								<td title=""><div id="Address">Kortemarkstraat 260A</div></td>
+								<td title=""><div id="TownVillage">Torhout</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=15500&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">9160</div></td>
+								<td title=""><div id="Address">Spendestraat 2</div></td>
+								<td title=""><div id="TownVillage">Lokeren</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=157515&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">2990</div></td>
+								<td title=""><div id="Address">Noordwateringsweg 26</div></td>
+								<td title=""><div id="TownVillage">Wuustwezel</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=174310&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">9880</div></td>
+								<td title=""><div id="Address">Kliplo 3</div></td>
+								<td title=""><div id="TownVillage">Aalter</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=157556&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">8647</div></td>
+								<td title=""><div id="Address">Pereboom 7</div></td>
+								<td title=""><div id="TownVillage">Lo-Reninge</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=182227&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">8470</div></td>
+								<td title=""><div id="Address">Zomerloosstraat 43</div></td>
+								<td title=""><div id="TownVillage">Gistel</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=139079&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">9850</div></td>
+								<td title=""><div id="Address">Landegemstraat 4</div></td>
+								<td title=""><div id="TownVillage">Nevele</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=182127&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">2322</div></td>
+								<td title=""><div id="Address">Princeven 4</div></td>
+								<td title=""><div id="TownVillage">Hoogstraten</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=139346&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">8920</div></td>
+								<td title=""><div id="Address">Stroombeekstraat 3A</div></td>
+								<td title=""><div id="TownVillage">Langemark-Poelkapelle</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=138892&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">8851</div></td>
+								<td title=""><div id="Address">Knijffelingstraat 6</div></td>
+								<td title=""><div id="TownVillage">Ardooie</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=138924&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">3950</div></td>
+								<td title=""><div id="Address">Kreyelerstraat 7</div></td>
+								<td title=""><div id="TownVillage">Bocholt</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=139076&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">2328</div></td>
+								<td title=""><div id="Address">Langstraat 21</div></td>
+								<td title=""><div id="TownVillage">Hoogstraten</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=182262&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">9880</div></td>
+								<td title=""><div id="Address">Leurebroekdreef 2</div></td>
+								<td title=""><div id="TownVillage">Aalter</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=139049&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">2960</div></td>
+								<td title=""><div id="Address">Luyckstraat Z/N</div></td>
+								<td title=""><div id="TownVillage">Brecht</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=182154&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">8020</div></td>
+								<td title=""><div id="Address">Scharestraat 28</div></td>
+								<td title=""><div id="TownVillage">Oostkamp</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=139251&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">2960</div></td>
+								<td title=""><div id="Address">Papbosstraat 2 bus B</div></td>
+								<td title=""><div id="TownVillage">Brecht</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=174497&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">8840</div></td>
+								<td title=""><div id="Address">Westrozebekestraat 76</div></td>
+								<td title=""><div id="TownVillage">Staden</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=157524&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">2990</div></td>
+								<td title=""><div id="Address">Kalmthoutse Steenweg
+										271</div></td>
+								<td title=""><div id="TownVillage">Wuustwezel</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=174443&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">8820</div></td>
+								<td title=""><div id="Address">Slingerstraat 50</div></td>
+								<td title=""><div id="TownVillage">Torhout</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=139027&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">8630</div></td>
+								<td title=""><div id="Address">Proostdijkstraat 28</div></td>
+								<td title=""><div id="TownVillage">Veurne</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=174376&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">8740</div></td>
+								<td title=""><div id="Address">Vijfstraat 7BIS</div></td>
+								<td title=""><div id="TownVillage">Pittem</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=174288&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">8691</div></td>
+								<td title=""><div id="Address">Neerloopstraat 7</div></td>
+								<td title=""><div id="TownVillage">Alveringem</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=139043&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">8820</div></td>
+								<td title=""><div id="Address">Vossebergstraat 2</div></td>
+								<td title=""><div id="TownVillage">Torhout</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=139024&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">1670</div></td>
+								<td title=""><div id="Address">Teleweidestraat 5</div></td>
+								<td title=""><div id="TownVillage">Pepingen</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=182381&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">3650</div></td>
+								<td title=""><div id="Address">Langerijnsweg 2</div></td>
+								<td title=""><div id="TownVillage">Dilsen-Stokkem</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=138929&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">9700</div></td>
+								<td title=""><div id="Address">Herlegem 67</div></td>
+								<td title=""><div id="TownVillage">Oudenaarde</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=139015&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">8920</div></td>
+								<td title=""><div id="Address">Waterstraat 4</div></td>
+								<td title=""><div id="TownVillage">Langemark-Poelkapelle</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=138796&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">8570</div></td>
+								<td title=""><div id="Address">Eegalstraat 7</div></td>
+								<td title=""><div id="TownVillage">Anzegem</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+							<tr class="generalListStyle_row">
+								<td title="CONFIDENTIAL"><div id="Facility">
+										<a
+											href="/FacilityDetails.aspx?FacilityId=182349&amp;ReportingYear=2012">CONFIDENTIAL</a>
+									</div></td>
+								<td title=""><div id="PostalCode">9290</div></td>
+								<td title=""><div id="Address">Molenstraat 75A</div></td>
+								<td title=""><div id="TownVillage">Berlare</div></td>
+								<td title="7.(a)"><div id="Activity">
+										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
+									</div></td>
+								<td title="BE"><div id="Country">
+										<span title="Belgium">BE</span>
+									</div></td>
+							</tr>
+							<tr>
+								<td colspan="6"></td>
+							</tr>
+
+						</tbody>
+					</table>
+
+					<div id="resultSizeDefine">
+						<span
+							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_datapager"><span>1</span>&nbsp;<a
+							href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$datapager$ctl00$ctl01','')">2</a>&nbsp;<a
+							href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$datapager$ctl00$ctl02','')">3</a>&nbsp;<a
+							href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$datapager$ctl00$ctl03','')">4</a>&nbsp;<a
+							href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$datapager$ctl00$ctl04','')">5</a>&nbsp;&nbsp;<a
+							href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$datapager$ctl00$ctl05','')">...</a>&nbsp;</span>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
+</div>
