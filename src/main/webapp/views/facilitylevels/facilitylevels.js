@@ -9,7 +9,7 @@ angular.module('myApp.facilitylevels', ['ngRoute'])
   });
 }])
 
-.controller('FacilityLevelsCtrl', ['$scope', function($scope) {
+.controller('FacilityLevelsCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.activityPanel = false;
 	$scope.activityPanelToggleButtonImage = 'images/expand_blue.jpg';
 	$scope.activityPanelToggleButtonTitle = 'Expand to include';
@@ -60,4 +60,9 @@ angular.module('myApp.facilitylevels', ['ngRoute'])
 	$scope.search = function() {
 	    $scope.searchResults = true;
     }
+	
+	$http.get('/eprtr/reportingYears').success(function(data, status, headers, config) {
+		$scope.reportingYears = data;
+		$scope.selectedReportingYear = $scope.reportingYears[$scope.reportingYears.length - 1];
+	});
 }]);

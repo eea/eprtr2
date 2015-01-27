@@ -122,16 +122,8 @@
 
 
 					<div class="searchOption_year">
-						Year <br> <select
-							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucYearSearchOption$cbReportYear"
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucYearSearchOption_cbReportYear">
-							<option value="2007">2007</option>
-							<option value="2008">2008</option>
-							<option value="2009">2009</option>
-							<option value="2010">2010</option>
-							<option value="2011">2011</option>
-							<option selected="selected" value="2012">2012</option>
-
+						Year <br> 
+						<select ng-model="selectedReportingYear" ng-options="year for year in reportingYears">
 						</select>
 
 					</div>
