@@ -40,3 +40,5 @@ RemoteSystemsTempFiles/.project
 npm-debug.log
 .metadata/.log
 src/main/webapp/view1/view1.html
+node/
+eprtrtest.h2.db
