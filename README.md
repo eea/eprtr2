@@ -21,6 +21,20 @@ Continuous JavaScript testing with Karma:
 npm test
 ```
 
+Deploying
+---------
+
+The following fragment must be added to context.xml for the web application before deploy the WAR archive.
+
+<Resource name="jdbc/datasource" auth="Container" type="javax.sql.DataSource"
+    	username="<username>"
+    	password="<password>"
+    	driverClassName="net.sourceforge.jtds.jdbc.Driver"
+    	url="jdbc:jtds:sqlserver://<servername>;database=<databasename>"
+    	maxActive="20"
+    	maxIdle="10"
+    	validationQuery="select 1" />
+
 How to build
 ------------
 You need Git to check the code out from the repository and to build you need Java and Maven.  All other dependencies will automatically be downloaded by Maven.

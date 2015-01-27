@@ -1,10 +1,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
 	
 	<mvc:resources location="/" mapping="/*"/>
 
@@ -13,29 +15,23 @@
 	
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />
-	
-        <bean id="jsonMessageConverter"
-              class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-            <property name="supportedMediaTypes" value="application/json" />
-        </bean>
-
-        <bean id="jaxbHttpMessageConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
-            <constructor-arg ref="jaxbMarshaller" index="0"/>
-            <constructor-arg ref="jaxbMarshaller" index="1"/>
-            <property name="supportedMediaTypes">
-                <list>
-                    <value>application/xml</value>
-                    <value>text/xml</value>
-                </list>
-            </property>
-        </bean>
-
-        <bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-            <property name="classesToBeBound">
-                <list>
-                    <value>eea.eprtr.model.Greeting</value>
-                </list>
-            </property>
-        </bean>
+    
+    <tx:annotation-driven transaction-manager="transactionManager" />  
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    	<property name="persistenceUnitName" value="eprtr"/>
+        <property name="dataSource" ref="dataSource" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="showSql" value="true" />
+            </bean>
+        </property>
+    </bean>      
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
+        <property name="jndiName" value="java:comp/env/jdbc/datasource" />
+        <property name="resourceRef" value="true" />        
+    </bean>
 
 </beans>
