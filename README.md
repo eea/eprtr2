@@ -26,6 +26,7 @@ Deploying
 
 The following fragment must be added to context.xml for the web application before deploy the WAR archive.
 
+```
 <Resource name="jdbc/datasource" auth="Container" type="javax.sql.DataSource"
     	username="<username>"
     	password="<password>"
@@ -34,6 +35,7 @@ The following fragment must be added to context.xml for the web application befo
     	maxActive="20"
     	maxIdle="10"
     	validationQuery="select 1" />
+```
 
 How to build
 ------------
