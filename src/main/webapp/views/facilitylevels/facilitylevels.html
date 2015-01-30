@@ -13,19 +13,13 @@
 			map search in the navigation menu.</p>
 	</div>
 
-	<div
-		id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_upSearchControls">
+	<div>
 
-		<div
-			id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_searchForm"
-			class="search_form">
+		<div class="search_form">
 
-			<div
-				id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_upSearchFacility">
+			<div>
 
-				<div
-					id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_pnlSearch"
-					onkeypress="javascript:return WebForm_FireDefaultButton(event, 'ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_btnSearch')">
+				<div>
 
 
 
@@ -44,93 +38,8 @@
 
 					</div>
 
-
-
-					<div class="searchOption_area">
-						Country<br> <select
-							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAreaSearchOption$cbFacilityCountry"
-							onchange="javascript:setTimeout('__doPostBack(\'ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAreaSearchOption$cbFacilityCountry\',\'\')', 0)"
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAreaSearchOption_cbFacilityCountry">
-							<option selected="selected" value="-1">All Reporting
-								States for E-PRTR</option>
-							<option value="-2">EU15</option>
-							<option value="-3">EU25</option>
-							<option value="-4">EU27</option>
-							<option value="15">Austria</option>
-							<option value="22">Belgium</option>
-							<option value="34">Bulgaria</option>
-							<option value="57">Cyprus</option>
-							<option value="58">Czech Republic</option>
-							<option value="59">Denmark</option>
-							<option value="68">Estonia</option>
-							<option value="73">Finland</option>
-							<option value="74">France</option>
-							<option value="81">Germany</option>
-							<option value="84">Greece</option>
-							<option value="100">Hungary</option>
-							<option value="101">Iceland</option>
-							<option value="106">Ireland</option>
-							<option value="109">Italy</option>
-							<option value="122">Latvia</option>
-							<option value="127">Liechtenstein</option>
-							<option value="128">Lithuania</option>
-							<option value="129">Luxembourg</option>
-							<option value="137">Malta</option>
-							<option value="156">Netherlands</option>
-							<option value="166">Norway</option>
-							<option value="177">Poland</option>
-							<option value="178">Portugal</option>
-							<option value="182">Romania</option>
-							<option value="197">Serbia</option>
-							<option value="201">Slovakia</option>
-							<option value="202">Slovenia</option>
-							<option value="207">Spain</option>
-							<option value="213">Sweden</option>
-							<option value="214">Switzerland</option>
-							<option value="234">United Kingdom</option>
-
-						</select>
-
-
-						<div>
-							<span
-								id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAreaSearchOption_rblRegionType"><input
-								id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAreaSearchOption_rblRegionType_0"
-								type="radio"
-								name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAreaSearchOption$rblRegionType"
-								value="0"
-								onclick="javascript:setTimeout('__doPostBack(\'ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAreaSearchOption$rblRegionType$0\',\'\')', 0)"><label
-								for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAreaSearchOption_rblRegionType_0">Region</label><input
-								id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAreaSearchOption_rblRegionType_1"
-								type="radio"
-								name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAreaSearchOption$rblRegionType"
-								value="1" checked="checked"><label
-								for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAreaSearchOption_rblRegionType_1">River
-									basin district</label></span>
-						</div>
-
-						<select
-							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAreaSearchOption$cbRegion"
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAreaSearchOption_cbRegion"
-							disabled="disabled">
-							<option selected="selected" value="-1">All river basin
-								districts</option>
-
-						</select>
-
+					<div search-placement>
 					</div>
-
-
-					<div class="searchOption_year">
-						Year <br> 
-						<select ng-model="selectedReportingYear" ng-options="year for year in reportingYears">
-						</select>
-
-					</div>
-
-
-
-
 
 					<div id="searchOption_facilityname">
 						Facility Name<br> <input

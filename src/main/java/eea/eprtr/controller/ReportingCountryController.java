@@ -7,17 +7,17 @@ import javax.persistence.TypedQuery;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import eea.eprtr.model.ReportingYear;
+import eea.eprtr.model.ReportingCountry;
 
 @RestController
-public class ReportingYearController {
+public class ReportingCountryController {
 
 	@PersistenceContext
     private EntityManager em;
 	
-	@RequestMapping("/reportingYears")
-    public ReportingYear[] reportingYears() {
-    	TypedQuery<ReportingYear> query = em.createNamedQuery("ReportingYear.findAll", ReportingYear.class);
-    	return query.getResultList().toArray(new ReportingYear[0]);
+	@RequestMapping("/reportingCountries")
+    public ReportingCountry[] reportingCountries() {
+		TypedQuery<ReportingCountry> query = em.createNamedQuery("ReportingCountry.findAll", ReportingCountry.class);
+		return query.getResultList().toArray(new ReportingCountry[0]);
     }
 }
