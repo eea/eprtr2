@@ -21,7 +21,7 @@ describe('myApp.search-placement module', function() {
         });
 
         it('...', function() {
-            expect($scope.regionType).toEqual('1');
+            expect($scope.searchFilter.regionType).toEqual('1');
         });
 
     });
