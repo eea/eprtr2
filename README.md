@@ -1,6 +1,8 @@
 E-PRTR 2
 ========
 
+[![Build Status](http://ci.eionet.europa.eu/job/EPRTR2/badge/icon)](http://ci.eionet.europa.eu/job/EPRTR2/badge/icon)
+
 The application uses Liquibase to create and upgrade the database.  The database is in-memory for the production and file-based for test. You can therefore just drop the WAR file into Tomcat, and it will create tables, load demo data and launch.
 
 Spring MVC provides decent API to build RESTful webservices on Tomcat: https://spring.io/guides/gs/rest-service/. A guide of how to use the services with AngularJS can be found here: https://spring.io/guides/gs/consuming-rest-angularjs/. In Spring it is possible to return Java object in preferred format by using @ResponseBody annotation in Controller method. It serializes the object to json or xml, if needed.
