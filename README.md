@@ -26,14 +26,24 @@ npm test
 Deploying
 ---------
 
-The following fragment must be added to context.xml for the web application before deploy the WAR archive.
+One of the following Resource fragments must be added to context.xml for the web application before deploying the WAR archive.
+You must also install the relevant JDBC driver jar file to /usr/share/tomcat/lib.
 
 ```
 <Resource name="jdbc/datasource" auth="Container" type="javax.sql.DataSource"
-    	username="<username>"
-    	password="<password>"
-    	driverClassName="net.sourceforge.jtds.jdbc.Driver"
-    	url="jdbc:jtds:sqlserver://<servername>;database=<databasename>"
+        username="<username>"
+        password="<password>"
+    	driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+    	url="jdbc:sqlserver://<instance>.database.windows.net:1433;database=<databasename>;encrypt=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30"
+    	maxActive="20"
+    	maxIdle="10"
+    	validationQuery="select 1" />
+
+<Resource name="jdbc/datasource" auth="Container" type="javax.sql.DataSource"
+        username="<username>"
+        password="<password>"
+        driverClassName="net.sourceforge.jtds.jdbc.Driver"
+        url="jdbc:jtds:sqlserver://<servername>;database=<databasename>"
     	maxActive="20"
     	maxIdle="10"
     	validationQuery="select 1" />
@@ -61,3 +71,11 @@ mvn.bat install
 
 This will create a `target` subdirectory, build the code, run the tests and put a WAR file in target. You can then deploy this file to Tomcat. It contains an embedded database with demo data.
 
+### Dependencies for CentOS 7
+
+Standard packages for CentOS 7 are Java 1.7, Tomcat 7, NPM 1.3.6 and Maven 3.0.5. To get NPM you need to install the Extra Packages for Enterprise Linux (epel-release).
+```
+yum install epel-release git npm java maven tomcat tomcat-native bzip2 unzip
+```
+
+For historical reasons the database is SQL Server. You can get a gratis JDBC driver from [Microsoft](https://msdn.microsoft.com/en-us/data/aa937724.aspx)
