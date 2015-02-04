@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.facilitylevels', ['ngRoute'])
+angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/facilitylevels', {
@@ -9,7 +9,8 @@ angular.module('myApp.facilitylevels', ['ngRoute'])
   });
 }])
 
-.controller('FacilityLevelsCtrl', ['$scope', '$http', function($scope, $http) {
+.controller('FacilityLevelsCtrl', ['$scope', '$http', 'searchFilter', function($scope, $http, searchFilter) {
+	$scope.searchFilter = searchFilter;
 	$scope.searchResults = false;
 	
 	$scope.expandButtonImage = 'images/expand_blue.jpg';
