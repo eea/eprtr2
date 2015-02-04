@@ -61,7 +61,19 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter'])
     }
 	
 	$scope.search = function() {
-	    $scope.searchResults = true;
+	    $scope.hasSearchResults = true;
+	    
+	    var querystring = '';
+	    querystring = querystring + 'ReportingYear=' + $scope.searchFilter.selectedReportingYear.year;
+	    if ($scope.searchFilter.selectedReportingCountry !== undefined && $scope.searchFilter.selectedReportingCountry.countryId) {
+	    	querystring = querystring + '&LOV_CountryID=' + $scope.searchFilter.selectedReportingCountry.countryId;
+	    }
+	    if ($scope.searchFilter.selectedReportingCountry !== undefined && $scope.searchFilter.selectedReportingCountry.groupId) {
+	    	querystring = querystring + '&LOV_AreaGroupID=' + $scope.searchFilter.selectedReportingCountry.groupId;
+	    }
+	    $http.get('/eprtr/facilitySearch?' + querystring).success(function(data, status, headers, config) {
+	        $scope.searchResults = data;
+	    });
     }
 	
 }]);
