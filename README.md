@@ -78,4 +78,4 @@ Standard packages for CentOS 7 are Java 1.7, Tomcat 7, NPM 1.3.6 and Maven 3.0.5
 yum install epel-release git npm java maven tomcat tomcat-native bzip2 unzip
 ```
 
-For historical reasons the database is SQL Server. You can get a gratis JDBC driver from [Microsoft](https://msdn.microsoft.com/en-us/data/aa937724.aspx)
+For historical reasons the database is SQL Server. You can get a gratis JDBC driver from [Microsoft](http://msdn.microsoft.com/data/jdbc)
