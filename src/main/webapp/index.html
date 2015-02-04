@@ -9,7 +9,7 @@
   <title>E-PRTR</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="http://www.eionet.europa.eu/styles/eionet2007/screen.css" media="screen"/>
+<!--   <link rel="stylesheet" type="text/css" href="http://www.eionet.europa.eu/styles/eionet2007/screen.css" media="screen"/> -->
 
   <link href="styles/searchOptionStyles.css" rel="stylesheet" type="text/css" />
   <link href="styles/sheetStyles.css" rel="stylesheet" type="text/css" />
@@ -21,120 +21,102 @@
   <!-- link href="styles/masterStyles.css" rel="stylesheet" type="text/css" / -->
   <!-- link href="styles/reset.css" rel="stylesheet" type="text/css" / -->
   <!-- link href="styles/typography.css" rel="stylesheet" type="text/css" / -->
+
+  
+  <link href="styles/bootstrap-3.3.2-dist/css/bootstrap.css" rel="stylesheet">
+  <link href="styles/bootstrap-3.3.2-dist/css/eprtr-custom.css" rel="stylesheet">
+  
+  
+  
+ 
+  
+  
   
   
 </head>
 <body>
 
-    <div id="container">
-      <div>
-        <div id="toolribbon">
-          <div id="lefttools">
-            <a id="skiplink" href="#workarea" accesskey="2">
-              <span>Skip to content</span>
-            </a>
-            <a id="eealink" href="http://www.eea.europa.eu/">EEA</a>
-          </div>
-          <div id="righttools">
-            <a id="loginlink" href="#">Login</a>
-            <a id="printlink" title="Print this page" href="javascript:this.print();">
-              <span>Print</span>
-            </a>
-            <a id="fullscreenlink" href="javascript:toggleFullScreenMode()" title="Switch to/from full screen mode">
-              <span>Switch to/from full screen mode</span>
-            </a>
-            <a id="acronymlink" href="/acronyms" title="Look up acronyms">
-              <span>Acronyms</span>
-            </a>
-            <a id="rsslink" type="application/rss+xml" href="http://www.eionet.europa.eu/announcements.rdf" title="Eionet headlines as RSS">
-              <span>RSS</span>
-            </a>
-            <form action="http://www.google.com/cse" id="cse-search-box">
-              <div id="freesrchform">
-                <input name="cx" type="hidden" value="010617083146134556574:ymkqzb7sibw"/>
-                <input name="ie" type="hidden" value="UTF-8"/>
-                <input name="sa" type="hidden" value="Search"/>
-                <input id="freesrchfld" type="text" name="q" size="10" onfocus="if(this.value=='Search Eionet')this.value='';" onblur="if(this.value=='')this.value='Search Eionet';" title="Search Eionet" value="Search Eionet"/>
-                <input id="freesrchbtn" type="image" src="http://www.eionet.europa.eu/styles/eionet2007/button_go.gif" alt="Go"/>
-              </div>
-            </form>
-          </div>
+
+
+
+
+  <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
         </div>
-        <!-- toolribbon -->
-        <div id="pagehead">
-          <a title="Frontpage" href="#">
-            <img src="images/eea-print-logo.gif" alt="Logo" id="logo" width="428" height="87"/>
-          </a>
-          <div id="networktitle">E-PRTR</div>
-          <div id="sitetitle">European Environment Information and Observation Network</div>
-          <div id="sitetagline">Networking improving Europe's environment</div>
-        </div>
-        <div id="menuribbon">
-          <ng-include src="'templates/dropdownmenus.html'"/>
-        </div>
-        <div class="breadcrumbtrail">
-          <div class="breadcrumbhead">You are here:</div>
-          <div class="breadcrumbitem eionetaccronym">
-            <a href="http://www.eionet.europa.eu">Eionet</a>
-          </div>
-          <th:block th:each="item, itemStat : ${breadcrumbs}">
-            <div class="breadcrumbitem" th:unless="${itemStat.last}">
-              <a href="#" th:href="@{${item.link}}" th:text="${item.linktext}">Middle breadcrumb</a>
-            </div>
-            <div class="breadcrumbitemlast" th:if="${itemStat.last}" th:text="${item.linktext}">Last breadcrumb</div>
-          </th:block>
-          <div class="breadcrumbtail">
-          </div>
-        </div>
-        <div id="leftcolumn">
-          <div class="localnav">
-            <h2>Local navigation</h2>
-            <ul>
-              <li><a href="#/home">Home</a></li>
-              <li><a href="#/about">About E-PRTR</a></li>
-              <li><a href="#">Search E-PRTR data</a>
-                  <ul>
-                  <li><a href="#/facilitylevels">Facility Level</a></li>
-                  <li><a href="#">Industrial Activity</a></li>
-                  <li><a href="#">Area Overview</a></li>
-                  <li><a href="#">Pollutant Releases</a></li>
-                  <li><a href="#">Waste Transfers</a></li>
-                  <li><a href="#">Map Search</a></li>
-                  </ul></li>
-              <li><a href="#">Releases Diffuse Sources</a>
-                  <ul>
-                  <li><a href="#">Approach</a></li>
-                  <li><a href="#">Releases to water</a></li>
-                  <li><a href="#">Releases to water</a></li>
-                  </ul></li>
-              <li><a href="#">Questions to E-PRTR</a></li>
-              <li><a href="#">List users</a></li>
-            </ul>
-          </div>
-        </div>
+        <div id="navbar" class="navbar-collapse collapse" ng-controller="HeaderController">
+          <ul class="nav navbar-nav">
+         	<li ng-class="{ active: isActive('/home')}"><a href="#home">Home</a></li>         	
+            <li ng-class="{ active: isActive('facilitylevels')}" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Search E-PRTR data <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#facilitylevels">Facility Level</a></li>
+                <li><a href="#">Industrial Activity (not yet available)</a></li>
+                <li><a href="#">Area Overview (not yet available)</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Polutant Releases (not yet available)</a></li>
+                <li><a href="#">Waste Transfers (not yet available)</a></li>
+                <li><a href="#">Map Search (not yet available)</a></li>
+              </ul>
+            </li>
+            <li ng-class="{ active: isActive('/about')}"><a href="#about">About E-PRTR</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Download</a></li>
+            <li><a href="#">Links</a></li>
+            <li><a href="#">Library</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
       </div>
-      <div id="workarea">
-        <div ng-view></div>
+    </nav>
+
+
+
+
+  <div class="bs-header" id="content">
+      <div class="container">
+        <h1>E-PRTR         
+        <div class="pull-right">
+	     	<a href="http://www.eea.europa.eu" accesskey="1"><img src="images/logo.gif"></a>
+	     </div>
+	     </h1>
+	     <h2>{{subtitle}}</h2>   
       </div>
-      <!-- workarea -->
     </div>
-    <!-- container -->
-    <div id="pagefoot">
-      <p>
-Document last modified
-2009/04/03.
-</p>
-      <p><a href="/disclaimer">Disclaimer</a>.
-Copyright: <a rel="license" href="http://creativecommons.org/licenses/by/2.5/dk/deed.en_GB" title="Creative Commons Attribution License"><img alt="Creative Commons Attribution License" src="http://i.creativecommons.org/l/by/2.5/dk/80x15.png"/></a>
-</p>
-    </div>
+
+
+
+
+
+    <div id="container" class="container">
+  	    <div class="col-md-12"> 
+	    	<div id="workarea">
+	      		<div class="row">
+	        		<div ng-view></div>
+	        	</div>
+	      	</div> <!-- workarea -->      
+      	</div>
+    </div>  <!-- container -->
+ 
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
+  
+
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.min.js"></script>
+  
   <script src="app.js"></script>
+  <script src="myCtrl.js"></script>
   <script src="views/home/home.js"></script>
   <script src="views/about/about.js"></script>
   <script src="views/facilitylevels/facilitylevels.js"></script>
@@ -143,5 +125,6 @@ Copyright: <a rel="license" href="http://creativecommons.org/licenses/by/2.5/dk/
   <script src="components/version/interpolate-filter.js"></script>
   <script src="components/search-filter/search-filter.js"></script>
   <script src="components/search-placement/search-placement.js"></script>
+
 </body>
 </html>
