@@ -42,3 +42,4 @@ npm-debug.log
 src/main/webapp/view1/view1.html
 node/
 eprtrtest.h2.db
+org.eclipse.jpt.entitygen.*
