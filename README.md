@@ -1,7 +1,7 @@
 E-PRTR 2
 ========
 
-[![Build Status](http://ci.eionet.europa.eu/job/EPRTR2/badge/icon)](http://ci.eionet.europa.eu/job/EPRTR2/badge/icon)
+[![Build Status](http://ci.eionet.europa.eu/job/EPRTR2/badge/icon)](http://ci.eionet.europa.eu/job/EPRTR2/)
 
 The application uses Liquibase to create and upgrade the database.  The database is in-memory for the production and file-based for test. You can therefore just drop the WAR file into Tomcat, and it will create tables, load demo data and launch.
 
