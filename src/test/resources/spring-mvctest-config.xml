@@ -9,7 +9,7 @@
     <mvc:resources location="/" mapping="/*"/>
 
 	<!-- Scans the classpath of this application for @Components to deploy as beans -->
-	<context:component-scan base-package="eea.eprtr.controller" />
+	<context:component-scan base-package="eea.eprtr.controller eea.eprtr.dao" />
 	
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />
