@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import eea.eprtr.dao.CountryAreaGroupRepository;
 import eea.eprtr.dao.FacilitySearchFilter;
 import eea.eprtr.dao.FacilitySearchRepository;
 import eea.eprtr.model.FacilitySearchMainActivity;
@@ -15,19 +16,22 @@ import eea.eprtr.model.FacilitySearchMainActivity;
 public class FacilitySearchController {
 
 	@Autowired
-	private FacilitySearchRepository repository;
+	private FacilitySearchRepository facilitySearchRepository;
+	
+	@Autowired
+	private CountryAreaGroupRepository countryAreaGroupRepository;
 	
 	@RequestMapping("/facilitySearch")
     public FacilitySearchMainActivity[] facilitySearch(
     		@RequestParam("ReportingYear") Integer reportingYear,
     		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
-    		@RequestParam(value = "AreaGroupID", required = false) Integer areaGroupID) {
+    		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID) {
 		
-		FacilitySearchFilter filter = new FacilitySearchFilter(reportingYear);
+		FacilitySearchFilter filter = new FacilitySearchFilter(countryAreaGroupRepository, reportingYear, countryID, areaGroupID);
 		
-		long facilitiesCount = repository.getFacilityCount(filter);
+		long facilitiesCount = facilitySearchRepository.getFacilityCount(filter);
 		if (facilitiesCount > 0) {
-			List<FacilitySearchMainActivity> facilities = repository.getFacilities(filter);
+			List<FacilitySearchMainActivity> facilities = facilitySearchRepository.getFacilities(filter);
 			return facilities.toArray(new FacilitySearchMainActivity[0]);
 		}
 		
