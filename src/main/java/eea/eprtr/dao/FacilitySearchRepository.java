@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -23,6 +24,14 @@ public class FacilitySearchRepository {
     private EntityManager em;
 	
 	public long getFacilityCount(FacilitySearchFilter filter) {
+		long count = getFacilitySearchAllCount(filter);
+		if (count > 0) {
+			count = getFacilitySearchMainActivityCount(filter);
+		}
+		return count;
+	}
+
+	private long getFacilitySearchAllCount(FacilitySearchFilter filter) {
 		
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		
@@ -31,11 +40,29 @@ public class FacilitySearchRepository {
 		cq.select(cb.count(qr));
 		filter.apply(cb, cq, qr);
 		
-		Long count = em.createQuery(cq).getSingleResult();
-		return count.longValue();
+		long count = em.createQuery(cq).getSingleResult().longValue();
+		return count;
 	}
 	
-	public List<FacilitySearchMainActivity> getFacilities(FacilitySearchFilter filter) {
+	private long getFacilitySearchMainActivityCount(FacilitySearchFilter filter) {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		
+		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
+		Root<FacilitySearchMainActivity> qr = cq.from(FacilitySearchMainActivity.class);
+		cq.select(cb.count(qr));
+		
+		Subquery<Integer> sq = cq.subquery(Integer.class);
+		Root<FacilitySearchAll> sqr = sq.from(FacilitySearchAll.class);
+		sq.select(sqr.get(FacilitySearchAll_.facilityReportID));
+		filter.apply(cb, sq, sqr);
+		
+		cq.where(qr.get(FacilitySearchMainActivity_.facilityReportID).in(sq));
+		
+		long count = em.createQuery(cq).getSingleResult().longValue();
+		return count;
+	}
+	
+	public List<FacilitySearchMainActivity> getFacilities(FacilitySearchFilter filter, OrderBy orderBy, QueryPager pager) {
 		
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		
@@ -49,8 +76,12 @@ public class FacilitySearchRepository {
 		filter.apply(cb, sq, sqr);
 		
 		cq.where(qr.get(FacilitySearchMainActivity_.facilityReportID).in(sq));
+		orderBy.apply(cb, cq, qr);
 		
-		List<FacilitySearchMainActivity> results = em.createQuery(cq).getResultList();
+		TypedQuery<FacilitySearchMainActivity> q = em.createQuery(cq);
+		pager.apply(q);
+		
+		List<FacilitySearchMainActivity> results = q.getResultList();
 		return results;
 	}
 }
