@@ -7,6 +7,7 @@ var myApp = angular.module('myApp', [
   'myApp.home',
   'myApp.about',
   'myApp.facilitylevels',
+  'myApp.facilitydetails',
   'myApp.version',
   'myApp.search-placement'
 ]).
