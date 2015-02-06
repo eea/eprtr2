@@ -2,7 +2,9 @@
 <!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> 
+
+<html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,17 +13,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--   <link rel="stylesheet" type="text/css" href="http://www.eionet.europa.eu/styles/eionet2007/screen.css" media="screen"/> -->
 
-  <link href="styles/searchOptionStyles.css" rel="stylesheet" type="text/css" />
-  <link href="styles/sheetStyles.css" rel="stylesheet" type="text/css" />
-  <link href="styles/forms.css" rel="stylesheet" type="text/css" />
-  <link href="styles/facilityDetailsSpecifics.css" rel="stylesheet" type="text/css" />
-  <link href="styles/columnHeaderStyles.css" rel="stylesheet" type="text/css" />
-  <link href="styles/columnStyles.css" rel="stylesheet" type="text/css" />
-  <link href="styles/commonStyles.css" rel="stylesheet" type="text/css" />
+<!--   <link href="styles/searchOptionStyles.css" rel="stylesheet" type="text/css" /> -->
+<!--   <link href="styles/sheetStyles.css" rel="stylesheet" type="text/css" /> -->
+<!--   <link href="styles/forms.css" rel="stylesheet" type="text/css" /> -->
+<!--   <link href="styles/facilityDetailsSpecifics.css" rel="stylesheet" type="text/css" /> -->
+<!--   <link href="styles/columnHeaderStyles.css" rel="stylesheet" type="text/css" /> -->
+<!--   <link href="styles/columnStyles.css" rel="stylesheet" type="text/css" /> -->
+<!--   <link href="styles/commonStyles.css" rel="stylesheet" type="text/css" /> -->
   <!-- link href="styles/masterStyles.css" rel="stylesheet" type="text/css" / -->
   <!-- link href="styles/reset.css" rel="stylesheet" type="text/css" / -->
   <!-- link href="styles/typography.css" rel="stylesheet" type="text/css" / -->
 
+<!-- map test start  -->
+ 	<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.10/js/esri/css/esri.css">   
+    <link rel="stylesheet" type="text/css" href="http://esri.github.io/bootstrap-map-js/src/css/bootstrapmap.css">   
+    <style type="text/css">
+      #mapDiv {
+        min-height: 100px; 
+        max-height: 1000px; 
+      }
+    </style>
+  <!-- map test slut  -->  
+    
+    
   
   <link href="styles/bootstrap-3.3.2-dist/css/bootstrap.css" rel="stylesheet">
   <link href="styles/bootstrap-3.3.2-dist/css/eprtr-custom.css" rel="stylesheet">
@@ -39,37 +53,30 @@
 
 
 
+<div ng-controller="HeaderController">
 
-  <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse" ng-controller="HeaderController">
+
+        <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-         	<li ng-class="{ active: isActive('/home')}"><a href="#home">Home</a></li>         	
-            <li ng-class="{ active: isActive('facilitylevels')}" class="dropdown">
+         	<li ng-class="{ active: isActive('/home')}"><a href="#home" ng-click="subtitle = 'Welcome to E-PRTR'">Home</a></li>         	
+            <li ng-class="{ active: isActive('/facilitylevels')}" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Search E-PRTR data <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#facilitylevels">Facility Level</a></li>
+                <li><a href="#facilitylevels" ng-click="subtitle = 'Facility Level Search'">Facility Level</a></li>
                 <li><a href="#">Industrial Activity (not yet available)</a></li>
                 <li><a href="#">Area Overview (not yet available)</a></li>
                 <li class="divider"></li>
                 <li><a href="#">Polutant Releases (not yet available)</a></li>
                 <li><a href="#">Waste Transfers (not yet available)</a></li>
-                <li><a href="#">Map Search (not yet available)</a></li>
+                <li><a href="#">{{subtitle}}</a></li>
               </ul>
             </li>
-            <li ng-class="{ active: isActive('/about')}"><a href="#about">About E-PRTR</a></li>
+            <li ng-class="{ active: isActive('/about')}"><a href="#about" ng-click="subtitle = 'About E-PRTR'">About E-PRTR</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Download</a></li>
+            <li><a href="#home">Download</a></li>
             <li><a href="#">Links</a></li>
             <li><a href="#">Library</a></li>
           </ul>
@@ -87,16 +94,19 @@
 	     	<a href="http://www.eea.europa.eu" accesskey="1"><img src="images/logo.gif"></a>
 	     </div>
 	     </h1>
-	     <h2>{{subtitle}}</h2>   
+	     <h2>{{subtitle}}</h2> 
       </div>
     </div>
 
-
+</div>
 
 
 
     <div id="container" class="container">
   	    <div class="col-md-12"> 
+  	    <div ng-controller="HeaderController"> 
+  	         <h2>{{subtitle}}</h2>
+  	     </div>   
 	    	<div id="workarea">
 	      		<div class="row">
 	        		<div ng-view></div>
@@ -125,6 +135,34 @@
   <script src="components/version/interpolate-filter.js"></script>
   <script src="components/search-filter/search-filter.js"></script>
   <script src="components/search-placement/search-placement.js"></script>
+  
+  
+<!-- map test start  -->
+    <script>
+        var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+        var dojoConfig = {
+            packages: [{
+                name: "application",
+                location: package_path + '/js'
+            }, {
+                name: "bootstrap",
+                location: "//rawgit.com/xsokev/Dojo-Bootstrap/master"
+            }]
+        };
+    </script>
+    <script src="http://js.arcgis.com/3.10compact"></script>
+    <script>
+        require(["esri/map", "application/bootstrapmap", "dojo/domReady!"], 
+          function(Map, BootstrapMap) {
+            // Get a reference to the ArcGIS Map class
+            var map = BootstrapMap.create("mapDiv",{
+              basemap:"hybrid",
+              center:[10,50],
+              zoom:5
+            });
+        });
+    </script>
+ <!-- map test slut  --> 
 
 </body>
 </html>

@@ -2,8 +2,8 @@
 
 
 
-	<script type="text/javasript" src="Charts/charts.js"></script>
-	<script type="text/javascript" src="Scripts/jsValidation.js"></script>
+<!-- 	<script type="text/javasript" src="Charts/charts.js"></script> -->
+<!-- 	<script type="text/javascript" src="Scripts/jsValidation.js"></script> -->
 
 
 	<div class="info_box_search">
@@ -13,9 +13,19 @@
 			map search in the navigation menu.</p>
 	</div>
 
-	<div>
+	<div class="row row-map">
 
-		<div class="search_form">
+
+        
+
+	
+
+
+
+
+
+
+		<div class="search_form col-md-6">
 
 			<div>
 
@@ -263,8 +273,7 @@
 											<img
 												id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMsgPRT_imgAlert"
 												src="images/alert.png" alt="alert"
-												style="border-width: 0px;"> This search will yield no
-											result
+												style="border-width: 0px;"> This search will yield no result
 											<div class="spacer"></div>
 										</div>
 
@@ -488,7 +497,16 @@
 
 
 		</div>
+		
+		<div class="col-md-6">
+                    <div id="mapDiv"></div>
+        </div>
+
+
 	</div>
+
+
+ 	
 
 	<div
 		id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_upResultArea" ng-show="searchResults">
@@ -1239,7 +1257,35 @@
 			</div>
 
 		</div>
+		         
 	</div>
+
+<script>
+        var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+        var dojoConfig = {
+            packages: [{
+                name: "application",
+                location: package_path + '/js'
+            }, {
+                name: "bootstrap",
+                location: "//rawgit.com/xsokev/Dojo-Bootstrap/master"
+            }]
+        };
+    </script>
+    <script src="http://js.arcgis.com/3.10compact"></script>
+    <script>
+        require(["esri/map", "application/bootstrapmap", "dojo/domReady!"], 
+          function(Map, BootstrapMap) {
+            // Get a reference to the ArcGIS Map class
+            var map = BootstrapMap.create("mapDiv",{
+              basemap:"national-geographic",
+              center:[-122.45,37.77],
+              zoom:12
+            });
+        });
+    </script>
+
+
 
 
 </div>
