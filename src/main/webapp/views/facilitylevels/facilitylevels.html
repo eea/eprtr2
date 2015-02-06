@@ -567,11 +567,8 @@
 							title="Print" src="images/ico-print.gif"
 							onclick="window.open('print.aspx?page=global','','height=500px,width=850px,scrollbars=1,resizable=yes,toolbar=no,status=no,replace=true');"
 							style="border-width: 0px;">
-
 					</div>
-
 				</div>
-
 				<div class="layout_sheet_subHeader">
 					<div>
 						<table cellspacing="0" border="0"
@@ -580,28 +577,12 @@
 							<tbody>
 								<tr style="border-style: None;">
 									<th class="resultSheet_subHeader_label detailsTitleColor"
-										scope="row">Area:</th>
-									<td class="resultSheet_subHeader_value">All Reporting
-										States for E-PRTR</td>
-								</tr>
-								<tr style="border-style: None;">
-									<th class="resultSheet_subHeader_label detailsTitleColor"
-										scope="row">Year:</th>
-									<td class="resultSheet_subHeader_value">2012</td>
-								</tr>
-								<tr style="border-style: None;">
-									<th class="resultSheet_subHeader_label detailsTitleColor"
 										scope="row">Facilities:</th>
-									<td class="resultSheet_subHeader_value">31,495</td>
+									<td class="resultSheet_subHeader_value">{{totalItemCount | number}}</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-
-
-
-
-
 					<div
 						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetSubHeader_ucConfidentialDisclaimer_divContent"
 						class="resultSheet_alert">
@@ -613,679 +594,57 @@
 							href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucSheetSubHeader$ucConfidentialDisclaimer$lnbAlert','')">Confidentiality
 							claims may affect the result. See details &gt;&gt;</a>
 					</div>
-
-
-
-
-
 				</div>
-
-
 				<div class="layout_sheet_content">
 					<span
 						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lbHelpText"
 						class="listHelp">Clicking the column headers will sort
 						results either descending or ascending</span><br>
 					<br>
-
-					<table>
-						<thead>
-							<tr class="generalListStyle_headerRow">
-								<th scope="col"><div id="headerFacility">
-										<a
-											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lvFacilityResult_lnkFacility"
-											href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$lvFacilityResult$lnkFacility','')">Facility</a>
-										<img
-											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lvFacilityResult_upFacility"
-											src="images/arrow_up.gif" style="border-width: 0px;">
-									</div></th>
-								<th scope="col"><div id="headerPostalCode">
-										<a
-											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lvFacilityResult_lnkPostalCode"
-											href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$lvFacilityResult$lnkPostalCode','')">Postal
-											Code</a>
-									</div></th>
-								<th scope="col"><div id="headerAddress">
-										<a
-											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lvFacilityResult_lnkAddress"
-											href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$lvFacilityResult$lnkAddress','')">Address</a>
-									</div></th>
-								<th scope="col"><div id="headerTownVillage">
-										<a
-											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lvFacilityResult_lnkTownVillage"
-											href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$lvFacilityResult$lnkTownVillage','')">Town/Village</a>
-									</div></th>
-								<th scope="col"><div id="headerActivity">
-										<a
-											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lvFacilityResult_lnkActivity"
-											href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$lvFacilityResult$lnkActivity','')">Activity</a>
-									</div></th>
-								<th scope="col"><div id="headerCountry">
-										<a
-											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lvFacilityResult_lnkCountry"
-											href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$lvFacilityResult$lnkCountry','')">Country</a>
-									</div></th>
-							</tr>
-						</thead>
-						<tbody>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=139059&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">8647</div></td>
-								<td title=""><div id="Address">Zavelhoek 5</div></td>
-								<td title=""><div id="TownVillage">Lo-Reninge</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=138845&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">8820</div></td>
-								<td title=""><div id="Address">Kortemarkstraat 260A</div></td>
-								<td title=""><div id="TownVillage">Torhout</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=15500&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">9160</div></td>
-								<td title=""><div id="Address">Spendestraat 2</div></td>
-								<td title=""><div id="TownVillage">Lokeren</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=157515&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">2990</div></td>
-								<td title=""><div id="Address">Noordwateringsweg 26</div></td>
-								<td title=""><div id="TownVillage">Wuustwezel</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=174310&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">9880</div></td>
-								<td title=""><div id="Address">Kliplo 3</div></td>
-								<td title=""><div id="TownVillage">Aalter</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=157556&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">8647</div></td>
-								<td title=""><div id="Address">Pereboom 7</div></td>
-								<td title=""><div id="TownVillage">Lo-Reninge</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=182227&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">8470</div></td>
-								<td title=""><div id="Address">Zomerloosstraat 43</div></td>
-								<td title=""><div id="TownVillage">Gistel</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=139079&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">9850</div></td>
-								<td title=""><div id="Address">Landegemstraat 4</div></td>
-								<td title=""><div id="TownVillage">Nevele</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=182127&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">2322</div></td>
-								<td title=""><div id="Address">Princeven 4</div></td>
-								<td title=""><div id="TownVillage">Hoogstraten</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=139346&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">8920</div></td>
-								<td title=""><div id="Address">Stroombeekstraat 3A</div></td>
-								<td title=""><div id="TownVillage">Langemark-Poelkapelle</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=138892&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">8851</div></td>
-								<td title=""><div id="Address">Knijffelingstraat 6</div></td>
-								<td title=""><div id="TownVillage">Ardooie</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=138924&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">3950</div></td>
-								<td title=""><div id="Address">Kreyelerstraat 7</div></td>
-								<td title=""><div id="TownVillage">Bocholt</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=139076&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">2328</div></td>
-								<td title=""><div id="Address">Langstraat 21</div></td>
-								<td title=""><div id="TownVillage">Hoogstraten</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=182262&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">9880</div></td>
-								<td title=""><div id="Address">Leurebroekdreef 2</div></td>
-								<td title=""><div id="TownVillage">Aalter</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=139049&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">2960</div></td>
-								<td title=""><div id="Address">Luyckstraat Z/N</div></td>
-								<td title=""><div id="TownVillage">Brecht</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=182154&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">8020</div></td>
-								<td title=""><div id="Address">Scharestraat 28</div></td>
-								<td title=""><div id="TownVillage">Oostkamp</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=139251&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">2960</div></td>
-								<td title=""><div id="Address">Papbosstraat 2 bus B</div></td>
-								<td title=""><div id="TownVillage">Brecht</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=174497&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">8840</div></td>
-								<td title=""><div id="Address">Westrozebekestraat 76</div></td>
-								<td title=""><div id="TownVillage">Staden</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=157524&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">2990</div></td>
-								<td title=""><div id="Address">Kalmthoutse Steenweg
-										271</div></td>
-								<td title=""><div id="TownVillage">Wuustwezel</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=174443&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">8820</div></td>
-								<td title=""><div id="Address">Slingerstraat 50</div></td>
-								<td title=""><div id="TownVillage">Torhout</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=139027&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">8630</div></td>
-								<td title=""><div id="Address">Proostdijkstraat 28</div></td>
-								<td title=""><div id="TownVillage">Veurne</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=174376&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">8740</div></td>
-								<td title=""><div id="Address">Vijfstraat 7BIS</div></td>
-								<td title=""><div id="TownVillage">Pittem</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=174288&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">8691</div></td>
-								<td title=""><div id="Address">Neerloopstraat 7</div></td>
-								<td title=""><div id="TownVillage">Alveringem</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=139043&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">8820</div></td>
-								<td title=""><div id="Address">Vossebergstraat 2</div></td>
-								<td title=""><div id="TownVillage">Torhout</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=139024&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">1670</div></td>
-								<td title=""><div id="Address">Teleweidestraat 5</div></td>
-								<td title=""><div id="TownVillage">Pepingen</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=182381&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">3650</div></td>
-								<td title=""><div id="Address">Langerijnsweg 2</div></td>
-								<td title=""><div id="TownVillage">Dilsen-Stokkem</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=138929&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">9700</div></td>
-								<td title=""><div id="Address">Herlegem 67</div></td>
-								<td title=""><div id="TownVillage">Oudenaarde</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=139015&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">8920</div></td>
-								<td title=""><div id="Address">Waterstraat 4</div></td>
-								<td title=""><div id="TownVillage">Langemark-Poelkapelle</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=138796&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">8570</div></td>
-								<td title=""><div id="Address">Eegalstraat 7</div></td>
-								<td title=""><div id="TownVillage">Anzegem</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-							<tr class="generalListStyle_row">
-								<td title="CONFIDENTIAL"><div id="Facility">
-										<a
-											href="/FacilityDetails.aspx?FacilityId=182349&amp;ReportingYear=2012">CONFIDENTIAL</a>
-									</div></td>
-								<td title=""><div id="PostalCode">9290</div></td>
-								<td title=""><div id="Address">Molenstraat 75A</div></td>
-								<td title=""><div id="TownVillage">Berlare</div></td>
-								<td title="7.(a)"><div id="Activity">
-										<span title="7.(a) Intensive rearing of poultry or pigs">7.(a)</span>
-									</div></td>
-								<td title="BE"><div id="Country">
-										<span title="Belgium">BE</span>
-									</div></td>
-							</tr>
-							<tr>
-								<td colspan="6"></td>
-							</tr>
-
-						</tbody>
-					</table>
-
-					<div id="resultSizeDefine">
-						<span
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_datapager"><span>1</span>&nbsp;<a
-							href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$datapager$ctl00$ctl01','')">2</a>&nbsp;<a
-							href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$datapager$ctl00$ctl02','')">3</a>&nbsp;<a
-							href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$datapager$ctl00$ctl03','')">4</a>&nbsp;<a
-							href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$datapager$ctl00$ctl04','')">5</a>&nbsp;&nbsp;<a
-							href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucFacilityListResult$datapager$ctl00$ctl05','')">...</a>&nbsp;</span>
-					</div>
-
+					<table class="table table-striped table-condensed table-hover">
+		                <thead>
+		                    <tr>
+		                        <th class="facilityName" custom-sort order="'facilityName'" sort="sort">Facility&nbsp;</th>
+		                        <th class="postalCode" custom-sort order="'postalCode'" sort="sort">Postal Code&nbsp;</th>
+		                        <th class="address" custom-sort order="'address'" sort="sort">Address&nbsp;</th>
+		                        <th class="city" custom-sort order="'city'" sort="sort">Town/Village&nbsp;</th>
+		                        <th class="iaactivityCode" custom-sort order="'IAActivityCode'" sort="sort">Activity&nbsp;</th>
+		                        <th class="countryCode" custom-sort order="'countryCode'" sort="sort">Country&nbsp;</th>
+		                    </tr>
+		                </thead>
+		                <tfoot>
+		                    <td colspan="6">
+		                    	<div ng-show="hasItems()">
+		                            <ul class="pagination pull-right">
+		                                <li ng-class="{disabled: currentPage == 0}">
+		                                    <a href ng-click="prevPage()">&laquo; Prev</a>
+		                                </li>
+		                            
+		                                <li ng-repeat="n in range(currentPage, currentPage + gap) " ng-class="{active: n == currentPage}" ng-click="setPage()">
+		                                    <a href ng-bind="n + 1">1</a>
+		                                </li>
+		                             
+		                                <li ng-class="{disabled: (currentPage) == pages() - 1}">
+		                                    <a href ng-click="nextPage()">Next &raquo;</a>
+		                                </li>
+		                            </ul>
+	                            </div>
+		                    </td>
+		                </tfoot>
+		                <tbody>
+		                    <tr ng-repeat="item in items">
+		                        <td>{{item.facilityName}}</td>
+		                        <td>{{item.postalCode}}</td>
+		                        <td>{{item.address}}</td>
+		                        <td>{{item.city}}</td>
+		                        <td>{{item.iaactivityCode}}</td>
+		                        <td>{{item.countryCode}}</td>
+		                    </tr>
+		                </tbody>
+		            </table>
 				</div>
 			</div>
-
 		</div>
 		         
 	</div>
-
-<script>
-        var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
-        var dojoConfig = {
-            packages: [{
-                name: "application",
-                location: package_path + '/js'
-            }, {
-                name: "bootstrap",
-                location: "//rawgit.com/xsokev/Dojo-Bootstrap/master"
-            }]
-        };
-    </script>
-    <script src="http://js.arcgis.com/3.10compact"></script>
-    <script>
-        require(["esri/map", "application/bootstrapmap", "dojo/domReady!"], 
-          function(Map, BootstrapMap) {
-            // Get a reference to the ArcGIS Map class
-            var map = BootstrapMap.create("mapDiv",{
-              basemap:"national-geographic",
-              center:[-122.45,37.77],
-              zoom:12
-            });
-        });
-    </script>
-
-
-
-
 </div>
