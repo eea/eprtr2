@@ -622,19 +622,7 @@
 		                <tfoot>
 		                    <td colspan="6">
 		                    	<div ng-show="hasItems()">
-		                            <ul class="pagination pull-right">
-		                                <li ng-class="{disabled: currentPage == 0}">
-		                                    <a href ng-click="prevPage()">&laquo; Prev</a>
-		                                </li>
-		                            
-		                                <li ng-repeat="n in range(currentPage, currentPage + gap) " ng-class="{active: n == currentPage}" ng-click="setPage()">
-		                                    <a href ng-bind="n + 1">1</a>
-		                                </li>
-		                             
-		                                <li ng-class="{disabled: (currentPage) == pages() - 1}">
-		                                    <a href ng-click="nextPage()">Next &raquo;</a>
-		                                </li>
-		                            </ul>
+ 		                    	 	<pagination boundary-links="true" ng-model="currentPage" total-items="totalItemCount" items-per-page="itemsPerPage" max-size="gap" class="pagination pull-right" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination> 
 	                            </div>
 		                    </td>
 		                </tfoot>

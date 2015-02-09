@@ -69,10 +69,9 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
     
 	$scope.searchResults = false;
     $scope.items = [];
-    $scope.groupedItems = [];
     $scope.itemsPerPage = 30;
     $scope.pagedItems = [];
-    $scope.currentPage = 0;
+    $scope.currentPage = 1;
     $scope.totalItemCount = 0;
     
     $scope.$watch('currentPage', function(value) {
@@ -82,16 +81,16 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
     });
     $scope.$watch('sort.sortingOrder', function(value) {
     	var prevPage = $scope.currentPage;
-    	$scope.currentPage = 0;
-    	if ($scope.currentSearchFilter !== undefined && prevPage == 0) {
+    	$scope.currentPage = 1;
+    	if ($scope.currentSearchFilter !== undefined && prevPage == 1) {
     		$scope.performSearch();
     	}
     });
     
     $scope.$watch('sort.reverse', function(value) {
     	var prevPage = $scope.currentPage;
-    	$scope.currentPage = 0;
-    	if ($scope.currentSearchFilter !== undefined && prevPage == 0) {
+    	$scope.currentPage = 1;
+    	if ($scope.currentSearchFilter !== undefined && prevPage == 1) {
     		$scope.performSearch();
     	}
     });
@@ -99,7 +98,9 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	$scope.search = function() {
 		$scope.currentSearchFilter = $scope.searchFilter;
 	    $scope.searchResults = true;
-        $scope.currentPage = 0;
+        $scope.currentPage = 1;
+        $scope.sort.sortingOrder = 'facilityName';
+        $scope.sort.reverse = false;
         $scope.performSearch();
     }
 	
@@ -117,7 +118,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	    if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.groupId) {
 	    	queryParams.LOV_AreaGroupID = $scope.currentSearchFilter.selectedReportingCountry.groupId;
 	    }
-	    queryParams.offset = $scope.currentPage * $scope.itemsPerPage;
+	    queryParams.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
 	    queryParams.limit = $scope.itemsPerPage;
 	    queryParams.order = $scope.sort.sortingOrder;
 	    queryParams.desc = $scope.sort.reverse;
@@ -127,46 +128,10 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	        $scope.totalItemCount = response.headers('X-Count');
 	    });
 	}
-	
-    $scope.range = function (start, end) {
-        var ret = [];        
-        
-        var size = $scope.pages();
-                      
-        if (size < end) {
-            end = size;
-            start = size-$scope.gap;
-        }
-        for (var i = start; i < end; i++) {
-            ret.push(i);
-        }        
-        return ret;
-    };
     
     $scope.hasItems = function() {
     	return $scope.items.length > 0;
     }
-    
-    $scope.pages = function() {
-    	return Math.ceil($scope.totalItemCount / $scope.itemsPerPage);
-    }
-    
-    $scope.prevPage = function () {
-        if ($scope.currentPage > 0) {
-            $scope.currentPage--;
-        }
-    };
-    
-    $scope.nextPage = function () {
-        if ($scope.currentPage < $scope.pages() - 1) {
-            $scope.currentPage++;
-        }
-    };
-    
-    $scope.setPage = function () {
-        $scope.currentPage = this.n;
-    };
-	
 }])
 
 .directive("customSort", function() {
