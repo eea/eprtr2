@@ -1,18 +1,21 @@
-<div class="searchOption_area">
-	Country<br> 
-	<select ng-model="searchFilter.selectedReportingCountry" ng-options="c.name for c in reportingCountries"></select>
-	<div>
-		<span>
-			<input  id="rblRegionType_0" type="radio" name="rblRegionType" value="0" ng-model="searchFilter.regionType"> 
-			<label for="rblRegionType_0">Region</label>
-			<input  id="rblRegionType_1" type="radio" name="rblRegionType" value="1" ng-model="searchFilter.regionType"> 
-			<label for="rblRegionType_1">River basin district</label>
-		</span>
-	</div>
-	<select ng-disabled="disableRegionSelect" ng-model="searchFilter.selectedRegion" ng-options="r.name for r in regions"></select>
+<div class="form-group">
+	<label class="control-label" for="inputCountry">Country</label>
+	<select class="form-control" ng-model="searchFilter.selectedReportingCountry" ng-options="c.name for c in reportingCountries" id="inputCountry"></select>
 </div>
 
-<div class="searchOption_year">
-	Year <br> 
-	<select ng-model="searchFilter.selectedReportingYear" ng-options="y.year for y in reportingYears track by y.year"></select>
+
+<div  class="form-group">
+	<label class="control-label">Region</label>
+	<div class="radio">
+		<label> <input type="radio" name="optionsRadios" id="rblRegionType_0" value="0" ng-model="searchFilter.regionType"> Region</label>
+	</div>
+	<div class="radio">
+		<label> <input type="radio" name="optionsRadios" id="rblRegionType_1" value="1" ng-model="searchFilter.regionType"> River basin district</label>
+	</div>
+	<select class="form-control" ng-disabled="disableRegionSelect" ng-model="searchFilter.selectedRegion" ng-options="r.name for r in regions"></select>
+</div>
+
+<div class="form-group">
+	<label class="control-label" for="inputYear">Year</label>
+	<select class="form-control" ng-model="searchFilter.selectedReportingYear" ng-options="y.year for y in reportingYears track by y.year" id="inputYear"></select>
 </div>
