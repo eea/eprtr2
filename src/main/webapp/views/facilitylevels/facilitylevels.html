@@ -27,43 +27,52 @@
 
 		<div class="search_form col-md-6">
 
-			<div>
-
-				<div>
-
-
-
-					<div
-						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_infoSearchHelp_divInfo"
-						class="searchHelpIcon infoIcon"
-						onclick="PopupWindowButtonClicked('pgHelpFacilitySeach.aspx' ); return false;">
-						<a
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_infoSearchHelp_lnkInfo"
-							href="UserControls/Common/pgHelpFacilitySeach.aspx"
-							target="_blank"><img
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_infoSearchHelp_imgInfo"
-							title="Search Help" src="images/help.png"
-							style="border-width: 0px;"></a>
-
-
-					</div>
+			<div class="panel panel-info">
+				<div class="panel-heading">Search</div>
+				<div class="panel-body">
 
 					<div search-placement>
 					</div>
 
-					<div id="searchOption_facilityname">
-						Facility Name<br> <input
-							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucFacilityLocationSearchOption$txFacilityName"
-							type="text"
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucFacilityLocationSearchOption_txFacilityName">
+					<div class="form-group">
+						<label class="control-label" for="inputFacilityName">Facility
+							Name</label> <input type="text" class="form-control"
+							id="inputFacilityName" placeholder="Enter facility name">
 					</div>
-					<div id="searchOption_town">
-						Town/village<br> <input
-							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucFacilityLocationSearchOption$txFacilityTown"
-							type="text"
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucFacilityLocationSearchOption_txFacilityTown">
+					<div class="form-group">
+						<label class="control-label" for="inputTown">Town/village</label>
+						<input type="text" class="form-control" id="inputTown"
+							placeholder="Enter town">
 					</div>
 
+					<accordion close-others="{{false}}"> 
+						<accordion-group is-open="activityPanel"> 
+							<accordion-heading>
+								Activity <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': activityPanel, 'glyphicon-chevron-right': !activityPanel}"></i>
+							</accordion-heading>
+							<div class="form-group">
+								<label class="control-label">Type</label>
+								<div class="radio">
+									<label> <input type="radio" name="optionsRadios" id="rblActivityType_0" value="0" ng-model="searchFilter.activityType"> Industrial activity</label>
+								</div>
+								<div class="radio">
+									<label> <input type="radio" name="optionsRadios" id="rblActivityType_1" value="1" ng-model="searchFilter.activityType"> Economic sector (NACE)</label>
+								</div>
+							</div>
+						</accordion-group> 
+						<accordion-group is-open="pollutantPanel"> 
+							<accordion-heading>
+								Pollutant releases and transfers <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': pollutantPanel, 'glyphicon-chevron-right': !pollutantPanel}"></i>
+							</accordion-heading> 
+							This is just some content to illustrate fancy headings. 
+						</accordion-group>
+						<accordion-group is-open="wastePanel"> 
+							<accordion-heading>
+								Waste transfers <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': wastePanel, 'glyphicon-chevron-right': !wastePanel}"></i>
+							</accordion-heading> 
+							This is just some content to illustrate fancy headings. 
+						</accordion-group>
+					</accordion>
 
 					<div
 						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedActivitySearchOption_upActivity">
@@ -483,7 +492,7 @@
 						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_plButton">
 
 
-						<input type="submit" value="Search" ng-click="search()" class="search_button"> 
+						<input type="submit" value="Search" ng-click="search()" class="btn btn-default"> 
 					</div>
 
 
