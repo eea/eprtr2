@@ -59,6 +59,9 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	    }
     }
 	
+	$scope.searchFilter.activityType = "0";
+	
+	
 	// init
     $scope.sort = {       
                 sortingOrder : 'facilityName',
@@ -123,6 +126,12 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	    }
 	    if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.groupId) {
 	    	queryParams.LOV_AreaGroupID = $scope.currentSearchFilter.selectedReportingCountry.groupId;
+	    }
+	    if ($scope.currentSearchFilter.facilityName) {
+	    	queryParams.FacilityName = $scope.currentSearchFilter.facilityName;
+	    }
+	    if ($scope.currentSearchFilter.cityName) {
+	    	queryParams.CityName = $scope.currentSearchFilter.cityName;
 	    }
 	    queryParams.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
 	    queryParams.limit = $scope.itemsPerPage;

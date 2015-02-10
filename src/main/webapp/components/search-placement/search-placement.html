@@ -7,10 +7,10 @@
 <div  class="form-group">
 	<label class="control-label">Region</label>
 	<div class="radio">
-		<label> <input type="radio" name="optionsRadios" id="rblRegionType_0" value="0" ng-model="searchFilter.regionType"> Region</label>
+		<label> <input type="radio" name="regionTypeOptionsRadios" id="rblRegionType_0" value="0" ng-model="searchFilter.regionType"> Region</label>
 	</div>
 	<div class="radio">
-		<label> <input type="radio" name="optionsRadios" id="rblRegionType_1" value="1" ng-model="searchFilter.regionType"> River basin district</label>
+		<label> <input type="radio" name="regionTypeOptionsRadios" id="rblRegionType_1" value="1" ng-model="searchFilter.regionType"> River basin district</label>
 	</div>
 	<select class="form-control" ng-disabled="disableRegionSelect" ng-model="searchFilter.selectedRegion" ng-options="r.name for r in regions"></select>
 </div>
