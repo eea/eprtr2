@@ -16,12 +16,16 @@ public class FacilitySearchFilter {
 	private Integer reportingYear;
 	private Integer countryID;
 	private Integer areaGroupID;
+	private Integer regionID;
+	private Integer rbdID;
 
-	public FacilitySearchFilter(CountryAreaGroupRepository repository, Integer reportingYear, Integer countryID, Integer areaGroupID) {
+	public FacilitySearchFilter(CountryAreaGroupRepository repository, Integer reportingYear, Integer countryID, Integer areaGroupID, Integer regionID, Integer rbdID) {
 		this.repository = repository;
 		this.reportingYear = reportingYear;
 		this.countryID = countryID;
-		this.areaGroupID = areaGroupID; 
+		this.areaGroupID = areaGroupID;
+		this.regionID = regionID; 
+		this.rbdID = rbdID;
 	}
 
 	public void apply(CriteriaBuilder cb, AbstractQuery<?> q, Root<FacilitySearchAll> qr) {
@@ -31,6 +35,11 @@ public class FacilitySearchFilter {
 			whereClause = cb.and(whereClause, qr.get(FacilitySearchAll_.LOV_CountryID).in(countryIDs));
 		} else if (countryID != null) {
 			whereClause = cb.and(whereClause, cb.equal(qr.get(FacilitySearchAll_.LOV_CountryID), countryID));
+			if (regionID != null) {
+				whereClause = cb.and(whereClause, cb.equal(qr.get(FacilitySearchAll_.LOV_NUTSRLevel2ID), regionID));
+			} else if (rbdID != null) {
+				whereClause = cb.and(whereClause, cb.equal(qr.get(FacilitySearchAll_.LOV_RiverBasinDistrictID), rbdID));
+			}
 		}
 		q.where(whereClause);
 	}

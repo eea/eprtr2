@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="LOV_NUTSREGION")
-@NamedQuery(name="Region.findByLOVCountryID", query="SELECT r FROM Region r where r.LOV_CountryID = :LOV_CountryID")
+@NamedQuery(name="Region.findByLOVCountryID", query="SELECT r FROM Region r where r.LOV_CountryID = :LOV_CountryID and r.level = :level")
 public class Region implements Serializable {
 	private static final long serialVersionUID = 1L;
 

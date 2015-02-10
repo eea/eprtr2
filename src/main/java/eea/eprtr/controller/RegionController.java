@@ -20,6 +20,7 @@ public class RegionController {
     public Region[] reportingYears(@RequestParam("LOV_CountryID") Integer countryId) {
     	TypedQuery<Region> query = em.createNamedQuery("Region.findByLOVCountryID", Region.class);
     	query.setParameter("LOV_CountryID", countryId);
+    	query.setParameter("level", new Integer(2));
     	return query.getResultList().toArray(new Region[0]);
     }
 }
