@@ -109,7 +109,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 		    RestangularConfigurer.setFullResponse(true);
 		});
 		
-	    var facilitySearch = rest.all('eprtr/facilitySearch');
+	    var facilitySearch = rest.all('facilitySearch');
 	    
 	    var queryParams = {ReportingYear: $scope.currentSearchFilter.selectedReportingYear.year};
 	    if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.countryId) {
