@@ -10,7 +10,9 @@ var myApp = angular.module('myApp', [
   'myApp.facilitylevels',
   'myApp.facilitydetails',
   'myApp.version',
-  'myApp.search-placement'
+  'myApp.search-placement',
+  'myApp.esrileafmap'/*,
+  'myApp.esritestmap'*/
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/home'});
