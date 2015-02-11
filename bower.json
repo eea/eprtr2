@@ -13,6 +13,7 @@
     "html5-boilerplate": "~4.3.0",
     "components-font-awesome": "4.3.0",
     "components-bootstrap": "3.3.2",
-    "restangular": "1.4.0"
+    "restangular": "1.4.0",
+    "angular-bootstrap": "0.12.0"
   }
 }

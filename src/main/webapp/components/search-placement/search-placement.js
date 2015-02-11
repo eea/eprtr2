@@ -6,12 +6,12 @@ angular.module('myApp.search-placement', ['myApp.search-filter'])
     
 	$scope.searchFilter = searchFilter;
 	
-	$http.get('/eprtr/reportingYears').success(function(data, status, headers, config) {
+	$http.get('/reportingYears').success(function(data, status, headers, config) {
         $scope.reportingYears = data;
         $scope.searchFilter.selectedReportingYear = $scope.reportingYears[$scope.reportingYears.length - 1];
     });
 
-    $http.get('/eprtr/reportingCountries').success(function(data, status, headers, config) {
+    $http.get('/reportingCountries').success(function(data, status, headers, config) {
         $scope.reportingCountries = data;
         $scope.searchFilter.selectedReportingCountry = $scope.reportingCountries[0];
     });
@@ -38,11 +38,11 @@ angular.module('myApp.search-placement', ['myApp.search-filter'])
         }
         if ($scope.searchFilter.selectedReportingCountry !== undefined && $scope.searchFilter.selectedReportingCountry.countryId) {
             if ($scope.searchFilter.regionType === '0') {
-                $http.get('/eprtr/regions?LOV_CountryID=' + $scope.searchFilter.selectedReportingCountry.countryId).success(function(data, status, headers, config) {
+                $http.get('/regions?LOV_CountryID=' + $scope.searchFilter.selectedReportingCountry.countryId).success(function(data, status, headers, config) {
                     $scope.regions = $scope.regions.concat(data);
                 });
             } else if ($scope.searchFilter.regionType === '1') {
-                $http.get('/eprtr/riverBasinDistricts?LOV_CountryID=' + $scope.searchFilter.selectedReportingCountry.countryId).success(function(data, status, headers, config) {
+                $http.get('/riverBasinDistricts?LOV_CountryID=' + $scope.searchFilter.selectedReportingCountry.countryId).success(function(data, status, headers, config) {
                     $scope.regions = $scope.regions.concat(data);
                 });
             }

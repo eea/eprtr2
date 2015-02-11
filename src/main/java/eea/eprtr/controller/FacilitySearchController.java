@@ -30,13 +30,17 @@ public class FacilitySearchController {
     		@RequestParam(value = "ReportingYear") Integer reportingYear,
     		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
     		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
+    		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
+    		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
+    		@RequestParam(value = "FacilityName", required = false) String facilityName,
+    		@RequestParam(value = "CityName", required = false) String cityName,
     		@RequestParam(value = "offset") Integer offset,
     		@RequestParam(value = "limit") Integer limit,
     		@RequestParam(value = "order") String order,
     		@RequestParam(value = "desc") Boolean desc,
     		HttpServletResponse response) {
 
-		FacilitySearchFilter filter = new FacilitySearchFilter(countryAreaGroupRepository, reportingYear, countryID, areaGroupID);
+		FacilitySearchFilter filter = new FacilitySearchFilter(countryAreaGroupRepository, reportingYear, countryID, areaGroupID, regionID, rbdID, facilityName, cityName);
 		
 		long facilitiesCount = facilitySearchRepository.getFacilityCount(filter);
 		response.setHeader("X-Count", String.valueOf(facilitiesCount));
