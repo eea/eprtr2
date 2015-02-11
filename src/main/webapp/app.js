@@ -4,6 +4,7 @@
 var myApp = angular.module('myApp', [
   'ui.bootstrap', 
   'ngRoute',
+  'leaflet-directive',
   'myApp.home',
   'myApp.about',
   'myApp.facilitylevels',

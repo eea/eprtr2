@@ -25,20 +25,21 @@
   <!-- link href="styles/typography.css" rel="stylesheet" type="text/css" / -->
 
 <!-- map test start  -->
- 	<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.10/js/esri/css/esri.css">   
-    <link rel="stylesheet" type="text/css" href="http://esri.github.io/bootstrap-map-js/src/css/bootstrapmap.css">   
+<!-- 	<link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.10/js/esri/css/esri.css">   
+    <link rel="stylesheet" type="text/css" href="http://esri.github.io/bootstrap-map-js/src/css/bootstrapmap.css">    
     <style type="text/css">
       #mapDiv {
         min-height: 100px; 
         max-height: 1000px; 
       }
-    </style>
+    </style> -->
   <!-- map test slut  -->  
     
  
-  <link href="bower_components/components-bootstrap/css/bootstrap.css" rel="stylesheet">
+ <link href="bower_components/components-bootstrap/css/bootstrap.css" rel="stylesheet"> 
   <link href="bower_components/components-font-awesome/css/font-awesome.min.css" rel="stylesheet">
 
+ <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" /> 
   <link href="styles/eprtr-custom.css" rel="stylesheet">
   
 </head>
@@ -123,15 +124,17 @@
   <script src="views/home/home.js"></script>
   <script src="views/about/about.js"></script>
   <script src="views/facilitylevels/facilitylevels.js"></script>
+  <script src="views/facilitydetails/facilitydetails.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>
   <script src="components/search-filter/search-filter.js"></script>
   <script src="components/search-placement/search-placement.js"></script>
+    <script src="bower_components/leaflet/dist/leaflet.js"></script>
+    <script src="bower_components/esri-leaflet/dist/esri-leaflet.js"></script>
+    <script src="js/angular-leaflet-directive.min.js"></script>
   
-  
-  
-<!-- map test start  -->
+<!-- map test start  
     <script>
         var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
         var dojoConfig = {
@@ -145,7 +148,7 @@
         };
     </script>
     <script src="http://js.arcgis.com/3.10compact"></script>
-    <script>
+     <script>
         require(["esri/map", "application/bootstrapmap", "dojo/domReady!"], 
           function(Map, BootstrapMap) {
             // Get a reference to the ArcGIS Map class
@@ -155,7 +158,8 @@
               zoom:5
             });
         });
-    </script>
+    </script -->
+ 
  <!-- map test slut  --> 
 </body>
 </html>
