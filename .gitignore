@@ -15,7 +15,6 @@ RemoteSystemsTempFiles/.project
 *.version
 *.tree
 .metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.resources.prefs
-*.prefs
 *.xmi
 .metadata/.plugins/org.eclipse.jdt.core/assumedExternalFilesCache
 .metadata/.plugins/org.eclipse.jdt.core/externalFilesCache
