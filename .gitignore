@@ -5,7 +5,6 @@ node_modules/
 bower_components/
 tmp
 .DS_Store
-.idea
 RemoteSystemsTempFiles/.project
 .metadata/.mylyn/repositories.xml.zip
 .metadata/.plugins/org.eclipse.core.resources/.projects/RemoteSystemsTempFiles/.indexes/properties.index
