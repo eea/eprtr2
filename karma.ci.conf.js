@@ -36,8 +36,8 @@ module.exports = function(config) {
                 
                 // Configure the JUnit reporter
                 junitReporter : {
-                        outputFile : 'target/surefire-reports/js-tests.xml',
-                        suite : 'js-tests'
+                        outputFile : 'target/surefire-reports/TEST-javascript.xml',
+                        suite : 'javascript'
                 }
         });
 };
