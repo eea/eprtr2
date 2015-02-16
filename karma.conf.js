@@ -36,6 +36,7 @@ module.exports = function(config){
       'src/main/webapp/bower_components/leaflet-plugins/layer/tile/Yandex.js',
       'src/main/webapp/bower_components/esri-leaflet/dist/esri-leaflet.js',
       'src/main/webapp/bower_components/underscore/underscore.js',
+      'src/main/webapp/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js',
       // endbower
       'src/main/webapp/components/**/*.js',
       'src/main/webapp/view*/**/*.js'
