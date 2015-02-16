@@ -13,8 +13,14 @@ var myApp = angular.module('myApp', [
   'myApp.search-placement',
   'myApp.esrileafmap'/*,
   'myApp.esritestmap'*/
-]).
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/home'});
-}]);
+])
 
+.config(['$routeProvider', function($routeProvider) {
+  $routeProvider.otherwise({redirectTo: '/home'});
+}])
+
+.controller('HeaderController', function($scope, $location) {	
+    $scope.isActive = function(route) {     	
+        return route === $location.url();
+    }
+});
