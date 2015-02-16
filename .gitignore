@@ -42,3 +42,4 @@ node/
 eprtrtest.h2.db
 org.eclipse.jpt.entitygen.*
 /.apt_generated/
+.idea
