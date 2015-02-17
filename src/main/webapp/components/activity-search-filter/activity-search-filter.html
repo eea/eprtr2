@@ -1,0 +1,26 @@
+<accordion-group is-open="activityPanel"> 
+	<accordion-heading>
+		Activity <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': activityPanel, 'glyphicon-chevron-right': !activityPanel}"></i>
+	</accordion-heading>
+	<div class="form-group">
+		<label class="control-label">Type</label>
+		<div class="radio">
+			<label> <input type="radio" name="activityTypeOptionsRadios" id="rblActivityType_0" value="0" ng-model="activitySearchFilter.activityType"> Industrial activity</label>
+		</div>
+		<div class="radio">
+			<label> <input type="radio" name="activityTypeOptionsRadios" id="rblActivityType_1" value="1" ng-model="activitySearchFilter.activityType"> Economic sector (NACE)</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="control-label" for="inputSector">Sector</label>
+		<select class="form-control" ng-multiple="true" multiple id="inputSector" ng-options="s.getDisplayText() for s in sectors" ng-model="activitySearchFilter.selectedSectors"></select>
+	</div>
+    <div class="form-group">
+        <label class="control-label" for="inputSector">Activities</label>
+        <select class="form-control" ng-multiple="true" multiple id="inputActivity" ng-options="s.getDisplayText() for s in activities" ng-model="activitySearchFilter.selectedActivities"></select>
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="inputSector">Sub-activities</label>
+        <select class="form-control" ng-multiple="true" multiple id="inputSubActivity" ng-options="s.getDisplayText() for s in subActivities" ng-model="activitySearchFilter.selectedSubActivities"></select>
+    </div>
+</accordion-group>
