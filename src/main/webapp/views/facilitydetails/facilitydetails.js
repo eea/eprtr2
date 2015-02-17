@@ -11,7 +11,7 @@ angular.module('myApp.facilitydetails', ['ngRoute','myApp.esrileafmap'])
 
 .controller('FacilityDetailsController', ['$scope',  function($scope) {
 	$scope.fdtitle = 'Hej Mor'
-    $scope.frID = 23;
+    $scope.frID = 89352;
 
 	/*esriTestMap.mapelem.addWhereStr('5');
 	esriTestMap.mapelem.addTextStr("Skudder muddr");
