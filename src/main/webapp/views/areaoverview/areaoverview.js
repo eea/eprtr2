@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'restangular', 'myApp.activitySearchFilter'])
+angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter', 'restangular'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/facilitylevels', {
-    templateUrl: 'views/facilitylevels/facilitylevels.html',
-    controller: 'FacilityLevelsCtrl'
+  $routeProvider.when('/areaoverview', {
+    templateUrl: 'views/areaoverview/areaoverview.html',
+    controller: 'AreaOverviewCtrl'
   });
 }])
 
-.controller('FacilityLevelsCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular', function($scope, $filter, $http, searchFilter, Restangular) {
+.controller('AreaOverviewCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular', function($scope, $filter, $http, searchFilter, Restangular) {
 	$scope.searchFilter = searchFilter;
 	
 	$scope.expandButtonImage = 'images/expand_blue.jpg';
@@ -29,7 +29,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	    	$scope.activityPanelToggleButtonImage = $scope.expandButtonImage;
 	    	$scope.activityPanelToggleButtonTitle = $scope.expandButtonText;
 	    }
-    };
+    }
 
 	$scope.pollutantPanel = false;
 	$scope.pollutantPanelToggleButtonImage = $scope.expandButtonImage;
@@ -43,7 +43,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	    	$scope.pollutantPanelToggleButtonImage = $scope.expandButtonImage;
 	    	$scope.pollutantPanelToggleButtonTitle = $scope.expandButtonText;
 	    }
-    };
+    }
 
 	$scope.wastePanel = false;
 	$scope.wastePanelToggleButtonImage = $scope.expandButtonImage;
@@ -57,7 +57,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	    	$scope.wastePanelToggleButtonImage = $scope.expandButtonImage;
 	    	$scope.wastePanelToggleButtonTitle = $scope.expandButtonText;
 	    }
-    };
+    }
 	
 	$scope.searchFilter.activityType = "0";
 	
@@ -105,7 +105,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.sort.sortingOrder = 'facilityName';
         $scope.sort.reverse = false;
         $scope.performSearch();
-    };
+    }
 	
 	$scope.performSearch = function() {
 		var rest = Restangular.withConfig(function(RestangularConfigurer) {
@@ -142,52 +142,13 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	        $scope.items = response.data;
 	        $scope.totalItemCount = response.headers('X-Count');
 	    });
-	};
+	}
     
     $scope.hasItems = function() {
     	return $scope.items.length > 0;
-    };
+    }
 }])
 
-.directive("customSort", function() {
-	return {
-	    restrict: 'A',
-	    transclude: true,    
-	    scope: {
-	      order: '=',
-	      sort: '='
-	    },
-	    template : 
-	      ' <a ng-click="sort_by(order)" style="color: #555555;">'+
-	      '    <span ng-transclude></span>'+
-	      '    <i ng-class="selectedCls(order)"></i>'+
-	      '</a>',
-	    link: function(scope) {
-	                
-	    // change sorting order
-	    scope.sort_by = function(newSortingOrder) {       
-	        var sort = scope.sort;
-	        
-	        if (sort.sortingOrder == newSortingOrder){
-	            sort.reverse = !sort.reverse;
-	        } else {
-	        	sort.reverse = false;
-	        }                    
-	
-	        sort.sortingOrder = newSortingOrder;
-	    };
-	    
-	   
-	    scope.selectedCls = function(column) {
-	        if(column == scope.sort.sortingOrder){
-	            return ('fa fa-chevron-' + ((scope.sort.reverse) ? 'down' : 'up'));
-	        }
-	        else{            
-	            return'fa fa-sort';
-	        }
-	    };      
-	  }// end link
-	};
-})
+
 
 ;

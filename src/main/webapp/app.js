@@ -9,7 +9,6 @@ var myApp = angular.module('myApp', [
   'myApp.about',
   'myApp.facilitylevels',
   'myApp.facilitydetails',
-  'myApp.version',
   'myApp.search-placement',
   'myApp.esrileafmap'/*,
   'myApp.esritestmap'*/
@@ -22,5 +21,5 @@ var myApp = angular.module('myApp', [
 .controller('HeaderController', function($scope, $location) {	
     $scope.isActive = function(route) {     	
         return route === $location.url();
-    }
+    };
 });

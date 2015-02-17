@@ -33,22 +33,10 @@
 						<input type="text" class="form-control" id="inputTown" placeholder="Enter town" ng-model="searchFilter.cityName">
 					</div>
 
-					<accordion close-others="{{false}}"> 
-						<accordion-group is-open="activityPanel"> 
-							<accordion-heading>
-								Activity <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': activityPanel, 'glyphicon-chevron-right': !activityPanel}"></i>
-							</accordion-heading>
-							<div class="form-group">
-								<label class="control-label">Type</label>
-								<div class="radio">
-									<label> <input type="radio" name="activityTypeOptionsRadios" id="rblActivityType_0" value="0" ng-model="searchFilter.activityType"> Industrial activity</label>
-								</div>
-								<div class="radio">
-									<label> <input type="radio" name="activityTypeOptionsRadios" id="rblActivityType_1" value="1" ng-model="searchFilter.activityType"> Economic sector (NACE)</label>
-								</div>
-							</div>
-						</accordion-group> 
-						<accordion-group is-open="pollutantPanel"> 
+					<accordion close-others="{{false}}">
+                        <div activity-search-filter-directive>
+                        </div>
+						<accordion-group is-open="pollutantPanel">
 							<accordion-heading>
 								Pollutant releases and transfers <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': pollutantPanel, 'glyphicon-chevron-right': !pollutantPanel}"></i>
 							</accordion-heading> 
