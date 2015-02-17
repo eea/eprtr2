@@ -2,7 +2,12 @@
 
 angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 .constant('elmconf',{
+<<<<<<< Updated upstream
 	'eprtrLayerUrl':'http://sdkcga6350:6080/arcgis/rest/services/EprtrFacilities/FeatureServer/0',
+=======
+	'eprtrLayerUrl1':'http://sdkcga6350:6080/arcgis/rest/services/EprtrFacilities/FeatureServer/0',
+	'eprtrLayerUrl2':'http://sdkcga6350:6080/arcgis/rest/services/EprtrFacilities/FeatureServer/1',
+>>>>>>> Stashed changes
 	'europebounds': [53.526, 10.667]}
 	)
 /*.config(['$routeProvider', function($routeProvider) {
@@ -77,7 +82,11 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 	});
     
 //	$scope.where = $scope.where ? $scope.where : "FacilityReportID=" + $scope.frid; 
+<<<<<<< Updated upstream
 	$scope.where = "CountryCode='NL' AND ReportingYear=2007" //+ $scope.frid; 
+=======
+	$scope.where = "CountryCode='DE' AND ReportingYear=2007" //+ $scope.frid; 
+>>>>>>> Stashed changes
 	
 	$scope.getMinOrMax = function (feature, minOrMax, latOrLng) {
 		  return _[minOrMax](feature, function (value) {
@@ -118,6 +127,7 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 		    map.fitBounds(latLngBounds);
 		});*/
 		
+<<<<<<< Updated upstream
 		elm_ctrl.fdlay = L.esri.clusteredFeatureLayer(elmconf.eprtrLayerUrl, {
 			spiderfyOnMaxZoom:false,
 		    disableClusteringAtZoom: 12,
@@ -154,6 +164,33 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 			      });
 		    },
 		});
+=======
+		elm_ctrl.fdlay = L.esri.featureLayer(elmconf.eprtrLayerUrl1, {
+			where: $scope.where,
+  		   name : "E-PRTR Facilities",
+		   pointToLayer: function (geojson, latlng) {
+			   return L.marker(latlng, {
+			        icon: $scope.eprtricons[geojson.properties.IASectorCode.toLowerCase()]
+			      });
+			   /*return  L.circleMarker(latlng, {
+		          color: '#5B7CBA',
+		          weight: 2,
+		          opacity: 0.85,
+		          fillOpacity: 0.5
+		        }); */
+		    },
+		  });
+
+		elm_ctrl.fdlay.once('load', function(e){
+//			
+			console.log('Once: '+ e.bounds.getCenter());
+			map.panTo(e.bounds.getCenter());
+			  // do something on load
+		});
+/*		elm_ctrl.fdlay.query().bounds(function(error, latLngBounds, response){
+			console.log('que: '+ latLngBounds.getCenter());
+		});*/
+>>>>>>> Stashed changes
 
 		elm_ctrl.fdlay.addTo(map);
 
@@ -185,7 +222,11 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 
 
 		elm_ctrl.fdlay.bindPopup(function (feature) {
+<<<<<<< Updated upstream
 				//console.log('pop: '+ feature.properties.X + ' ' + feature.properties.Y);
+=======
+				console.log('pop: '+ feature.properties.X + ' ' + feature.properties.Y);
+>>>>>>> Stashed changes
         	    return L.Util.template('<p>{FacilityName }<br>{ReportingYear }<br>{CountryCode }</p>', feature.properties);
         	  });
 
