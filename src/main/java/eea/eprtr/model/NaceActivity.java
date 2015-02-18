@@ -1,35 +1,45 @@
 package eea.eprtr.model;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
+import javax.persistence.*;
 
 /**
  * The persistent class for the LOV_NACEACTIVITY database table.
  * 
  */
 @Entity
-@Table(name="LOV_NACEACTIVITY")
-@NamedQuery(name="NaceActivity.findAllSectors", query="SELECT l FROM NaceActivity l where parentID is null and startYear >= :startYearEPRTR")
+@Table(name = "LOV_NACEACTIVITY")
+@Cacheable(true)
+@NamedQueries({
+		@NamedQuery(
+				name = "NaceActivity.findRootActivities", query = "SELECT l FROM NaceActivity l where parentID is null and startYear >= :startYearEPRTR", 
+				hints = { @QueryHint(name = "org.hibernate.cacheable", value = "true") }
+				),
+		@NamedQuery(
+				name = "NaceActivity.findActivities", query = "SELECT l FROM NaceActivity l where parentID = :parentID and startYear >= :startYearEPRTR", 
+				hints = { @QueryHint(name = "org.hibernate.cacheable", value = "true") }
+				) 
+		})
 public class NaceActivity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="Code")
+	@Column(name = "Code")
 	private String code;
 
-	@Column(name="EndYear")
+	@Column(name = "EndYear")
 	private Integer endYear;
 
 	@Id
 	private int LOV_NACEActivityID;
 
-	@Column(name="Name")
+	@Column(name = "Name")
 	private String name;
 
-	@Column(name="ParentID")
+	@Column(name = "ParentID")
 	private Integer parentID;
 
-	@Column(name="StartYear")
+	@Column(name = "StartYear")
 	private Integer startYear;
 
 	public NaceActivity() {
