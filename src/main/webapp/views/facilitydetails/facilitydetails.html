@@ -1,18 +1,32 @@
 <div class="container-fluid" >
         <!--Main Banner-->
-        <div class="row bg-primary header">
+        <div class="row">
             <div class="col-md-4 col-md-offset-1" style="display: inline-block; vertical-align: bottom; float: none;">
                 <h2>{{fdtitle}}</h2>
-                <h4>Combining AngularJS with the Esri Leaflet API</h4>
+              <p>
+              Country:
+            <select ng-model="objwhere.cc">
+                <option ng-repeat="cc in ['DK','DE','SE','ES','NL']">{{cc}}</option>
+            </select>
+              Year:
+            <select ng-model="objwhere.ye">
+                <option ng-repeat="ye in [2004,2006,2007,2008,2012]">{{ye}}</option>
+            </select>
+                </p>
+                
             </div>
             <div class="col-md-2 col-md-offset-4" style="display: inline-block; vertical-align: bottom; float: none; padding-bottom: 5px;">
-                <label style="padding-right: 3px;" for="whereInput">Where </label><input id="whereInput" type="text" class="text-success" placeholder="Recreation Where" ng-model="esriWhereClause">
+                <label style="padding-right: 3px;" for="whereInput">Where </label>
+                <!-- input id="whereInput" type="text" class="text-success" placeholder="Recreation Where" ng-model="strwhere" -->
                <!-- <select ng-model="selectedBaseMapLayer" ng-options="layer.name for layer in baseMapLayers" class="btn btn-default btn-lg dropdown-toggle"></select> -->
             </div>
         </div>
         <div class="row" >
-        <div class="col-md-4" >
+        <!-- div class="col-md-4" >
         <esri-leaf-map facility-report-id="{{frID}}" height="400px" />
+		</div -->
+        <div class="col-md-4" >
+        <esri-leaf-map queryparams="objwhere.wh" height="400px" />
 		</div>
         </div>
  </div>
