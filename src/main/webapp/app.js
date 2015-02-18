@@ -9,6 +9,7 @@ var myApp = angular.module('myApp', [
   'myApp.about',
   'myApp.facilitylevels',
   'myApp.facilitydetails',
+  'myApp.areaoverview',
   'myApp.version',
   'myApp.search-placement',
   'myApp.esrileafmap'/*,
