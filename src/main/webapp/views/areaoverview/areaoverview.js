@@ -9,7 +9,16 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter', 'restang
   });
 }])
 
+
+
 .controller('AreaOverviewCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular', function($scope, $filter, $http, searchFilter, Restangular) {
+	
+	 $http.get('/polutantMainGroups').success(function(data, status, headers, config) {
+	        $scope.polutantMainGroup = data;
+	        $scope.searchFilter.selectedPolutantGroup = $scope.polutantMainGroup[0];
+	    });
+	
+	
 	$scope.searchFilter = searchFilter;
 	
 	$scope.expandButtonImage = 'images/expand_blue.jpg';

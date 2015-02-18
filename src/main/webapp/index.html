@@ -39,7 +39,7 @@
               <ul class="dropdown-menu" dropdown-menu role="menu">
                 <li><a href="#facilitylevels" ng-click="subtitle = 'Facility Level Search'">Facility Level</a></li>
                 <li><a href="#">Industrial Activity (not yet available)</a></li>
-                <li><a href="#">Area Overview (not yet available)</a></li>
+                <li><a href="#areaoverview" ng-click="subtitle = 'Area Overview'">Area Overview</a></li>
                 <li class="divider"></li>
                 <li><a href="#">Polutant Releases (not yet available)</a></li>
                 <li><a href="#">Waste Transfers (not yet available)</a></li>
@@ -128,14 +128,20 @@
   <script src="bower_components/underscore/underscore.js"></script>
   <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
   <!-- endbower -->
-  <!-- endbuild -->
-
+  <!-- endbuild --> 
+ 
   <!-- build:js(src/main/webapp) scripts/scripts.js -->
   <script src="app.js"></script>
   <script src="views/home/home.js"></script>
   <script src="views/about/about.js"></script>
   <script src="views/facilitylevels/facilitylevels.js"></script>
   <script src="views/facilitydetails/facilitydetails.js"></script>
+
+  <script src="views/areaoverview/areaoverview.js"></script>
+<!--   <script src="components/version/version.js"></script> -->
+<!--   <script src="components/version/version-directive.js"></script> -->
+<!--   <script src="components/version/interpolate-filter.js"></script> -->
+
   <script src="components/search-filter/search-filter.js"></script>
   <script src="components/esrileafmap/esrileafmap.js"></script>
   <script src="components/search-placement/search-placement.js"></script>

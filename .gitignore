@@ -16,3 +16,4 @@ org.eclipse.jpt.entitygen.*
 /.apt_generated/
 .idea
 .metadata
+database/test.sql

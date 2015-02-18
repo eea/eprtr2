@@ -33,7 +33,8 @@ angular.module('myApp.activitySearchFilter', ['restangular', 'myApp.search-filte
             $scope.activitySearchFilter.selectedSectors = [allSectors];
             $scope.sectors = [allSectors];
             if ($scope.activitySearchFilter.activityType === '1') {
-                NaceActivity.getList().then(function (data) {
+                var params = {};
+                NaceActivity.getList(params).then(function (data) {
                     $scope.sectors = $scope.sectors.concat(data);
                 });
             }
@@ -42,34 +43,28 @@ angular.module('myApp.activitySearchFilter', ['restangular', 'myApp.search-filte
         $scope.updateActivity = function() {
             $scope.activitySearchFilter.selectedActivities = [allActivities];
             $scope.activities = [allActivities];
-            var populate = true;
             var selectedSectors = $scope.activitySearchFilter.selectedSectors;
-            if (selectedSectors.length !== 1) {
-                populate = false;
-            } else if (selectedSectors[0] === allSectors) {
-                populate = false;
-            }
-            if (populate && $scope.activitySearchFilter.activityType === '1') {
-                NaceActivity.getList({ParentID : selectedSectors[0].lov_NACEActivityID}).then(function (data) {
-                    $scope.activities = $scope.activities.concat(data);
-                });
+            if (selectedSectors.length === 1 && selectedSectors[0] !== allSectors) {
+                if ($scope.activitySearchFilter.activityType === '1') {
+                    var params = {ParentID: selectedSectors[0].lov_NACEActivityID};
+                    NaceActivity.getList(params).then(function (data) {
+                        $scope.activities = $scope.activities.concat(data);
+                    });
+                }
             }
         };
 
         $scope.updateSubActivity = function() {
             $scope.activitySearchFilter.selectedSubActivities = [allSubActivities];
             $scope.subActivities = [allSubActivities];
-            var populate = true;
             var selectedActivities = $scope.activitySearchFilter.selectedActivities;
-            if (selectedActivities.length !== 1) {
-                populate = false;
-            } else if (selectedActivities[0] === allActivities) {
-                populate = false;
-            }
-            if (populate && $scope.activitySearchFilter.activityType === '1') {
-                NaceActivity.getList({ParentID : selectedActivities[0].lov_NACEActivityID}).then(function (data) {
-                    $scope.subActivities = $scope.subActivities.concat(data);
-                });
+            if (selectedActivities.length === 1 && selectedActivities[0] !== allActivities) {
+                if ($scope.activitySearchFilter.activityType === '1') {
+                    var params = {ParentID: selectedActivities[0].lov_NACEActivityID};
+                    NaceActivity.getList(params).then(function (data) {
+                        $scope.subActivities = $scope.subActivities.concat(data);
+                    });
+                }
             }
         };
     }])

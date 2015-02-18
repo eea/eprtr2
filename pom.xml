@@ -17,10 +17,10 @@
         <spring.version>4.1.4.RELEASE</spring.version>
         <tiles.version>3.0.1</tiles.version>
         <checkstyle.config.location>${basedir}/doc/checkstyle.xml</checkstyle.config.location>
-        <!--
         <liquibase.changeLogFile>database/changelog-master.xml</liquibase.changeLogFile>
-        -->
+        <!--
         <liquibase.changeLogFile>database/CMS.xml</liquibase.changeLogFile>
+        -->
         <m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
     </properties>
 
@@ -607,6 +607,12 @@
             <version>3.3</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+		    <groupId>org.mockito</groupId>
+		    <artifactId>mockito-all</artifactId>
+		    <version>1.10.19</version>
+		    <scope>test</scope>
+		</dependency>
         <!-- End TEST dependencies -->
 
     </dependencies>

@@ -18,187 +18,142 @@
 			<div class="panel panel-info">
 				<div class="panel-heading">Search</div>
 				<div class="panel-body">
-
-					<div search-placement>
-					</div>
-
-
-
-				
-
-
+					<div search-placement>	</div>		
 					
-
-
-					<div
-						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_upWaste">
-
-
-
-						<input type="hidden"
-							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedWasteSearchOption$cpeWaste_ClientState"
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_cpeWaste_ClientState"
-							value="true">
-
-	
-
-
+					<div id="ContentChoice">
+						<label class="form-label" for="contentdropdown"> Contents </label> 
+						<select	name="content" id="contentdropdown" class="form-control">
+							<option selected="selected" value="">Pollutant Releases</option>
+							<option value="1">Pollutant Transfers</option>
+							<option value="1">Waste Transfers</option>
+						</select>
 					</div>
-
-
-
-					<div
-						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_plButton">
-
-
-						<input type="submit" value="Search" ng-click="search()" class="btn btn-default"> 
+					<br/>
+					<div id="ContentChoice">
+						<label class="form-label" for="contentdropdown"> Polutant Group </label> 
+						<select class="form-control" ng-model="searchFilter.selectedPolutantGroup" ng-options="c.name for c in polutantMainGroup" id="polutantMainGroups"></select>
 					</div>
-
-
+					<br/>
+					
+					<div id="SearchButton">
+						<input type="submit" value="Search" ng-click="search()" class="btn btn-primary"> 
+					</div>
 				</div>
-
 			</div>
-
-
-
-
+			
 		</div>
 		
 		<div class="col-md-6">
-            <div id="mapDiv"></div>
+             <esri-leaf-map facility-report-id="{{frID}}" height="400px" />
         </div>
 
 
 	</div>
 
 
- 	
+ 
 
-	<div
-		id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_upResultArea" ng-show="searchResults">
+	<div id="searchResults" ng-show="searchResults">
+	
+	
+		<h2>Polutant releases</h2>
+	
 
-		<div
-			id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_resultArea"
-			class="layout_resultArea">
+		
+<div>
+		  <tabset>
+			    <tab heading="Air">
 
-
-
-			<div class="look_sheet_level0">
-
-				<div class="layout_sheet_header">
-					<h2>Facility search / Facilities</h2>
-				</div>
-
-
-
-				<div class="layout_sheet_contentsBox look_sheet_contentsBox">
-					<span
-						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetLinks_lbContentsHeader"
-						class="contentsBox_header">Contents:</span> <br> <a
-						onclick="ShowWaitIndicator();"
-						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetLinks_LinkButton0"
-						class="contentsBox_item contentsBox_item_selected"
-						href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucSheetLinks$LinkButton0','')">Facilities</a>
-					<a onclick="ShowWaitIndicator();"
-						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetLinks_LinkButton1"
-						class="contentsBox_item"
-						href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucSheetLinks$LinkButton1','')">Confidentiality</a>
-
-
-
-
-
-
-
-
-				</div>
-
-
-
-
-
-
-
-				<div class="layout_sheet_download_print">
-					<div
-						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucDownloadPrint_dowloadbuttons">
-
-						<input type="image"
-							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucDownloadPrint$btndownload"
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucDownloadPrint_btndownload"
-							title="Download" src="images/download.gif"
-							style="border-width: 0px;"> <input type="image"
-							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucDownloadPrint$btnPrint"
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucDownloadPrint_btnPrint"
-							title="Print" src="images/ico-print.gif"
-							onclick="window.open('print.aspx?page=global','','height=500px,width=850px,scrollbars=1,resizable=yes,toolbar=no,status=no,replace=true');"
-							style="border-width: 0px;">
-					</div>
-				</div>
-				<div class="layout_sheet_subHeader">
-					<div>
-						<table cellspacing="0" border="0"
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetSubHeader_subheadlineGridView"
-							style="border-collapse: collapse;">
-							<tbody>
-								<tr style="border-style: None;">
-									<th class="resultSheet_subHeader_label detailsTitleColor"
-										scope="row">Facilities:</th>
-									<td class="resultSheet_subHeader_value">{{totalItemCount | number}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div
-						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetSubHeader_ucConfidentialDisclaimer_divContent"
-						class="resultSheet_alert">
-						<img
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetSubHeader_ucConfidentialDisclaimer_imgAlert"
-							src="images/alert.png" alt="alert" style="border-width: 0px;">
-						<a onclick="ShowWaitIndicator();"
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetSubHeader_ucConfidentialDisclaimer_lnbAlert"
-							href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucSheetSubHeader$ucConfidentialDisclaimer$lnbAlert','')">Confidentiality
-							claims may affect the result. See details &gt;&gt;</a>
-					</div>
-				</div>
-				<div class="layout_sheet_content">
-					<span
-						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lbHelpText"
-						class="listHelp">Clicking the column headers will sort
-						results either descending or ascending</span><br>
-					<br>
-					<table class="table table-striped table-condensed table-hover">
+				<table class="table table-striped table-condensed table-hover">
+	                <thead>
+	                    <tr>
+                        <th class="facilityName" custom-sort order="'facilityName'" sort="sort">Facility&nbsp;</th>
+                        <th class="postalCode" custom-sort order="'postalCode'" sort="sort">Postal Code&nbsp;</th>
+                        <th class="address" custom-sort order="'address'" sort="sort">Address&nbsp;</th>
+                        <th class="city" custom-sort order="'city'" sort="sort">Town/Village&nbsp;</th>
+                        <th class="iaactivityCode" custom-sort order="'IAActivityCode'" sort="sort">Activity&nbsp;</th>
+                        <th class="countryCode" custom-sort order="'countryCode'" sort="sort">Country&nbsp;</th>
+	                    </tr>
+	                </thead>
+		                <tbody>
+				           <tr ng-repeat="item in items">
+				               <td>{{item.facilityName}}</td>
+				               <td>{{item.postalCode}}</td>
+				               <td>{{item.address}}</td>
+				               <td>{{item.city}}</td>
+				               <td>{{item.iaactivityCode}}</td>
+				               <td>{{item.countryCode}}</td>
+				            </tr>
+				        </tbody>
+				 </table>
+  
+			</tab>
+			    <tab heading="Water">Water
+			    
+				    <table class="table table-striped table-condensed table-hover">
 		                <thead>
 		                    <tr>
-		                        <th class="facilityName" custom-sort order="'facilityName'" sort="sort">Facility&nbsp;</th>
-		                        <th class="postalCode" custom-sort order="'postalCode'" sort="sort">Postal Code&nbsp;</th>
-		                        <th class="address" custom-sort order="'address'" sort="sort">Address&nbsp;</th>
-		                        <th class="city" custom-sort order="'city'" sort="sort">Town/Village&nbsp;</th>
-		                        <th class="iaactivityCode" custom-sort order="'IAActivityCode'" sort="sort">Activity&nbsp;</th>
-		                        <th class="countryCode" custom-sort order="'countryCode'" sort="sort">Country&nbsp;</th>
+	                        <th class="facilityName" custom-sort order="'facilityName'" sort="sort">Facility&nbsp;</th>
+	                        <th class="postalCode" custom-sort order="'postalCode'" sort="sort">Postal Code&nbsp;</th>
+	                        <th class="address" custom-sort order="'address'" sort="sort">Address&nbsp;</th>
+	                        <th class="city" custom-sort order="'city'" sort="sort">Town/Village&nbsp;</th>
+	                        <th class="iaactivityCode" custom-sort order="'IAActivityCode'" sort="sort">Activity&nbsp;</th>
+	                        <th class="countryCode" custom-sort order="'countryCode'" sort="sort">Country&nbsp;</th>
 		                    </tr>
 		                </thead>
-		                <tfoot>
-		                    <td colspan="6">
-		                    	<div ng-show="hasItems()">
- 		                    	 	<pagination boundary-links="true" ng-model="currentPage" total-items="totalItemCount" items-per-page="itemsPerPage" max-size="gap" class="pagination pull-right" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination> 
-	                            </div>
-		                    </td>
-		                </tfoot>
-		                <tbody>
-		                    <tr ng-repeat="item in items">
-		                        <td>{{item.facilityName}}</td>
-		                        <td>{{item.postalCode}}</td>
-		                        <td>{{item.address}}</td>
-		                        <td>{{item.city}}</td>
-		                        <td>{{item.iaactivityCode}}</td>
-		                        <td>{{item.countryCode}}</td>
-		                    </tr>
-		                </tbody>
-		            </table>
-				</div>
-			</div>
-		</div>
-		         
-	</div>
-</div>
+			                <tbody>
+					           <tr ng-repeat="item in items">
+					               <td>{{item.facilityName}}</td>
+					               <td>{{item.postalCode}}</td>
+					               <td>{{item.address}}</td>
+					               <td>{{item.city}}</td>
+					               <td>{{item.iaactivityCode}}</td>
+					               <td>{{item.countryCode}}</td>
+					            </tr>
+					        </tbody>
+					 </table>
+			    
+			    
+			    </tab>
+			    <tab heading="Soil">Soil
+			    fasdfdasdf
+			    
+			    asdfasdfafsd
+			    <br/>
+			    asdfasdfafsd
+			    <br/>
+			    asdfasdfafsd
+			    <br/>
+			    asdfasdfafsd
+			    <br/>
+			    asdfasdfafsd
+			    <br/>
+			    asdfasdfafsd
+			    <br/>
+			    asdfasdfafsd
+			    <br/>
+			    asdfasdfafsd
+			    <br/>
+			    asdfasdfafsd
+			    <br/>
+			    asdfasdfafsd
+			    <br/>
+			    asdfasdfafsd
+			    <br/>
+			    asdfasdfafsd
+			    <br/>
+			    asdfasdfafsd
+			    <br/>
+			    asdfasdfafsd
+			    <br/>
+			    v
+			    asdfasdfafsd
+			    <br/>
+			    
+			    </tab>
+			   
+			  </tabset>
+</div>		         
+		
+	</div> <!-- Search Result -->
+</div> <!-- Info Area -->
