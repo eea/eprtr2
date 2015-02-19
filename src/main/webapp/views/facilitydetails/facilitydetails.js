@@ -28,15 +28,15 @@ angular.module('myApp.facilitydetails', ['ngRoute','myApp.esrileafmap'])
     };
     
     $scope.$watch('objwhere.cc', function(value) {
-        console.log('objwhere1: '+ value);
+        //console.log('objwhere1: '+ value);
         $scope.setWhereStr();
-        console.log('objwhere2: '+ JSON.stringify($scope.objwhere.wh));
+        //console.log('objwhere2: '+ JSON.stringify($scope.objwhere.wh));
     });
 
     $scope.$watch('objwhere.ye', function(value) {
-        console.log('objwhere3: '+ value);
+        //console.log('objwhere3: '+ value);
         $scope.setWhereStr();
-        console.log('objwhere4: '+ JSON.stringify($scope.objwhere.wh));
+        //console.log('objwhere4: '+ JSON.stringify($scope.objwhere.wh));
     });
 
     //$scope.setWhereStr = '';

@@ -7,6 +7,7 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 .constant('elmconf',{
 	'eprtrLayerUrl':'http://sdkcga6350:6080/arcgis/rest/services/EprtrFacilities/FeatureServer/0',
 	'europebounds': [53.526, 10.667],
+	'europezoom': 3,
 	'passInFilter': ['FacilityReportID','FacilityName','FacilityID','NationalID',
 	                 'ParentCompanyName','ReportingYear','Address','City','PostalCode',
 	                 'CountryCode','LOV_CountryID','RiverBasinDistrictCode','LOV_RiverBasinDistrictID',
@@ -20,7 +21,7 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 	'sectors':['0','1','2','3','4','5','6','7','8','9']
 	})
 
-.controller('esriLeafMapController', ['$scope',  'leafletData','elmconf', function($scope,  leafletData, elmconf) {
+.controller('esriLeafMapController', ['$scope',  'leafletData', 'elmconf', function($scope,  leafletData, elmconf) {
 	var elm_ctrl = this;
 	var points = [];
 	var where = '';
@@ -97,7 +98,7 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 	    	var arrQue = []
 	    	for (var key in queryparams){
 	    		if (elmconf.passInFilter.indexOf(key)>=0){
-	    			console.log('queryparams passed: True');
+	    			//console.log('queryparams passed: True');
 	        		var qstr = ""
 	        		if (queryparams[key] && queryparams[key] != ''){
 		        		if (typeof queryparams[key] === 'number'){
@@ -154,7 +155,7 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 	//Here we initialize the map
 	leafletData.getMap().then(function(map) {
 		//Initial extent
-		map.setView(elmconf.europebounds, 4);
+		map.setView(elmconf.europebounds, elmconf.europezoom);
 		elm_ctrl.elm_map = map
 		//We set the baselayer - in version 2 we can add more baselayers and a selector
 		L.esri.basemapLayer("Streets").addTo(map);
