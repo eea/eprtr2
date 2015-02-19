@@ -1,6 +1,7 @@
 package eea.eprtr.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -10,17 +11,27 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="LOV_ANNEXIACTIVITY")
-@NamedQuery(name="LovAnnexiactivity.findAll", query="SELECT l FROM LovAnnexiactivity l")
-public class LovAnnexiactivity implements Serializable {
+@Cacheable(true)
+@NamedQueries({
+		@NamedQuery(
+				name = "AnnexIActivity.findRootActivities", query = "SELECT l FROM AnnexIActivity l where parentID is null and startYear >= :startYearEPRTR", 
+				hints = { @QueryHint(name = "org.hibernate.cacheable", value = "true") }
+				),
+		@NamedQuery(
+				name = "AnnexIActivity.findActivities", query = "SELECT l FROM AnnexIActivity l where parentID = :parentID and startYear >= :startYearEPRTR", 
+				hints = { @QueryHint(name = "org.hibernate.cacheable", value = "true") }
+				) 
+		})
+public class AnnexIActivity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="Code")
 	private String code;
 
 	@Column(name="EndYear")
-	private int endYear;
+	private Integer endYear;
 
-	private int eperAnnex3_ID;
+	private Integer eperAnnex3_ID;
 
 	private String IPPCCode;
 	
@@ -31,12 +42,12 @@ public class LovAnnexiactivity implements Serializable {
 	private String name;
 
 	@Column(name="ParentID")
-	private int parentID;
+	private Integer parentID;
 
 	@Column(name="StartYear")
-	private int startYear;
+	private Integer startYear;
 
-	public LovAnnexiactivity() {
+	public AnnexIActivity() {
 	}
 
 	public String getCode() {
@@ -47,19 +58,19 @@ public class LovAnnexiactivity implements Serializable {
 		this.code = code;
 	}
 
-	public int getEndYear() {
+	public Integer getEndYear() {
 		return this.endYear;
 	}
 
-	public void setEndYear(int endYear) {
+	public void setEndYear(Integer endYear) {
 		this.endYear = endYear;
 	}
 
-	public int getEperAnnex3_ID() {
+	public Integer getEperAnnex3_ID() {
 		return this.eperAnnex3_ID;
 	}
 
-	public void setEperAnnex3_ID(int eperAnnex3_ID) {
+	public void setEperAnnex3_ID(Integer eperAnnex3_ID) {
 		this.eperAnnex3_ID = eperAnnex3_ID;
 	}
 
@@ -87,19 +98,19 @@ public class LovAnnexiactivity implements Serializable {
 		this.name = name;
 	}
 
-	public int getParentID() {
+	public Integer getParentID() {
 		return this.parentID;
 	}
 
-	public void setParentID(int parentID) {
+	public void setParentID(Integer parentID) {
 		this.parentID = parentID;
 	}
 
-	public int getStartYear() {
+	public Integer getStartYear() {
 		return this.startYear;
 	}
 
-	public void setStartYear(int startYear) {
+	public void setStartYear(Integer startYear) {
 		this.startYear = startYear;
 	}
 

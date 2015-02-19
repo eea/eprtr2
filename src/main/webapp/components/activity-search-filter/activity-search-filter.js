@@ -2,7 +2,7 @@
 
 angular.module('myApp.activitySearchFilter', ['restangular', 'myApp.search-filter'])
 
-.controller('activitySearchFilterController', ['$scope', 'activitySearchFilter', 'searchFilter', 'NaceActivity', function($scope, activitySearchFilter, searchFilter, NaceActivity) {
+.controller('activitySearchFilterController', ['$scope', 'activitySearchFilter', 'searchFilter', 'naceActivityType', 'annexIActivityType', function($scope, activitySearchFilter, searchFilter, naceActivityType, annexIActivityType) {
         $scope.activitySearchFilter = activitySearchFilter;
         searchFilter.activitySearchFilter = activitySearchFilter;
 
@@ -15,6 +15,10 @@ angular.module('myApp.activitySearchFilter', ['restangular', 'myApp.search-filte
         $scope.$watch('activitySearchFilter.selectedActivities', function(value) {
             $scope.updateSubActivity();
         });
+
+        activitySearchFilter.activityType = annexIActivityType;
+        activitySearchFilter.annexIActivityType = annexIActivityType;
+        activitySearchFilter.naceActivityType = naceActivityType;
 
         var allSectors = {};
         allSectors.getDisplayText = function() {
@@ -32,12 +36,9 @@ angular.module('myApp.activitySearchFilter', ['restangular', 'myApp.search-filte
         $scope.updateSector = function() {
             $scope.activitySearchFilter.selectedSectors = [allSectors];
             $scope.sectors = [allSectors];
-            if ($scope.activitySearchFilter.activityType === '1') {
-                var params = {};
-                NaceActivity.getList(params).then(function (data) {
-                    $scope.sectors = $scope.sectors.concat(data);
-                });
-            }
+            activitySearchFilter.activityType.getList().then(function (data) {
+                $scope.sectors = $scope.sectors.concat(data);
+            });
         };
 
         $scope.updateActivity = function() {
@@ -45,12 +46,9 @@ angular.module('myApp.activitySearchFilter', ['restangular', 'myApp.search-filte
             $scope.activities = [allActivities];
             var selectedSectors = $scope.activitySearchFilter.selectedSectors;
             if (selectedSectors.length === 1 && selectedSectors[0] !== allSectors) {
-                if ($scope.activitySearchFilter.activityType === '1') {
-                    var params = {ParentID: selectedSectors[0].lov_NACEActivityID};
-                    NaceActivity.getList(params).then(function (data) {
-                        $scope.activities = $scope.activities.concat(data);
-                    });
-                }
+                activitySearchFilter.activityType.getList(selectedSectors[0]).then(function (data) {
+                    $scope.activities = $scope.activities.concat(data);
+                });
             }
         };
 
@@ -59,23 +57,43 @@ angular.module('myApp.activitySearchFilter', ['restangular', 'myApp.search-filte
             $scope.subActivities = [allSubActivities];
             var selectedActivities = $scope.activitySearchFilter.selectedActivities;
             if (selectedActivities.length === 1 && selectedActivities[0] !== allActivities) {
-                if ($scope.activitySearchFilter.activityType === '1') {
-                    var params = {ParentID: selectedActivities[0].lov_NACEActivityID};
-                    NaceActivity.getList(params).then(function (data) {
-                        $scope.subActivities = $scope.subActivities.concat(data);
-                    });
+                activitySearchFilter.activityType.getList(selectedActivities[0]).then(function (data) {
+                    $scope.subActivities = $scope.subActivities.concat(data);
+                });
+            }
+        };
+    }])
+
+.factory('naceActivityType', ['naceActivityService', function(naceActivityService) {
+        return {
+            getList : function(parent) {
+                var params = {};
+                if (parent !== undefined) {
+                    params = {ParentID: parent.lov_NACEActivityID};
                 }
+                return naceActivityService.getList(params);
+            }
+        };
+    }])
+
+.factory('annexIActivityType', ['annexIActivityService', function(annexIActivityService) {
+        return {
+            getList : function(parent) {
+                var params = {};
+                if (parent !== undefined) {
+                    params = {ParentID: parent.lov_AnnexIActivityID};
+                }
+                return annexIActivityService.getList(params);
             }
         };
     }])
 
 .factory('activitySearchFilter', [function() {
         var searchFilter = {};
-        searchFilter.activityType = '0';
         return searchFilter;
     }])
 
-.service('NaceActivity', ['Restangular', function(Restangular){
+.service('naceActivityService', ['Restangular', function(Restangular){
         var NaceActivity = Restangular.service('naceActivity');
 
         Restangular.extendModel('naceActivity', function(model) {
@@ -86,6 +104,19 @@ angular.module('myApp.activitySearchFilter', ['restangular', 'myApp.search-filte
         });
 
         return NaceActivity;
+    }])
+
+.service('annexIActivityService', ['Restangular', function(Restangular){
+        var AnnexIActivity = Restangular.service('annexIActivity');
+
+        Restangular.extendModel('annexIActivity', function(model) {
+            model.getDisplayText = function() {
+                return this.code + ' ' + this.name;
+            };
+            return model;
+        });
+
+        return AnnexIActivity;
     }])
 
 .directive('activitySearchFilterDirective', function() {
