@@ -83,11 +83,11 @@ public class LovPollutant implements Serializable {
 		this.eperPollutant_ID = eperPollutant_ID;
 	}
 
-	public Integer getLOV_PollutantID() {
+	public int getLOV_PollutantID() {
 		return this.LOV_PollutantID;
 	}
 
-	public void setLOV_PollutantID(Integer LOV_PollutantID) {
+	public void setLOV_PollutantID(int LOV_PollutantID) {
 		this.LOV_PollutantID = LOV_PollutantID;
 	}
 
