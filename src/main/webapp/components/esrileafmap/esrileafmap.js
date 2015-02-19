@@ -7,7 +7,16 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 .constant('elmconf',{
 	'eprtrLayerUrl':'http://sdkcga6350:6080/arcgis/rest/services/EprtrFacilities/FeatureServer/0',
 	'europebounds': [53.526, 10.667],
-	'passInFilter': ['offset','limit','order','desc'],
+	'passInFilter': ['FacilityReportID','FacilityName','FacilityID','NationalID',
+	                 'ParentCompanyName','ReportingYear','Address','City','PostalCode',
+	                 'CountryCode','LOV_CountryID','RiverBasinDistrictCode','LOV_RiverBasinDistrictID',
+	                 'NUTSLevel2RegionCode','LOV_NUTSRLevel1ID','LOV_NUTSRLevel2ID','LOV_NUTSRLevel3ID',
+	                 'IASectorCode','IAActivityCode','IASubActivityCode','IPPCSectorCode','IPPCActivityCode',
+	                 'IPPCSubActivityCode','LOV_IASectorID','LOV_IAActivityID','LOV_IASubActivityID',
+	                 'NACESectorCode','NACEActivityCode','NACESubActivityCode','LOV_NACESectorID',
+	                 'LOV_NACEActivityID','LOV_NACESubActivityID','IAReportedActivityCode',
+	                 'IPPCReportedActivityCode','NACEReportedActivityCode',
+	                 'ConfidentialCode','LOV_ConfidentialityID'],
 	'sectors':['0','1','2','3','4','5','6','7','8','9']
 	})
 
@@ -87,7 +96,8 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 	    buildWhere: function(queryparams) {
 	    	var arrQue = []
 	    	for (var key in queryparams){
-	    		if (elmconf.passInFilter.indexOf(key)<0){
+	    		if (elmconf.passInFilter.indexOf(key)>=0){
+	    			console.log('queryparams passed: True');
 	        		var qstr = ""
 	        		if (queryparams[key] && queryparams[key] != ''){
 		        		if (typeof queryparams[key] === 'number'){
@@ -180,7 +190,8 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
    		   	where: $scope.where,
    		   	name: "E-PRTR Facilities",
 		    pointToLayer: function (geojson, latlng) {
-			   points.push(latlng)
+		       //Points used by zoomToFeatures
+			   //points.push(latlng)
 			   var sec = geojson.properties.IASectorCode.toLowerCase();
 			   return L.marker(latlng, {
 			        icon: $scope.eprtricons[(elmconf.sectors.indexOf(sec)>0)?sec:'others']
@@ -189,7 +200,7 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 		});
 
 		//Here we try to navigate to the extent of the selected features - still not satisfied
-		elm_ctrl.fdlay.on('load', function(e){
+/*		elm_ctrl.fdlay.on('load', function(e){
 //			console.log('pnts: '+ points.length);
 			if (points.length > 0){
 				var bounds = $scope.updateExtent(points);
@@ -197,9 +208,8 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 	  		    map.fitBounds(bounds,{maxZoom:3});
 	  		    points = [];
 			};
-//  		    map.fitBounds(bounds,{maxZoom:2});
-			  // do something on load
-		});
+		  // do something on load
+		});*/
 		//Now we add the clusterlayer to the map
 		elm_ctrl.fdlay.addTo(map);
 
