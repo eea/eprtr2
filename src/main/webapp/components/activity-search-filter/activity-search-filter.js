@@ -6,62 +6,38 @@ angular.module('myApp.activitySearchFilter', ['restangular', 'myApp.search-filte
         $scope.activitySearchFilter = activitySearchFilter;
         searchFilter.activitySearchFilter = activitySearchFilter;
 
-        $scope.$watch('activitySearchFilter.activityType', function(value) {
-            $scope.updateSector();
-        });
-        $scope.$watch('activitySearchFilter.selectedSectors', function(value) {
-            $scope.updateActivity();
-        });
-        $scope.$watch('activitySearchFilter.selectedActivities', function(value) {
-            $scope.updateSubActivity();
-        });
-
         activitySearchFilter.activityType = annexIActivityType;
         activitySearchFilter.annexIActivityType = annexIActivityType;
         activitySearchFilter.naceActivityType = naceActivityType;
 
-        var allSectors = {};
-        allSectors.getDisplayText = function() {
-            return 'All sectors';
-        };
-        var allActivities = {};
-        allActivities.getDisplayText = function() {
-            return 'All activities';
-        };
-        var allSubActivities = {};
-        allSubActivities.getDisplayText = function() {
-            return 'All sub-activities';
-        };
-
-        $scope.updateSector = function() {
-            $scope.activitySearchFilter.selectedSectors = [allSectors];
-            $scope.sectors = [allSectors];
+        $scope.$watch('activitySearchFilter.activityType', function() {
+            var all = { getDisplayText : function() { return 'All sectors'; } };
+        	$scope.activitySearchFilter.selectedSectors = [all];
+            $scope.sectors = [all];
             activitySearchFilter.activityType.getList().then(function (data) {
                 $scope.sectors = $scope.sectors.concat(data);
             });
-        };
-
-        $scope.updateActivity = function() {
-            $scope.activitySearchFilter.selectedActivities = [allActivities];
-            $scope.activities = [allActivities];
-            var selectedSectors = $scope.activitySearchFilter.selectedSectors;
-            if (selectedSectors.length === 1 && selectedSectors[0] !== allSectors) {
-                activitySearchFilter.activityType.getList(selectedSectors[0]).then(function (data) {
+        });
+        $scope.$watch('activitySearchFilter.selectedSectors', function(value) {
+            var all = { getDisplayText : function() { return 'All activities'; } };
+        	$scope.activitySearchFilter.selectedActivities = [all];
+            $scope.activities = [all];
+            if (value.length === 1 && value[0].code) {
+                activitySearchFilter.activityType.getList(value[0]).then(function (data) {
                     $scope.activities = $scope.activities.concat(data);
                 });
             }
-        };
-
-        $scope.updateSubActivity = function() {
-            $scope.activitySearchFilter.selectedSubActivities = [allSubActivities];
-            $scope.subActivities = [allSubActivities];
-            var selectedActivities = $scope.activitySearchFilter.selectedActivities;
-            if (selectedActivities.length === 1 && selectedActivities[0] !== allActivities) {
-                activitySearchFilter.activityType.getList(selectedActivities[0]).then(function (data) {
+        });
+        $scope.$watch('activitySearchFilter.selectedActivities', function(value) {
+            var all = { getDisplayText : function() { return 'All sub-activities'; } };
+        	$scope.activitySearchFilter.selectedSubActivities = [all];
+            $scope.subActivities = [all];
+            if (value.length === 1 && value[0].code) {
+                activitySearchFilter.activityType.getList(value[0]).then(function (data) {
                     $scope.subActivities = $scope.subActivities.concat(data);
                 });
             }
-        };
+        });
     }])
 
 .factory('naceActivityType', ['naceActivityService', function(naceActivityService) {
@@ -89,8 +65,7 @@ angular.module('myApp.activitySearchFilter', ['restangular', 'myApp.search-filte
     }])
 
 .factory('activitySearchFilter', [function() {
-        var searchFilter = {};
-        return searchFilter;
+        return {};
     }])
 
 .service('naceActivityService', ['Restangular', function(Restangular){
