@@ -17,20 +17,6 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	$scope.collapseButtonImage = 'images/collapse_blue.jpg';
 	$scope.collapseButtonText = 'Collapse to exclude';
 
-	$scope.activityPanel = false;
-	$scope.activityPanelToggleButtonImage = $scope.expandButtonImage;
-	$scope.activityPanelToggleButtonTitle = $scope.expandButtonText;
-	$scope.toggleActivityPanel = function() {
-	    $scope.activityPanel = !$scope.activityPanel;
-	    if ($scope.activityPanel) {
-	    	$scope.activityPanelToggleButtonImage = $scope.collapseButtonImage;
-	    	$scope.activityPanelToggleButtonTitle = $scope.collapseButtonText;
-	    } else {
-	    	$scope.activityPanelToggleButtonImage = $scope.expandButtonImage;
-	    	$scope.activityPanelToggleButtonTitle = $scope.expandButtonText;
-	    }
-    };
-
 	$scope.pollutantPanel = false;
 	$scope.pollutantPanelToggleButtonImage = $scope.expandButtonImage;
 	$scope.pollutantPanelToggleButtonTitle = $scope.expandButtonText;
@@ -58,9 +44,6 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	    	$scope.wastePanelToggleButtonTitle = $scope.expandButtonText;
 	    }
     };
-	
-	$scope.searchFilter.activityType = "0";
-	
 	
 	// init
     $scope.sort = {       
@@ -133,6 +116,9 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	    if ($scope.currentSearchFilter.cityName) {
 	    	queryParams.CityName = $scope.currentSearchFilter.cityName;
 	    }
+        if ($scope.currentSearchFilter.activitySearchFilter) {
+            $scope.currentSearchFilter.activitySearchFilter.filter(queryParams);
+        }
 	    queryParams.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
 	    queryParams.limit = $scope.itemsPerPage;
 	    queryParams.order = $scope.sort.sortingOrder;

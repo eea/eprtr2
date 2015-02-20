@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import eea.eprtr.dao.ActivitySearchFilter;
 import eea.eprtr.dao.CountryAreaGroupRepository;
 import eea.eprtr.dao.FacilitySearchFilter;
 import eea.eprtr.dao.FacilitySearchRepository;
@@ -34,13 +35,21 @@ public class FacilitySearchController {
     		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
     		@RequestParam(value = "FacilityName", required = false) String facilityName,
     		@RequestParam(value = "CityName", required = false) String cityName,
+    		@RequestParam(value = "LOV_AISectorID", required = false) Integer aiSectorID,
+    		@RequestParam(value = "LOV_AIActivityID", required = false) Integer aiActivityID,
+    		@RequestParam(value = "LOV_AISubActivityID", required = false) Integer aiSubActivityID,
+    		@RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
+    		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
+    		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
+    		
     		@RequestParam(value = "offset") Integer offset,
     		@RequestParam(value = "limit") Integer limit,
     		@RequestParam(value = "order") String order,
     		@RequestParam(value = "desc") Boolean desc,
     		HttpServletResponse response) {
 
-		FacilitySearchFilter filter = new FacilitySearchFilter(countryAreaGroupRepository, reportingYear, countryID, areaGroupID, regionID, rbdID, facilityName, cityName);
+		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
+		FacilitySearchFilter filter = new FacilitySearchFilter(countryAreaGroupRepository, reportingYear, countryID, areaGroupID, regionID, rbdID, facilityName, cityName, activityFilter);
 		
 		long facilitiesCount = facilitySearchRepository.getFacilityCount(filter);
 		response.setHeader("X-Count", String.valueOf(facilitiesCount));

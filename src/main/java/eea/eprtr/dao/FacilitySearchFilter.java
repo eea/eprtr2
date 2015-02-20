@@ -2,7 +2,6 @@ package eea.eprtr.dao;
 
 import java.util.List;
 
-import javax.persistence.criteria.AbstractQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -20,8 +19,9 @@ public class FacilitySearchFilter {
 	private Integer rbdID;
 	private String facilityName;
 	private String cityName;
+	private ActivitySearchFilter activityFilter;
 
-	public FacilitySearchFilter(CountryAreaGroupRepository repository, Integer reportingYear, Integer countryID, Integer areaGroupID, Integer regionID, Integer rbdID, String facilityName, String cityName) {
+	public FacilitySearchFilter(CountryAreaGroupRepository repository, Integer reportingYear, Integer countryID, Integer areaGroupID, Integer regionID, Integer rbdID, String facilityName, String cityName, ActivitySearchFilter activityFilter) {
 		this.repository = repository;
 		this.reportingYear = reportingYear;
 		this.countryID = countryID;
@@ -30,23 +30,25 @@ public class FacilitySearchFilter {
 		this.rbdID = rbdID;
 		this.facilityName = facilityName;
 		this.cityName = cityName;
+		this.activityFilter = activityFilter;
 	}
 
-	public void apply(CriteriaBuilder cb, AbstractQuery<?> q, Root<FacilitySearchAll> qr) {
-		Predicate whereClause = cb.equal(qr.get(FacilitySearchAll_.reportingYear), reportingYear);
+	public Predicate buildWhereClause(CriteriaBuilder cb, Root<FacilitySearchAll> qr) {
+		Predicate whereClause = cb.conjunction();
+		whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.reportingYear), reportingYear));
 		if (areaGroupID != null) {
 			List<Integer> countryIDs = repository.getCountryIDs(areaGroupID);
-			whereClause = cb.and(whereClause, qr.get(FacilitySearchAll_.LOV_CountryID).in(countryIDs));
+			whereClause.getExpressions().add(qr.get(FacilitySearchAll_.LOV_CountryID).in(countryIDs));
 		} else if (countryID != null) {
-			whereClause = cb.and(whereClause, cb.equal(qr.get(FacilitySearchAll_.LOV_CountryID), countryID));
+			whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.LOV_CountryID), countryID));
 			if (regionID != null) {
-				whereClause = cb.and(whereClause, cb.equal(qr.get(FacilitySearchAll_.LOV_NUTSRLevel2ID), regionID));
+				whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.LOV_NUTSRLevel2ID), regionID));
 			} else if (rbdID != null) {
-				whereClause = cb.and(whereClause, cb.equal(qr.get(FacilitySearchAll_.LOV_RiverBasinDistrictID), rbdID));
+				whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.LOV_RiverBasinDistrictID), rbdID));
 			}
 		}
 		if (facilityName != null) {
-			whereClause = cb.and(whereClause,
+			whereClause.getExpressions().add(
 					cb.or(
 							cb.equal(qr.get(FacilitySearchAll_.facilitySearchName), facilityName),
 							cb.equal(qr.get(FacilitySearchAll_.parentCompanySearchName), facilityName)
@@ -54,8 +56,12 @@ public class FacilitySearchFilter {
 			);
 		}
 		if (cityName != null) {
-			whereClause = cb.and(whereClause, cb.equal(qr.get(FacilitySearchAll_.citySearchName), cityName));
+			whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.citySearchName), cityName));
 		}
-		q.where(whereClause);
+		Predicate activitySearchWhereClause = activityFilter.buildWhereClause(cb, qr);
+		if (activitySearchWhereClause.getExpressions().size() > 0) {
+			whereClause.getExpressions().add(activitySearchWhereClause);
+		}
+		return whereClause;
 	}
 }

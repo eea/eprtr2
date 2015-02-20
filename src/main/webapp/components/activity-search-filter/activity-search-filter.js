@@ -48,6 +48,15 @@ angular.module('myApp.activitySearchFilter', ['restangular', 'myApp.search-filte
                     params = {ParentID: parent.lov_NACEActivityID};
                 }
                 return naceActivityService.getList(params);
+            },
+            filter : function(filter, queryParams) {
+                if (filter.selectedSubActivities.length === 1 && filter.selectedSubActivities[0].code) {
+                    queryParams.LOV_NACESubActivityID = filter.selectedSubActivities[0].lov_NACEActivityID;
+                } else if (filter.selectedActivities.length === 1 && filter.selectedActivities[0].code) {
+                    queryParams.LOV_NACEActivityID = filter.selectedActivities[0].lov_NACEActivityID;
+                } else if (filter.selectedSectors.length === 1 && filter.selectedSectors[0].code) {
+                    queryParams.LOV_NACESectorID = filter.selectedSectors[0].lov_NACEActivityID;
+                }
             }
         };
     }])
@@ -60,12 +69,25 @@ angular.module('myApp.activitySearchFilter', ['restangular', 'myApp.search-filte
                     params = {ParentID: parent.lov_AnnexIActivityID};
                 }
                 return annexIActivityService.getList(params);
+            },
+            filter : function(filter, queryParams) {
+                if (filter.selectedSubActivities.length === 1 && filter.selectedSubActivities[0].code) {
+                    queryParams.LOV_AISubActivityID = filter.selectedSubActivities[0].lov_AnnexIActivityID;
+                } else if (filter.selectedActivities.length === 1 && filter.selectedActivities[0].code) {
+                    queryParams.LOV_AIActivityID = filter.selectedActivities[0].lov_AnnexIActivityID;
+                } else if (filter.selectedSectors.length === 1 && filter.selectedSectors[0].code) {
+                    queryParams.LOV_AISectorID = filter.selectedSectors[0].lov_AnnexIActivityID;
+                }
             }
         };
     }])
 
 .factory('activitySearchFilter', [function() {
-        return {};
+        return {
+            filter : function(queryParams) {
+                this.activityType.filter(this, queryParams);
+            }
+        };
     }])
 
 .service('naceActivityService', ['Restangular', function(Restangular){

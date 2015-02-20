@@ -38,7 +38,7 @@ public class FacilitySearchRepository {
 		CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 		Root<FacilitySearchAll> qr = cq.from(FacilitySearchAll.class);
 		cq.select(cb.count(qr));
-		filter.apply(cb, cq, qr);
+		cq.where(filter.buildWhereClause(cb, qr));
 		
 		long count = em.createQuery(cq).getSingleResult().longValue();
 		return count;
@@ -54,7 +54,7 @@ public class FacilitySearchRepository {
 		Subquery<Integer> sq = cq.subquery(Integer.class);
 		Root<FacilitySearchAll> sqr = sq.from(FacilitySearchAll.class);
 		sq.select(sqr.get(FacilitySearchAll_.facilityReportID));
-		filter.apply(cb, sq, sqr);
+		sq.where(filter.buildWhereClause(cb, sqr));
 		
 		cq.where(qr.get(FacilitySearchMainActivity_.facilityReportID).in(sq));
 		
@@ -73,7 +73,7 @@ public class FacilitySearchRepository {
 		Subquery<Integer> sq = cq.subquery(Integer.class);
 		Root<FacilitySearchAll> sqr = sq.from(FacilitySearchAll.class);
 		sq.select(sqr.get(FacilitySearchAll_.facilityReportID));
-		filter.apply(cb, sq, sqr);
+		sq.where(filter.buildWhereClause(cb, sqr));
 		
 		cq.where(qr.get(FacilitySearchMainActivity_.facilityReportID).in(sq));
 		orderBy.apply(cb, cq, qr);
