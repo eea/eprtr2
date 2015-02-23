@@ -48,7 +48,7 @@ angular.module('myApp.search-placement', ['myApp.search-filter'])
             }
         }
         $scope.searchFilter.selectedRegion = $scope.regions[0];
-    }
+    };
 }])
 
 .directive('searchPlacement', function() {
