@@ -14,6 +14,7 @@ import eea.eprtr.dao.CountryAreaGroupRepository;
 import eea.eprtr.dao.FacilitySearchFilter;
 import eea.eprtr.dao.FacilitySearchRepository;
 import eea.eprtr.dao.OrderBy;
+import eea.eprtr.dao.PollutantSearchFilter;
 import eea.eprtr.dao.QueryPager;
 import eea.eprtr.model.FacilitySearchMainActivity;
 
@@ -42,6 +43,11 @@ public class FacilitySearchController {
     		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
     		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
     		
+    		@RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
+    		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
+    		@RequestParam(value = "MediumCode", required = false) List<String> mediumCode,
+    		@RequestParam(value = "Accidental", required = false) Integer accidental,
+    		
     		@RequestParam(value = "offset") Integer offset,
     		@RequestParam(value = "limit") Integer limit,
     		@RequestParam(value = "order") String order,
@@ -49,7 +55,8 @@ public class FacilitySearchController {
     		HttpServletResponse response) {
 
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
-		FacilitySearchFilter filter = new FacilitySearchFilter(countryAreaGroupRepository, reportingYear, countryID, areaGroupID, regionID, rbdID, facilityName, cityName, activityFilter);
+		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental);  
+		FacilitySearchFilter filter = new FacilitySearchFilter(countryAreaGroupRepository, reportingYear, countryID, areaGroupID, regionID, rbdID, facilityName, cityName, activityFilter, pollutantFilter);
 		
 		long facilitiesCount = facilitySearchRepository.getFacilityCount(filter);
 		response.setHeader("X-Count", String.valueOf(facilitiesCount));

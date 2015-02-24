@@ -1,0 +1,37 @@
+<accordion-group is-open="pollutantPanel"> 
+	<accordion-heading>
+        Pollutant releases and transfers <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': pollutantPanel, 'glyphicon-chevron-right': !pollutantPanel}"></i>
+    </accordion-heading>
+    <div class="form-group">
+        <label class="control-label" for="inputPollutantGroup">Pollutant Group</label>
+        <select class="form-control" ng-model="pollutantSearchFilter.selectedPollutantGroup" ng-options="c.name for c in pollutantGroups" id="inputPollutantGroup"></select>
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="inputPollutant">Pollutant</label>
+        <select class="form-control" ng-model="pollutantSearchFilter.selectedPollutant" ng-options="c.name for c in pollutants" id="inputPollutant"></select>
+    </div>
+    <div  class="form-group">
+        <label class="control-label">Releases to</label>
+        <div class="checkbox">
+            <label><input type="checkbox" name="releasesToAirCheck" id="releasesToAirCheck_0" value="0" ng-model="pollutantSearchFilter.releasesToAir"> Air</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" name="releasesToWaterCheck" id="releasesToWaterCheck_0" value="1" ng-model="pollutantSearchFilter.releasesToWater"> Water</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" name="releasesToSoilCheck" id="releasesToSoilCheck_0" value="2" ng-model="pollutantSearchFilter.releasesToSoil"> Soil</label>
+        </div>
+    </div>
+    <div  class="form-group">
+        <label class="control-label">Transfers to</label>
+        <div class="checkbox">
+            <label><input type="checkbox" name="transfersToWasteWaterCheck" id="transfersToWasteWaterCheck_0" value="0" ng-model="pollutantSearchFilter.transfersToWasteWater"> Waste water</label>
+        </div>
+    </div>
+    <div  class="form-group">
+        <label class="control-label">Accidental only</label>
+        <div class="checkbox">
+            <label><input type="checkbox" name="accidentalOnlyCheck" id=accidentalOnlyCheck_0" ng-model="pollutantSearchFilter.accidentalOnly"></label>
+        </div>
+    </div>
+</accordion-group>

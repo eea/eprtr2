@@ -36,12 +36,8 @@
 					<accordion close-others="{{false}}">
                         <div activity-search-filter-directive>
                         </div>
-						<accordion-group is-open="pollutantPanel">
-							<accordion-heading>
-								Pollutant releases and transfers <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': pollutantPanel, 'glyphicon-chevron-right': !pollutantPanel}"></i>
-							</accordion-heading> 
-							This is just some content to illustrate fancy headings. 
-						</accordion-group>
+						<div pollutant-search-filter-directive>
+                        </div>
 						<accordion-group is-open="wastePanel"> 
 							<accordion-heading>
 								Waste transfers <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': wastePanel, 'glyphicon-chevron-right': !wastePanel}"></i>
@@ -49,135 +45,6 @@
 							This is just some content to illustrate fancy headings. 
 						</accordion-group>
 					</accordion>
-
-					<div
-						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_upPollutant">
-
-
-
-						<input type="hidden"
-							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$cpePollutant_ClientState"
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_cpePollutant_ClientState"
-							value="true">
-
-						<div class="searchOption_pollutant">
-							<fieldset>
-								<legend> Pollutant releases and transfers </legend>
-
-								<div class="panelIcons">
-									<input type="image" class="collapseIcon" ng-src="{{pollutantPanelToggleButtonImage}}" ng-attr-title="{{pollutnatPanelToggleButtonTitle}}" ng-click="togglePollutantPanel()" style="border-width: 0px;">
-									<div class="infoIcon">
-										<a href="UserControls/Common/pgLibraryPollutants.aspx?mpage=pop" target="_blank">
-											<img title="Information about pollutants" src="images/info.png" style="border-width: 0px;">
-										</a>
-									</div>
-								</div>
-								
-								<span class="cpeTextLabel2" ng-hide="pollutantPanel">Not included</span> 
-								<span class="cpeTextLabel" ng-hide="pollutantPanel">Expand to include</span>
-
-								<div class="cpeContent" ng-show="pollutantPanel">
-									<div id="" class="cpeContent">
-
-										Pollutant Group<br> <select
-											name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$ucPollutantSearchOption$cbPollutantGroup"
-											onchange="javascript:setTimeout('__doPostBack(\'ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$ucPollutantSearchOption$cbPollutantGroup\',\'\')', 0)"
-											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucPollutantSearchOption_cbPollutantGroup">
-											<option selected="selected" value="-1">All pollutant
-												groups</option>
-											<option value="5">Chlorinated organic substances</option>
-											<option value="1">Greenhouse gases</option>
-											<option value="3">Heavy metals</option>
-											<option value="7">Inorganic substances</option>
-											<option value="2">Other gases</option>
-											<option value="6">Other organic substances</option>
-											<option value="4">Pesticides</option>
-
-										</select> Pollutant<br> <select
-											name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$ucPollutantSearchOption$cbPollutant"
-											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucPollutantSearchOption_cbPollutant">
-											<option selected="selected" value="-1">All
-												pollutants</option>
-
-										</select> Releases to <input
-											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkAir"
-											type="checkbox"
-											name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$ucMediumSearchOption$chkAir"
-											checked="checked" onclick="PRTValidation();"><label
-											for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkAir">Air</label>
-										<input type="hidden" id="clIDchkAir"
-											value="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkAir">
-										<input
-											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkWater"
-											type="checkbox"
-											name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$ucMediumSearchOption$chkWater"
-											checked="checked" onclick="PRTValidation();"><label
-											for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkWater">Water</label>
-										<input type="hidden" id="clIDchkWater"
-											value="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkWater">
-										<input
-											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkSoil"
-											type="checkbox"
-											name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$ucMediumSearchOption$chkSoil"
-											checked="checked" onclick="PRTValidation();"><label
-											for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkSoil">Soil</label>
-										<input type="hidden" id="clIDchkSoil"
-											value="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkSoil">
-
-										<div
-											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_plTransfers">
-
-											Transfers to <input
-												id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkWasteWater"
-												type="checkbox"
-												name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$ucMediumSearchOption$chkWasteWater"
-												checked="checked" onclick="PRTValidation();"><label
-												for="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkWasteWater">Waste
-												water</label> <input type="hidden" id="clIDchkWasteWater"
-												value="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMediumSearchOption_chkWasteWater">
-
-										</div>
-
-
-
-
-
-
-
-										<div class="spacer"></div>
-										Accidental only <input
-											id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucAccidentalSearchOption_chkAccidental"
-											type="checkbox"
-											name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentSearchForm$ucSearchOptions$ucAdvancedPollutantSearchOption$ucAccidentalSearchOption$chkAccidental">
-										<input type="hidden" id="clIDchkAccidental"
-											value="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucAccidentalSearchOption_chkAccidental">
-
-
-
-
-										<div id="msgPRTValidation"
-											style="display: none; width: 280px;"
-											class="resultSheet_alert">
-											<img
-												id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedPollutantSearchOption_ucMsgPRT_imgAlert"
-												src="images/alert.png" alt="alert"
-												style="border-width: 0px;"> This search will yield no result
-											<div class="spacer"></div>
-										</div>
-
-										<div class="spacer"></div>
-
-									</div>
-								</div>
-
-
-
-							</fieldset>
-						</div>
-
-
-					</div>
-
 
 					<div
 						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentSearchForm_ucSearchOptions_ucAdvancedWasteSearchOption_upWaste">

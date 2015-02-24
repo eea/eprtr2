@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'restangular', 'myApp.activitySearchFilter'])
+angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'restangular', 'myApp.activitySearchFilter', 'myApp.pollutantSearchFilter'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/facilitylevels', {
@@ -118,6 +118,9 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	    }
         if ($scope.currentSearchFilter.activitySearchFilter) {
             $scope.currentSearchFilter.activitySearchFilter.filter(queryParams);
+        }
+        if ($scope.currentSearchFilter.pollutantSearchFilter) {
+            $scope.currentSearchFilter.pollutantSearchFilter.filter(queryParams);
         }
 	    queryParams.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
 	    queryParams.limit = $scope.itemsPerPage;
