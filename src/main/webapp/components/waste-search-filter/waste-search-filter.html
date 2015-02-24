@@ -1,0 +1,33 @@
+<accordion-group is-open="wastePanel">
+    <accordion-heading>
+        Waste transfers <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': wastePanel, 'glyphicon-chevron-right': !wastePanel}"></i>
+    </accordion-heading>
+    <div  class="form-group">
+        <label class="control-label">Transfer of</label>
+        <div class="checkbox">
+            <label><input type="checkbox" name="nonHazardousWasteTransferCheck" id="nonHazardousWasteTransferCheck_0" ng-model="wasteSearchFilter.nonHazardousWasteTransfer"> Non Hazardous waste</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" name="hazardousWasteCountryTransferCheck" id="hazardousWasteCountryTransferCheck_0" ng-model="wasteSearchFilter.hazardousWasteCountryTransfer"> Hazardous waste, domestic</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" name="hazardousWasteTransboundaryTransferCheck" id="hazardousWasteTransboundaryTransferCheck_0" ng-model="wasteSearchFilter.hazardousWasteTransboundaryTransfer"> Hazardous waste, transboundary</label>
+        </div>
+    </div>
+    <div  class="form-group">
+        <label class="control-label">Treatment</label>
+        <div class="checkbox">
+            <label><input type="checkbox" name="recoveryTreatmentCheck" id="recoveryTreatmentCheck_0" ng-model="wasteSearchFilter.recoveryTreatment"> Recovery</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" name="disposalTreatmentCheck" id="disposalTreatmentCheck_0" ng-model="wasteSearchFilter.disposalTreatment"> Disposal</label>
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" name="unspecifiedTreatmentCheck" id="unspecifiedTreatmentCheck_0" ng-model="wasteSearchFilter.unspecifiedTreatment"> Unspecified</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="inputReceivingCountry">Receiving Country</label>
+        <select class="form-control" ng-model="wasteSearchFilter.selectedReceivingCountry" ng-options="c.name for c in receivingCountries" id="inputReceivingCountry"></select>
+    </div>
+</accordion-group>
