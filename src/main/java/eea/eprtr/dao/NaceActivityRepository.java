@@ -16,11 +16,16 @@ public class NaceActivityRepository {
 	@PersistenceContext
     private EntityManager em;
 
-	public List<NaceActivity> list(Integer parentID) {
+	public List<NaceActivity> list(Integer parentID, String naceActivityCode) {
 		Integer startYearEPRTR = new Integer(2007);
 		
 		TypedQuery<NaceActivity> query = null;
-		if (parentID == null) {
+		
+		if (naceActivityCode != null) {
+			query = em.createNamedQuery("NaceActivity.findByCode", NaceActivity.class);
+	    	query.setParameter("NaceActivityCode", naceActivityCode);
+		}
+		else if (parentID == null) {
 			query = em.createNamedQuery("NaceActivity.findRootActivities", NaceActivity.class);
 		} else {
 			query = em.createNamedQuery("NaceActivity.findActivities", NaceActivity.class);

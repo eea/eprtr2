@@ -11,9 +11,4 @@ angular.module('myApp.facilitydetails', ['ngRoute','myApp.fd-main'])
 
 .controller('FacilityDetailsController', ['$scope',  function($scope) {
     $scope.fdrID = 89352;
-    //$scope.setWhereStr = '';
-	/*esriTestMap.mapelem.addWhereStr('5');
-	esriTestMap.mapelem.addTextStr("Skudder muddr");
-*/
-
 }]);
