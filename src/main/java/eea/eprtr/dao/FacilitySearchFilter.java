@@ -20,8 +20,9 @@ public class FacilitySearchFilter {
 	private String facilityName;
 	private String cityName;
 	private ActivitySearchFilter activityFilter;
+	private PollutantSearchFilter pollutantFilter;
 
-	public FacilitySearchFilter(CountryAreaGroupRepository repository, Integer reportingYear, Integer countryID, Integer areaGroupID, Integer regionID, Integer rbdID, String facilityName, String cityName, ActivitySearchFilter activityFilter) {
+	public FacilitySearchFilter(CountryAreaGroupRepository repository, Integer reportingYear, Integer countryID, Integer areaGroupID, Integer regionID, Integer rbdID, String facilityName, String cityName, ActivitySearchFilter activityFilter, PollutantSearchFilter pollutantFilter) {
 		this.repository = repository;
 		this.reportingYear = reportingYear;
 		this.countryID = countryID;
@@ -31,6 +32,7 @@ public class FacilitySearchFilter {
 		this.facilityName = facilityName;
 		this.cityName = cityName;
 		this.activityFilter = activityFilter;
+		this.pollutantFilter = pollutantFilter;
 	}
 
 	public Predicate buildWhereClause(CriteriaBuilder cb, Root<FacilitySearchAll> qr) {
@@ -61,6 +63,10 @@ public class FacilitySearchFilter {
 		Predicate activitySearchWhereClause = activityFilter.buildWhereClause(cb, qr);
 		if (activitySearchWhereClause.getExpressions().size() > 0) {
 			whereClause.getExpressions().add(activitySearchWhereClause);
+		}
+		Predicate pollutantSearchWhereClause = pollutantFilter.buildWhereClause(cb, qr);
+		if (pollutantSearchWhereClause.getExpressions().size() > 0) {
+			whereClause.getExpressions().add(pollutantSearchWhereClause);
 		}
 		return whereClause;
 	}

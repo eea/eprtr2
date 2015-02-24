@@ -33,9 +33,9 @@
 
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-         	<li ng-class="{ active: isActive('/home')}"><a href="#home" ng-click="subtitle = 'Welcome to E-PRTR'">Home</a></li>         	
+         	<li ng-class="{ active: isActive('/home')}"><a href="#home" ng-click="subtitle = 'Welcome to E-PRTR'">Home</a></li>
             <li ng-class="{ active: isActive('/facilitylevels')}" class="dropdown" dropdown>
-              <a href="#" class="dropdown-toggle" dropdown-toggle data-toggle="dropdown" role="button" aria-expanded="false">Search E-PRTR data <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Search E-PRTR data <span class="caret"></span></a>
               <ul class="dropdown-menu" dropdown-menu role="menu">
                 <li><a href="#facilitylevels" ng-click="subtitle = 'Facility Level Search'">Facility Level</a></li>
                 <li><a href="#">Industrial Activity (not yet available)</a></li>
@@ -137,17 +137,14 @@
   <script src="views/about/about.js"></script>
   <script src="views/facilitylevels/facilitylevels.js"></script>
   <script src="views/facilitydetails/facilitydetails.js"></script>
-
   <script src="views/areaoverview/areaoverview.js"></script>
-<!--   <script src="components/version/version.js"></script> -->
-<!--   <script src="components/version/version-directive.js"></script> -->
-<!--   <script src="components/version/interpolate-filter.js"></script> -->
-
   <script src="components/search-filter/search-filter.js"></script>
   <script src="components/esrileafmap/esrileafmap.js"></script>
   <script src="components/search-placement/search-placement.js"></script>
   <script src="components/activity-search-filter/activity-search-filter.js"></script>
   <script src="components/facilitydetails/fd-main.js"></script>
+  <script src="components/pollutant-search-filter/pollutant-search-filter.js"></script>
+  <script src="components/waste-search-filter/waste-search-filter.js"></script>
   <!-- endbuild -->
 
 </body>

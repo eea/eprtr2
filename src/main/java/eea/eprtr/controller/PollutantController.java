@@ -1,5 +1,7 @@
 package eea.eprtr.controller;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -15,11 +17,15 @@ public class PollutantController {
 	@PersistenceContext
     private EntityManager em;
 
-	@RequestMapping("/polutantMainGroups")
-    public LovPollutant[] getMainPolutantGroups() {
-		TypedQuery<LovPollutant> query = em.createQuery("SELECT l FROM LovPollutant l where l.parentID is null", LovPollutant.class);		
-		LovPollutant[] result = query.getResultList().toArray(new LovPollutant[0]);
-		return result;
+	@RequestMapping("/pollutant")
+    public List<LovPollutant> list(@RequestParam(value = "ParentID", required = false) Integer parentID) {
+		TypedQuery<LovPollutant> query = null;
+		if (parentID == null) {
+			query = em.createQuery("SELECT l FROM LovPollutant l where l.parentID is null", LovPollutant.class);		
+		} else {
+			query = em.createQuery("SELECT l FROM LovPollutant l where l.parentID = :parentID", LovPollutant.class).setParameter("parentID", parentID);
+		}
+		return query.getResultList();
     }
 
 }
