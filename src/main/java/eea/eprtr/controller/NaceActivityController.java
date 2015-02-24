@@ -25,4 +25,10 @@ public class NaceActivityController {
 			@RequestParam(value = "ParentID", required = false) Integer parentID) {
 		return repository.list(parentID);
 	}
+
+	@RequestMapping("/naceActivity/{code}")
+	public NaceActivity get(
+			@RequestParam(value = "Code", required = false) String naceCode) {
+		return repository.get(naceCode);
+	}
 }

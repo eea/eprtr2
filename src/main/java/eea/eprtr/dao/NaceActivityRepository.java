@@ -31,4 +31,13 @@ public class NaceActivityRepository {
 		return results;
 	}
 
+	public NaceActivity get(String naceCode) {
+		
+		TypedQuery<NaceActivity> query = em.createNamedQuery("NaceActivity.findRootActivities", NaceActivity.class);
+		query = em.createNamedQuery("NaceActivity.findByCode", NaceActivity.class);
+		query.setParameter("naceCode", naceCode);
+		NaceActivity results = query.getSingleResult();
+		return results;
+	}
+
 }

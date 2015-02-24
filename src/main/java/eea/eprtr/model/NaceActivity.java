@@ -19,6 +19,10 @@ import javax.persistence.*;
 		@NamedQuery(
 				name = "NaceActivity.findActivities", query = "SELECT l FROM NaceActivity l where parentID = :parentID and startYear >= :startYearEPRTR", 
 				hints = { @QueryHint(name = "org.hibernate.cacheable", value = "true") }
+				),
+		@NamedQuery(
+				name = "NaceActivity.findByCode", query = "SELECT l FROM NaceActivity l where code = :naceCode", 
+				hints = { @QueryHint(name = "org.hibernate.cacheable", value = "true") }
 				) 
 		})
 public class NaceActivity implements Serializable {
