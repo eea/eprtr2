@@ -11,4 +11,5 @@ angular.module('myApp.facilitydetails', ['ngRoute','myApp.fd-main'])
 
 .controller('FacilityDetailsController', ['$scope',  function($scope) {
     $scope.fdrID = 89352;
+
 }]);
