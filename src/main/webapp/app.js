@@ -11,8 +11,8 @@ var myApp = angular.module('myApp', [
   'myApp.facilitydetails',
   'myApp.areaoverview',
   'myApp.search-placement',
-  'myApp.esrileafmap'/*,
-  'myApp.esritestmap'*/
+  'myApp.esrileafmap',
+  'myApp.fd-main'
 ])
 
 .config(['$routeProvider', function($routeProvider) {

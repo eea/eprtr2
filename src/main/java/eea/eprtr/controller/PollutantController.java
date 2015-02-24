@@ -5,12 +5,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eea.eprtr.model.LovPollutant;
-import eea.eprtr.model.Region;
-import eea.eprtr.model.ReportingCountry;
 
 @RestController
 public class PollutantController {

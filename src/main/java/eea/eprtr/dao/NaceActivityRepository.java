@@ -33,7 +33,7 @@ public class NaceActivityRepository {
 
 	public NaceActivity get(String naceCode) {
 		
-		TypedQuery<NaceActivity> query = em.createNamedQuery("NaceActivity.findRootActivities", NaceActivity.class);
+		TypedQuery<NaceActivity> query = null;
 		query = em.createNamedQuery("NaceActivity.findByCode", NaceActivity.class);
 		query.setParameter("naceCode", naceCode);
 		NaceActivity results = query.getSingleResult();

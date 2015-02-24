@@ -150,3 +150,23 @@ background-color: #00446A;
     border-width: 4px;
   }
 
+/*FacilityDetails*/
+
+.fdTitles  {
+border-bottom: Solid 0px Transparent;
+color: #8b4513;
+white-space: pre;
+vertical-align: top;
+padding-left: 10px;
+padding-right: 10px;
+font-weight: bold;	
+} 
+
+.fdSubTitles  {
+color: Gray;
+border-bottom: Solid 0px Transparent;
+white-space: pre;
+padding-left: 10px;
+padding-right: 10px;
+vertical-align: top;	
+} 
