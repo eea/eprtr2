@@ -24,7 +24,7 @@ public class RiverBasinDistrictController {
     	return query.getResultList().toArray(new RiverBasinDistrict[0]);
     }
 
-	@RequestMapping("/riverBasinDistricts/code/{riverBasinCode}")
+	@RequestMapping("/riverBasinDistricts/{riverBasinCode}")
     public RiverBasinDistrict getRiverBasinDistrict(@PathVariable(value = "riverBasinCode") String riverBasinCode){
     	TypedQuery<RiverBasinDistrict> query = em.createNamedQuery("RiverBasinDistrict.findByCode", RiverBasinDistrict.class);
     	query.setParameter("RiverBasinCode", riverBasinCode);

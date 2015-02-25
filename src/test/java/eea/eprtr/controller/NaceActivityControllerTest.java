@@ -41,8 +41,8 @@ public class NaceActivityControllerTest extends UnitilsJUnit4 {
 	
 	@Test
 	public void testThatControllerListReturnsTheCorrectFormattedJson() throws Exception {
-		String expectedResponse = "[{\"code\":null,\"endYear\":null,\"name\":\"Root Activity 1\",\"parentID\":null,\"startYear\":2007,\"lov_NACEActivityID\":1},"
-				+ "{\"code\":null,\"endYear\":null,\"name\":\"Root Activity 2\",\"parentID\":null,\"startYear\":2007,\"lov_NACEActivityID\":2}]";
+		String expectedResponse = "[{\"code\":01,\"endYear\":null,\"name\":\"Root Activity 1\",\"parentID\":null,\"startYear\":2007,\"lov_NACEActivityID\":1},"
+				+ "{\"code\":02,\"endYear\":null,\"name\":\"Root Activity 2\",\"parentID\":null,\"startYear\":2007,\"lov_NACEActivityID\":2}]";
 		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 		mockMvc.perform(get("/naceActivity"))
         	.andExpect(status().isOk())

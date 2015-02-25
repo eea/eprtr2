@@ -5,12 +5,15 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 .controller('FDMainController', 
 		['$scope', '$http', '$filter', 'fdDetailsType', 'fdUnitType',
 		 'lovCountryType', 'fdNaceActivityType', 'nutsRegionType', 'fdRiverBasinType',
+		 'lovConfidentialType','fdAuthorityType',
           function($scope, $http, $filter, fdDetailsType, fdUnitType, lovCountryType, 
-        		  fdNaceActivityType, nutsRegionType, fdRiverBasinType) {
+        		  fdNaceActivityType, nutsRegionType, fdRiverBasinType, lovConfidentialType,
+        		  fdAuthorityType) {
 	$scope.fdtitle = 'Facility Level';
 	$scope.headitms = [];
 	$scope.infoitms = [{'order':0,	'clss':'fdTitles', 	'title':'Facility Details',	'val': ' '}];
 	$scope.infoitms2 = [];
+	var degrees = "°";
 	//    $scope.frID;
 
 	if ($scope.frid !== undefined){
@@ -18,7 +21,12 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 		fdDetailsType.get($scope.frid).get().then(function (data) {
 			$scope.details = data;
         });
+		fdAuthorityType.get($scope.frid).get().then(function(data) {
+			 $scope.authority = data;
+		});
+
 	}
+	
 	
 	$scope.$watch('details', function() {
 		if($scope.details !== undefined && $scope.details.countryCode !== undefined){
@@ -98,6 +106,18 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 					console.log('nace: ' + JSON.stringify($scope.nace));
 				});*/
 			}
+
+			if($scope.unit === undefined){
+				fdUnitType.get($scope.details.productionVolumeUnitCode).get().then(function(data) {
+					 $scope.unit = data;
+				});
+			}
+
+			if($scope.confidential === undefined && $scope.details.confidentialIndicator){
+				lovConfidentialType.get($scope.details.confidentialIndicatorCode).get().then(function(data) {
+					 $scope.confidential = data;
+				});
+			}
 			
 			$scope.headitms = [
 	                  			{'order':0,	'clss':'fdTitles',
@@ -118,43 +138,46 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 	                  			},
 	                  			{'order':4,'clss':'fdTitles',
 	                  				'title':'Regulation',
-	                  				'val': $scope.details.facilityID
+	                  				'val': $scope.details.reportingYear < 2007 ? "EPER Regulation" : "E-PRTR Regulation"
 	                  			}];
+			
+			
 			
 			$scope.infoitms.push({'order':1, 'clss':'fdSubTitles', 	
 				'title':'Parent Company Name', 
 				'val': $scope.details.confidentialIndicator ? 'CONFIDENTIAL' : $scope.details.parentCompanyName
 			});
 
+			var crd = $scope.details.coordinates.replace('POINT','').replace('(','').replace(')','').trim().split(' ');
 			$scope.infoitms.push({'order':2, 'clss':'fdSubTitles', 	
-				'title':'Coordinates (Lon;Lat)', 'val': $scope.details.coordinates.replace('POINT','')});
+				'title':'Coordinates (Lon;Lat)', 'val': "("+crd[0]+degrees+", "+crd[1]+degrees+")"});
 
 			//No. of IPPC installations is voluntary. Only add if reported.
-	        if ($scope.details.TotalIPPCInstallationQuantity != '' && $scope.details.TotalIPPCInstallationQuantity !== undefined)
+	        if ($scope.details.totalIPPCInstallationQuantity != '' && $scope.details.totalIPPCInstallationQuantity !== undefined)
 	        {
 				$scope.infoitms.push({'order':9, 'clss':'fdSubTitles', 	
-					'title':'IPPC Installations', 'val': $scope.details.TotalIPPCInstallationQuantity});
+					'title':'IPPC Installations', 'val': $filter('number')($scope.details.totalIPPCInstallationQuantity)});
 	        }
 
 	        //No. of emplyees is voluntary. Only add if reported.
-	        if ($scope.details.TotalEmployeeQuantity != '' && $scope.details.TotalEmployeeQuantity !== undefined)
+	        if ($scope.details.totalEmployeeQuantity != '' && $scope.details.totalEmployeeQuantity !== undefined)
 	        {
 				$scope.infoitms.push({'order':10, 'clss':'fdSubTitles', 	
-					'title':'TotalEmployeeQuantity', 'val': $scope.details.TotalEmployeeQuantity});
+					'title':'TotalEmployeeQuantity', 'val': $filter('number')($scope.details.totalEmployeeQuantity)});
 	        }
 
 	        //Operating hours is voluntary. Only add if reported.
-	        if ($scope.details.OperatingHours != '' && $scope.details.OperatingHours !== undefined)
+	        if ($scope.details.operatingHours != '' && $scope.details.operatingHours !== undefined)
 	        {
 				$scope.infoitms.push({'order':11, 'clss':'fdSubTitles', 	
-					'title':'Operating hours', 'val': $scope.details.OperatingHours});
+					'title':'Operating hours', 'val': $scope.details.operatingHours});
 	        }
 
 	        //Website is voluntary. Only add if reported.
-	        if ($scope.details.WebsiteCommunication != '' && $scope.details.WebsiteCommunication !== undefined)
+	        if ($scope.details.websiteCommunication != '' && $scope.details.websiteCommunication !== undefined)
 	        {
 				$scope.infoitms.push({'order':12, 'clss':'fdSubTitles', 	
-					'title':'Website', 'val': $scope.details.WebsiteCommunication});
+					'title':'Website', 'val': $scope.details.websiteCommunication});
 	        }
 
 	        if ($scope.details.nationalID != '' && $scope.details.nationalID !== undefined)
@@ -227,7 +250,7 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 	});
 
 	$scope.$watch('nace', function(value) {
-		if($scope.details !== undefined && $scope.details.countryCode !== undefined ){
+		if($scope.details !== undefined && $scope.details.naceactivityCode !== undefined ){
 
 			if($scope.nace !== undefined){
 		        //NACE code reported on sub-activity level, except for EPER where some is reported on Activity level
@@ -239,17 +262,16 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 	});
 	
 	$scope.$watch('unit', function(value) {
-		if($scope.details !== undefined && $scope.details.countryCode !== undefined ){
-
+		if($scope.details !== undefined){
 			if($scope.unit !== undefined){
-
 		        //Production volume is voluntary. Only add if reported.
-		        if ($scope.details.ProductionVolumeQuantity != '' && $scope.details.ProductionVolumeQuantity !== undefined)
+		        if ($scope.details.productionVolumeQuantity != '' && $scope.details.productionVolumeQuantity !== undefined)
 		        {
 					$scope.infoitms.push({'order':8, 'clss':'fdSubTitles', 	
-						'title':'ProductionVolumeQuantity', 
-						'val': $scope.details.ProductionVolumeProductName + ' ' + $scope.details.ProductionVolumeQuantity 
-						+ ' ' + $scope.unit.unitName});
+						'title':'Production volume', 
+						'val': $scope.details.productionVolumeProductName + ' ' + 
+						$filter('number')($scope.details.productionVolumeQuantity) 
+						+ ' ' + $scope.unit.name});
 						//TODO LOVResources.UnitName(fac.ProductionVolumeUnitCode))));
 		        }
 			}
@@ -258,12 +280,11 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 	
 			
 	$scope.$watch('confidential', function(value) {
-		if($scope.details !== undefined && $scope.details.countryCode !== undefined ){
-
+		if($scope.details !== undefined && $scope.details.confidentialIndicator){
 	        if ($scope.confidential !== undefined)
 	        {
 				$scope.infoitms.push({'order':13, 'clss':'fdSubTitles', 	
-					'title':'ConfidentialityReason', 'val': $scope.confidential.ConfidentialIndicatorReason});
+					'title':'Confidentiality Reason', 'val': $scope.confidential.name});
 	        }
 		}
 	});
@@ -273,50 +294,47 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
      * Part 2 of InfoItems
      * */
 	$scope.$watch('authority', function(value) {
-		if($scope.details !== undefined && $scope.details.countryCode !== undefined ){
+        if ($scope.authority !== undefined){
+        	var upddate = $scope.authority.calastUpdate !== undefined ? $filter('date')($scope.authority.calastUpdate, "dd MMM yyyy") : 'Unknown';
+			$scope.infoitms2 = [{'order':0,	'clss':'fdTitles', 	'title':'Competent Authority',	'val': '(Last updated: '+ upddate +')'}];
+				
 
-	        if ($scope.authority !== undefined){
-	        	var upddate = $filter('date')($scope.authority.CALastUpdate, "dd MMM yyyy") ? $scope.authority.CALastUpdate !== undefined : 'Unknown';
-				$scope.infoitms2 = [{'order':0,	'clss':'fdTitles', 	'title':'Competent Authority',	'val': '(Last updated: '+ upddate +')'}];
-					
+	        if ($scope.authority.caname != '' && $scope.authority.caname !== undefined)
+	        {
+				$scope.infoitms2.push({'order':1, 'clss':'fdSubTitles', 	
+					'title':'Name', 'val': $scope.authority.caname});
+	        }
 
-		        if ($scope.authority.CAName != '' && $scope.authority.CAName !== undefined)
-		        {
-					$scope.infoitms2.push({'order':1, 'clss':'fdSubTitles', 	
-						'title':'Name', 'val': $scope.authority.CAName});
-		        }
+	        if ($scope.authority.caaddress != '' && $scope.authority.caaddress !== undefined)
+	        {
+				$scope.infoitms2.push({'order':2, 'clss':'fdSubTitles', 	
+					'title':'Address', 'val': $scope.authority.caaddress  + ", " +  $scope.authority.capostalCode + ", " +  $scope.authority.cacity});
+	        }
 
-		        if ($scope.authority.CAAddress != '' && $scope.authority.CAAddress !== undefined)
-		        {
-					$scope.infoitms2.push({'order':2, 'clss':'fdSubTitles', 	
-						'title':'Address', 'val': $scope.authority.CAAddress  + " ," +  $scope.authority.CAPostalCode + " ," +  $scope.authority.CACity});
-		        }
+	        if ($scope.authority.catelephoneCommunication != '' && $scope.authority.catelephoneCommunication !== undefined)
+	        {
+				$scope.infoitms2.push({'order':3, 'clss':'fdSubTitles', 	
+					'title':'Phone', 'val': $scope.authority.catelephoneCommunication});
+	        }
 
-		        if ($scope.authority.CATelephoneCommunication != '' && $scope.authority.CATelephoneCommunication !== undefined)
-		        {
-					$scope.infoitms2.push({'order':3, 'clss':'fdSubTitles', 	
-						'title':'Phone', 'val': $scope.authority.CATelephoneCommunication});
-		        }
+	        if ($scope.authority.cafaxCommunication != '' && $scope.authority.cafaxCommunication !== undefined)
+	        {
+				$scope.infoitms2.push({'order':4, 'clss':'fdSubTitles', 	
+					'title':'Fax', 'val': $scope.authority.cafaxCommunication});
+	        }
 
-		        if ($scope.authority.CAFaxCommunication != '' && $scope.authority.CAFaxCommunication !== undefined)
-		        {
-					$scope.infoitms2.push({'order':4, 'clss':'fdSubTitles', 	
-						'title':'Fax', 'val': $scope.authority.CAFaxCommunication});
-		        }
+	        if ($scope.authority.caemailCommunication != '' && $scope.authority.caemailCommunication !== undefined)
+	        {
+				$scope.infoitms2.push({'order':5, 'clss':'fdSubTitles', 	
+					'title':'E-mail', 'val': $scope.authority.caemailCommunication});
+	        }
 
-		        if ($scope.authority.CAEmailCommunication != '' && $scope.authority.CAEmailCommunication !== undefined)
-		        {
-					$scope.infoitms2.push({'order':5, 'clss':'fdSubTitles', 	
-						'title':'E-mail', 'val': $scope.authority.CAEmailCommunication});
-		        }
+	        if ($scope.authority.cacontactPersonName != '' && $scope.authority.cacontactPersonName !== undefined)
+	        {
+				$scope.infoitms2.push({'order':6, 'clss':'fdSubTitles', 	
+					'title':'Contact Person', 'val': $scope.authority.cacontactPersonName});
+	        }
 
-		        if ($scope.authority.CAContactPersonName != '' && $scope.authority.CAContactPersonName !== undefined)
-		        {
-					$scope.infoitms2.push({'order':6, 'clss':'fdSubTitles', 	
-						'title':'Contact Person', 'val': $scope.authority.CAContactPersonName});
-		        }
-
-			}
 		}
     });
 
@@ -359,10 +377,10 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
             }
         };
     }])
-.factory('fdRiverBasinType', ['riverBasinService', function(riverBasinService) {
+.factory('fdRiverBasinType', ['fdRiverBasinService', function(fdRiverBasinService) {
     return {
         get : function(riverBasinCode) {
-            return riverBasinService.one(riverBasinCode);
+            return fdRiverBasinService.one(riverBasinCode);
         }
     };
 }])
@@ -383,7 +401,35 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
         };
     }])
 
-    
+.factory('lovConfidentialType', ['lovConfidentialService', function(lovConfidentialService) {
+        return {
+            get : function(confidentialCode) {
+                return lovConfidentialService.one(confidentialCode);
+            }
+        };
+    }])
+
+.factory('fdAuthorityType', ['fdAuthorityService', function(fdAuthorityService) {
+    return {
+        get : function(fdrid) {
+            return fdAuthorityService.one(fdrid);
+        }
+    };
+}])
+
+.service('fdAuthorityService', ['Restangular', function(Restangular){
+    var fdAuthority = Restangular.service('facilitydetailAuthority');
+
+    Restangular.extendModel('facilitydetailAuthority', function(model) {
+        model.getDisplayText = function() {
+            return this.code + ' ' + this.name;
+        };
+        return model;
+    });
+
+    return fdAuthority;
+}])
+
 .service('fdDetailsService', ['Restangular', function(Restangular){
     var fdDetails = Restangular.service('facilitydetailDetails');
 
@@ -435,8 +481,21 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 
     return nutsRegion;
 }])
-    
-.service('riverBasinService', ['Restangular', function(Restangular){
+
+.service('lovConfidentialService', ['Restangular', function(Restangular){
+    var lovConfidential = Restangular.service('lovConfidential');
+
+    Restangular.extendModel('lovConfidential', function(model) {
+        model.getDisplayText = function() {
+            return this.code + ' ' + this.name;
+        };
+        return model;
+    });
+
+    return lovConfidential;
+}])
+
+.service('fdRiverBasinService', ['Restangular', function(Restangular){
     var riverBasinDistricts = Restangular.service('riverBasinDistricts');
 
     Restangular.extendModel('riverBasinDistricts', function(model) {

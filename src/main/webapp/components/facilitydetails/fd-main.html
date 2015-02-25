@@ -12,31 +12,43 @@
  </br>
  
             </div>
-            <div class="col-md-2 col-md-offset-4" style="display: inline-block; vertical-align: bottom; float: none; padding-bottom: 5px;">
+
+        <div class="col-md-8" style="display: inline-block; vertical-align: bottom; float: none; padding-bottom: 5px;">
+        	<p><b>TODO</b> Print icon</p>
+        	<p><b>TODO</b> Export icon</p>
+           	<p><b>TODO</b> Year selector</p>
+           	<p><b>TODO</b> Information text</p>
+           	<p><b>TODO</b> Confidential Disclaimer text</p>
+           	<p><b>TODO</b> Confidential Disclaimer Alert click event handler</p>
+        	
                 <!-- input id="whereInput" type="text" class="text-success" placeholder="Recreation Where" ng-model="strwhere" -->
                <!-- <select ng-model="selectedBaseMapLayer" ng-options="layer.name for layer in baseMapLayers" class="btn btn-default btn-lg dropdown-toggle"></select> -->
             </div>
         </div>
         <div class="row" >
+
         <div class="col-md-4" >
-        <esri-leaf-map queryparams="map.wh" height="400px" />
+	        <esri-leaf-map queryparams="map.wh" height="400px" />
 		</div>
+
 		<div class="col-md-4" >
- <table>
-  <tr ng-repeat="i1 in infoitms | orderBy : 'order'" >
-    <td class="{{i1.clss}}">{{ i1.title }}:</td>
-    <td>{{ i1.val }}</td>
-  </tr>
-</table>
- </br>
-</br>
-                 <table>
-  <tr ng-repeat="i2 in infoitms2 | orderBy : 'order'" >
-    <td class="{{i2.clss}}">{{ i2.title }}:</td>
-    <td>{{ i2.val }}</td>
-  </tr>
-</table>
- </br>
+			 <table>
+			  <tr ng-repeat="i1 in infoitms | orderBy : 'order'" >
+			    <td class="{{i1.clss}}">{{ i1.title }}:</td>
+			    <td>{{ i1.val }}</td>
+			  </tr>
+			</table>
+			 </br>
+		</div>
+	
+		<div class="col-md-4" >
+            <table>
+			  <tr ng-repeat="i2 in infoitms2 | orderBy : 'order'" >
+			    <td class="{{i2.clss}}">{{ i2.title }}:</td>
+			    <td>{{ i2.val }}</td>
+			  </tr>
+			</table>
+			 </br>
 		</div>
 		
         </div>
