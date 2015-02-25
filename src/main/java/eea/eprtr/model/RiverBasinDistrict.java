@@ -16,7 +16,8 @@ import javax.persistence.*;
 	@NamedQuery(name="RiverBasinDistrict.findByLOVCountryID", 
 			query="SELECT r FROM RiverBasinDistrict r where r.LOV_CountryID = :LOV_CountryID"),
 	@NamedQuery(name="RiverBasinDistrict.findByCode", 
-			query="SELECT r FROM RiverBasinDistrict r where r.code = :RiverBasinCode")})
+			query="SELECT r FROM RiverBasinDistrict r where r.code = :RiverBasinCode")
+})
 public class RiverBasinDistrict implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="LOV_UNIT")
-@NamedQuery(name="LovUnit.findByCode", query="SELECT l FROM LovUnit l where l.code = :Code")
+@NamedQuery(name="LovUnit.findByCode", query="SELECT l FROM LovUnit l where l.code = :UnitCode")
 public class LovUnit implements Serializable {
 	private static final long serialVersionUID = 1L;
 

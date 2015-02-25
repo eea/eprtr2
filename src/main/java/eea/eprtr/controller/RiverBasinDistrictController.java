@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,25 +16,18 @@ public class RiverBasinDistrictController {
 
 	@PersistenceContext
     private EntityManager em;
-	/*
+	
 	@RequestMapping("/riverBasinDistricts")
     public RiverBasinDistrict[] reportingYears(@RequestParam("LOV_CountryID") Integer countryId) {
     	TypedQuery<RiverBasinDistrict> query = em.createNamedQuery("RiverBasinDistrict.findByLOVCountryID", RiverBasinDistrict.class);
     	query.setParameter("LOV_CountryID", countryId);
     	return query.getResultList().toArray(new RiverBasinDistrict[0]);
     }
-*/
-	@RequestMapping("/riverBasinDistricts/{lovCountryID}")
-    public RiverBasinDistrict getRiverBasinDistrict(@RequestParam("LOV_CountryID") Integer lovCountryID) {
-    	TypedQuery<RiverBasinDistrict> query = em.createNamedQuery("RiverBasinDistrict.findByLOVCountryID", RiverBasinDistrict.class);
-    	query.setParameter("LOV_CountryID", lovCountryID);
-    	return query.getSingleResult();
-    }
 
-	@RequestMapping("/riverBasinDistricts/{riverBasinCode}")
-    public RiverBasinDistrict getRiverBasinDistrict(@RequestParam("RiverBasinCode") String riverBasinCode) {
+	@RequestMapping("/riverBasinDistricts/code/{riverBasinCode}")
+    public RiverBasinDistrict getRiverBasinDistrict(@PathVariable(value = "riverBasinCode") String riverBasinCode){
     	TypedQuery<RiverBasinDistrict> query = em.createNamedQuery("RiverBasinDistrict.findByCode", RiverBasinDistrict.class);
-    	query.setParameter("riverBasinCode", riverBasinCode);
+    	query.setParameter("RiverBasinCode", riverBasinCode);
     	return query.getSingleResult();
     }
 
