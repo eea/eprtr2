@@ -44,4 +44,13 @@ public class NaceActivityRepositoryTest extends UnitilsJUnit4 {
 		assertNotNull(results);
 		assertEquals(0, results.size());
 	}
+	
+	@Test
+	public void testThatRepositoryGetReturnsTheActivitieThatHasCode01() {
+		NaceActivity results = repository.get("01");
+		assertNotNull(results);
+		//assertEquals(1, results.size());
+		assertEquals("Activity 1", results.getName());
+	}
+
 }
