@@ -1,6 +1,7 @@
 package eea.eprtr.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -10,7 +11,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="LOV_RIVERBASINDISTRICT")
-@NamedQuery(name="RiverBasinDistrict.findByLOVCountryID", query="SELECT r FROM RiverBasinDistrict r where r.LOV_CountryID = :LOV_CountryID")
+@Cacheable(true)
+@NamedQueries({
+	@NamedQuery(name="RiverBasinDistrict.findByLOVCountryID", 
+			query="SELECT r FROM RiverBasinDistrict r where r.LOV_CountryID = :LOV_CountryID"),
+	@NamedQuery(name="RiverBasinDistrict.findByCode", 
+			query="SELECT r FROM RiverBasinDistrict r where r.code = :RiverBasinCode")})
 public class RiverBasinDistrict implements Serializable {
 	private static final long serialVersionUID = 1L;
 

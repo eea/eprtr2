@@ -4,6 +4,7 @@
 		<mapping-file>META-INF/database-mapping.xml</mapping-file>
 		<class>eea.eprtr.model.LovCountry</class>
 		<class>eea.eprtr.model.FacilitydetailDetail</class>
+		<class>eea.eprtr.model.LovUnit</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
 		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 		<properties>

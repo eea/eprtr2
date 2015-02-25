@@ -3,10 +3,10 @@
 angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 
 .controller('FDMainController', 
-		['$scope', '$http', '$filter', 'fdDetailsType', 
-		 'lovCountryType', 'fdNaceActivityType', 'nutsRegionType', 
-          function($scope, $http, $filter, fdDetailsType, lovCountryType, 
-        		  fdNaceActivityType, nutsRegionType) {
+		['$scope', '$http', '$filter', 'fdDetailsType', 'fdUnitType',
+		 'lovCountryType', 'fdNaceActivityType', 'nutsRegionType', 'fdRiverBasinType',
+          function($scope, $http, $filter, fdDetailsType, fdUnitType, lovCountryType, 
+        		  fdNaceActivityType, nutsRegionType, fdRiverBasinType) {
 	$scope.fdtitle = 'Facility Level';
 	$scope.headitms = [];
 	$scope.infoitms = [{'order':0,	'clss':'fdTitles', 	'title':'Facility Details',	'val': ' '}];
@@ -29,13 +29,6 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 				});
 			}
 			if($scope.nuts === undefined){
-/*				if ($scope.nuts.nutsregionSourceCode != $scope.nuts.nutsregionLevel2Code){
-					$scope.infoitms.push({'order':3, 'clss':'fdSubTitles', 	
-						'title':'NUTS Region (Map)', 'val': $scope.nuts.nutsregionLevel2Name});
-					$scope.infoitms.push({'order':4, 'clss':'fdSubTitles', 	
-						'title':'NUTS Region (Reported)', 'val': $scope.nuts.nutsregionSourceName});
-
-*/
 				if ($scope.details.nutsregionSourceCode != undefined && $scope.details.nutsregionSourceCode != '' ){
 					var nuts = {}
 					nutsRegionType.get($scope.details.nutsregionSourceCode).get().then(function (data) {
@@ -61,6 +54,35 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 						$scope.nuts = {};
 						$scope.nuts.nutsregionLevel2Code = data.code;
 						$scope.nuts.nutsregionLevel2Name = data.name;
+					});
+				}
+			}
+			if($scope.river === undefined){
+				if ($scope.details.riverBasinDistrictCode != undefined && $scope.details.riverBasinDistrictCode != '' ){
+					var river = {}
+					fdRiverBasinType.get($scope.details.riverBasinDistrictCode).get().then(function (data) {
+						river.riverBasinDistrictCode = data.code;
+						river.riverBasinDistrictName = data.name;
+						
+						if ($scope.details.riverBasinDistrictSourceCode != undefined && $scope.details.riverBasinDistrictSourceCode != '' ){
+							fdRiverBasinType.get($scope.details.riverBasinDistrictSourceCode).get().then(function (data) {
+								river.riverBasinDistrictSourceCode = data.code;
+								river.riverBasinDistrictSourceNAme = data.name;
+								$scope.river = river;
+							});
+						}
+						else{
+							$scope.river = river;
+						}
+
+					//console.log('details.country: ' + JSON.stringify($scope.details.country));
+					});
+				}
+				else if ($scope.details.riverBasinDistrictSourceCode != undefined && $scope.details.riverBasinDistrictSourceCode != '' ){
+					fdRiverBasinType.get($scope.details.riverBasinDistrictSourceCode).get().then(function (data) {
+						$scope.river = {};
+						$scope.river.riverBasinDistrictSourceCode = data.code;
+						$scope.river.riverBasinDistrictSourceName = data.name;
 					});
 				}
 			}
@@ -185,20 +207,20 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 	});
 
 	$scope.$watch('river', function(value) {
-		if($scope.details !== undefined && $scope.details.countryCode !== undefined ){
+		if($scope.details !== undefined && $scope.details.riverBasinDistrictCode !== undefined ){
 			if($scope.river !== undefined){
 		        //Add both reported and geo-coded value - if they differ.
-		        if ($scope.river.RiverBasinDistrictSourceCode != $scope.river.RiverBasinDistrictCode)
+		        if ($scope.river.riverBasinDistrictSourceCode != $scope.river.riverBasinDistrictCode)
 		        {
 					$scope.infoitms.push({'order':5, 'clss':'fdSubTitles', 	
-						'title':'River Basin District (Map)', 'val': $scope.river.RiverBasinDistrictName});
+						'title':'River Basin District (Map)', 'val': $scope.river.riverBasinDistrictName});
 					$scope.infoitms.push({'order':6, 'clss':'fdSubTitles', 	
-						'title':'River Basin District (Reported)', 'val': $scope.river.RiverBasinDistrictSourceName});
+						'title':'River Basin District (Reported)', 'val': $scope.river.riverBasinDistrictSourceName});
 		        }
 		        else
 		        {
 					$scope.infoitms.push({'order':5, 'clss':'fdSubTitles', 	
-						'title':'River Basin District', 'val': $scope.river.RiverBasinDistrictName});
+						'title':'River Basin District', 'val': $scope.river.riverBasinDistrictName});
 		        }
 			}
 		}
@@ -226,7 +248,8 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 		        {
 					$scope.infoitms.push({'order':8, 'clss':'fdSubTitles', 	
 						'title':'ProductionVolumeQuantity', 
-						'val': $scope.details.ProductionVolumeProductName + ' ' + $scope.details.ProductionVolumeQuantity + ' ' + $scope.unit.unitName});
+						'val': $scope.details.ProductionVolumeProductName + ' ' + $scope.details.ProductionVolumeQuantity 
+						+ ' ' + $scope.unit.unitName});
 						//TODO LOVResources.UnitName(fac.ProductionVolumeUnitCode))));
 		        }
 			}
@@ -331,10 +354,18 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
                 if (naceCode !== undefined) {
                     params = {naceCode: naceCode};
                 }*/
+
                 return naceActivityService.one(naceCode);
             }
         };
     }])
+.factory('fdRiverBasinType', ['riverBasinService', function(riverBasinService) {
+    return {
+        get : function(riverBasinCode) {
+            return riverBasinService.one(riverBasinCode);
+        }
+    };
+}])
 
 .factory('nutsRegionType', ['nutsRegionService', function(nutsRegionService) {
         return {
@@ -344,6 +375,13 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
         };
     }])
 
+.factory('fdUnitType', ['lovUnitService', function(lovUnitService) {
+        return {
+            get : function(unitCode) {
+                return lovUnitService.one(unitCode);
+            }
+        };
+    }])
 
     
 .service('fdDetailsService', ['Restangular', function(Restangular){
@@ -372,6 +410,19 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
     return LovCountry;
 }])
 
+.service('lovUnitService', ['Restangular', function(Restangular){
+    var LovUnit = Restangular.service('lovUnit');
+
+    Restangular.extendModel('lovUnit', function(model) {
+        model.getDisplayText = function() {
+            return this.code + ' ' + this.name;
+        };
+        return model;
+    });
+
+    return LovUnit;
+}])
+
 .service('nutsRegionService', ['Restangular', function(Restangular){
     var nutsRegion = Restangular.service('nutsRegion');
 
@@ -385,6 +436,18 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
     return nutsRegion;
 }])
     
+.service('riverBasinService', ['Restangular', function(Restangular){
+    var riverBasinDistricts = Restangular.service('riverBasinDistricts');
+
+    Restangular.extendModel('riverBasinDistricts', function(model) {
+        model.getDisplayText = function() {
+            return this.code + ' ' + this.name;
+        };
+        return model;
+    });
+
+    return riverBasinDistricts;
+}])
 
 /*
  * This directive enables us to define this module as a custom HTML element

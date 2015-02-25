@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,9 +29,8 @@ public class NaceActivityController {
 
 	@RequestMapping("/naceActivity")
 	public List<NaceActivity> list(
-			@RequestParam(value = "ParentID", required = false) Integer parentID,
-			@RequestParam(value = "NaceActivityCode", required = false) String naceActivityCode) {
-			return repository.list(parentID, naceActivityCode);
+			@RequestParam(value = "ParentID", required = false) Integer parentID) {
+			return repository.list(parentID);
 		}
 
 	@RequestMapping("/naceActivity/{naceCode}")

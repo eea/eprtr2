@@ -15,11 +15,26 @@ public class RiverBasinDistrictController {
 
 	@PersistenceContext
     private EntityManager em;
-	
+	/*
 	@RequestMapping("/riverBasinDistricts")
     public RiverBasinDistrict[] reportingYears(@RequestParam("LOV_CountryID") Integer countryId) {
     	TypedQuery<RiverBasinDistrict> query = em.createNamedQuery("RiverBasinDistrict.findByLOVCountryID", RiverBasinDistrict.class);
     	query.setParameter("LOV_CountryID", countryId);
     	return query.getResultList().toArray(new RiverBasinDistrict[0]);
     }
+*/
+	@RequestMapping("/riverBasinDistricts/{lovCountryID}")
+    public RiverBasinDistrict getRiverBasinDistrict(@RequestParam("LOV_CountryID") Integer lovCountryID) {
+    	TypedQuery<RiverBasinDistrict> query = em.createNamedQuery("RiverBasinDistrict.findByLOVCountryID", RiverBasinDistrict.class);
+    	query.setParameter("LOV_CountryID", lovCountryID);
+    	return query.getSingleResult();
+    }
+
+	@RequestMapping("/riverBasinDistricts/{riverBasinCode}")
+    public RiverBasinDistrict getRiverBasinDistrict(@RequestParam("RiverBasinCode") String riverBasinCode) {
+    	TypedQuery<RiverBasinDistrict> query = em.createNamedQuery("RiverBasinDistrict.findByCode", RiverBasinDistrict.class);
+    	query.setParameter("riverBasinCode", riverBasinCode);
+    	return query.getSingleResult();
+    }
+
 }
