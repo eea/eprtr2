@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <dataset>
-  <LOV_NACEACTIVITY LOV_NACEActivityID="1" Name="Root Activity 1" StartYear="2007"/>
-  <LOV_NACEACTIVITY LOV_NACEActivityID="2" Name="Root Activity 2" StartYear="2007"/>
-  <LOV_NACEACTIVITY LOV_NACEActivityID="3" Name="Activity 1" ParentID="1" StartYear="2007"/>
+  <LOV_NACEACTIVITY LOV_NACEActivityID="1" Name="Root Activity 1" StartYear="2007" Code="01"/>
+  <LOV_NACEACTIVITY LOV_NACEActivityID="2" Name="Root Activity 2" StartYear="2007" Code="02"/>
+  <LOV_NACEACTIVITY LOV_NACEActivityID="3" Name="Activity 1" ParentID="1" StartYear="2007" Code="01.1"/>
 </dataset>
