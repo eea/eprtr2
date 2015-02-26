@@ -21,7 +21,7 @@ public class PollutantController {
 
 	@RequestMapping("/pollutant")
 
-    public List<LovPollutant> list(@RequestParam("ParentID") Integer parentID) {
+    public List<LovPollutant> list(@RequestParam(value = "ParentID", required = false) Integer parentID) {
 		TypedQuery<LovPollutant> query = null;
 		if (parentID == null) {
 			query = em.createQuery("SELECT l FROM LovPollutant l where l.parentID is null", LovPollutant.class);		
