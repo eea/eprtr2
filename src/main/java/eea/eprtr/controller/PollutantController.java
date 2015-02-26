@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import eea.eprtr.model.LovPollutant;
-import eea.eprtr.model.Region;
 
 @RestController
 public class PollutantController {
