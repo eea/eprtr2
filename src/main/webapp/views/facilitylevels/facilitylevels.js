@@ -14,40 +14,6 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	$scope.queryParams = {};
 	$scope.queryParams.ReportingYear = -1;
 	
-	$scope.expandButtonImage = 'images/expand_blue.jpg';
-	$scope.expandButtonText = 'Expand to include';
-	$scope.collapseButtonImage = 'images/collapse_blue.jpg';
-	$scope.collapseButtonText = 'Collapse to exclude';
-
-	$scope.pollutantPanel = false;
-	$scope.pollutantPanelToggleButtonImage = $scope.expandButtonImage;
-	$scope.pollutantPanelToggleButtonTitle = $scope.expandButtonText;
-	$scope.togglePollutantPanel = function() {
-	    $scope.pollutantPanel = !$scope.pollutantPanel;
-	    if ($scope.pollutantPanel) {
-	    	$scope.pollutantPanelToggleButtonImage = $scope.collapseButtonImage;
-	    	$scope.pollutantPanelToggleButtonTitle = $scope.collapseButtonText;
-	    } else {
-	    	$scope.pollutantPanelToggleButtonImage = $scope.expandButtonImage;
-	    	$scope.pollutantPanelToggleButtonTitle = $scope.expandButtonText;
-	    }
-    };
-
-	$scope.wastePanel = false;
-	$scope.wastePanelToggleButtonImage = $scope.expandButtonImage;
-	$scope.wastePanelToggleButtonTitle = $scope.expandButtonText;
-	$scope.toggleWastePanel = function() {
-	    $scope.wastePanel = !$scope.wastePanel;
-	    if ($scope.wastePanel) {
-	    	$scope.wastePanelToggleButtonImage = $scope.collapseButtonImage;
-	    	$scope.wastePanelToggleButtonTitle = $scope.collapseButtonText;
-	    } else {
-	    	$scope.wastePanelToggleButtonImage = $scope.expandButtonImage;
-	    	$scope.wastePanelToggleButtonTitle = $scope.expandButtonText;
-	    }
-    };
-	
-	// init
     $scope.sort = {       
                 sortingOrder : 'facilityName',
                 reverse : false

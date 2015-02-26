@@ -1,12 +1,6 @@
-<div class="info_area">
+<div>
 
-
-
-<!-- 	<script type="text/javasript" src="Charts/charts.js"></script> -->
-<!-- 	<script type="text/javascript" src="Scripts/jsValidation.js"></script> -->
-
-
-	<div class="info_box_search">
+	<div>
 		<h1>Facility level</h1>
 		<p>This report will display the reported releases and transfers of
 			a specific facility. You can also search for a facility by using the
@@ -58,99 +52,13 @@
 
 	</div>
 
-	<div
-		id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_upResultArea" ng-show="searchResults">
-
-		<div
-			id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_resultArea"
-			class="layout_resultArea">
-
-
-
-			<div class="look_sheet_level0">
-
-				<div class="layout_sheet_header">
+	<div ng-show="searchResults">
+		<div>
+			<div>
+				<div>
 					<h2>Facility search / Facilities</h2>
 				</div>
-
-
-
-				<div class="layout_sheet_contentsBox look_sheet_contentsBox">
-					<span
-						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetLinks_lbContentsHeader"
-						class="contentsBox_header">Contents:</span> <br> <a
-						onclick="ShowWaitIndicator();"
-						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetLinks_LinkButton0"
-						class="contentsBox_item contentsBox_item_selected"
-						href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucSheetLinks$LinkButton0','')">Facilities</a>
-					<a onclick="ShowWaitIndicator();"
-						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetLinks_LinkButton1"
-						class="contentsBox_item"
-						href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucSheetLinks$LinkButton1','')">Confidentiality</a>
-
-
-
-
-
-
-
-
-				</div>
-
-
-
-
-
-
-
-				<div class="layout_sheet_download_print">
-					<div
-						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucDownloadPrint_dowloadbuttons">
-
-						<input type="image"
-							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucDownloadPrint$btndownload"
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucDownloadPrint_btndownload"
-							title="Download" src="images/download.gif"
-							style="border-width: 0px;"> <input type="image"
-							name="ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucDownloadPrint$btnPrint"
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucDownloadPrint_btnPrint"
-							title="Print" src="images/ico-print.gif"
-							onclick="window.open('print.aspx?page=global','','height=500px,width=850px,scrollbars=1,resizable=yes,toolbar=no,status=no,replace=true');"
-							style="border-width: 0px;">
-					</div>
-				</div>
-				<div class="layout_sheet_subHeader">
-					<div>
-						<table cellspacing="0" border="0"
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetSubHeader_subheadlineGridView"
-							style="border-collapse: collapse;">
-							<tbody>
-								<tr style="border-style: None;">
-									<th class="resultSheet_subHeader_label detailsTitleColor"
-										scope="row">Facilities:</th>
-									<td class="resultSheet_subHeader_value">{{totalItemCount | number}}</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<div
-						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetSubHeader_ucConfidentialDisclaimer_divContent"
-						class="resultSheet_alert">
-						<img
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetSubHeader_ucConfidentialDisclaimer_imgAlert"
-							src="images/alert.png" alt="alert" style="border-width: 0px;">
-						<a onclick="ShowWaitIndicator();"
-							id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucSheetSubHeader_ucConfidentialDisclaimer_lnbAlert"
-							href="javascript:__doPostBack('ctl00$ctl00$ContentPlaceHolderMaster$ContentInfoArea$ContentResultArea$ucFacilityListSheet$ucSheetSubHeader$ucConfidentialDisclaimer$lnbAlert','')">Confidentiality
-							claims may affect the result. See details &gt;&gt;</a>
-					</div>
-				</div>
-				<div class="layout_sheet_content">
-					<span
-						id="ctl00_ctl00_ContentPlaceHolderMaster_ContentInfoArea_ContentResultArea_ucFacilityListSheet_ucFacilityListResult_lbHelpText"
-						class="listHelp">Clicking the column headers will sort
-						results either descending or ascending</span><br>
-					<br>
+				<div>
 					<table class="table table-striped table-condensed table-hover">
 		                <thead>
 		                    <tr>
