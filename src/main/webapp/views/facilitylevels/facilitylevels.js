@@ -11,6 +11,8 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 
 .controller('FacilityLevelsCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular', function($scope, $filter, $http, searchFilter, Restangular) {
 	$scope.searchFilter = searchFilter;
+	$scope.queryParams = {};
+	$scope.queryParams.ReportingYear = -1;
 	
 	$scope.expandButtonImage = 'images/expand_blue.jpg';
 	$scope.expandButtonText = 'Expand to include';
@@ -129,6 +131,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	    queryParams.limit = $scope.itemsPerPage;
 	    queryParams.order = $scope.sort.sortingOrder;
 	    queryParams.desc = $scope.sort.reverse;
+	    $scope.queryParams = queryParams;
 	    
 	    facilitySearch.getList(queryParams).then(function(response) {
 	        $scope.items = response.data;
