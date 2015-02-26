@@ -53,44 +53,60 @@
 	</div>
 
 	<div ng-show="searchResults">
-		<div>
-			<div>
-				<div>
-					<h2>Facility search / Facilities</h2>
-				</div>
-				<div>
-					<table class="table table-striped table-condensed table-hover">
-		                <thead>
-		                    <tr>
-		                        <th class="facilityName" custom-sort order="'facilityName'" sort="sort">Facility&nbsp;</th>
-		                        <th class="postalCode" custom-sort order="'postalCode'" sort="sort">Postal Code&nbsp;</th>
-		                        <th class="address" custom-sort order="'address'" sort="sort">Address&nbsp;</th>
-		                        <th class="city" custom-sort order="'city'" sort="sort">Town/Village&nbsp;</th>
-		                        <th class="iaactivityCode" custom-sort order="'IAActivityCode'" sort="sort">Activity&nbsp;</th>
-		                        <th class="countryCode" custom-sort order="'countryCode'" sort="sort">Country&nbsp;</th>
-		                    </tr>
-		                </thead>
-		                <tfoot>
-		                    <td colspan="6">
-		                    	<div ng-show="hasItems()">
- 		                    	 	<pagination boundary-links="true" ng-model="currentPage" total-items="totalItemCount" items-per-page="itemsPerPage" max-size="gap" class="pagination pull-right" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination> 
-	                            </div>
-		                    </td>
-		                </tfoot>
-		                <tbody>
-		                    <tr ng-repeat="item in items">
-		                        <td>{{item.facilityName}}</td>
-		                        <td>{{item.postalCode}}</td>
-		                        <td>{{item.address}}</td>
-		                        <td>{{item.city}}</td>
-		                        <td>{{item.iaactivityCode}}</td>
-		                        <td>{{item.countryCode}}</td>
-		                    </tr>
-		                </tbody>
-		            </table>
-				</div>
-			</div>
-		</div>
-		         
+        <tabset>
+            <tab heading="Facilities">
+                <br/>
+                <div ng-show="confidentialFacilities">
+                    <div>
+                        <img src="images/alert.png" alt="alert" style="border-width:0px;">
+                        <a ng-click="doShowConfidentiality()">Confidentiality claims may affect the result. See details &gt;&gt;</a>
+                    </div>
+                    <br/>
+                </div>
+                <table class="table table-striped table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th class="facilityName" custom-sort order="'facilityName'" sort="sort">Facility&nbsp;</th>
+                            <th class="postalCode" custom-sort order="'postalCode'" sort="sort">Postal Code&nbsp;</th>
+                            <th class="address" custom-sort order="'address'" sort="sort">Address&nbsp;</th>
+                            <th class="city" custom-sort order="'city'" sort="sort">Town/Village&nbsp;</th>
+                            <th class="iaactivityCode" custom-sort order="'IAActivityCode'" sort="sort">Activity&nbsp;</th>
+                            <th class="countryCode" custom-sort order="'countryCode'" sort="sort">Country&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <td colspan="6">
+                            <div ng-show="hasItems()">
+                                <pagination boundary-links="true" ng-model="currentPage" total-items="totalItemCount" items-per-page="itemsPerPage" max-size="gap" class="pagination pull-right" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+                            </div>
+                        </td>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="item in items">
+                            <td>{{item.facilityName}}</td>
+                            <td>{{item.postalCode}}</td>
+                            <td>{{item.address}}</td>
+                            <td>{{item.city}}</td>
+                            <td>{{item.iaactivityCode}}</td>
+                            <td>{{item.countryCode}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </tab>
+            <tab heading="Confidentiality">
+                <br/>
+                <div ng-show="confidentialFacilities">
+                    <div>
+                        <img src="images/alert.png" alt="alert" style="border-width:0px;">
+                        <a>Confidentiality claims may affect the result.</a>
+                    </div>
+                    <br/>
+                </div>
+                <p>
+                    The total releases and off site transfers in waste water of single pollutants as well as aggregated amount of waste transferred off-site might be effected by confidentiality claims.
+                </p>
+            </tab>
+        </tabset>
 	</div>
+
 </div>

@@ -21,6 +21,7 @@ public class FacilitySearchFilter {
 	private String cityName;
 	private ActivitySearchFilter activityFilter;
 	private PollutantSearchFilter pollutantFilter;
+	private ConfidentialityFilter confidentialityFilter;
 
 	public FacilitySearchFilter(CountryAreaGroupRepository repository, Integer reportingYear, Integer countryID, Integer areaGroupID, Integer regionID, Integer rbdID, String facilityName, String cityName, ActivitySearchFilter activityFilter, PollutantSearchFilter pollutantFilter) {
 		this.repository = repository;
@@ -68,6 +69,22 @@ public class FacilitySearchFilter {
 		if (pollutantSearchWhereClause.getExpressions().size() > 0) {
 			whereClause.getExpressions().add(pollutantSearchWhereClause);
 		}
+		
+		if (confidentialityFilter != null) {
+			Predicate confidentialityWhereClause = confidentialityFilter.buildWhereClause(cb, qr);
+			whereClause.getExpressions().add(confidentialityWhereClause);
+		}
+		
 		return whereClause;
+	}
+
+	public FacilitySearchFilter createConfidentialityFilter() {
+		FacilitySearchFilter filter = new FacilitySearchFilter(repository, reportingYear, countryID, areaGroupID, regionID, rbdID, facilityName, cityName, activityFilter, pollutantFilter);
+		filter.setConfidentialityFilter(new ConfidentialityFilter());
+		return filter;
+	}
+
+	private void setConfidentialityFilter(ConfidentialityFilter confidentialityFilter) {
+		this.confidentialityFilter = confidentialityFilter;
 	}
 }

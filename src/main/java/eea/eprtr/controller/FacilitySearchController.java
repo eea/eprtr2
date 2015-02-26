@@ -58,8 +58,12 @@ public class FacilitySearchController {
 		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental);  
 		FacilitySearchFilter filter = new FacilitySearchFilter(countryAreaGroupRepository, reportingYear, countryID, areaGroupID, regionID, rbdID, facilityName, cityName, activityFilter, pollutantFilter);
 		
+		long facilitiesWithConfidentialityCount = facilitySearchRepository.getFacilityCount(filter.createConfidentialityFilter());
+		response.setHeader("X-Confidentiality", String.valueOf(facilitiesWithConfidentialityCount > 0));
+		
 		long facilitiesCount = facilitySearchRepository.getFacilityCount(filter);
 		response.setHeader("X-Count", String.valueOf(facilitiesCount));
+		
 		if (facilitiesCount > 0) {
 			OrderBy orderBy = new OrderBy(order, desc.booleanValue());
 			QueryPager pager = new QueryPager(offset.intValue(), limit.intValue());

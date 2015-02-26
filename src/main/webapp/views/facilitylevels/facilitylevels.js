@@ -13,8 +13,8 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	$scope.searchFilter = searchFilter;
 	$scope.queryParams = {};
 	$scope.queryParams.ReportingYear = -1;
-	
-    $scope.sort = {       
+
+    $scope.sort = {
                 sortingOrder : 'facilityName',
                 reverse : false
             };
@@ -100,14 +100,16 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	    $scope.queryParams = queryParams;
 	    
 	    facilitySearch.getList(queryParams).then(function(response) {
-	        $scope.items = response.data;
+            $scope.items = response.data;
 	        $scope.totalItemCount = response.headers('X-Count');
+	        $scope.confidentialFacilities = response.headers('X-Confidentiality');
 	    });
 	};
-    
+
     $scope.hasItems = function() {
     	return $scope.items.length > 0;
     };
+
 }])
 
 .directive("customSort", function() {
