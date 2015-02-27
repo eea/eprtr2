@@ -54,12 +54,12 @@
 
 	<div ng-show="searchResults">
         <tabset>
-            <tab heading="Facilities">
+            <tab heading="Facilities" active="facilitiesTabActive">
                 <br/>
                 <div ng-show="confidentialFacilities">
                     <div>
                         <img src="images/alert.png" alt="alert" style="border-width:0px;">
-                        <a ng-click="doShowConfidentiality()">Confidentiality claims may affect the result. See details &gt;&gt;</a>
+                        <a ng-click="confidentialityTabActive = true">Confidentiality claims may affect the result. See details &gt;&gt;</a>
                     </div>
                     <br/>
                 </div>
@@ -93,7 +93,7 @@
                     </tbody>
                 </table>
             </tab>
-            <tab heading="Confidentiality">
+            <tab heading="Confidentiality" active="confidentialityTabActive">
                 <br/>
                 <div ng-show="confidentialFacilities">
                     <div>
