@@ -83,10 +83,10 @@
                     </tfoot>
                     <tbody>
                         <tr ng-repeat="item in items">
-                            <td>{{item.facilityName}}</td>
-                            <td>{{item.postalCode}}</td>
-                            <td>{{item.address}}</td>
-                            <td>{{item.city}}</td>
+                            <td><a href="#/facilitydetails?FacilityId={{item.facilityID}}&ReportingYear={{item.reportingYear}}">{{formatText(item.facilityName, item.confidentialIndicator)}}</a></td>
+                            <td>{{formatText(item.postalCode, item.confidentialIndicator)}}</td>
+                            <td>{{formatText(item.address, item.confidentialIndicator)}}</td>
+                            <td>{{formatText(item.city, item.confidentialIndicator)}}</td>
                             <td>{{item.iaactivityCode}}</td>
                             <td>{{item.countryCode}}</td>
                         </tr>

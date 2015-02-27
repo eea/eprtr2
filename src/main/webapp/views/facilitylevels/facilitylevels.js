@@ -110,6 +110,20 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
     	return $scope.items.length > 0;
     };
 
+        $scope.formatText = function(txt, confidential) {
+            if (txt)
+            {
+                return txt;
+            }
+            else if (confidential)
+            {
+                return "CONFIDENTIAL";
+            }
+            else
+            {
+                return "-";
+            }
+        };
 }])
 
 .directive("customSort", function() {
