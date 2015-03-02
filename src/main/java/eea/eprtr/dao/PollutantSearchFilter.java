@@ -32,10 +32,10 @@ public class PollutantSearchFilter {
 			whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.LOV_PollutantGroupID), pollutantGroupID));
 		}
 		if (mediumCode != null) {
-			whereClause.getExpressions().add(qr.get(FacilitySearchAll_.mediumCode).in(mediumCode));
+			whereClause.getExpressions().add(cb.not(qr.get(FacilitySearchAll_.mediumCode).in(mediumCode)));
 		}
 		if (accidental != null) {
-			// TODO filter on accidental column 
+			whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.accidental), accidental));
 		} 
 		 
 		return whereClause;

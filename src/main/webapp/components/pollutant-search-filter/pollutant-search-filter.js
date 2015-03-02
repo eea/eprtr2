@@ -27,21 +27,27 @@ angular.module('myApp.pollutantSearchFilter', ['restangular', 'myApp.search-filt
 
 .factory('pollutantSearchFilter', [function() {
         return {
+            accidentalOnly : false,
+            releasesToAir : true,
+            releasesToWater : true,
+            releasesToSoil : true,
+            transfersToWasteWater : true,
+
             filter : function(queryParams) {
                 if (this.accidentalOnly) {
                     queryParams.Accidental = 1;
                 }
                 var mediumCodes = [];
-                if (this.releasesToAir) {
+                if (!this.releasesToAir) {
                     mediumCodes = mediumCodes.concat('AIR');
                 }
-                if (this.releasesToWater) {
+                if (!this.releasesToWater) {
                     mediumCodes = mediumCodes.concat('WATER');
                 }
-                if (this.releasesToSoil) {
+                if (!this.releasesToSoil) {
                     mediumCodes = mediumCodes.concat('LAND');
                 }
-                if (this.transfersToWasteWater) {
+                if (!this.transfersToWasteWater) {
                     mediumCodes = mediumCodes.concat('WASTEWATER');
                 }
                 if (mediumCodes.length > 0) {

@@ -76,6 +76,8 @@ public class FacilitySearchAll implements Serializable {
 	private String IASubActivityCode;
 
 	private Integer IDWaste;
+	
+	private Integer accidental;
 
 	@Column(length=255)
 	private String IPPCActivityCode;
@@ -690,6 +692,14 @@ public class FacilitySearchAll implements Serializable {
 
 	public void setWHPCountryID(Integer WHPCountryID) {
 		this.WHPCountryID = WHPCountryID;
+	}
+
+	public Integer getAccidental() {
+		return accidental;
+	}
+
+	public void setAccidental(Integer accidental) {
+		this.accidental = accidental;
 	}
 
 }

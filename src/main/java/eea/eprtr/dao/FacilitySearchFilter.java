@@ -22,8 +22,9 @@ public class FacilitySearchFilter {
 	private ActivitySearchFilter activityFilter;
 	private PollutantSearchFilter pollutantFilter;
 	private ConfidentialityFilter confidentialityFilter;
+	private WasteSearchFilter wasteFilter;
 
-	public FacilitySearchFilter(CountryAreaGroupRepository repository, Integer reportingYear, Integer countryID, Integer areaGroupID, Integer regionID, Integer rbdID, String facilityName, String cityName, ActivitySearchFilter activityFilter, PollutantSearchFilter pollutantFilter) {
+	public FacilitySearchFilter(CountryAreaGroupRepository repository, Integer reportingYear, Integer countryID, Integer areaGroupID, Integer regionID, Integer rbdID, String facilityName, String cityName, ActivitySearchFilter activityFilter, PollutantSearchFilter pollutantFilter, WasteSearchFilter wasteFilter) {
 		this.repository = repository;
 		this.reportingYear = reportingYear;
 		this.countryID = countryID;
@@ -34,6 +35,7 @@ public class FacilitySearchFilter {
 		this.cityName = cityName;
 		this.activityFilter = activityFilter;
 		this.pollutantFilter = pollutantFilter;
+		this.wasteFilter = wasteFilter;
 	}
 
 	public Predicate buildWhereClause(CriteriaBuilder cb, Root<FacilitySearchAll> qr) {
@@ -69,6 +71,10 @@ public class FacilitySearchFilter {
 		if (pollutantSearchWhereClause.getExpressions().size() > 0) {
 			whereClause.getExpressions().add(pollutantSearchWhereClause);
 		}
+		Predicate wasteSearchWhereClause = wasteFilter.buildWhereClause(cb, qr);
+		if (wasteSearchWhereClause.getExpressions().size() > 0) {
+			whereClause.getExpressions().add(wasteSearchWhereClause);
+		}
 		
 		if (confidentialityFilter != null) {
 			Predicate confidentialityWhereClause = confidentialityFilter.buildWhereClause(cb, qr);
@@ -79,7 +85,7 @@ public class FacilitySearchFilter {
 	}
 
 	public FacilitySearchFilter createConfidentialityFilter() {
-		FacilitySearchFilter filter = new FacilitySearchFilter(repository, reportingYear, countryID, areaGroupID, regionID, rbdID, facilityName, cityName, activityFilter, pollutantFilter);
+		FacilitySearchFilter filter = new FacilitySearchFilter(repository, reportingYear, countryID, areaGroupID, regionID, rbdID, facilityName, cityName, activityFilter, pollutantFilter, wasteFilter);
 		filter.setConfidentialityFilter(new ConfidentialityFilter());
 		return filter;
 	}
