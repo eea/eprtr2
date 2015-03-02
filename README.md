@@ -5,18 +5,42 @@ E-PRTR 2
 
 The application is available here: http://prtrproto.cloudapp.net/
 
-Spring MVC provides decent API to build RESTful webservices on Tomcat: https://spring.io/guides/gs/rest-service/. A guide of how to use the services with AngularJS can be found here: https://spring.io/guides/gs/consuming-rest-angularjs/. In Spring it is possible to return Java object in preferred format by using @ResponseBody annotation in Controller method. It serializes the object to json or xml, if needed.
+Structure
+---------
 
-If you want to make the service more JEE compliant by allocating [JAX-RS spec](https://jax-rs-spec.java.net/), then it is possible to use [Jersey framework](https://jersey.java.net/). Spring and Jersey can also live in the same application. In this case you are using JAX-RS annotations to define and provide the services with Jersey and Spring takes care of the application context and other layers. This solution allows you to benefit from the Spring power of simplifying unit testing.
+The project is structured as a Maven project, and can be built by Maven command 
+line.
 
+The Java code is located at src/main/java and the web site files (js, html, 
+css, etc.) is located at src/main/webapp.
+
+`bower.json` defines all JavaScript dependencies for the JavaScript application
+code and the dependencies added to this file will automatically be reflected in 
+index.html (in src/main/webapp) and karma.conf.js in the `bower:js` and 
+`bower:css` sections if you are using `Eclipse` or executing 
+`mvn copy-resources`.
+
+`Gruntfile.js` is the Grunt build file.
+
+`karma.conf.js` and `karma.ci.conf.js` is JavaScript unittest 
+configuration files (`karma.ci.conf.js` is for the CI server only). 
+
+`package.json` defines all JavaScript dependencies needed to build the 
+JavaScript application code.
+
+The application is based on a single page MVC web site consisting of a number
+of views each using a number of components.
+
+The views are located at src/main/webapp/views and the components are located
+at src/main/webapp/components.
+
+The main page is located at src/main/webapp/index.html.
 
 Testing
 -------
-There are test examples of both controllers and data access objects using the Spring test package. Note that loading demo data is part of the liquibase changelog, and the tests use that data instead of initialising with their own test data.
-
-For AngularJS see http://www.tuesdaydeveloper.com/2013/06/angularjs-testing-with-karma-and-jasmine/
-
-There is a blog post of how to invoke Karma from Maven: http://jamesnavin.net/2014/05/25/maven-karma-webjars/
+There are test examples of both controllers and data access objects using the Spring test package. Note that loading
+demo data is part of the liquibase changelog, and the tests use that data instead of initialising with their own
+test data.
 
 Continuous JavaScript testing with Karma:
 ```
@@ -30,23 +54,23 @@ One of the following Resource fragments must be added to context.xml for the web
 You must also install the relevant JDBC driver jar file to /usr/share/tomcat/lib.
 
 ```
-<Resource name="jdbc/datasource" auth="Container" type="javax.sql.DataSource"
+&lt;Resource name="jdbc/datasource" auth="Container" type="javax.sql.DataSource"
         username="<username>"
         password="<password>"
     	driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
     	url="jdbc:sqlserver://<instance>.database.windows.net:1433;database=<databasename>;encrypt=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30"
     	maxActive="20"
     	maxIdle="10"
-    	validationQuery="select 1" />
+    	validationQuery="select 1" /&gt;
 
-<Resource name="jdbc/datasource" auth="Container" type="javax.sql.DataSource"
+&lt;Resource name="jdbc/datasource" auth="Container" type="javax.sql.DataSource"
         username="<username>"
         password="<password>"
         driverClassName="net.sourceforge.jtds.jdbc.Driver"
         url="jdbc:jtds:sqlserver://<servername>;database=<databasename>"
     	maxActive="20"
     	maxIdle="10"
-    	validationQuery="select 1" />
+    	validationQuery="select 1" /&gt;
 ```
 
 How to build
