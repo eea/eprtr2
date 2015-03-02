@@ -54,46 +54,67 @@ One of the following Resource fragments must be added to context.xml for the web
 You must also install the relevant JDBC driver jar file to /usr/share/tomcat/lib.
 
 ```
-&lt;Resource name="jdbc/datasource" auth="Container" type="javax.sql.DataSource"
+<Resource name="jdbc/datasource" auth="Container" type="javax.sql.DataSource"
         username="<username>"
         password="<password>"
     	driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
     	url="jdbc:sqlserver://<instance>.database.windows.net:1433;database=<databasename>;encrypt=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30"
     	maxActive="20"
     	maxIdle="10"
-    	validationQuery="select 1" /&gt;
+    	validationQuery="select 1" />
 
-&lt;Resource name="jdbc/datasource" auth="Container" type="javax.sql.DataSource"
+<Resource name="jdbc/datasource" auth="Container" type="javax.sql.DataSource"
         username="<username>"
         password="<password>"
         driverClassName="net.sourceforge.jtds.jdbc.Driver"
         url="jdbc:jtds:sqlserver://<servername>;database=<databasename>"
     	maxActive="20"
     	maxIdle="10"
-    	validationQuery="select 1" /&gt;
+    	validationQuery="select 1" />
 ```
 
 How to build
 ------------
-You need Git to check the code out from the repository and to build you need Java and Maven.  All other dependencies will automatically be downloaded by Maven.
+You need Git to check the code out from the repository and to build you need Java and 
+Maven.  All other dependencies will automatically be downloaded by Maven.
 
 For Windows see the pages on:
 * [Git for Windows](http://git-scm.com/downloads)
 * [Maven for Windows](http://maven.apache.org/guides/getting-started/windows-prerequisites.html).
 * [Node.js](http://nodejs.org/)
-* [Git Shell](https://windows.github.com/)
 
 Before building you need to install Node.js. 
 
-To build you do (preferably from Git Shell if using Windows):
+To build you do:
 ```
 git clone https://github.com/eea/eprtr2.git
 cd eprtr2
-npm install
 mvn.bat install
 ```
 
-This will create a `target` subdirectory, build the code, run the tests and put a WAR file in target. You can then deploy this file to Tomcat. It contains an embedded database with demo data.
+This will create a `target` subdirectory, build the code, run the tests and 
+put a WAR file in target. You can then deploy this file to Tomcat. It contains 
+an embedded database with demo data.
+
+To build a completely minified version of the application do the following: 
+```
+grunt build
+```
+
+This will create a dist directory that contains the application fully minified.
+To make a minified version of the war directory located at target\eprtr (and
+assuming that `mvn install` and `grunt build` has been run) do the
+following:
+
+```
+rmdir /s /q target\eprtr-min
+mkdir target\eprtr-min
+xcopy /s /q /i target\eprtr\bower_components target\eprtr-min\bower_components
+xcopy /s /q /i target\eprtr\WEB-INF target\eprtr-min\WEB-INF
+xcopy /s /q dist target\eprtr-min
+```
+
+
 
 ### Dependencies for CentOS 7
 
