@@ -1,7 +1,9 @@
 package eea.eprtr.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 
 
@@ -11,7 +13,13 @@ import java.sql.Timestamp;
  */
 @Entity
 @Table(name="FACILITYDETAIL_DETAIL")
-@NamedQuery(name="FacilitydetailDetail.findByFacilityReportID", query="SELECT f FROM FacilitydetailDetail f where f.facilityReportID = :FacilityReportID")
+@NamedQueries({
+	@NamedQuery(name="FacilitydetailDetail.findByFacilityReportID", query="SELECT f FROM FacilitydetailDetail f where f.facilityReportID = :FacilityReportID"),
+	@NamedQuery(name="FacilitydetailDetail.findByFacilityIDAndYear", 
+		query="SELECT f FROM FacilitydetailDetail f where f.facilityID = :FacilityID AND f.reportingYear = :ReportingYear"),	
+	@NamedQuery(name="FacilitydetailDetail.findByFacilityID", 
+		query="SELECT f FROM FacilitydetailDetail f where f.facilityID = :FacilityID")
+})
 public class FacilitydetailDetail implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,13 +36,13 @@ public class FacilitydetailDetail implements Serializable {
 	private String confidentialIndicatorCode;
 
 	@Column(name="ConfidentialIndicatorPollutantRelease")
-	private int confidentialIndicatorPollutantRelease;
+	private Integer confidentialIndicatorPollutantRelease;
 
 	@Column(name="ConfidentialIndicatorPollutantTransfer")
-	private int confidentialIndicatorPollutantTransfer;
+	private Integer confidentialIndicatorPollutantTransfer;
 
 	@Column(name="ConfidentialIndicatorWaste")
-	private int confidentialIndicatorWaste;
+	private Integer confidentialIndicatorWaste;
 
 	@Column(name="Coordinates")
 	private String coordinates;
@@ -46,14 +54,14 @@ public class FacilitydetailDetail implements Serializable {
 	private String countryCode;
 
 	@Column(name="FacilityID")
-	private int facilityID;
+	private Integer facilityID;
 
 	@Column(name="FacilityName")
 	private String facilityName;
 
 	@Id
 	@Column(name="FacilityReportID")
-	private int facilityReportID;
+	private Integer facilityReportID;
 
 	private String IAActivityCode;
 
@@ -79,7 +87,7 @@ public class FacilitydetailDetail implements Serializable {
 	private String NUTSRegionSourceCode;
 
 	@Column(name="OperatingHours")
-	private int operatingHours;
+	private Integer operatingHours;
 
 	@Column(name="ParentCompanyName")
 	private String parentCompanyName;
@@ -91,7 +99,7 @@ public class FacilitydetailDetail implements Serializable {
 	private String productionVolumeProductName;
 
 	@Column(name="ProductionVolumeQuantity")
-	private double productionVolumeQuantity;
+	private Double productionVolumeQuantity;
 
 	@Column(name="ProductionVolumeUnitCode")
 	private String productionVolumeUnitCode;
@@ -103,7 +111,7 @@ public class FacilitydetailDetail implements Serializable {
 	private Timestamp published;
 
 	@Column(name="ReportingYear")
-	private int reportingYear;
+	private Integer reportingYear;
 
 	@Column(name="RiverBasinDistrictCode")
 	private String riverBasinDistrictCode;
@@ -112,10 +120,10 @@ public class FacilitydetailDetail implements Serializable {
 	private String riverBasinDistrictSourceCode;
 
 	@Column(name="TotalEmployeeQuantity")
-	private int totalEmployeeQuantity;
+	private Integer totalEmployeeQuantity;
 
 	@Column(name="TotalIPPCInstallationQuantity")
-	private int totalIPPCInstallationQuantity;
+	private Integer totalIPPCInstallationQuantity;
 
 	@Column(name="WebsiteCommunication")
 	private String websiteCommunication;
@@ -155,27 +163,27 @@ public class FacilitydetailDetail implements Serializable {
 		this.confidentialIndicatorCode = confidentialIndicatorCode;
 	}
 
-	public int getConfidentialIndicatorPollutantRelease() {
+	public Integer getConfidentialIndicatorPollutantRelease() {
 		return this.confidentialIndicatorPollutantRelease;
 	}
 
-	public void setConfidentialIndicatorPollutantRelease(int confidentialIndicatorPollutantRelease) {
+	public void setConfidentialIndicatorPollutantRelease(Integer confidentialIndicatorPollutantRelease) {
 		this.confidentialIndicatorPollutantRelease = confidentialIndicatorPollutantRelease;
 	}
 
-	public int getConfidentialIndicatorPollutantTransfer() {
+	public Integer getConfidentialIndicatorPollutantTransfer() {
 		return this.confidentialIndicatorPollutantTransfer;
 	}
 
-	public void setConfidentialIndicatorPollutantTransfer(int confidentialIndicatorPollutantTransfer) {
+	public void setConfidentialIndicatorPollutantTransfer(Integer confidentialIndicatorPollutantTransfer) {
 		this.confidentialIndicatorPollutantTransfer = confidentialIndicatorPollutantTransfer;
 	}
 
-	public int getConfidentialIndicatorWaste() {
+	public Integer getConfidentialIndicatorWaste() {
 		return this.confidentialIndicatorWaste;
 	}
 
-	public void setConfidentialIndicatorWaste(int confidentialIndicatorWaste) {
+	public void setConfidentialIndicatorWaste(Integer confidentialIndicatorWaste) {
 		this.confidentialIndicatorWaste = confidentialIndicatorWaste;
 	}
 
@@ -203,11 +211,11 @@ public class FacilitydetailDetail implements Serializable {
 		this.countryCode = countryCode;
 	}
 
-	public int getFacilityID() {
+	public Integer getFacilityID() {
 		return this.facilityID;
 	}
 
-	public void setFacilityID(int facilityID) {
+	public void setFacilityID(Integer facilityID) {
 		this.facilityID = facilityID;
 	}
 
@@ -219,11 +227,11 @@ public class FacilitydetailDetail implements Serializable {
 		this.facilityName = facilityName;
 	}
 
-	public int getFacilityReportID() {
+	public Integer getFacilityReportID() {
 		return this.facilityReportID;
 	}
 
-	public void setFacilityReportID(int facilityReportID) {
+	public void setFacilityReportID(Integer facilityReportID) {
 		this.facilityReportID = facilityReportID;
 	}
 
@@ -315,11 +323,11 @@ public class FacilitydetailDetail implements Serializable {
 		this.NUTSRegionSourceCode = NUTSRegionSourceCode;
 	}
 
-	public int getOperatingHours() {
+	public Integer getOperatingHours() {
 		return this.operatingHours;
 	}
 
-	public void setOperatingHours(int operatingHours) {
+	public void setOperatingHours(Integer operatingHours) {
 		this.operatingHours = operatingHours;
 	}
 
@@ -347,13 +355,24 @@ public class FacilitydetailDetail implements Serializable {
 		this.productionVolumeProductName = productionVolumeProductName;
 	}
 
-	public double getProductionVolumeQuantity() {
+	public Double getProductionVolumeQuantity() {
 		return this.productionVolumeQuantity;
+		//return Double.parseDouble(this.productionVolumeQuantity);
 	}
 
-	public void setProductionVolumeQuantity(double productionVolumeQuantity) {
+	public void setProductionVolumeQuantity(Double productionVolumeQuantity) {
 		this.productionVolumeQuantity = productionVolumeQuantity;
 	}
+
+	
+/*	public void setProductionVolumeQuantity(String productionVolumeQuantity) {
+		if (productionVolumeQuantity != null && productionVolumeQuantity != "" ){
+			this.productionVolumeQuantity = productionVolumeQuantity;
+		}
+		else{
+			this.productionVolumeQuantity = "-1"; 
+		}
+	}*/
 
 	public String getProductionVolumeUnitCode() {
 		return this.productionVolumeUnitCode;
@@ -379,11 +398,11 @@ public class FacilitydetailDetail implements Serializable {
 		this.published = published;
 	}
 
-	public int getReportingYear() {
+	public Integer getReportingYear() {
 		return this.reportingYear;
 	}
 
-	public void setReportingYear(int reportingYear) {
+	public void setReportingYear(Integer reportingYear) {
 		this.reportingYear = reportingYear;
 	}
 
@@ -403,19 +422,19 @@ public class FacilitydetailDetail implements Serializable {
 		this.riverBasinDistrictSourceCode = riverBasinDistrictSourceCode;
 	}
 
-	public int getTotalEmployeeQuantity() {
+	public Integer getTotalEmployeeQuantity() {
 		return this.totalEmployeeQuantity;
 	}
 
-	public void setTotalEmployeeQuantity(int totalEmployeeQuantity) {
+	public void setTotalEmployeeQuantity(Integer totalEmployeeQuantity) {
 		this.totalEmployeeQuantity = totalEmployeeQuantity;
 	}
 
-	public int getTotalIPPCInstallationQuantity() {
+	public Integer getTotalIPPCInstallationQuantity() {
 		return this.totalIPPCInstallationQuantity;
 	}
 
-	public void setTotalIPPCInstallationQuantity(int totalIPPCInstallationQuantity) {
+	public void setTotalIPPCInstallationQuantity(Integer totalIPPCInstallationQuantity) {
 		this.totalIPPCInstallationQuantity = totalIPPCInstallationQuantity;
 	}
 

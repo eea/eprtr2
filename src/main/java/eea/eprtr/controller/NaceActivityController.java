@@ -33,7 +33,7 @@ public class NaceActivityController {
 			return repository.list(parentID);
 		}
 
-	@RequestMapping("/naceActivity/{naceCode}")
+	@RequestMapping("/naceActivity/{naceCode:.+}")
 	public NaceActivity get(
 		@PathVariable(value = "naceCode") String naceCode) {
 			return repository.get(naceCode);

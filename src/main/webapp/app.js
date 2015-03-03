@@ -12,15 +12,20 @@ var myApp = angular.module('myApp', [
   'myApp.areaoverview',
   'myApp.search-placement',
   'myApp.esrileafmap',
-  'myApp.fd-main'
+  'myApp.fd-main',
+  'myApp.industrialactivity',
+  'myApp.pollutantreleases',
+  'myApp.pollutanttransfers',
+  'myApp.wastetransfers'
 ])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/home'});
 }])
 
-.controller('HeaderController', function($scope, $location) {	
+.controller('HeaderController', function($scope, $location ) {	
     $scope.isActive = function(route) {     	
         return route === $location.url();
     };
+    
 });

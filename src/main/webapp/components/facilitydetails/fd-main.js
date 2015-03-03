@@ -3,12 +3,8 @@
 angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 
 .controller('FDMainController', 
-		['$scope', '$http', '$filter', 'fdDetailsType', 'fdUnitType',
-		 'lovCountryType', 'fdNaceActivityType', 'nutsRegionType', 'fdRiverBasinType',
-		 'lovConfidentialType','fdAuthorityType',
-          function($scope, $http, $filter, fdDetailsType, fdUnitType, lovCountryType, 
-        		  fdNaceActivityType, nutsRegionType, fdRiverBasinType, lovConfidentialType,
-        		  fdAuthorityType) {
+		['$scope', '$http', '$filter', 'translationService','fdDetailsType', 'fdAuthorityType', 
+          function($scope, $http, $filter, translationService, fdDetailsType, fdAuthorityType) {
 	$scope.fdtitle = 'Facility Level';
 	$scope.headitms = [];
 	$scope.infoitms = [{'order':0,	'clss':'fdTitles', 	'title':'Facility Details',	'val': ' '}];
@@ -16,396 +12,329 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 	var degrees = "°";
 	//    $scope.frID;
 
-	if ($scope.frid !== undefined){
+	
+//	Requesting text and title resources 
+	translationService.get().then(function (data) {
+		$scope.tr_f = data.Facility;
+		$scope.tr_c = data.Common;
+		$scope.tr_p = data.Pollutant;
+		$scope.tr_lna = data.LOV_NACEACTIVITY;
+		$scope.tr_lnr = data.LOV_NUTSREGION;
+		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
+		$scope.tr_lu = data.LOV_UNIT;
+		$scope.tr_lcf = data.LOV_CONFIDENTIALITY;
+		$scope.tr_lco = data.LOV_COUNTRY;
+    });
+/*	translationService.get('Facility').then(function (data) {
+		$scope.tr_f = data;
+    });
+	translationService.get('Common').then(function (data) {
+		$scope.tr_c = data;
+    });
+	translationService.get('Pollutant').then(function (data) {
+		$scope.tr_p = data;
+    });
+	translationService.get('LOV_NACEACTIVITY').then(function (data) {
+		$scope.tr_lna = data;
+    });
+	translationService.get('LOV_NUTSREGION').then(function (data) {
+		$scope.tr_lnr = data;
+    });
+	translationService.get('LOV_RIVERBASINDISTRICT').then(function (data) {
+		$scope.tr_lrbd = data;
+    });
+	translationService.get('LOV_UNIT').then(function (data) {
+		$scope.tr_lu = data;
+    });
+	translationService.get('LOV_CONFIDENTIALITY').then(function (data) {
+		$scope.tr_lcf = data;
+    });
+	translationService.get('LOV_COUNTRY').then(function (data) {
+		$scope.tr_lco = data;
+    });*/
+	
+
+	$scope.updateByFdrid = function(){
 		$scope.map = {wh : {'FacilityReportID': $scope.frid}};
-		fdDetailsType.get($scope.frid).get().then(function (data) {
+		fdDetailsType.getByFdrID($scope.frid).get().then(function (data) {
 			$scope.details = data;
+			$scope.fid = data.facilityId;
+			$scope.year = data.reportingYear;
         });
 		fdAuthorityType.get($scope.frid).get().then(function(data) {
 			 $scope.authority = data;
 		});
+	};
+	$scope.updateByFdidAndyear = function(){
+		$scope.map = {wh : {'FacilityID': $scope.fid, 'ReportingYear': $scope.year}};
+		fdDetailsType.getByFdIDAndYear($scope.fid,$scope.year).then(function (details) {
+			$scope.details = details[0];
+			$scope.frid = details[0].facilityReportID;
+			fdAuthorityType.get(details[0].facilityReportID).get().then(function(authority) {
+				 $scope.authority = authority;
+			});
+        });
+	};
 
+	//Requesting values
+	if ($scope.frid !== undefined && $scope.frid != null && $scope.frid != ''){
+		$scope.updateByFdrid();
 	}
-	
-	
-	$scope.$watch('details', function() {
-		if($scope.details !== undefined && $scope.details.countryCode !== undefined){
-			if($scope.country === undefined){
-				lovCountryType.get($scope.details.countryCode).get().then(function (data) {
-					$scope.country = data;
-					//console.log('details.country: ' + JSON.stringify($scope.details.country));
-				});
-			}
-			if($scope.nuts === undefined){
-				if ($scope.details.nutsregionSourceCode != undefined && $scope.details.nutsregionSourceCode != '' ){
-					var nuts = {}
-					nutsRegionType.get($scope.details.nutsregionSourceCode).get().then(function (data) {
-						nuts.nutsregionSourceCode = data.code;
-						nuts.nutsregionSourceName = data.name;
-						
-						if ($scope.details.nutsregionLevel2Code != undefined && $scope.details.nutsregionLevel2Code != '' ){
-							nutsRegionType.get($scope.details.nutsregionLevel2Code).get().then(function (data) {
-								nuts.nutsregionLevel2Code = data.code;
-								nuts.nutsregionLevel2Name = data.name;
-								$scope.nuts = nuts;
-							});
-						}
-						else{
-							$scope.nuts = nuts;
-						}
+	else if ($scope.fid != undefined && $scope.year != undefined && 
+			 $scope.fid != null && $scope.year != null &&
+			 $scope.fid != '' && $scope.year != ''){
+		$scope.updateByFdidAndyear();
+	}
 
-					//console.log('details.country: ' + JSON.stringify($scope.details.country));
-					});
-				}
-				else if ($scope.details.nutsregionLevel2Code != undefined && $scope.details.nutsregionLevel2Code != '' ){
-					nutsRegionType.get($scope.details.nutsregionLevel2Code).get().then(function (data) {
-						$scope.nuts = {};
-						$scope.nuts.nutsregionLevel2Code = data.code;
-						$scope.nuts.nutsregionLevel2Name = data.name;
-					});
-				}
-			}
-			if($scope.river === undefined){
-				if ($scope.details.riverBasinDistrictCode != undefined && $scope.details.riverBasinDistrictCode != '' ){
-					var river = {}
-					fdRiverBasinType.get($scope.details.riverBasinDistrictCode).get().then(function (data) {
-						river.riverBasinDistrictCode = data.code;
-						river.riverBasinDistrictName = data.name;
-						
-						if ($scope.details.riverBasinDistrictSourceCode != undefined && $scope.details.riverBasinDistrictSourceCode != '' ){
-							fdRiverBasinType.get($scope.details.riverBasinDistrictSourceCode).get().then(function (data) {
-								river.riverBasinDistrictSourceCode = data.code;
-								river.riverBasinDistrictSourceNAme = data.name;
-								$scope.river = river;
-							});
-						}
-						else{
-							$scope.river = river;
-						}
-
-					//console.log('details.country: ' + JSON.stringify($scope.details.country));
-					});
-				}
-				else if ($scope.details.riverBasinDistrictSourceCode != undefined && $scope.details.riverBasinDistrictSourceCode != '' ){
-					fdRiverBasinType.get($scope.details.riverBasinDistrictSourceCode).get().then(function (data) {
-						$scope.river = {};
-						$scope.river.riverBasinDistrictSourceCode = data.code;
-						$scope.river.riverBasinDistrictSourceName = data.name;
-					});
-				}
-			}
-			if($scope.nace === undefined){
-		        var naceCode = $scope.details.nacesubActivityCode != ''? $scope.details.nacesubActivityCode  : $scope.details.naceactivityCode;
-				console.log('nacecode: ' + naceCode);
-				fdNaceActivityType.get(naceCode).get().then(function(data) {
-					 $scope.nace = data;
-				});
-				console.log('nace: ' + JSON.stringify($scope.nace));
-				/*.then(function (data) {
-					$scope.nace = data;
-					console.log('nace: ' + JSON.stringify($scope.nace));
-				});*/
-			}
-
-			if($scope.unit === undefined){
-				fdUnitType.get($scope.details.productionVolumeUnitCode).get().then(function(data) {
-					 $scope.unit = data;
-				});
-			}
-
-			if($scope.confidential === undefined && $scope.details.confidentialIndicator){
-				lovConfidentialType.get($scope.details.confidentialIndicatorCode).get().then(function(data) {
-					 $scope.confidential = data;
-				});
-			}
-			
+ 	$scope.$watchCollection('[tr_c,tr_f, details]', function(value) {
+ 		if ($scope.tr_c !== undefined && $scope.tr_f !== undefined && $scope.details !== undefined){
 			$scope.headitms = [
 	                  			{'order':0,	'clss':'fdTitles',
-	                  				'title':'Facility',
+	                  				'title':$scope.tr_f.FacilityName,
 	                  				'val': $scope.details.facilityName
 	                  			},
 	                  			{'order':1, 'clss':'fdTitles',
-	                  				'title':'Address',
+	                  				'title': $scope.tr_f.Address,
 	                  				'val': $scope.details.address + " ," +  $scope.details.postalCode + " ," +  $scope.details.city
 	                  			},
-/*	                  			{'order':2,'clss':'fdTitles',
-	                  				'title':'Country',
-	                  				'val': $scope.country.countryName
-	                  			},*/
+	/*	                  			{'order':2,'clss':'fdTitles',
+		                  				'title':'Country',
+		                  				'val': $scope.country.countryName
+		                  			},*/
 	                  			{'order':3,'clss':'fdTitles',
-	                  				'title':'Year',
+	                  				'title':$scope.tr_c.Year,
 	                  				'val': $scope.details.reportingYear +  " (published: " + $filter('date')($scope.details.published, "dd MMM yyyy") + ")"
 	                  			},
 	                  			{'order':4,'clss':'fdTitles',
-	                  				'title':'Regulation',
+	                  				'title':$scope.tr_c.Regulation,
 	                  				'val': $scope.details.reportingYear < 2007 ? "EPER Regulation" : "E-PRTR Regulation"
 	                  			}];
 			
 			
 			
 			$scope.infoitms.push({'order':1, 'clss':'fdSubTitles', 	
-				'title':'Parent Company Name', 
+				'title':$scope.tr_f.ParentCompanyName, 
 				'val': $scope.details.confidentialIndicator ? 'CONFIDENTIAL' : $scope.details.parentCompanyName
 			});
-
+	
 			var crd = $scope.details.coordinates.replace('POINT','').replace('(','').replace(')','').trim().split(' ');
 			$scope.infoitms.push({'order':2, 'clss':'fdSubTitles', 	
-				'title':'Coordinates (Lon;Lat)', 'val': "("+crd[0]+degrees+", "+crd[1]+degrees+")"});
-
+				'title':$scope.tr_f.Coords, 'val': "("+crd[0]+degrees+", "+crd[1]+degrees+")"});
+	
 			//No. of IPPC installations is voluntary. Only add if reported.
-	        if ($scope.details.totalIPPCInstallationQuantity != '' && $scope.details.totalIPPCInstallationQuantity !== undefined)
+	        if ($scope.details.totalIPPCInstallationQuantity != '' && $scope.details.totalIPPCInstallationQuantity != null)
 	        {
 				$scope.infoitms.push({'order':9, 'clss':'fdSubTitles', 	
-					'title':'IPPC Installations', 'val': $filter('number')($scope.details.totalIPPCInstallationQuantity)});
+					'title':$scope.tr_f.IPPC, 'val': $filter('number')($scope.details.totalIPPCInstallationQuantity)});
 	        }
-
+	
 	        //No. of emplyees is voluntary. Only add if reported.
-	        if ($scope.details.totalEmployeeQuantity != '' && $scope.details.totalEmployeeQuantity !== undefined)
+	        if ($scope.details.totalEmployeeQuantity != '' && $scope.details.totalEmployeeQuantity != null)
 	        {
 				$scope.infoitms.push({'order':10, 'clss':'fdSubTitles', 	
-					'title':'TotalEmployeeQuantity', 'val': $filter('number')($scope.details.totalEmployeeQuantity)});
+					'title':$scope.tr_f.Employ, 'val': $filter('number')($scope.details.totalEmployeeQuantity)});
 	        }
-
+	
 	        //Operating hours is voluntary. Only add if reported.
-	        if ($scope.details.operatingHours != '' && $scope.details.operatingHours !== undefined)
+	        if ($scope.details.operatingHours != '' && $scope.details.operatingHours != null)
 	        {
 				$scope.infoitms.push({'order':11, 'clss':'fdSubTitles', 	
-					'title':'Operating hours', 'val': $scope.details.operatingHours});
+					'title':$scope.tr_f.OperationHours, 'val': $scope.details.operatingHours});
 	        }
-
+	
 	        //Website is voluntary. Only add if reported.
-	        if ($scope.details.websiteCommunication != '' && $scope.details.websiteCommunication !== undefined)
+	        if ($scope.details.websiteCommunication != '' && $scope.details.websiteCommunication != null)
 	        {
 				$scope.infoitms.push({'order':12, 'clss':'fdSubTitles', 	
-					'title':'Website', 'val': $scope.details.websiteCommunication});
+					'title':$scope.tr_f.WebSite, 'val': $scope.details.websiteCommunication});
 	        }
-
-	        if ($scope.details.nationalID != '' && $scope.details.nationalID !== undefined)
+	
+	        if ($scope.details.nationalID != '' && $scope.details.nationalID != null)
 	        {
 				$scope.infoitms.push({'order':14, 'clss':'fdSubTitles', 	
-					'title':'National ID', 'val': $scope.details.nationalID + ' (in '+ $scope.details.reportingYear +')'});
+					'title':$scope.tr_f.NationalID, 'val': $scope.details.nationalID + ' (in '+ $scope.details.reportingYear +')'});
 	        }
-
-		}
+ 		}
     });
 
-	$scope.$watch('country', function(value) {
-		if($scope.details !== undefined && $scope.details.countryCode !== undefined ){
-			if($scope.country !== undefined){
-//				console.log('details.country: ' + JSON.stringify($scope.details.country));
-				//Build headitems list
-				$scope.headitms.push({'order':2,'clss':'fdTitles',
-		                  				'title':'Country',
-		                  				'val': $scope.country.countryName
-		                  			});
-			}
+ 	$scope.$watchCollection('[tr_c, tr_lco, details]', function(value) {
+		if($scope.details !== undefined && $scope.tr_c !== undefined 
+				&& $scope.details.countryCode !== undefined && $scope.tr_lco !== undefined){
+			$scope.headitms.push({'order':2,'clss':'fdTitles',
+	                  				'title':$scope.tr_c.Country,
+	                  				'val': $scope.tr_lco[$scope.details.countryCode]
+	                  			});
 		}
 	});
 	
-	$scope.$watch('nuts', function(value) {
-		if($scope.details !== undefined){
-			if($scope.nuts !== undefined){
-				//NUTS Region$scope.nuts.nutsregionLevel2Name
-				if($scope.nuts.nutsregionSourceCode != undefined){
-					if ($scope.nuts.nutsregionSourceCode != $scope.nuts.nutsregionLevel2Code){
-						$scope.infoitms.push({'order':3, 'clss':'fdSubTitles', 	
-							'title':'NUTS Region (Map)', 'val': $scope.nuts.nutsregionLevel2Name});
-						$scope.infoitms.push({'order':4, 'clss':'fdSubTitles', 	
-							'title':'NUTS Region (Reported)', 'val': $scope.nuts.nutsregionSourceName});
-						
-					}
-					else {
-						$scope.infoitms.push({'order':3, 'clss':'fdSubTitles', 	
-							'title':'NUTS', 'val': $scope.nuts.nutsregionLevel2Name});
-					}
-					
+ 	$scope.$watchCollection('[tr_f, tr_lnr, details]', function(value) {
+		if($scope.details !== undefined && $scope.tr_f !== undefined && $scope.tr_lnr !== undefined ){
+			//NUTS Region$scope.nuts.nutsregionLevel2Name
+			if ($scope.details.nutsregionSourceCode != undefined && $scope.details.nutsregionSourceCode != '' ){
+				if ($scope.details.nutsregionSourceCode != $scope.details.nutsregionLevel2Code){
+					$scope.infoitms.push({'order':3, 'clss':'fdSubTitles', 	
+						'title':$scope.tr_f.NUTSMap, 'val': $scope.tr_lnr[$scope.details.nutsregionLevel2Code]});
+					$scope.infoitms.push({'order':4, 'clss':'fdSubTitles', 	
+						'title':$scope.tr_f.NUTSReported, 'val': $scope.tr_lnr[$scope.details.nutsregionSourceCode]});
 				}
 				else {
-					if($scope.nuts.nutsregionLevel2Code != '')
 					$scope.infoitms.push({'order':3, 'clss':'fdSubTitles', 	
-						'title':'NUTS', 'val': $scope.nuts.nutsregionLevel2Name});
+						'title':$scope.tr_f.NUTS, 'val': $scope.tr_lnr[$scope.details.nutsregionLevel2Code]});
 				}
+			}
+			else {
+				if($scope.details.nutsregionLevel2Code != '')
+				$scope.infoitms.push({'order':3, 'clss':'fdSubTitles', 	
+					'title':$scope.tr_f.NUTS, 'val':  $scope.tr_lnr[$scope.details.nutsregionLevel2Code]});
 			}
 		}
 	});
 
-	$scope.$watch('river', function(value) {
-		if($scope.details !== undefined && $scope.details.riverBasinDistrictCode !== undefined ){
-			if($scope.river !== undefined){
-		        //Add both reported and geo-coded value - if they differ.
-		        if ($scope.river.riverBasinDistrictSourceCode != $scope.river.riverBasinDistrictCode)
+ 	$scope.$watchCollection('[tr_f, tr_lrbd, details]', function(value) {
+		if($scope.details !== undefined && $scope.tr_f !== undefined 
+				&& $scope.details.riverBasinDistrictCode !== undefined && $scope.tr_lrbd !== undefined){
+	        //Add both reported and geo-coded value - if they differ.
+
+			if($scope.details.riverBasinDistrictSourceCode != 'UNKNOWN' 
+				&& $scope.details.riverBasinDistrictSourceCode != null 
+				&& $scope.details.riverBasinDistrictSourceCode != ''){
+			
+		        if ($scope.details.riverBasinDistrictSourceCode != $scope.details.riverBasinDistrictCode
+		        		&& $scope.details.riverBasinDistrictCode != 'UNKNOWN' 
+	        		&& $scope.details.riverBasinDistrictCode != null 
+	        		&& $scope.details.riverBasinDistrictCode != '' )
 		        {
 					$scope.infoitms.push({'order':5, 'clss':'fdSubTitles', 	
-						'title':'River Basin District (Map)', 'val': $scope.river.riverBasinDistrictName});
+						'title':$scope.tr_f.RBDMap, 'val': $scope.tr_lrbd[$scope.details.riverBasinDistrictCode]});
 					$scope.infoitms.push({'order':6, 'clss':'fdSubTitles', 	
-						'title':'River Basin District (Reported)', 'val': $scope.river.riverBasinDistrictSourceName});
+						'title':$scope.tr_f.RBDReported, 'val': $scope.tr_lrbd[$scope.details.riverBasinDistrictSourceCode]});
 		        }
 		        else
 		        {
 					$scope.infoitms.push({'order':5, 'clss':'fdSubTitles', 	
-						'title':'River Basin District', 'val': $scope.river.riverBasinDistrictName});
+						'title':$scope.tr_f.RBD, 'val': $scope.tr_lrbd[$scope.details.riverBasinDistrictSourceCode]});
 		        }
 			}
-		}
-	});
-
-	$scope.$watch('nace', function(value) {
-		if($scope.details !== undefined && $scope.details.naceactivityCode !== undefined ){
-
-			if($scope.nace !== undefined){
-		        //NACE code reported on sub-activity level, except for EPER where some is reported on Activity level
-		        //var naceCode = $scope.nace.nacesubActivityCode ? $scope.nace.NACESubActivityCode != '' : $scope.nace.NACEActivityCode;
-				$scope.infoitms.push({'order':7, 'clss':'fdSubTitles', 	
-					'title':'Main activity (NACE)', 'val': $scope.nace.name});
-			}
-		}
-	});
-	
-	$scope.$watch('unit', function(value) {
-		if($scope.details !== undefined){
-			if($scope.unit !== undefined){
-		        //Production volume is voluntary. Only add if reported.
-		        if ($scope.details.productionVolumeQuantity != '' && $scope.details.productionVolumeQuantity !== undefined)
-		        {
-					$scope.infoitms.push({'order':8, 'clss':'fdSubTitles', 	
-						'title':'Production volume', 
-						'val': $scope.details.productionVolumeProductName + ' ' + 
-						$filter('number')($scope.details.productionVolumeQuantity) 
-						+ ' ' + $scope.unit.name});
-						//TODO LOVResources.UnitName(fac.ProductionVolumeUnitCode))));
-		        }
-			}
-		}
-	});
-	
-			
-	$scope.$watch('confidential', function(value) {
-		if($scope.details !== undefined && $scope.details.confidentialIndicator){
-	        if ($scope.confidential !== undefined)
+	        else
 	        {
-				$scope.infoitms.push({'order':13, 'clss':'fdSubTitles', 	
-					'title':'Confidentiality Reason', 'val': $scope.confidential.name});
+				$scope.infoitms.push({'order':5, 'clss':'fdSubTitles', 	
+					'title':$scope.tr_f.RBD, 'val': $scope.tr_lrbd[$scope.details.riverBasinDistrictCode]});
 	        }
 		}
+	
+	});
+
+ 	$scope.$watchCollection('[tr_f, tr_lna, details]', function(value) {
+		if($scope.details !== undefined && $scope.tr_f !== undefined  && $scope.tr_lna !== undefined  
+				&& $scope.details.naceactivityCode !== undefined){
+	        //NACE code reported on sub-activity level, except for EPER where some is reported on Activity level
+	        //var naceCode = $scope.nace.nacesubActivityCode ? $scope.nace.NACESubActivityCode != '' : $scope.nace.NACEActivityCode;
+			var na_val = $scope.tr_lna[$scope.details.naceactivityCode];
+			if ($scope.details.naceactivityCode.indexOf("NACE_1.1") > -1)
+            {
+				na_val += " (rev. 1.1.)";
+            }
+			$scope.infoitms.push({'order':7, 'clss':'fdSubTitles', 	
+				'title':$scope.tr_f.NACE, 'val': na_val});
+		}
+	});
+	
+ 	$scope.$watchCollection('[tr_f, tr_lu, details]', function(value) {
+		if($scope.details !== undefined && $scope.tr_f !== undefined 
+				&& $scope.tr_lu !== undefined){
+			if($scope.details.productionVolumeQuantity != '' 
+				&& $scope.details.productionVolumeQuantity != null){
+				var pv_val = $scope.details.productionVolumeProductName + ' ' + 
+				$filter('number')($scope.details.productionVolumeQuantity);
+				if ($scope.details.productionVolumeUnitCode != undefined &&
+						$scope.details.productionVolumeUnitCode != '' ){
+					pv_val += ' ' + $scope.tr_lu[$scope.details.productionVolumeUnitCode];
+				}
+				$scope.infoitms.push({'order':8, 'clss':'fdSubTitles', 	
+					'title':$scope.tr_f.ProductionV, 
+					'val': pv_val });
+					//TODO LOVResources.UnitName(fac.ProductionVolumeUnitCode))));
+	        }
+		}
+	});
+	
+ 	$scope.$watchCollection('[tr_p, tr_lcf, details]', function(value) {
+		if($scope.details !== undefined && $scope.tr_f !== undefined 
+				&& $scope.details.confidentialIndicator 
+				&& $scope.tr_lcf !== undefined){
+			$scope.infoitms.push({'order':13, 'clss':'fdSubTitles', 	
+				'title':$scope.tr_p.ConfidentialityReason, 'val': $scope.tr_lcf[$scope.details.confidentialIndicatorCode]});
+        }
 	});
 
 		        
     /*
      * Part 2 of InfoItems
      * */
-	$scope.$watch('authority', function(value) {
-        if ($scope.authority !== undefined){
-        	var upddate = $scope.authority.calastUpdate !== undefined ? $filter('date')($scope.authority.calastUpdate, "dd MMM yyyy") : 'Unknown';
-			$scope.infoitms2 = [{'order':0,	'clss':'fdTitles', 	'title':'Competent Authority',	'val': '(Last updated: '+ upddate +')'}];
+ 	$scope.$watchCollection('[tr_f, authority]', function(value) {
+		if($scope.authority !== undefined && $scope.tr_f !== undefined){
+        	var upddate = ($scope.authority.calastUpdate != undefined 
+            		&& $scope.authority.calastUpdate != null 
+            		&& $scope.authority.calastUpdate != '') ? $filter('date')($scope.authority.calastUpdate, "dd MMM yyyy") : 'Unknown';
+			$scope.infoitms2 = [{'order':0,	'clss':'fdTitles', 	'title':$scope.tr_f.CompetentA,	'val': '(Last updated: '+ upddate +')'}];
 				
 
 	        if ($scope.authority.caname != '' && $scope.authority.caname !== undefined)
 	        {
 				$scope.infoitms2.push({'order':1, 'clss':'fdSubTitles', 	
-					'title':'Name', 'val': $scope.authority.caname});
+					'title':$scope.tr_f.Name, 'val': $scope.authority.caname});
 	        }
 
 	        if ($scope.authority.caaddress != '' && $scope.authority.caaddress !== undefined)
 	        {
 				$scope.infoitms2.push({'order':2, 'clss':'fdSubTitles', 	
-					'title':'Address', 'val': $scope.authority.caaddress  + ", " +  $scope.authority.capostalCode + ", " +  $scope.authority.cacity});
+					'title':$scope.tr_f.Address, 'val': $scope.authority.caaddress  + ", " +  $scope.authority.capostalCode + ", " +  $scope.authority.cacity});
 	        }
 
 	        if ($scope.authority.catelephoneCommunication != '' && $scope.authority.catelephoneCommunication !== undefined)
 	        {
 				$scope.infoitms2.push({'order':3, 'clss':'fdSubTitles', 	
-					'title':'Phone', 'val': $scope.authority.catelephoneCommunication});
+					'title':$scope.tr_f.Phone, 'val': $scope.authority.catelephoneCommunication});
 	        }
 
 	        if ($scope.authority.cafaxCommunication != '' && $scope.authority.cafaxCommunication !== undefined)
 	        {
 				$scope.infoitms2.push({'order':4, 'clss':'fdSubTitles', 	
-					'title':'Fax', 'val': $scope.authority.cafaxCommunication});
+					'title':$scope.tr_f.Fax, 'val': $scope.authority.cafaxCommunication});
 	        }
 
 	        if ($scope.authority.caemailCommunication != '' && $scope.authority.caemailCommunication !== undefined)
 	        {
 				$scope.infoitms2.push({'order':5, 'clss':'fdSubTitles', 	
-					'title':'E-mail', 'val': $scope.authority.caemailCommunication});
+					'title':$scope.tr_f.Email, 'val': $scope.authority.caemailCommunication});
 	        }
 
 	        if ($scope.authority.cacontactPersonName != '' && $scope.authority.cacontactPersonName !== undefined)
 	        {
 				$scope.infoitms2.push({'order':6, 'clss':'fdSubTitles', 	
-					'title':'Contact Person', 'val': $scope.authority.cacontactPersonName});
+					'title':$scope.tr_f.CPerson, 'val': $scope.authority.cacontactPersonName});
 	        }
 
 		}
     });
 
-//      console.log('Res: ' + JSON.stringify( data));
-
-    	 
-	 
-
 }])
 
+/*
+ * Factories
+ * */
 .factory('fdDetailsType', ['fdDetailsService', function(fdDetailsService) {
         return {
-            get : function(fdrid) {
-                /*var params = {};
-                if (fdrid !== undefined) {
-                    params = {FacilityReportID: fdrid};
-                }*/
+            getByFdrID : function(fdrid) {
                 return fdDetailsService.one(fdrid);
-            }
-        };
-    }])
-
-.factory('lovCountryType', ['lovCountryService', function(lovCountryService) {
-        return {
-            get : function(countryCode) {
-                return lovCountryService.one(countryCode);
-            }
-        };
-    }])
-
-.factory('fdNaceActivityType', ['naceActivityService', function(naceActivityService) {
-        return {
-            get : function(naceCode) {
-/*                var params = {};
-                if (naceCode !== undefined) {
-                    params = {naceCode: naceCode};
-                }*/
-
-                return naceActivityService.one(naceCode);
-            }
-        };
-    }])
-.factory('fdRiverBasinType', ['fdRiverBasinService', function(fdRiverBasinService) {
-    return {
-        get : function(riverBasinCode) {
-            return fdRiverBasinService.one(riverBasinCode);
-        }
-    };
-}])
-
-.factory('nutsRegionType', ['nutsRegionService', function(nutsRegionService) {
-        return {
-            get : function(nutsRegionCode) {
-                return nutsRegionService.one(nutsRegionCode);
-            }
-        };
-    }])
-
-.factory('fdUnitType', ['lovUnitService', function(lovUnitService) {
-        return {
-            get : function(unitCode) {
-                return lovUnitService.one(unitCode);
-            }
-        };
-    }])
-
-.factory('lovConfidentialType', ['lovConfidentialService', function(lovConfidentialService) {
-        return {
-            get : function(confidentialCode) {
-                return lovConfidentialService.one(confidentialCode);
-            }
+            },
+	        getByFdIDAndYear : function(fdid, year) {
+	        	var params = {};
+	        	params.FacilityID = fdid;
+	        	params.ReportingYear = year;
+	        	//return Restangular.all('facilitydetailDetails').get(params);
+	            return fdDetailsService.getList(params);
+	        }
         };
     }])
 
@@ -417,6 +346,9 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
     };
 }])
 
+/*
+ * Services
+ * */
 .service('fdAuthorityService', ['Restangular', function(Restangular){
     var fdAuthority = Restangular.service('facilitydetailAuthority');
 
@@ -443,71 +375,6 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
     return fdDetails;
 }])
 
-.service('lovCountryService', ['Restangular', function(Restangular){
-    var LovCountry = Restangular.service('lovCountry');
-
-    Restangular.extendModel('lovCountry', function(model) {
-        model.getDisplayText = function() {
-            return this.code + ' ' + this.name;
-        };
-        return model;
-    });
-
-    return LovCountry;
-}])
-
-.service('lovUnitService', ['Restangular', function(Restangular){
-    var LovUnit = Restangular.service('lovUnit');
-
-    Restangular.extendModel('lovUnit', function(model) {
-        model.getDisplayText = function() {
-            return this.code + ' ' + this.name;
-        };
-        return model;
-    });
-
-    return LovUnit;
-}])
-
-.service('nutsRegionService', ['Restangular', function(Restangular){
-    var nutsRegion = Restangular.service('nutsRegion');
-
-    Restangular.extendModel('nutsRegion', function(model) {
-        model.getDisplayText = function() {
-            return this.code + ' ' + this.name;
-        };
-        return model;
-    });
-
-    return nutsRegion;
-}])
-
-.service('lovConfidentialService', ['Restangular', function(Restangular){
-    var lovConfidential = Restangular.service('lovConfidential');
-
-    Restangular.extendModel('lovConfidential', function(model) {
-        model.getDisplayText = function() {
-            return this.code + ' ' + this.name;
-        };
-        return model;
-    });
-
-    return lovConfidential;
-}])
-
-.service('fdRiverBasinService', ['Restangular', function(Restangular){
-    var riverBasinDistricts = Restangular.service('riverBasinDistricts');
-
-    Restangular.extendModel('riverBasinDistricts', function(model) {
-        model.getDisplayText = function() {
-            return this.code + ' ' + this.name;
-        };
-        return model;
-    });
-
-    return riverBasinDistricts;
-}])
-
 /*
  * This directive enables us to define this module as a custom HTML element
  * <esri-leaf-map queryparams="" /> 
@@ -522,11 +389,13 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 		controller: 'FDMainController',
         transclude: true,
 		scope: {
-			frid: '@facilityReportId'
+			frid: '@facilityReportId',
+			fid: '@facilityId',
+			year: '@reportingYear'
 		},
 		templateUrl: 'components/facilitydetails/fd-main.html',
 		link: function(scope, element, attrs){
-			scope.$watch('frID', function() {
+			scope.$watchCollection('[frid, fid, year]', function() {
 				console.log('FacilityReportID changed:' + scope.frid);
 	        	//scope.setwhere(scope.buildWhere(scope.queryparams));
 		    },true);

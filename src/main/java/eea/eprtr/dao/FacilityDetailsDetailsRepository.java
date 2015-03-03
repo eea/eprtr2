@@ -14,7 +14,7 @@ public class FacilityDetailsDetailsRepository {
 	@PersistenceContext
     private EntityManager em;
 
-	public FacilitydetailDetail get(Integer facilityReportID) {
+	public FacilitydetailDetail getByFacilityReportID(Integer facilityReportID) {
 		
 		TypedQuery<FacilitydetailDetail> query = null;
 		query = em.createNamedQuery("FacilitydetailDetail.findByFacilityReportID", FacilitydetailDetail.class);
@@ -22,4 +22,15 @@ public class FacilityDetailsDetailsRepository {
 		FacilitydetailDetail results = query.getSingleResult();
 		return results;
 	}
+	
+	public FacilitydetailDetail getByFacilityIDAndYear(Integer facilityID, Integer reportingYear) {
+		
+		TypedQuery<FacilitydetailDetail> query = null;
+		query = em.createNamedQuery("FacilitydetailDetail.findByFacilityIDAndYear", FacilitydetailDetail.class);
+		query.setParameter("facilityID", facilityID);
+		query.setParameter("reportingYear", reportingYear);
+		FacilitydetailDetail results = query.getSingleResult();
+		return results;
+	}
+
 }
