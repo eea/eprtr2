@@ -10,5 +10,6 @@ angular.module('myApp.wastetransfers', ['ngRoute'])
     }])
 
     .controller('WasteTransfersCtrl', ['$scope', function($scope) {
+        $scope.wastePanel = true;
     }])
 ;

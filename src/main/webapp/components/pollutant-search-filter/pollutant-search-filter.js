@@ -6,20 +6,30 @@ angular.module('myApp.pollutantSearchFilter', ['restangular', 'myApp.search-filt
         $scope.pollutantSearchFilter = pollutantSearchFilter;
         searchFilter.pollutantSearchFilter = pollutantSearchFilter;
 
-        var allPollutantGroups = { name : 'All pollutant groups' };
-        $scope.pollutantSearchFilter.selectedPollutantGroup = allPollutantGroups;
-        $scope.pollutantGroups = [allPollutantGroups];
+        $scope.pollutantGroups = [];
+        delete ($scope.pollutantSearchFilter.selectedPollutantGroup);
+        if ($scope.usePollutantSelectorHeaders) {
+            var allPollutantGroups = {name: 'All pollutant groups'};
+            $scope.pollutantGroups = [allPollutantGroups];
+            $scope.pollutantSearchFilter.selectedPollutantGroup = allPollutantGroups;
+        }
         pollutantService.getList().then(function (data) {
             $scope.pollutantGroups = $scope.pollutantGroups.concat(data);
+            $scope.pollutantSearchFilter.selectedPollutantGroup = $scope.pollutantGroups[0];
         });
 
         $scope.$watch('pollutantSearchFilter.selectedPollutantGroup', function() {
-            var allPollutants = { name : 'All pollutants' };
-            $scope.pollutantSearchFilter.selectedPollutant = allPollutants;
-            $scope.pollutants = [allPollutants];
+            $scope.pollutants = [];
+            delete ($scope.pollutantSearchFilter.selectedPollutant);
+            if ($scope.usePollutantSelectorHeaders) {
+                var allPollutants = {name: 'All pollutants'};
+                $scope.pollutants = [allPollutants];
+                $scope.pollutantSearchFilter.selectedPollutant = allPollutants;
+            }
             if (pollutantSearchFilter.selectedPollutantGroup.lov_PollutantID) {
                 pollutantService.getList({ParentID: pollutantSearchFilter.selectedPollutantGroup.lov_PollutantID}).then(function (data) {
                     $scope.pollutants = $scope.pollutants.concat(data);
+                    $scope.pollutantSearchFilter.selectedPollutant = $scope.pollutants[0];
                 });
             }
         });

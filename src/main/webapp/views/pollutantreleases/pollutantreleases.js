@@ -10,5 +10,8 @@ angular.module('myApp.pollutantreleases', ['ngRoute'])
     }])
 
     .controller('PollutantReleasesCtrl', ['$scope', function($scope) {
+        $scope.pollutantPanel = true;
+        $scope.showReleasesToInputField = true;
+        $scope.pollutantPanelTitle = 'Pollutant releases';
     }])
 ;

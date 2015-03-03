@@ -10,5 +10,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute'])
     }])
 
     .controller('PollutantTransfersCtrl', ['$scope', function($scope) {
+        $scope.pollutantPanel = true;
+        $scope.pollutantPanelTitle = 'Pollutant transfers';
     }])
 ;
