@@ -3,18 +3,21 @@
 // Declare app level module which depends on views, and components
 
 var myApp = angular.module('myApp', [
-    'ui.bootstrap',
-    'ngRoute',
-    'leaflet-directive',
-    'myApp.home',
-    'myApp.about',
-    'myApp.facilitylevels',
-    'myApp.facilitydetails',
-    'myApp.areaoverview',
-    'myApp.search-placement',
-    'myApp.esrileafmap',
-    'myApp.fd-main',
-    'myApp.industrialactivity'
+        'ui.bootstrap',
+        'ngRoute',
+        'leaflet-directive',
+        'myApp.home',
+        'myApp.about',
+        'myApp.facilitylevels',
+        'myApp.facilitydetails',
+        'myApp.areaoverview',
+        'myApp.search-placement',
+        'myApp.esrileafmap',
+        'myApp.fd-main',
+        'myApp.industrialactivity',
+        'myApp.pollutantreleases',
+        'myApp.pollutanttransfers',
+        'myApp.wastetransfers'
     ])
 
     .config(['$routeProvider', function($routeProvider) {

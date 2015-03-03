@@ -1,0 +1,39 @@
+<div>
+
+    <div>
+        <p>This report will display the aggregated releases of a specific pollutant.</p>
+    </div>
+
+    <div class="row row-map">
+
+        <div class="search_form col-md-6">
+
+            <div class="panel panel-info">
+                <div class="panel-heading">Search</div>
+                <div class="panel-body">
+
+                    <div search-placement>
+                    </div>
+
+                    <accordion close-others="{{false}}">
+                        <div activity-search-filter-directive>
+                        </div>
+                    </accordion>
+
+                    <div>
+                        <input type="submit" value="Search" ng-click="search()" class="btn btn-default">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <esri-leaf-map queryparams="queryParams" height="400px" />
+        </div>
+
+    </div>
+
+</div>
