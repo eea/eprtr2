@@ -23,9 +23,9 @@ public class PollutantController {
     public List<LovPollutant> list(@RequestParam(value = "ParentID", required = false) Integer parentID) {
 		TypedQuery<LovPollutant> query = null;
 		if (parentID == null) {
-			query = em.createQuery("SELECT l FROM LovPollutant l where l.parentID is null", LovPollutant.class);		
+			query = em.createQuery("SELECT l FROM LovPollutant l where l.parentID is null order by l.code", LovPollutant.class);		
 		} else {
-			query = em.createQuery("SELECT l FROM LovPollutant l where l.parentID = :parentID", LovPollutant.class).setParameter("parentID", parentID);
+			query = em.createQuery("SELECT l FROM LovPollutant l where l.parentID = :parentID order by l.code", LovPollutant.class).setParameter("parentID", parentID);
 		}
 		return query.getResultList();
     }

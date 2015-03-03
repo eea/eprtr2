@@ -26,7 +26,7 @@
             <label><input type="checkbox" name="unspecifiedTreatmentCheck" id="unspecifiedTreatmentCheck_0" ng-model="wasteSearchFilter.unspecifiedTreatment"> Unspecified</label>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" ng-show="showReceivingCountryInputField">
         <label class="control-label" for="inputReceivingCountry">Receiving Country</label>
         <select class="form-control" ng-model="wasteSearchFilter.selectedReceivingCountry" ng-options="c.name for c in receivingCountries" id="inputReceivingCountry"></select>
     </div>

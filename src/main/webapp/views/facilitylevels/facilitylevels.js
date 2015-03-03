@@ -10,6 +10,15 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 }])
 
 .controller('FacilityLevelsCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular', function($scope, $filter, $http, searchFilter, Restangular) {
+
+        $scope.showReceivingCountryInputField = true;
+        $scope.showReleasesToInputField = true;
+        $scope.showTransfersToInputField = true;
+        $scope.showAccidentalOnlyInputField = true;
+        $scope.pollutantPanelTitle = 'Pollutant releases and transfers';
+        $scope.usePollutantSelectorHeaders = true;
+
+
 	$scope.searchFilter = searchFilter;
 	$scope.queryParams = {};
 	$scope.queryParams.ReportingYear = -1;
