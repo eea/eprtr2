@@ -24,12 +24,15 @@
       </div>
    </div>
    <div class="row" >
+          <tabset>
+            <tab heading="Details" active="fdDetailsTabActive">
+   <div class="row" >
         <div class="col-md-4" >
 	        <esri-leaf-map queryparams="map.wh" height="400px" />
 		</div>
 
 		<div class="col-md-4" >
-			 <table>
+			 <table >
 			  <tr ng-repeat="i1 in infoitms | orderBy : 'order'" >
 			    <td class="{{i1.clss}}">{{ i1.title }}:</td>
 			    <td>{{ i1.val }}</td>
@@ -47,6 +50,32 @@
 			</table>
 			 </br>
 		</div>
+	</div>
+		<!-- activities -->
+    
+    <div class="row" >
+		<div class="col-md-12" >
+		</br>
+	           <table >
+                    <thead>
+                        <tr>
+                            <th class="col-sm-10 generalListStyle_headerRow" ><img ng-src="images/info.png" ng-click="alert('WindowOpen');"> {{tr_f.IndustrialActivities}}</th>
+                            <th class="col-sm-2 generalListStyle_headerRow">{{tr_f.IPPCcode}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in activities">
+							<td class="{{item.IsSubHeaderRow ? 'indentLevel0' : 'indentLevel1'}} facilityActivity">{{item.content}}</td>
+                            <td class="facilityIPPC">{{item.ippcCode}}</td>
+                        </tr>
+                    </tbody>
+                </table>
 		
+		</div>
+	</div>
+		</tab>
+		<tab heading="Confidentiality" active="confidentialityTabActive">
+		</tab>
+		</tabset>
     </div>
  </div>

@@ -3,8 +3,8 @@
 angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 
 .controller('FDMainController', 
-		['$scope', '$http', '$filter', 'translationService','fdDetailsType', 'fdAuthorityType', 
-          function($scope, $http, $filter, translationService, fdDetailsType, fdAuthorityType) {
+		['$scope', '$http', '$filter', 'translationService','fdDetailsType', 'fdAuthorityType', 'fdActivityType', 
+          function($scope, $http, $filter, translationService, fdDetailsType, fdAuthorityType, fdActivityType) {
 	$scope.fdtitle = 'Facility Level';
 	$scope.headitms = [];
 	$scope.infoitms = [{'order':0,	'clss':'fdTitles', 	'title':'Facility Details',	'val': ' '}];
@@ -27,32 +27,34 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
     });
 /*	translationService.get('Facility').then(function (data) {
 		$scope.tr_f = data;
-    });
-	translationService.get('Common').then(function (data) {
-		$scope.tr_c = data;
-    });
-	translationService.get('Pollutant').then(function (data) {
-		$scope.tr_p = data;
-    });
-	translationService.get('LOV_NACEACTIVITY').then(function (data) {
-		$scope.tr_lna = data;
-    });
-	translationService.get('LOV_NUTSREGION').then(function (data) {
-		$scope.tr_lnr = data;
-    });
-	translationService.get('LOV_RIVERBASINDISTRICT').then(function (data) {
-		$scope.tr_lrbd = data;
-    });
-	translationService.get('LOV_UNIT').then(function (data) {
-		$scope.tr_lu = data;
-    });
-	translationService.get('LOV_CONFIDENTIALITY').then(function (data) {
-		$scope.tr_lcf = data;
-    });
-	translationService.get('LOV_COUNTRY').then(function (data) {
-		$scope.tr_lco = data;
     });*/
 	
+	$scope.orderActivities = function(data){
+		var a_list = [];
+		var countAdditional = 0;
+		for (var i=0; i<data.length; i++) {
+			var a_itm = {};
+			if(data[i].mainActivityIndicator){
+				a_itm.content = $scope.tr_f.MainActivity;
+				a_itm.ippcCode = '';
+				a_itm.isSubHeaderRow = false;
+				a_list.push(a_itm)
+			}
+			else if(countAdditional == 0){
+				a_itm.content = $scope.tr_f.AdditionalActivities;
+				a_itm.ippcCode = '';
+				a_itm.isSubHeaderRow = false;
+				countAdditional += 1;
+				a_list.push(a_itm)
+			}
+			var a_itm = {};
+			a_itm.content = data[i].iareportedActivityCode;
+			a_itm.ippcCode = data[i].ippcreportedActivityCode;
+			a_itm.isSubHeaderRow = true;
+			a_list.push(a_itm)
+		}
+		return a_list;
+	};
 
 	$scope.updateByFdrid = function(){
 		$scope.map = {wh : {'FacilityReportID': $scope.frid}};
@@ -64,6 +66,9 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 		fdAuthorityType.get($scope.frid).get().then(function(data) {
 			 $scope.authority = data;
 		});
+		fdActivityType.getList($scope.frid).then(function(data) {
+			 $scope.activities = $scope.orderActivities(data);
+		});
 	};
 	$scope.updateByFdidAndyear = function(){
 		$scope.map = {wh : {'FacilityID': $scope.fid, 'ReportingYear': $scope.year}};
@@ -72,6 +77,9 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 			$scope.frid = details[0].facilityReportID;
 			fdAuthorityType.get(details[0].facilityReportID).get().then(function(authority) {
 				 $scope.authority = authority;
+			});
+			fdActivityType.getList(details[0].facilityReportID).then(function(activit) {
+				 $scope.activities = $scope.orderActivities(activit);
 			});
         });
 	};
@@ -346,6 +354,14 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
     };
 }])
 
+.factory('fdActivityType', ['fdActivityService', function(fdActivityService) {
+    return {
+        getList : function(fdrid) {
+            return fdActivityService.getList({FacilityReportID:fdrid});
+        }
+    };
+}])
+
 /*
  * Services
  * */
@@ -373,6 +389,19 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
     });
 
     return fdDetails;
+}])
+
+.service('fdActivityService', ['Restangular', function(Restangular){
+    var fdActivity = Restangular.service('facilitydetailActivity');
+
+    Restangular.extendModel('facilitydetailActivity', function(model) {
+        model.getDisplayText = function() {
+            return this.code + ' ' + this.name;
+        };
+        return model;
+    });
+
+    return fdActivity;
 }])
 
 /*

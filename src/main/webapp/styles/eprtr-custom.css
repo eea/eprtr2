@@ -170,3 +170,31 @@ padding-left: 10px;
 padding-right: 10px;
 vertical-align: top;	
 } 
+
+generalListStyle_headerRow th {
+border-bottom: solid 1px black;
+border-right: Solid 0px Transparent;
+border-left: Solid 0px Transparent;
+border-top: solid 1px black;
+background-color: #EEEDE8;
+vertical-align: top;
+}
+
+.indentLevel0
+{
+	color:Black;
+}
+
+.indentLevel1
+{
+	left:15px;
+	position:relative;
+}
+
+.indentLevel2
+{
+	left:30px;
+	position:relative;
+}
+
+
