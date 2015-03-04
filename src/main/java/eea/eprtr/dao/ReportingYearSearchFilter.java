@@ -1,0 +1,31 @@
+package eea.eprtr.dao;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
+import eea.eprtr.model.FacilitySearchAll;
+import eea.eprtr.model.FacilitySearchAll_;
+import eea.eprtr.model.Pollutantrelease;
+import eea.eprtr.model.Pollutantrelease_;
+
+public class ReportingYearSearchFilter {
+	
+	private Integer reportingYear;
+
+	public ReportingYearSearchFilter(Integer reportingYear) {
+		this.reportingYear = reportingYear;
+	}
+
+	public Predicate buildWhereClause(CriteriaBuilder cb, Root<FacilitySearchAll> qr) {
+		Predicate whereClause = cb.conjunction();
+		whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.reportingYear), reportingYear));
+		return whereClause;
+	}
+	
+	public Predicate buildWhereClausePollutantrelease(CriteriaBuilder cb, Root<Pollutantrelease> qr) {
+		Predicate whereClause = cb.conjunction();
+		whereClause.getExpressions().add(cb.equal(qr.get(Pollutantrelease_.reportingYear), reportingYear));
+		return whereClause;
+	}
+}

@@ -1,7 +1,5 @@
 package eea.eprtr.dao;
 
-import java.util.List;
-
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -11,28 +9,20 @@ import eea.eprtr.model.FacilitySearchAll_;
 
 public class FacilitySearchFilter {
 
-	private CountryAreaGroupRepository repository;
-	private Integer reportingYear;
-	private Integer countryID;
-	private Integer areaGroupID;
-	private Integer regionID;
-	private Integer rbdID;
 	private String facilityName;
 	private String cityName;
+	private ReportingYearSearchFilter reportingYearFilter;
+	private LocationSearchFilter locationFilter;
 	private ActivitySearchFilter activityFilter;
 	private PollutantSearchFilter pollutantFilter;
 	private ConfidentialityFilter confidentialityFilter;
 	private WasteSearchFilter wasteFilter;
 
-	public FacilitySearchFilter(CountryAreaGroupRepository repository, Integer reportingYear, Integer countryID, Integer areaGroupID, Integer regionID, Integer rbdID, String facilityName, String cityName, ActivitySearchFilter activityFilter, PollutantSearchFilter pollutantFilter, WasteSearchFilter wasteFilter) {
-		this.repository = repository;
-		this.reportingYear = reportingYear;
-		this.countryID = countryID;
-		this.areaGroupID = areaGroupID;
-		this.regionID = regionID; 
-		this.rbdID = rbdID;
+	public FacilitySearchFilter(String facilityName, String cityName, ReportingYearSearchFilter reportingYearFilter, LocationSearchFilter locationFilter, ActivitySearchFilter activityFilter, PollutantSearchFilter pollutantFilter, WasteSearchFilter wasteFilter) {
 		this.facilityName = facilityName;
 		this.cityName = cityName;
+		this.reportingYearFilter = reportingYearFilter;
+		this.locationFilter = locationFilter;
 		this.activityFilter = activityFilter;
 		this.pollutantFilter = pollutantFilter;
 		this.wasteFilter = wasteFilter;
@@ -40,17 +30,13 @@ public class FacilitySearchFilter {
 
 	public Predicate buildWhereClause(CriteriaBuilder cb, Root<FacilitySearchAll> qr) {
 		Predicate whereClause = cb.conjunction();
-		whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.reportingYear), reportingYear));
-		if (areaGroupID != null) {
-			List<Integer> countryIDs = repository.getCountryIDs(areaGroupID);
-			whereClause.getExpressions().add(qr.get(FacilitySearchAll_.LOV_CountryID).in(countryIDs));
-		} else if (countryID != null) {
-			whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.LOV_CountryID), countryID));
-			if (regionID != null) {
-				whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.LOV_NUTSRLevel2ID), regionID));
-			} else if (rbdID != null) {
-				whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.LOV_RiverBasinDistrictID), rbdID));
-			}
+		Predicate reportingYearSearchWhereClause = reportingYearFilter.buildWhereClause(cb, qr);
+		if (reportingYearSearchWhereClause.getExpressions().size() > 0) {
+			whereClause.getExpressions().add(reportingYearSearchWhereClause);
+		}
+		Predicate locationSearchWhereClause = locationFilter.buildWhereClause(cb, qr);
+		if (locationSearchWhereClause.getExpressions().size() > 0) {
+			whereClause.getExpressions().add(locationSearchWhereClause);
 		}
 		if (facilityName != null) {
 			whereClause.getExpressions().add(
@@ -85,7 +71,7 @@ public class FacilitySearchFilter {
 	}
 
 	public FacilitySearchFilter createConfidentialityFilter() {
-		FacilitySearchFilter filter = new FacilitySearchFilter(repository, reportingYear, countryID, areaGroupID, regionID, rbdID, facilityName, cityName, activityFilter, pollutantFilter, wasteFilter);
+		FacilitySearchFilter filter = new FacilitySearchFilter(facilityName, cityName, reportingYearFilter, locationFilter, activityFilter, pollutantFilter, wasteFilter);
 		filter.setConfidentialityFilter(new ConfidentialityFilter());
 		return filter;
 	}

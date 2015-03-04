@@ -8,6 +8,8 @@ import javax.persistence.criteria.Root;
 
 import eea.eprtr.model.FacilitySearchAll;
 import eea.eprtr.model.FacilitySearchAll_;
+import eea.eprtr.model.Pollutantrelease;
+import eea.eprtr.model.Pollutantrelease_;
 
 public class PollutantSearchFilter {
 
@@ -38,6 +40,17 @@ public class PollutantSearchFilter {
 			whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.accidental), accidental));
 		} 
 		 
+		return whereClause;
+	}
+	
+	public Predicate buildWhereClausePollutantrelease(CriteriaBuilder cb, Root<Pollutantrelease> qr) {
+		Predicate whereClause = cb.conjunction();
+		if (pollutantID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(Pollutantrelease_.LOV_PollutantID), pollutantID));
+		}
+		if (pollutantGroupID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(Pollutantrelease_.LOV_PollutantGroupID), pollutantGroupID));
+		}
 		return whereClause;
 	}
 }
