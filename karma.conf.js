@@ -39,6 +39,7 @@ module.exports = function(config){
       'src/main/webapp/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js',
       'src/main/webapp/bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js',
       'src/main/webapp/bower_components/underscore/underscore.js',
+      'src/main/webapp/bower_components/angular-google-chart/ng-google-chart.js',
       // endbower
       'src/main/webapp/components/**/*.js',
       'src/main/webapp/view*/**/*.js'

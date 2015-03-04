@@ -22,7 +22,8 @@
     "esri-leaflet-clustered-feature-layer": "*",
     "angular-leaflet-directive": "0.7.8",
     "Leaflet.awesome-markers": "2.0.2",
-    "underscore": "*"
+    "underscore": "*",
+    "angular-google-chart": "*"
   },
   "appPath": "src/main/webapp"
 }
