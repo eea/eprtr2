@@ -36,14 +36,14 @@ public class Pollutantrelease implements Serializable {
 	private String countryCode;
 
 	@Column(name="FacilityID")
-	private int facilityID;
+	private Integer facilityID;
 
 	@Column(name="FacilityName")
 	private String facilityName;
 
 	@Id
 	@Column(name="FacilityReportID")
-	private int facilityReportID;
+	private Integer facilityReportID;
 
 	private String IAActivityCode;
 
@@ -57,37 +57,37 @@ public class Pollutantrelease implements Serializable {
 
 	private String IPPCSubActivityCode;
 
-	private int LOV_ConfidentialityIDAir;
+	private Integer LOV_ConfidentialityIDAir;
 
-	private int LOV_ConfidentialityIDSoil;
+	private Integer LOV_ConfidentialityIDSoil;
 
-	private int LOV_ConfidentialityIDWater;
+	private Integer LOV_ConfidentialityIDWater;
 
-	private int LOV_CountryID;
+	private Integer LOV_CountryID;
 
-	private int LOV_IAActivityID;
+	private Integer LOV_IAActivityID;
 
-	private int LOV_IASectorID;
+	private Integer LOV_IASectorID;
 
-	private int LOV_IASubActivityID;
+	private Integer LOV_IASubActivityID;
 
-	private int LOV_NACEActivityID;
+	private Integer LOV_NACEActivityID;
 
-	private int LOV_NACESectorID;
+	private Integer LOV_NACESectorID;
 
-	private int LOV_NACESubActivityID;
+	private Integer LOV_NACESubActivityID;
 
-	private int LOV_NUTSRLevel1ID;
+	private Integer LOV_NUTSRLevel1ID;
 
-	private int LOV_NUTSRLevel2ID;
+	private Integer LOV_NUTSRLevel2ID;
 
-	private int LOV_NUTSRLevel3ID;
+	private Integer LOV_NUTSRLevel3ID;
 
-	private int LOV_PollutantGroupID;
+	private Integer LOV_PollutantGroupID;
 
-	private int LOV_PollutantID;
+	private Integer LOV_PollutantID;
 
-	private int LOV_RiverBasinDistrictID;
+	private Integer LOV_RiverBasinDistrictID;
 
 	@Column(name="MethodCodeAir")
 	private String methodCodeAir;
@@ -125,13 +125,13 @@ public class Pollutantrelease implements Serializable {
 	private String NUTSLevel2RegionCode;
 
 	@Column(name="PercentAccidentalAir")
-	private double percentAccidentalAir;
+	private Double percentAccidentalAir;
 
 	@Column(name="PercentAccidentalSoil")
-	private double percentAccidentalSoil;
+	private Double percentAccidentalSoil;
 
 	@Column(name="PercentAccidentalWater")
-	private double percentAccidentalWater;
+	private Double percentAccidentalWater;
 
 	@Column(name="PollutantCode")
 	private String pollutantCode;
@@ -140,25 +140,25 @@ public class Pollutantrelease implements Serializable {
 	private String pollutantGroupCode;
 
 	@Column(name="QuantityAccidentalAir")
-	private double quantityAccidentalAir;
+	private Double quantityAccidentalAir;
 
 	@Column(name="QuantityAccidentalSoil")
-	private double quantityAccidentalSoil;
+	private Double quantityAccidentalSoil;
 
 	@Column(name="QuantityAccidentalWater")
-	private double quantityAccidentalWater;
+	private Double quantityAccidentalWater;
 
 	@Column(name="QuantityAir")
-	private double quantityAir;
+	private Double quantityAir;
 
 	@Column(name="QuantitySoil")
-	private double quantitySoil;
+	private Double quantitySoil;
 
 	@Column(name="QuantityWater")
-	private double quantityWater;
+	private Double quantityWater;
 
 	@Column(name="ReportingYear")
-	private int reportingYear;
+	private Integer reportingYear;
 
 	@Column(name="RiverBasinDistrictCode")
 	private String riverBasinDistrictCode;
@@ -240,11 +240,11 @@ public class Pollutantrelease implements Serializable {
 		this.countryCode = countryCode;
 	}
 
-	public int getFacilityID() {
+	public Integer getFacilityID() {
 		return this.facilityID;
 	}
 
-	public void setFacilityID(int facilityID) {
+	public void setFacilityID(Integer facilityID) {
 		this.facilityID = facilityID;
 	}
 
@@ -256,11 +256,11 @@ public class Pollutantrelease implements Serializable {
 		this.facilityName = facilityName;
 	}
 
-	public int getFacilityReportID() {
+	public Integer getFacilityReportID() {
 		return this.facilityReportID;
 	}
 
-	public void setFacilityReportID(int facilityReportID) {
+	public void setFacilityReportID(Integer facilityReportID) {
 		this.facilityReportID = facilityReportID;
 	}
 
@@ -312,131 +312,131 @@ public class Pollutantrelease implements Serializable {
 		this.IPPCSubActivityCode = IPPCSubActivityCode;
 	}
 
-	public int getLOV_ConfidentialityIDAir() {
+	public Integer getLOV_ConfidentialityIDAir() {
 		return this.LOV_ConfidentialityIDAir;
 	}
 
-	public void setLOV_ConfidentialityIDAir(int LOV_ConfidentialityIDAir) {
+	public void setLOV_ConfidentialityIDAir(Integer LOV_ConfidentialityIDAir) {
 		this.LOV_ConfidentialityIDAir = LOV_ConfidentialityIDAir;
 	}
 
-	public int getLOV_ConfidentialityIDSoil() {
+	public Integer getLOV_ConfidentialityIDSoil() {
 		return this.LOV_ConfidentialityIDSoil;
 	}
 
-	public void setLOV_ConfidentialityIDSoil(int LOV_ConfidentialityIDSoil) {
+	public void setLOV_ConfidentialityIDSoil(Integer LOV_ConfidentialityIDSoil) {
 		this.LOV_ConfidentialityIDSoil = LOV_ConfidentialityIDSoil;
 	}
 
-	public int getLOV_ConfidentialityIDWater() {
+	public Integer getLOV_ConfidentialityIDWater() {
 		return this.LOV_ConfidentialityIDWater;
 	}
 
-	public void setLOV_ConfidentialityIDWater(int LOV_ConfidentialityIDWater) {
+	public void setLOV_ConfidentialityIDWater(Integer LOV_ConfidentialityIDWater) {
 		this.LOV_ConfidentialityIDWater = LOV_ConfidentialityIDWater;
 	}
 
-	public int getLOV_CountryID() {
+	public Integer getLOV_CountryID() {
 		return this.LOV_CountryID;
 	}
 
-	public void setLOV_CountryID(int LOV_CountryID) {
+	public void setLOV_CountryID(Integer LOV_CountryID) {
 		this.LOV_CountryID = LOV_CountryID;
 	}
 
-	public int getLOV_IAActivityID() {
+	public Integer getLOV_IAActivityID() {
 		return this.LOV_IAActivityID;
 	}
 
-	public void setLOV_IAActivityID(int LOV_IAActivityID) {
+	public void setLOV_IAActivityID(Integer LOV_IAActivityID) {
 		this.LOV_IAActivityID = LOV_IAActivityID;
 	}
 
-	public int getLOV_IASectorID() {
+	public Integer getLOV_IASectorID() {
 		return this.LOV_IASectorID;
 	}
 
-	public void setLOV_IASectorID(int LOV_IASectorID) {
+	public void setLOV_IASectorID(Integer LOV_IASectorID) {
 		this.LOV_IASectorID = LOV_IASectorID;
 	}
 
-	public int getLOV_IASubActivityID() {
+	public Integer getLOV_IASubActivityID() {
 		return this.LOV_IASubActivityID;
 	}
 
-	public void setLOV_IASubActivityID(int LOV_IASubActivityID) {
+	public void setLOV_IASubActivityID(Integer LOV_IASubActivityID) {
 		this.LOV_IASubActivityID = LOV_IASubActivityID;
 	}
 
-	public int getLOV_NACEActivityID() {
+	public Integer getLOV_NACEActivityID() {
 		return this.LOV_NACEActivityID;
 	}
 
-	public void setLOV_NACEActivityID(int LOV_NACEActivityID) {
+	public void setLOV_NACEActivityID(Integer LOV_NACEActivityID) {
 		this.LOV_NACEActivityID = LOV_NACEActivityID;
 	}
 
-	public int getLOV_NACESectorID() {
+	public Integer getLOV_NACESectorID() {
 		return this.LOV_NACESectorID;
 	}
 
-	public void setLOV_NACESectorID(int LOV_NACESectorID) {
+	public void setLOV_NACESectorID(Integer LOV_NACESectorID) {
 		this.LOV_NACESectorID = LOV_NACESectorID;
 	}
 
-	public int getLOV_NACESubActivityID() {
+	public Integer getLOV_NACESubActivityID() {
 		return this.LOV_NACESubActivityID;
 	}
 
-	public void setLOV_NACESubActivityID(int LOV_NACESubActivityID) {
+	public void setLOV_NACESubActivityID(Integer LOV_NACESubActivityID) {
 		this.LOV_NACESubActivityID = LOV_NACESubActivityID;
 	}
 
-	public int getLOV_NUTSRLevel1ID() {
+	public Integer getLOV_NUTSRLevel1ID() {
 		return this.LOV_NUTSRLevel1ID;
 	}
 
-	public void setLOV_NUTSRLevel1ID(int LOV_NUTSRLevel1ID) {
+	public void setLOV_NUTSRLevel1ID(Integer LOV_NUTSRLevel1ID) {
 		this.LOV_NUTSRLevel1ID = LOV_NUTSRLevel1ID;
 	}
 
-	public int getLOV_NUTSRLevel2ID() {
+	public Integer getLOV_NUTSRLevel2ID() {
 		return this.LOV_NUTSRLevel2ID;
 	}
 
-	public void setLOV_NUTSRLevel2ID(int LOV_NUTSRLevel2ID) {
+	public void setLOV_NUTSRLevel2ID(Integer LOV_NUTSRLevel2ID) {
 		this.LOV_NUTSRLevel2ID = LOV_NUTSRLevel2ID;
 	}
 
-	public int getLOV_NUTSRLevel3ID() {
+	public Integer getLOV_NUTSRLevel3ID() {
 		return this.LOV_NUTSRLevel3ID;
 	}
 
-	public void setLOV_NUTSRLevel3ID(int LOV_NUTSRLevel3ID) {
+	public void setLOV_NUTSRLevel3ID(Integer LOV_NUTSRLevel3ID) {
 		this.LOV_NUTSRLevel3ID = LOV_NUTSRLevel3ID;
 	}
 
-	public int getLOV_PollutantGroupID() {
+	public Integer getLOV_PollutantGroupID() {
 		return this.LOV_PollutantGroupID;
 	}
 
-	public void setLOV_PollutantGroupID(int LOV_PollutantGroupID) {
+	public void setLOV_PollutantGroupID(Integer LOV_PollutantGroupID) {
 		this.LOV_PollutantGroupID = LOV_PollutantGroupID;
 	}
 
-	public int getLOV_PollutantID() {
+	public Integer getLOV_PollutantID() {
 		return this.LOV_PollutantID;
 	}
 
-	public void setLOV_PollutantID(int LOV_PollutantID) {
+	public void setLOV_PollutantID(Integer LOV_PollutantID) {
 		this.LOV_PollutantID = LOV_PollutantID;
 	}
 
-	public int getLOV_RiverBasinDistrictID() {
+	public Integer getLOV_RiverBasinDistrictID() {
 		return this.LOV_RiverBasinDistrictID;
 	}
 
-	public void setLOV_RiverBasinDistrictID(int LOV_RiverBasinDistrictID) {
+	public void setLOV_RiverBasinDistrictID(Integer LOV_RiverBasinDistrictID) {
 		this.LOV_RiverBasinDistrictID = LOV_RiverBasinDistrictID;
 	}
 
@@ -544,27 +544,27 @@ public class Pollutantrelease implements Serializable {
 		this.NUTSLevel2RegionCode = NUTSLevel2RegionCode;
 	}
 
-	public double getPercentAccidentalAir() {
+	public Double getPercentAccidentalAir() {
 		return this.percentAccidentalAir;
 	}
 
-	public void setPercentAccidentalAir(double percentAccidentalAir) {
+	public void setPercentAccidentalAir(Double percentAccidentalAir) {
 		this.percentAccidentalAir = percentAccidentalAir;
 	}
 
-	public double getPercentAccidentalSoil() {
+	public Double getPercentAccidentalSoil() {
 		return this.percentAccidentalSoil;
 	}
 
-	public void setPercentAccidentalSoil(double percentAccidentalSoil) {
+	public void setPercentAccidentalSoil(Double percentAccidentalSoil) {
 		this.percentAccidentalSoil = percentAccidentalSoil;
 	}
 
-	public double getPercentAccidentalWater() {
+	public Double getPercentAccidentalWater() {
 		return this.percentAccidentalWater;
 	}
 
-	public void setPercentAccidentalWater(double percentAccidentalWater) {
+	public void setPercentAccidentalWater(Double percentAccidentalWater) {
 		this.percentAccidentalWater = percentAccidentalWater;
 	}
 
@@ -584,59 +584,59 @@ public class Pollutantrelease implements Serializable {
 		this.pollutantGroupCode = pollutantGroupCode;
 	}
 
-	public double getQuantityAccidentalAir() {
+	public Double getQuantityAccidentalAir() {
 		return this.quantityAccidentalAir;
 	}
 
-	public void setQuantityAccidentalAir(double quantityAccidentalAir) {
+	public void setQuantityAccidentalAir(Double quantityAccidentalAir) {
 		this.quantityAccidentalAir = quantityAccidentalAir;
 	}
 
-	public double getQuantityAccidentalSoil() {
+	public Double getQuantityAccidentalSoil() {
 		return this.quantityAccidentalSoil;
 	}
 
-	public void setQuantityAccidentalSoil(double quantityAccidentalSoil) {
+	public void setQuantityAccidentalSoil(Double quantityAccidentalSoil) {
 		this.quantityAccidentalSoil = quantityAccidentalSoil;
 	}
 
-	public double getQuantityAccidentalWater() {
+	public Double getQuantityAccidentalWater() {
 		return this.quantityAccidentalWater;
 	}
 
-	public void setQuantityAccidentalWater(double quantityAccidentalWater) {
+	public void setQuantityAccidentalWater(Double quantityAccidentalWater) {
 		this.quantityAccidentalWater = quantityAccidentalWater;
 	}
 
-	public double getQuantityAir() {
+	public Double getQuantityAir() {
 		return this.quantityAir;
 	}
 
-	public void setQuantityAir(double quantityAir) {
+	public void setQuantityAir(Double quantityAir) {
 		this.quantityAir = quantityAir;
 	}
 
-	public double getQuantitySoil() {
+	public Double getQuantitySoil() {
 		return this.quantitySoil;
 	}
 
-	public void setQuantitySoil(double quantitySoil) {
+	public void setQuantitySoil(Double quantitySoil) {
 		this.quantitySoil = quantitySoil;
 	}
 
-	public double getQuantityWater() {
+	public Double getQuantityWater() {
 		return this.quantityWater;
 	}
 
-	public void setQuantityWater(double quantityWater) {
+	public void setQuantityWater(Double quantityWater) {
 		this.quantityWater = quantityWater;
 	}
 
-	public int getReportingYear() {
+	public Integer getReportingYear() {
 		return this.reportingYear;
 	}
 
-	public void setReportingYear(int reportingYear) {
+	public void setReportingYear(Integer reportingYear) {
 		this.reportingYear = reportingYear;
 	}
 
