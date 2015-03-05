@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart'])
+angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.search-filter', 'restangular'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/pollutantreleases', {
@@ -9,13 +9,20 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart'])
         });
     }])
 
-    .controller('PollutantReleasesCtrl', ['$scope', function($scope) {
+    .controller('PollutantReleasesCtrl', ['$scope', 'searchFilter', 'Restangular', function($scope, searchFilter, Restangular) {
         $scope.pollutantPanel = true;
         $scope.showReleasesToInputField = true;
         $scope.pollutantPanelTitle = 'Pollutant releases';
 
+        $scope.searchFilter = searchFilter;
+        $scope.queryParams = {};
+        $scope.queryParams.ReportingYear = -1;
+
         $scope.search = function() {
+            $scope.currentSearchFilter = $scope.searchFilter;
             $scope.searchResults = true;
+            $scope.performSearch();
+
             $scope.chartObject = {};
             $scope.chartObject.data = {"cols": [
                 {id: "t", label: "Name", type: "string"},
@@ -31,6 +38,39 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart'])
                 ]}
             ]};
             $scope.chartObject.type = 'PieChart';
+        };
+
+        $scope.performSearch = function() {
+            var rest = Restangular.withConfig(function(RestangularConfigurer) {
+                RestangularConfigurer.setFullResponse(true);
+            });
+
+            var facilitySearch = rest.all('pollutantreleaseSearch');
+
+            var queryParams = {ReportingYear: $scope.currentSearchFilter.selectedReportingYear.year};
+            if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.countryId) {
+                queryParams.LOV_CountryID = $scope.currentSearchFilter.selectedReportingCountry.countryId;
+                if ($scope.currentSearchFilter.selectedRegion.lov_NUTSRegionID) {
+                    queryParams.LOV_NUTSRegionID = $scope.currentSearchFilter.selectedRegion.lov_NUTSRegionID;
+                }
+                else if ($scope.currentSearchFilter.selectedRegion.lov_RiverBasinDistrictID) {
+                    queryParams.LOV_RiverBasinDistrictID = $scope.currentSearchFilter.selectedRegion.lov_RiverBasinDistrictID;
+                }
+            }
+            if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.groupId) {
+                queryParams.LOV_AreaGroupID = $scope.currentSearchFilter.selectedReportingCountry.groupId;
+            }
+            if ($scope.currentSearchFilter.activitySearchFilter) {
+                $scope.currentSearchFilter.activitySearchFilter.filter(queryParams);
+            }
+            if ($scope.currentSearchFilter.pollutantSearchFilter) {
+                $scope.currentSearchFilter.pollutantSearchFilter.filter(queryParams);
+            }
+            $scope.queryParams = queryParams;
+
+            facilitySearch.getList(queryParams).then(function(response) {
+                $scope.items = response.data;
+            });
         };
     }])
 ;
