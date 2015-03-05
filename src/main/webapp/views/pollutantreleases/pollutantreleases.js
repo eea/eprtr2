@@ -70,7 +70,67 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
 
             facilitySearch.getList(queryParams).then(function(response) {
                 $scope.items = response.data;
+                $scope.mediumType = 'Water';
+                $scope.quantityAir = response.headers('X-QuantityAir');
+                $scope.quantityWater = response.headers('X-QuantityWater');
+                $scope.quantitySoil = response.headers('X-QuantitySoil');
             });
+        };
+
+        $scope.formatText = function(txt, confidential) {
+            if (txt)
+            {
+                return txt;
+            }
+            else if (confidential)
+            {
+                return "CONFIDENTIAL";
+            }
+            else
+            {
+                return "-";
+            }
+        };
+
+        $scope.quantity = function(item) {
+            if (item['quantity' + $scope.mediumType])
+            {
+                return item['quantity' + $scope.mediumType];
+            }
+            else if (item.confidentialIndicator)
+            {
+                return "CONFIDENTIAL";
+            }
+            else
+            {
+                return "-";
+            }
+        };
+
+        $scope.quantityAccidental = function(item) {
+            if (item['quantityAccidental' + $scope.mediumType])
+            {
+                return item['quantityAccidental' + $scope.mediumType];
+            }
+            else if (item.confidentialIndicator)
+            {
+                return "CONFIDENTIAL";
+            }
+            else
+            {
+                return "-";
+            }
+        };
+
+        $scope.percentageAccidental = function(item) {
+            if (item['percentageAccidental' + $scope.mediumType])
+            {
+                return item['percentageAccidental' + $scope.mediumType];
+            }
+            else
+            {
+                return "-";
+            }
         };
     }])
 ;
