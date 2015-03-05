@@ -2,6 +2,8 @@ package eea.eprtr.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,6 +13,7 @@ import eea.eprtr.dao.ActivitySearchFilter;
 import eea.eprtr.dao.CountryAreaGroupRepository;
 import eea.eprtr.dao.LocationSearchFilter;
 import eea.eprtr.dao.PollutantSearchFilter;
+import eea.eprtr.dao.PollutantreleaseCounts;
 import eea.eprtr.dao.PollutantreleaseSearchFilter;
 import eea.eprtr.dao.PollutantreleaseSearchRepository;
 import eea.eprtr.dao.ReportingYearSearchFilter;
@@ -46,8 +49,9 @@ public class PollutantreleaseSearchController {
     		@RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
     		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
     		@RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
-    		@RequestParam(value = "Accidental", required = false) Integer accidental
+    		@RequestParam(value = "Accidental", required = false) Integer accidental,
     		
+    		HttpServletResponse response
     		) {
 		
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
@@ -55,6 +59,11 @@ public class PollutantreleaseSearchController {
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental);
 		PollutantreleaseSearchFilter filter = new PollutantreleaseSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter);
+		
+		PollutantreleaseCounts counts = pollutantreleaseSearchRepository.getPollutantreleaseCounts(filter);
+		response.setHeader("X-QuantityAir", String.valueOf(counts.getQuantityAir()));
+		response.setHeader("X-QuantitySoil", String.valueOf(counts.getQuantitySoil()));
+		response.setHeader("X-QuantityWater", String.valueOf(counts.getQuantityWater()));
 		
 		List<Pollutantrelease> pollutantreleases = pollutantreleaseSearchRepository.getPollutantreleases(filter);
 		return pollutantreleases;
