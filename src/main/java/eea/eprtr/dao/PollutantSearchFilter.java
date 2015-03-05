@@ -1,5 +1,7 @@
 package eea.eprtr.dao;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -8,6 +10,7 @@ import javax.persistence.criteria.Root;
 
 import eea.eprtr.model.FacilitySearchAll;
 import eea.eprtr.model.FacilitySearchAll_;
+import eea.eprtr.model.MediumCode;
 import eea.eprtr.model.Pollutantrelease;
 import eea.eprtr.model.Pollutantrelease_;
 
@@ -15,10 +18,10 @@ public class PollutantSearchFilter {
 
 	private Integer pollutantID;
 	private Integer pollutantGroupID;
-	private List<String> mediumCode;
+	private List<MediumCode> mediumCode;
 	private Integer accidental;
 
-	public PollutantSearchFilter(Integer pollutantID, Integer pollutantGroupID, List<String> mediumCode, Integer accidental) {
+	public PollutantSearchFilter(Integer pollutantID, Integer pollutantGroupID, List<MediumCode> mediumCode, Integer accidental) {
 		this.pollutantID = pollutantID;
 		this.pollutantGroupID = pollutantGroupID;
 		this.mediumCode = mediumCode;
@@ -50,6 +53,28 @@ public class PollutantSearchFilter {
 		}
 		if (pollutantGroupID != null) {
 			whereClause.getExpressions().add(cb.equal(qr.get(Pollutantrelease_.LOV_PollutantGroupID), pollutantGroupID));
+		}
+		if (mediumCode != null) {
+			ArrayList<MediumCode> codes = new ArrayList<MediumCode>(Arrays.asList(MediumCode.values()));
+			codes.removeAll(mediumCode);
+			Predicate mediumCodesWhereClause = cb.disjunction();
+			for (MediumCode code : codes) {
+				switch (code) {
+				case AIR:
+					mediumCodesWhereClause.getExpressions().add(qr.get(Pollutantrelease_.quantityAir).isNotNull());
+					break;
+				case LAND:
+					mediumCodesWhereClause.getExpressions().add(qr.get(Pollutantrelease_.quantitySoil).isNotNull());
+					break;
+				case WATER:
+					mediumCodesWhereClause.getExpressions().add(qr.get(Pollutantrelease_.quantityWater).isNotNull());
+					break;
+				default:
+				}
+			}
+			if (mediumCodesWhereClause.getExpressions().size() > 0) {
+				whereClause.getExpressions().add(mediumCodesWhereClause);
+			}
 		}
 		return whereClause;
 	}

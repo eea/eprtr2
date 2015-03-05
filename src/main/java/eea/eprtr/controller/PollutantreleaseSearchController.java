@@ -11,9 +11,10 @@ import eea.eprtr.dao.ActivitySearchFilter;
 import eea.eprtr.dao.CountryAreaGroupRepository;
 import eea.eprtr.dao.LocationSearchFilter;
 import eea.eprtr.dao.PollutantSearchFilter;
-import eea.eprtr.dao.PollutantreleaseSearchRepository;
 import eea.eprtr.dao.PollutantreleaseSearchFilter;
+import eea.eprtr.dao.PollutantreleaseSearchRepository;
 import eea.eprtr.dao.ReportingYearSearchFilter;
+import eea.eprtr.model.MediumCode;
 import eea.eprtr.model.Pollutantrelease;
 
 @RestController
@@ -44,8 +45,9 @@ public class PollutantreleaseSearchController {
     		
     		@RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
     		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
-    		@RequestParam(value = "MediumCode", required = false) List<String> mediumCode,
+    		@RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
     		@RequestParam(value = "Accidental", required = false) Integer accidental
+    		
     		) {
 		
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);

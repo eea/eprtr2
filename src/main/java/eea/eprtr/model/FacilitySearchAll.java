@@ -132,7 +132,8 @@ public class FacilitySearchAll implements Serializable {
 	private Integer LOV_WasteTypeID;
 
 	@Column(name="MediumCode", length=255)
-	private String mediumCode;
+	@Enumerated(EnumType.STRING)
+	private MediumCode mediumCode;
 
 	@Column(length=255)
 	private String NACEActivityCode;
@@ -542,11 +543,11 @@ public class FacilitySearchAll implements Serializable {
 		this.LOV_WasteTypeID = LOV_WasteTypeID;
 	}
 
-	public String getMediumCode() {
+	public MediumCode getMediumCode() {
 		return this.mediumCode;
 	}
 
-	public void setMediumCode(String mediumCode) {
+	public void setMediumCode(MediumCode mediumCode) {
 		this.mediumCode = mediumCode;
 	}
 

@@ -20,6 +20,7 @@ import eea.eprtr.dao.QueryPager;
 import eea.eprtr.dao.ReportingYearSearchFilter;
 import eea.eprtr.dao.WasteSearchFilter;
 import eea.eprtr.model.FacilitySearchMainActivity;
+import eea.eprtr.model.MediumCode;
 
 @RestController
 public class FacilitySearchController {
@@ -52,7 +53,7 @@ public class FacilitySearchController {
     		
     		@RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
     		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
-    		@RequestParam(value = "MediumCode", required = false) List<String> mediumCode,
+    		@RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
     		@RequestParam(value = "Accidental", required = false) Integer accidental,
     		
     		@RequestParam(value = "WasteTypeCode", required = false) List<String> wasteTypeCode,
