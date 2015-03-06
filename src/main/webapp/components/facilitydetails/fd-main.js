@@ -1,10 +1,12 @@
 'use strict';
 
-angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
+angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esrileafmap'])
 
 .controller('FDMainController', 
-		['$scope', '$http', '$filter', 'translationService','fdDetailsType', 'fdAuthorityType', 'fdActivityType', 
-          function($scope, $http, $filter, translationService, fdDetailsType, fdAuthorityType, fdActivityType) {
+		['$scope', '$http', '$filter', '$sce', 'translationService','fdDetailsType', 'fdAuthorityType', 'fdActivityType',
+		 'fdPollutantreleasesType',
+          function($scope, $http, $filter, $sce, translationService, fdDetailsType, fdAuthorityType, fdActivityType, 
+        		  fdPollutantreleasesType) {
 	$scope.fdtitle = 'Facility Level';
 	$scope.headitms = [];
 	$scope.infoitms = [{'order':0,	'clss':'fdTitles', 	'title':'Facility Details',	'val': ' '}];
@@ -24,10 +26,170 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 		$scope.tr_lu = data.LOV_UNIT;
 		$scope.tr_lcf = data.LOV_CONFIDENTIALITY;
 		$scope.tr_lco = data.LOV_COUNTRY;
+		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
+		$scope.tr_lmbn = data.LOV_METHODBASIS;
+		$scope.tr_lmtn = data.LOV_METHODTYPE;
+		$scope.tr_lpo = data.LOV_POLLUTANT;
+		$scope.tr_lme = data.LOV_MEDIUM;
+		
+		
     });
 /*	translationService.get('Facility').then(function (data) {
 		$scope.tr_f = data;
     });*/
+	
+	$scope.formatQuantity = function(quantity, unit, conf){
+        if (quantity == null)
+        {
+            return $scope.ConfidentialFormat(null, conf);
+        }
+        else
+        {
+            if (unit.toLowerCase() == 'unknown')
+            {
+                return $scope.ConfidentialFormat($filter('number')(quantity), conf);
+            }
+            else if (unit.toLowerCase() == 'tne' || unit.toLowerCase() == 't')
+            {
+                return $scope.formatMethod(quantity * 1000, conf);
+            }
+            else
+            {
+                return $scope.formatMethod(quantity, conf);
+            }
+        }
+	};
+    $scope.formatMethod = function(amount, conf)    {
+        var result = '';
+        if (amount == null)
+        {
+            result = $scope.ConfidentialFormat.Format(result, conf);
+        }
+        else
+        {
+            if (amount < 0)
+            {
+                alert("Negative Amount provided" +amount.toString());
+            }
+            else if (amount >= 100000)
+            {
+                result = $filter('number')((amount / 1000), 0) + " " + $scope.tr_lu.TNE;
+            }
+            else if (amount >= 10000 && amount < 100000)
+            {
+                result = $filter('number')((amount / 1000), 1) + " " + $scope.tr_lu.TNE;
+            }
+            else if (amount >= 1000 && amount < 10000)
+            {
+                result = $filter('number')((amount / 1000), 2) + " " + $scope.tr_lu.TNE;
+            }
+            else if (amount >= 100 && amount < 1000)
+            {
+                result = $filter('number')(amount, 0) + " " + $scope.tr_lu.KGM;
+            }
+            else if (amount >= 10 && amount < 100)
+            {
+                result = $filter('number')(amount, 1) + " " + $scope.tr_lu.KGM;
+            }
+            else if (amount >= 1 && amount < 10)
+            {
+                result = $filter('number')(amount, 2) + " " + $scope.tr_lu.KGM;
+            }
+            else if (amount == 0.00)
+            {
+                result = "0";
+            }
+            else if (amount * 10 >= 1 && amount * 10 < 10)
+            {
+                result = $filter('number')((amount * 1000), 0) + " " + $scope.tr_lu.GRM;
+            }
+            else if (amount * 100 >= 1 && amount * 100 < 10)
+            {
+                result = $filter('number')((amount * 1000), 1) + " " + $scope.tr_lu.GRM;
+            }
+            else if (amount * 1000 < 10 && amount > 0)
+            {
+                result = $filter('number')((amount * 1000), 3) + " " + $scope.tr_lu.GRM;
+            }
+        }
+        return result;
+    };
+    
+    $scope.DeterminePercent = function(total, accidental)
+    {
+        if (accidental != null && accidental > 0 && total != null)
+        {
+            return $filter('number')(((parseFloat(accidental) / parseFloat(totalConverted)) * 100), 2) + " %";
+        }
+        return "0 %";
+    };
+    
+    $scope.MethodUsedFormat = function(typeCodes, designations, confidential)
+    {
+    	var delim = '<br />'
+        var result = '';
+        var designationSplit = [];
+        var typecodeSplit = [];
+
+        //designations wll never be given without type codes.
+        if (typeCodes == null || typeCodes == '')
+        {
+            return $scope.ConfidentialFormat(null, confidential);
+        }
+        else
+        {
+            typecodeSplit = typeCodes.split(delim);
+
+            if (designations != null && designations != '')
+            {
+                designationSplit = designations.split(delim);
+            }
+
+            for (var i = 0; i < typecodeSplit.length; i++)
+            {
+                var typeCode = typecodeSplit[i];
+                var designation = designationSplit != null ? designationSplit[i] : null;
+
+                if (typeCodes != null && typeCodes != '')
+                {
+                    //CEN/ISO is removed as this is also part of the designation
+                    if (typeCode.toUpperCase() != "CEN/ISO")
+                    {
+                        result += "<abbr title=\"" + $scope.tr_lmtn[typeCode] + "\"> " + typeCode + " </abbr>";
+                    }
+
+                    if (designation != null && designation != '')
+                    {
+                        result += " " + "<span title=\""+designation+"\">"+designation+"</span>";
+                    }
+                    result += delim;
+                }
+            }
+        }
+        return result;
+
+    }
+
+
+
+    $scope.ConfidentialFormat = function(txt, confidential)
+        {
+            var result = '';
+            if (txt!= null && txt != '')
+            {
+                result = txt;
+            }
+            else if (confidential)
+            {
+                result = $scope.tr_c.CONFIDENTIAL;
+            }
+            else
+            {
+                result = "-"; 
+            }
+            return result;
+        };
+	
 	
 	$scope.orderActivities = function(data){
 		var a_list = [];
@@ -48,7 +210,7 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 				a_list.push(a_itm)
 			}
 			var a_itm = {};
-			a_itm.content = data[i].iareportedActivityCode;
+			a_itm.content = $scope.tr_laa[data[i].iareportedActivityCode];
 			a_itm.ippcCode = data[i].ippcreportedActivityCode;
 			a_itm.isSubHeaderRow = true;
 			a_list.push(a_itm)
@@ -69,6 +231,11 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 		fdActivityType.getList($scope.frid).then(function(data) {
 			 $scope.activities = $scope.orderActivities(data);
 		});
+		fdPollutantreleasesType.getList($scope.frid).then(function(data) {
+			 $scope.pollutantreleases = data;
+		});
+		
+		
 	};
 	$scope.updateByFdidAndyear = function(){
 		$scope.map = {wh : {'FacilityID': $scope.fid, 'ReportingYear': $scope.year}};
@@ -80,6 +247,9 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 			});
 			fdActivityType.getList(details[0].facilityReportID).then(function(activit) {
 				 $scope.activities = $scope.orderActivities(activit);
+			});
+			fdPollutantreleasesType.getList(details[0].facilityReportID).then(function(data) {
+				 $scope.pollutantreleases = data;
 			});
         });
 	};
@@ -362,6 +532,15 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
     };
 }])
 
+.factory('fdPollutantreleasesType', ['fdPollutantreleasesService', function(fdPollutantreleasesService) {
+    return {
+        getList : function(fdrid) {
+            return fdPollutantreleasesService.getList({FacilityReportID:fdrid});
+        }
+    };
+}])
+
+
 /*
  * Services
  * */
@@ -403,6 +582,20 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','myApp.esrileafmap'])
 
     return fdActivity;
 }])
+
+.service('fdPollutantreleasesService', ['Restangular', function(Restangular){
+    var fdPollutantrelease = Restangular.service('facilitydetailPollutantrelease');
+
+    Restangular.extendModel('facilitydetailPollutantrelease', function(model) {
+        model.getDisplayText = function() {
+            return this.code + ' ' + this.name;
+        };
+        return model;
+    });
+
+    return fdPollutantrelease;
+}])
+
 
 /*
  * This directive enables us to define this module as a custom HTML element

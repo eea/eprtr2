@@ -171,18 +171,10 @@ padding-right: 10px;
 vertical-align: top;	
 } 
 
-generalListStyle_headerRow th {
-border-bottom: solid 1px black;
-border-right: Solid 0px Transparent;
-border-left: Solid 0px Transparent;
-border-top: solid 1px black;
-background-color: #EEEDE8;
-vertical-align: top;
-}
-
 .indentLevel0
 {
-	color:Black;
+	left:0px;
+	position:relative;
 }
 
 .indentLevel1
@@ -197,4 +189,15 @@ vertical-align: top;
 	position:relative;
 }
 
+.borderless tbody tr td {
+    border: none;
+}
 
+.borderless tbody tr th, .borderless thead tr th{
+border-bottom: solid 1px black;
+border-right: Solid 0px Transparent;
+border-left: Solid 0px Transparent;
+border-top: solid 1px black;
+background-color: #EEEDE8;
+vertical-align: top;
+}

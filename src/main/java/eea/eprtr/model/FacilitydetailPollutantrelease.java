@@ -1,6 +1,7 @@
 package eea.eprtr.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -10,12 +11,16 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="FACILITYDETAIL_POLLUTANTRELEASE")
-@NamedQuery(name="FacilitydetailPollutantrelease.findAll", query="SELECT f FROM FacilitydetailPollutantrelease f")
+@NamedQueries({
+	@NamedQuery(name="FacilitydetailPollutantrelease.findAll", query="SELECT f FROM FacilitydetailPollutantrelease f"),
+	@NamedQuery(name="FacilitydetailPollutantrelease.findByFacilityReportID", query="SELECT f FROM FacilitydetailPollutantrelease f where f.facilityReportID = :FacilityReportID")
+})
+
 public class FacilitydetailPollutantrelease implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="AccidentalQuantity")
-	private double accidentalQuantity;
+	private Double accidentalQuantity;
 
 	@Column(name="AccidentalQuantityUnitCode")
 	private String accidentalQuantityUnitCode;
@@ -30,23 +35,23 @@ public class FacilitydetailPollutantrelease implements Serializable {
 	private boolean confidentialIndicator;
 
 	@Column(name="FacilityID")
-	private int facilityID;
+	private Integer facilityID;
 	
 	@Id
-	@Column(name="FacilityReportID") private int facilityReportID;
+	@Column(name="FacilityReportID") private Integer facilityReportID;
 
 	@Column(name="GroupCode")
 	private String groupCode;
 
-	private int LOV_ConfidentialityID;
+	private Integer LOV_ConfidentialityID;
 
-	private int LOV_MediumID;
+	private Integer LOV_MediumID;
 
-	private int LOV_MethodBasisID;
+	private Integer LOV_MethodBasisID;
 
-	private int LOV_PollutantGroupID;
+	private Integer LOV_PollutantGroupID;
 
-	private int LOV_PollutantID;
+	private Integer LOV_PollutantID;
 
 	@Column(name="MethodCode")
 	private String methodCode;
@@ -55,7 +60,7 @@ public class FacilitydetailPollutantrelease implements Serializable {
 	private String methodDesignation;
 
 	@Column(name="MethodListID")
-	private int methodListID;
+	private Integer methodListID;
 
 	@Column(name="MethodTypeCode")
 	private String methodTypeCode;
@@ -67,7 +72,7 @@ public class FacilitydetailPollutantrelease implements Serializable {
 	private String pollutantTo;
 
 	@Column(name="TotalQuantity")
-	private double totalQuantity;
+	private Double totalQuantity;
 
 	@Column(name="TotalQuantityUnitCode")
 	private String totalQuantityUnitCode;
@@ -75,11 +80,11 @@ public class FacilitydetailPollutantrelease implements Serializable {
 	public FacilitydetailPollutantrelease() {
 	}
 
-	public double getAccidentalQuantity() {
+	public Double getAccidentalQuantity() {
 		return this.accidentalQuantity;
 	}
 
-	public void setAccidentalQuantity(double accidentalQuantity) {
+	public void setAccidentalQuantity(Double accidentalQuantity) {
 		this.accidentalQuantity = accidentalQuantity;
 	}
 
@@ -115,19 +120,19 @@ public class FacilitydetailPollutantrelease implements Serializable {
 		this.confidentialIndicator = confidentialIndicator;
 	}
 
-	public int getFacilityID() {
+	public Integer getFacilityID() {
 		return this.facilityID;
 	}
 
-	public void setFacilityID(int facilityID) {
+	public void setFacilityID(Integer facilityID) {
 		this.facilityID = facilityID;
 	}
 
-	public int getFacilityReportID() {
+	public Integer getFacilityReportID() {
 		return this.facilityReportID;
 	}
 
-	public void setFacilityReportID(int facilityReportID) {
+	public void setFacilityReportID(Integer facilityReportID) {
 		this.facilityReportID = facilityReportID;
 	}
 
@@ -139,43 +144,43 @@ public class FacilitydetailPollutantrelease implements Serializable {
 		this.groupCode = groupCode;
 	}
 
-	public int getLOV_ConfidentialityID() {
+	public Integer getLOV_ConfidentialityID() {
 		return this.LOV_ConfidentialityID;
 	}
 
-	public void setLOV_ConfidentialityID(int LOV_ConfidentialityID) {
+	public void setLOV_ConfidentialityID(Integer LOV_ConfidentialityID) {
 		this.LOV_ConfidentialityID = LOV_ConfidentialityID;
 	}
 
-	public int getLOV_MediumID() {
+	public Integer getLOV_MediumID() {
 		return this.LOV_MediumID;
 	}
 
-	public void setLOV_MediumID(int LOV_MediumID) {
+	public void setLOV_MediumID(Integer LOV_MediumID) {
 		this.LOV_MediumID = LOV_MediumID;
 	}
 
-	public int getLOV_MethodBasisID() {
+	public Integer getLOV_MethodBasisID() {
 		return this.LOV_MethodBasisID;
 	}
 
-	public void setLOV_MethodBasisID(int LOV_MethodBasisID) {
+	public void setLOV_MethodBasisID(Integer LOV_MethodBasisID) {
 		this.LOV_MethodBasisID = LOV_MethodBasisID;
 	}
 
-	public int getLOV_PollutantGroupID() {
+	public Integer getLOV_PollutantGroupID() {
 		return this.LOV_PollutantGroupID;
 	}
 
-	public void setLOV_PollutantGroupID(int LOV_PollutantGroupID) {
+	public void setLOV_PollutantGroupID(Integer LOV_PollutantGroupID) {
 		this.LOV_PollutantGroupID = LOV_PollutantGroupID;
 	}
 
-	public int getLOV_PollutantID() {
+	public Integer getLOV_PollutantID() {
 		return this.LOV_PollutantID;
 	}
 
-	public void setLOV_PollutantID(int LOV_PollutantID) {
+	public void setLOV_PollutantID(Integer LOV_PollutantID) {
 		this.LOV_PollutantID = LOV_PollutantID;
 	}
 
@@ -195,11 +200,11 @@ public class FacilitydetailPollutantrelease implements Serializable {
 		this.methodDesignation = methodDesignation;
 	}
 
-	public int getMethodListID() {
+	public Integer getMethodListID() {
 		return this.methodListID;
 	}
 
-	public void setMethodListID(int methodListID) {
+	public void setMethodListID(Integer methodListID) {
 		this.methodListID = methodListID;
 	}
 
@@ -227,11 +232,11 @@ public class FacilitydetailPollutantrelease implements Serializable {
 		this.pollutantTo = pollutantTo;
 	}
 
-	public double getTotalQuantity() {
+	public Double getTotalQuantity() {
 		return this.totalQuantity;
 	}
 
-	public void setTotalQuantity(double totalQuantity) {
+	public void setTotalQuantity(Double totalQuantity) {
 		this.totalQuantity = totalQuantity;
 	}
 

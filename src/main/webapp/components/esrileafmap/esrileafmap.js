@@ -5,7 +5,9 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
  * Find better solution for these constants?
  * */
 .constant('elmconf',{
-	'eprtrLayerUrl':'http://sdkcga6350:6080/arcgis/rest/services/EprtrFacilities/FeatureServer/0',
+	//http://air.discomap.eea.europa.eu/arcgis/rest/services/Air/EprtrFacilities_Dyna_WGS84/FeatureServer
+	//http://sdkcga6350:6080/arcgis/rest/services/EprtrFacilities/FeatureServer/0
+	'eprtrLayerUrl':'http://air.discomap.eea.europa.eu/arcgis/rest/services/Air/EprtrFacilities_Dyna_WGS84/FeatureServer/0',
 	'europebounds': [53.526, 10.667],
 	'europezoom': 3,
 	'passInFilter': ['FacilityReportID','FacilityName','FacilityID','NationalID',
@@ -155,8 +157,12 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 	//Here we initialize the map
 	leafletData.getMap().then(function(map) {
 		//Initial extent
+		//map.invalidateSize();
 		map.setView(elmconf.europebounds, elmconf.europezoom);
+		map.attributionControl = false;
+		
 		elm_ctrl.elm_map = map
+		
 		//We set the baselayer - in version 2 we can add more baselayers and a selector
 		L.esri.basemapLayer("Streets").addTo(map);
 
@@ -240,7 +246,7 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 		scope: {
 			frid: '@facilityReportId',
 			wherestr: '=',
-			queryparams: '='//,
+			queryparams: '='
 		},
 		templateUrl: 'components/esrileafmap/esrileafmap.html',
 		link: function(scope, element, attrs){

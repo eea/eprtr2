@@ -24,7 +24,7 @@ angular.module('myApp.home', ['ngRoute'])
         	//We extend the service at some point with language - we can get it from cookie or drop down:
         	//language = (language == undefined || language == '')? 'en-gb': language;
         	var language = 'en-gb';
-		    var languageFilePath = 'translations/eprtr-locale_' + language + '.json';
+		    var languageFilePath = 'translations/eprtr-resource_' + language + '.json';
           $http.get(languageFilePath).success(function(results) {
         	  if(type != undefined && type != ''){
         		  results = results[type];

@@ -15,7 +15,6 @@
         	<p><b>TODO</b> Print icon</p>
         	<p><b>TODO</b> Export icon</p>
            	<p><b>TODO</b> Year selector</p>
-           	<p><b>TODO</b> Information text</p>
            	<p><b>TODO</b> Confidential Disclaimer text</p>
            	<p><b>TODO</b> Confidential Disclaimer Alert click event handler</p>
         	
@@ -26,21 +25,19 @@
    <div class="row" >
           <tabset>
             <tab heading="Details" active="fdDetailsTabActive">
-   <div class="row" >
-        <div class="col-md-4" >
-	        <esri-leaf-map queryparams="map.wh" height="400px" />
+   <div class="row" style="padding-top:10px;" >
+        <div class="col-md-3" style="height:350px;" >
+	        <esri-leaf-map queryparams="map.wh"  />
 		</div>
 
-		<div class="col-md-4" >
+		<div class="col-md-5" >
 			 <table >
 			  <tr ng-repeat="i1 in infoitms | orderBy : 'order'" >
 			    <td class="{{i1.clss}}">{{ i1.title }}:</td>
 			    <td>{{ i1.val }}</td>
 			  </tr>
 			</table>
-			 </br>
 		</div>
-	
 		<div class="col-md-4" >
             <table>
 			  <tr ng-repeat="i2 in infoitms2 | orderBy : 'order'" >
@@ -50,31 +47,220 @@
 			</table>
 			 </br>
 		</div>
-	</div>
-		<!-- activities -->
-    
-    <div class="row" >
-		<div class="col-md-12" >
+		<div class="col-md-9 .col-md-offset-3" >
 		</br>
-	           <table >
+		</br>
+	           <table class="table table-hover table-condensed borderless">
                     <thead>
                         <tr>
-                            <th class="col-sm-10 generalListStyle_headerRow" ><img ng-src="images/info.png" ng-click="alert('WindowOpen');"> {{tr_f.IndustrialActivities}}</th>
-                            <th class="col-sm-2 generalListStyle_headerRow">{{tr_f.IPPCcode}}</th>
+                            <th class="col-sm-10 " ><button class="btn btn-default btn-xs" title=""><i class="fa fa-info-circle"></i></button> {{tr_f.IndustrialActivities}}</th>
+                            <th class="col-sm-2 ">{{tr_f.IPPCcode}}</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in activities">
-							<td class="{{item.IsSubHeaderRow ? 'indentLevel0' : 'indentLevel1'}} facilityActivity">{{item.content}}</td>
+							<td class="{{item.isSubHeaderRow ? 'indentLevel1' : 'indentLevel0'}} facilityActivity">{{item.content}}</td>
                             <td class="facilityIPPC">{{item.ippcCode}}</td>
                         </tr>
                     </tbody>
                 </table>
-		
+		</div>
+	</div>
+	
+    <!-- public info -->
+    <div class="row" >
+		<div class="col-md-8" ng-show="if(details != undefined && details.publicInformation != null && details.publicInformation != '')?true:false" >
+		</br>
+		</br>
+		</br>
+            <p>{{tr_c.PublicInfo}}</p>
+            <p><Small>{{details.publicInformation}}</Small></p>
+        </div>
+	</div>		
+
+    <!-- Disclaimer -->
+    <div class="row" >
+		<div class="col-md-8" >
+		{{tr_c.DisclaimerHeader}}
+		<div ng-bind-html="tr_f.DisclaimerTextFacilityDetails"></div>
+		</div>
+	</div>
+		</tab>
+
+<!-- 
+POLLUTANT RELEASES
+ -->
+
+		<tab heading="Pollutant releases" active="polReleaseTabActive">
+    <!-- Disclaimer -->
+    <div class="row">
+    	<br />
+    	<div class="col-md-4">{{tr_p.AllValuesAreYearlyReleases}}</div>
+    	<div class="col-md-4 .col-md-offset-8"><a ><i class="fa fa-info-circle"></i>  {{tr_c.InfoPollutant}}</a></div>
+    </div>
+    <div class="row" >
+		<div class="col-md-12" >
+		<H3><small>{{tr_p.ReleasesToAir}}</small></H3>
+		<table class="table table-striped table-condensed table-hover" ng-hide="(pollutantreleases | filter:{ pollutantTo: tr_lme.AIR }).length > 0 ? false : true">
+                   <thead>
+                        <tr class="generalListStyle_headerRow">
+                          <th></th>
+                          <th>{{tr_p.PollutantName}}</th>
+                          <th>{{tr_p.TotalQuantity}}</th>
+                          <th>{{tr_p.ReleasesAccidental}}</th>
+                          <th>{{tr_p.ReleasesAccidentalPercent}}</th>
+                          <th>{{tr_p.Method}}</th>
+                          <th>{{tr_p.MethodUsed}}</th>
+                          <th>{{tr_p.Confidentiality}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in pollutantreleases | filter:{ pollutantTo: tr_lme.AIR } ">
+	                   <td><button type="button" class="btn btn-sm btn-default"><i class="fa fa-bar-chart"></i></button>
+	                   <!-- <a href="#" class="btn btn-lg"><img href="images/timeseries.png"/></a>  -->	                   
+	                   <!-- ng-click="" CommandName='toggletimeseries' CommandArgument='<%#GetPollutantCode(Container.DataItem)%>'  --></td>
+                    <td>{{tr_lpo[item.pollutantCode]}}</td>
+                    <td>{{formatQuantity(item.totalQuantity, item.totalQuantityUnitCode, item.confidentialIndicator)}}</td>
+                    <td>{{formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
+                    <td>{{DeterminePercent(item.totalQuantity, item.accidentalQuantity)}}</td>
+                    <td>{{tr_lmbn[item.methodCode]}}</td>
+                    <td ng-bind-html="MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator)"></td>
+                    <td>{{tr_lcf[item.confidentialCode]}}</td>
+                </tr>
+                <!-- tr>
+                    <td colspan="100"> <%--span all--%>
+                        <div id="subsheet" class="layout_sheetIntable" visible="false" runat="server">
+                            <eprtr:ucFacilityPollutantReleasesTrendSheet ID="timeSeries" Visible="false" runat="server"  />
+                        </div>
+                    </td>
+                </tr>  -->
+
+                    </tbody>
+                </table>
+        <p class="text-warning" ng-hide="(pollutantreleases | filter:{ pollutantTo: tr_lme.AIR }).length > 0 ? true : false">{{tr_c.NoResultsFoundAir}}</p>
+		</div>
+	</div>
+    <div class="row" >
+		<div class="col-md-12" >
+		<H3><small>{{tr_p.ReleasesToWater}}</small></H3>
+		<table class="table table-striped table-condensed table-hover" ng-hide="(pollutantreleases | filter:{ pollutantTo: tr_lme.WATER }).length > 0 ? false : true">
+                   <thead>
+                        <tr class="generalListStyle_headerRow">
+                          <th></th>
+                          <th>{{tr_p.PollutantName}}</th>
+                          <th>{{tr_p.TotalQuantity}}</th>
+                          <th>{{tr_p.ReleasesAccidental}}</th>
+                          <th>{{tr_p.ReleasesAccidentalPercent}}</th>
+                          <th>{{tr_p.Method}}</th>
+                          <th>{{tr_p.MethodUsed}}</th>
+                          <th>{{tr_p.Confidentiality}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in pollutantreleases | filter:{ pollutantTo: tr_lme.WATER } ">
+	                   <td><button type="button" class="btn btn-sm btn-default"><i class="fa fa-bar-chart"></i></button>
+	                   <!-- <a href="#" class="btn btn-lg"><img href="images/timeseries.png"/></a>  -->	                   
+	                   <!-- ng-click="" CommandName='toggletimeseries' CommandArgument='<%#GetPollutantCode(Container.DataItem)%>'  --></td>
+                    <td>{{tr_lpo[item.pollutantCode]}}</td>
+                    <td>{{formatQuantity(item.totalQuantity, item.totalQuantityUnitCode, item.confidentialIndicator)}}</td>
+                    <td>{{formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
+                    <td>{{DeterminePercent(item.totalQuantity, item.accidentalQuantity)}}</td>
+                    <td>{{tr_lmbn[item.methodCode]}}</td>
+                    <td ng-bind-html="MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator)"></td>
+                    <td>{{tr_lcf[item.confidentialCode]}}</td>
+                </tr>
+                <!-- tr>
+                    <td colspan="100"> <%--span all--%>
+                        <div id="subsheet" class="layout_sheetIntable" visible="false" runat="server">
+                            <eprtr:ucFacilityPollutantReleasesTrendSheet ID="timeSeries" Visible="false" runat="server"  />
+                        </div>
+                    </td>
+                </tr>  -->
+
+                    </tbody>
+                </table>
+               <p class="text-warning" ng-hide="(pollutantreleases | filter:{ pollutantTo: tr_lme.WATER }).length > 0 ? true : false">{{tr_c.NoResultsFoundWater}}</p>
+		</div>
+	</div>
+    <div class="row" >
+		<div class="col-md-12" >
+		<H3><small>{{tr_p.ReleasesToSoil}}</small></H3>
+		<table class="table table-striped table-condensed table-hover" ng-hide="(pollutantreleases | filter:{ pollutantTo: tr_lme.LAND }).length > 0 ? false : true">
+                   <thead>
+                        <tr class="generalListStyle_headerRow">
+                          <th></th>
+                          <th>{{tr_p.PollutantName}}</th>
+                          <th>{{tr_p.TotalQuantity}}</th>
+                          <th>{{tr_p.ReleasesAccidental}}</th>
+                          <th>{{tr_p.ReleasesAccidentalPercent}}</th>
+                          <th>{{tr_p.Method}}</th>
+                          <th>{{tr_p.MethodUsed}}</th>
+                          <th>{{tr_p.Confidentiality}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in pollutantreleases | filter:{ pollutantTo: tr_lme.LAND } ">
+	                   <td><button type="button" class="btn btn-sm btn-default"><i class="fa fa-bar-chart"></i></button>
+	                   <!-- <a href="#" class="btn btn-lg"><img href="images/timeseries.png"/></a>  -->	                   
+	                   <!-- ng-click="" CommandName='toggletimeseries' CommandArgument='<%#GetPollutantCode(Container.DataItem)%>'  --></td>
+                    <td>{{tr_lpo[item.pollutantCode]}}</td>
+                    <td>{{formatQuantity(item.totalQuantity, item.totalQuantityUnitCode, item.confidentialIndicator)}}</td>
+                    <td>{{formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
+                    <td>{{DeterminePercent(item.totalQuantity, item.accidentalQuantity)}}</td>
+                    <td>{{tr_lmbn[item.methodCode]}}</td>
+                    <td ng-bind-html="MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator)"></td>
+                    <td>{{tr_lcf[item.confidentialCode]}}</td>
+                </tr>
+                <!-- tr>
+                    <td colspan="100"> <%--span all--%>
+                        <div id="subsheet" class="layout_sheetIntable" visible="false" runat="server">
+                            <eprtr:ucFacilityPollutantReleasesTrendSheet ID="timeSeries" Visible="false" runat="server"  />
+                        </div>
+                    </td>
+                </tr>  -->
+
+                    </tbody>
+                </table>
+        <p class="text-warning" ng-hide="(pollutantreleases | filter:{ pollutantTo: tr_lme.LAND }).length > 0 ? true : false">{{tr_c.NoResultsFoundSoil}}</p>
+		</div>
+	</div>
+    <div class="row" >
+		</br>
+		</br>
+		<div class="col-md-12" >
+		{{tr_c.DisclaimerHeader}}
+		<div ng-bind-html="tr_f.DisclaimerTextPollutantReleases"></div>
+		</div>
+	</div>
+		</tab>
+		<tab heading="Pollutant transfers" active="polTransferTabActive">
+    <!-- Disclaimer -->
+    <div class="row" >
+		</br>
+		</br>
+		<div class="col-md-12" >
+		{{tr_c.DisclaimerHeader}}
+		<div ng-bind-html="tr_f.DisclaimerTextPollutantTransfers"></div>
+		</div>
+	</div>
+		</tab>
+		<tab heading="Waste transfers" active="wasteTransferTabActive">
+    <!-- Disclaimer -->
+    <div class="row" >
+		<div class="col-md-8" >
+		{{tr_c.DisclaimerHeader}}
+		<div ng-bind-html="tr_f.DisclaimerTextWaste"></div>
 		</div>
 	</div>
 		</tab>
 		<tab heading="Confidentiality" active="confidentialityTabActive">
+    <!-- Disclaimer -->
+    <div class="row" >
+		<div class="col-md-8" >
+		{{tr_c.DisclaimerHeader}}
+		<div ng-bind-html="tr_f.DisclaimerTextConfidentiality"></div>
+		</div>
+	</div>
 		</tab>
 		</tabset>
     </div>
