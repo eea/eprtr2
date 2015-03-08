@@ -4,9 +4,9 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 
 .controller('FDMainController', 
 		['$scope', '$http', '$filter', '$sce', 'translationService','fdDetailsType', 'fdAuthorityType', 'fdActivityType',
-		 'fdPollutantreleasesType',
+		 'fdPollutantreleasesType', 'fdWastetransfersType', 'fdPollutanttransfersType', 
           function($scope, $http, $filter, $sce, translationService, fdDetailsType, fdAuthorityType, fdActivityType, 
-        		  fdPollutantreleasesType) {
+        		  fdPollutantreleasesType, fdWastetransfersType, fdPollutanttransfersType) {
 	$scope.fdtitle = 'Facility Level';
 	$scope.headitms = [];
 	$scope.infoitms = [{'order':0,	'clss':'fdTitles', 	'title':'Facility Details',	'val': ' '}];
@@ -234,8 +234,13 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 		fdPollutantreleasesType.getList($scope.frid).then(function(data) {
 			 $scope.pollutantreleases = data;
 		});
-		
-		
+		fdPollutanttransfersType.getList($scope.frid).then(function(data) {
+			 $scope.pollutanttransfers = data;
+		});
+		fdWastetransfersType.getList($scope.frid).then(function(data) {
+			 $scope.wastetransfers = data;
+		});
+	
 	};
 	$scope.updateByFdidAndyear = function(){
 		$scope.map = {wh : {'FacilityID': $scope.fid, 'ReportingYear': $scope.year}};
@@ -250,6 +255,12 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 			});
 			fdPollutantreleasesType.getList(details[0].facilityReportID).then(function(data) {
 				 $scope.pollutantreleases = data;
+			});
+			fdPollutanttransfersType.getList(details[0].facilityReportID).then(function(data) {
+				 $scope.pollutanttransfers = data;
+			});
+			fdWastetransfersType.getList(details[0].facilityReportID).then(function(data) {
+				 $scope.wastetransfers = data;
 			});
         });
 	};
@@ -540,6 +551,21 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
     };
 }])
 
+.factory('fdPollutanttransfersType', ['fdPollutanttransfersService', function(fdPollutanttransfersService) {
+    return {
+        getList : function(fdrid) {
+            return fdPollutanttransfersService.getList({FacilityReportID:fdrid});
+        }
+    };
+}])
+
+.factory('fdWastetransfersType', ['fdWastetransfersService', function(fdWastetransfersService) {
+    return {
+        getList : function(fdrid) {
+            return fdWastetransfersService.getList({FacilityReportID:fdrid});
+        }
+    };
+}])
 
 /*
  * Services
@@ -596,6 +622,31 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
     return fdPollutantrelease;
 }])
 
+.service('fdPollutanttransfersService', ['Restangular', function(Restangular){
+    var fdPollutanttransfer = Restangular.service('facilitydetailPollutanttransfer');
+
+    Restangular.extendModel('facilitydetailPollutanttransfer', function(model) {
+        model.getDisplayText = function() {
+            return this.code + ' ' + this.name;
+        };
+        return model;
+    });
+
+    return fdPollutanttransfer;
+}])
+
+.service('fdWastetransfersService', ['Restangular', function(Restangular){
+    var fdWastetransfer = Restangular.service('facilitydetailWastetransfer');
+
+    Restangular.extendModel('facilitydetailWastetransfer', function(model) {
+        model.getDisplayText = function() {
+            return this.code + ' ' + this.name;
+        };
+        return model;
+    });
+
+    return fdWastetransfer;
+}])
 
 /*
  * This directive enables us to define this module as a custom HTML element
