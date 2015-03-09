@@ -74,7 +74,7 @@
                     <tfoot>
                         <td colspan="6">
                             <div ng-show="hasItems()">
-                                <pagination boundary-links="true" ng-model="currentPage" total-items="totalItemCount" items-per-page="itemsPerPage" max-size="gap" class="pagination pull-right" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+                                <pagination boundary-links="true" ng-model="$parent.currentPage" total-items="totalItemCount" items-per-page="itemsPerPage" max-size="gap" class="pagination pull-right" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
                             </div>
                         </td>
                     </tfoot>
