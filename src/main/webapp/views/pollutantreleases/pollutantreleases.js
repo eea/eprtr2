@@ -9,7 +9,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         });
     }])
 
-    .controller('PollutantReleasesCtrl', ['$scope', 'searchFilter', 'Restangular', function($scope, searchFilter, Restangular) {
+    .controller('PollutantReleasesCtrl', ['$scope', '$filter', 'searchFilter', 'Restangular', function($scope, $filter, searchFilter, Restangular) {
         $scope.pollutantPanel = true;
         $scope.showReleasesToInputField = true;
         $scope.pollutantPanelTitle = 'Pollutant releases';
@@ -17,6 +17,12 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         $scope.searchFilter = searchFilter;
         $scope.queryParams = {};
         $scope.queryParams.ReportingYear = -1;
+
+        $scope.$watch('mediumType', function(value) {
+            if ($scope.items) {
+                $scope.updateData();
+            }
+        });
 
         $scope.search = function() {
             $scope.currentSearchFilter = $scope.searchFilter;
@@ -54,45 +60,53 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
 
             facilitySearch.getList(queryParams).then(function(response) {
                 $scope.items = response.data;
-                $scope.mediumType = 'Water';
+
                 $scope.quantityAir = response.headers('X-QuantityAir');
                 $scope.quantityWater = response.headers('X-QuantityWater');
                 $scope.quantitySoil = response.headers('X-QuantitySoil');
 
-                var graphdata = {};
-                for (var i = 0; i < $scope.items.length; i++) {
-                    if (!graphdata[$scope.items[i].iaactivityCode]) {
-                        graphdata[$scope.items[i].iaactivityCode] = {c: [
-                            {v: $scope.items[i].iaactivityCode},
-                            {v: $scope.items[i]['quantity' + $scope.mediumType]}
-                        ]};
-                    } else {
-                        graphdata[$scope.items[i].iaactivityCode].c[1].v =
-                            graphdata[$scope.items[i].iaactivityCode].c[1].v
-                            + $scope.items[i]['quantity' + $scope.mediumType];
-                    }
-                }
-
-                var graphdata_array = [];
-                for (var key in graphdata) {
-                    if (graphdata.hasOwnProperty(key)) {
-                        graphdata_array = graphdata_array.concat(graphdata[key]);
-                    }
-                }
-
-                $scope.chartObject = {};
-                $scope.chartObject.data = {
-                    "cols": [
-                        {id: "t", label: "Name", type: "string"},
-                        {id: "s", label: "Total", type: "number"}
-                    ],
-                    "rows": graphdata_array
-                };
-                $scope.chartObject.type = 'PieChart';
-
-
-
+                $scope.mediumType = 'Air';
+                $scope.updateData();
             });
+        };
+
+        $scope.updateData = function() {
+            $scope.filteredItems = $filter('filter')($scope.items, function (item) {
+                if (item['quantity' + $scope.mediumType]) {
+                    return true;
+                }
+                return false;
+            });
+
+            var graphData = {};
+            for (var i = 0; i < $scope.filteredItems.length; i++) {
+                if (!graphData[$scope.filteredItems[i].iaactivityCode]) {
+                    graphData[$scope.filteredItems[i].iaactivityCode] = {c: [
+                        {v: $scope.filteredItems[i].iaactivityCode},
+                        {v: $scope.filteredItems[i]['quantity' + $scope.mediumType]}
+                    ]};
+                } else {
+                    graphData[$scope.filteredItems[i].iaactivityCode].c[1].v =
+                        graphData[$scope.filteredItems[i].iaactivityCode].c[1].v + $scope.filteredItems[i]['quantity' + $scope.mediumType];
+                }
+            }
+
+            var graphDataArray = [];
+            for (var key in graphData) {
+                if (graphData.hasOwnProperty(key)) {
+                    graphDataArray = graphDataArray.concat(graphData[key]);
+                }
+            }
+
+            $scope.chartObject = {};
+            $scope.chartObject.data = {
+                "cols": [
+                    {id: "t", label: "Name", type: "string"},
+                    {id: "s", label: "Total", type: "number"}
+                ],
+                "rows": graphDataArray
+            };
+            $scope.chartObject.type = 'PieChart';
         };
 
         $scope.formatText = function(txt, confidential) {
