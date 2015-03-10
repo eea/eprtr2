@@ -74,6 +74,8 @@ public class PollutantSearchFilter {
 			}
 			if (mediumCodesWhereClause.getExpressions().size() > 0) {
 				whereClause.getExpressions().add(mediumCodesWhereClause);
+			} else {
+				whereClause.getExpressions().add(cb.or());
 			}
 		}
 		return whereClause;
