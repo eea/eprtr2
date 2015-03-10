@@ -5,37 +5,6 @@ E-PRTR 2
 
 The application is available here: http://prtrproto.cloudapp.net/
 
-Structure
----------
-
-The project is structured as a Maven project, and can be built by Maven command 
-line.
-
-The Java code is located at src/main/java and the web site files (js, html, 
-css, etc.) is located at src/main/webapp.
-
-`bower.json` defines all JavaScript dependencies for the JavaScript application
-code and the dependencies added to this file will automatically be reflected in 
-index.html (in src/main/webapp) and karma.conf.js in the `bower:js` and 
-`bower:css` sections if you are using `Eclipse` or executing 
-`mvn copy-resources`.
-
-`Gruntfile.js` is the Grunt build file.
-
-`karma.conf.js` and `karma.ci.conf.js` is JavaScript unittest 
-configuration files (`karma.ci.conf.js` is for the CI server only). 
-
-`package.json` defines all JavaScript dependencies needed to build the 
-JavaScript application code.
-
-The application is based on a single page MVC web site consisting of a number
-of views each using a number of components.
-
-The views are located at src/main/webapp/views and the components are located
-at src/main/webapp/components.
-
-The main page is located at src/main/webapp/index.html.
-
 Testing
 -------
 There are test examples of both controllers and data access objects using the Spring test package. Note that loading
