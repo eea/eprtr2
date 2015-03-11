@@ -30,6 +30,12 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
             }
         });
 
+        $scope.$watch('mediumTypeAreaComparison', function(value) {
+            if ($scope.items) {
+                $scope.updateAreaComparisonData();
+            }
+        });
+
         $scope.search = function() {
             $scope.currentSearchFilter = $scope.searchFilter;
             $scope.searchResults = true;
@@ -73,8 +79,10 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
 
                 $scope.mediumTypeSummary = 'Air';
                 $scope.mediumTypeFacilities = 'Air';
+                $scope.mediumTypeAreaComparison = 'Air';
                 $scope.updateSummaryData();
                 $scope.updateFacilitiesData();
+                $scope.updateAreaComparisonData();
             });
         };
 
@@ -106,15 +114,15 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 }
             }
 
-            $scope.chartObject = {};
-            $scope.chartObject.data = {
+            $scope.summaryChartObject = {};
+            $scope.summaryChartObject.data = {
                 "cols": [
                     {id: "t", label: "Name", type: "string"},
                     {id: "s", label: "Total", type: "number"}
                 ],
                 "rows": graphDataArray
             };
-            $scope.chartObject.type = 'PieChart';
+            $scope.summaryChartObject.type = 'PieChart';
         };
 
         $scope.updateFacilitiesData = function() {
@@ -124,6 +132,45 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 }
                 return false;
             });
+        };
+
+        $scope.updateAreaComparisonData = function() {
+            $scope.areaComparisonItems = $filter('filter')($scope.items, function (item) {
+                if (item['quantity' + $scope.mediumTypeAreaComparison]) {
+                    return true;
+                }
+                return false;
+            });
+
+            var graphData = {};
+            for (var i = 0; i < $scope.areaComparisonItems.length; i++) {
+                if (!graphData[$scope.areaComparisonItems[i].countryCode]) {
+                    graphData[$scope.areaComparisonItems[i].countryCode] = {c: [
+                        {v: $scope.areaComparisonItems[i].countryCode},
+                        {v: $scope.areaComparisonItems[i]['quantity' + $scope.mediumTypeSummary]}
+                    ]};
+                } else {
+                    graphData[$scope.areaComparisonItems[i].countryCode].c[1].v =
+                        graphData[$scope.areaComparisonItems[i].countryCode].c[1].v + $scope.areaComparisonItems[i]['quantity' + $scope.mediumTypeSummary];
+                }
+            }
+
+            var graphDataArray = [];
+            for (var key in graphData) {
+                if (graphData.hasOwnProperty(key)) {
+                    graphDataArray = graphDataArray.concat(graphData[key]);
+                }
+            }
+
+            $scope.areaComparisonChartObject = {};
+            $scope.areaComparisonChartObject.data = {
+                "cols": [
+                    {id: "t", label: "Name", type: "string"},
+                    {id: "s", label: "Total", type: "number"}
+                ],
+                "rows": graphDataArray
+            };
+            $scope.areaComparisonChartObject.type = 'BarChart';
         };
 
         $scope.formatText = function(txt, confidential) {

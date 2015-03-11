@@ -47,7 +47,7 @@
                 <label class="radio-inline"><input type="radio" name="summaryMediumTypeOptionsRadios" id="summaryMediumTypeOptionsRadios_1" value="Water" ng-model="$parent.mediumTypeSummary"> Water ({{quantityWater}} facilities)</label>
                 <label class="radio-inline"><input type="radio" name="summaryMediumTypeOptionsRadios" id="summaryMediumTypeOptionsRadios_2" value="Soil" ng-model="$parent.mediumTypeSummary"> Soil ({{quantitySoil}} facilities)</label>
                 <br/>
-                <div google-chart chart="chartObject" style="height:600px; width:100%;">
+                <div google-chart chart="summaryChartObject" style="height:600px; width:100%;">
                 </div>
             </tab>
             <tab heading="Activities">
@@ -57,7 +57,14 @@
 
             </tab>
             <tab heading="Area Comparison">
-
+                <br/>
+                Show facilities releasing to
+                <label class="radio-inline"><input type="radio" name="areaComparisonMediumTypeOptionsRadios" id="areaComparisonMediumTypeOptionsRadios_0" value="Air" ng-model="$parent.mediumTypeAreaComparison"> Air ({{quantityAir}} facilities)</label>
+                <label class="radio-inline"><input type="radio" name="areaComparisonMediumTypeOptionsRadios" id="areaComparisonMediumTypeOptionsRadios_1" value="Water" ng-model="$parent.mediumTypeAreaComparison"> Water ({{quantityWater}} facilities)</label>
+                <label class="radio-inline"><input type="radio" name="areaComparisonMediumTypeOptionsRadios" id="areaComparisonMediumTypeOptionsRadios_2" value="Soil" ng-model="$parent.mediumTypeAreaComparison"> Soil ({{quantitySoil}} facilities)</label>
+                <br/>
+                <div google-chart chart="areaComparisonChartObject" style="height:600px; width:100%;">
+                </div>
             </tab>
             <tab heading="Facilities">
                 <br/>
