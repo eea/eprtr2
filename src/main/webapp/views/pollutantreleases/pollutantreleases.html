@@ -43,9 +43,9 @@
             <tab heading="Summary">
                 <br/>
                 Show facilities releasing to
-                <label class="radio-inline"><input type="radio" name="summaryMediumTypeOptionsRadios" id="summaryMediumTypeOptionsRadios_0" value="Air" ng-model="$parent.mediumType"> Air ({{quantityAir}} facilities)</label>
-                <label class="radio-inline"><input type="radio" name="summaryMediumTypeOptionsRadios" id="summaryMediumTypeOptionsRadios_1" value="Water" ng-model="$parent.mediumType"> Water ({{quantityWater}} facilities)</label>
-                <label class="radio-inline"><input type="radio" name="summaryMediumTypeOptionsRadios" id="summaryMediumTypeOptionsRadios_2" value="Soil" ng-model="$parent.mediumType"> Soil ({{quantitySoil}} facilities)</label>
+                <label class="radio-inline"><input type="radio" name="summaryMediumTypeOptionsRadios" id="summaryMediumTypeOptionsRadios_0" value="Air" ng-model="$parent.mediumTypeSummary"> Air ({{quantityAir}} facilities)</label>
+                <label class="radio-inline"><input type="radio" name="summaryMediumTypeOptionsRadios" id="summaryMediumTypeOptionsRadios_1" value="Water" ng-model="$parent.mediumTypeSummary"> Water ({{quantityWater}} facilities)</label>
+                <label class="radio-inline"><input type="radio" name="summaryMediumTypeOptionsRadios" id="summaryMediumTypeOptionsRadios_2" value="Soil" ng-model="$parent.mediumTypeSummary"> Soil ({{quantitySoil}} facilities)</label>
                 <br/>
                 <div google-chart chart="chartObject" style="height:600px; width:100%;">
                 </div>
@@ -62,9 +62,9 @@
             <tab heading="Facilities">
                 <br/>
                 Show facilities releasing to
-                <label class="radio-inline"><input type="radio" name="facilitiesMediumTypeOptionsRadios" id="facilitiesMediumTypeOptionsRadios_0" value="Air" ng-model="$parent.mediumType"> Air ({{quantityAir}} facilities)</label>
-                <label class="radio-inline"><input type="radio" name="facilitiesMediumTypeOptionsRadios" id="facilitiesMediumTypeOptionsRadios_1" value="Water" ng-model="$parent.mediumType"> Water ({{quantityWater}} facilities)</label>
-                <label class="radio-inline"><input type="radio" name="facilitiesMediumTypeOptionsRadios" id="facilitiesMediumTypeOptionsRadios_2" value="Soil" ng-model="$parent.mediumType"> Soil ({{quantitySoil}} facilities)</label>
+                <label class="radio-inline"><input type="radio" name="facilitiesMediumTypeOptionsRadios" id="facilitiesMediumTypeOptionsRadios_0" value="Air" ng-model="$parent.mediumTypeFacilities"> Air ({{quantityAir}} facilities)</label>
+                <label class="radio-inline"><input type="radio" name="facilitiesMediumTypeOptionsRadios" id="facilitiesMediumTypeOptionsRadios_1" value="Water" ng-model="$parent.mediumTypeFacilities"> Water ({{quantityWater}} facilities)</label>
+                <label class="radio-inline"><input type="radio" name="facilitiesMediumTypeOptionsRadios" id="facilitiesMediumTypeOptionsRadios_2" value="Soil" ng-model="$parent.mediumTypeFacilities"> Soil ({{quantitySoil}} facilities)</label>
                 <br/>
                 <table class="table table-striped table-condensed table-hover">
                     <thead>
@@ -78,7 +78,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="item in filteredItems">
+                    <tr ng-repeat="item in facilitiesItems">
                         <td><a href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">{{formatText(item.facilityName, item.confidentialIndicatorFacility)}}</a></td>
                         <td>{{quantity(item)}}</td>
                         <td>{{quantityAccidental(item)}}</td>

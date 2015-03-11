@@ -18,9 +18,15 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         $scope.queryParams = {};
         $scope.queryParams.ReportingYear = -1;
 
-        $scope.$watch('mediumType', function(value) {
+        $scope.$watch('mediumTypeSummary', function(value) {
             if ($scope.items) {
-                $scope.updateData();
+                $scope.updateSummaryData();
+            }
+        });
+
+        $scope.$watch('mediumTypeFacilities', function(value) {
+            if ($scope.items) {
+                $scope.updateFacilitiesData();
             }
         });
 
@@ -65,29 +71,31 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 $scope.quantityWater = response.headers('X-QuantityWater');
                 $scope.quantitySoil = response.headers('X-QuantitySoil');
 
-                $scope.mediumType = 'Air';
-                $scope.updateData();
+                $scope.mediumTypeSummary = 'Air';
+                $scope.mediumTypeFacilities = 'Air';
+                $scope.updateSummaryData();
+                $scope.updateFacilitiesData();
             });
         };
 
-        $scope.updateData = function() {
-            $scope.filteredItems = $filter('filter')($scope.items, function (item) {
-                if (item['quantity' + $scope.mediumType]) {
+        $scope.updateSummaryData = function() {
+            $scope.summaryItems = $filter('filter')($scope.items, function (item) {
+                if (item['quantity' + $scope.mediumTypeSummary]) {
                     return true;
                 }
                 return false;
             });
 
             var graphData = {};
-            for (var i = 0; i < $scope.filteredItems.length; i++) {
-                if (!graphData[$scope.filteredItems[i].iaactivityCode]) {
-                    graphData[$scope.filteredItems[i].iaactivityCode] = {c: [
-                        {v: $scope.filteredItems[i].iaactivityCode},
-                        {v: $scope.filteredItems[i]['quantity' + $scope.mediumType]}
+            for (var i = 0; i < $scope.summaryItems.length; i++) {
+                if (!graphData[$scope.summaryItems[i].iaactivityCode]) {
+                    graphData[$scope.summaryItems[i].iaactivityCode] = {c: [
+                        {v: $scope.summaryItems[i].iaactivityCode},
+                        {v: $scope.summaryItems[i]['quantity' + $scope.mediumTypeSummary]}
                     ]};
                 } else {
-                    graphData[$scope.filteredItems[i].iaactivityCode].c[1].v =
-                        graphData[$scope.filteredItems[i].iaactivityCode].c[1].v + $scope.filteredItems[i]['quantity' + $scope.mediumType];
+                    graphData[$scope.summaryItems[i].iaactivityCode].c[1].v =
+                        graphData[$scope.summaryItems[i].iaactivityCode].c[1].v + $scope.summaryItems[i]['quantity' + $scope.mediumTypeSummary];
                 }
             }
 
@@ -107,6 +115,15 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 "rows": graphDataArray
             };
             $scope.chartObject.type = 'PieChart';
+        };
+
+        $scope.updateFacilitiesData = function() {
+            $scope.facilitiesItems = $filter('filter')($scope.items, function (item) {
+                if (item['quantity' + $scope.mediumTypeFacilities]) {
+                    return true;
+                }
+                return false;
+            });
         };
 
         $scope.formatText = function(txt, confidential) {
