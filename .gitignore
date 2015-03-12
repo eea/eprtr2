@@ -18,3 +18,4 @@ org.eclipse.jpt.entitygen.*
 .metadata
 database/test.sql
 eprtrtest.trace.db
+.tmp
