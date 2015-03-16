@@ -18,7 +18,10 @@ import javax.persistence.*;
 
 public class FacilitydetailPollutantrelease implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
+/*	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+*/	
 	@Column(name="AccidentalQuantity")
 	private Double accidentalQuantity;
 
@@ -38,7 +41,8 @@ public class FacilitydetailPollutantrelease implements Serializable {
 	private Integer facilityID;
 	
 	@Id
-	@Column(name="FacilityReportID") private Integer facilityReportID;
+	@Column(name="FacilityReportID") 
+	private Integer facilityReportID;
 
 	@Column(name="GroupCode")
 	private String groupCode;
@@ -51,6 +55,7 @@ public class FacilitydetailPollutantrelease implements Serializable {
 
 	private Integer LOV_PollutantGroupID;
 
+	@Id
 	private Integer LOV_PollutantID;
 
 	@Column(name="MethodCode")
@@ -80,6 +85,11 @@ public class FacilitydetailPollutantrelease implements Serializable {
 	public FacilitydetailPollutantrelease() {
 	}
 
+/*	public Integer getId() {
+		this.id += 1;
+		return this.id;
+	}*/
+
 	public Double getAccidentalQuantity() {
 		return this.accidentalQuantity;
 	}
@@ -99,6 +109,7 @@ public class FacilitydetailPollutantrelease implements Serializable {
 	public String getCas() {
 		return this.cas;
 	}
+
 
 	public void setCas(String cas) {
 		this.cas = cas;

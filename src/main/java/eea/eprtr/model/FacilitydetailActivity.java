@@ -21,6 +21,7 @@ public class FacilitydetailActivity implements Serializable {
 	@Column(name="ActivityIPPCCode")
 	private String activityIPPCCode;
 
+	@Id
 	@Column(name="FacilityReportID")
 	private Integer facilityReportID;
 

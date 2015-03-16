@@ -27,6 +27,7 @@ public class FacilitydetailWastetransfer implements Serializable {
 	@Column(name="FacilityID")
 	private Integer facilityID;
 
+	@Id
 	@Column(name="FacilityReportID")
 	private Integer facilityReportID;
 

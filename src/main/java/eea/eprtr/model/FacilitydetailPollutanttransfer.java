@@ -43,6 +43,7 @@ public class FacilitydetailPollutanttransfer implements Serializable {
 
 	private Integer LOV_PollutantGroupID;
 
+	@Id
 	private Integer LOV_PollutantID;
 
 	@Column(name="MethodCode")

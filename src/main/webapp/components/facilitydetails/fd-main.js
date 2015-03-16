@@ -3,23 +3,49 @@
 angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esrileafmap'])
 
 .controller('FDMainController', 
-		['$scope', '$http', '$filter', '$sce', 'translationService','fdDetailsType', 'fdAuthorityType', 'fdActivityType',
+		['$scope', '$http', '$filter', '$sce', '$modal', 'translationService','fdDetailsType', 'fdAuthorityType', 'fdActivityType',
 		 'fdPollutantreleasesType', 'fdWastetransfersType', 'fdPollutanttransfersType', 
-          function($scope, $http, $filter, $sce, translationService, fdDetailsType, fdAuthorityType, fdActivityType, 
+          function($scope, $http, $filter, $sce, $modal, translationService, fdDetailsType, fdAuthorityType, fdActivityType, 
         		  fdPollutantreleasesType, fdWastetransfersType, fdPollutanttransfersType) {
-	$scope.fdtitle = 'Facility Level';
+	//$scope.fdtitle = Facilitylevel;
 	$scope.headitms = [];
 	$scope.infoitms = [{'order':0,	'clss':'fdTitles', 	'title':'Facility Details',	'val': ' '}];
 	$scope.infoitms2 = [];
+	$scope.showalert = false;
 	var degrees = "°";
 	//    $scope.frID;
 
+    $scope.showModal = false;
+    $scope.toggleModal = function(){
+        $scope.showModal = !$scope.showModal;
+    };
+    
+    $scope.open = function (size) {
+
+        var modalInstance = $modal.open({
+          templateUrl: 'myModalContent.html',
+          controller: 'ModalInstanceCtrl',
+          size: size,
+          resolve: {
+            items: function () {
+              //return $scope.items;
+            }
+          }
+        });
+
+        modalInstance.result.then(function () {
+            //$scope.selected = selectedItem;
+          }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+          });
+        };
 	
 //	Requesting text and title resources 
 	translationService.get().then(function (data) {
 		$scope.tr_f = data.Facility;
 		$scope.tr_c = data.Common;
 		$scope.tr_p = data.Pollutant;
+		$scope.tr_w = data.WasteTransfers;
 		$scope.tr_lna = data.LOV_NACEACTIVITY;
 		$scope.tr_lnr = data.LOV_NUTSREGION;
 		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
@@ -30,8 +56,8 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 		$scope.tr_lmbn = data.LOV_METHODBASIS;
 		$scope.tr_lmtn = data.LOV_METHODTYPE;
 		$scope.tr_lpo = data.LOV_POLLUTANT;
+		$scope.tr_lwt = data.LOV_WASTETREATMENT;
 		$scope.tr_lme = data.LOV_MEDIUM;
-		
 		
     });
 /*	translationService.get('Facility').then(function (data) {
@@ -170,8 +196,6 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 
     }
 
-
-
     $scope.ConfidentialFormat = function(txt, confidential)
         {
             var result = '';
@@ -189,8 +213,14 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
             }
             return result;
         };
-	
-	
+    $scope.active = {
+		fddetails: true
+	};
+    $scope.activateTab = function(tab) {
+    	  $scope.active = {}; //reset
+    	  $scope.active[tab] = true;
+    	}
+        
 	$scope.orderActivities = function(data){
 		var a_list = [];
 		var countAdditional = 0;
@@ -224,6 +254,7 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 			$scope.details = data;
 			$scope.fid = data.facilityId;
 			$scope.year = data.reportingYear;
+			$scope.showalert = data.confidentialIndicator;
         });
 		fdAuthorityType.get($scope.frid).get().then(function(data) {
 			 $scope.authority = data;
@@ -233,12 +264,21 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 		});
 		fdPollutantreleasesType.getList($scope.frid).then(function(data) {
 			 $scope.pollutantreleases = data;
+			 if(!$scope.showalert && data.confidentialIndicator != undefined){
+				 $scope.showalert = data.confidentialIndicator;
+			 }
 		});
 		fdPollutanttransfersType.getList($scope.frid).then(function(data) {
 			 $scope.pollutanttransfers = data;
+			 if(!$scope.showalert && data.confidentialIndicator != undefined){
+				 $scope.showalert = data.confidentialIndicator;
+			 }
 		});
 		fdWastetransfersType.getList($scope.frid).then(function(data) {
 			 $scope.wastetransfers = data;
+			 if(!$scope.showalert && data.confidentialIndicator != undefined){
+				 $scope.showalert = data.confidentialIndicator;
+			 }
 		});
 	
 	};
@@ -247,6 +287,9 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 		fdDetailsType.getByFdIDAndYear($scope.fid,$scope.year).then(function (details) {
 			$scope.details = details[0];
 			$scope.frid = details[0].facilityReportID;
+			 if(!$scope.showalert && details[0].confidentialIndicator != undefined){
+				 $scope.showalert = details[0].confidentialIndicator;
+			 }
 			fdAuthorityType.get(details[0].facilityReportID).get().then(function(authority) {
 				 $scope.authority = authority;
 			});
@@ -255,16 +298,25 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 			});
 			fdPollutantreleasesType.getList(details[0].facilityReportID).then(function(data) {
 				 $scope.pollutantreleases = data;
+				 if(!$scope.showalert && data.confidentialIndicator != undefined){
+					 $scope.showalert = data.confidentialIndicator;
+				 }
 			});
 			fdPollutanttransfersType.getList(details[0].facilityReportID).then(function(data) {
 				 $scope.pollutanttransfers = data;
+				 if(!$scope.showalert && data.confidentialIndicator != undefined){
+					 $scope.showalert = data.confidentialIndicator;
+				 }
 			});
 			fdWastetransfersType.getList(details[0].facilityReportID).then(function(data) {
 				 $scope.wastetransfers = data;
+				 if(!$scope.showalert && data.confidentialIndicator != undefined){
+					 $scope.showalert = data.confidentialIndicator;
+				 }
 			});
         });
 	};
-
+	
 	//Requesting values
 	if ($scope.frid !== undefined && $scope.frid != null && $scope.frid != ''){
 		$scope.updateByFdrid();
@@ -277,14 +329,17 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 
  	$scope.$watchCollection('[tr_c,tr_f, details]', function(value) {
  		if ($scope.tr_c !== undefined && $scope.tr_f !== undefined && $scope.details !== undefined){
+ 			var adr = $scope.details.address != null?
+ 					$scope.details.address + " ," +  $scope.details.postalCode + " ," +  $scope.details.city:
+ 						null;
 			$scope.headitms = [
 	                  			{'order':0,	'clss':'fdTitles',
 	                  				'title':$scope.tr_f.FacilityName,
-	                  				'val': $scope.details.facilityName
+	                  				'val': $scope.ConfidentialFormat($scope.details.facilityName, $scope.details.confidentialIndicator)
 	                  			},
 	                  			{'order':1, 'clss':'fdTitles',
 	                  				'title': $scope.tr_f.Address,
-	                  				'val': $scope.details.address + " ," +  $scope.details.postalCode + " ," +  $scope.details.city
+	                  				'val': $scope.ConfidentialFormat(adr, $scope.details.confidentialIndicator)
 	                  			},
 	/*	                  			{'order':2,'clss':'fdTitles',
 		                  				'title':'Country',
@@ -647,6 +702,64 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 
     return fdWastetransfer;
 }])
+
+/*.directive('modal', function () {
+    return {
+      template: '<div class="modal fade">' + 
+          '<div class="modal-dialog">' + 
+            '<div class="modal-content">' + 
+              '<div class="modal-header">' + 
+                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' + 
+                '<h4 class="modal-title">{{ title }}</h4>' + 
+              '</div>' + 
+              '<div class="modal-body" ng-transclude></div>' + 
+            '</div>' + 
+          '</div>' + 
+        '</div>',
+      restrict: 'E',
+      transclude: true,
+      replace:true,
+      scope:true,
+      link: function postLink(scope, element, attrs) {
+        scope.title = attrs.title;
+
+        scope.$watch(attrs.visible, function(value){
+          if(value == true)
+            $(element).modal('show');
+          else
+            $(element).modal('hide');
+        });
+
+        $(element).on('shown.bs.modal', function(){
+          scope.$apply(function(){
+            scope.$parent[attrs.visible] = true;
+          });
+        });
+
+        $(element).on('hidden.bs.modal', function(){
+          scope.$apply(function(){
+            scope.$parent[attrs.visible] = false;
+          });
+        });
+      }
+    };
+  })*/
+  .controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
+
+/*  $scope.items = items;
+  $scope.selected = {
+    item: $scope.items[0]
+  };*/
+
+  $scope.ok = function () {
+    $modalInstance.close();
+    //$modalInstance.close($scope.selected.item);
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+})
 
 /*
  * This directive enables us to define this module as a custom HTML element
