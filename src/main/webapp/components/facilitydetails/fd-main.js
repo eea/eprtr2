@@ -20,16 +20,40 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 /*
  * Handling Modal popup
  * */
-    $scope.showModal = false;
-    $scope.toggleModal = function(){
-        $scope.showModal = !$scope.showModal;
+/*    $scope.showActivityModal = false;
+    $scope.toggleActivityModal = function(){
+        $scope.showActivityModal = !$scope.showActivityModal;
     };
+    $scope.showPollutantModal = false;
+    $scope.togglePollutantModal = function(){
+        $scope.showPollutantModal = !$scope.showPollutantModal;
+    }; */
     
-    $scope.open = function (size) {
+    $scope.openActivity = function (size) {
 
         var modalInstance = $modal.open({
-          templateUrl: 'myModalContent.html',
-          controller: 'ModalInstanceCtrl',
+          templateUrl: 'myActivityContent.html',
+          controller: 'ModalActivityInstanceCtrl',
+          size: size,
+          resolve: {
+            input: function () {
+              return $scope.tr_lib;
+            }
+          }
+        });
+
+        modalInstance.result.then(function () {
+            //$scope.selected = selectedItem;
+          }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+          });
+        };
+
+    $scope.openPollutant = function (size) {
+
+        var modalInstance = $modal.open({
+          templateUrl: 'myPollutantContent.html',
+          controller: 'ModalPollutantInstanceCtrl',
           size: size,
           resolve: {
             items: function () {
@@ -44,7 +68,7 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
             $log.info('Modal dismissed at: ' + new Date());
           });
         };
-	
+
 /*
  * Load translation resources 
  * */        
@@ -66,7 +90,7 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 		$scope.tr_lpo = data.LOV_POLLUTANT;
 		$scope.tr_lwt = data.LOV_WASTETREATMENT;
 		$scope.tr_lme = data.LOV_MEDIUM;
-		
+		$scope.tr_lib = data.Library;
     });
 /*	translationService.get('Facility').then(function (data) {
 		$scope.tr_f = data;
@@ -834,16 +858,23 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
       }
     };
   })*/
-  .controller('ModalInstanceCtrl', function ($scope, $modalInstance) {
-
-/*  $scope.items = items;
-  $scope.selected = {
-    item: $scope.items[0]
-  };*/
+  .controller('ModalPollutantInstanceCtrl', function ($scope, $modalInstance) {
 
   $scope.ok = function () {
     $modalInstance.close();
-    //$modalInstance.close($scope.selected.item);
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+})
+
+  .controller('ModalActivityInstanceCtrl', function ($scope, $modalInstance, input) {
+
+  $scope.input = input;
+
+  $scope.ok = function () {
+    $modalInstance.close();
   };
 
   $scope.cancel = function () {

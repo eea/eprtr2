@@ -59,7 +59,7 @@ DETAILS
 	           <table class="table table-hover table-condensed borderless">
                     <thead>
                         <tr>
-                            <th class="col-sm-10 " ><button class="btn btn-default btn-xs" title=""><i class="fa fa-info-circle"></i></button> {{tr_f.IndustrialActivities}}</th>
+                            <th class="col-sm-10 " ><button class="btn btn-default btn-xs"  ng-click="openActivity()" title=""><i class="fa fa-info-circle"></i></button> {{tr_f.IndustrialActivities}}</th>
                             <th class="col-sm-2 ">{{tr_f.IPPCcode}}</th>
                         </tr>
                     </thead>
@@ -102,7 +102,7 @@ POLLUTANT RELEASES
     	<br />
     	<div class="col-md-4">{{tr_p.AllValuesAreYearlyReleases}}</div>
     	<div class="col-md-5"></div>
-    	<div class="col-md-3" ><a title="Show pollutant information" ng-click="open()" ><i class="fa fa-info-circle"></i>  {{tr_c.InfoPollutant}}</a></div>
+    	<div class="col-md-3" ><a title="Show pollutant information" ng-click="openPollutant()" ><i class="fa fa-info-circle"></i>  {{tr_c.InfoPollutant}}</a></div>
     </div>
     <div class="row" >
 		<div class="col-md-12" >
@@ -247,7 +247,7 @@ POLLUTANT TRANSFERS
     	<br />
     	<div class="col-md-4">{{tr_p.AllValuesAreYearlyTransfers}}</div>
     	<div class="col-md-5"></div>
-    	<div class="col-md-3"><a title="Show pollutant information" ng-click="toggleModal()"><i class="fa fa-info-circle"></i>  {{tr_c.InfoPollutant}}</a></div>
+    	<div class="col-md-3"><a title="Show pollutant information" ng-click="openPollutant()"><i class="fa fa-info-circle"></i>  {{tr_c.InfoPollutant}}</a></div>
     </div>
      <div class="row" >
 		<div class="col-md-12" >
@@ -453,12 +453,25 @@ CONFIDENTIALITY
 <!-- 
 POLLUTANT MODAL
  -->
-    <script type="text/ng-template" id="myModalContent.html">
+    <script type="text/ng-template" id="myPollutantContent.html">
         <div class="modal-header">
             <h3 class="modal-title">Pollutants Information</h3>
         </div>
         <div class="modal-body">
             <h1>Here we show pollutant info!</h1>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="myActivityContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Industrial Activities</h3>
+        </div>
+        <div class="modal-body">
+            <div ng-bind-html="input.ActivityPageContent" ></div>
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" ng-click="ok()">OK</button>
