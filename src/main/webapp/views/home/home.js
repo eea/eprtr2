@@ -9,9 +9,7 @@ angular.module('myApp.home', ['ngRoute'])
   });
 }])
 
-.controller('HomeCtrl', ['$scope',function($scope) {
-	$scope.queryParams = {};
-	$scope.queryParams.ReportingYear = -1;
+.controller('HomeCtrl', [function() {
 }])
 
 /*
