@@ -73,7 +73,8 @@ background-color: #00446A;
 @media (min-width: 992px) {
   .bs-header h1,
   .bs-header p {
-    margin-right: 380px;
+  /*Style does not work in chrom Why is added ?*/
+    /*margin-right: 380px;*/
   }
 }
 
@@ -201,3 +202,76 @@ border-top: solid 1px black;
 background-color: #EEEDE8;
 vertical-align: top;
 }
+
+/* Feed links*/
+.portlet
+{
+	/*background: none repeat scroll 0 0 #f3f3f3;*/
+}
+
+.portletHeader
+{
+	color: black;
+    font-family: "Open Sans",Verdana,Helvetica,Arial,sans-serif;
+    font-feature-settings: normal;
+    font-kerning: auto;
+    font-language-override: normal;
+    font-size: 160%;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-synthesis: weight style;
+    font-variant: normal;
+    font-weight: normal !important;
+    line-height: 1.4;
+}
+
+#twitter-link, #facebook-link, #youtube-link, #rss-link, #email-link {
+	background: url("http://www.eea.europa.eu/sprite-eeaimages.png") no-repeat scroll 0 0 transparent;
+    padding: 0;
+	display: block;
+    height: 32px;
+    width: 33px;
+} 
+
+#twitter-link
+{
+	background-position: 0 -180px !important;
+}
+
+#facebook-link
+{
+	background-position: 0 -147px !important;
+}
+
+#youtube-link
+{
+	background-position: 0 -213px !important;
+}
+
+#rss-link
+{
+	 background-position: 0 -246px !important;
+}
+
+#email-link
+{
+	background: url("http://www.eea.europa.eu/email_32.png") no-repeat scroll center center transparent;
+}
+
+#europeancommission
+{
+	width:80px;
+	height: 60px;
+}
+
+.footer
+{
+	background: none repeat scroll 0 0 #f3f3f3;
+    min-height: 50px;
+    width: 100%;
+    font-size: 12px;
+}
+
+
+
