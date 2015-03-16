@@ -29,14 +29,18 @@ public class FacilitydetailDetailController {
 	@RequestMapping("/facilitydetailDetails")
 	public FacilitydetailDetail[] getByFacilityIDAndYear(
     		@RequestParam(value = "FacilityID") Integer facilityID,
-    		@RequestParam(value = "ReportingYear") Integer reportingYear){
+    		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear){
 
 		TypedQuery<FacilitydetailDetail> query = null;
-		
-		query = em.createNamedQuery("FacilitydetailDetail.findByFacilityIDAndYear", FacilitydetailDetail.class);
-		query.setParameter("FacilityID", facilityID);
-		query.setParameter("ReportingYear", reportingYear);
-		
+		if (reportingYear != null) {
+			query = em.createNamedQuery("FacilitydetailDetail.findByFacilityIDAndYear", FacilitydetailDetail.class);
+			query.setParameter("FacilityID", facilityID);
+			query.setParameter("ReportingYear", reportingYear);
+		}
+		else{
+			query = em.createNamedQuery("FacilitydetailDetail.findByFacilityID", FacilitydetailDetail.class);
+			query.setParameter("FacilityID", facilityID);
+		}
 		return query.getResultList().toArray(new FacilitydetailDetail[0]);
 	}
 	

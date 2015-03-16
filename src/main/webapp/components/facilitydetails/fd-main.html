@@ -1,7 +1,7 @@
 <div class="container-fluid" >
    <!--Main Banner-->
    <div class="row">
-      <div class="col-md-4 " style="display: inline-block; vertical-align: bottom;">
+      <div class="col-md-6 " style="display: inline-block; vertical-align: bottom;">
           <h2>{{tr_f.Facilitylevel}}</h2>
           <table>
 			  <tr ng-repeat="x in headitms | orderBy : 'order'" >
@@ -11,11 +11,11 @@
 			</table>
 		    </br>
       </div>
-      <div class="col-md-8 text-right"><button class="btn btn-default btn-xs" title="Print"><i class="fa fa-print"></i></button></div>
-      <div class="col-md-8" style="display: inline-block; vertical-align: bottom; float: none; padding-bottom: 5px;">
-           	<p><b>TODO</b> Years elector</p>
-                <!-- input id="whereInput" type="text" class="text-success" placeholder="Recreation Where" ng-model="strwhere" -->
-               <!-- <select ng-model="selectedBaseMapLayer" ng-options="layer.name for layer in baseMapLayers" class="btn btn-default btn-lg dropdown-toggle"></select> -->
+      <div class="col-md-6 text-right"><button class="btn btn-default btn-xs" title="Print"><i class="fa fa-print"></i></button></div>
+      <div class="col-md-2" ></div>
+      <div class="col-md-4" style="display: inline-block; vertical-align: bottom; float: none; padding-bottom: 5px;">
+			<label class="control-label" for="inputReportingYear">Reporting Year:</label>
+			<select class="form-control" ng-change="updateWithNewYear()" ng-model="selectedReportingYear" ng-options="c.name for c in reportingYears | orderBy : 'name'" id="inputReportingYear"></select>
       </div>
    </div>
    <div class="row" ng-hide="showalert? false: true">
