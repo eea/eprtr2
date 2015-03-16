@@ -20,14 +20,6 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 /*
  * Handling Modal popup
  * */
-/*    $scope.showActivityModal = false;
-    $scope.toggleActivityModal = function(){
-        $scope.showActivityModal = !$scope.showActivityModal;
-    };
-    $scope.showPollutantModal = false;
-    $scope.togglePollutantModal = function(){
-        $scope.showPollutantModal = !$scope.showPollutantModal;
-    }; */
     
     $scope.openActivity = function (size) {
 
@@ -41,13 +33,7 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
             }
           }
         });
-
-        modalInstance.result.then(function () {
-            //$scope.selected = selectedItem;
-          }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-          });
-        };
+    };
 
     $scope.openPollutant = function (size) {
 
@@ -61,13 +47,7 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
             }
           }
         });
-
-        modalInstance.result.then(function () {
-            //$scope.selected = selectedItem;
-          }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-          });
-        };
+    };
 
 /*
  * Load translation resources 
