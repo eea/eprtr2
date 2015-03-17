@@ -38,4 +38,30 @@
 
     </div>
 
+	<div ng-show="searchResults">
+        <tabset>
+            <tab heading="Activities" active="activitiesTabActive">
+                <br/>
+                <div ui-grid="gridOptions" ui-grid-pinning ui-grid-expandable class="grid"></div>
+            </tab>
+            <tab heading="Confidentiality" active="confidentialityTabActive">
+                <br/>
+                <div ng-show="confidentialFacilities">
+                    <div>
+                        <img src="images/alert.png" alt="alert" style="border-width:0px;">
+                        <a>Confidentiality claims may affect the result.</a>
+                    </div>
+                    <br/>
+                </div>
+                <p>
+                    The total releases and off site transfers in waste water of single pollutants as well as aggregated amount of waste transferred off-site might be effected by confidentiality claims.
+                </p>
+            </tab>
+        </tabset>
+	</div>
+
 </div>
+
+    <script type="text/ng-template" id="expandableRowTemplate.html">
+		<div ui-grid="row.entity.subGridOptions" style="height:140px;"></div>
+	</script>
