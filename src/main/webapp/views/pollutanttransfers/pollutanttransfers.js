@@ -24,13 +24,22 @@ angular.module('myApp.pollutanttransfers', ['ngRoute','ngTouch', 'ui.grid', 'ui.
         	  }
         	 
         	  $scope.gridOptions.columnDefs = [
-        	    { displayName: ' ', name: 'code', width: '10%'  },
-        	    { displayName: 'Transfer per industrial activities', name: 'code', grouping: { groupPriority: 0 }},
-        	    { displayName: ' ', name: 'code', width: '10%'},
-        	    { displayName: 'Facilities', grouping: { aggregation: uiGridGroupingConstants.aggregation.COUNT }, width: '10%' },
-        	    { displayName: 'Quantity', grouping: { aggregation: uiGridGroupingConstants.aggregation.SUM }, width: '20%'}
+        	    { displayName: ' ', name: 'code'},
+        	    { displayName: 'Transfer per industrial activities', name: 'code', grouping: { groupPriority: 0 }, maxWidth: '40%'},
+        	    { displayName: ' ', name: 'code'},
+        	    { displayName: 'Facilities', name: 'code', grouping: { aggregation: uiGridGroupingConstants.aggregation.COUNT }},
+        	    { displayName: 'Quantity', name: 'code', grouping: { aggregation: uiGridGroupingConstants.aggregation.SUM }}
         	  ];
         	 
+        
+        /*
+         * ActivityTreeListRow(string sectorCode, string activityCode, string subActivityCode,
+                          string pollutantCode,  
+                          int facilities, 
+                          double quantity, 
+                          bool hasChildren)
+         * */
+        
         	 /* $http.get('/data/500_complex.json')
         	    .success(function(data) {
         	      for(i = 0; i < data.length; i++){
