@@ -265,13 +265,34 @@ vertical-align: top;
 	height: 60px;
 }
 
-.footer
-{
-	background: none repeat scroll 0 0 #f3f3f3;
-    min-height: 50px;
-    width: 100%;
-    font-size: 12px;
+/* .footer */
+/* { */
+/* 	background: none repeat scroll 0 0 #f3f3f3; */
+/*     min-height: 50px; */
+/*     width: 100%; */
+/*     font-size: 12px; */
+/* } */
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
 }
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 100px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 100px;
+  background-color: #f5f5f5;
+}
+
 
 
 
