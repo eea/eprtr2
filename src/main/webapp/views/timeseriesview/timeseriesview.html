@@ -1,0 +1,45 @@
+<div class="container-fluid" >
+	<div class="row">
+
+		<div class="search_form col-md-6">
+
+			<div class="panel panel-info">
+				<div class="panel-heading">Search</div>
+				<div class="panel-body">
+
+        <div class="form-group">
+        	<label>PRTR type: </label> 
+        	<label  class="radio-inline">
+	         <input type="radio" name="rbprtrtype" id="rbprtrtype_0" ng-model="searchFilter.prtrtype" value="pollutantrelease" />Pollutant Release</label>
+	        <label class="radio-inline">
+	         <input type="radio" name="rbprtrtype" id="rbprtrtype_1"  ng-model="searchFilter.prtrtype" value="pollutanttransfer" />Pollutant Transfer</label>
+	        <label  class="radio-inline">
+	         <input type="radio" name="rbprtrtype" id="rbprtrtype_2"  ng-model="searchFilter.prtrtype" value="wastetransfer" />Waste Transfer</label>
+        </div>
+
+					<div search-placement>
+					</div>
+
+					<accordion close-others="{{false}}">
+                        <div activity-search-filter-directive>
+                        </div>
+						<div pollutant-search-filter-directive>
+                        </div>
+                        <div waste-search-filter-directive>
+                        </div>
+					</accordion>
+
+					<div>
+                        <input type="submit" value="Search" ng-click="search()" class="btn btn-default">
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+		<div class="col-md-6">
+		<timeseries prtr="{{prtrtype1}}" queryParams="{{filter}}" year={{year}} />
+		</div>
+</div>		
+</div>

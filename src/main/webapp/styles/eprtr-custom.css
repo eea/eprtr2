@@ -294,5 +294,12 @@ body {
 }
 
 
-
+.radio-simple {
+  display: inline-block;
+  padding-left: 10px;
+  margin-bottom: 0;
+  font-weight: normal;
+  vertical-align: top;
+  cursor: pointer;
+}
 

@@ -17,7 +17,9 @@ var myApp = angular.module('myApp', [
         'myApp.industrialactivity',
         'myApp.pollutantreleases',
         'myApp.pollutanttransfers',
-        'myApp.wastetransfers'
+        'myApp.wastetransfers',
+        'myApp.timeseriesview',
+        'myApp.timeseries'
     ])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/home'});
