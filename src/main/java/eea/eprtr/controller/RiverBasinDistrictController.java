@@ -24,10 +24,10 @@ public class RiverBasinDistrictController {
     	return query.getResultList().toArray(new RiverBasinDistrict[0]);
     }
 
-	@RequestMapping("/riverBasinDistricts/{riverBasinCode}")
-    public RiverBasinDistrict getRiverBasinDistrict(@PathVariable(value = "riverBasinCode") String riverBasinCode){
-    	TypedQuery<RiverBasinDistrict> query = em.createNamedQuery("RiverBasinDistrict.findByCode", RiverBasinDistrict.class);
-    	query.setParameter("RiverBasinCode", riverBasinCode);
+	@RequestMapping("/riverBasinDistricts/{id}")
+    public RiverBasinDistrict getRiverBasinDistrict(@PathVariable(value = "id") Integer id){
+    	TypedQuery<RiverBasinDistrict> query = em.createNamedQuery("RiverBasinDistrict.findByID", RiverBasinDistrict.class);
+    	query.setParameter("Id", id);
     	return query.getSingleResult();
     }
 

@@ -3,8 +3,10 @@
 angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 
 .controller('TimeseriesController', 
-		['$scope', '$http', '$filter', 'translationService', 'lovPollutantType',
-          function($scope, $http, $filter, translationService, lovPollutantType ) {
+		['$scope', '$http', '$filter', 'translationService', 'lovPollutantType','lovCountryType', 
+		 'lovAreaGroupType', 'lovNutsRegionType', 'riverBasinDistrictsType', 'annexIActivityType', 'naceActivityType', 
+          function($scope, $http, $filter, translationService, lovPollutantType, lovCountryType, 
+        		  lovAreaGroupType, lovNutsRegionType, riverBasinDistrictsType, annexIActivityType, naceActivityType ) {
 
 /**		
  * Basic parameters
@@ -14,6 +16,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 	$scope.showalert = false;
 	$scope.showGroup = false;
 	$scope.base = {};
+	$scope.filter = {}
 	//DATA
 	$scope.tscoll = [];
 	
@@ -35,16 +38,25 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 		$scope.tr_p = data.Pollutant;
 		$scope.tr_w = data.WasteTransfers;
 		$scope.tr_lcf = data.LOV_CONFIDENTIALITY;
+		$scope.tr_lag = data.LOV_AREAGROUP;
+		$scope.tr_lnr = data.LOV_NUTSREGION;
+		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
+		$scope.tr_lco = data.LOV_COUNTRY;
+		$scope.tr_la = data.Activity;
+		$scope.tr_lna = data.LOV_NACEACTIVITY;
+		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
+		
+		
     });
 
-	$scope.$watch('queryParams', function(value) {
-		if($scope.queryParams != undefined){
+	$scope.reqpollutanttransfere = function() {
+		if($scope.queryParams.pollutantSearchFilter != undefined){
 			/**
 			 * We use pollutants for Pollutanttransfer and Pollutantrelease  
 			 * */
 			if($scope.queryParams.pollutantSearchFilter.PollutantID !== undefined){
 				/*Request LOV_pollutant*/
-				lovPollutantType.getById($scope.queryParams.pollutantSearchFilter.PollutantID).then(function(data) {
+				lovPollutantType.getByID($scope.queryParams.pollutantSearchFilter.PollutantID).then(function(data) {
 					// returns pollutant object 
 					$scope.base.pollutant = data;
 					if(data.parentID != null){
@@ -59,7 +71,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 			}
 			
 		} 
-	});
+	};
 
 
 		/**
@@ -79,26 +91,34 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
             }*/
         });
 
-	$scope.$watchCollection('[prtr,tr_c]', function(value) {
+	$scope.$watchCollection('[queryParams,tr_c]', function(value) {
+		if($scope.tr_c != undefined && $scope.queryParams != undefined  && $scope.queryParams != ""){
+			$scope.createheader();
+		}
+	});
+        
+	$scope.$watchCollection('[content,tr_c]', function(value) {
 		if($scope.tr_c != undefined){
 	        /**
 	         * Set prtr scope
 	         */
-			switch($scope.prtr){
+			switch($scope.content){
 				case 'pollutantrelease': 
 					$scope.title = 'Time Series - ' + $scope.tr_c.PollutantReleases;
 					$scope.ConfidentialityExplanation = $scope.tr_t.ConfidentialityExplanationPR1;
+					$scope.filter.prsel ="air";
 					//Request data
 					break;
 				case 'pollutanttransfer': 
 					$scope.title = 'Time Series - ' + $scope.tr_c.PollutantTransfers;
 					$scope.ConfidentialityExplanation = $scope.tr_t.ConfidentialityExplanationPT1;
+					//$scope.filter.prsel ="air";
 					//Request data
 					break;
 				case 'wastetransfer': 
 					$scope.title = 'Time Series - ' + $scope.tr_c.WasteTransfers;
 					$scope.ConfidentialityExplanation = $scope.tr_t.ConfidentialityExplanationWT1;
-					$scope.wtsel = 'nonhw';
+					$scope.filter.wtsel = 'nonhw';
 					//Request data
 					break;
 			}
@@ -106,7 +126,93 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 	});
 		
 		/*HEADER*/
+	$scope.createheader = function(){
+		$scope.headitms = [];
+		//Area
+		var area = {'order':0,	'clss':'fdTitles', 'title':$scope.tr_c.Area};
+		if($scope.queryParams.LOV_AreaGroupID != undefined){
+			// Get list of Countries using AreaGroup ID
+			lovAreaGroupType.getByID($scope.queryParams.LOV_AreaGroupID).get().then(function(data) {
+				area.val = $scope.tr_lag[data.code];
+				$scope.headitms.push(area);
+			});
+		}
+		else if($scope.queryParams.LOV_CountryID != undefined){
+			//We use LOV_NUTSRegionID for title
+			if($scope.queryParams.LOV_NUTSRegionID != undefined){
+				lovNutsRegionType.getByID($scope.queryParams.LOV_NUTSRegionID).get().then(function(data) {
+					area.val = $scope.tr_lnr[data.code];
+					$scope.headitms.push(area);
+				});
+			}
+			//We use LOV_RiverBasinDistrictID for title
+			else if($scope.queryParams.LOV_RiverBasinDistrictID != undefined){
+				riverBasinDistrictsType.getByID($scope.queryParams.LOV_RiverBasinDistrictID).get().then(function(data) {
+					area.val = $scope.tr_lrbd[data.code];
+					$scope.headitms.push(area);
+				});
+			}
+			//We use LOV_CountryID for title
+			else{
+				lovCountryType.getByID($scope.queryParams.LOV_CountryID).get().then(function(data) {
+					area.val = $scope.tr_lco[data.countryCode];
+					$scope.headitms.push(area);
+				});
+			}
+		}
+		//Industrial Activity
+		var act = {'order':1, 'clss':'fdTitles'};
+		act.val = $scope.tr_c["AllSectors"];
+        if ($scope.queryParams.LOV_NACESubActivityID != undefined) {
+            act.title = $scope.tr_la['NACE'];
+            naceActivityType.getByID($scope.queryParams.LOV_NACESubActivityID).get().then(function(data) {
+        		act.val = $scope.tr_lna[data.code];
+				$scope.headitms.push(act);
+			});
+        } else if ($scope.queryParams.LOV_NACEActivityID != undefined) {
+            act.title = $scope.tr_la['NACE'];
+            naceActivityType.getByID($scope.queryParams.LOV_NACEActivityID).get().then(function(data) {
+        		act.val = $scope.tr_lna[data.code];
+				$scope.headitms.push(act);
+			});
+        } else if ($scope.queryParams.LOV_NACESectorID != undefined) {
+            act.title = $scope.tr_la['NACE'];
+            naceActivityType.getByID($scope.queryParams.LOV_NACESectorID).get().then(function(data) {
+        		act.val = $scope.tr_lna[data.code];
+				$scope.headitms.push(act);
+			});
+        }
+        else if ($scope.queryParams.LOV_AISubActivityID != undefined) {
+			act.title = $scope.tr_la['AnnexI'];
+        	annexIActivityType.getByID($scope.queryParams.LOV_AISubActivityID).get().then(function(data) {
+        		act.val = $scope.tr_laa[data.code];
+				$scope.headitms.push(act);
+			});
+        } else if ($scope.queryParams.LOV_AIActivityID != undefined) {
+			act.title = $scope.tr_la['AnnexI'];
+        	annexIActivityType.getByID($scope.queryParams.LOV_AIActivityID).get().then(function(data) {
+        		act.val = $scope.tr_laa[data.code];
+				$scope.headitms.push(act);
+			});
+        } else if ($scope.queryParams.LOV_AISectorID != undefined) {
+			act.title = $scope.tr_la['AnnexI'];
+        	annexIActivityType.getByID($scope.queryParams.LOV_AISectorID).get().then(function(data) {
+        		act.val = $scope.tr_laa[data.code];
+				$scope.headitms.push(act);
+			});
+        }
+
+		//Pollutant
+	    if ($scope.queryParams.pollutantSearchFilter != undefined){
+	    	
+	    }
 		
+		//Releases to
+		
+		//Waste type
+	    if ($scope.queryParams.wasteSearchFilter != undefined){}
+	};
+	
 /*		$scope.headitms = [
                  			{'order':0,	'clss':'fdTitles',
                  				'title':$scope.tr_f.FacilityName,
@@ -224,13 +330,46 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
  * */
 .factory('lovPollutantType', ['lovPollutantService', function(lovPollutantService) {
         return {
-            getById : function(id) {
+        	getByID : function(id) {
                 return lovPollutantService.one(id);
             }
         };
     }])
 
+.factory('lovCountryType', ['lovCountryService', function(lovCountryService) {
+        return {
+        	getByID : function(id) {
+                return lovCountryService.one(id);
+            }
+        };
+    }])
 
+.factory('lovAreaGroupType', ['lovAreaGroupService', function(lovAreaGroupService) {
+    return {
+    	getByID : function(id) {
+            return lovAreaGroupService.one(id);
+        }
+    };
+}])
+
+.factory('lovNutsRegionType', ['lovNutsRegionService', function(lovNutsRegionService) {
+    return {
+    	getByID : function(id) {
+            return lovNutsRegionService.one(id);
+        }
+    };
+}])
+
+.factory('riverBasinDistrictsType', ['riverBasinDistrictsService', function(riverBasinDistrictsService) {
+    return {
+    	getByID : function(id) {
+            return riverBasinDistrictsService.one(id);
+        }
+    };
+}])
+
+    
+    
 /*
  * SERVICES
  * **/
@@ -248,6 +387,61 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
     return lovPollutant;
 }])
 
+.service('lovCountryService', ['Restangular', function(Restangular){
+    var lovCountry = Restangular.service('lovCountry');
+
+    Restangular.extendModel('lovCountry', function(model) {
+        model.getDisplayText = function() {
+            return this.code + ' ' + this.name;
+        };
+        return model;
+    });
+
+    return lovCountry;
+}])
+
+.service('lovAreaGroupService', ['Restangular', function(Restangular){
+    var lovAreaGroup = Restangular.service('lovAreaGroup');
+
+    Restangular.extendModel('lovAreaGroup', function(model) {
+        model.getDisplayText = function() {
+            return this.code + ' ' + this.name;
+        };
+        return model;
+    });
+
+    return lovAreaGroup;
+}])
+
+.service('lovNutsRegionService', ['Restangular', function(Restangular){
+    var lovNutsRegion = Restangular.service('nutsRegion');
+
+    Restangular.extendModel('nutsRegion', function(model) {
+        model.getDisplayText = function() {
+            return this.code + ' ' + this.name;
+        };
+        return model;
+    });
+
+    return lovNutsRegion;
+}])
+
+.service('riverBasinDistrictsService', ['Restangular', function(Restangular){
+    var riverBasinDistricts = Restangular.service('riverBasinDistricts');
+
+    Restangular.extendModel('riverBasinDistricts', function(model) {
+        model.getDisplayText = function() {
+            return this.code + ' ' + this.name;
+        };
+        return model;
+    });
+
+    return riverBasinDistricts;
+}])
+
+
+
+
 /*
  * This directive enables us to define this module as a custom HTML element
  *  
@@ -259,8 +453,8 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 		controller: 'TimeseriesController',
         transclude: true,
 		scope: {
-			prtr: '@', /*[pollutantrelease,pollutanttransfer,wastetransfer]*/
-			queryParams: '=', /* Filter needs to include area, activity, [pollutant, medium, wastetype ]/  */
+			content: '@', /*[pollutantrelease,pollutanttransfer,wastetransfer]*/
+			queryParams: '=queryParams', /* Filter needs to include area, activity, [pollutant, medium, wastetype ]/  */
 			year: '@'
 		},
 		templateUrl: 'components/timeseries/timeseries.html',

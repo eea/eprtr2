@@ -3,8 +3,8 @@
 
 
    <div class="row">
-      <div class="col-md-6 " style="display: inline-block; vertical-align: bottom;">
-          <h2>{{title}}</h2>
+      <div class="col-md-8 " style="display: inline-block; vertical-align: bottom;">
+          <h2><small>{{title}}</small></h2>
           <table>
 			  <tr ng-repeat="x in headitms | orderBy : 'order'" >
 			    <td class="{{x.clss}}">{{ x.title }}:</td>
@@ -13,7 +13,7 @@
 			</table>
 		    </br>
       </div>
-      <div class="col-md-6 text-right">
+      <div class="col-md-4 text-right" style="padding-top:5px;">
       	  <button class="btn btn-default btn-xs" title="Print"><i class="fa fa-print"></i></button>
 	      <button class="btn btn-default btn-xs" title="Download"><i class="fa fa-download"></i></button>
 	  </div>
@@ -28,26 +28,26 @@
    <div class="row" style="padding-top:10px;" ng-hide="prtr != 'pollutantrelease'">
         	<div class="col-md-12 "><strong>{{tr_p.ShowFacilitiesReleasingToMedium}}</strong></br> 
         	<label class="col-md-4 radio-simple">
-	         <input type="radio" name="prsel" ng-model="$parent.prsel" ng-value="air" /> {{tr_c.Air}} ({{wtselcoll.NOAIR | number}} {{tr_c.Facilities}})
+	         <input type="radio" name="prsel" ng-model="filter.prsel" ng-value="air" /> {{tr_c.Air}} ({{wtselcoll.NOAIR | number}} {{tr_c.Facilities}})
 	        </label>
 	        <label  class="col-md-4 radio-simple">
-	         <input type="radio" name="prsel" ng-model="$parent.prsel" ng-value="water" /> {{tr_c.Water}} ({{wtselcoll.NOWATER | number}} {{tr_c.Facilities}})
+	         <input type="radio" name="prsel" ng-model="filter.prsel" ng-value="water" /> {{tr_c.Water}} ({{wtselcoll.NOWATER | number}} {{tr_c.Facilities}})
 	        </label>
 	        <label  class="col-md-4 radio-simple">
-	         <input type="radio" name="prsel" ng-model="$parent.prsel" ng-value="soil" /> {{tr_c.Soil}} ({{wtselcoll.NOSOIL | number}} {{tr_c.Facilities}})
+	         <input type="radio" name="prsel" ng-model="filter.prsel" ng-value="soil" /> {{tr_c.Soil}} ({{wtselcoll.NOSOIL | number}} {{tr_c.Facilities}})
          	</label>
          	</div>
        </div>
    <div class="row" style="padding-top:10px;" ng-hide="prtr != 'wastetransfer'">
         	<div class="col-md-12"><strong>{{tr_w.ShowFacilitiesWithTransferOfWasteType}}</strong></br> 
         	<label class="col-md-4 radio-simple">
-	         <input type="radio" name="wtsel" ng-model="$parent.wtsel" ng-value="nonhw" /> {{tr_c.NoHazardouswaste}} ({{wtselcoll.NONHW | number}} {{tr_c.Facilities}})
+	         <input type="radio" name="wtsel" ng-model="filter.wtsel" ng-value="nonhw" /> {{tr_c.NoHazardouswaste}} ({{wtselcoll.NONHW | number}} {{tr_c.Facilities}})
 	        </label>
 	        <label class="col-md-4 radio-simple">
-	         <input type="radio" name="wtsel" ng-model="$parent.wtsel" ng-value="hwic" /> {{tr_c.HazardouswasteWithinCountry}} ({{wtselcoll.HWIC | number}} {{tr_c.Facilities}})
+	         <input type="radio" name="wtsel" ng-model="filter.wtsel" ng-value="hwic" /> {{tr_c.HazardouswasteWithinCountry}} ({{wtselcoll.HWIC | number}} {{tr_c.Facilities}})
 	        </label>
 	        <label  class="col-md-4 radio-simple">
-	         <input type="radio" name="wtsel" ng-model="$parent.wtsel" ng-value="hwoc" /> {{tr_c.HazardouswasteTransboundary}} ({{wtselcoll.HWOC | number}} {{tr_c.Facilities}})
+	         <input type="radio" name="wtsel" ng-model="filter.wtsel" ng-value="hwoc" /> {{tr_c.HazardouswasteTransboundary}} ({{wtselcoll.HWOC | number}} {{tr_c.Facilities}})
          	</label>
          	</div>
         </div>

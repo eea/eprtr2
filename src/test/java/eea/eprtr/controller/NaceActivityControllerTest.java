@@ -49,4 +49,15 @@ public class NaceActivityControllerTest extends UnitilsJUnit4 {
         	.andExpect(content().contentType("application/json;charset=UTF-8"))
         	.andExpect(content().string(expectedResponse));
 	}
+	
+	@Test
+	public void testThatControllerGetReturnsTheSameAsRepositoryGet() {
+		NaceActivityRepository repository = mock(NaceActivityRepository.class);
+		NaceActivityController controller = new NaceActivityController(repository);
+		Integer id = new Integer(1);
+		NaceActivity getItemReturnedByRepository = new NaceActivity();
+		when(repository.get(id)).thenReturn(getItemReturnedByRepository);
+		NaceActivity item = controller.get(id);
+		assertSame(item, getItemReturnedByRepository);
+	}
 }

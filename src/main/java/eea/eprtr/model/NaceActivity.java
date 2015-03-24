@@ -21,7 +21,7 @@ import javax.persistence.*;
 				hints = { @QueryHint(name = "org.hibernate.cacheable", value = "true") }
 				),
 		@NamedQuery(
-				name = "NaceActivity.findByCode", query = "SELECT l FROM NaceActivity l where code = :NaceActivityCode", 
+				name = "NaceActivity.findByID", query = "SELECT l FROM NaceActivity l where LOV_NACEActivityID = :Id", 
 				hints = { @QueryHint(name = "org.hibernate.cacheable", value = "true") }
 				) 
 		})
