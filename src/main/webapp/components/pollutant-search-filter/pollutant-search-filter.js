@@ -26,7 +26,7 @@ angular.module('myApp.pollutantSearchFilter', ['restangular', 'myApp.search-filt
                 $scope.pollutants = [allPollutants];
                 $scope.pollutantSearchFilter.selectedPollutant = allPollutants;
             }
-            if (pollutantSearchFilter.selectedPollutantGroup.lov_PollutantID) {
+            if (pollutantSearchFilter.selectedPollutantGroup && pollutantSearchFilter.selectedPollutantGroup.lov_PollutantID) {
                 pollutantService.getList({ParentID: pollutantSearchFilter.selectedPollutantGroup.lov_PollutantID}).then(function (data) {
                     $scope.pollutants = $scope.pollutants.concat(data);
                     $scope.pollutantSearchFilter.selectedPollutant = $scope.pollutants[0];
@@ -48,16 +48,16 @@ angular.module('myApp.pollutantSearchFilter', ['restangular', 'myApp.search-filt
                     queryParams.Accidental = 1;
                 }
                 var mediumCodes = [];
-                if (!this.releasesToAir) {
+                if (this.releasesToAir) {
                     mediumCodes = mediumCodes.concat('AIR');
                 }
-                if (!this.releasesToWater) {
+                if (this.releasesToWater) {
                     mediumCodes = mediumCodes.concat('WATER');
                 }
-                if (!this.releasesToSoil) {
+                if (this.releasesToSoil) {
                     mediumCodes = mediumCodes.concat('LAND');
                 }
-                if (!this.transfersToWasteWater) {
+                if (this.transfersToWasteWater) {
                     mediumCodes = mediumCodes.concat('WASTEWATER');
                 }
                 if (mediumCodes.length > 0) {
