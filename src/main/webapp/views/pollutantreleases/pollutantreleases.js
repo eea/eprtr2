@@ -9,7 +9,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         });
     }])
 
-    .controller('PollutantReleasesCtrl', ['$scope', '$filter', 'searchFilter', 'Restangular', function($scope, $filter, searchFilter, Restangular) {
+    .controller('PollutantReleasesCtrl', ['$scope', '$filter', 'searchFilter', 'Restangular','translationService', function($scope, $filter, searchFilter, Restangular,translationService) {
         $scope.pollutantPanel = true;
         $scope.showReleasesToInputField = true;
         $scope.pollutantPanelTitle = 'Pollutant releases';
@@ -17,7 +17,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         $scope.searchFilter = searchFilter;
         $scope.queryParams = {};
         $scope.queryParams.ReportingYear = -1;
-
+        
         $scope.$watch('mediumTypeSummary', function(value) {
             if ($scope.items) {
                 $scope.updateSummaryData();
@@ -46,9 +46,9 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
             var rest = Restangular.withConfig(function(RestangularConfigurer) {
                 RestangularConfigurer.setFullResponse(true);
             });
-
+            $scope.regionSearch = false;
             var facilitySearch = rest.all('pollutantreleaseSearch');
-
+            	
             var queryParams = {ReportingYear: $scope.currentSearchFilter.selectedReportingYear.year};
             if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.countryId) {
                 queryParams.LOV_CountryID = $scope.currentSearchFilter.selectedReportingCountry.countryId;
@@ -59,6 +59,14 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                     queryParams.LOV_RiverBasinDistrictID = $scope.currentSearchFilter.selectedRegion.lov_RiverBasinDistrictID;
                 }
             }
+            if(searchFilter.regionType == 0)
+            {
+            	$scope.regionSearch = true;
+            }else
+            {
+            	$scope.regionSearch = false;
+            }
+            
             if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.groupId) {
                 queryParams.LOV_AreaGroupID = $scope.currentSearchFilter.selectedReportingCountry.groupId;
             }
@@ -83,6 +91,11 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 $scope.updateSummaryData();
                 $scope.updateFacilitiesData();
                 $scope.updateAreaComparisonData();
+                
+                $scope.updateActivitiesData();
+                $scope.updateAreasData();
+                $scope.updateConfidentialityData();
+                
             });
         };
 
@@ -172,6 +185,73 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
             };
             $scope.areaComparisonChartObject.type = 'BarChart';
         };
+        
+        $scope.updateActivitiesData = function()
+        {
+        	// Releases per industrial activity Facilities Air Water Soil
+        };
+        
+        
+        
+        $scope.showinfo = function(data, ref)
+        {
+        
+        	alert('test');
+        };
+        
+        /*Two levels*/
+        $scope.updateAreasData = function()
+        {
+        	$scope.contries = [];
+        	$scope.groupby('countryCode',false); //,'facilityID');
+        	
+        	translationService.get().then(function (data) {
+        		$scope.tr_lco = data.LOV_COUNTRY;
+        		$scope.tr_lnr = data.LOV_NUTSREGION;
+        		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
+        		$scope.tr_f = data.Facility;
+        		$scope.tr_c = data.Common;
+        		$scope.tr_p = data.Pollutant;
+        		
+        		/*$scope.tr_f = data.Facility;
+        		$scope.tr_c = data.Common;
+        		$scope.tr_p = data.Pollutant;
+        		$scope.tr_w = data.WasteTransfers;
+        		$scope.tr_lna = data.LOV_NACEACTIVITY;
+        		$scope.tr_lnr = data.LOV_NUTSREGION;
+        		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
+        		$scope.tr_lu = data.LOV_UNIT;
+        		$scope.tr_lcf = data.LOV_CONFIDENTIALITY;
+        		$scope.tr_lco = data.LOV_COUNTRY;
+        		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
+        		$scope.tr_lmbn = data.LOV_METHODBASIS;
+        		$scope.tr_lmtn = data.LOV_METHODTYPE;
+        		$scope.tr_lpo = data.LOV_POLLUTANT;
+        		$scope.tr_lwt = data.LOV_WASTETREATMENT;
+        		$scope.tr_lme = data.LOV_MEDIUM;
+        		$scope.tr_lib = data.Library;*/
+            });
+        	
+        	$scope.areasItems = $filter('filter')($scope.items, function (item) {
+        		return true; // Return all for now
+        	});
+        	// $scope.items
+        	// alert('Grid Area data');
+        	// gridAreas
+        	// Translate
+        	/*
+        	nutslevel2RegionCode  region
+        	riverBasinDistrictCode
+        	*/	
+        	// countryCode
+        	// $scope.gridAreasOptions.data = $scope.items;
+        };
+        
+        $scope.updateConfidentialityData = function()
+        {
+        	// Pia chart
+        	//alert('Grid Confidentiality Data');
+        };
 
         $scope.formatText = function(txt, confidential) {
             if (txt)
@@ -228,5 +308,157 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 return "-";
             }
         };
+        
+     
+  
+        
+        $scope.getSum = function(item, type)
+        {
+        	if(!item.length)
+        	{
+        		item = jQuery.makeArray(item);
+        	}
+        	var sum = 0;
+    		for(var i = 0; i < item.length; i++)
+			{
+				 var temp = item[i][type];
+				 if(temp)
+				 {
+					 sum += temp;
+				 }
+			}
+    		if(sum == 0)
+    		{
+    			return "-";
+    		}
+    		// TODO format
+    		return sum;
+     
+        };
+        
+        $scope.getTypeCount = function(item, type){  
+            
+        	if(!item.length)
+        	{
+        		item = jQuery.makeArray(item);
+        	}
+            
+            var total = 0;
+            for(var i = 0; i < item.length; i++){
+                if(type=="facility")
+                {
+                	total += item[i].fcount;
+                }else
+                {
+                	total += item[i].facount;
+                }
+            }
+            return total;
+        }
+        
+        $scope.groupby = function(propertyGP1, propertyGP2)
+        {
+        	$scope.contries = [];
+        	var gval = "_nogruopvalue_";
+        	for ( var i = 0; i < $scope.items.length; i++ ) {
+        		var record = $scope.items[i];
+        	
+        		if(record[propertyGP1] !== gval)
+        		{
+        			var group = {
+    					key: record[propertyGP1],
+    					data:[]
+        			};
+        			gval = group.key;
+        			$scope.contries.push(group);
+        		}
+        		var exist = false;
+        		
+        		for(var j = 0;j< group.data.length; j++)
+        		{
+        			if(group.data[j].riverBasinDistrictCode == record.riverBasinDistrictCode)
+        			{
+        				// Groupe
+        				if(record.quantityAir)
+        				{
+        					group.data[j].quantityAir += record.quantityAir;
+        				}
+        				if(record.quantitySoil)
+        				{
+        					group.data[j].quantitySoil += record.quantitySoil;	
+        				}
+        				if(record.quantityWater)
+        				{
+        					group.data[j].quantityWater += record.quantityWater;
+        				}
+        				var accidentalfound = false;
+        				if(record.quantityAccidentalAir)
+        				{
+        					group.data[j].quantityAccidentalAir += record.quantityAccidentalAir;
+        					accidentalfound = true;
+        				}
+        				if(record.quantityAccidentalSoil)
+        				{
+        					group.data[j].quantityAccidentalSoil += record.quantityAccidentalSoil;
+        					accidentalfound = true;
+        				}
+        				if(record.quantityAccidentalWater)
+        				{
+        					group.data[j].quantityAccidentalWater += record.quantityAccidentalWater;
+        					accidentalfound = true;
+        				}
+        				group.data[j].fcount+=1;
+        				if(accidentalfound)
+        				{
+        					group.data[j].facount+=1;
+        				}
+        				exist = true;
+        				break;
+        			}
+        		}
+        		if(!exist)
+        		{
+        			record.fcount = 1;
+        			if(record.quantityAccidentalAir || record.quantityAccidentalSoil || record.quantityAccidentalWater)
+        			{
+        				record.facount = 1;
+        			}else
+        			{
+        				record.facount = 0;
+        			}
+        			group.data.push(record);
+        		}        		
+        		//group.data.push(record);
+        	}
+        	
+        	
+        	if(!propertyGP2)
+        	{
+        		return;
+        	}
+        	
+        	for(var i = 0; i<$scope.contries.length;i++)
+        	{
+        		var gval2 = "_nogruopvalue_";
+        		// Get groupe1
+        		var levelGP2 = $scope.contries[i];
+        		for(var j = 0; j < levelGP2.data.length; j++)
+        		{
+        			var record = levelGP2.data[j];
+        			if(record[propertyGP2] !== gval2)
+        			{
+        				var group2 = {
+        						key: record[propertyGP2],
+        						data2:[]
+        				};
+        				gval2 = group2.key; 
+        				$scope.contries[i].data.push(group2);
+        			}
+        			group2.data2.push(record);
+        		}
+        	}
+        	
+        };
+        
     }])
 ;

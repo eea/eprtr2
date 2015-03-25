@@ -51,10 +51,157 @@
                 </div>
             </tab>
             <tab heading="Activities">
-
+<div>
+				<h3>Pollutant releases</h3>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			Pollutant:</div>
+       			<div class="col-md-3">
+       			{{currentSearchFilter.pollutantSearchFilter.selectedPollutant.name}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			Year:
+       			</div>
+       			<div class="col-md-1">
+       			{{queryParams.ReportingYear}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			Area:
+       			</div>
+       			<div class="col-md-3">
+       			{{currentSearchFilter.selectedReportingCountry.name}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			Facilities:
+       			</div>
+       			<div class="col-md-1">
+       			{{items.length}}
+       			</div>
+			</div>
+			
+			<br />
+			All values are yearly releases.
+			<br/>
+			
             </tab>
+            
             <tab heading="Areas">
+			<div>
+				<h3>Pollutant releases</h3>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			Pollutant:</div>
+       			<div class="col-md-3">
+       			{{currentSearchFilter.pollutantSearchFilter.selectedPollutant.name}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			Year:
+       			</div>
+       			<div class="col-md-1">
+       			{{queryParams.ReportingYear}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			Area:
+       			</div>
+       			<div class="col-md-3">
+       			{{currentSearchFilter.selectedReportingCountry.name}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			Facilities:
+       			</div>
+       			<div class="col-md-1">
+       			{{items.length}}
+       			</div>
+			</div>
+			
+			<br />
+			All values are yearly releases.
+			<br/>
 
+    			<!-- <div ng-repeat-start="team in teams" class="header">{{team.name}}</div>
+    			<div ng-repeat="player in team.players">{{player.firstName}} {{player.lastName}}</div>
+    			<div ng-repeat-end><br /></div>-->
+
+			 <table class="table table-striped table-condensed table-hover">
+                    <thead>
+                    <tr>
+                    	<th>&nbsp;</th>
+                        <th>{{tr_p.ReleasesPerCountry}}&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>{{tr_p.Facilities}}&nbsp;</th>
+                        <th>{{tr_p.Air}}&nbsp;</th>
+                        <th>{{tr_p.Water}}&nbsp;</th>
+                        <th>{{tr_p.Soil}}&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody >
+                    <!-- First level -->
+                    <tr ng-repeat-start="item in contries" ><!-- ng-click="showing=!showing" ng-click="showinfo(item, this)" -->
+                        <td><img src="images/timeseries.png" class="timesericesImage" ng-click="alert('TODO')" alt="" /></td>
+                        <td>
+                        <img ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
+                        <img ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
+                        <a ng-click="showing=!showing">{{tr_lco[item.key]}}</a></td>            
+                        <td>
+                        {{tr_p.ReleasesAccidentialTotal}}<br/>
+                        {{tr_p.ReleasesAccidentalValue}}
+                        </td>
+                        <td>{{getTypeCount(item.data,"facility")}}<br />{{getTypeCount(item.data,"accidental")}}</td>
+                        <td>{{getSum(item.data,"quantityAir")}}<br/>{{getSum(item.data,"quantityAccidentalAir")}}</td>
+                        <td>{{getSum(item.data,"quantityWater")}}<br />{{getSum(item.data,"quantityAccidentalWater")}}</td>
+                        <td>{{getSum(item.data,"quantitySoil")}}<br />{{getSum(item.data,"quantityAccidentalSoil")}}</td>
+                    </tr>
+                    <!-- Second level -->
+                    <tr ng-show="showing" ng-repeat-start="item2 in item.data">
+                        	<td><img src="images/timeseries.png" class="timesericesImage" ng-click="showinfo(item2, this)" alt="" /></td>
+                        	
+                        	<td ng-if="regionSearch">
+                        		{{tr_lnr[item2.nutslevel2RegionCode]}}
+                        	</td>
+                        	<td ng-if="!regionSearch">
+                        		{{tr_lrbd[item2.riverBasinDistrictCode]}}
+                        	</td>
+                        	        
+                        	<td>
+                        	{{tr_p.ReleasesAccidentialTotal}}<br/>
+                        	{{tr_p.ReleasesAccidentalValue}}
+                        	</td>
+                        	<td>{{getTypeCount(item2,"facility")}}<br />{{getTypeCount(item2,"accidental")}}</td>
+                         	<td>{{getSum(item2,"quantityAir")}}<br/>{{getSum(item2,"quantityAccidentalAir")}}</td>
+                        	<td>{{getSum(item2,"quantityWater")}}<br />{{getSum(item2,"quantityAccidentalWater")}}</td>
+                        	<td>{{getSum(item2,"quantitySoil")}}<br />{{getSum(item2,"quantityAccidentalSoil")}}</td>
+                    </tr>
+                    <!-- Third level -->
+                    <!--  <tr ng-show="test3" ng-repeat-start="test2 in test.data" >
+                        	<td></td>
+                        	<td></td>            
+                        	<td></td>
+                        	<td>{{test2.facilityReportID}}</td>
+                        	<td></td>
+                        	<td></td>
+                        	<td></td>
+                    </tr>-->
+                    
+                    <tr ng-repeat-end></tr>
+                    <tr ng-repeat-end ng-hide="true"></tr>
+                    <!-- <tr ng-repeat-end ng-hide="true"></tr>-->
+                    </tbody>
+                </table>
+              <!--  <div id="gridAreas" ui-grid="gridAreasOptions" ui-grid-grouping class="grid"></div>-->
             </tab>
             <tab heading="Area Comparison">
                 <br/>
