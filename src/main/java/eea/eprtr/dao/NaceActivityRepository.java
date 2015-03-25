@@ -32,11 +32,11 @@ public class NaceActivityRepository {
 		return results;
 	}
 
-	public NaceActivity get(String naceCode) {
+	public NaceActivity get(Integer id) {
 		
 		TypedQuery<NaceActivity> query = null;
-		query = em.createNamedQuery("NaceActivity.findByCode", NaceActivity.class);
-		query.setParameter("NaceActivityCode", naceCode);
+		query = em.createNamedQuery("NaceActivity.findByID", NaceActivity.class);
+		query.setParameter("Id", id);
 		NaceActivity results = query.getSingleResult();
 		return results;
 	}

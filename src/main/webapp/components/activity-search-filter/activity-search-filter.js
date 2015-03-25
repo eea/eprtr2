@@ -49,6 +49,9 @@ angular.module('myApp.activitySearchFilter', ['restangular', 'myApp.search-filte
                 }
                 return naceActivityService.getList(params);
             },
+            getByID : function(id) {
+                return naceActivityService.one(id);
+            },
             filter : function(filter, queryParams) {
                 if (filter.selectedSubActivities.length === 1 && filter.selectedSubActivities[0].code) {
                     queryParams.LOV_NACESubActivityID = filter.selectedSubActivities[0].lov_NACEActivityID;
@@ -69,6 +72,9 @@ angular.module('myApp.activitySearchFilter', ['restangular', 'myApp.search-filte
                     params = {ParentID: parent.lov_AnnexIActivityID};
                 }
                 return annexIActivityService.getList(params);
+            },
+            getByID: function(id) {
+                return annexIActivityService.one(id);
             },
             filter : function(filter, queryParams) {
                 if (filter.selectedSubActivities.length === 1 && filter.selectedSubActivities[0].code) {

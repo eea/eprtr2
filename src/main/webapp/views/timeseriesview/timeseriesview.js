@@ -10,7 +10,7 @@ angular.module('myApp.timeseriesview', ['ngRoute','myApp.timeseries', 'myApp.sea
 }])
 
 .controller('TimeseriesViewController', ['$scope','$routeParams', '$filter', '$http', 'searchFilter', 'Restangular',  function($scope, $routeParams, $filter, $http, searchFilter, Restangular) {
-	$scope.filter = null;
+	$scope.qparams = {};
 	$scope.year=2010;
 
     $scope.showReceivingCountryInputField = true;
@@ -25,7 +25,7 @@ angular.module('myApp.timeseriesview', ['ngRoute','myApp.timeseries', 'myApp.sea
 	$scope.queryParams = {};
 	$scope.queryParams.ReportingYear = -1;
 
-	$scope.searchFilter.prtrtype = 'pollutanttransfer';
+	$scope.searchFilter.contenttype = 'pollutanttransfer';
 	
 	$scope.prtrtype1 = '';
 	
@@ -58,10 +58,10 @@ $scope.$watch('currentPage', function(value) {
 	}
 });*/
 
-$scope.$watch('searchFilter.prtrtype', function(value) {
+$scope.$watch('searchFilter.contenttype', function(value) {
 	// We might change search options
 	console.log('prtr type:' + value);
-	$scope.prtrtype1 = value;
+	$scope.contenttype1 = value;
 });
 
 /*
@@ -123,7 +123,7 @@ $scope.performSearch = function() {
    // queryParams.desc = $scope.sort.reverse;
     $scope.queryParams = queryParams;
     
-    $scope.filter = queryParams;
+    $scope.qparams = queryParams;
 /*    facilitySearch.getList(queryParams).then(function(response) {
         $scope.items = response.data;
         $scope.totalItemCount = response.headers('X-Count');

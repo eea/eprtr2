@@ -8,13 +8,13 @@
 				<div class="panel-body">
 
         <div class="form-group">
-        	<label>PRTR type: </label> 
+        	<label>Content: </label> 
         	<label  class="radio-inline">
-	         <input type="radio" name="rbprtrtype" id="rbprtrtype_0" ng-model="searchFilter.prtrtype" value="pollutantrelease" />Pollutant Release</label>
+	         <input type="radio" name="rbprtrtype" id="rbprtrtype_0" ng-model="searchFilter.contenttype" value="pollutantrelease" />Pollutant Release</label>
 	        <label class="radio-inline">
-	         <input type="radio" name="rbprtrtype" id="rbprtrtype_1"  ng-model="searchFilter.prtrtype" value="pollutanttransfer" />Pollutant Transfer</label>
+	         <input type="radio" name="rbprtrtype" id="rbprtrtype_1"  ng-model="searchFilter.contenttype" value="pollutanttransfer" />Pollutant Transfer</label>
 	        <label  class="radio-inline">
-	         <input type="radio" name="rbprtrtype" id="rbprtrtype_2"  ng-model="searchFilter.prtrtype" value="wastetransfer" />Waste Transfer</label>
+	         <input type="radio" name="rbprtrtype" id="rbprtrtype_2"  ng-model="searchFilter.contenttype" value="wastetransfer" />Waste Transfer</label>
         </div>
 
 					<div search-placement>
@@ -39,7 +39,7 @@
 
 		</div>
 		<div class="col-md-6">
-		<timeseries prtr="{{prtrtype1}}" queryParams="{{filter}}" year={{year}} />
+		<timeseries content="{{contenttype1}}" query-params="qparams" year={{year}} />
 		</div>
 </div>		
 </div>
