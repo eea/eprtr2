@@ -117,8 +117,8 @@ $scope.performSearch = function() {
     if ($scope.currentSearchFilter.wasteSearchFilter) {
         $scope.currentSearchFilter.wasteSearchFilter.filter(queryParams);
     }
-    queryParams.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
-    queryParams.limit = $scope.itemsPerPage;
+   // queryParams.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
+   // queryParams.limit = $scope.itemsPerPage;
    // queryParams.order = $scope.sort.sortingOrder;
    // queryParams.desc = $scope.sort.reverse;
     $scope.queryParams = queryParams;

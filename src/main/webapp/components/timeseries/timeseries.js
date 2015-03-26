@@ -3,9 +3,9 @@
 angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 
 .controller('TimeseriesController', 
-		['$scope', '$http', '$filter', 'translationService', 'lovPollutantType','lovCountryType', 
+		['$scope', '$http', '$filter', 'Restangular', 'translationService', 'lovPollutantType','lovCountryType', 
 		 'lovAreaGroupType', 'lovNutsRegionType', 'riverBasinDistrictsType', 'annexIActivityType', 'naceActivityType', 
-          function($scope, $http, $filter, translationService, lovPollutantType, lovCountryType, 
+          function($scope, $http, $filter, Restangular, translationService, lovPollutantType, lovCountryType, 
         		  lovAreaGroupType, lovNutsRegionType, riverBasinDistrictsType, annexIActivityType, naceActivityType ) {
 
 /**		
@@ -45,46 +45,24 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 		$scope.tr_la = data.Activity;
 		$scope.tr_lna = data.LOV_NACEACTIVITY;
 		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
-		
+		$scope.tr_lp = data.LOV_POLLUTANT;
+		$scope.tr_lm = data.LOV_MEDIUM;
+		$scope.tr_lwt = data.LOV_WASTETYPE;
 		
     });
-
-	$scope.reqpollutanttransfere = function() {
-		if($scope.queryParams.pollutantSearchFilter != undefined){
-			/**
-			 * We use pollutants for Pollutanttransfer and Pollutantrelease  
-			 * */
-			if($scope.queryParams.pollutantSearchFilter.PollutantID !== undefined){
-				/*Request LOV_pollutant*/
-				lovPollutantType.getByID($scope.queryParams.pollutantSearchFilter.PollutantID).then(function(data) {
-					// returns pollutant object 
-					$scope.base.pollutant = data;
-					if(data.parentID != null){
-						// We use the pollutant.ParentID.Value for requesting parent pollutant
-						// We use the parent pollutant.Code for $scope.base.parentCode
-						$scope.showGroup = true;
-						lovPollutantType.getByID(data.parentID).then(function(parentdata) {
-							$scope.base.parentpollutant = parentdata;
-						});
-					}
-				});
-			}
-			
-		} 
-	};
-
 
 		/**
 		 * events
 		 */
-        $scope.$watch('prsel', function(value) {
-        	//Pollutantrelease medium changed
+        $scope.$watch('prselcoll', function(value) {
+			$scope.reqPollutantReleaseData();
+			//Pollutantrelease medium changed
             /*if ($scope.items) {
                 $scope.updateSummaryData();
             }*/
         });
 
-        $scope.$watch('wtsel', function(value) {
+        $scope.$watch('wtselcoll', function(value) {
         	//Wastetransfer hazard type changed
             /*if ($scope.items) {
                 $scope.updateSummaryData();
@@ -106,8 +84,9 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 				case 'pollutantrelease': 
 					$scope.title = 'Time Series - ' + $scope.tr_c.PollutantReleases;
 					$scope.ConfidentialityExplanation = $scope.tr_t.ConfidentialityExplanationPR1;
-					$scope.filter.prsel ="air";
+					$scope.prselcoll.prsel ="air";
 					//Request data
+					$scope.reqPollutantReleaseData();
 					break;
 				case 'pollutanttransfer': 
 					$scope.title = 'Time Series - ' + $scope.tr_c.PollutantTransfers;
@@ -118,7 +97,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 				case 'wastetransfer': 
 					$scope.title = 'Time Series - ' + $scope.tr_c.WasteTransfers;
 					$scope.ConfidentialityExplanation = $scope.tr_t.ConfidentialityExplanationWT1;
-					$scope.filter.wtsel = 'nonhw';
+					$scope.wtselcoll.wtsel = 'nonhw';
 					//Request data
 					break;
 			}
@@ -203,35 +182,114 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
         }
 
 		//Pollutant
-	    if ($scope.queryParams.pollutantSearchFilter != undefined){
-	    	
+	    if ($scope.content == 'pollutantrelease' || $scope.content == 'pollutanttransfer'){
+			var pol = {'order':2, 'clss':'fdTitles'};
+			pol.title = $scope.tr_c["Pollutant"];
+			pol.val = $scope.tr_c["AllPollutants"];
+			if ($scope.queryParams.LOV_PollutantGroupID)
+	        {
+				lovPollutantType.getByID($scope.queryParams.LOV_PollutantGroupID).get().then(function(data) {
+					// returns pollutant object 
+					$scope.base.pollutant = data;
+					pol.val = $scope.tr_lp[data.code];
+					$scope.headitms.push(pol);
+				});
+	        }
+	        else if ($scope.queryParams.LOV_PollutantID)
+	        {
+				lovPollutantType.getByID($scope.queryParams.LOV_PollutantID).get().then(function(data) {
+					// returns pollutant object 
+					$scope.base.pollutant = data;
+					pol.val = $scope.tr_lp[data.code];
+					$scope.headitms.push(pol);
+					if(data.parentID != null){
+						// We use the pollutant.ParentID.Value for requesting parent pollutant
+						// We use the parent pollutant.Code for $scope.base.parentCode
+						$scope.showGroup = true;
+						lovPollutantType.getByID(data.parentID).get().then(function(parentdata) {
+							$scope.base.parentpollutant = parentdata;
+						});
+					}
+				});
+	        }
+			//Releases to
+		    if ($scope.queryParams.MediumCode != undefined){
+				var rel = {'order':3, 'clss':'fdTitles'};
+				rel.title = $scope.tr_c["ReleasesTo"];
+				rel.val = $scope.tr_c["AllPollutants"];
+				var med = [];
+				for (var i=0; i< $scope.queryParams.MediumCode.length; i++) {
+					var m = $scope.queryParams.MediumCode[i];
+		    		if (m != 'WASTEWATER'){
+		    			med.push($scope.tr_lm[m]);
+		    		}
+		    	}
+		    	if (med.length > 0){
+			    	rel.val = med.join(", ");
+					$scope.headitms.push(rel);
+		    	}
+				if($scope.queryParams.MediumCode.indexOf('WASTEWATER') >-1){
+					rel = {'order':4, 'clss':'fdTitles'};
+					rel.title = $scope.tr_c["TransfersTo"];
+					rel.val = $scope.tr_lm["WASTEWATER"];
+					$scope.headitms.push(rel);
+				}
+		    }
+		  //Accidental
+		    if ($scope.queryParams.Accidental != undefined && $scope.queryParams.Accidental == 1){
+				var acc = {'order':5, 'clss':'fdTitles'};
+				acc.title = $scope.tr_c["AccidentalOnly"];
+				acc.val = $scope.tr_c["Yes"];
+				$scope.headitms.push(acc);
+		    }
 	    }
-		
-		//Releases to
-		
-		//Waste type
-	    if ($scope.queryParams.wasteSearchFilter != undefined){}
+	    else if ($scope.content == 'wastetransfer'){
+			//Waste type
+		    if ($scope.queryParams.WasteTypeCode != undefined){
+				var wast = {'order':6, 'clss':'fdTitles'};
+				wast.title = $scope.tr_c["WasteTransfers"];
+				var wt = [];
+				for (var i=0; i< $scope.queryParams.WasteTypeCode.length; i++) {
+					var w = $scope.queryParams.WasteTypeCode[i];
+		    		if (w != 'HW'){
+		    			wt.push($scope.tr_lwt[w]);
+		    		}
+		    	}
+		    	if (wt.length > 0){
+		    		wast.val = wt.join(", ");
+					$scope.headitms.push(wast);
+		    	}
+		    }
+	    }
 	};
-	
-/*		$scope.headitms = [
-                 			{'order':0,	'clss':'fdTitles',
-                 				'title':$scope.tr_f.FacilityName,
-                 				'val': $scope.ConfidentialFormat($scope.details.facilityName, $scope.details.confidentialIndicator)
-                 			}]*/
-		/*Pollutant release*/
-        /*addArea(header, filter.AreaFilter); addActivity(header, filter.ActivityFilter); addPollutant(header, filter.PollutantFilter); addMedium(header, filter.MediumFilter);*/
-		/*Pollutant transfer*/
-        /*addArea(header, filter.AreaFilter); addActivity(header, filter.ActivityFilter); addPollutant(header, filter.PollutantFilter);*/
-		/*Waste transfer*/
-        /*addArea(header, filter.AreaFilter); addActivity(header, filter.ActivityFilter); addWasteType(header, filter.WasteTypeFilter);*/
-
-		
-		
 		
 		/**
 		 * Data 
 		 * */
-		//Pollutantrelease
+
+	
+	//Pollutantrelease
+	$scope.reqPollutantReleaseData = function(){
+		if ($scope.queryParams.length > 0){
+			//PollutantReleaseTrend.GetTimeSeries(filter, medium); 
+			//Request data then group
+	        var rest = Restangular.withConfig(function(RestangularConfigurer) {
+	            RestangularConfigurer.setFullResponse(true);
+	        });
+	        var pollutantSearch = rest.all('pollutantreleaseSearch');
+	        pollutantSearch.getList($scope.queryParams).then(function(response) {
+	            $scope.items = response.data;
+	
+	            $scope.quantityAir = response.headers('X-QuantityAir');
+	            $scope.quantityWater = response.headers('X-QuantityWater');
+	            $scope.quantitySoil = response.headers('X-QuantitySoil');
+	
+	        });
+		}
+		
+	};
+	
+	
 		//GetTimeSeries(PollutantReleasesTimeSeriesFilter filter, MediumFilter.Medium medium) -->
 		//	GetTimeSeries([AreaFilter,PeriodFilter,PollutantFilter,MediumFilter,ActivityFilter], MediumFilter.Medium medium)
 		//GetTimeSeries(int facilityid, string pollutantCode, MediumFilter.Medium medium)

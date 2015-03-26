@@ -27,16 +27,16 @@ angular.module('myApp.wasteSearchFilter', ['restangular', 'myApp.search-filter']
             filter : function(queryParams) {
 
                 var type = [];
-                if (!this.nonHazardousWasteTransfer) {
+                if (this.nonHazardousWasteTransfer) {
                     type = type.concat('NON-HW');
                 }
-                if (!this.hazardousWasteCountryTransfer) {
+                if (this.hazardousWasteCountryTransfer) {
                     type = type.concat('HWIC');
                 }
-                if (!this.hazardousWasteTransboundaryTransfer) {
+                if (this.hazardousWasteTransboundaryTransfer) {
                     type = type.concat('HWOC');
                 }
-                if (!this.hazardousWasteCountryTransfer && !this.hazardousWasteTransboundaryTransfer) {
+                if (this.hazardousWasteCountryTransfer || this.hazardousWasteTransboundaryTransfer) {
                     type = type.concat('HW');
                 }
                 if (type.length > 0) {

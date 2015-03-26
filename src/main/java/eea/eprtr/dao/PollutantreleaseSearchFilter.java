@@ -24,9 +24,11 @@ public class PollutantreleaseSearchFilter {
 
 	public Predicate buildWhereClause(CriteriaBuilder cb, Root<Pollutantrelease> qr) {
 		Predicate whereClause = cb.conjunction();
-		Predicate reportingYearSearchWhereClause = reportingYearFilter.buildWhereClausePollutantrelease(cb, qr);
-		if (reportingYearSearchWhereClause.getExpressions().size() > 0) {
-			whereClause.getExpressions().add(reportingYearSearchWhereClause);
+		if (reportingYearFilter != null){
+			Predicate reportingYearSearchWhereClause = reportingYearFilter.buildWhereClausePollutantrelease(cb, qr);
+			if (reportingYearSearchWhereClause.getExpressions().size() > 0) {
+				whereClause.getExpressions().add(reportingYearSearchWhereClause);
+			}
 		}
 		Predicate locationSearchWhereClause = locationFilter.buildWhereClausePollutantrelease(cb, qr);
 		if (locationSearchWhereClause.getExpressions().size() > 0) {

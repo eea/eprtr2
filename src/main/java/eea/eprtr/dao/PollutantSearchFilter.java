@@ -55,10 +55,10 @@ public class PollutantSearchFilter {
 			whereClause.getExpressions().add(cb.equal(qr.get(Pollutantrelease_.LOV_PollutantGroupID), pollutantGroupID));
 		}
 		if (mediumCode != null) {
-			ArrayList<MediumCode> codes = new ArrayList<MediumCode>(Arrays.asList(MediumCode.values()));
-			codes.removeAll(mediumCode);
+			/*ArrayList<MediumCode> codes = new ArrayList<MediumCode>(Arrays.asList(mediumCode.values()));
+			codes.removeAll(mediumCode);*/
 			Predicate mediumCodesWhereClause = cb.disjunction();
-			for (MediumCode code : codes) {
+			for (MediumCode code : mediumCode) {
 				switch (code) {
 				case AIR:
 					mediumCodesWhereClause.getExpressions().add(qr.get(Pollutantrelease_.quantityAir).isNotNull());

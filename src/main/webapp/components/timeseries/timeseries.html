@@ -25,7 +25,7 @@
    </div>
 
 <!-- ** SELECTORS ** -->
-   <div class="row" style="padding-top:10px;" ng-hide="prtr != 'pollutantrelease'">
+   <div class="row" style="padding-top:10px;" ng-hide="content != 'pollutantrelease'">
         	<div class="col-md-12 "><strong>{{tr_p.ShowFacilitiesReleasingToMedium}}</strong></br> 
         	<label class="col-md-4 radio-simple">
 	         <input type="radio" name="prsel" ng-model="filter.prsel" ng-value="air" /> {{tr_c.Air}} ({{wtselcoll.NOAIR | number}} {{tr_c.Facilities}})
@@ -38,7 +38,7 @@
          	</label>
          	</div>
        </div>
-   <div class="row" style="padding-top:10px;" ng-hide="prtr != 'wastetransfer'">
+   <div class="row" style="padding-top:10px;" ng-hide="content != 'wastetransfer'">
         	<div class="col-md-12"><strong>{{tr_w.ShowFacilitiesWithTransferOfWasteType}}</strong></br> 
         	<label class="col-md-4 radio-simple">
 	         <input type="radio" name="wtsel" ng-model="filter.wtsel" ng-value="nonhw" /> {{tr_c.NoHazardouswaste}} ({{wtselcoll.NONHW | number}} {{tr_c.Facilities}})

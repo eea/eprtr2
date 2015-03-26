@@ -32,7 +32,7 @@ public class PollutantreleaseSearchController {
 	@RequestMapping("/pollutantreleaseSearch")
     public List<Pollutantrelease> pollutantreleaseSearch(
     		
-    		@RequestParam(value = "ReportingYear") Integer reportingYear,
+    		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
     		
     		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
     		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
@@ -53,8 +53,11 @@ public class PollutantreleaseSearchController {
     		
     		HttpServletResponse response
     		) {
-		
-		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+
+		ReportingYearSearchFilter reportingYearFilter = null;
+		if (reportingYear != null) {
+			reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		}
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental);
