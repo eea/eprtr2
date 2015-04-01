@@ -25,49 +25,49 @@
    </div>
 
 <!-- ** SELECTORS ** -->
-   <div class="row" style="padding-top:10px;" ng-hide="content != 'pollutantrelease'">
+   <div class="row" style="padding-top:10px;" ng-if="content == 'pollutantrelease'">
         	<div class="col-md-12 "><strong>{{tr_p.ShowFacilitiesReleasingToMedium}}</strong></br> 
         	<label class="col-md-4 radio-simple">
-	         <input type="radio" name="prsel" ng-model="filter.prsel" ng-value="air" /> {{tr_c.Air}} ({{wtselcoll.NOAIR | number}} {{tr_c.Facilities}})
+	         <input type="radio" name="prsel" ng-model="filter.prsel" value="AIR" /> {{tr_c.Air}} ({{quantityAir | number}} {{tr_c.Facilities}})
 	        </label>
 	        <label  class="col-md-4 radio-simple">
-	         <input type="radio" name="prsel" ng-model="filter.prsel" ng-value="water" /> {{tr_c.Water}} ({{wtselcoll.NOWATER | number}} {{tr_c.Facilities}})
+	         <input type="radio" name="prsel" ng-model="filter.prsel" value="WATER" /> {{tr_c.Water}} ({{quantityWater | number}} {{tr_c.Facilities}})
 	        </label>
 	        <label  class="col-md-4 radio-simple">
-	         <input type="radio" name="prsel" ng-model="filter.prsel" ng-value="soil" /> {{tr_c.Soil}} ({{wtselcoll.NOSOIL | number}} {{tr_c.Facilities}})
+	         <input type="radio" name="prsel" ng-model="filter.prsel" value="SOIL" /> {{tr_c.Soil}} ({{quantitySoil | number}} {{tr_c.Facilities}})
          	</label>
          	</div>
        </div>
-   <div class="row" style="padding-top:10px;" ng-hide="content != 'wastetransfer'">
+   <div class="row" style="padding-top:10px;" ng-if="content == 'wastetransfer'">
         	<div class="col-md-12"><strong>{{tr_w.ShowFacilitiesWithTransferOfWasteType}}</strong></br> 
         	<label class="col-md-4 radio-simple">
-	         <input type="radio" name="wtsel" ng-model="filter.wtsel" ng-value="nonhw" /> {{tr_c.NoHazardouswaste}} ({{wtselcoll.NONHW | number}} {{tr_c.Facilities}})
+	         <input type="radio" name="wtsel" ng-model="filter.wtsel" value="nonhw" /> {{tr_c.NoHazardouswaste}} ({{wtselcoll.NONHW | number}} {{tr_c.Facilities}})
 	        </label>
 	        <label class="col-md-4 radio-simple">
-	         <input type="radio" name="wtsel" ng-model="filter.wtsel" ng-value="hwic" /> {{tr_c.HazardouswasteWithinCountry}} ({{wtselcoll.HWIC | number}} {{tr_c.Facilities}})
+	         <input type="radio" name="wtsel" ng-model="filter.wtsel" value="hwic" /> {{tr_c.HazardouswasteWithinCountry}} ({{wtselcoll.HWIC | number}} {{tr_c.Facilities}})
 	        </label>
 	        <label  class="col-md-4 radio-simple">
-	         <input type="radio" name="wtsel" ng-model="filter.wtsel" ng-value="hwoc" /> {{tr_c.HazardouswasteTransboundary}} ({{wtselcoll.HWOC | number}} {{tr_c.Facilities}})
+	         <input type="radio" name="wtsel" ng-model="filter.wtsel" value="hwoc" /> {{tr_c.HazardouswasteTransboundary}} ({{wtselcoll.HWOC | number}} {{tr_c.Facilities}})
          	</label>
          	</div>
         </div>
 
 <!-- ** Tabset ** -->
-   <div class="row" >
+   <div class="row" style="padding-top:10px;" >
           <tabset>
 <!-- 
 TIMESERIES
  -->
   <tab heading="Time Series" active="active.timeseries">
    <div class="row" style="padding-top:10px;" >
-        <div class="col-md-12" style="height:350px;" >
-        	Graph - Stackseries
+        <div class="col-md-12">
+        	<div google-chart chart="tsStackseriesObject" style="height:250px; width:100%;"></div>
         </div>
    </div>
    <div class="row" style="padding-top:10px;" >
 <!-- TS TABLE -->
-   <div class="col-md-6"  >
-	<table class="table table-striped table-condensed table-hover" ng-hide="(tscoll).length > 0 ? false : true ">
+   <div class="col-md-6" >
+	<table class="table table-striped table-condensed table-hover"  ng-if="tscoll.length > 0" >
       <thead>
            <tr class="generalListStyle_headerRow">
              <th>{{tr_c.Year}}</th>
@@ -78,12 +78,12 @@ TIMESERIES
        <tbody>
          <tr ng-repeat="item in tscoll | orderBy : 'year'">
 	         <td>{{item.year}}</td>
-	         <td>{{item.Countries | number}}</td>
-	         <td>{{item.Facilities | number}}</td>
+	         <td class="text-right">{{item.countries | number}}</td>
+	         <td class="text-right">{{item.facilities | number}}</td>
 	     </tr>
        </tbody>
    </table>
-   <p class="text-warning" ng-hide="(tscoll).length > 0 ? true : false">{{tr_c.NoResultsFound}}</p>
+   <p class="text-warning" ng-if="tscoll.length < 1">{{tr_c.NoResultsFound}}</p>
         </div>
    </div>
   </tab>

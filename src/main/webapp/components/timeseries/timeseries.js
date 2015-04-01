@@ -1,11 +1,31 @@
 'use strict';
 
-angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
+angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googlechart'])
+
+.constant('tsconf',{
+	colors:{
+		'ColorAirTotal':'#93adcd',
+		'ColorAirAccidental':'#7E94AF',
+		'ColorAirBothYears':'#b3b3b3',
+		'ColorWaterTotal':'#c6d4aa',
+		'ColorWaterAccidental':'#A9B592',
+		'ColorWaterBothYears':'#b3b3b3',
+		'ColorSoilTotal':'#d5b9a4',
+		'ColorSoilAccidental':'#B69E8C',
+		'ColorSoilBothYears':'#b3b3b3',
+		'ColorWasteWater':'#C7D5AB',
+		'ColorWasteWaterBothYears':'#b3b3b3',
+		'ColorWasteTotal':'#bebebe',
+		'ColorWasteRecovery':'#c6d4aa',
+		'ColorWasteDisposal':'#d6baa5',			
+		'ColorWasteUnspec':'#C6EBF7',
+		'ColorWasteBothYears':'#b3b3b3'}
+})
 
 .controller('TimeseriesController', 
-		['$scope', '$http', '$filter', 'Restangular', 'translationService', 'lovPollutantType','lovCountryType', 
+		['$scope', '$http', '$filter', 'Restangular', 'tsconf', 'translationService', 'lovPollutantType','lovCountryType', 
 		 'lovAreaGroupType', 'lovNutsRegionType', 'riverBasinDistrictsType', 'annexIActivityType', 'naceActivityType', 
-          function($scope, $http, $filter, Restangular, translationService, lovPollutantType, lovCountryType, 
+          function($scope, $http, $filter, Restangular, tsconf, translationService, lovPollutantType, lovCountryType, 
         		  lovAreaGroupType, lovNutsRegionType, riverBasinDistrictsType, annexIActivityType, naceActivityType ) {
 
 /**		
@@ -27,6 +47,20 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 	$scope.ptconfcoll = [];
 	$scope.wtconfcoll = [];
 
+	/*GOOGLE CHART*/
+    $scope.tsStackseriesObject = {};
+    $scope.tsStackseriesObject.type = 'ColumnChart';
+    $scope.tsStackseriesObject.formatters = {};
+    $scope.tsStackseriesObject.options = {
+    		"tooltip": {"isHtml": true},
+    		"focusTarget": "category",
+    		"legend":"bottom",
+            "isStacked": "true",
+            "fill": 20,
+            "displayExactValues": true
+        };
+    
+    
 /*
  * Load translation resources 
  * */        
@@ -48,13 +82,14 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 		$scope.tr_lp = data.LOV_POLLUTANT;
 		$scope.tr_lm = data.LOV_MEDIUM;
 		$scope.tr_lwt = data.LOV_WASTETYPE;
+		$scope.tr_lu = data.LOV_UNIT;
 		
     });
 
 		/**
 		 * events
 		 */
-        $scope.$watch('prselcoll', function(value) {
+        $scope.$watch('filter.prsel', function(value) {
 			$scope.reqPollutantReleaseData();
 			//Pollutantrelease medium changed
             /*if ($scope.items) {
@@ -62,21 +97,25 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
             }*/
         });
 
-        $scope.$watch('wtselcoll', function(value) {
+        $scope.$watch('filter.wtsel', function(value) {
         	//Wastetransfer hazard type changed
             /*if ($scope.items) {
                 $scope.updateSummaryData();
             }*/
         });
 
-	$scope.$watchCollection('[queryParams,tr_c]', function(value) {
+	/*$scope.$watchCollection('[queryParams,tr_c]', function(value) {
 		if($scope.tr_c != undefined && $scope.queryParams != undefined  && $scope.queryParams != ""){
 			$scope.createheader();
 		}
-	});
+	});*/
         
-	$scope.$watchCollection('[content,tr_c]', function(value) {
+	$scope.$watchCollection('[content,queryParams,tr_c]', function(value) {
 		if($scope.tr_c != undefined){
+			/*Stack bar titles*/
+		    $scope.tsStackseriesObject.options["vAxis"] = {"title": $scope.tr_lu['KGM']};
+		    /*Header input*/
+			$scope.createheader();
 	        /**
 	         * Set prtr scope
 	         */
@@ -84,9 +123,12 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 				case 'pollutantrelease': 
 					$scope.title = 'Time Series - ' + $scope.tr_c.PollutantReleases;
 					$scope.ConfidentialityExplanation = $scope.tr_t.ConfidentialityExplanationPR1;
-					$scope.prselcoll.prsel ="air";
+					$scope.filter.prsel = "AIR";
 					//Request data
+					$scope.reqPollutantReleaseRBHeader();
 					$scope.reqPollutantReleaseData();
+					
+					
 					break;
 				case 'pollutanttransfer': 
 					$scope.title = 'Time Series - ' + $scope.tr_c.PollutantTransfers;
@@ -97,7 +139,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 				case 'wastetransfer': 
 					$scope.title = 'Time Series - ' + $scope.tr_c.WasteTransfers;
 					$scope.ConfidentialityExplanation = $scope.tr_t.ConfidentialityExplanationWT1;
-					$scope.wtselcoll.wtsel = 'nonhw';
+					$scope.filter.wtsel = 'nonhw';
 					//Request data
 					break;
 			}
@@ -269,8 +311,9 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 
 	
 	//Pollutantrelease
-	$scope.reqPollutantReleaseData = function(){
-		if ($scope.queryParams.length > 0){
+	$scope.reqPollutantReleaseRBHeader = function(){
+		//if (Object.keys($scope.queryParams).length > 0){
+		if (_.keys($scope.queryParams).length > 0){
 			//PollutantReleaseTrend.GetTimeSeries(filter, medium); 
 			//Request data then group
 	        var rest = Restangular.withConfig(function(RestangularConfigurer) {
@@ -278,16 +321,139 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 	        });
 	        var pollutantSearch = rest.all('pollutantreleaseSearch');
 	        pollutantSearch.getList($scope.queryParams).then(function(response) {
-	            $scope.items = response.data;
+//	            $scope.headitems = response.data;
 	
 	            $scope.quantityAir = response.headers('X-QuantityAir');
 	            $scope.quantityWater = response.headers('X-QuantityWater');
 	            $scope.quantitySoil = response.headers('X-QuantitySoil');
-	
 	        });
 		}
-		
 	};
+	
+	$scope.reqPollutantReleaseData = function(){
+		if (_.keys($scope.queryParams).length > 0){
+			//Create new qparams
+			var qp = {};
+		    for(var key in $scope.queryParams) {
+		        if(key != 'MediumCode' && key != 'ReportingYear') {
+		        	qp[key] = $scope.queryParams[key];
+		        }
+		    }
+	        qp['MediumCode'] = $scope.filter.prsel;
+	        var rest = Restangular.withConfig(function(RestangularConfigurer) {
+	            RestangularConfigurer.setFullResponse(true);
+	        });
+	        var pollutantSearch = rest.all('pollutantreleaseSearch');
+	        pollutantSearch.getList(qp).then(function(response) {
+	        	$scope.setPRTScoll(response.data);
+	        });
+		}
+	};
+	
+	$scope.setPRTScoll = function(data){
+		//Need to group by year
+		var simple = {};
+		var byYears = _.groupBy(data.map(function(o) {
+		    return { 
+		    	reportingYear: o.reportingYear, 
+		    	countryCode: o.countryCode, 
+		    	facilityID: o.facilityID,
+		    	quantityAir : o.quantityAir,  
+		    	quantitySoil: o.quantitySoil,
+		    	quantityWater: o.quantityWater,
+		    	quantityAccidentalAir: o.quantityAccidentalAir,
+		    	quantityAccidentalSoil: o.quantityAccidentalSoil ,
+		    	quantityAccidentalWater : o.quantityAccidentalWater
+		    	};
+		}), 'reportingYear');
+		
+		$scope.tscoll = [];
+		for (var k in byYears){
+			var f = _.size(_.uniq(_.pluck(byYears[k], "facilityID")));
+			simple[k] = {'year' : k};
+			simple[k].facilities = f;
+//			var f = _.size(_.pluck(byYears[k], "facilityID"));
+			var c = _.size(_.uniq(_.pluck(byYears[k], "countryCode")));
+			$scope.tscoll.push({'year':k,'countries':c,'facilities':f});
+		}
+
+		/*Column Bar*/
+		$scope.tsStackseriesObject.data = {"cols": [
+              {id: "y", label: "Release year", type: "string"},
+              {id: "t", type: "string", role: "tooltip", p: {html: true}},
+              {id: "q", label: "Quantity", type: "number"},
+              {id: "a", label: "Accidental", type: "number"}
+        ]};
+		var colors = [];
+		if ($scope.filter.prsel == 'AIR'){
+			colors = [tsconf.colors.ColorAirTotal,tsconf.colors.ColorAirAccidental];
+		}
+		else if ($scope.filter.prsel == 'WATER'){
+			colors = [tsconf.colors.ColorWaterTotal,tsconf.colors.ColorWaterAccidental];
+		}
+		else if ($scope.filter.prsel == 'SOIL'){
+			colors = [tsconf.colors.ColorSoilTotal,tsconf.colors.ColorSoilAccidental];
+		}
+		$scope.tsStackseriesObject.options.colors = colors;
+
+		var rows = [];
+		for (var k in byYears){
+			
+			if ($scope.filter.prsel == 'AIR'){
+				simple[k].quantity = _.reduce(_.pluck(byYears[k], "quantityAir"), function(memo, num){ return memo + num; }, 0);
+				simple[k].quantityAccidental = _.reduce(_.pluck(byYears[k], "quantityAccidentalAir"), function(memo, num){ return memo + num; }, 0);
+			}
+			else if ($scope.filter.prsel == 'WATER'){
+				simple[k].quantity = _.reduce(_.pluck(byYears[k], "quantityWater"), function(memo, num){ return memo + num; }, 0);
+				simple[k].quantityAccidental = _.reduce(_.pluck(byYears[k], "quantityAccidentalWater"), function(memo, num){ return memo + num; }, 0);
+			}
+			else if ($scope.filter.prsel == 'SOIL'){
+				simple[k].quantity = _.reduce(_.pluck(byYears[k], "quantitySoil"), function(memo, num){ return memo + num; }, 0);
+				simple[k].quantityAccidental = _.reduce(_.pluck(byYears[k], "quantityAccidentalSoil"), function(memo, num){ return memo + num; }, 0);
+			}
+			/*TODO*/
+			simple[k].accidentalPercent = 0;
+			var tip = $scope.formatTooltip(simple[k]);
+			var row = [{v: k},{v: tip}];
+			row.push({v: simple[k].quantity})
+			row.push({v: simple[k].quantityAccidental})
+			rows.push({c: row});
+		}
+		$scope.tsStackseriesObject.data["rows"] = rows;
+	}
+
+	$scope.formatTooltip = function(item){
+		var html = '<div><table ><tr><td>';
+		/*TODO*/
+		html += $scope.tr_c['Year'] + '</td><td>' + item.year  + '</td></tr><tr><td>';
+		html += $scope.tr_c['Facilities'] + '</td><td>' + item.facilities  + '</td></tr><tr><td>';
+		html += $scope.tr_p['ReleasesTotal'] + '</td><td>' + item.quantity  + '</td></tr><tr><td>';
+		html += $scope.tr_p['ReleasesAccidentalReleases'] + '</td><td>' + item.quantityAccidental  + '</td></tr><tr><td>';
+		html += $scope.tr_p['ReleasesAccidentalPercentValue'] + '</td><td>' + item.accidentalPercent  + '</td></tr></table></div>';
+		return html;
+		/*
+		 * 
+		 * String.Format("{0}: {1}", Resources.GetGlobal("Common", "Year"), v.Year),
+           String.Format("{0}: {1}", Resources.GetGlobal("Common", "Facilities"), v.Facilities),
+           String.Format("{0}: {1}", Resources.GetGlobal("Pollutant", "ReleasesTotal"), QuantityFormat.Format(v.Quantity, v.QuantityUnit)),
+           String.Format("{0}: {1}", Resources.GetGlobal("Pollutant", "ReleasesAccidentalReleases"), QuantityFormat.Format(v.QuantityAccidental, v.QuantityAccidentalUnit)),
+           (v.AccidentalPercent > 0.0) ? 
+           	String.Format("{0}: {1:F5}%", Resources.GetGlobal("Pollutant", "ReleasesAccidentalPercentValue"), v.AccidentalPercent) : 
+           	String.Format("{0}: 0%", Resources.GetGlobal("Pollutant", "ReleasesAccidentalPercentValue"))};
+
+		 * */
+	}
+
+	
+	
+	
+	$scope.sum = function(numbers) {
+	    return _.reduce(numbers, function(result, current) {
+	        return result + parseFloat(current);
+	    }, 0);
+	}
+
+
 	
 	
 		//GetTimeSeries(PollutantReleasesTimeSeriesFilter filter, MediumFilter.Medium medium) -->

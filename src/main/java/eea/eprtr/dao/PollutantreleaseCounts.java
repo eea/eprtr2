@@ -2,25 +2,25 @@ package eea.eprtr.dao;
 
 public class PollutantreleaseCounts {
 
-	private final long quantityAir;
-	private final long quantitySoil;
-	private final long quantityWater;
+	private final Double quantityAir;
+	private final Double quantitySoil;
+	private final Double quantityWater;
 
-	public PollutantreleaseCounts(long quantityAir, long quantitySoil, long quantityWater) {
+	public PollutantreleaseCounts(Double quantityAir, Double quantitySoil, Double quantityWater) {
 		this.quantityAir = quantityAir;
 		this.quantitySoil = quantitySoil;
 		this.quantityWater = quantityWater;
 	}
 
-	public long getQuantityAir() {
+	public Double getQuantityAir() {
 		return quantityAir;
 	}
 
-	public long getQuantitySoil() {
+	public Double getQuantitySoil() {
 		return quantitySoil;
 	}
 
-	public long getQuantityWater() {
+	public Double getQuantityWater() {
 		return quantityWater;
 	}
 }
