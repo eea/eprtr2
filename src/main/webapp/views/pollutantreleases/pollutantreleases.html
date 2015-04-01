@@ -1,41 +1,31 @@
 <div>
-
     <div>
         <p>This report will display the aggregated releases of a specific pollutant.</p>
     </div>
 
     <div class="row row-map">
-
         <div class="search_form col-md-6">
-
             <div class="panel panel-info">
                 <div class="panel-heading">Search</div>
                 <div class="panel-body">
-
                     <div search-placement>
                     </div>
-
                     <accordion close-others="{{false}}">
                         <div pollutant-search-filter-directive>
                         </div>
                         <div activity-search-filter-directive>
                         </div>
                     </accordion>
-
                     <div>
                         <input type="submit" value="Search" ng-click="search()" class="btn btn-default">
                     </div>
-
                 </div>
-
             </div>
-
         </div>
 
         <div class="col-md-6" style="height:400px;">
             <esri-leaf-map queryparams="queryParams" />
         </div>
-
     </div>
 
     <div ng-show="searchResults">
@@ -51,19 +41,19 @@
                 </div>
             </tab>
             <tab heading="Activities">
-<div>
-				<h3>Pollutant releases</h3>
+			<div>
+				<h3>{{tr_c.PollutantReleases}}</h3>
 			</div>
 			<div class="row">
 			   	<div class="col-md-1">
-       			Pollutant:</div>
+       			{{tr_c.Pollutant}}:</div>
        			<div class="col-md-3">
        			{{currentSearchFilter.pollutantSearchFilter.selectedPollutant.name}}
        			</div>
 			</div>
 			<div class="row">
 			   	<div class="col-md-1">
-       			Year:
+       			{{tr_c.Year}}:
        			</div>
        			<div class="col-md-1">
        			{{queryParams.ReportingYear}}
@@ -71,7 +61,7 @@
 			</div>
 			<div class="row">
 			   	<div class="col-md-1">
-       			Area:
+       			{{tr_c.Area}}:
        			</div>
        			<div class="col-md-3">
        			{{currentSearchFilter.selectedReportingCountry.name}}
@@ -79,33 +69,104 @@
 			</div>
 			<div class="row">
 			   	<div class="col-md-1">
-       			Facilities:
+       			{{tr_c.Facilities}}:
        			</div>
        			<div class="col-md-1">
        			{{items.length}}
        			</div>
 			</div>
-			
 			<br />
 			All values are yearly releases.
 			<br/>
-			
+			<!-- message -->
+			<table class="table table-striped table-condensed table-hover">
+                    <thead>
+                    <tr>
+                    	<th>&nbsp;</th>
+                        <th>{{tr_p.ReleasesPerIndustrialActivity}}&nbsp;</th>
+                        <th>&nbsp;</th>
+                        <th>{{tr_p.Facilities}}&nbsp;</th>
+                        <th>{{tr_p.Air}}&nbsp;</th>
+                        <th>{{tr_p.Water}}&nbsp;</th>
+                        <th>{{tr_p.Soil}}&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Level1 -->
+                    <tr ng-repeat-start="item in activities | orderBy: 'key'">
+                    <td><img src="images/timeseries.png" class="timesericesImage" ng-click="alert('TODO')" alt="" /></td>
+                        <td>
+                        	<img ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
+                        	<img ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
+                        	<a ng-click="showing=!showing">{{tr_laa[item.key]}}</a>
+                        </td>            
+                        <td>
+                        {{tr_p.ReleasesAccidentialTotal}}<br/>
+                        {{tr_p.ReleasesAccidentalValue}}
+                        </td>
+                        <td>{{getTypeCount(item.data,"facility")}}<br />{{getTypeCount(item.data,"accidental")}}</td>
+                        <td>{{getSum(item.data,"quantityAir")}}<br/>{{getSum(item.data,"quantityAccidentalAir")}}</td>
+                        <td>{{getSum(item.data,"quantityWater")}}<br />{{getSum(item.data,"quantityAccidentalWater")}}</td>
+                        <td>{{getSum(item.data,"quantitySoil")}}<br />{{getSum(item.data,"quantityAccidentalSoil")}}</td>
+                    </tr>
+                    <!-- Level2 -->
+                    <tr ng-show="showing" ng-repeat-start="level2 in item.data | orderBy: 'iaactivityCode'">
+                    	<td>
+                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="alert('TODO')" alt="" />
+                    	</td>
+                    	<td>
+                    		<img ng-click="showing2=!showing2" ng-show="!showing2 && level2.sublevel" src="images/plus.gif" />
+                        	<img ng-click="showing2=!showing2" ng-show="showing2" src="images/minus.gif" /> 
+                    		{{tr_laa[level2.iaactivityCode]}}
+                    	</td>
+                    	<td>
+                    	   	{{tr_p.ReleasesAccidentialTotal}}<br/>
+                        	{{tr_p.ReleasesAccidentalValue}}
+                    	</td>
+                   		<td>{{getTypeCount(level2,"facility")}}<br />{{getTypeCount(level2,"accidental")}}</td>
+                       	<td>{{getSum(level2,"quantityAir")}}<br/>{{getSum(level2,"quantityAccidentalAir")}}</td>
+                       	<td>{{getSum(level2,"quantityWater")}}<br />{{getSum(level2,"quantityAccidentalWater")}}</td>
+                       	<td>{{getSum(level2,"quantitySoil")}}<br />{{getSum(level2,"quantityAccidentalSoil")}}</td>
+                    </tr>
+                    <!-- Level3 -->
+                    <tr ng-show="showing2" ng-repeat-start="level3 in level2.sublevel | orderBy: 'iasubActivityCode'">
+                    	<td>
+                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="alert('TODO')" alt="" />
+                    	</td>
+                    	<td> 
+                    		{{tr_laa[level3.iasubActivityCode]}}
+                    	</td>
+                    	<td>
+                    	   	{{tr_p.ReleasesAccidentialTotal}}<br/>
+                        	{{tr_p.ReleasesAccidentalValue}}
+                    	</td>
+                   		<td>{{getTypeCount(level3,"facility")}}<br />{{getTypeCount(level3,"accidental")}}</td>
+                       	<td>{{getSum(level3,"quantityAir")}}<br/>{{getSum(level3,"quantityAccidentalAir")}}</td>
+                       	<td>{{getSum(level3,"quantityWater")}}<br />{{getSum(level3,"quantityAccidentalWater")}}</td>
+                       	<td>{{getSum(level3,"quantitySoil")}}<br />{{getSum(level3,"quantityAccidentalSoil")}}</td>
+                    </tr>
+                    <tr ng-repeat-end></tr>
+                    <tr ng-repeat-end ng-hide="true"></tr>
+                    <tr ng-repeat-end ng-hide="true"></tr>
+                    </tbody>
+                </table>    
             </tab>
             
             <tab heading="Areas">
 			<div>
-				<h3>Pollutant releases</h3>
+				<h3>{{tr_c.PollutantReleases}}</h3>
 			</div>
 			<div class="row">
 			   	<div class="col-md-1">
-       			Pollutant:</div>
+       			{{tr_c.Pollutant}}:
+       			</div>
        			<div class="col-md-3">
        			{{currentSearchFilter.pollutantSearchFilter.selectedPollutant.name}}
        			</div>
 			</div>
 			<div class="row">
 			   	<div class="col-md-1">
-       			Year:
+       			{{tr_c.Year}}:
        			</div>
        			<div class="col-md-1">
        			{{queryParams.ReportingYear}}
@@ -113,7 +174,7 @@
 			</div>
 			<div class="row">
 			   	<div class="col-md-1">
-       			Area:
+       			{{tr_c.Area}}:
        			</div>
        			<div class="col-md-3">
        			{{currentSearchFilter.selectedReportingCountry.name}}
@@ -121,7 +182,7 @@
 			</div>
 			<div class="row">
 			   	<div class="col-md-1">
-       			Facilities:
+       			{{tr_c.Facilities}}:
        			</div>
        			<div class="col-md-1">
        			{{items.length}}
@@ -131,10 +192,6 @@
 			<br />
 			All values are yearly releases.
 			<br/>
-
-    			<!-- <div ng-repeat-start="team in teams" class="header">{{team.name}}</div>
-    			<div ng-repeat="player in team.players">{{player.firstName}} {{player.lastName}}</div>
-    			<div ng-repeat-end><br /></div>-->
 
 			 <table class="table table-striped table-condensed table-hover">
                     <thead>
@@ -148,9 +205,10 @@
                         <th>{{tr_p.Soil}}&nbsp;</th>
                     </tr>
                     </thead>
-                    <tbody >
+                    <tbody>
+                    
                     <!-- First level -->
-                    <tr ng-repeat-start="item in contries" ><!-- ng-click="showing=!showing" ng-click="showinfo(item, this)" -->
+                    <tr ng-repeat-start="item in areas" >
                         <td><img src="images/timeseries.png" class="timesericesImage" ng-click="alert('TODO')" alt="" /></td>
                         <td>
                         <img ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
@@ -165,6 +223,7 @@
                         <td>{{getSum(item.data,"quantityWater")}}<br />{{getSum(item.data,"quantityAccidentalWater")}}</td>
                         <td>{{getSum(item.data,"quantitySoil")}}<br />{{getSum(item.data,"quantityAccidentalSoil")}}</td>
                     </tr>
+                    
                     <!-- Second level -->
                     <tr ng-show="showing" ng-repeat-start="item2 in item.data">
                         	<td><img src="images/timeseries.png" class="timesericesImage" ng-click="showinfo(item2, this)" alt="" /></td>
@@ -184,25 +243,13 @@
                          	<td>{{getSum(item2,"quantityAir")}}<br/>{{getSum(item2,"quantityAccidentalAir")}}</td>
                         	<td>{{getSum(item2,"quantityWater")}}<br />{{getSum(item2,"quantityAccidentalWater")}}</td>
                         	<td>{{getSum(item2,"quantitySoil")}}<br />{{getSum(item2,"quantityAccidentalSoil")}}</td>
-                    </tr>
-                    <!-- Third level -->
-                    <!--  <tr ng-show="test3" ng-repeat-start="test2 in test.data" >
-                        	<td></td>
-                        	<td></td>            
-                        	<td></td>
-                        	<td>{{test2.facilityReportID}}</td>
-                        	<td></td>
-                        	<td></td>
-                        	<td></td>
-                    </tr>-->
-                    
+                    </tr>                
                     <tr ng-repeat-end></tr>
                     <tr ng-repeat-end ng-hide="true"></tr>
-                    <!-- <tr ng-repeat-end ng-hide="true"></tr>-->
                     </tbody>
                 </table>
-              <!--  <div id="gridAreas" ui-grid="gridAreasOptions" ui-grid-grouping class="grid"></div>-->
             </tab>
+            
             <tab heading="Area Comparison">
                 <br/>
                 Show facilities releasing to
@@ -213,6 +260,8 @@
                 <div google-chart chart="areaComparisonChartObject" style="height:600px; width:100%;">
                 </div>
             </tab>
+            
+
             <tab heading="Facilities">
                 <br/>
                 Show facilities releasing to
@@ -223,12 +272,12 @@
                 <table class="table table-striped table-condensed table-hover">
                     <thead>
                     <tr>
-                        <th>Facility&nbsp;</th>
-                        <th>Quantity&nbsp;</th>
-                        <th>Accidental&nbsp;</th>
-                        <th>Accidental %&nbsp;</th>
-                        <th>Activity&nbsp;</th>
-                        <th>Country&nbsp;</th>
+                        <th>{{tr_c.Facility}}&nbsp;</th>
+                        <th>{{tr_c.Quantity}}&nbsp;</th>
+                        <th>{{tr_c.Accidental}}&nbsp;</th>
+                        <th>{{tr_c.Accidental}} %&nbsp;</th>
+                        <th>{{tr_c.Activity}}&nbsp;</th>
+                        <th>{{tr_c.Country}}&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -237,17 +286,69 @@
                         <td>{{quantity(item)}}</td>
                         <td>{{quantityAccidental(item)}}</td>
                         <td>{{percentageAccidental(item)}}</td>
-                        <td>{{item.iaactivityCode}}</td>
-                        <td>{{item.countryCode}}</td>
+                        <td>{{tr_laa[item.iaactivityCode]}}</td>
+                        <td>{{tr_lco[item.countryCode]}}</td>
                     </tr>
                     </tbody>
                 </table>
             </tab>
+            
             <tab heading="Confidentiality">
-                <br/>
-                <p>
-                    The search result is not affected by any confidentiality claims.
-                </p>
+                <br />
+                <div ng-bind-html="tr_con.NoConfidentialityInformation">
+                </div>
+                    
+                <div>
+	                <div ng-bind-html="tr_c.ConfidentialityExplanationPR1">
+	                </div>
+	                 <table class="table table-striped table-condensed table-hover">
+                    	<thead>
+                    	<tr>
+                   		<th>{{tr_c.Pollutant}}</th>
+                  		<th>{{tr_f.FacilitiesAir}}</th>
+                   		<th>{{tr_f.FacilitiesWater}}</th>
+                   		<th>{{tr_f.FacilitiesSoil}}</th>
+                    	</tr>
+                    	</thead>
+                    	<tbody>
+                    	<tr>
+                    	<td></td>
+                    	<td></td>
+                    	<td></td>
+                    	<td></td>
+                    	</tr>
+	                    </tbody>
+               		</table>
+	                <br />
+					<br />
+					<div ng-bind-html="tr_p.ConfidentialityReason">
+					</div>
+					<br />
+					<br />
+	                <div>
+	                  <table class="table table-striped table-condensed table-hover">
+                    	<thead>
+                    	<tr>
+                    		<th>{{tr_c.Reason}}</th>
+                    		<th>{{tr_f.FacilitiesAir}}</th>
+                    		<th>{{tr_f.FacilitiesWater}}</th>
+                    		<th>{{tr_f.FacilitiesSoil}}</th>
+                    	</tr>
+                    	</thead>
+                    	<tbody>
+                    	<tr>
+                    		<td></td>
+                    		<td></td>
+                    		<td></td>
+                    		<td></td>
+                    	</tr>
+	                    </tbody>
+               		  </table>
+               		  <br />
+               		    <div ng-bind-html="tr_c.ConfidentialityExplanationPR2">
+	                	</div>
+	                </div>
+                </div>
             </tab>
         </tabset>
     </div>
