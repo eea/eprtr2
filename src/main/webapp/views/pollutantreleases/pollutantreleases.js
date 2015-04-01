@@ -395,12 +395,13 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         			}
         		}
         		var levelkey = record[propertyGP3];
-    			if(levelkey)
+    			if(levelkey) // Find unspecified sub levels
     			{
-    				subCollection.push(record);
+    				subCollection.push(angular.copy(record));
     			}
         		if(!exist)
         		{
+        			//console.log("Collection: "+record[propertyGP2]+"   "+record[propertyGP3]);
         			record.fcount = 1;
         			if(record.quantityAccidentalAir || record.quantityAccidentalSoil || record.quantityAccidentalWater)
         			{
@@ -412,11 +413,10 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         			group.data.push(record);
         		}        		
         	}
-        	
+     
         	// Create level 3
         	for(var i = 0;i<subCollection.length;i++)
         	{
-        		//console.log("sub: "+subCollection[i][propertyGP3]);
         		for(var j = 0; j < collection.length;j++)
         		{
         			if(collection[j].key === subCollection[i].iasectorCode)
@@ -424,8 +424,15 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         				for(var n = 0;n < collection[j].data.length;n++)
         				{
         					// iaactivityCode
+        					// unspecified
+        					
         					if(collection[j].data[n].iaactivityCode === subCollection[i].iaactivityCode)
         					{
+        						if(subCollection[i].iaactivityCode === '4.(a)')
+        						{
+        							
+        							//console.log('sub: '+subCollection[i][propertyGP3] );
+        						}
         						var sublevel = collection[j].data[n].sublevel;       						
         						if(!sublevel){
         							sublevel = [];
@@ -471,10 +478,6 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         		        				{
         		        					sublevel[m].facount+=1;
         		        				}
-        		        				if(sublevel[m][propertyGP3] === '4.(a).(i)')
-            		        			{
-            		        				//console.log("4.(A).(I): "+sublevel[m].fcount + " "+sublevel[m].facount);
-            		        			}
         		        				existSublevel = true;
         		        				break;
         		        			}
@@ -489,11 +492,6 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         		        			}else
         		        			{
         		        				subCollection[i].facount = 0;
-        		        			}
-        		        			//console.log("CR: "+subCollection[i][propertyGP3]);
-        		        			if(subCollection[i][propertyGP3] === '4.(a).(i)')
-        		        			{
-        		        				//console.log("CREATE 4.(A).(I): "+subCollection[i].fcount + " "+subCollection[i].facount);
         		        			}
         		        			
         		        			sublevel.push(subCollection[i]);
