@@ -128,7 +128,7 @@ POLLUTANT RELEASES
 		                    <td class="text-right">{{fFactory.formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
 		                    <td class="text-right">{{fFactory.DeterminePercent(item.totalQuantity, item.accidentalQuantity)}}</td>
 		                    <td>{{tr_lmbn[item.methodCode]}}</td>
-		                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator)"></td>
+		                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
 		                    <td>{{tr_lcf[item.confidentialCode]}}</td>
 
 		                </tr>
@@ -171,7 +171,7 @@ POLLUTANT RELEASES
                     <td class="text-right">{{fFactory.formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
                     <td class="text-right">{{fFactory.DeterminePercent(item.totalQuantity, item.accidentalQuantity)}}</td>
                     <td>{{tr_lmbn[item.methodCode]}}</td>
-                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator)"></td>
+                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
                     <td>{{tr_lcf[item.confidentialCode]}}</td>
                 </tr>
                 <!-- tr>
@@ -213,7 +213,7 @@ POLLUTANT RELEASES
                     <td class="text-right">{{fFactory.formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
                     <td class="text-right">{{fFactory.DeterminePercent(item.totalQuantity, item.accidentalQuantity)}}</td>
                     <td>{{tr_lmbn[item.methodCode]}}</td>
-                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator)"></td>
+                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
                     <td>{{tr_lcf[item.confidentialCode]}}</td>
                 </tr>
                 <!-- tr>
@@ -275,7 +275,7 @@ POLLUTANT TRANSFERS
                     <td class="text-right">{{fFactory.formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
                     <td class="text-right">{{fFactory.DeterminePercent(item.totalQuantity, item.accidentalQuantity)}}</td>
                     <td>{{tr_lmbn[item.methodCode]}}</td>
-                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator)"></td>
+                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
                     <td>{{tr_lcf[item.confidentialCode]}}</td>
                 </tr>
                 <!-- tr>
@@ -330,7 +330,7 @@ WASTE TRANSFERS
                     <td class="text-right">{{fFactory.formatQuantity(item.quantity, item.unitCode, item.confidentialIndicator)}}</td>
                     <td>{{ConfidentialFormat(tr_lwt[item.wasteTreatmentCode], item.confidentialIndicator)}}</td>
                     <td>{{tr_lmbn[item.methodCode]}}</td>
-                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator)"></td>
+                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
                     <td>{{tr_lcf[item.confidentialCode]}}</td>
                 </tr>
                 <!-- tr>
@@ -366,7 +366,7 @@ WASTE TRANSFERS
                     <td class="text-right">{{fFactory.formatQuantity(item.quantity, item.unitCode, item.confidentialIndicator)}}</td>
                     <td>{{ConfidentialFormat(tr_lwt[item.wasteTreatmentCode], item.confidentialIndicator)}}</td>
                     <td>{{tr_lmbn[item.methodCode]}}</td>
-                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator)"></td>
+                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
                     <td>{{tr_lcf[item.confidentialCode]}}</td>
                 </tr>
                 <!-- tr>
@@ -402,7 +402,7 @@ WASTE TRANSFERS
                     <td class="text-right">{{fFactory.formatQuantity(item.quantity, item.unitCode, item.confidentialIndicator)}}</td>
                     <td>{{ConfidentialFormat(tr_lwt[item.wasteTreatmentCode], item.confidentialIndicator)}}</td>
                     <td>{{tr_lmbn[item.methodCode]}}</td>
-                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator)"></td>
+                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
                     <td>{{tr_lcf[item.confidentialCode]}}</td>
                 </tr>
                 <!-- tr>

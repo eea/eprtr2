@@ -149,7 +149,7 @@ angular.module('myApp.home', ['ngRoute'])
 	        return "0 %";
 	    },
 	    
-	    MethodUsedFormat: function(typeCodes, designations, confidential)
+	    MethodUsedFormat: function(typeCodes, designations, confidential,tr_lmtn)
 	    {
 	    	var delim = '<br />'
 	        var result = '';
@@ -180,7 +180,7 @@ angular.module('myApp.home', ['ngRoute'])
 	                    //CEN/ISO is removed as this is also part of the designation
 	                    if (typeCode.toUpperCase() != "CEN/ISO")
 	                    {
-	                        result += "<abbr title=\"" + $scope.tr_lmtn[typeCode] + "\"> " + typeCode + " </abbr>";
+	                        result += "<abbr title=\"" + tr_lmtn[typeCode] + "\"> " + typeCode + " </abbr>";
 	                    }
 
 	                    if (designation != null && designation != '')
