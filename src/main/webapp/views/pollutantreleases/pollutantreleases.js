@@ -98,6 +98,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 $scope.updateConfidentialityData();
                 
             });
+            var test = "";
         };
 
         $scope.updateSummaryData = function() {
@@ -284,16 +285,16 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
             }
         };
             
-        $scope.getSum = function(item, type)
+        $scope.getSum = function(elements, type)
         {
-        	if(!item.length)
+        	if(!elements.length)
         	{
-        		item = jQuery.makeArray(item);
+        		elements = jQuery.makeArray(elements);
         	}
         	var sum = 0;
-    		for(var i = 0; i < item.length; i++)
+    		for(var i = 0; i < elements.length; i++)
 			{
-				 var temp = item[i][type];
+				 var temp = elements[i][type];
 				 if(temp)
 				 {
 					 sum += temp;
@@ -303,26 +304,24 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
     		{
     			return "-";
     		}
-    		// TODO format
-    		console.log(formatStrFactory.getStrFormat(sum) +" before "+sum);
     		return formatStrFactory.getStrFormat(sum);
         };
         
-        $scope.getTypeCount = function(item, type){  
+        $scope.getTypeCount = function(elements, type){  
             
-        	if(!item.length)
+        	if(!elements.length)
         	{
-        		item = jQuery.makeArray(item);
+        		elements = jQuery.makeArray(elements);
         	}
             
             var total = 0;
-            for(var i = 0; i < item.length; i++){
+            for(var i = 0; i < elements.length; i++){
                 if(type==="facility")
                 {
-                	total += item[i].fcount;
+                	total += elements[i].fcount;
                 }else
                 {
-                	total += item[i].facount;
+                	total += elements[i].facount;
                 }
             }
             return total;
@@ -343,7 +342,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         {
         	var subCollection = [];
         	for ( var i = 0; i < $scope.items.length; i++ ) {
-        		var record = $scope.items[i];
+        		var record = angular.copy($scope.items[i]);
         		var group = $scope.findGroup(collection,record[propertyGP1]);		
         		if(!group)
         		{
@@ -415,10 +414,9 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         	}
         	
         	// Create level 3
-        	// For each sublevel
         	for(var i = 0;i<subCollection.length;i++)
         	{
-        		console.log("sub: "+subCollection[i][propertyGP3]);
+        		//console.log("sub: "+subCollection[i][propertyGP3]);
         		for(var j = 0; j < collection.length;j++)
         		{
         			if(collection[j].key === subCollection[i].iasectorCode)
@@ -428,7 +426,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         					// iaactivityCode
         					if(collection[j].data[n].iaactivityCode === subCollection[i].iaactivityCode)
         					{
-        						var sublevel = collection[j].data[n].sublevel       						
+        						var sublevel = collection[j].data[n].sublevel;       						
         						if(!sublevel){
         							sublevel = [];
         							collection[j].data[n].sublevel = sublevel;
@@ -475,7 +473,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         		        				}
         		        				if(sublevel[m][propertyGP3] === '4.(a).(i)')
             		        			{
-            		        				console.log("4.(A).(I): "+sublevel[m].fcount + " "+sublevel[m].facount);
+            		        				//console.log("4.(A).(I): "+sublevel[m].fcount + " "+sublevel[m].facount);
             		        			}
         		        				existSublevel = true;
         		        				break;
@@ -492,10 +490,10 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         		        			{
         		        				subCollection[i].facount = 0;
         		        			}
-        		        			console.log("CR: "+subCollection[i][propertyGP3]);
+        		        			//console.log("CR: "+subCollection[i][propertyGP3]);
         		        			if(subCollection[i][propertyGP3] === '4.(a).(i)')
         		        			{
-        		        				console.log("CREATE 4.(A).(I): "+subCollection[i].fcount + " "+subCollection[i].facount);
+        		        				//console.log("CREATE 4.(A).(I): "+subCollection[i].fcount + " "+subCollection[i].facount);
         		        			}
         		        			
         		        			sublevel.push(subCollection[i]);
@@ -504,14 +502,13 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         				}
         			}
         		} // End collection
-        	}
-        	var test = "";     	
+        	}    	
         };
         
         $scope.groupbyAreas = function(propertyGP1, collection)
         {
         	for ( var i = 0; i < $scope.items.length; i++ ) {
-        		var record = $scope.items[i];
+        		var record = angular.copy($scope.items[i]);
         		var group = $scope.findGroup(collection,record[propertyGP1]);		
         		if(!group)
         		{
@@ -579,8 +576,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         		}        		
         	}    	
         };
- 
-        
+  
         $scope.showinfo = function(data, ref)
         {
         	alert('test');
