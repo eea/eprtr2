@@ -3,14 +3,15 @@
 angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esrileafmap'])
 
 .controller('FDMainController', 
-		['$scope', '$http', '$filter', '$sce', '$modal', 'translationService','fdDetailsType', 'fdAuthorityType', 'fdActivityType',
+		['$scope', '$http', '$filter', '$sce', '$modal', 'translationService', 'formatStrFactory','fdDetailsType', 'fdAuthorityType', 'fdActivityType',
 		 'fdPollutantreleasesType', 'fdWastetransfersType', 'fdPollutanttransfersType', 
-          function($scope, $http, $filter, $sce, $modal, translationService, fdDetailsType, fdAuthorityType, fdActivityType, 
+          function($scope, $http, $filter, $sce, $modal, translationService,formatStrFactory, fdDetailsType, fdAuthorityType, fdActivityType, 
         		  fdPollutantreleasesType, fdWastetransfersType, fdPollutanttransfersType) {
 
 /*
  * Basic parameters
  * */
+	$scope.fFactory = formatStrFactory;
 	$scope.headitms = [];
 	$scope.infoitms = [{'order':0,	'clss':'fdTitles', 	'title':'Facility Details',	'val': ' '}];
 	$scope.infoitms2 = [];
@@ -268,11 +269,11 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 			$scope.headitms = [
 	                  			{'order':0,	'clss':'fdTitles',
 	                  				'title':$scope.tr_f.FacilityName,
-	                  				'val': $scope.ConfidentialFormat($scope.details.facilityName, $scope.details.confidentialIndicator)
+	                  				'val': $scope.fFactory.ConfidentialFormat($scope.details.facilityName, $scope.details.confidentialIndicator)
 	                  			},
 	                  			{'order':1, 'clss':'fdTitles',
 	                  				'title': $scope.tr_f.Address,
-	                  				'val': $scope.ConfidentialFormat(adr, $scope.details.confidentialIndicator)
+	                  				'val': $scope.fFactory.ConfidentialFormat(adr, $scope.details.confidentialIndicator)
 	                  			},
 	                  			{'order':3,'clss':'fdTitles',
 	                  				'title':$scope.tr_c.Year,
@@ -504,7 +505,7 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
  * Used by Facilitydetailspollutantrelease, Facilitydetailspollutanttransfer and FacilitydetailsWastetransfer data
  * */ 	
 	
-	$scope.formatQuantity = function(quantity, unit, conf){
+/*	$scope.formatQuantity = function(quantity, unit, conf){
         if (quantity == null)
         {
             return $scope.ConfidentialFormat(null, conf);
@@ -513,15 +514,15 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
         {
             if (unit.toLowerCase() == 'unknown')
             {
-                return $scope.ConfidentialFormat($filter('number')(quantity), conf);
+                return formatStrFactory.ConfidentialFormat($filter('number')(quantity), conf);
             }
             else if (unit.toLowerCase() == 'tne' || unit.toLowerCase() == 't')
             {
-                return $scope.formatMethod(quantity * 1000, conf);
+                return formatStrFactory.formatMethod(quantity * 1000, conf);
             }
             else
             {
-                return $scope.formatMethod(quantity, conf);
+                return formatStrFactory.formatMethod(quantity, conf);
             }
         }
 	};
@@ -654,7 +655,7 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
             }
             return result;
         };
-
+*/
 
 }])
 

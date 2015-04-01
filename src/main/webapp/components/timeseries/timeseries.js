@@ -23,9 +23,9 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 })
 
 .controller('TimeseriesController', 
-		['$scope', '$http', '$filter', 'Restangular', 'tsconf', 'translationService', 'lovPollutantType','lovCountryType', 
+		['$scope', '$http', '$filter', 'Restangular', 'tsconf', 'translationService', 'formatStrFactory', 'lovPollutantType','lovCountryType', 
 		 'lovAreaGroupType', 'lovNutsRegionType', 'riverBasinDistrictsType', 'annexIActivityType', 'naceActivityType', 
-          function($scope, $http, $filter, Restangular, tsconf, translationService, lovPollutantType, lovCountryType, 
+          function($scope, $http, $filter, Restangular, tsconf, translationService, formatStrFactory, lovPollutantType, lovCountryType, 
         		  lovAreaGroupType, lovNutsRegionType, riverBasinDistrictsType, annexIActivityType, naceActivityType ) {
 
 /**		
@@ -411,8 +411,13 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 				simple[k].quantity = _.reduce(_.pluck(byYears[k], "quantitySoil"), function(memo, num){ return memo + num; }, 0);
 				simple[k].quantityAccidental = _.reduce(_.pluck(byYears[k], "quantityAccidentalSoil"), function(memo, num){ return memo + num; }, 0);
 			}
-			/*TODO*/
-			simple[k].accidentalPercent = 0;
+			/*Calculate accidental Percentage*/
+			if (simple[k].quantityAccidental > 0){
+				simple[k].accidentalPercent = formatStrFactory.DeterminePercent(simple[k].quantity, simple[k].quantityAccidental );
+			}
+			else{
+				simple[k].accidentalPercent = 0;
+			}
 			var tip = $scope.formatTooltip(simple[k]);
 			var row = [{v: k},{v: tip}];
 			row.push({v: simple[k].quantity})
@@ -423,25 +428,15 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 	}
 
 	$scope.formatTooltip = function(item){
-		var html = '<div><table ><tr><td>';
+		var html = '<div style="padding:5px 5px 5px 5px;"><table ><tr><td class="fdTitles">';
 		/*TODO*/
-		html += $scope.tr_c['Year'] + '</td><td>' + item.year  + '</td></tr><tr><td>';
-		html += $scope.tr_c['Facilities'] + '</td><td>' + item.facilities  + '</td></tr><tr><td>';
-		html += $scope.tr_p['ReleasesTotal'] + '</td><td>' + item.quantity  + '</td></tr><tr><td>';
-		html += $scope.tr_p['ReleasesAccidentalReleases'] + '</td><td>' + item.quantityAccidental  + '</td></tr><tr><td>';
+		html += $scope.tr_c['Year'] + '</td><td>' + item.year  + '</td></tr><tr><td class="fdTitles">';
+		html += $scope.tr_c['Facilities'] + '</td><td>' + $filter('number')(item.facilities) + '</td></tr><tr><td class="fdTitles">';
+		html += $scope.tr_p['ReleasesTotal'] + '</td><td>' + formatStrFactory.getStrFormat(item.quantity)  + '</td></tr><tr><td class="fdTitles">';
+		html += $scope.tr_p['ReleasesAccidentalReleases'] + '</td><td>' + formatStrFactory.getStrFormat(item.quantityAccidental)  + '</td></tr><tr><td class="fdTitles">';
 		html += $scope.tr_p['ReleasesAccidentalPercentValue'] + '</td><td>' + item.accidentalPercent  + '</td></tr></table></div>';
 		return html;
-		/*
-		 * 
-		 * String.Format("{0}: {1}", Resources.GetGlobal("Common", "Year"), v.Year),
-           String.Format("{0}: {1}", Resources.GetGlobal("Common", "Facilities"), v.Facilities),
-           String.Format("{0}: {1}", Resources.GetGlobal("Pollutant", "ReleasesTotal"), QuantityFormat.Format(v.Quantity, v.QuantityUnit)),
-           String.Format("{0}: {1}", Resources.GetGlobal("Pollutant", "ReleasesAccidentalReleases"), QuantityFormat.Format(v.QuantityAccidental, v.QuantityAccidentalUnit)),
-           (v.AccidentalPercent > 0.0) ? 
-           	String.Format("{0}: {1:F5}%", Resources.GetGlobal("Pollutant", "ReleasesAccidentalPercentValue"), v.AccidentalPercent) : 
-           	String.Format("{0}: 0%", Resources.GetGlobal("Pollutant", "ReleasesAccidentalPercentValue"))};
 
-		 * */
 	}
 
 	
