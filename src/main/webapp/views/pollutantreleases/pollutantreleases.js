@@ -395,13 +395,22 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         			}
         		}
         		var levelkey = record[propertyGP3];
-    			if(levelkey) // Find unspecified sub levels
+    			if(levelkey) 
     			{
     				subCollection.push(angular.copy(record));
+    			}else
+    			{
+    				// Find unspecified sub levels if more then one
+    				var result = _.countBy($scope.items, function(element){ return (element[propertyGP2] === record[propertyGP2] && element[propertyGP3])? 'foundcount' : 'notfoundcount'; });
+    				if(result.foundcount)
+    				{
+    					// set unspecified sub levels
+    					record.iasubActivityCode = "unspecified";
+    					subCollection.push(angular.copy(record));
+    				}
     			}
         		if(!exist)
         		{
-        			//console.log("Collection: "+record[propertyGP2]+"   "+record[propertyGP3]);
         			record.fcount = 1;
         			if(record.quantityAccidentalAir || record.quantityAccidentalSoil || record.quantityAccidentalWater)
         			{
@@ -413,7 +422,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         			group.data.push(record);
         		}        		
         	}
-     
+
         	// Create level 3
         	for(var i = 0;i<subCollection.length;i++)
         	{
@@ -423,21 +432,12 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         			{
         				for(var n = 0;n < collection[j].data.length;n++)
         				{
-        					// iaactivityCode
-        					// unspecified
-        					
         					if(collection[j].data[n].iaactivityCode === subCollection[i].iaactivityCode)
         					{
-        						if(subCollection[i].iaactivityCode === '4.(a)')
-        						{
-        							
-        							//console.log('sub: '+subCollection[i][propertyGP3] );
-        						}
         						var sublevel = collection[j].data[n].sublevel;       						
         						if(!sublevel){
         							sublevel = [];
         							collection[j].data[n].sublevel = sublevel;
-        							collection[j].data[n].sublevel.push(subCollection[i]);					
         						}
         								
         						var existSublevel = false;
@@ -484,7 +484,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         		        		} // end for
         		        		
         		        		if(!existSublevel)
-        		        		{
+        		        		{	
         		        			subCollection[i].fcount = 1;
         		        			if(subCollection[i].quantityAccidentalAir || subCollection[i].quantityAccidentalSoil || subCollection[i].quantityAccidentalWater)
         		        			{
@@ -493,7 +493,6 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         		        			{
         		        				subCollection[i].facount = 0;
         		        			}
-        		        			
         		        			sublevel.push(subCollection[i]);
         		        		}        		
         					}
