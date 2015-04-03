@@ -240,7 +240,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         $scope.formatNumber = function(value)
         {
         	return value 
-        }
+        };
         
         
 
@@ -305,6 +305,78 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
     			return "-";
     		}
     		return formatStrFactory.getStrFormat(sum);
+        };
+        
+        $scope.getSumTotal = function(type,property1)
+        {
+        	var sumtotal = 0;
+        	switch(type.toLocaleLowerCase())
+        	{
+        		case "activities":
+        			for(var i = 0; i < $scope.activities.length; i++ )
+        			{
+        				for(var j = 0; j < $scope.activities[i].data.length; j++)
+        				{
+        					if($scope.activities[i].data[j][property1]);
+        					{
+        						sumtotal+= $scope.activities[i].data[j][property1];
+        					}
+        					
+        				}
+        			}
+        			break;
+        		case "areas":
+        			for(var i = 0; i < $scope.areas.length; i++ )
+        			{
+        				for(var j = 0; j < $scope.areas[i].data.length; j++)
+        				{
+        					if($scope.areas[i].data[j][property1]);
+        					{
+        						sumtotal+= $scope.areas[i].data[j][property1];
+        					}
+        				}
+        			}
+        			break;
+        		default:
+        			break;
+        	}
+        	console.log("SUM: "+sumtotal);
+        	return formatStrFactory.getStrFormat(sumtotal);
+        };
+        
+        $scope.getTotalCount = function(type,property)
+        {
+        	var count = 0;
+        	switch(type.toLocaleLowerCase())
+        	{
+        		case "activities":
+        			for(var i = 0; i < $scope.activities.length; i++ )
+        			{
+        				for(var j = 0; j < $scope.activities[i].data.length; j++)
+        				{
+        					if($scope.activities[i].data[j][property]);
+        					{
+        						count+=	$scope.activities[i].data[j][property];
+        					}
+        				}
+        			}
+        			break;
+        		case "areas":
+        			for(var i = 0; i < $scope.areas.length; i++ )
+        			{
+        				for(var j = 0; j < $scope.areas[i].data.length; j++)
+        				{
+        					if($scope.areas[i].data[j][property]);
+        					{
+        						count+=	$scope.areas[i].data[j][property];
+        					}
+        				}
+        			}
+        			break;
+        		default:
+        			break;
+        	}
+        	return count;
         };
         
         $scope.getTypeCount = function(elements, type){  
@@ -499,7 +571,17 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         				}
         			}
         		} // End collection
-        	}    	
+        	}
+        	
+        	$scope.totalactivitiesfac = $scope.getTotalCount("activities","fcount");
+        	$scope.totalactivitiesacc = $scope.getTotalCount("activities","facount");
+        	$scope.totalactivitiessumair = $scope.getSumTotal("activities","quantityAir");
+        	$scope.totalactivitiessumaair = $scope.getSumTotal("activities","quantityAccidentalAir");
+        	$scope.totalactivitiessumwater = $scope.getSumTotal("activities","quantityWater");
+        	$scope.totalactivitiessumawater = $scope.getSumTotal("activities","quantityAccidentalWater");
+        	$scope.totalactivitiessumsoal = $scope.getSumTotal("activities","quantitySoil");
+        	$scope.totalactivitiessumasoil = $scope.getSumTotal("activities","quantityAccidentalSoil");
+        	
         };
         
         $scope.groupbyAreas = function(propertyGP1, collection)
@@ -571,7 +653,15 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         			}
         			group.data.push(record);
         		}        		
-        	}    	
+        	}
+        	$scope.totalareasfac = $scope.getTotalCount("areas","fcount");
+        	$scope.totalareasacc = $scope.getTotalCount("areas","facount");
+        	$scope.totalareassumair = $scope.getSumTotal("areas","quantityAir");
+        	$scope.totalareassumaair = $scope.getSumTotal("areas","quantityAccidentalAir");
+        	$scope.totalareassumwater = $scope.getSumTotal("areas","quantityWater");
+        	$scope.totalareassumawater = $scope.getSumTotal("areas","quantityAccidentalWater");
+        	$scope.totalareassumsoal = $scope.getSumTotal("areas","quantitySoil");
+        	$scope.totalareassumasoil = $scope.getSumTotal("areas","quantityAccidentalSoil");
         };
   
         $scope.showinfo = function(data, ref)

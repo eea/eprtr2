@@ -146,7 +146,23 @@
                        	<td>{{getSum(level3,"quantitySoil")}}<br />{{getSum(level3,"quantityAccidentalSoil")}}</td>
                     </tr>
                     <tr ng-repeat-end></tr>
-                    <tr ng-repeat-end ng-hide="true"></tr>
+                    <tr ng-repeat-end ng-hide="true"></tr>       
+                    <tr ng-if="$last">
+                    	<td>
+                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="alert('TODO')" alt="" />
+                    	</td>
+                    	<td>
+                    		{{tr_c.Total}}
+                    	</td>
+                    	<td>
+                   	   		{{tr_p.ReleasesAccidentialTotal}}<br/>
+                     		{{tr_p.ReleasesAccidentalValue}}
+                   		</td>
+                   		<td>{{totalactivitiesfac}}<br />{{totalactivitiesacc}}</td>
+                        <td>{{totalactivitiessumair}}<br/>{{totalactivitiessumaair}}</td>
+                    	<td>{{totalactivitiessumwater}}<br />{{totalactivitiessumawater}}</td>
+                    	<td>{{totalactivitiessumsoil}}<br />{{totalactivitiessumasoil}}</td>
+                    </tr>
                     <tr ng-repeat-end ng-hide="true"></tr>
                     </tbody>
                 </table>    
@@ -245,6 +261,22 @@
                         	<td>{{getSum(item2,"quantitySoil")}}<br />{{getSum(item2,"quantityAccidentalSoil")}}</td>
                     </tr>                
                     <tr ng-repeat-end></tr>
+                       <tr ng-if="$last">
+                    	<td>
+                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="alert('TODO')" alt="" />
+                    	</td>
+                    	<td>
+                    		{{tr_c.Total}}
+                    	</td>
+                    	<td>
+                   	   		{{tr_p.ReleasesAccidentialTotal}}<br/>
+                     		{{tr_p.ReleasesAccidentalValue}}
+                   		</td>
+                   		<td>{{totalareasfac}}<br />{{totalareasacc}}</td>
+                    	<td>{{totalareassumair}}<br/>{{totalareassumaair}}</td>
+                    	<td>{{totalareassumwater}}<br />{{totalareassumawater}}</td>
+                    	<td>{{totalareassumsoil}}<br />{{totalareassumasoil}}</td>
+                    </tr>
                     <tr ng-repeat-end ng-hide="true"></tr>
                     </tbody>
                 </table>
