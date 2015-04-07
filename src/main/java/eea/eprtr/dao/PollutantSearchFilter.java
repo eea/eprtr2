@@ -20,12 +20,14 @@ public class PollutantSearchFilter {
 	private Integer pollutantGroupID;
 	private List<MediumCode> mediumCode;
 	private Integer accidental;
+	private Integer confidentialIndicator;
 
-	public PollutantSearchFilter(Integer pollutantID, Integer pollutantGroupID, List<MediumCode> mediumCode, Integer accidental) {
+	public PollutantSearchFilter(Integer pollutantID, Integer pollutantGroupID, List<MediumCode> mediumCode, Integer accidental, Integer confidentialIndicator) {
 		this.pollutantID = pollutantID;
 		this.pollutantGroupID = pollutantGroupID;
 		this.mediumCode = mediumCode;
 		this.accidental = accidental;
+		this.confidentialIndicator = confidentialIndicator;
 	}
 	
 	public Predicate buildWhereClause(CriteriaBuilder cb, Root<FacilitySearchAll> qr) {
@@ -41,7 +43,11 @@ public class PollutantSearchFilter {
 		}
 		if (accidental != null) {
 			whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.accidental), accidental));
-		} 
+		}
+		if(confidentialIndicator != null)
+		{
+			whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.confidentialIndicator), confidentialIndicator));
+		}
 		 
 		return whereClause;
 	}
@@ -54,6 +60,11 @@ public class PollutantSearchFilter {
 		if (pollutantGroupID != null) {
 			whereClause.getExpressions().add(cb.equal(qr.get(Pollutantrelease_.LOV_PollutantGroupID), pollutantGroupID));
 		}
+		if(confidentialIndicator != null)
+		{
+			whereClause.getExpressions().add(cb.equal(qr.get(Pollutantrelease_.confidentialIndicator), confidentialIndicator));
+		}
+		
 		if (mediumCode != null) {
 			/*ArrayList<MediumCode> codes = new ArrayList<MediumCode>(Arrays.asList(mediumCode.values()));
 			codes.removeAll(mediumCode);*/

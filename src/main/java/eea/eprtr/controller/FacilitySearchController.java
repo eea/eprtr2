@@ -59,6 +59,7 @@ public class FacilitySearchController {
     		@RequestParam(value = "WasteTypeCode", required = false) List<String> wasteTypeCode,
     		@RequestParam(value = "WasteTreatmentCode", required = false) List<String> wasteTreatmentCode,
     		@RequestParam(value = "WHPCountryID", required = false) Integer whpCountryID,
+    		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
     		
     		@RequestParam(value = "offset") Integer offset,
     		@RequestParam(value = "limit") Integer limit,
@@ -70,7 +71,7 @@ public class FacilitySearchController {
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
-		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental);
+		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
 		WasteSearchFilter wasteFilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID);
 		FacilitySearchFilter filter = new FacilitySearchFilter(facilityName, cityName, reportingYearFilter, locationFilter, activityFilter, pollutantFilter, wasteFilter);
 		

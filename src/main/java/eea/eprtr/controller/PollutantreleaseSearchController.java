@@ -50,7 +50,7 @@ public class PollutantreleaseSearchController {
     		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
     		@RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
     		@RequestParam(value = "Accidental", required = false) Integer accidental,
-    		
+    		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
     		HttpServletResponse response
     		) {
 
@@ -60,7 +60,7 @@ public class PollutantreleaseSearchController {
 		}
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
-		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental);
+		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
 		PollutantreleaseSearchFilter filter = new PollutantreleaseSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter);
 		
 		PollutantreleaseCounts counts = pollutantreleaseSearchRepository.getPollutantreleaseCounts(filter);

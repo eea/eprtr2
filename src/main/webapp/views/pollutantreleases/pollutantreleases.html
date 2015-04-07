@@ -327,10 +327,11 @@
             
             <tab heading="Confidentiality">
                 <br />
-                <div ng-bind-html="tr_con.NoConfidentialityInformation">
+                <div ng-if="!hasConfidentionalData" ng-bind-html="tr_con.NoConfidentialityInformation">
+   				<br />
                 </div>
                     
-                <div>
+                <div ng-if="hasConfidentionalData">
 	                <div ng-bind-html="tr_c.ConfidentialityExplanationPR1">
 	                </div>
 	                 <table class="table table-striped table-condensed table-hover">
@@ -343,11 +344,11 @@
                     	</tr>
                     	</thead>
                     	<tbody>
-                    	<tr>
-                    	<td></td>
-                    	<td></td>
-                    	<td></td>
-                    	<td></td>
+                    	<tr ng-repeat="item in itemCon">
+                    	<td>{{tr_lpo[item.pollutantCode]}}</td>
+                    	<td>{{item.aircount}}</td>
+                    	<td>{{item.watercount}}</td>
+                    	<td>{{item.soilcount}}</td>
                     	</tr>
 	                    </tbody>
                		</table>
@@ -368,11 +369,11 @@
                     	</tr>
                     	</thead>
                     	<tbody>
-                    	<tr>
-                    		<td></td>
-                    		<td></td>
-                    		<td></td>
-                    		<td></td>
+                    	<tr ng-repeat="item in itemConReason">
+                    		<td>{{tr_lcon[item.reason]}}</td>
+                    		<td>{{item.aircount}}</td>
+                    		<td>{{item.watercount}}</td>
+                    		<td>{{item.soilcount}}</td>
                     	</tr>
 	                    </tbody>
                		  </table>

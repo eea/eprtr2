@@ -76,7 +76,17 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 $scope.currentSearchFilter.pollutantSearchFilter.filter(queryParams);
             }
             $scope.queryParams = queryParams;
-
+            // Create confidential search
+            $scope.confidentialParams = angular.copy(queryParams);
+            if($scope.confidentialParams.LOV_PollutantID)
+            {
+            	delete $scope.confidentialParams.LOV_PollutantID;
+            }
+            if ($scope.currentSearchFilter.pollutantSearchFilter) {
+            	$scope.confidentialParams.LOV_PollutantGroupID = $scope.currentSearchFilter.pollutantSearchFilter.selectedPollutantGroup.lov_PollutantID;
+            }
+            $scope.confidentialParams.ConfidentialIndicator = 1;
+            
             facilitySearch.getList(queryParams).then(function(response) {
                 $scope.items = response.data;
 
@@ -95,10 +105,15 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 
                 $scope.updateActivitiesData();
                 $scope.updateAreasData();
-                $scope.updateConfidentialityData();
+                
                 
             });
-            var test = "";
+            
+            // Do confidential search
+            facilitySearch.getList($scope.confidentialParams).then(function(response) {
+                $scope.itemsConfidentiality = response.data;
+                $scope.updateConfidentialityData();
+            });
         };
 
         $scope.updateSummaryData = function() {
@@ -204,6 +219,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         		$scope.tr_c = data.Common;
         		$scope.tr_p = data.Pollutant;
         		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
+        		$scope.tr_lcon =data.LOV_CONFIDENTIALITY;
         		$scope.tr_con =data.Confidentiality;
         		$scope.tr_lpo = data.LOV_POLLUTANT;
         		$scope.tr_lnr = data.LOV_NUTSREGION;
@@ -219,7 +235,78 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         
         $scope.updateConfidentialityData = function()
         {
-    		// Area
+        	$scope.hasConfidentionalData = $scope.itemsConfidentiality.length > 0? true: false;
+        	
+        	$scope.itemCon = [];
+        	$scope.itemConReason = [];
+        	// Confidential
+        	for ( var i = 0; i < $scope.itemsConfidentiality.length; i++ ) { 		
+        		var conObj =_.find($scope.itemCon, function(element){ return element.pollutantCode === ($scope.itemsConfidentiality[i].pollutantCode + ".Confidential") });       		
+        		if(!conObj)
+        		{
+        			var polutent = {};
+        			polutent.pollutantCode = $scope.itemsConfidentiality[i].pollutantCode+".Confidential";
+        			polutent.aircount = $scope.itemsConfidentiality[i].confidentialCodeAir ? 1: 0;
+        			polutent.watercount = $scope.itemsConfidentiality[i].confidentialCodeWater ? 1: 0;
+        			polutent.soilcount = $scope.itemsConfidentiality[i].confidentialCodeSoil ? 1: 0;
+        			$scope.itemCon.push(polutent);
+        		}else
+        		{
+        			if( $scope.itemsConfidentiality[i].confidentialCodeAir)
+        			{
+        				conObj.aircount += 1;
+        			}
+        			if( $scope.itemsConfidentiality[i].confidentialCodeWater)
+        			{
+        				conObj.watercount += 1;
+        			}
+        			if( $scope.itemsConfidentiality[i].confidentialCodeSoil)
+        			{
+        				conObj.soilcount += 1;
+        			}
+        		}
+        	}
+        	// Reason
+        	for ( var i = 0; i < $scope.itemsConfidentiality.length; i++ ) {
+        		var conObj =_.find($scope.itemConReason, function(element){ 
+        			return ((element.reason === $scope.itemsConfidentiality[i].confidentialCodeAir) && $scope.itemsConfidentiality[i].confidentialCodeAir) ||
+        			((element.reason === $scope.itemsConfidentiality[i].confidentialCodeWater) && $scope.itemsConfidentiality[i].confidentialCodeWater) ||
+        			((element.reason === $scope.itemsConfidentiality[i].confidentialCodeSoil) && $scope.itemsConfidentiality[i].confidentialCodeSoil)});       		
+        		if(!conObj)
+        		{
+        			var polutent = {};
+        			if( $scope.itemsConfidentiality[i].confidentialCodeAir)
+        			{
+        				polutent.reason = $scope.itemsConfidentiality[i].confidentialCodeAir
+        			}
+        			if( $scope.itemsConfidentiality[i].confidentialCodeWater)
+        			{
+        				polutent.reason = $scope.itemsConfidentiality[i].confidentialCodeWater
+        			}
+        			if( $scope.itemsConfidentiality[i].confidentialCodeSoil)
+        			{
+        				polutent.reason = $scope.itemsConfidentiality[i].confidentialCodeSoil
+        			}  		
+        			polutent.aircount = $scope.itemsConfidentiality[i].confidentialCodeAir ? 1: 0;
+        			polutent.watercount = $scope.itemsConfidentiality[i].confidentialCodeWater ? 1: 0;
+        			polutent.soilcount = $scope.itemsConfidentiality[i].confidentialCodeSoil ? 1: 0;
+        			$scope.itemConReason.push(polutent);
+        		}else
+        		{
+        			if( $scope.itemsConfidentiality[i].confidentialCodeAir)
+        			{
+        				conObj.aircount += 1;
+        			}
+        			if( $scope.itemsConfidentiality[i].confidentialCodeWater)
+        			{
+        				conObj.watercount += 1;
+        			}
+        			if( $scope.itemsConfidentiality[i].confidentialCodeSoil)
+        			{
+        				conObj.soilcount += 1;
+        			} 
+        		}
+        	}	
         };
 
         $scope.formatText = function(txt, confidential) {
@@ -340,7 +427,6 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         		default:
         			break;
         	}
-        	console.log("SUM: "+sumtotal);
         	return formatStrFactory.getStrFormat(sumtotal);
         };
         

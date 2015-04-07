@@ -38,6 +38,9 @@ public class FacilitySearchAll implements Serializable {
 	@Column(name="ConfidentialIndicatorFacility", nullable=false)
 	private boolean confidentialIndicatorFacility;
 
+	@Column(name="ConfidentialIndicator", nullable=false)
+	private boolean confidentialIndicator;
+	
 	@Column(name="ConfidentialIndicatorPollutant")
 	private boolean confidentialIndicatorPollutant;
 
@@ -253,6 +256,15 @@ public class FacilitySearchAll implements Serializable {
 
 	public void setConfidentialIndicatorFacility(boolean confidentialIndicatorFacility) {
 		this.confidentialIndicatorFacility = confidentialIndicatorFacility;
+	}
+	
+	public boolean getConfidentialIndicator(){
+		return this.confidentialIndicator;
+	}
+	
+	public void setConfidentialIndicator(boolean confidentialIndicator)
+	{
+		this.confidentialIndicator = confidentialIndicator;
 	}
 
 	public boolean getConfidentialIndicatorPollutant() {
