@@ -96,15 +96,22 @@
                     <tr ng-repeat-start="item in activities | orderBy: 'key'">
                     <td><img src="images/timeseries.png" class="timesericesImage" ng-click="alert('TODO')" alt="" /></td>
                         <td>
-                        	<img ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
-                        	<img ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
+                        	<img class="handcursor" ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
+                        	<img class="handcursor" ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
                         	<a ng-click="showing=!showing">{{tr_laa[item.key]}}</a>
+                        	 <a href="#/industrialactivity?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">
+                        	 <img ng-attr-title="{{tr_c.LinkSearchActivity}}" src="images/newsearch.gif" class="newsearchimg"  ng-click="alert('Search')" alt="" />
+                    		 </a>
                         </td>
                         <td>
                         {{tr_p.ReleasesAccidentialTotal}}<br/>
                         {{tr_p.ReleasesAccidentalValue}}
                         </td>
-                        <td>{{getTypeCount(item.data,"facility")}}<br />{{getTypeCount(item.data,"accidental")}}</td>
+                        <td>{{getTypeCount(item.data,"facility")}}
+                        <a href="#/facilitylevels?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">
+                          <img ng-attr-title="{{tr_c.LinkSearchFacility}}" src="images/newsearch.gif" class="newsearchimg" alt="" />
+                        </a>
+                        <br />{{getTypeCount(item.data,"accidental")}}</td>
                         <td>{{getSum(item.data,"quantityAir")}}<br/>{{getSum(item.data,"quantityAccidentalAir")}}</td>
                         <td>{{getSum(item.data,"quantityWater")}}<br />{{getSum(item.data,"quantityAccidentalWater")}}</td>
                         <td>{{getSum(item.data,"quantitySoil")}}<br />{{getSum(item.data,"quantityAccidentalSoil")}}</td>
@@ -115,32 +122,47 @@
                     		<img src="images/timeseries.png" class="timesericesImage" ng-click="alert('TODO')" alt="" />
                     	</td>
                     	<td>
-                    		<img ng-click="showing2=!showing2" ng-show="!showing2 && level2.sublevel" src="images/plus.gif" />
-                        	<img ng-click="showing2=!showing2" ng-show="showing2" src="images/minus.gif" /> 
+                    		<div class="innerlevel2">
+                    		<img class="handcursor" ng-click="showing2=!showing2" ng-show="!showing2 && level2.sublevel" src="images/plus.gif" />
+                        	<img class="handcursor" ng-click="showing2=!showing2" ng-show="showing2" src="images/minus.gif" /> 
                     		{{tr_laa[level2.iaactivityCode]}}
+                    	 	<a href="#/industrialactivity?FacilityID={{level2.facilityID}}&ReportingYear={{level2.reportingYear}}">
+                        	 <img ng-attr-title="{{tr_c.LinkSearchActivity}}" src="images/newsearch.gif" class="newsearchimg" ng-click="alert('Search')" alt="" />
+                    		 </a>
+                    		</div>
                     	</td>
                     	<td>
                     	   	{{tr_p.ReleasesAccidentialTotal}}<br/>
                         	{{tr_p.ReleasesAccidentalValue}}
                     	</td>
-                   		<td>{{getTypeCount(level2,"facility")}}<br />{{getTypeCount(level2,"accidental")}}</td>
+                   		<td>{{getTypeCount(level2,"facility")}}
+                   		<a href="#/facilitylevels?FacilityID={{level2.facilityID}}&ReportingYear={{level2.reportingYear}}">
+                   	      <img ng-attr-title="{{tr_c.LinkSearchFacility}}" src="images/newsearch.gif" class="newsearchimg" alt="" />
+                   		</a>
+                   		<br />{{getTypeCount(level2,"accidental")}}</td>
                        	<td>{{getSum(level2,"quantityAir")}}<br/>{{getSum(level2,"quantityAccidentalAir")}}</td>
                        	<td>{{getSum(level2,"quantityWater")}}<br />{{getSum(level2,"quantityAccidentalWater")}}</td>
                        	<td>{{getSum(level2,"quantitySoil")}}<br />{{getSum(level2,"quantityAccidentalSoil")}}</td>
                     </tr>
                     <!-- Level3 -->
-                    <tr ng-show="showing2" ng-repeat-start="level3 in level2.sublevel | orderBy: 'iasubActivityCode'">
+                    <tr  ng-show="showing2 && showing" ng-repeat-start="level3 in level2.sublevel | orderBy: 'iasubActivityCode'">
                     	<td>
                     		<img src="images/timeseries.png" class="timesericesImage" ng-click="alert('TODO')" alt="" />
                     	</td>
-                    	<td> 
+                    	<td>
+                    		<div class="innerlevel3"> 
                     		{{tr_laa[level3.iasubActivityCode]}}
+                    		</div>
                     	</td>
                     	<td>
                     	   	{{tr_p.ReleasesAccidentialTotal}}<br/>
                         	{{tr_p.ReleasesAccidentalValue}}
                     	</td>
-                   		<td>{{getTypeCount(level3,"facility")}}<br />{{getTypeCount(level3,"accidental")}}</td>
+                   		<td>{{getTypeCount(level3,"facility")}}
+                   		<a href="#/facilitylevels?FacilityID={{level3.facilityID}}&ReportingYear={{level3.reportingYear}}">
+                   	      <img ng-attr-title="{{tr_c.LinkSearchFacility}}" src="images/newsearch.gif" class="newsearchimg" ng-click="alert('Search')" alt="" />
+                   	      </a>
+                   		<br />{{getTypeCount(level3,"accidental")}}</td>
                        	<td>{{getSum(level3,"quantityAir")}}<br/>{{getSum(level3,"quantityAccidentalAir")}}</td>
                        	<td>{{getSum(level3,"quantityWater")}}<br />{{getSum(level3,"quantityAccidentalWater")}}</td>
                        	<td>{{getSum(level3,"quantitySoil")}}<br />{{getSum(level3,"quantityAccidentalSoil")}}</td>
@@ -227,14 +249,19 @@
                     <tr ng-repeat-start="item in areas" >
                         <td><img src="images/timeseries.png" class="timesericesImage" ng-click="alert('TODO')" alt="" /></td>
                         <td>
-                        <img ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
-                        <img ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
+                        <img class="handcursor" ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
+                        <img class="handcursor" ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
                         <a ng-click="showing=!showing">{{tr_lco[item.key]}}</a></td>            
                         <td>
-                        {{tr_p.ReleasesAccidentialTotal}}<br/>
+                        {{tr_p.ReleasesAccidentialTotal}}
+                        <br/>
                         {{tr_p.ReleasesAccidentalValue}}
                         </td>
-                        <td>{{getTypeCount(item.data,"facility")}}<br />{{getTypeCount(item.data,"accidental")}}</td>
+                        <td>{{getTypeCount(item.data,"facility")}}
+                        <a href="#/facilitylevels?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">
+                        <img ng-attr-title="{{tr_c.LinkSearchFacility}}" src="images/newsearch.gif" class="newsearchimg" alt="" />
+                        </a>
+                        <br />{{getTypeCount(item.data,"accidental")}}</td>
                         <td>{{getSum(item.data,"quantityAir")}}<br/>{{getSum(item.data,"quantityAccidentalAir")}}</td>
                         <td>{{getSum(item.data,"quantityWater")}}<br />{{getSum(item.data,"quantityAccidentalWater")}}</td>
                         <td>{{getSum(item.data,"quantitySoil")}}<br />{{getSum(item.data,"quantityAccidentalSoil")}}</td>
@@ -242,20 +269,27 @@
                     
                     <!-- Second level -->
                     <tr ng-show="showing" ng-repeat-start="item2 in item.data">
-                        	<td><img src="images/timeseries.png" class="timesericesImage" ng-click="showinfo(item2, this)" alt="" /></td>
-                        	
+                        	<td><img src="images/timeseries.png" class="timesericesImage" ng-click="showinfo(item2, this)" alt="" /></td>        	
                         	<td ng-if="regionSearch">
+                        		<div class="innerlevel2">
                         		{{tr_lnr[item2.nutslevel2RegionCode]}}
+                        		</div>
                         	</td>
                         	<td ng-if="!regionSearch">
+                        		<div class="innerlevel2">
                         		{{tr_lrbd[item2.riverBasinDistrictCode]}}
-                        	</td>
-                        	        
+                        		</div>
+                        	</td>        
                         	<td>
-                        	{{tr_p.ReleasesAccidentialTotal}}<br/>
+                        	{{tr_p.ReleasesAccidentialTotal}}
+                        	<br/>
                         	{{tr_p.ReleasesAccidentalValue}}
                         	</td>
-                        	<td>{{getTypeCount(item2,"facility")}}<br />{{getTypeCount(item2,"accidental")}}</td>
+                        	<td>{{getTypeCount(item2,"facility")}}
+                        	<a href="#/facilitylevels?FacilityID={{item2.facilityID}}&ReportingYear={{item2.reportingYear}}">
+                        	<img ng-attr-title="{{tr_c.LinkSearchFacility}}" src="images/newsearch.gif" class="newsearchimg" alt="" />
+                        	</a>
+                        	<br />{{getTypeCount(item2,"accidental")}}</td>
                          	<td>{{getSum(item2,"quantityAir")}}<br/>{{getSum(item2,"quantityAccidentalAir")}}</td>
                         	<td>{{getSum(item2,"quantityWater")}}<br />{{getSum(item2,"quantityAccidentalWater")}}</td>
                         	<td>{{getSum(item2,"quantitySoil")}}<br />{{getSum(item2,"quantityAccidentalSoil")}}</td>

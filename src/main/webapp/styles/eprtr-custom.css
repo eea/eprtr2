@@ -273,6 +273,29 @@ vertical-align: top;
 /*     font-size: 12px; */
 /* } */
 
+/*
+* ng-Repeater style
+*/
+.innerlevel2
+{
+	padding-left:15px;
+}
+.innerlevel3
+{
+	padding-left:30px;
+}
+.handcursor
+{
+	cursor:pointer; 
+}
+.newsearchimg
+{
+	cursor:pointer;
+}
+.timesericesImage
+{
+	cursor:pointer;
+}
 
 /* Sticky footer styles
 -------------------------------------------------- */
