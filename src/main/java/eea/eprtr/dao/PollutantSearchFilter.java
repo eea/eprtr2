@@ -14,6 +14,9 @@ import eea.eprtr.model.MediumCode;
 import eea.eprtr.model.Pollutantrelease;
 import eea.eprtr.model.Pollutantrelease_;
 
+import eea.eprtr.model.Pollutanttransfer;
+import eea.eprtr.model.Pollutanttransfer_;
+
 public class PollutantSearchFilter {
 
 	private Integer pollutantID;
@@ -88,6 +91,21 @@ public class PollutantSearchFilter {
 			} else {
 				whereClause.getExpressions().add(cb.or());
 			}
+		}
+		return whereClause;
+	}
+	
+	public Predicate buildWhereClausePollutanttransfer(CriteriaBuilder cb, Root<Pollutanttransfer> qr) {
+		Predicate whereClause = cb.conjunction();
+		if (pollutantID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(Pollutanttransfer_.LOV_PollutantID), pollutantID));
+		}
+		if (pollutantGroupID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(Pollutanttransfer_.LOV_PollutantGroupID), pollutantGroupID));
+		}
+		if(confidentialIndicator != null)
+		{
+			whereClause.getExpressions().add(cb.equal(qr.get(Pollutanttransfer_.confidentialIndicator), confidentialIndicator));
 		}
 		return whereClause;
 	}

@@ -9,6 +9,9 @@ import eea.eprtr.model.FacilitySearchAll_;
 import eea.eprtr.model.Pollutantrelease;
 import eea.eprtr.model.Pollutantrelease_;
 
+import eea.eprtr.model.Pollutanttransfer;
+import eea.eprtr.model.Pollutanttransfer_;
+
 public class ActivitySearchFilter {
 
 	private Integer aiSectorID;
@@ -61,6 +64,25 @@ public class ActivitySearchFilter {
 			whereClause.getExpressions().add(cb.equal(qr.get(Pollutantrelease_.LOV_NACEActivityID), naceActivityID));
 		} else if (naceSubActivityID != null) {
 			whereClause.getExpressions().add(cb.equal(qr.get(Pollutantrelease_.LOV_NACESubActivityID), naceSubActivityID));
+		}
+		 
+		return whereClause;
+	}
+	
+	public Predicate buildWhereClausePollutanttransfer(CriteriaBuilder cb, Root<Pollutanttransfer> qr) {
+		Predicate whereClause = cb.conjunction();
+		if (aiSectorID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(Pollutanttransfer_.LOV_IASectorID), aiSectorID));
+		} else if (aiActivityID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(Pollutanttransfer_.LOV_IAActivityID), aiActivityID));
+		} else if (aiSubActivityID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(Pollutanttransfer_.LOV_IASubActivityID), aiSubActivityID));
+		} else if (naceSectorID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(Pollutanttransfer_.LOV_NACESectorID), naceSectorID));
+		} else if (naceActivityID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(Pollutanttransfer_.LOV_NACEActivityID), naceActivityID));
+		} else if (naceSubActivityID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(Pollutanttransfer_.LOV_NACESubActivityID), naceSubActivityID));
 		}
 		 
 		return whereClause;

@@ -10,6 +10,8 @@ import eea.eprtr.model.FacilitySearchAll;
 import eea.eprtr.model.FacilitySearchAll_;
 import eea.eprtr.model.Pollutantrelease;
 import eea.eprtr.model.Pollutantrelease_;
+import eea.eprtr.model.Pollutanttransfer;
+import eea.eprtr.model.Pollutanttransfer_;
 
 public class LocationSearchFilter {
 
@@ -63,4 +65,21 @@ public class LocationSearchFilter {
 		}
 		return whereClause;
 	}
+	
+	public Predicate buildWhereClausePollutanttransfer(CriteriaBuilder cb, Root<Pollutanttransfer> qr) {
+		Predicate whereClause = cb.conjunction();
+		if (areaGroupID != null) {
+			List<Integer> countryIDs = repository.getCountryIDs(areaGroupID);
+			whereClause.getExpressions().add(qr.get(Pollutanttransfer_.LOV_CountryID).in(countryIDs));
+		} else if (countryID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(Pollutanttransfer_.LOV_CountryID), countryID));
+			if (regionID != null) {
+				whereClause.getExpressions().add(cb.equal(qr.get(Pollutanttransfer_.LOV_NUTSRLevel2ID), regionID));
+			} else if (rbdID != null) {
+				whereClause.getExpressions().add(cb.equal(qr.get(Pollutanttransfer_.LOV_RiverBasinDistrictID), rbdID));
+			}
+		}
+		return whereClause;
+	}
+	
 }
