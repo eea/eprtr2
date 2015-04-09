@@ -16,7 +16,26 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         $scope.searchFilter = searchFilter;
         $scope.queryParams = {};
         $scope.queryParams.ReportingYear = -1;
+        $scope.translate = function()
+        {
+        	translationService.get().then(function (data) {
+        		$scope.tr_lco = data.LOV_COUNTRY;
+        		$scope.tr_lnr = data.LOV_NUTSREGION;
+        		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
+        		$scope.tr_f = data.Facility;
+        		$scope.tr_c = data.Common;
+        		$scope.tr_p = data.Pollutant;
+        		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
+        		$scope.tr_lcon =data.LOV_CONFIDENTIALITY;
+        		$scope.tr_con =data.Confidentiality;
+        		$scope.tr_lpo = data.LOV_POLLUTANT;
+        		$scope.tr_lnr = data.LOV_NUTSREGION;
+        		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
+        		$scope.tr_chart = data.ChartLabels;
+        	  });
+        };
         
+        $scope.translate();
         $scope.$watch('mediumTypeSummary', function(value) {
             if ($scope.items) {
                 $scope.updateSummaryData();
@@ -86,7 +105,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
             	$scope.confidentialParams.LOV_PollutantGroupID = $scope.currentSearchFilter.pollutantSearchFilter.selectedPollutantGroup.lov_PollutantID;
             }
             $scope.confidentialParams.ConfidentialIndicator = 1;
-            
+       
             facilitySearch.getList(queryParams).then(function(response) {
                 $scope.items = response.data;
 
@@ -98,7 +117,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 $scope.mediumTypeFacilities = 'Air';
                 $scope.mediumTypeAreaComparison = 'Air';
                 
-                $scope.translate();
+
                 $scope.updateSummaryData();
                 $scope.updateFacilitiesData();
                 $scope.updateAreaComparisonData();
@@ -123,6 +142,11 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 }
                 return false;
             });
+     	
+            for(var i = 0; i <$scope.summaryItems.length;i++)
+            {
+            	$scope.summaryItems[i].iaactivityCode = $scope.tr_laa[$scope.summaryItems[i].iaactivityCode];
+            }
 
             var graphData = {};
             for (var i = 0; i < $scope.summaryItems.length; i++) {
@@ -171,27 +195,39 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 }
                 return false;
             });
-
+            
+            var totalquantity = 0;
             var graphData = {};
             for (var i = 0; i < $scope.areaComparisonItems.length; i++) {
-                if (!graphData[$scope.areaComparisonItems[i].countryCode]) {
-                    graphData[$scope.areaComparisonItems[i].countryCode] = {c: [
+                // Test for creating country
+            	if (!graphData[$scope.areaComparisonItems[i].countryCode]) {
+            		
+            		//$scope.tr_chart.AREA
+                    graphData[$scope.areaComparisonItems[i].countryCode] = 
+                    {c: [
                         {v: $scope.areaComparisonItems[i].countryCode},
-                        {v: $scope.areaComparisonItems[i]['quantity' + $scope.mediumTypeSummary]}
+                        {v: $scope.areaComparisonItems[i]['quantity' + $scope.mediumTypeSummary]},
+                        {v: "ff<br/>Dette er en test"} 
                     ]};
+                    totalquantity +=$scope.areaComparisonItems[i]['quantity' + $scope.mediumTypeSummary];
                 } else {
                     graphData[$scope.areaComparisonItems[i].countryCode].c[1].v =
                         graphData[$scope.areaComparisonItems[i].countryCode].c[1].v + $scope.areaComparisonItems[i]['quantity' + $scope.mediumTypeSummary];
+                    graphData[$scope.areaComparisonItems[i].countryCode].c[2].v = "ff<br /> test";
+                    totalquantity +=$scope.areaComparisonItems[i]['quantity' + $scope.mediumTypeSummary];
                 }
             }
 
             var graphDataArray = [];
             for (var key in graphData) {
                 if (graphData.hasOwnProperty(key)) {
+                	// Calculate % of total quantity
+                	graphData[key].c[1].v =  Math.round(((graphData[key].c[1].v * 100) / totalquantity)*100)/100;
                     graphDataArray = graphDataArray.concat(graphData[key]);
                 }
             }
-
+        	
+            // $scope.tr_chart.PERCENT_TOTAL;
             $scope.areaComparisonChartObject = {};
             $scope.areaComparisonChartObject.data = {
                 "cols": [
@@ -200,6 +236,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 ],
                 "rows": graphDataArray
             };
+            $scope.areaComparisonChartObject.options = {"tooltip": {"isHtml": false}};
             $scope.areaComparisonChartObject.type = 'BarChart';
         };
         
@@ -209,24 +246,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         	$scope.groupbyActivitet('iasectorCode','iaactivityCode','iasubActivityCode',$scope.activities);
         };
         
-        $scope.translate = function()
-        {
-        	translationService.get().then(function (data) {
-        		$scope.tr_lco = data.LOV_COUNTRY;
-        		$scope.tr_lnr = data.LOV_NUTSREGION;
-        		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
-        		$scope.tr_f = data.Facility;
-        		$scope.tr_c = data.Common;
-        		$scope.tr_p = data.Pollutant;
-        		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
-        		$scope.tr_lcon =data.LOV_CONFIDENTIALITY;
-        		$scope.tr_con =data.Confidentiality;
-        		$scope.tr_lpo = data.LOV_POLLUTANT;
-        		$scope.tr_lnr = data.LOV_NUTSREGION;
-        		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
-        	  });
-        };
-        
+ 
         $scope.updateAreasData = function()
         {
         	$scope.areas = [];
@@ -483,7 +503,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 }
             }
             return total;
-        }
+        };
         
         $scope.findGroup = function(collection,key)
         {

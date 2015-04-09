@@ -17,6 +17,9 @@ public class Pollutanttransfer implements Serializable {
 	@Column(name="CAS")
 	private String cas;
 
+	@Column(name="ConfidentialCode")
+	private String confidentialCode;
+	
 	@Column(name="ConfidentialIndicator")
 	private boolean confidentialIndicator;
 
@@ -387,6 +390,14 @@ public class Pollutanttransfer implements Serializable {
 
 	public void setQuantity(Double quantity) {
 		this.quantity = quantity;
+	}
+
+	public String getConfidentialCode() {
+		return confidentialCode;
+	}
+
+	public void setConfidentialCode(String confidentialCode) {
+		this.confidentialCode = confidentialCode;
 	}
 	
 	

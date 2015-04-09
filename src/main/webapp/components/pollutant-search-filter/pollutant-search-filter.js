@@ -68,6 +68,17 @@ angular.module('myApp.pollutantSearchFilter', ['restangular', 'myApp.search-filt
                 } else if (this.selectedPollutantGroup.lov_PollutantID) {
                     queryParams.LOV_PollutantGroupID = this.selectedPollutantGroup.lov_PollutantID;
                 }
+            },
+            filterTransfer: function(queryParams)
+            {
+            	if (this.accidentalOnly) {
+                    queryParams.Accidental = 1;
+                }
+                if (this.selectedPollutant.lov_PollutantID) {
+                    queryParams.LOV_PollutantID = this.selectedPollutant.lov_PollutantID;
+                } else if (this.selectedPollutantGroup.lov_PollutantID) {
+                    queryParams.LOV_PollutantGroupID = this.selectedPollutantGroup.lov_PollutantID;
+                }
             }
         };
     }])

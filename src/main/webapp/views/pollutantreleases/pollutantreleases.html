@@ -1,6 +1,7 @@
 <div>
     <div>
-        <p>This report will display the aggregated releases of a specific pollutant.</p>
+    	<h3>{{tr_p.PollutantReleasesHeadline}}</h3>
+        <p>{{tr_p.PollutantReleasesSubHeadline}}</p>
     </div>
 
     <div class="row row-map">
@@ -31,8 +32,45 @@
     <div ng-show="searchResults">
         <tabset>
             <tab heading="Summary">
+                  <div>
+				<h3>{{tr_c.PollutantReleasesSummary}}</h3>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Pollutant}}:</div>
+       			<div class="col-md-3">
+       			{{currentSearchFilter.pollutantSearchFilter.selectedPollutant.name}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Year}}:
+       			</div>
+       			<div class="col-md-1">
+       			{{queryParams.ReportingYear}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Area}}:
+       			</div>
+       			<div class="col-md-3">
+       			{{currentSearchFilter.selectedReportingCountry.name}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Facilities}}:
+       			</div>
+       			<div class="col-md-1">
+       			{{items.length}}
+       			</div>
+			</div>
                 <br/>
-                Show facilities releasing to
+                {{tr_p.AllValuesAreYearlyReleases}}
+                <br/>
+                <br/>
+                {{tr_p.ShowFacilitiesReleasingToMedium}}
                 <label class="radio-inline"><input type="radio" name="summaryMediumTypeOptionsRadios" id="summaryMediumTypeOptionsRadios_0" value="Air" ng-model="$parent.mediumTypeSummary"> Air ({{quantityAir}} facilities)</label>
                 <label class="radio-inline"><input type="radio" name="summaryMediumTypeOptionsRadios" id="summaryMediumTypeOptionsRadios_1" value="Water" ng-model="$parent.mediumTypeSummary"> Water ({{quantityWater}} facilities)</label>
                 <label class="radio-inline"><input type="radio" name="summaryMediumTypeOptionsRadios" id="summaryMediumTypeOptionsRadios_2" value="Soil" ng-model="$parent.mediumTypeSummary"> Soil ({{quantitySoil}} facilities)</label>
@@ -42,7 +80,7 @@
             </tab>
             <tab heading="Activities">
 			<div>
-				<h3>{{tr_c.PollutantReleases}}</h3>
+				<h3>{{tr_c.PollutantReleasesActivity}}</h3>
 			</div>
 			<div class="row">
 			   	<div class="col-md-1">
@@ -76,7 +114,7 @@
        			</div>
 			</div>
 			<br />
-			All values are yearly releases.
+			{{tr_p.AllValuesAreYearlyReleases}}
 			<br/>
 			<!-- message -->
 			<table class="table table-striped table-condensed table-hover">
@@ -192,7 +230,7 @@
             
             <tab heading="Areas">
 			<div>
-				<h3>{{tr_c.PollutantReleases}}</h3>
+				<h3>{{tr_c.PollutantReleasesAreas}}</h3>
 			</div>
 			<div class="row">
 			   	<div class="col-md-1">
@@ -228,7 +266,7 @@
 			</div>
 			
 			<br />
-			All values are yearly releases.
+			{{tr_p.AllValuesAreYearlyReleases}}
 			<br/>
 
 			 <table class="table table-striped table-condensed table-hover">
@@ -317,8 +355,44 @@
             </tab>
             
             <tab heading="Area Comparison">
+                     	<div>
+				<h3>{{tr_c.PollutantReleasesAreaComparison}}</h3>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Pollutant}}:</div>
+       			<div class="col-md-3">
+       			{{currentSearchFilter.pollutantSearchFilter.selectedPollutant.name}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Year}}:
+       			</div>
+       			<div class="col-md-1">
+       			{{queryParams.ReportingYear}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Area}}:
+       			</div>
+       			<div class="col-md-3">
+       			{{currentSearchFilter.selectedReportingCountry.name}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Facilities}}:
+       			</div>
+       			<div class="col-md-1">
+       			{{items.length}}
+       			</div>
+			</div>
                 <br/>
-                Show facilities releasing to
+             	{{tr_p.AllValuesArePercentOfEuroTotal}}
+                 <br/>
+                {{tr_p.ShowFacilitiesReleasingToMedium}}
                 <label class="radio-inline"><input type="radio" name="areaComparisonMediumTypeOptionsRadios" id="areaComparisonMediumTypeOptionsRadios_0" value="Air" ng-model="$parent.mediumTypeAreaComparison"> Air ({{quantityAir}} facilities)</label>
                 <label class="radio-inline"><input type="radio" name="areaComparisonMediumTypeOptionsRadios" id="areaComparisonMediumTypeOptionsRadios_1" value="Water" ng-model="$parent.mediumTypeAreaComparison"> Water ({{quantityWater}} facilities)</label>
                 <label class="radio-inline"><input type="radio" name="areaComparisonMediumTypeOptionsRadios" id="areaComparisonMediumTypeOptionsRadios_2" value="Soil" ng-model="$parent.mediumTypeAreaComparison"> Soil ({{quantitySoil}} facilities)</label>
@@ -327,10 +401,43 @@
                 </div>
             </tab>
             
-
             <tab heading="Facilities">
+             <div>
+				<h3>{{tr_c.PollutantReleasesFacilities}}</h3>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Pollutant}}:</div>
+       			<div class="col-md-3">
+       			{{currentSearchFilter.pollutantSearchFilter.selectedPollutant.name}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Year}}:
+       			</div>
+       			<div class="col-md-1">
+       			{{queryParams.ReportingYear}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Area}}:
+       			</div>
+       			<div class="col-md-3">
+       			{{currentSearchFilter.selectedReportingCountry.name}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Facilities}}:
+       			</div>
+       			<div class="col-md-1">
+       			{{items.length}}
+       			</div>
+			</div>
                 <br/>
-                Show facilities releasing to
+               {{tr_p.ShowFacilitiesReleasingToMedium}}
                 <label class="radio-inline"><input type="radio" name="facilitiesMediumTypeOptionsRadios" id="facilitiesMediumTypeOptionsRadios_0" value="Air" ng-model="$parent.mediumTypeFacilities"> Air ({{quantityAir}} facilities)</label>
                 <label class="radio-inline"><input type="radio" name="facilitiesMediumTypeOptionsRadios" id="facilitiesMediumTypeOptionsRadios_1" value="Water" ng-model="$parent.mediumTypeFacilities"> Water ({{quantityWater}} facilities)</label>
                 <label class="radio-inline"><input type="radio" name="facilitiesMediumTypeOptionsRadios" id="facilitiesMediumTypeOptionsRadios_2" value="Soil" ng-model="$parent.mediumTypeFacilities"> Soil ({{quantitySoil}} facilities)</label>
@@ -360,11 +467,37 @@
             </tab>
             
             <tab heading="Confidentiality">
-                <br />
+             <div>
+				<h3>{{tr_c.PollutantReleasesConfidentiality}}</h3>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Pollutant}}:</div>
+       			<div class="col-md-3">
+       			{{currentSearchFilter.pollutantSearchFilter.selectedPollutant.name}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Year}}:
+       			</div>
+       			<div class="col-md-1">
+       			{{queryParams.ReportingYear}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Area}}:
+       			</div>
+       			<div class="col-md-3">
+       			{{currentSearchFilter.selectedReportingCountry.name}}
+       			</div>
+			</div>
+			<br />
                 <div ng-if="!hasConfidentionalData" ng-bind-html="tr_con.NoConfidentialityInformation">
-   				<br />
                 </div>
-                    
+                <br />
+                <br />     
                 <div ng-if="hasConfidentionalData">
 	                <div ng-bind-html="tr_c.ConfidentialityExplanationPR1">
 	                </div>
