@@ -77,7 +77,7 @@ TIMESERIES
        </thead>
        <tbody>
          <tr ng-repeat="item in tscoll | orderBy : 'year'">
-	         <td>{{item.year}}</td>
+	         <td>{{item.releaseYear}}</td>
 	         <td class="text-right">{{item.countries | number}}</td>
 	         <td class="text-right">{{item.facilities | number}}</td>
 	     </tr>
@@ -92,7 +92,14 @@ COMPARISON
  -->
    <tab heading="Comparison" active="active.comparison">
    <div class="row" style="padding-top:10px;" >
-        <div class="col-md-3" style="height:350px;" >	</div>
+        <div class="col-md-6" style="height:325px;" >	
+        	<!--  Year selector -->
+        	<div >
+        		<p>{{tr_c.TimeSeriesCompareYears}}</p>
+        		<select style="width:70px;" ng-model="tscompare.selectedStartYear" ng-options="y.year for y in reportingyears" id="startYear" ></select>  {{tr_c.TimeSeriesCompareAnd}}  <select style="width:70px;" ng-model="tscompare.selectedEndYear" ng-options="y.year for y in reportingyears" id="endYear" ></select>
+              	<div google-chart chart="tsStackCompareObject" style="height:250px; width:100%;"></div>
+        	</div>
+        </div>
    </div>
    </tab>
 <!-- 

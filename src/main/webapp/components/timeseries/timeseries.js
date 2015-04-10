@@ -24,9 +24,9 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 
 .controller('TimeseriesController', 
 		['$scope', '$http', '$filter', 'Restangular', 'tsconf', 'translationService', 'formatStrFactory', 'lovPollutantType','lovCountryType', 
-		 'lovAreaGroupType', 'lovNutsRegionType', 'riverBasinDistrictsType', 'annexIActivityType', 'naceActivityType', 
+		 'lovAreaGroupType', 'lovNutsRegionType', 'riverBasinDistrictsType', 'annexIActivityType', 'naceActivityType', 'reportingYearsType',
           function($scope, $http, $filter, Restangular, tsconf, translationService, formatStrFactory, lovPollutantType, lovCountryType, 
-        		  lovAreaGroupType, lovNutsRegionType, riverBasinDistrictsType, annexIActivityType, naceActivityType ) {
+        		  lovAreaGroupType, lovNutsRegionType, riverBasinDistrictsType, annexIActivityType, naceActivityType, reportingYearsType ) {
 
 /**		
  * Basic parameters
@@ -46,6 +46,9 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 	$scope.prconfcoll = [];
 	$scope.ptconfcoll = [];
 	$scope.wtconfcoll = [];
+	
+	$scope.reportingyears = {};
+	$scope.tscompare = {};
 
 	/*GOOGLE CHART*/
     $scope.tsStackseriesObject = {};
@@ -59,8 +62,29 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
             "fill": 20,
             "displayExactValues": true
         };
-    
-    
+
+    $scope.tsStackCompareObject = {};
+    $scope.tsStackCompareObject.type = 'ColumnChart';
+    $scope.tsStackCompareObject.formatters = {};
+    $scope.tsStackCompareObject.options = {
+    		"tooltip": {"isHtml": true},
+    		"focusTarget": "category",
+    		"legend":"bottom",
+            "isStacked": "true",
+            "fill": 20,
+            "displayExactValues": true
+        };
+
+    /* ReportingYears*/
+    reportingYearsType.getList().then(function(data) {
+    	$scope.reportingyears = data;
+    	$scope.tscompare.selectedStartYear = $scope.reportingyears[0];
+		$scope.tscompare.selectedEndYear = $scope.reportingyears[$scope.reportingyears.length -1]; 
+		 /*if(!$scope.showalert && data.confidentialIndicator != undefined){
+			 $scope.showalert = data.confidentialIndicator;
+		 }*/
+	});
+
 /*
  * Load translation resources 
  * */        
@@ -90,7 +114,8 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		 * events
 		 */
         $scope.$watch('filter.prsel', function(value) {
-			$scope.reqPollutantReleaseData();
+			//$scope.reqPollutantReleaseData();
+			$scope.setPRTScoll();
 			//Pollutantrelease medium changed
             /*if ($scope.items) {
                 $scope.updateSummaryData();
@@ -109,6 +134,12 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 			$scope.createheader();
 		}
 	});*/
+    
+    $scope.$watchCollection('[reportingyears,selectedStartYear,selectedEndYear]', function(value){
+    	if($scope.reportingyears != undefined){
+    		
+    	}
+    });
         
 	$scope.$watchCollection('[content,queryParams,tr_c]', function(value) {
 		if($scope.tr_c != undefined){
@@ -333,98 +364,97 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 	$scope.reqPollutantReleaseData = function(){
 		if (_.keys($scope.queryParams).length > 0){
 			//Create new qparams
+			$scope.tscoll = [];
 			var qp = {};
 		    for(var key in $scope.queryParams) {
 		        if(key != 'MediumCode' && key != 'ReportingYear') {
 		        	qp[key] = $scope.queryParams[key];
 		        }
 		    }
-	        qp['MediumCode'] = $scope.filter.prsel;
+//	        qp['MediumCode'] = $scope.filter.prsel;
 	        var rest = Restangular.withConfig(function(RestangularConfigurer) {
 	            RestangularConfigurer.setFullResponse(true);
 	        });
-	        var pollutantSearch = rest.all('pollutantreleaseSearch');
-	        pollutantSearch.getList(qp).then(function(response) {
-	        	$scope.setPRTScoll(response.data);
+	        var pollutantSeriesSearch = rest.all('pollutantreleaseSeries');
+	        pollutantSeriesSearch.getList(qp).then(function(response) {
+				for (var i = 0; i < $scope.reportingyears.length; i++){
+					var _y = $scope.reportingyears[i].year;
+					var _ts = null;
+					for (var j = 0; j < response.data.length; j++){
+						if(response.data[j].releaseYear == _y){
+							_ts = response.data[j];
+						}
+					}
+					if (_ts == null){
+						_ts = {"releaseYear":_y,"facilities":0,"countries":0,"quantityAir":null,"accidentalAir":null,"quantityWater":null,"accidentalWater":null,"quantitySoil":null,"accidentalSoil":null};
+					}
+					$scope.tscoll.push(_ts);
+				}
+	        	//$scope.tscoll = response.data;
+	        	$scope.setPRTScoll();
 	        });
 		}
 	};
 	
-	$scope.setPRTScoll = function(data){
-		//Need to group by year
-		var simple = {};
-		var byYears = _.groupBy(data.map(function(o) {
-		    return { 
-		    	reportingYear: o.reportingYear, 
-		    	countryCode: o.countryCode, 
-		    	facilityID: o.facilityID,
-		    	quantityAir : o.quantityAir,  
-		    	quantitySoil: o.quantitySoil,
-		    	quantityWater: o.quantityWater,
-		    	quantityAccidentalAir: o.quantityAccidentalAir,
-		    	quantityAccidentalSoil: o.quantityAccidentalSoil ,
-		    	quantityAccidentalWater : o.quantityAccidentalWater
-		    	};
-		}), 'reportingYear');
-		
-		$scope.tscoll = [];
-		for (var k in byYears){
-			var f = _.size(_.uniq(_.pluck(byYears[k], "facilityID")));
-			simple[k] = {'year' : k};
-			simple[k].facilities = f;
-//			var f = _.size(_.pluck(byYears[k], "facilityID"));
-			var c = _.size(_.uniq(_.pluck(byYears[k], "countryCode")));
-			$scope.tscoll.push({'year':k,'countries':c,'facilities':f});
-		}
-
-		/*Column Bar*/
-		$scope.tsStackseriesObject.data = {"cols": [
-              {id: "y", label: "Release year", type: "string"},
-              {id: "t", type: "string", role: "tooltip", p: {html: true}},
-              {id: "q", label: "Quantity", type: "number"},
-              {id: "a", label: "Accidental", type: "number"}
-        ]};
-		var colors = [];
-		if ($scope.filter.prsel == 'AIR'){
-			colors = [tsconf.colors.ColorAirTotal,tsconf.colors.ColorAirAccidental];
-		}
-		else if ($scope.filter.prsel == 'WATER'){
-			colors = [tsconf.colors.ColorWaterTotal,tsconf.colors.ColorWaterAccidental];
-		}
-		else if ($scope.filter.prsel == 'SOIL'){
-			colors = [tsconf.colors.ColorSoilTotal,tsconf.colors.ColorSoilAccidental];
-		}
-		$scope.tsStackseriesObject.options.colors = colors;
-
-		var rows = [];
-		for (var k in byYears){
-			
+	$scope.setPRTScoll = function(){
+		if ($scope.tscoll.length > 0){
+			//Need to group by year
+			var simple = {};
+			/*Column Bar*/
+			$scope.tsStackseriesObject.data = {"cols": [
+	              {id: "y", label: "Release year", type: "string"},
+	              {id: "t", type: "string", role: "tooltip", p: {html: true}},
+	              {id: "q", label: "Quantity", type: "number"},
+	              {id: "a", label: "Accidental", type: "number"}
+	        ]};
+			var colors = [];
 			if ($scope.filter.prsel == 'AIR'){
-				simple[k].quantity = _.reduce(_.pluck(byYears[k], "quantityAir"), function(memo, num){ return memo + num; }, 0);
-				simple[k].quantityAccidental = _.reduce(_.pluck(byYears[k], "quantityAccidentalAir"), function(memo, num){ return memo + num; }, 0);
+				colors = [tsconf.colors.ColorAirTotal,tsconf.colors.ColorAirAccidental];
 			}
 			else if ($scope.filter.prsel == 'WATER'){
-				simple[k].quantity = _.reduce(_.pluck(byYears[k], "quantityWater"), function(memo, num){ return memo + num; }, 0);
-				simple[k].quantityAccidental = _.reduce(_.pluck(byYears[k], "quantityAccidentalWater"), function(memo, num){ return memo + num; }, 0);
+				colors = [tsconf.colors.ColorWaterTotal,tsconf.colors.ColorWaterAccidental];
 			}
 			else if ($scope.filter.prsel == 'SOIL'){
-				simple[k].quantity = _.reduce(_.pluck(byYears[k], "quantitySoil"), function(memo, num){ return memo + num; }, 0);
-				simple[k].quantityAccidental = _.reduce(_.pluck(byYears[k], "quantityAccidentalSoil"), function(memo, num){ return memo + num; }, 0);
+				colors = [tsconf.colors.ColorSoilTotal,tsconf.colors.ColorSoilAccidental];
 			}
-			/*Calculate accidental Percentage*/
-			if (simple[k].quantityAccidental > 0){
-				simple[k].accidentalPercent = formatStrFactory.DeterminePercent(simple[k].quantity, simple[k].quantityAccidental );
+			$scope.tsStackseriesObject.options.colors = colors;
+	
+			
+			var rows = [];
+			for (var i = 0; i < $scope.tscoll.length; i++){
+				var ts = $scope.tscoll[i];
+				var k = ts.releaseYear;
+				simple[k] = ts;
+				if ($scope.filter.prsel == 'AIR'){
+					simple[k].quantity = ts.quantityAir;
+					simple[k].quantityAccidental = ts.accidentalAir;
+				}
+				else if ($scope.filter.prsel == 'WATER'){
+					simple[k].quantity = ts.quantityWater;
+					simple[k].quantityAccidental = ts.accidentalWater;
+				}
+				else if ($scope.filter.prsel == 'SOIL'){
+					simple[k].quantity = ts.quantitySoil;
+					simple[k].quantityAccidental = ts.accidentalSoil;
+				}
+				/*Calculate accidental Percentage*/
+				if (simple[k].quantityAccidental > 0){
+					simple[k].accidentalPercent = formatStrFactory.DeterminePercent(simple[k].quantity, simple[k].quantityAccidental );
+					simple[k].tsquantity = parseFloat(simple[k].quantity) - parseFloat(simple[k].quantityAccidental);
+				}
+				else{
+					simple[k].accidentalPercent = 0;
+					simple[k].tsquantity = simple[k].quantity;
+				}
+				var tip = $scope.formatTooltip(simple[k]);
+				var row = [{v: k},{v: tip}];
+				row.push({v: simple[k].tsquantity})
+				row.push({v: simple[k].quantityAccidental})
+				rows.push({c: row});
+	
 			}
-			else{
-				simple[k].accidentalPercent = 0;
-			}
-			var tip = $scope.formatTooltip(simple[k]);
-			var row = [{v: k},{v: tip}];
-			row.push({v: simple[k].quantity})
-			row.push({v: simple[k].quantityAccidental})
-			rows.push({c: row});
+			$scope.tsStackseriesObject.data["rows"] = rows;
 		}
-		$scope.tsStackseriesObject.data["rows"] = rows;
 	}
 
 	$scope.formatTooltip = function(item){
@@ -587,6 +617,14 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
     };
 }])
 
+.factory('reportingYearsType', ['reportingYearsService', function(reportingYearsService) {
+    return {
+    	getList : function() {
+            return reportingYearsService.getList();
+        }
+    };
+}])
+
     
     
 /*
@@ -658,8 +696,18 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
     return riverBasinDistricts;
 }])
 
+.service('reportingYearsService', ['Restangular', function(Restangular){
+    var reportingYears = Restangular.service('reportingYears');
 
+    Restangular.extendModel('reportingYears', function(model) {
+        model.getDisplayText = function() {
+            return this.code + ' ' + this.name;
+        };
+        return model;
+    });
 
+    return reportingYears;
+}])
 
 /*
  * This directive enables us to define this module as a custom HTML element

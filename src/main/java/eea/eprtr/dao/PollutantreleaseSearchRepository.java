@@ -1,5 +1,6 @@
 package eea.eprtr.dao;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -58,6 +59,67 @@ public class PollutantreleaseSearchRepository {
 		PollutantreleaseCounts result_1 = new PollutantreleaseCounts(_quantityAir, _quantitySoil, _quantityWater) ;
 		return result_1;
 	}
+	
+	public List<PollutantreleasesSeries> getPollutantreleasesSeries(PollutantreleaseSearchFilter filter) {
+
+		/*All except countries*/
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<PollutantreleasesSeries> cq = cb.createQuery(PollutantreleasesSeries.class);
+		Root<Pollutantrelease> qr = cq.from(Pollutantrelease.class);
+
+		cq.select(cb.construct(PollutantreleasesSeries.class, 
+				qr.get(Pollutantrelease_.reportingYear),
+				cb.count(qr.get(Pollutantrelease_.facilityID)),
+				cb.sum(qr.get(Pollutantrelease_.quantityAir)), 
+				cb.sum(qr.get(Pollutantrelease_.quantityAccidentalAir)), 
+				cb.sum(qr.get(Pollutantrelease_.quantityWater)),
+				cb.sum(qr.get(Pollutantrelease_.quantityAccidentalWater)),
+				cb.sum(qr.get(Pollutantrelease_.quantitySoil)), 
+				cb.sum(qr.get(Pollutantrelease_.quantityAccidentalSoil)))
+				);
+		cq.where(filter.buildWhereClause(cb, qr));
+		cq.groupBy(qr.get(Pollutantrelease_.reportingYear));
+		cq.orderBy(cb.asc(qr.get(Pollutantrelease_.reportingYear)));
+
+		TypedQuery<PollutantreleasesSeries> q = em.createQuery(cq);
+		List<PollutantreleasesSeries> results = q.getResultList();
+		
+		/*Countries*/
+		CriteriaBuilder cb1 = em.getCriteriaBuilder();
+		CriteriaQuery<PollutantreleasesCountries> cq1 = cb1.createQuery(PollutantreleasesCountries.class);
+		Root<Pollutantrelease> qr1 = cq1.from(Pollutantrelease.class);
+
+		cq1.select(cb1.construct(PollutantreleasesCountries.class, 
+				qr1.get(Pollutantrelease_.reportingYear),
+				qr1.get(Pollutantrelease_.countryCode))
+				);
+		cq1.where(filter.buildWhereClause(cb1, qr1));
+		cq1.groupBy(qr1.get(Pollutantrelease_.reportingYear),qr1.get(Pollutantrelease_.countryCode));
+		cq1.orderBy(cb1.asc(qr1.get(Pollutantrelease_.reportingYear)));
+
+		TypedQuery<PollutantreleasesCountries> q1 = em.createQuery(cq1);
+		List<PollutantreleasesCountries> results1 = q1.getResultList();
+		
+		LinkedHashMap<Integer, Integer> countries = new LinkedHashMap<Integer, Integer>();
+		for (int i =0; i < results1.size(); i++){
+			PollutantreleasesCountries pc = results1.get(i);
+			Integer y = pc.getReleaseYear();
+			if (!countries.containsKey(y)){
+				countries.put(y, 1);
+			}
+			else{
+				Integer coun = (Integer)countries.get(y);
+				coun++; 
+				countries.put(y, coun);
+			}
+		}
+		
+		for (int i =0; i < results.size(); i++){
+			PollutantreleasesSeries ps = results.get(i);
+			ps.setCountries((long)countries.get(ps.getReleaseYear()));
+		}
+		return results;
+	} 
 	
 	public List<Pollutantrelease> getPollutantreleases(PollutantreleaseSearchFilter filter) {
 		
