@@ -26,7 +26,7 @@ public class WasteSearchFilter {
 		if (wasteTypeCode != null) {
 			whereClause.getExpressions().add(cb.not(qr.get(FacilitySearchAll_.wasteTypeCode).in(wasteTypeCode)));
 		}
-		if (wasteTypeCode != null) {
+		if (wasteTreatmentCode != null) {
 			whereClause.getExpressions().add(cb.not(qr.get(FacilitySearchAll_.wasteTreatmentCode).in(wasteTreatmentCode)));
 		}
 		if (whpCountryID != null) {
