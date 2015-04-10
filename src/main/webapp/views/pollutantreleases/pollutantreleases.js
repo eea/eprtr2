@@ -226,6 +226,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                     graphDataArray = graphDataArray.concat(graphData[key]);
                 }
             }
+            graphDataArray = _.sortBy(graphDataArray, function(element) {  return element.c[1].v;}).reverse();
         	
             // $scope.tr_chart.PERCENT_TOTAL;
             $scope.areaComparisonChartObject = {};

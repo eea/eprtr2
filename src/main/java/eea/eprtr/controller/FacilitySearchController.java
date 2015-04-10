@@ -81,7 +81,8 @@ public class FacilitySearchController {
 		long facilitiesCount = facilitySearchRepository.getFacilityCount(filter);
 		response.setHeader("X-Count", String.valueOf(facilitiesCount));
 		
-		if (facilitiesCount > 0) {
+		if (facilitiesCount > 0)
+		{
 			OrderBy orderBy = new OrderBy(order, desc.booleanValue());
 			QueryPager pager = new QueryPager(offset.intValue(), limit.intValue());
 			List<FacilitySearchMainActivity> facilities = facilitySearchRepository.getFacilities(filter, orderBy, pager);

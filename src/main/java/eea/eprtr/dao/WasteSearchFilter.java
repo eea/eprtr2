@@ -24,10 +24,12 @@ public class WasteSearchFilter {
 	public Predicate buildWhereClause(CriteriaBuilder cb, Root<FacilitySearchAll> qr) {
 		Predicate whereClause = cb.conjunction();
 		if (wasteTypeCode != null) {
-			whereClause.getExpressions().add(cb.not(qr.get(FacilitySearchAll_.wasteTypeCode).in(wasteTypeCode)));
+			//whereClause.getExpressions().add(cb.not(qr.get(FacilitySearchAll_.wasteTypeCode).in(wasteTypeCode)));
+			whereClause.getExpressions().add(qr.get(FacilitySearchAll_.wasteTypeCode).in(wasteTypeCode));
 		}
 		if (wasteTreatmentCode != null) {
-			whereClause.getExpressions().add(cb.not(qr.get(FacilitySearchAll_.wasteTreatmentCode).in(wasteTreatmentCode)));
+			//whereClause.getExpressions().add(cb.not(qr.get(FacilitySearchAll_.wasteTreatmentCode).in(wasteTreatmentCode)));
+			whereClause.getExpressions().add(qr.get(FacilitySearchAll_.wasteTreatmentCode).in(wasteTreatmentCode));
 		}
 		if (whpCountryID != null) {
 			whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.WHPCountryID), whpCountryID));
