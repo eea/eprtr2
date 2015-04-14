@@ -12,6 +12,8 @@ import eea.eprtr.model.Pollutantrelease;
 import eea.eprtr.model.Pollutantrelease_;
 import eea.eprtr.model.Pollutanttransfer;
 import eea.eprtr.model.Pollutanttransfer_;
+import eea.eprtr.model.Wastetransfer;
+import eea.eprtr.model.Wastetransfer_;
 
 public class LocationSearchFilter {
 
@@ -77,6 +79,22 @@ public class LocationSearchFilter {
 				whereClause.getExpressions().add(cb.equal(qr.get(Pollutanttransfer_.LOV_NUTSRLevel2ID), regionID));
 			} else if (rbdID != null) {
 				whereClause.getExpressions().add(cb.equal(qr.get(Pollutanttransfer_.LOV_RiverBasinDistrictID), rbdID));
+			}
+		}
+		return whereClause;
+	}
+	
+	public Predicate buildWhereClauseWastetransfer(CriteriaBuilder cb, Root<Wastetransfer> qr) {
+		Predicate whereClause = cb.conjunction();
+		if (areaGroupID != null) {
+			List<Integer> countryIDs = repository.getCountryIDs(areaGroupID);
+			whereClause.getExpressions().add(qr.get(Wastetransfer_.LOV_CountryID).in(countryIDs));
+		} else if (countryID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(Wastetransfer_.LOV_CountryID), countryID));
+			if (regionID != null) {
+				whereClause.getExpressions().add(cb.equal(qr.get(Wastetransfer_.LOV_NUTSRLevel2ID), regionID));
+			} else if (rbdID != null) {
+				whereClause.getExpressions().add(cb.equal(qr.get(Wastetransfer_.LOV_RiverBasinDistrictID), rbdID));
 			}
 		}
 		return whereClause;

@@ -1,7 +1,8 @@
 <div>
 
     <div>
-        <p>This report will display the aggregated releases and transfers of a specific industrial activity or a sector.</p>
+        <h3>{{tr_ina.Headline}}</h3>
+        <p>{{tr_ina.SubHeadline}}</p>
     </div>
 
     <div class="row row-map">
@@ -35,5 +36,16 @@
         </div>
 
     </div>
-
+	<div ng-show="searchResults">
+        <tabset>
+            <tab heading="Pollutant Releases">
+           	</tab>
+           	  <tab heading="Pollutant Transfer">
+           	</tab>
+           	  <tab heading="Waste Transfer">
+           	</tab>
+           	  <tab heading="Confidentiality">
+           	</tab>
+        </tabset>
+     </div>
 </div>

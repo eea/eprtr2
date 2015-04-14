@@ -146,14 +146,10 @@
                         	
                         </td>
                         <td>
-                        <a href="#/industrialactivity?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">
-                        	 <img ng-attr-title="{{tr_c.LinkSearchActivity}}" src="images/newsearch.gif" class="newsearchimg" alt="" />
-                    		 </a>
+        
                         </td>
                         <td>{{getTypeCount(item.data,"facility")}}
-                        <a href="#/facilitylevels?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">
-                          <img ng-attr-title="{{tr_c.LinkSearchFacility}}" src="images/newsearch.gif" class="newsearchimg" alt="" />
-                        </a>
+                       
                         </td>
                         <td>{{getSum(item.data,"quantity")}}</td>
                     </tr>
@@ -170,14 +166,10 @@
                     		</div>
                     	</td>
                     	<td>
-                    	 	<a href="#/industrialactivity?FacilityID={{level2.facilityID}}&ReportingYear={{level2.reportingYear}}">
-                        	 <img ng-attr-title="{{tr_c.LinkSearchActivity}}" src="images/newsearch.gif" class="newsearchimg" ng-click="alert('Search')" alt="" />
-                    		 </a>
+                   
                     	</td>
                    		<td>{{getTypeCount(level2,"facility")}}
-                   		<a href="#/facilitylevels?FacilityID={{level2.facilityID}}&ReportingYear={{level2.reportingYear}}">
-                   	      <img ng-attr-title="{{tr_c.LinkSearchFacility}}" src="images/newsearch.gif" class="newsearchimg" alt="" />
-                   		</a>
+                   
            				</td>
                        	<td>{{getSum(level2,"quantity")}}</td>
                     </tr>
@@ -194,9 +186,7 @@
                     	<td>
                     	</td>
                    		<td>{{getTypeCount(level3,"facility")}}
-                   		<a href="#/facilitylevels?FacilityID={{level3.facilityID}}&ReportingYear={{level3.reportingYear}}">
-                   	      <img ng-attr-title="{{tr_c.LinkSearchFacility}}" src="images/newsearch.gif" class="newsearchimg" alt="" />
-                   	      </a>
+                   	
                   		</td>
                        	<td>{{getSum(level3,"quantity")}}</td>
                     </tr>
@@ -283,9 +273,7 @@
                         <td>
                         </td>
                         <td>{{getTypeCount(item.data,"facility")}}
-                        <a href="#/facilitylevels?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">
-                        <img ng-attr-title="{{tr_c.LinkSearchFacility}}" src="images/newsearch.gif" class="newsearchimg" alt="" />
-                        </a>
+                 
                         </td>
                         <td>{{getSum(item.data,"quantity")}}</td>
                     </tr>
@@ -306,9 +294,7 @@
                         	<td>
                         	</td>
                         	<td>{{getTypeCount(item2,"facility")}}
-                        	<a href="#/facilitylevels?FacilityID={{item2.facilityID}}&ReportingYear={{item2.reportingYear}}">
-                        	<img ng-attr-title="{{tr_c.LinkSearchFacility}}" src="images/newsearch.gif" class="newsearchimg" alt="" />
-                        	</a>
+                    
                         	</td>
                          	<td>{{getSum(item2,"quantity")}}</td>
                     </tr>                
@@ -422,7 +408,7 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="item in facilitiesItems">
-                        <td><a href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">{{formatText(item.facilityName, item.confidentialIndicatorFacility)}}</a></td>
+                        <td>{{formatText(item.facilityName, item.confidentialIndicatorFacility)}}</td>
                         <td>{{quantity(item)}}</td>
                         <td>{{tr_laa[item.iaactivityCode]}}</td>
                         <td>{{tr_lco[item.countryCode]}}</td>

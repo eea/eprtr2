@@ -8,6 +8,9 @@ import javax.persistence.criteria.Root;
 
 import eea.eprtr.model.FacilitySearchAll;
 import eea.eprtr.model.FacilitySearchAll_;
+import eea.eprtr.model.Pollutantrelease_;
+import eea.eprtr.model.Wastetransfer;
+import eea.eprtr.model.Wastetransfer_;
 
 public class WasteSearchFilter {
 
@@ -24,15 +27,42 @@ public class WasteSearchFilter {
 	public Predicate buildWhereClause(CriteriaBuilder cb, Root<FacilitySearchAll> qr) {
 		Predicate whereClause = cb.conjunction();
 		if (wasteTypeCode != null) {
-			//whereClause.getExpressions().add(cb.not(qr.get(FacilitySearchAll_.wasteTypeCode).in(wasteTypeCode)));
 			whereClause.getExpressions().add(qr.get(FacilitySearchAll_.wasteTypeCode).in(wasteTypeCode));
 		}
 		if (wasteTreatmentCode != null) {
-			//whereClause.getExpressions().add(cb.not(qr.get(FacilitySearchAll_.wasteTreatmentCode).in(wasteTreatmentCode)));
 			whereClause.getExpressions().add(qr.get(FacilitySearchAll_.wasteTreatmentCode).in(wasteTreatmentCode));
 		}
 		if (whpCountryID != null) {
 			whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.WHPCountryID), whpCountryID));
+		}
+		return whereClause;
+	}
+	
+	public Predicate buildWhereClauseWastetransfer(CriteriaBuilder cb, Root<Wastetransfer> qr) {
+		Predicate whereClause = cb.conjunction();
+		if (wasteTypeCode != null) {
+		//	whereClause.getExpressions().add(qr.get(Wastetransfer_.wasteTypeCode).in(wasteTypeCode));
+		}
+		if (wasteTreatmentCode != null) {
+			for(String code : wasteTreatmentCode)
+			{
+				switch (code.toUpperCase()) {
+					case "R":
+						whereClause.getExpressions().add(cb.equal(qr.get(Wastetransfer_.hasReportedRecovery), 0));
+						break;
+					case "U":
+						whereClause.getExpressions().add(cb.equal(qr.get(Wastetransfer_.hasReportedUnspecified), 0));
+						break;
+					case "D":
+						whereClause.getExpressions().add(cb.equal(qr.get(Wastetransfer_.hasReportedDisposal), 0));
+						break;
+					default:
+						break;
+				}
+			}
+		}
+		if (whpCountryID != null) {
+			//whereClause.getExpressions().add(cb.equal(qr.get(Wastetransfer_.WHPCountryID), whpCountryID));
 		}
 		return whereClause;
 	}

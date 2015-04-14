@@ -309,6 +309,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute','googlechart', 'myApp.sear
     		{
     			return "-";
     		}
+    	
     		return formatStrFactory.getStrFormat(sum);
         };
         

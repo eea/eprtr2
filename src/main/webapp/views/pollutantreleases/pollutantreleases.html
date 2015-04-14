@@ -137,18 +137,12 @@
                         	<img class="handcursor" ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
                         	<img class="handcursor" ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
                         	<a ng-click="showing=!showing">{{tr_laa[item.key]}}</a>
-                        	 <a href="#/industrialactivity?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">
-                        	 <img ng-attr-title="{{tr_c.LinkSearchActivity}}" src="images/newsearch.gif" class="newsearchimg"  ng-click="alert('Search')" alt="" />
-                    		 </a>
                         </td>
                         <td>
                         {{tr_p.ReleasesAccidentialTotal}}<br/>
                         {{tr_p.ReleasesAccidentalValue}}
                         </td>
                         <td>{{getTypeCount(item.data,"facility")}}
-                        <a href="#/facilitylevels?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">
-                          <img ng-attr-title="{{tr_c.LinkSearchFacility}}" src="images/newsearch.gif" class="newsearchimg" alt="" />
-                        </a>
                         <br />{{getTypeCount(item.data,"accidental")}}</td>
                         <td>{{getSum(item.data,"quantityAir")}}<br/>{{getSum(item.data,"quantityAccidentalAir")}}</td>
                         <td>{{getSum(item.data,"quantityWater")}}<br />{{getSum(item.data,"quantityAccidentalWater")}}</td>
@@ -164,9 +158,7 @@
                     		<img class="handcursor" ng-click="showing2=!showing2" ng-show="!showing2 && level2.sublevel" src="images/plus.gif" />
                         	<img class="handcursor" ng-click="showing2=!showing2" ng-show="showing2" src="images/minus.gif" /> 
                     		{{tr_laa[level2.iaactivityCode]}}
-                    	 	<a href="#/industrialactivity?FacilityID={{level2.facilityID}}&ReportingYear={{level2.reportingYear}}">
-                        	 <img ng-attr-title="{{tr_c.LinkSearchActivity}}" src="images/newsearch.gif" class="newsearchimg" ng-click="alert('Search')" alt="" />
-                    		 </a>
+              
                     		</div>
                     	</td>
                     	<td>
@@ -174,9 +166,7 @@
                         	{{tr_p.ReleasesAccidentalValue}}
                     	</td>
                    		<td>{{getTypeCount(level2,"facility")}}
-                   		<a href="#/facilitylevels?FacilityID={{level2.facilityID}}&ReportingYear={{level2.reportingYear}}">
-                   	      <img ng-attr-title="{{tr_c.LinkSearchFacility}}" src="images/newsearch.gif" class="newsearchimg" alt="" />
-                   		</a>
+               
                    		<br />{{getTypeCount(level2,"accidental")}}</td>
                        	<td>{{getSum(level2,"quantityAir")}}<br/>{{getSum(level2,"quantityAccidentalAir")}}</td>
                        	<td>{{getSum(level2,"quantityWater")}}<br />{{getSum(level2,"quantityAccidentalWater")}}</td>
@@ -197,9 +187,7 @@
                         	{{tr_p.ReleasesAccidentalValue}}
                     	</td>
                    		<td>{{getTypeCount(level3,"facility")}}
-                   		<a href="#/facilitylevels?FacilityID={{level3.facilityID}}&ReportingYear={{level3.reportingYear}}">
-                   	      <img ng-attr-title="{{tr_c.LinkSearchFacility}}" src="images/newsearch.gif" class="newsearchimg" ng-click="alert('Search')" alt="" />
-                   	      </a>
+      
                    		<br />{{getTypeCount(level3,"accidental")}}</td>
                        	<td>{{getSum(level3,"quantityAir")}}<br/>{{getSum(level3,"quantityAccidentalAir")}}</td>
                        	<td>{{getSum(level3,"quantityWater")}}<br />{{getSum(level3,"quantityAccidentalWater")}}</td>
@@ -296,9 +284,7 @@
                         {{tr_p.ReleasesAccidentalValue}}
                         </td>
                         <td>{{getTypeCount(item.data,"facility")}}
-                        <a href="#/facilitylevels?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">
-                        <img ng-attr-title="{{tr_c.LinkSearchFacility}}" src="images/newsearch.gif" class="newsearchimg" alt="" />
-                        </a>
+             
                         <br />{{getTypeCount(item.data,"accidental")}}</td>
                         <td>{{getSum(item.data,"quantityAir")}}<br/>{{getSum(item.data,"quantityAccidentalAir")}}</td>
                         <td>{{getSum(item.data,"quantityWater")}}<br />{{getSum(item.data,"quantityAccidentalWater")}}</td>
@@ -324,9 +310,7 @@
                         	{{tr_p.ReleasesAccidentalValue}}
                         	</td>
                         	<td>{{getTypeCount(item2,"facility")}}
-                        	<a href="#/facilitylevels?FacilityID={{item2.facilityID}}&ReportingYear={{item2.reportingYear}}">
-                        	<img ng-attr-title="{{tr_c.LinkSearchFacility}}" src="images/newsearch.gif" class="newsearchimg" alt="" />
-                        	</a>
+                   
                         	<br />{{getTypeCount(item2,"accidental")}}</td>
                          	<td>{{getSum(item2,"quantityAir")}}<br/>{{getSum(item2,"quantityAccidentalAir")}}</td>
                         	<td>{{getSum(item2,"quantityWater")}}<br />{{getSum(item2,"quantityAccidentalWater")}}</td>
@@ -455,7 +439,7 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="item in facilitiesItems">
-                        <td><a href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">{{formatText(item.facilityName, item.confidentialIndicatorFacility)}}</a></td>
+                        <td>{{formatText(item.facilityName, item.confidentialIndicatorFacility)}}</td>
                         <td>{{quantity(item)}}</td>
                         <td>{{quantityAccidental(item)}}</td>
                         <td>{{percentageAccidental(item)}}</td>

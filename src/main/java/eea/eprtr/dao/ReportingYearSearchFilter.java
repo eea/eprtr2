@@ -10,6 +10,9 @@ import eea.eprtr.model.Pollutantrelease;
 import eea.eprtr.model.Pollutantrelease_;
 import eea.eprtr.model.Pollutanttransfer;
 import eea.eprtr.model.Pollutanttransfer_;
+import eea.eprtr.model.Wastetransfer;
+import eea.eprtr.model.Wastetransfer_;
+
 
 public class ReportingYearSearchFilter {
 	
@@ -34,6 +37,12 @@ public class ReportingYearSearchFilter {
 	public Predicate buildWhereClausePollutanttransfer(CriteriaBuilder cb, Root<Pollutanttransfer> qr) {
 		Predicate whereClause = cb.conjunction();
 		whereClause.getExpressions().add(cb.equal(qr.get(Pollutanttransfer_.reportingYear), reportingYear));
+		return whereClause;
+	}
+	
+	public Predicate buildWhereClauseWastetransfer(CriteriaBuilder cb, Root<Wastetransfer> qr) {
+		Predicate whereClause = cb.conjunction();
+		whereClause.getExpressions().add(cb.equal(qr.get(Wastetransfer_.reportingYear), reportingYear));
 		return whereClause;
 	}
 }
