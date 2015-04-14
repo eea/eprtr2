@@ -92,14 +92,59 @@ COMPARISON
  -->
    <tab heading="Comparison" active="active.comparison">
    <div class="row" style="padding-top:10px;" >
-        <div class="col-md-6" style="height:325px;" >	
+        <div class="col-md-5" style="height:325px;" >	
         	<!--  Year selector -->
         	<div >
         		<p>{{tr_c.TimeSeriesCompareYears}}</p>
-        		<select style="width:70px;" ng-model="tscompare.selectedStartYear" ng-options="y.year for y in reportingyears" id="startYear" ></select>  {{tr_c.TimeSeriesCompareAnd}}  <select style="width:70px;" ng-model="tscompare.selectedEndYear" ng-options="y.year for y in reportingyears" id="endYear" ></select>
+        		<select style="width:60px;" ng-model="tscompare.selectedStartYear" ng-options="y.year for y in reportingyears" id="startYear" ></select>  {{tr_c.TimeSeriesCompareAnd}}  <select style="width:60px;" ng-model="tscompare.selectedEndYear" ng-options="y.year for y in reportingyears" id="endYear" ></select>
+        		</br>
               	<div google-chart chart="tsStackCompareObject" style="height:250px; width:100%;"></div>
         	</div>
         </div>
+        <div class="col-md-7"  >	
+			<table class="table table-striped table-condensed table-hover"  ng-if="tscompare.alldata.length > 0" >
+		      <thead>
+		           <tr class="generalListStyle_headerRow">
+		             <th class="col-md-6">{{tr_c.AllFacilities}}</th>
+		             <th class="col-md-3 text-right">{{tscompare.selectedStartYear.year}}</th>
+		             <th class="col-md-3 text-right">{{tscompare.selectedEndYear.year}}</th>
+		           </tr>
+		       </thead>
+		       <tbody>
+		         <tr ng-repeat="item in tscompare.alldata">
+			         <td>{{item.title}}</td>
+			         <td class="text-right">{{item.col1}}</td>
+			         <td class="text-right">{{item.col2}}</td>
+			     </tr>
+		       </tbody>
+		   </table>
+		   <p class="text-warning" ng-if="tscompare.alldata.length < 1">{{tr_c.NoResultsFound}}</p>
+		   </br>
+		   	<table class="table table-striped table-condensed table-hover"  ng-if="tscompare.bothdata.length > 0" >
+		      <thead>
+		           <tr class="generalListStyle_headerRow">
+		             <th class="col-md-6">{{tr_c.FacilitiesBothYears}}</th>
+		             <th class="col-md-3 text-right">{{tscompare.selectedStartYear.year}}</th>
+		             <th class="col-md-3 text-right">{{tscompare.selectedEndYear.year}}</th>
+		           </tr>
+		       </thead>
+		       <tbody>
+		         <tr ng-repeat="item in tscompare.bothdata">
+			         <td>{{item.title}}</td>
+			         <td class="text-right">{{item.col1}}</td>
+			         <td class="text-right">{{item.col2}}</td>
+			     </tr>
+		       </tbody>
+		   </table>
+		   <p class="text-warning" ng-if="tscompare.bothdata.length < 1">{{tr_c.NoResultsFound}}</p>
+		   
+        
+        <!-- 		$scope.tscompare.alldata.push(
+					{'title':$scope.tr_c['Total'], 
+						'col1':formatStrFactory.getStrFormat(y1.quantityAll), 
+						'col2':formatStrFactory.getStrFormat(y2.quantityAll)});
+         -->	
+		</div>        
    </div>
    </tab>
 <!-- 

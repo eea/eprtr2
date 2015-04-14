@@ -1,7 +1,5 @@
 package eea.eprtr.dao;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -13,7 +11,6 @@ import eea.eprtr.model.FacilitySearchAll_;
 import eea.eprtr.model.MediumCode;
 import eea.eprtr.model.Pollutantrelease;
 import eea.eprtr.model.Pollutantrelease_;
-
 import eea.eprtr.model.Pollutanttransfer;
 import eea.eprtr.model.Pollutanttransfer_;
 

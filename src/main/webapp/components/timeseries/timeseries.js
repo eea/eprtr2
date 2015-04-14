@@ -57,7 +57,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
     $scope.tsStackseriesObject.options = {
     		"tooltip": {"isHtml": true},
     		"focusTarget": "category",
-    		"legend":"bottom",
+    		"legend":{position: 'bottom', maxLines: 3, alignment:'start' },
             "isStacked": "true",
             "fill": 20,
             "displayExactValues": true
@@ -69,7 +69,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
     $scope.tsStackCompareObject.options = {
     		"tooltip": {"isHtml": true},
     		"focusTarget": "category",
-    		"legend":"bottom",
+    		"legend":{position: 'bottom', maxLines: 3, alignment:'start' },
             "isStacked": "true",
             "fill": 20,
             "displayExactValues": true
@@ -116,6 +116,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
         $scope.$watch('filter.prsel', function(value) {
 			//$scope.reqPollutantReleaseData();
 			$scope.setPRTScoll();
+			//$scope.reqPollutantReleaseCompareData();
 			//Pollutantrelease medium changed
             /*if ($scope.items) {
                 $scope.updateSummaryData();
@@ -128,16 +129,10 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
                 $scope.updateSummaryData();
             }*/
         });
-
-	/*$scope.$watchCollection('[queryParams,tr_c]', function(value) {
-		if($scope.tr_c != undefined && $scope.queryParams != undefined  && $scope.queryParams != ""){
-			$scope.createheader();
-		}
-	});*/
     
-    $scope.$watchCollection('[reportingyears,selectedStartYear,selectedEndYear]', function(value){
+    $scope.$watchCollection('[reportingyears,tscompare.selectedStartYear,tscompare.selectedEndYear,filter.prsel]', function(value){
     	if($scope.reportingyears != undefined){
-    		
+			$scope.reqPollutantReleaseCompareData();
     	}
     });
         
@@ -339,8 +334,6 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		/**
 		 * Data 
 		 * */
-
-	
 	//Pollutantrelease
 	$scope.reqPollutantReleaseRBHeader = function(){
 		//if (Object.keys($scope.queryParams).length > 0){
@@ -396,16 +389,50 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		}
 	};
 	
+	/*
+	 * Request Pollutant Release Compare data
+	 */
+	$scope.reqPollutantReleaseCompareData = function(){
+		if (_.keys($scope.queryParams).length > 0){
+			//$scope.tscoll = [];
+			$scope.tscompare.data = [];
+
+			//Create new qparams
+			var qp = {};
+			qp.ReportingYearStart = $scope.tscompare.selectedStartYear.year;
+			qp.ReportingYearEnd = $scope.tscompare.selectedEndYear.year;
+			qp.Medium = $scope.filter.prsel;
+
+			/*Filter Query parameters*/
+		    for(var key in $scope.queryParams) {
+		        if(key != 'MediumCode' && key != 'ReportingYear') {
+		        	qp[key] = $scope.queryParams[key];
+		        }
+		    }
+//	        qp['MediumCode'] = $scope.filter.prsel;
+	        var rest = Restangular.withConfig(function(RestangularConfigurer) {
+	            RestangularConfigurer.setFullResponse(true);
+	        });
+	        var pollutantCompareSearch = rest.all('pollutantreleasecompare');
+	        pollutantCompareSearch.getList(qp).then(function(response) {
+				$scope.tscompare.data = response.data;
+				$scope.setPRCPcoll();
+				$scope.setPRCPtabcoll();
+	        });
+		}
+	};
+	
+	
 	$scope.setPRTScoll = function(){
 		if ($scope.tscoll.length > 0){
 			//Need to group by year
 			var simple = {};
 			/*Column Bar*/
 			$scope.tsStackseriesObject.data = {"cols": [
-	              {id: "y", label: "Release year", type: "string"},
+	              {id: "y", label: "Reporting year", type: "string"},
 	              {id: "t", type: "string", role: "tooltip", p: {html: true}},
-	              {id: "q", label: "Quantity", type: "number"},
-	              {id: "a", label: "Accidental", type: "number"}
+	              {id: "a", label: $scope.tr_p['AccidentalQuantity'], type: "number"},
+	              {id: "q", label: $scope.tr_p['Quantity'], type: "number"}
 	        ]};
 			var colors = [];
 			if ($scope.filter.prsel == 'AIR'){
@@ -446,10 +473,10 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 					simple[k].accidentalPercent = 0;
 					simple[k].tsquantity = simple[k].quantity;
 				}
-				var tip = $scope.formatTooltip(simple[k]);
+				var tip = $scope.formatPRTooltip(simple[k]);
 				var row = [{v: k},{v: tip}];
-				row.push({v: simple[k].tsquantity})
 				row.push({v: simple[k].quantityAccidental})
+				row.push({v: simple[k].tsquantity})
 				rows.push({c: row});
 	
 			}
@@ -457,57 +484,127 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		}
 	}
 
-	$scope.formatTooltip = function(item){
+/*	$scope.sum = function(numbers) {
+	    return _.reduce(numbers, function(result, current) {
+	        return result + parseFloat(current);
+	    }, 0);
+	}*/
+
+	/*Compare*/
+	$scope.setPRCPcoll = function(){
+		if ($scope.tscompare.data != undefined && $scope.tscompare.data.length > 0){
+			//tsStackCompareObject
+			$scope.tsStackCompareObject.data = {"cols": [
+			                          	              {id: "y", label: "Reporting year", type: "string"},
+			                          	              {id: "t", type: "string", role: "tooltip", p: {html: true}},
+			                          	              {id: "a", label: $scope.tr_c['FacilitiesBothYears'], type: "number"},
+			                          	              {id: "q", label: $scope.tr_c['AllFacilities'], type: "number"}
+			                          	        ]};
+			var colors = [];
+			if ($scope.filter.prsel == 'AIR'){
+				colors = [tsconf.colors.ColorAirTotal,tsconf.colors.ColorAirAccidental];
+			}
+			else if ($scope.filter.prsel == 'WATER'){
+				colors = [tsconf.colors.ColorWaterTotal,tsconf.colors.ColorWaterAccidental];
+			}
+			else if ($scope.filter.prsel == 'SOIL'){
+				colors = [tsconf.colors.ColorSoilTotal,tsconf.colors.ColorSoilAccidental];
+			}
+			$scope.tsStackCompareObject.options.colors = colors;
+			
+			var simple = {};
+			var rows = [];
+			for (var i = 0; i < $scope.tscompare.data.length; i++){
+				var ts = $scope.tscompare.data[i];
+				var k = ts.reportingYear;
+				simple[k] = ts;
+				/*simple[k].facilitiesall = ts.facilitiesAll;
+				simple[k].facilitiesboth = ts.facilitiesBoth;
+				simple[k].quantityall = ts.quantityAll;
+				simple[k].quantityboth = ts.quantityBoth;*/
+
+				/*Calculate accidental Percentage*/
+				if (simple[k].quantityBoth > 0){
+					simple[k].bothPercent = formatStrFactory.DeterminePercent(simple[k].quantityAll, simple[k].quantityBoth );
+					simple[k].compquantityall = parseFloat(simple[k].quantityAll) - parseFloat(simple[k].quantityBoth);
+				}
+				else{
+					simple[k].bothPercent = 0;
+					simple[k].compquantityall = simple[k].quantityAll;
+				}
+				var tip = $scope.formatPRCTooltip(simple[k]);
+				var row = [{v: k},{v: tip}];
+				row.push({v: simple[k].quantityBoth})
+				row.push({v: simple[k].compquantityall})
+				rows.push({c: row});
+	
+			}
+			$scope.tsStackCompareObject.data["rows"] = rows;
+
+		}
+	};
+	
+	$scope.setPRCPtabcoll = function(){
+		if ($scope.tscompare.data != undefined && $scope.tscompare.data.length > 0){
+			$scope.tscompare.alldata = [];
+			$scope.tscompare.bothdata = [];
+			var y1 = $scope.tscompare.data[0];
+			var y2 = $scope.tscompare.data[1];
+			/*ALL*/
+			$scope.tscompare.alldata.push(
+					{'title':$scope.tr_c['Total'], 
+						'col1':formatStrFactory.getStrFormat(y1.quantityAll), 
+						'col2':formatStrFactory.getStrFormat(y2.quantityAll)});
+			$scope.tscompare.alldata.push(
+					{'title':$scope.tr_c['Accidental'], 
+						'col1':formatStrFactory.getStrFormat(y1.accidentalAll), 
+						'col2':formatStrFactory.getStrFormat(y2.accidentalAll)});
+			$scope.tscompare.alldata.push(
+					{'title':$scope.tr_c['Facilities'], 
+						'col1':$filter('number')(y1.facilitiesAll), 
+						'col2':$filter('number')(y2.facilitiesAll)});
+			/*BOTH*/
+			$scope.tscompare.bothdata.push(
+					{'title':$scope.tr_c['Total'], 
+						'col1':formatStrFactory.getStrFormat(y1.quantityBoth), 
+						'col2':formatStrFactory.getStrFormat(y2.quantityBoth)});
+			$scope.tscompare.bothdata.push(
+					{'title':$scope.tr_c['Accidental'], 
+						'col1':formatStrFactory.getStrFormat(y1.accidentalBoth), 
+						'col2':formatStrFactory.getStrFormat(y2.accidentalBoth)});
+			$scope.tscompare.bothdata.push(
+					{'title':$scope.tr_c['Facilities'], 
+						'col1': $filter('number')(y1.facilitiesBoth), 
+						'col2':$filter('number')(y2.facilitiesBoth)});
+		};
+	};
+
+	$scope.formatPRTooltip = function(item){
 		var html = '<div style="padding:5px 5px 5px 5px;"><table ><tr><td class="fdTitles">';
 		/*TODO*/
 		html += $scope.tr_c['Year'] + '</td><td>' + item.year  + '</td></tr><tr><td class="fdTitles">';
-		html += $scope.tr_c['Facilities'] + '</td><td>' + $filter('number')(item.facilities) + '</td></tr><tr><td class="fdTitles">';
+		html += $scope.tr_c['Facilities'] + '</td><td>' + $filter('number')(item.quantityall) + '</td></tr><tr><td class="fdTitles">';
 		html += $scope.tr_p['ReleasesTotal'] + '</td><td>' + formatStrFactory.getStrFormat(item.quantity)  + '</td></tr><tr><td class="fdTitles">';
 		html += $scope.tr_p['ReleasesAccidentalReleases'] + '</td><td>' + formatStrFactory.getStrFormat(item.quantityAccidental)  + '</td></tr><tr><td class="fdTitles">';
 		html += $scope.tr_p['ReleasesAccidentalPercentValue'] + '</td><td>' + item.accidentalPercent  + '</td></tr></table></div>';
 		return html;
-
 	}
 
-	
-	
-	
-	$scope.sum = function(numbers) {
-	    return _.reduce(numbers, function(result, current) {
-	        return result + parseFloat(current);
-	    }, 0);
+	$scope.formatPRCTooltip = function(item){
+		var html = '<div style="padding:5px 5px 5px 5px;"><table ><tr><td class="fdTitles">';
+		html += $scope.tr_c['Year'] + '</td><td>' + item.reportingYear  + '</td></tr><tr><td class="fdTitles">';
+		html += $scope.tr_c['AllFacilities'] + '</td><td>' + formatStrFactory.getStrFormat(item.quantityAll) + '</td></tr><tr><td class="fdTitles">';
+		html += $scope.tr_c['FacilitiesBothYears'] + '</td><td>' + formatStrFactory.getStrFormat(item.quantityBoth) + '</td></tr><tr><td class="fdTitles">';
+		html += 'Percentage of reporting in both years' + '</td><td>' + item.bothPercent  + '</td></tr></table></div>';
+		return html;
 	}
 
-
-	
 	
 		//GetTimeSeries(PollutantReleasesTimeSeriesFilter filter, MediumFilter.Medium medium) -->
 		//	GetTimeSeries([AreaFilter,PeriodFilter,PollutantFilter,MediumFilter,ActivityFilter], MediumFilter.Medium medium)
 		//GetTimeSeries(int facilityid, string pollutantCode, MediumFilter.Medium medium)
-		/*
-			db.POLLUTANTRELEASEs.Where(lambda).GroupBy(p => p.ReportingYear).OrderBy(p => p.Key);
-			or  
-			db.POLLUTANTRELEASEs.Where(f => f.FacilityID == facilityid && f.PollutantCode == pollutantCode).Where(getLambdaExpression(medium)).GroupBy(p => p.ReportingYear);
-           switch (medium)
-            {
-                case MediumFilter.Medium.Air:
-                    data = group.Select(x => new TimeSeriesClasses.PollutantReleases(x.Key,x.Count(), x.Sum(p => p.QuantityAir),x.Sum(p => p.QuantityAccidentalAir)));
-                    break;
-                case MediumFilter.Medium.Soil:
-                    data = group.Select(x => new TimeSeriesClasses.PollutantReleases(x.Key, x.Count(), x.Sum(p => p.QuantitySoil), x.Sum(p => p.QuantityAccidentalSoil)));
-                    break;
-                case MediumFilter.Medium.Water:
-                    data = group.Select(x => new TimeSeriesClasses.PollutantReleases(x.Key, x.Count(), x.Sum(p => p.QuantityWater), x.Sum(p => p.QuantityAccidentalWater)));
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException("medium", String.Format("Illegal medium: {0}", medium.ToString()));
-            }
-            Facility.GetReportingCountries(filter.AreaFilter).ToList(); and clone with collection
-            return res.OrderBy(p => p.Year).ToList();
-		 *
-		 */		
-		
-		//Pollutanttransfer
+
+	//Pollutanttransfer
 		//GetTimeSeries([AreaFilter,PeriodFilter,PollutantFilter,ActivityFilter])
 		/*
 		 db.POLLUTANTTRANSFERs.Where(lambda).GroupBy(p => p.ReportingYear).OrderBy(p => p.Key).Select(x => new {

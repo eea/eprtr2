@@ -21,6 +21,39 @@ public class PollutantreleaseSearchFilter {
 		this.activityFilter = activityFilter;
 		this.pollutantFilter = pollutantFilter;
 	}
+	
+	public ReportingYearSearchFilter getReportingYearSearchFilter() {
+		return reportingYearFilter;
+	}
+
+	public void setReportingYearSearchFilter(ReportingYearSearchFilter reportingYearFilter) {
+		this.reportingYearFilter = reportingYearFilter;
+	}
+
+	public LocationSearchFilter getLocationSearchFilter() {
+		return locationFilter;
+	}
+
+	public void setLocationSearchFilter(LocationSearchFilter locationFilter) {
+		this.locationFilter = locationFilter;
+	}
+
+	public ActivitySearchFilter getActivitySearchFilter() {
+		return activityFilter;
+	}
+
+	public void setActivitySearchFilter(ActivitySearchFilter activityFilter) {
+		this.activityFilter = activityFilter;
+	}
+	
+	public PollutantSearchFilter getPollutantSearchFilter() {
+		return pollutantFilter;
+	}
+
+	public void setPollutantSearchFilter(PollutantSearchFilter pollutantFilter) {
+		this.pollutantFilter = pollutantFilter;
+	}
+
 
 	public Predicate buildWhereClause(CriteriaBuilder cb, Root<Pollutantrelease> qr) {
 		Predicate whereClause = cb.conjunction();
@@ -44,5 +77,6 @@ public class PollutantreleaseSearchFilter {
 		}
 		return whereClause;
 	}
+	
 
 }
