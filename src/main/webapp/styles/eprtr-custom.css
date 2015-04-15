@@ -297,6 +297,13 @@ vertical-align: top;
 	cursor:pointer;
 }
 
+/*Piechart*/
+.piachartcontent
+{
+	height:300px; 
+	width:100%;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

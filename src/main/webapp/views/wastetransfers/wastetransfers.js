@@ -14,6 +14,7 @@ angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-f
         $scope.searchFilter = searchFilter;
         $scope.queryParams = {};
         $scope.queryParams.ReportingYear = -1;
+        $scope.SearchType="SUMMARY";
         $scope.translate = function()
         {
         	translationService.get().then(function (data) {
@@ -91,8 +92,8 @@ angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-f
             
             queryParams.RegionSearch = $scope.regionSearch;
             
-            // Search
-            queryParams.SearchType="SUMMARY"
+            // SearchType
+            queryParams.SearchType= $scope.SearchType;
         
             $scope.queryParams = queryParams;
             
@@ -117,6 +118,7 @@ angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-f
         		// No search done
         		return;
         	}
+        	$scope.SearchType = type;
         	$scope.queryParams.SearchType=type;
         	if(type.toUpperCase() === "SUMMARY" && $scope.summaryItems.length != 0)
         	{
