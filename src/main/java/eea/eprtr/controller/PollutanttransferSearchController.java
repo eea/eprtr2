@@ -9,18 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import eea.eprtr.Util.DataHelperPollutantTransfer;
 import eea.eprtr.dao.ActivitySearchFilter;
 import eea.eprtr.dao.CountryAreaGroupRepository;
 import eea.eprtr.dao.LocationSearchFilter;
 import eea.eprtr.dao.PollutantSearchFilter;
-//import eea.eprtr.dao.PollutantreleaseSearchRepository;
-//import eea.eprtr.dao.PollutantreleaseCounts;
-//import eea.eprtr.dao.PollutantreleaseSearchFilter;
 import eea.eprtr.dao.PollutanttransferSearchFilter;
 import eea.eprtr.dao.PollutanttransferSearchRepository;
 import eea.eprtr.dao.ReportingYearSearchFilter;
 import eea.eprtr.model.MediumCode;
-//import eea.eprtr.model.Pollutantrelease;
 import eea.eprtr.model.Pollutanttransfer;
 
 @RestController
@@ -54,6 +51,7 @@ public class PollutanttransferSearchController {
     		@RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
     		@RequestParam(value = "Accidental", required = false) Integer accidental,
     		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
+    		@RequestParam(value = "SearchType", required = false) String searchtype,
     		HttpServletResponse response
     		) {
 
@@ -66,12 +64,19 @@ public class PollutanttransferSearchController {
 		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
 		PollutanttransferSearchFilter filter = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter); 
 		
-		/*PollutantreleaseCounts counts = pollutantreleaseSearchRepository.getPollutantreleaseCounts(filter);
+		/*
+		PollutantreleaseCounts counts = pollutantreleaseSearchRepository.getPollutantreleaseCounts(filter);
 		response.setHeader("X-QuantityAir", String.valueOf(counts.getQuantityAir()));
 		response.setHeader("X-QuantitySoil", String.valueOf(counts.getQuantitySoil()));
 		response.setHeader("X-QuantityWater", String.valueOf(counts.getQuantityWater()));
 		*/
+		
+		//POLLUTANTTRANSFERSUM
 		List<Pollutanttransfer> pollutanttransfers = pollutanttransferSearchRepository.getPollutanttransfer(filter);
+		if(searchtype != null && searchtype != "")
+		{
+			return new DataHelperPollutantTransfer().getSubdata(searchtype,pollutanttransfers);
+		}
 		return pollutanttransfers;
 	}
 }

@@ -66,6 +66,59 @@
        				{{sectorIA}}
        				</div>
 				</div>
+				<br />
+				<table class="table table-striped table-condensed table-hover">
+                    <thead>
+                    <tr>
+                        <th>{{tr_p.ReleasesPerCountry}}&nbsp;</th>
+                        <th></th>
+                        <th>{{tr_c.Facilities}}&nbsp;</th>
+                        <th>{{tr_c.Air}}&nbsp;</th>
+                        <th>{{tr_c.Water}}&nbsp;</th>
+                        <th>{{tr_c.Soil}}&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat-start="item in pollutantreleaseItems | orderBy: 'key'")>
+                    	<td>
+                     	{{tr_lpo[item.key]}}
+                    	</td>
+                    	<td>
+                        </td>
+                    	<td>
+                    	{{getTypeCount(item.sublevel)}}
+                    	</td>
+                    	<td></td>
+                    	<td></td>
+                    	<td></td>
+                    </tr>
+                     <tr ng-repeat-start="level2 in item.sublevel | orderBy: 'pollutantCode'">
+                	    <td><a href=""><img src="images/timeseries.png" class="timesericesImage" ng-click="showinfo(item2, this)" alt="" /></a> 
+                	    <!--  {{tr_lpo[level2.pollutantCode]}}</td>-->
+                	    {{level2.pollutantCode}}
+                    	<td>{{tr_p.ReleasesAccidentialTotal}}<br/>
+                        {{tr_p.ReleasesAccidentalValue}}
+                        </td>
+                    	<td>{{getTypeCount(level2)}}<br />
+                    	{{getTypeCountAccidential(level2)}}</td>
+                    	<td>
+                    	{{getformat(level2.quantityAir)}}<br />
+                    	{{getformat(level2.quantityAccidentalAir)}}
+                    	</td>
+                    	<td>
+                    	{{getformat(level2.quantityWater)}}<br />
+                    	{{getformat(level2.quantityAccidentalWater)}}
+                    	</td>
+                    	<td>
+                    	{{getformat(level2.quantitySoil)}}<br />
+                    	{{getformat(level2.quantityAccidentalSoil)}}
+                    	</td>
+                    </tr>
+                    <tr ng-repeat-end></tr>
+                    <tr ng-repeat-end ng-hide="true"></tr>  
+                    </tbody>
+                </table>
+				
            	</tab>
            	
            	<tab heading="Pollutant Transfer">
@@ -96,6 +149,35 @@
        				{{sectorIA}}
        				</div>
 				</div>
+				<br />
+				<table class="table table-striped table-condensed table-hover">
+                    <thead>
+                    <tr>
+                        <th>{{tr_p.TransferPerCountry}}&nbsp;</th>
+                        <th>{{tr_c.Facilities}}&nbsp;</th>
+                        <th>{{tr_c.Quantity}}&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat-start="item in pollutanttransferItems | orderBy: 'key'">
+                    	<td>
+                    	{{tr_lpo[item.key]}}
+                    	</td>
+                    	<td>{{getTypeCount(item.sublevel)}}</td>
+                    	<td></td>
+                    </tr>
+                    <tr ng-repeat-start="level2 in item.sublevel | orderBy: 'pollutantCode'">
+						<td>
+                    	<a href=""><img src="images/timeseries.png" class="timesericesImage" ng-click="showinfo(item2, this)" alt="" /></a>
+                    	{{tr_lpo[level2.pollutantCode]}}
+                    	</td>
+                    	<td>{{getTypeCount(level2)}}</td>
+                    	<td>{{getformat(level2.totalQuantity)}}</td>                  
+                    </tr>
+                    <tr ng-repeat-end></tr>
+                    <tr ng-repeat-end ng-hide="true"></tr>   
+                    </tbody>
+                </table>
            	</tab>
            	
            	<tab heading="Waste Transfer">

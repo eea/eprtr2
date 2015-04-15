@@ -1,6 +1,7 @@
 package eea.eprtr.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="POLLUTANTTRANSFER")
 @NamedQuery(name="Pollutanttransfer.findAll", query="SELECT p FROM Pollutanttransfer p")
-public class Pollutanttransfer implements Serializable {
+public class Pollutanttransfer implements Serializable,Cloneable {
 	private static final long serialVersionUID = 1L;
 	
 	@Column(name="CAS")
@@ -66,7 +67,9 @@ public class Pollutanttransfer implements Serializable {
 	private Integer LOV_NUTSRLevel3ID;
 	
 	private Integer LOV_PollutantGroupID;
-
+	
+	@Id
+	@Column(name="LOV_PollutantID")
 	private Integer LOV_PollutantID;
 
 	private Integer LOV_RiverBasinDistrictID;
@@ -102,7 +105,20 @@ public class Pollutanttransfer implements Serializable {
 	
 	@Column(name="Quantity")
 	private Double quantity;
-
+	
+	@Transient
+	public String key;
+	
+	@Transient
+	public int facilityCount = 0;
+	
+	@Transient
+	public List<Pollutanttransfer> sublevel;
+	
+	@Transient
+	public double totalQuantity = 0.0;
+	
+	
 	public String getCas() {
 		return cas;
 	}
@@ -400,6 +416,9 @@ public class Pollutanttransfer implements Serializable {
 		this.confidentialCode = confidentialCode;
 	}
 	
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 	
 	
 }

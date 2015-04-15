@@ -18,7 +18,7 @@ import eea.eprtr.dao.WastetransferSearchFilter;
 import eea.eprtr.dao.WasteTransferSearchRepository;
 import eea.eprtr.model.MediumCode;
 import eea.eprtr.model.Wastetransfer;
-import eea.eprtr.Util.DataHelper;
+import eea.eprtr.Util.DataHelperWasteTransfer;
 
 @RestController
 public class WastetransferSearchController {
@@ -75,7 +75,7 @@ public class WastetransferSearchController {
 		
 		if(searchtype != null && searchtype != "")
 		{
-			return new DataHelper().getSubdata(searchtype, wastetranfer,regionsearch);
+			return new DataHelperWasteTransfer().getSubdata(searchtype, wastetranfer,regionsearch);
 		}
 		return wastetranfer;
 	}

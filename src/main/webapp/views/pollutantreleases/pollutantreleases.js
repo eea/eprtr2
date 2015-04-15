@@ -770,10 +770,5 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         	$scope.totalareassumsoal = $scope.getSumTotal("areas","quantitySoil");
         	$scope.totalareassumasoil = $scope.getSumTotal("areas","quantityAccidentalSoil");
         };
-  
-        $scope.showinfo = function(data, ref)
-        {
-        	alert('test');
-        };
     }])
 ;

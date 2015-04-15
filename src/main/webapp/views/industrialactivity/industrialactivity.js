@@ -109,13 +109,13 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
 	        	    // SearchType
 	        		var params = angular.copy($scope.queryParams);
 	        		params.SearchType="POLLUTANTRELEASESUM";
-	        		//$scope.getData(params);
+	        		$scope.getData(params);
 	        		break;
 	        	case "pollutanttransfer":
 	        		$scope.searchService = $scope.restconfig.all('pollutanttransferSearch');
 	        		var params = angular.copy($scope.queryParams);
 	        		params.SearchType="POLLUTANTTRANSFERSUM";
-	        		//$scope.getData(params);
+	        		$scope.getData(params);
 	        		break;
 	        	case "wastetransfer":
 	        		$scope.searchService = $scope.restconfig.all('wastetransferSearch');
@@ -275,9 +275,22 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
               return total;
           };
           
+          $scope.getTypeCountAccidential = function(elements){  
+              
+            	if(!elements.length)
+            	{
+            		elements = jQuery.makeArray(elements);
+            	}  
+                var total = 0;
+                for(var i = 0; i < elements.length; i++){
+                    	total += elements[i].facilityAccidentalCount; 
+                }
+                return total;
+            };
+          
           $scope.getformat = function(value)
           {
-       		if(value === 0)
+       		if(!value || value === 0)
       		{
       			return "-";
       		}
@@ -292,6 +305,8 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
       		}
       		return value+"%";
           };
+          
+        
         
     }])
 ;

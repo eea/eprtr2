@@ -5,9 +5,9 @@ import java.util.List;
 
 import eea.eprtr.model.Wastetransfer;
 
-public class DataHelper {
+public class DataHelperWasteTransfer {
 
-	public DataHelper()
+	public DataHelperWasteTransfer()
 	{
 		
 	}
@@ -255,6 +255,52 @@ public class DataHelper {
 			}
 			if(!exist)
     		{
+				if(obj.isHasReportedRecovery())
+				{
+					if(obj.getQuantityRecoveryHWOC() > 0)
+					{
+						obj.recovery += obj.getQuantityRecoveryHWOC();
+					}
+					if(obj.getQuantityRecoveryHWIC() > 0)
+					{
+						obj.recovery += obj.getQuantityRecoveryHWIC();
+					}
+				}
+				
+				if(obj.isHasReportedDisposal())
+				{
+					
+					if(obj.getQuantityDisposalHWIC() > 0)
+					{
+						obj.disposal +=obj.getQuantityDisposalHWIC();
+					}
+					if(obj.getQuantityDisposalHWOC() > 0)
+					{
+						obj.disposal +=obj.getQuantityDisposalHWOC();
+					}
+				}
+			
+				if(obj.isHasReportedUnspecified())
+				{
+				
+					if(obj.getQuantityUnspecHWIC() > 0)
+					{
+						obj.unspec +=  obj.getQuantityUnspecHWIC();
+					}
+					if(obj.getQuantityUnspecHWOC() > 0)
+					{
+						obj.unspec +=obj.getQuantityUnspecHWOC();
+					}		
+				}
+				
+				if(obj.getQuantityTotalHWOC() > 0)
+				{
+					obj.total += obj.getQuantityTotalHWOC();
+				}
+				if(obj.getQuantityTotalHWIC() > 0)
+				{
+					obj.total += obj.getQuantityTotalHWIC();
+				}
     			obj.facilityCount = 1;
     			element.data.add(obj);
     		}
@@ -366,6 +412,51 @@ public class DataHelper {
 							}
 							if(!sublevelexist)
 							{
+								if(sublist.get(i).isHasReportedRecovery())
+			    				{
+			    					if(sublist.get(i).getQuantityRecoveryHWOC() > 0)
+			    					{	
+			    						sublist.get(i).recovery += sublist.get(i).getQuantityRecoveryHWOC();
+			    					}
+			    					if(sublist.get(i).getQuantityRecoveryHWIC() > 0)
+			    					{
+			    						sublist.get(i).recovery += sublist.get(i).getQuantityRecoveryHWIC();
+			    					}
+			    				}
+			    				
+			    				if(sublist.get(i).isHasReportedDisposal())
+			    				{
+			    					if(sublist.get(i).getQuantityDisposalHWIC() > 0)
+			    					{
+			    						sublist.get(i).disposal +=sublist.get(i).getQuantityDisposalHWIC();
+			    					}
+			    					if(sublist.get(i).getQuantityDisposalHWOC() > 0)
+			    					{
+			    						sublist.get(i).disposal +=sublist.get(i).getQuantityDisposalHWOC();
+			    					}
+			    				}
+			    			
+			    				if(sublist.get(i).isHasReportedUnspecified())
+			    				{
+			    					if(sublist.get(i).getQuantityUnspecHWIC() > 0)
+			    					{
+			    						sublist.get(i).unspec +=  sublist.get(i).getQuantityUnspecHWIC();
+			    					}
+			    					if(sublist.get(i).getQuantityUnspecHWOC() > 0)
+			    					{
+			    						sublist.get(i).unspec +=sublist.get(i).getQuantityUnspecHWOC();
+			    					}		
+			    				}
+			    				
+			    				if(sublist.get(i).getQuantityTotalHWOC() > 0)
+			    				{
+			    					sublist.get(i).total += sublist.get(i).getQuantityTotalHWOC();
+			    				}
+			    				if(sublist.get(i).getQuantityTotalHWIC() > 0)
+			    				{
+			    					sublist.get(i).total += sublist.get(i).getQuantityTotalHWIC();
+			    				}
+						
 								sublist.get(i).facilityCount =1;
 								sublevel.add(sublist.get(i));
 							}

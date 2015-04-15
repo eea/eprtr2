@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import eea.eprtr.Util.DataHelperPollutantRelease;
 import eea.eprtr.dao.ActivitySearchFilter;
 import eea.eprtr.dao.CountryAreaGroupRepository;
 import eea.eprtr.dao.LocationSearchFilter;
@@ -19,6 +20,7 @@ import eea.eprtr.dao.PollutantreleaseSearchRepository;
 import eea.eprtr.dao.ReportingYearSearchFilter;
 import eea.eprtr.model.MediumCode;
 import eea.eprtr.model.Pollutantrelease;
+import eea.eprtr.model.Pollutantrelease_;
 
 @RestController
 public class PollutantreleaseSearchController {
@@ -51,6 +53,7 @@ public class PollutantreleaseSearchController {
     		@RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
     		@RequestParam(value = "Accidental", required = false) Integer accidental,
     		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
+    		@RequestParam(value = "SearchType", required = false) String searchtype,
     		HttpServletResponse response
     		) {
 
@@ -69,6 +72,10 @@ public class PollutantreleaseSearchController {
 		response.setHeader("X-QuantityWater", String.valueOf(counts.getQuantityWater()));
 		
 		List<Pollutantrelease> pollutantreleases = pollutantreleaseSearchRepository.getPollutantreleases(filter);
+		if(searchtype != null && !searchtype.equals(""))
+		{
+			return new DataHelperPollutantRelease().getSubdata(searchtype, pollutantreleases);
+		}
 		return pollutantreleases;
 	}
 }
