@@ -67,7 +67,7 @@ angular.module('myApp.home', ['ngRoute'])
 	        var result = '';
 	        if (amount == null)
 	        {
-	            result = this.ConfidentialFormat.Format(result, conf);
+	            result = this.ConfidentialFormat(result, conf);
 	        }
 	        else
 	        {

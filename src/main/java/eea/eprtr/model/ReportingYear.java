@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="REPORTINGYEAR")
-@NamedQuery(name="ReportingYear.findAll", query="SELECT r FROM ReportingYear r")
+@NamedQuery(name="ReportingYear.findAll", query="SELECT r FROM ReportingYear r where r.year > 2006")
 public class ReportingYear implements Serializable {
 	private static final long serialVersionUID = 1L;
 

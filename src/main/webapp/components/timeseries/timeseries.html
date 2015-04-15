@@ -20,12 +20,12 @@
    </div>
    <div class="row" ng-hide="showalert? false: true">
       <blockquote>
-      	<a class="text-danger" ng-click="activateTab('fdconf')" ><i class="fa fa-exclamation-triangle"></i>  {{tr_f.ConfidentialityAlertLink}}</a>
+      	<a class="text-danger" ng-click="activateTab('confidentiality')" ><i class="fa fa-exclamation-triangle"></i>  {{tr_f.ConfidentialityAlertLink}}</a>
       </blockquote>
    </div>
 
 <!-- ** SELECTORS ** -->
-   <div class="row" style="padding-top:10px;" ng-if="content == 'pollutantrelease'">
+   <div class="row" style="padding-top:10px;" ng-if="content == 'pollutantrelease' && queryParams.MediumCode != undefined && queryParams.MediumCode.length > 1">
         	<div class="col-md-12 "><strong>{{tr_p.ShowFacilitiesReleasingToMedium}}</strong></br> 
         	<label class="col-md-4 radio-simple">
 	         <input type="radio" name="prsel" ng-model="filter.prsel" value="AIR" /> {{tr_c.Air}} ({{quantityAir | number}} {{tr_c.Facilities}})
@@ -34,7 +34,7 @@
 	         <input type="radio" name="prsel" ng-model="filter.prsel" value="WATER" /> {{tr_c.Water}} ({{quantityWater | number}} {{tr_c.Facilities}})
 	        </label>
 	        <label  class="col-md-4 radio-simple">
-	         <input type="radio" name="prsel" ng-model="filter.prsel" value="SOIL" /> {{tr_c.Soil}} ({{quantitySoil | number}} {{tr_c.Facilities}})
+	         <input type="radio" name="prsel" ng-model="filter.prsel" value="LAND" /> {{tr_c.Soil}} ({{quantitySoil | number}} {{tr_c.Facilities}})
          	</label>
          	</div>
        </div>
@@ -58,7 +58,7 @@
 <!-- 
 TIMESERIES
  -->
-  <tab heading="Time Series" active="active.timeseries">
+  <tab heading="Time Series" active="active.timeseries" ng-click="activateTab('timeseries')">
    <div class="row" style="padding-top:10px;" >
         <div class="col-md-12">
         	<div google-chart chart="tsStackseriesObject" style="height:250px; width:100%;"></div>
@@ -90,13 +90,13 @@ TIMESERIES
 <!-- 
 COMPARISON
  -->
-   <tab heading="Comparison" active="active.comparison">
+   <tab heading="Comparison" active="active.comparison" ng-click="activateTab('comparison')">
    <div class="row" style="padding-top:10px;" >
         <div class="col-md-5" style="height:325px;" >	
         	<!--  Year selector -->
         	<div >
         		<p>{{tr_c.TimeSeriesCompareYears}}</p>
-        		<select style="width:60px;" ng-model="tscompare.selectedStartYear" ng-options="y.year for y in reportingyears" id="startYear" ></select>  {{tr_c.TimeSeriesCompareAnd}}  <select style="width:60px;" ng-model="tscompare.selectedEndYear" ng-options="y.year for y in reportingyears" id="endYear" ></select>
+        		<select style="width:70px;" ng-model="tscompare.selectedStartYear" ng-options="y.year for y in reportingyears" id="startYear" ></select>  {{tr_c.TimeSeriesCompareAnd}}  <select style="width:70px;" ng-model="tscompare.selectedEndYear" ng-options="y.year for y in reportingyears" id="endYear" ></select>
         		</br>
               	<div google-chart chart="tsStackCompareObject" style="height:250px; width:100%;"></div>
         	</div>
@@ -150,7 +150,7 @@ COMPARISON
 <!-- 
 CONFIDENT
  -->
-   <tab heading="Confidentiality" active="active.confidentiality">
+   <tab heading="Confidentiality" active="active.confidentiality"  ng-click="setActiveTab('confidentiality')">
    <div class="row" style="padding-top:10px;" ng-hide="showalert">
         <div class="col-md-12" >{{tr_lcf.NoConfidentialityInformation}}
         </div>
