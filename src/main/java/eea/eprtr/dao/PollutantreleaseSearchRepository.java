@@ -89,10 +89,10 @@ public class PollutantreleaseSearchRepository {
 		
 		/*Countries*/
 		CriteriaBuilder cb1 = em.getCriteriaBuilder();
-		CriteriaQuery<PollutantreleasesCountries> cq1 = cb1.createQuery(PollutantreleasesCountries.class);
+		CriteriaQuery<NumOfCountriesPrYear> cq1 = cb1.createQuery(NumOfCountriesPrYear.class);
 		Root<Pollutantrelease> qr1 = cq1.from(Pollutantrelease.class);
 
-		cq1.select(cb1.construct(PollutantreleasesCountries.class, 
+		cq1.select(cb1.construct(NumOfCountriesPrYear.class, 
 				qr1.get(Pollutantrelease_.reportingYear),
 				qr1.get(Pollutantrelease_.countryCode))
 				);
@@ -100,12 +100,12 @@ public class PollutantreleaseSearchRepository {
 		cq1.groupBy(qr1.get(Pollutantrelease_.reportingYear),qr1.get(Pollutantrelease_.countryCode));
 		cq1.orderBy(cb1.asc(qr1.get(Pollutantrelease_.reportingYear)));
 
-		TypedQuery<PollutantreleasesCountries> q1 = em.createQuery(cq1);
-		List<PollutantreleasesCountries> results1 = q1.getResultList();
+		TypedQuery<NumOfCountriesPrYear> q1 = em.createQuery(cq1);
+		List<NumOfCountriesPrYear> results1 = q1.getResultList();
 		
 		LinkedHashMap<Integer, Integer> countries = new LinkedHashMap<Integer, Integer>();
 		for (int i =0; i < results1.size(); i++){
-			PollutantreleasesCountries pc = results1.get(i);
+			NumOfCountriesPrYear pc = results1.get(i);
 			Integer y = pc.getReleaseYear();
 			if (!countries.containsKey(y)){
 				countries.put(y, 1);

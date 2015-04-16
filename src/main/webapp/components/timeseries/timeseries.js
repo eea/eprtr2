@@ -150,14 +150,14 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 						}
 					}
 					//Request Pollutant Release Timeseries data
-					$scope.reqPollutantReleaseData();
+					$scope.reqPollutantReleaseSeriesData();
 					break;
 
 				case 'pollutanttransfer': 
 					$scope.title = 'Time Series - ' + $scope.tr_c.PollutantTransfers;
 					$scope.ConfidentialityExplanation = $scope.tr_t.ConfidentialityExplanationPT1;
-					//$scope.filter.prsel ="air";
 					//Request data
+					$scope.reqPollutantTransferSeriesData();
 					break;
 
 				case 'wastetransfer': 
@@ -186,10 +186,22 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 			$scope.setPRTScoll();
     	}
     });
+    /*Pollutant Transfer Timeseries*/
+    $scope.$watchCollection('[tscoll,active]', function(value){
+    	if($scope.content == 'pollutanttransfer' && $scope.tscoll != undefined && $scope.tscoll.length > 0 && $scope.active.timeseries != undefined ){
+			$scope.setPTTScoll();
+    	}
+    });
     /*Pollutant Release Compare*/
     $scope.$watchCollection('[reportingyears,tscompare.selectedStartYear,tscompare.selectedEndYear,filter.prsel,active]', function(value){
     	if($scope.reportingyears != undefined && $scope.active.comparison != undefined ){
 			$scope.reqPollutantReleaseCompareData();
+    	}
+    });
+    /*Pollutant Transfer Compare*/
+    $scope.$watchCollection('[reportingyears,tscompare.selectedStartYear,tscompare.selectedEndYear,active]', function(value){
+    	if($scope.content == 'pollutanttransfer' && $scope.reportingyears != undefined && $scope.active.comparison != undefined ){
+			$scope.reqPollutantTransferCompareData();
     	}
     });
         
@@ -219,7 +231,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		}
 	};
 	
-	$scope.reqPollutantReleaseData = function(){
+	$scope.reqPollutantReleaseSeriesData = function(){
 		if (_.keys($scope.queryParams).length > 0){
 			//Create new qparams
 			$scope.tscoll = [];
@@ -255,7 +267,43 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 	        });
 		}
 	};
-	
+
+	$scope.reqPollutantTransferSeriesData = function(){
+		if (_.keys($scope.queryParams).length > 0){
+			//Create new qparams
+			$scope.tscoll = [];
+			var _coll = [];
+			var qp = {};
+		    for(var key in $scope.queryParams) {
+		        if(key != 'ReportingYear') {
+		        	qp[key] = $scope.queryParams[key];
+		        }
+		    }
+	        var rest = Restangular.withConfig(function(RestangularConfigurer) {
+	            RestangularConfigurer.setFullResponse(true);
+	        });
+	        var pollutantSeriesSearch = rest.all('pollutanttransferSeries');
+	        pollutantSeriesSearch.getList(qp).then(function(response) {
+				for (var i = 0; i < $scope.reportingyears.length; i++){
+					var _y = $scope.reportingyears[i].year;
+					var _ts = null;
+					for (var j = 0; j < response.data.length; j++){
+						if(response.data[j].releaseYear == _y){
+							_ts = response.data[j];
+						}
+					}
+					if (_ts == null){
+						_ts = {"releaseYear":_y,"facilities":0,"countries":0,"quantity":null};
+					}
+					_coll.push(_ts);
+				}
+	        	//$scope.tscoll = response.data;
+				$scope.tscoll = _coll;
+				//$scope.setPRTScoll();
+	        });
+		}
+	};
+
 	/*
 	 * Request Pollutant Release Compare data
 	 */
@@ -285,6 +333,37 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 				$scope.tscompare.data = response.data;
 				$scope.setPRCPcoll();
 				$scope.setPRCPtabcoll();
+	        });
+		}
+	};
+	
+	/*
+	 * Request Pollutant Release Compare data
+	 */
+	$scope.reqPollutantTransferCompareData = function(){
+		if (_.keys($scope.queryParams).length > 0){
+			//$scope.tscoll = [];
+			$scope.tscompare.data = [];
+
+			//Create new qparams
+			var qp = {};
+			qp.ReportingYearStart = $scope.tscompare.selectedStartYear.year;
+			qp.ReportingYearEnd = $scope.tscompare.selectedEndYear.year;
+			/*Filter Query parameters*/
+		    for(var key in $scope.queryParams) {
+		        if(key != 'MediumCode' && key != 'ReportingYear') {
+		        	qp[key] = $scope.queryParams[key];
+		        }
+		    }
+//	        qp['MediumCode'] = $scope.filter.prsel;
+	        var rest = Restangular.withConfig(function(RestangularConfigurer) {
+	            RestangularConfigurer.setFullResponse(true);
+	        });
+	        var pollutantCompareSearch = rest.all('pollutanttransferCompare');
+	        pollutantCompareSearch.getList(qp).then(function(response) {
+				$scope.tscompare.data = response.data;
+				$scope.setPTCPcoll();
+				$scope.setPTCPtabcoll();
 	        });
 		}
 	};
@@ -357,6 +436,34 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		}
 	}
 
+	/*Pollutant Release Timeseries*/
+	$scope.setPTTScoll = function(){
+		if ($scope.tscoll.length > 0){
+			//Need to group by year
+			var simple = {};
+			/*Column Bar*/
+			$scope.tsStackseriesObject.data = {"cols": [
+	              {id: "y", label: "Reporting year", type: "string"},
+	              {id: "t", type: "string", role: "tooltip", p: {html: true}},
+	              {id: "q", label: $scope.tr_p['Quantity'], type: "number"}
+	        ]};
+			$scope.tsStackseriesObject.options.colors = [tsconf.colors.ColorWasteTotal];
+			
+			var rows = [];
+			for (var i = 0; i < $scope.tscoll.length; i++){
+				var ts = $scope.tscoll[i];
+				var k = ts.releaseYear;
+				simple[k] = ts;
+				var tip = $scope.formatPTTooltip(simple[k]);
+				var row = [{v: k},{v: tip}];
+				row.push({v: simple[k].quantity})
+				rows.push({c: row});
+	
+			}
+			$scope.tsStackseriesObject.data["rows"] = rows;
+		}
+	}
+
 	/*Pollutant Release Compare data for Chart*/
 	$scope.setPRCPcoll = function(){
 		if ($scope.tscompare.data != undefined && $scope.tscompare.data.length > 0){
@@ -395,7 +502,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 					simple[k].bothPercent = 0;
 					simple[k].compquantityall = simple[k].quantityAll;
 				}
-				var tip = $scope.formatPRCTooltip(simple[k]);
+				var tip = $scope.formatPCTooltip(simple[k]);
 				var row = [{v: k},{v: tip}];
 				row.push({v: simple[k].quantityBoth})
 				row.push({v: simple[k].compquantityall})
@@ -407,6 +514,46 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		}
 	};
 	
+	/*Pollutant Transfer Compare data for Chart*/
+	$scope.setPTCPcoll = function(){
+		if ($scope.tscompare.data != undefined && $scope.tscompare.data.length > 0){
+			//tsStackCompareObject
+			$scope.tsStackCompareObject.data = {"cols": [
+			                          	              {id: "y", label: "Reporting year", type: "string"},
+			                          	              {id: "t", type: "string", role: "tooltip", p: {html: true}},
+			                          	              {id: "a", label: $scope.tr_c['FacilitiesBothYears'], type: "number"},
+			                          	              {id: "q", label: $scope.tr_c['AllFacilities'], type: "number"}
+			                          	        ]};
+
+			$scope.tsStackCompareObject.options.colors = [tsconf.colors.ColorWasteTotal,tsconf.colors.ColorWasteWaterBothYears];
+			var simple = {};
+			var rows = [];
+			for (var i = 0; i < $scope.tscompare.data.length; i++){
+				var ts = $scope.tscompare.data[i];
+				var k = ts.reportingYear;
+				simple[k] = ts;
+
+				/*Calculate accidental Percentage*/
+				if (simple[k].quantityBoth > 0){
+					simple[k].bothPercent = formatStrFactory.DeterminePercent(simple[k].quantityAll, simple[k].quantityBoth );
+					simple[k].compquantityall = parseFloat(simple[k].quantityAll) - parseFloat(simple[k].quantityBoth);
+				}
+				else{
+					simple[k].bothPercent = 0;
+					simple[k].compquantityall = simple[k].quantityAll;
+				}
+				var tip = $scope.formatPCTooltip(simple[k]);
+				var row = [{v: k},{v: tip}];
+				row.push({v: simple[k].quantityBoth})
+				row.push({v: simple[k].compquantityall})
+				rows.push({c: row});
+	
+			}
+			$scope.tsStackCompareObject.data["rows"] = rows;
+
+		}
+	};
+
 	/*Pollutant Release Compare data for Tables*/
 	$scope.setPRCPtabcoll = function(){
 		if ($scope.tscompare.data != undefined && $scope.tscompare.data.length > 0){
@@ -443,6 +590,34 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		};
 	};
 
+	/*Pollutant Release Compare data for Tables*/
+	$scope.setPTCPtabcoll = function(){
+		if ($scope.tscompare.data != undefined && $scope.tscompare.data.length > 0){
+			$scope.tscompare.alldata = [];
+			$scope.tscompare.bothdata = [];
+			var y1 = $scope.tscompare.data[0];
+			var y2 = $scope.tscompare.data[1];
+			/*ALL*/
+			$scope.tscompare.alldata.push(
+					{'title':$scope.tr_c['Total'], 
+						'col1':y1.quantityAll != null ? formatStrFactory.formatMethod(y1.quantityAll,false):'-', 
+						'col2':y2.quantityAll != null ? formatStrFactory.formatMethod(y2.quantityAll,false):'-'});
+			$scope.tscompare.alldata.push(
+					{'title':$scope.tr_c['Facilities'], 
+						'col1':$filter('number')(y1.facilitiesAll), 
+						'col2':$filter('number')(y2.facilitiesAll)});
+			/*BOTH*/
+			$scope.tscompare.bothdata.push(
+					{'title':$scope.tr_c['Total'], 
+						'col1':y1.quantityBoth != null ? formatStrFactory.formatMethod(y1.quantityBoth,false):'-', 
+						'col2':y2.quantityBoth != null ? formatStrFactory.formatMethod(y2.quantityBoth,false):'-'});
+			$scope.tscompare.bothdata.push(
+					{'title':$scope.tr_c['Facilities'], 
+						'col1': $filter('number')(y1.facilitiesBoth), 
+						'col2':$filter('number')(y2.facilitiesBoth)});
+		};
+	};
+
 	
 	/**
 	 * TOOLTIP Formatting
@@ -457,8 +632,16 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		html += $scope.tr_p['ReleasesAccidentalPercentValue'] + '</td><td class="text-right">' + item.accidentalPercent  + '</td></tr></table></div>';
 		return html;
 	}
+	/*Pollutant Transfer Timeseries Chart*/
+	$scope.formatPTTooltip = function(item){
+		var html = '<div style="padding:5px 5px 5px 5px;"><table ><tr><td class="fdTitles">';
+		html += $scope.tr_c['Year'] + '</td><td class="text-right" style="min-width:100px;">' + item.releaseYear + '</td></tr><tr><td class="fdTitles">';
+		html += $scope.tr_c['Facilities'] + '</td><td class="text-right">' + $filter('number')(item.facilities) + '</td></tr><tr><td class="fdTitles">';
+		html += $scope.tr_p['ReleasesTotal'] + '</td><td class="text-right">' + formatStrFactory.formatMethod(item.quantity,false)  + '</td></tr></table></div>';
+		return html;
+	}
 	/*Pollutant Release Compare Chart*/
-	$scope.formatPRCTooltip = function(item){
+	$scope.formatPCTooltip = function(item){
 		var html = '<div style="padding:5px 5px 5px 5px;"><table ><tr><td class="fdTitles">';
 		html += $scope.tr_c['Year'] + '</td><td class="text-right" style="min-width:100px;">' + item.reportingYear + '</td></tr><tr><td class="fdTitles">';
 		html += $scope.tr_c['AllFacilities'] + '</td><td class="text-right">' + formatStrFactory.formatMethod(item.quantityAll,false) + '</td></tr><tr><td class="fdTitles">';

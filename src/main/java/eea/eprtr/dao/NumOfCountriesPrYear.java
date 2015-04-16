@@ -1,11 +1,11 @@
 package eea.eprtr.dao;
 
-public class PollutantreleasesCountries {
+public class NumOfCountriesPrYear {
 
 	private final Integer releaseYear;
 	private final String countries;
 	
-	public PollutantreleasesCountries(Integer releaseYear, String countries) {
+	public NumOfCountriesPrYear(Integer releaseYear, String countries) {
 		this.releaseYear = releaseYear;
 		this.countries = countries;
 	}
