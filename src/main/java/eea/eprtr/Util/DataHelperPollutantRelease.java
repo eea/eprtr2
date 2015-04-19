@@ -8,13 +8,14 @@ import eea.eprtr.model.Pollutantrelease;
 
 public class DataHelperPollutantRelease {
 
+	private List<String> facilityPolluntant;
 	public DataHelperPollutantRelease()
 	{
-		
 	}
 	
 	public List<Pollutantrelease> getSubdata(String type,List<Pollutantrelease> elements)
 	{
+		facilityPolluntant = new ArrayList<String>();
 		switch(type.toUpperCase())
 		{
 		case "POLLUTANTRELEASESUM":
@@ -37,14 +38,9 @@ public class DataHelperPollutantRelease {
 	
 	private List<Pollutantrelease> getSummary(List<Pollutantrelease> elements)
 	{
-		System.out.println("Count: "+elements.size());
 		List<Pollutantrelease> group = new ArrayList<Pollutantrelease>();
 		for(Pollutantrelease obj : elements)
 		{
-			if(obj.getPollutantCode().equals("BROMINATED DIPHENYLETHER"))
-			{
-				System.out.println("PollutantCode: "+obj.getPollutantCode()+ " "+obj.getFacilityName());
-			}
 			Pollutantrelease element = findGroupe(group, obj.getPollutantGroupCode());
 			if(element == null)
 			{
@@ -121,6 +117,11 @@ public class DataHelperPollutantRelease {
     				}
     				if(foundData || foundAccidental)
     				{
+    					if(!facilityPolluntant.contains(obj.getPollutantGroupCode()+"_"+obj.getFacilityID()))
+						{
+							facilityPolluntant.add(obj.getPollutantGroupCode()+"_"+obj.getFacilityID());
+							element.sublevel.get(j).facilityTotalCount +=1;
+						}
     					element.sublevel.get(j).facilityCount += 1;
     				}
     				exist = true;
@@ -142,6 +143,12 @@ public class DataHelperPollutantRelease {
 						obj.facilityAccidentalCount > 0)
 					{
 						obj.facilityCount = 1;
+						if(!facilityPolluntant.contains(obj.getPollutantGroupCode()+"_"+obj.getFacilityID()))
+						{
+							facilityPolluntant.add(obj.getPollutantGroupCode()+"_"+obj.getFacilityID());
+							obj.facilityTotalCount = 1;
+						}
+						
 						element.sublevel.add(obj);
 					}
 			}	

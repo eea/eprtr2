@@ -19,6 +19,7 @@ public class Wastetransfer implements Serializable,Cloneable{
 	@Column(name="FacilityReportID")
 	private Integer facilityReportID;
 	
+	
 	@Column(name="FacilityName")
 	private String facilityName;
 	
@@ -149,6 +150,16 @@ public class Wastetransfer implements Serializable,Cloneable{
 	
 	@Column(name="HasReportedUnspecified")
 	private boolean hasReportedUnspecified;
+	
+	@Column(name="ConfidentialIndicatorNONHW")
+	private Boolean confidentialIndicatorNONHW;
+	
+	@Column(name="ConfidentialIndicatorHWIC")
+	private Boolean confidentialIndicatorHWIC;
+	
+	@Column(name="ConfidentialIndicatorHWOC")
+	private Boolean confidentialIndicatorHWOC;
+	
 	
 	// extra data fields for grouping
 	@Transient
@@ -588,7 +599,45 @@ public class Wastetransfer implements Serializable,Cloneable{
 		this.hasReportedUnspecified = hasReportedUnspecified;
 	}
 	
-    public Object clone() throws CloneNotSupportedException {
+	
+	
+    public boolean isConfidentialIndicatorNONHW() {
+		if(confidentialIndicatorNONHW == null)
+		{
+			return false;
+		}
+    	return confidentialIndicatorNONHW;
+	}
+
+	public void setConfidentialIndicatorNONHW(Boolean confidentialIndicatorNONHW) {
+		this.confidentialIndicatorNONHW = confidentialIndicatorNONHW;
+	}
+
+	public boolean isConfidentialIndicatorHWIC() {
+		if(confidentialIndicatorHWIC == null)
+		{
+			return false;
+		}
+		return confidentialIndicatorHWIC;
+	}
+
+	public void setConfidentialIndicatorHWIC(Boolean confidentialIndicatorHWIC) {	
+			this.confidentialIndicatorHWIC = confidentialIndicatorHWIC;
+	}
+
+	public boolean isConfidentialIndicatorHWOC() {
+		if(confidentialIndicatorHWOC == null)
+		{
+			return false;
+		}
+		return confidentialIndicatorHWOC;
+	}
+
+	public void setConfidentialIndicatorHWOC(Boolean confidentialIndicatorHWOC) {
+		this.confidentialIndicatorHWOC = confidentialIndicatorHWOC;
+	}
+
+	public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
 		

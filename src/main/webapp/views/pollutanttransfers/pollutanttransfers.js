@@ -553,11 +553,5 @@ angular.module('myApp.pollutanttransfers', ['ngRoute','googlechart', 'myApp.sear
         	$scope.totalareasfac = $scope.getTotalCount("areas","fcount");
         	$scope.totalareasq = $scope.getSumTotal("areas","quantity");
         };
-  
-        
-        $scope.showinfo = function(data, ref)
-        {
-        	
-        };
         
     }]);

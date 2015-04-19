@@ -18,8 +18,12 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
         $scope.summaryItems = [];
         $scope.pollutantreleaseItems = [];
         $scope.pollutanttransferItems = [];
+        $scope.itemsConfidentiality =[];
+        $scope.itemCon = [];
+        $scope.itemConReason = [];
         $scope.summaryItems = [];
         $scope.sectorIA ="";
+        $scope.totalSearchResult = 0;
         
     	$scope.restconfig = Restangular.withConfig(function(RestangularConfigurer) {
             RestangularConfigurer.setFullResponse(true);
@@ -46,6 +50,15 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
         	  });
         };
         $scope.translate();
+        
+        $scope.showresult = function(value)
+        {
+        	if($scope.itemsConfidentiality)
+        	{
+            	$scope.showConfidential = value;
+        		$scope.updateConfidentialData();
+        	}
+        };
         
         $scope.search = function() {
             $scope.currentSearchFilter = $scope.searchFilter;
@@ -93,10 +106,12 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
             // Create confidential search
             $scope.confidentialParams = angular.copy(queryParams);
             $scope.confidentialParams.ConfidentialIndicator = 1;
-            
+            $scope.totalSearchResult = 0;
+        	$scope.showConfidential = 'polRelease';
             $scope.getTabData("pollutantrelease");
             $scope.getTabData("pollutanttransfer");
             $scope.getTabData("wastetransfer");
+            $scope.getTabData("confidentiality");
                       
         };
         
@@ -124,7 +139,10 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
 	        		$scope.getData(params);
 	        		break;
 	        	case "confidentiality":
-	        		// TODO
+	        		$scope.searchService = $scope.restconfig.all('confindustrialactivitySearch');
+	        		var params = angular.copy($scope.queryParams);
+	        		params.SearchType="ALLCONF";
+	        		$scope.getData(params);
 	        		break;
 	        	default:
 	        		break;
@@ -133,17 +151,31 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
         
         $scope.getData = function(params){
         	$scope.searchService.getList(params).then(function(response) {
-        		$scope.items = response.data;  
+        		$scope.items = response.data;
+        	    
     			switch(params.SearchType.toUpperCase())
     			{
     				case "POLLUTANTRELEASESUM":
+    					$scope.pollutantreleaseItems = response.data;
+    					$scope.polreleasecount = response.headers('facilitiesCount');
+    					$scope.totalSearchResult += parseInt($scope.polreleasecount);
     					$scope.updatePollutantReleaseData();
     					break;
     				case "POLLUTANTTRANSFERSUM":
+    					$scope.pollutanttransferItems = response.data;
+    					$scope.poltransfercount = response.headers('facilitiesCount');
+    					$scope.totalSearchResult += parseInt($scope.poltransfercount);
     					$scope.updatePollutantTransferData();
     					break;
                   	case "SUMMARY":
+                  		$scope.summaryItems = response.data;
+                  		$scope.wastetransfercount = response.headers('facilitiesCount');
+                  		$scope.totalSearchResult += parseInt($scope.wastetransfercount);
                   		$scope.updateSummaryData();
+                  		break;
+                  	case "ALLCONF":
+                  		$scope.itemsConfidentiality = response.data;
+                  		$scope.updateConfidentialData();
                   		break;
                   	default:
                   		// No valid search
@@ -152,18 +184,210 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
               });
         };
         
+        $scope.updateConfidentialData = function()
+        {
+        	$scope.hasConfidentionalData = $scope.itemsConfidentiality.length > 0? true: false;
+        	
+        	$scope.itemCon = [];
+        	$scope.itemConReason = [];
+        	
+        	switch($scope.showConfidential)
+        	{
+	        	case "polRelease":
+		        	// Confidential
+		        	for ( var i = 0; i < $scope.itemsConfidentiality.length; i++ ) { 		
+		        		if(!$scope.itemsConfidentiality[i].conftype || $scope.itemsConfidentiality[i].conftype.toLowerCase() != "polrelease")
+		        		{
+		        			continue;
+		        		}
+		        		var conObj =_.find($scope.itemCon, function(element){ return element.pollutantCode === ($scope.itemsConfidentiality[i].pollutantCode + ".Confidential") });       		
+		        		if(!conObj)
+		        		{
+		        			var polutent = {};
+		        			polutent.pollutantCode = $scope.itemsConfidentiality[i].pollutantCode+".Confidential";
+		        			polutent.pollutantGroupCode = $scope.itemsConfidentiality[i].pollutantGroupCode+".Confidential";
+		        			polutent.aircount = $scope.itemsConfidentiality[i].confidentialCodeAir ? 1: 0;
+		        			polutent.watercount = $scope.itemsConfidentiality[i].confidentialCodeWater ? 1: 0;
+		        			polutent.soilcount = $scope.itemsConfidentiality[i].confidentialCodeSoil ? 1: 0;
+		        			$scope.itemCon.push(polutent);
+		        		}else
+		        		{
+		        			if( $scope.itemsConfidentiality[i].confidentialCodeAir)
+		        			{
+		        				conObj.aircount += 1;
+		        			}
+		        			if( $scope.itemsConfidentiality[i].confidentialCodeWater)
+		        			{
+		        				conObj.watercount += 1;
+		        			}
+		        			if( $scope.itemsConfidentiality[i].confidentialCodeSoil)
+		        			{
+		        				conObj.soilcount += 1;
+		        			}
+		        		}
+		        	}
+		        	// Reason
+		        	for ( var i = 0; i < $scope.itemsConfidentiality.length; i++ ) {
+		        		if(!$scope.itemsConfidentiality[i].conftype || $scope.itemsConfidentiality[i].conftype.toLowerCase() != "polrelease")
+		        		{
+		        			continue;
+		        		}
+		        		var conObj =_.find($scope.itemConReason, function(element){ 
+		        			return ((element.reason === $scope.itemsConfidentiality[i].confidentialCodeAir) && $scope.itemsConfidentiality[i].confidentialCodeAir) ||
+		        			((element.reason === $scope.itemsConfidentiality[i].confidentialCodeWater) && $scope.itemsConfidentiality[i].confidentialCodeWater) ||
+		        			((element.reason === $scope.itemsConfidentiality[i].confidentialCodeSoil) && $scope.itemsConfidentiality[i].confidentialCodeSoil)});       		
+		        		if(!conObj)
+		        		{
+		        			var polutent = {};
+		        			if( $scope.itemsConfidentiality[i].confidentialCodeAir)
+		        			{
+		        				polutent.reason = $scope.itemsConfidentiality[i].confidentialCodeAir
+		        			}
+		        			if( $scope.itemsConfidentiality[i].confidentialCodeWater)
+		        			{
+		        				polutent.reason = $scope.itemsConfidentiality[i].confidentialCodeWater
+		        			}
+		        			if( $scope.itemsConfidentiality[i].confidentialCodeSoil)
+		        			{
+		        				polutent.reason = $scope.itemsConfidentiality[i].confidentialCodeSoil
+		        			}
+		        			polutent.pollutantGroupCode = $scope.itemsConfidentiality[i].pollutantGroupCode+".Confidential";
+		        			polutent.aircount = $scope.itemsConfidentiality[i].confidentialCodeAir ? 1: 0;
+		        			polutent.watercount = $scope.itemsConfidentiality[i].confidentialCodeWater ? 1: 0;
+		        			polutent.soilcount = $scope.itemsConfidentiality[i].confidentialCodeSoil ? 1: 0;
+		        			$scope.itemConReason.push(polutent);
+		        		}else
+		        		{
+		        			if( $scope.itemsConfidentiality[i].confidentialCodeAir)
+		        			{
+		        				conObj.aircount += 1;
+		        			}
+		        			if( $scope.itemsConfidentiality[i].confidentialCodeWater)
+		        			{
+		        				conObj.watercount += 1;
+		        			}
+		        			if( $scope.itemsConfidentiality[i].confidentialCodeSoil)
+		        			{
+		        				conObj.soilcount += 1;
+		        			} 
+		        		}
+		        	}
+		        	break;
+	        	case "polTransfer":
+	        		for ( var i = 0; i < $scope.itemsConfidentiality.length; i++ ) { 		
+	        			if(!$scope.itemsConfidentiality[i].conftype || $scope.itemsConfidentiality[i].conftype.toLowerCase() != "poltransfer")
+		        		{
+		        			continue;
+		        		}
+	        			var conObj =_.find($scope.itemCon, function(element){ return element.pollutantCode === ($scope.itemsConfidentiality[i].pollutantCode + ".Confidential") });       		
+	            		if(!conObj)
+	            		{
+	            			var polutent = {};
+	            			polutent.pollutantGroupCode = $scope.itemsConfidentiality[i].pollutantGroupCode+".Confidential";
+	            			polutent.pollutantCode = $scope.itemsConfidentiality[i].pollutantCode+".Confidential";
+	            			polutent.count = $scope.itemsConfidentiality[i].confidentialCode ? 1: 0;
+	        				$scope.itemCon.push(polutent);
+	            		}else
+	            		{
+	            			if( $scope.itemsConfidentiality[i].confidentialCode)
+	            			{
+	            				conObj.count += 1;
+	            			}
+	            		}
+	            	}
+	            	// Reason
+	            	for ( var i = 0; i < $scope.itemsConfidentiality.length; i++ ) {
+	            		if(!$scope.itemsConfidentiality[i].conftype || $scope.itemsConfidentiality[i].conftype.toLowerCase() != "poltransfer")
+		        		{
+		        			continue;
+		        		}
+	            		var conObj =_.find($scope.itemConReason, function(element){ 
+	            			return ((element.reason === $scope.itemsConfidentiality[i].confidentialCode) && $scope.itemsConfidentiality[i].confidentialCode)});       		
+	            		if(!conObj)
+	            		{
+	            			var polutent = {};
+	            			if( $scope.itemsConfidentiality[i].confidentialCode)
+	            			{
+	            				polutent.reason = $scope.itemsConfidentiality[i].confidentialCode
+	            			}
+	            			polutent.pollutantGroupCode = $scope.itemsConfidentiality[i].pollutantGroupCode+".Confidential";
+	            			polutent.count = $scope.itemsConfidentiality[i].confidentialCode ? 1: 0;
+	            			$scope.itemConReason.push(polutent);
+	            		}else
+	            		{
+	            			if( $scope.itemsConfidentiality[i].confidentialCode)
+	            			{
+	            				conObj.count += 1;
+	            			}
+	            		}
+	            	}	
+	        		break;
+	        	case "wasteTransfer":
+	        		for ( var i = 0; i < $scope.itemsConfidentiality.length; i++ ) { 		
+	        			if(!$scope.itemsConfidentiality[i].conftype || $scope.itemsConfidentiality[i].conftype.toLowerCase() != "wastetransfer")
+		        		{
+		        			continue;
+		        		}
+	        			if($scope.itemCon.length === 0)
+	        			{
+	        				var polutent = {};
+	        				polutent.countNONHW = 0;
+	        				polutent.countHWIC = 0;
+	        				polutent.countHWOC = 0;
+	        				$scope.itemCon.push(polutent);
+	        			}
+	        			if($scope.itemsConfidentiality[i].wastetype ==="NON-HW")
+	        			{
+	        				$scope.itemCon[0].countNONHW +=1;
+	        			}
+	        			if($scope.itemsConfidentiality[i].wastetype ==="HWIC")
+	        			{
+	        				$scope.itemCon[0].countHWIC +=1;
+	        			}
+	        			if($scope.itemsConfidentiality[i].wastetype ==="HWOC")
+	        			{
+	        				$scope.itemCon[0].countHWOC +=1;
+	        			}
+	            	}
+	            	// Reason
+	            	for ( var i = 0; i < $scope.itemsConfidentiality.length; i++ ) {
+	            		if(!$scope.itemsConfidentiality[i].conftype || $scope.itemsConfidentiality[i].conftype.toLowerCase() != "wastetransfer")
+		        		{
+		        			continue;
+		        		}
+	            		
+	            		var conObj =_.find($scope.itemConReason, function(element){ 
+	            			return ((element.reason === $scope.itemsConfidentiality[i].confidentialCode) && element.wastetype === $scope.itemsConfidentiality[i].wastetype)});       		
+	            		if(!conObj)
+	            		{
+	            			var polutent = {};
+	            			polutent.wastetype = $scope.itemsConfidentiality[i].wastetype;
+	            			polutent.reason = $scope.itemsConfidentiality[i].confidentialCode
+	            			polutent.count = 1;
+	            			$scope.itemConReason.push(polutent);
+	            		}else
+	            		{
+	            				conObj.count += 1;
+	            		}
+	            	}	
+	        		break;
+	        	default:
+	        		break;
+        	}	
+        };
+        
         $scope.updatePollutantReleaseData = function()
         {
-        	$scope.pollutantreleaseItems = angular.copy($scope.items);
+        	//$scope.pollutantreleaseItems = angular.copy($scope.items);
         };
         
         $scope.updatePollutantTransferData = function()
         {
-        	$scope.pollutanttransferItems = angular.copy($scope.items);
+        	//$scope.pollutanttransferItems = angular.copy($scope.items);
         };
         
         $scope.updateSummaryData = function() {
-         	 $scope.summaryItems = angular.copy($scope.items);
+         	// $scope.summaryItems = angular.copy($scope.items);
          	  
          	 	// Handle data
          	for(var i = 0; i <$scope.summaryItems.length;i++)
@@ -274,6 +498,40 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
               }
               return total;
           };
+          $scope.getFacilityCount = function(elements){  
+              
+            	if(!elements.length)
+            	{
+            		elements = jQuery.makeArray(elements);
+            	}  
+                var total = 0;
+                for(var i = 0; i < elements.length; i++){
+                    	total += elements[i].facilityTotalCount;
+                 
+                }
+                return total;
+            };
+          
+          
+          
+          $scope.getTotalCount = function(elements){  
+              
+            	if(!elements.length)
+            	{
+            		elements = jQuery.makeArray(elements);
+            	}  
+                var total = 0;
+                for(var i = 0; i < elements.length; i++){
+                	if(!elements[i].sublevel)
+                	{ 
+                		continue;
+                	}
+                	for(var j = 0; j < elements[i].sublevel.length; j++){
+                		total += elements[i].sublevel[j].facilityCount;
+                	}
+                }
+                return total;
+            };
           
           $scope.getTypeCountAccidential = function(elements){  
               

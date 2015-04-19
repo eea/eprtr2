@@ -7,12 +7,14 @@ import eea.eprtr.model.Pollutanttransfer;
 
 public class DataHelperPollutantTransfer {
 
+	private List<String> facilityPolluntant;
 	public DataHelperPollutantTransfer()
 	{		
 	}
 	
 	public List<Pollutanttransfer> getSubdata(String type, List<Pollutanttransfer> elements)
 	{
+		facilityPolluntant = new ArrayList<String>();
 		switch(type.toUpperCase())
 		{
 		case "POLLUTANTTRANSFERSUM":
@@ -57,6 +59,12 @@ public class DataHelperPollutantTransfer {
     				{
     					element.sublevel.get(j).totalQuantity += obj.getQuantity();
     				}
+
+					if(!facilityPolluntant.contains(obj.getPollutantGroupCode()+"_"+obj.getFacilityID()))
+					{
+						facilityPolluntant.add(obj.getPollutantGroupCode()+"_"+obj.getFacilityID());
+						element.sublevel.get(j).facilityTotalCount +=1;
+					}
     				element.sublevel.get(j).facilityCount += 1;
     				exist = true;
     			}
@@ -64,16 +72,16 @@ public class DataHelperPollutantTransfer {
 			
 			if(!exist)
 			{
+				if(!facilityPolluntant.contains(obj.getPollutantGroupCode()+"_"+obj.getFacilityID()))
+				{
+					facilityPolluntant.add(obj.getPollutantGroupCode()+"_"+obj.getFacilityID());
+					obj.facilityTotalCount = 1;
+				}
 				obj.facilityCount = 1;
 				obj.totalQuantity = obj.getQuantity();
     			element.sublevel.add(obj);
 			}
 			
-			/*System.out.println("Quantity: "+obj.getQuantity());
-			System.out.println("PollutantGroupCode: "+obj.getPollutantGroupCode());
-			System.out.println("LOV_PollutantGroupID: "+obj.getLOV_PollutantGroupID());
-			System.out.println("PollutantCode: "+obj.getPollutantCode());
-			System.out.println("LOV_PollutantID: "+obj.getLOV_PollutantID());*/
 		}
 		return group;
 	}

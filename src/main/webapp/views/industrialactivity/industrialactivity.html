@@ -66,6 +66,14 @@
        				{{sectorIA}}
        				</div>
 				</div>
+				<div class="row">
+			   		<div class="col-md-1">
+       				{{tr_c.Facilities}}:
+       				</div>
+       				<div class="col-md-3">
+       				{{polreleasecount}}&nbsp;({{tr_c.TotalInSearch}}:&nbsp;{{totalSearchResult}})
+       				</div>
+				</div>
 				<br />
 				<table class="table table-striped table-condensed table-hover">
                     <thead>
@@ -86,7 +94,7 @@
                     	<td>
                         </td>
                     	<td>
-                    	{{getTypeCount(item.sublevel)}}
+                    	{{getFacilityCount(item.sublevel)}}
                     	</td>
                     	<td></td>
                     	<td></td>
@@ -149,6 +157,14 @@
        				{{sectorIA}}
        				</div>
 				</div>
+				<div class="row">
+			   		<div class="col-md-1">
+       				{{tr_c.Facilities}}:
+       				</div>
+       				<div class="col-md-3">
+       				{{poltransfercount}}&nbsp;({{tr_c.TotalInSearch}}:&nbsp;{{totalSearchResult}})
+       				</div>
+				</div>
 				<br />
 				<table class="table table-striped table-condensed table-hover">
                     <thead>
@@ -163,7 +179,7 @@
                     	<td>
                     	{{tr_lpo[item.key]}}
                     	</td>
-                    	<td>{{getTypeCount(item.sublevel)}}</td>
+                    	<td>{{getFacilityCount(item.sublevel)}}</td>
                     	<td></td>
                     </tr>
                     <tr ng-repeat-start="level2 in item.sublevel | orderBy: 'pollutantCode'">
@@ -213,7 +229,7 @@
        			{{tr_c.Facilities}}:
        			</div>
        			<div class="col-md-3">
-       			{{getTypeCount(summaryItems)}}
+       			{{wastetransfercount}}&nbsp;({{tr_c.TotalInSearch}}:&nbsp;{{totalSearchResult}})
        			</div>
 			</div>
 			<br />
@@ -269,7 +285,176 @@
             </table>
            	</tab>
            	
-           	  <tab heading="Confidentiality">
+           	<tab heading="Confidentiality">
+           	 <div>
+				<h3>{{tr_c.PollutantTransConfidentiality}}</h3>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Year}}:
+       			</div>
+       			<div class="col-md-1">
+       			{{queryParams.ReportingYear}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Area}}:
+       			</div>
+       			<div class="col-md-3">
+       			{{currentSearchFilter.selectedReportingCountry.name}}
+       			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_ina.Headline}}:
+       			</div>
+       			<div class="col-md-3">
+       			{{sectorIA}}
+      			</div>
+			</div>
+			<div class="row">
+			   	<div class="col-md-1">
+       			{{tr_c.Facilities}}:
+       			</div>
+       			<div class="col-md-3">
+       			{{wastetransfercount}}&nbsp;({{tr_c.TotalInSearch}}:&nbsp;{{totalSearchResult}})
+       			</div>
+			</div>
+			<br />
+                <div ng-if="!hasConfidentionalData" ng-bind-html="tr_con.NoConfidentialityInformation">
+                </div>      	    
+                <div ng-if="hasConfidentionalData">
+	            	 <br/>
+                	<label class="radio-inline"><input type="radio" name="showConfidentialOptionsRadios" id="showConfidentialOptionsRadios_0" value="polRelease" ng-model="showConfidential" ng-click="showresult('polRelease')">{{tr_c.ContentPollutantReleases}}</label>
+                	<label class="radio-inline"><input type="radio" name="showConfidentialOptionsRadios" id="showConfidentialOptionsRadios_1" value="polTransfer" ng-model="showConfidential" ng-click="showresult('polTransfer')">{{tr_c.ContentPollutantTransfers}}</label>
+                	<label class="radio-inline"><input type="radio" name="showConfidentialOptionsRadios" id="showConfidentialOptionsRadios_2" value="wasteTransfer" ng-model="showConfidential" ng-click="showresult('wasteTransfer')">{{tr_c.ContentWastetransfers}}</label>
+                	<br/>
+                	<br/>
+                	
+	                <div ng-if="showConfidential==='polRelease'" ng-bind-html="tr_p.ConfReleaseDesc">
+	                </div>
+	                <div ng-if="showConfidential==='polTransfer'" ng-bind-html="tr_p.ConfTransfersDesc">
+	                </div>
+	                <div ng-if="showConfidential==='wasteTransfer'" ng-bind-html="tr_wt.ConfWasteDesc">
+	                </div>
+	                
+	                <div>
+		                 <table ng-if="showConfidential==='polRelease'" class="table table-striped table-condensed table-hover">
+	                    	<thead>
+	                    	<tr>
+	                   		<th>{{tr_c.PollutantGroup}}</th>
+                 		   	<th></th>
+                 		   	<th>{{tr_f.FacilitiesAir}}</th>
+                   			<th>{{tr_f.FacilitiesWater}}</th>
+                   			<th>{{tr_f.FacilitiesSoil}}</th>
+	                    	</tr>
+	                    	</thead>
+	                    	<tbody>
+	                    	<tr ng-repeat="item in itemCon">
+	                    	<td>{{tr_lpo[item.pollutantGroupCode]}}</td>
+                 	        <td>{{tr_c.FacilitiesClaimingConfidentiality}}</td>
+                 	        <td>{{item.aircount}}</td>
+                    	    <td>{{item.watercount}}</td>
+                    	    <td>{{item.soilcount}}</td>
+	                    	</tr>
+		                    </tbody>
+	               		</table>
+	               		<table ng-if="showConfidential==='polTransfer'" class="table table-striped table-condensed table-hover">
+	                    	<thead>
+	                    	<tr>
+	                   		<th>{{tr_c.PollutantGroup}}</th>
+	                   		<th></th>
+	                  		<th>{{tr_f.Facilities}}</th>
+	                    	</tr>
+	                    	</thead>
+	                    	<tbody>
+	                    	<tr ng-repeat="item in itemCon">
+	                    	<td>{{tr_lpo[item.pollutantGroupCode]}}</td>
+	                    	<td>{{tr_c.FacilitiesClaimingConfidentiality}}</td>
+	                    	<td>{{item.count}}</td>
+	                    	</tr>
+		                    </tbody>
+	               		</table>
+	               		<table ng-if="showConfidential==='wasteTransfer'" class="table table-striped table-condensed table-hover">
+	                    	<thead>
+	                    	<tr>
+	                    	<th></th>
+	                   		<th>Non hazardous&nbsp;{{tr_f.Facilities}}</th>
+	                   		<th>{{tr_lovwt.HWIC}}&nbsp;{{tr_f.Facilities}}</th>
+	                  		<th>{{tr_lovwt.HWOC}}&nbsp;{{tr_f.Facilities}}</th>
+	                    	</tr>
+	                    	</thead>
+	                    	<tbody>
+	                    	<tr ng-repeat="item in itemCon">
+	                    	<td>{{tr_wt.WasteTransfersConfidentiality}}</td>
+	                    	<td>{{item.countNONHW}}</td>
+	                    	<td>{{item.countHWIC}}</td>
+	                    	<td>{{item.countHWOC}}</td>
+	                    	</tr>
+		                    </tbody>
+	               		</table>
+		                <br />
+						<br />
+						<div ng-bind-html="tr_p.ConfidentialityReason">
+						</div>
+						<br />
+						<br />
+						<table ng-if="showConfidential==='polRelease'" class="table table-striped table-condensed table-hover">
+                    	<thead>
+                    	<tr>
+                    		<th>{{tr_c.PollutantGroup}}</th>
+                    		<th>{{tr_c.Reason}}</th>
+                    		<th>{{tr_f.FacilitiesAir}}</th>
+                    		<th>{{tr_f.FacilitiesWater}}</th>
+                    		<th>{{tr_f.FacilitiesSoil}}</th>
+                    	</tr>
+                    	</thead>
+                    	<tbody>
+                    	<tr ng-repeat="item in itemConReason">
+                    		<td>{{tr_lpo[item.pollutantGroupCode]}}</td>
+                    		<td>{{tr_lcon[item.reason]}}</td>
+                    		<td>{{item.aircount}}</td>
+                    		<td>{{item.watercount}}</td>
+                    		<td>{{item.soilcount}}</td>
+                    	</tr>
+	                    </tbody>
+               		  </table>
+	                  <table ng-if="showConfidential==='polTransfer'" class="table table-striped table-condensed table-hover">
+                    	<thead>
+                    	<tr>
+                    		<th>{{tr_c.PollutantGroup}}</th>
+                    		<th>{{tr_c.Reason}}</th>
+                    		<th>{{tr_f.Facilities}}</th>
+                    	</tr>
+                    	</thead>
+                    	<tbody>
+                    	<tr ng-repeat="item in itemConReason">
+                    		<td>{{tr_lpo[item.pollutantGroupCode]}}</td>
+                    		<td>{{tr_lcon[item.reason]}}</td>
+                    		<td>{{item.count}}</td>
+                    	</tr>
+	                    </tbody>
+               		  </table>
+               		  <table ng-if="showConfidential==='wasteTransfer'" class="table table-striped table-condensed table-hover">
+                    	<thead>
+                    	<tr>
+                    		<th>{{tr_c.WasteType}}</th>
+                    		<th>{{tr_c.Reason}}</th>
+                    		<th>{{tr_f.Facilities}}</th>
+                    	</tr>
+                    	</thead>
+                    	<tbody>
+                    	<tr ng-repeat="item in itemConReason | orderBy: 'wastetype'">
+                    		<td>{{tr_lovwt[item.wastetype]}}</td>
+                    		<td>{{tr_lcon[item.reason]}}</td>
+                    		<td>{{item.count}}</td>
+                    	</tr>
+	                    </tbody>
+               		  </table>
+               		  <br />
+	                </div>
+                </div>
            	</tab>
         </tabset>
      </div>

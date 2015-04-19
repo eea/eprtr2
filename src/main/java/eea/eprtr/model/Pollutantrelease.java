@@ -190,6 +190,9 @@ public class Pollutantrelease implements Serializable,Cloneable {
 	
 	@Transient
 	public int facilityCount = 0;
+
+	@Transient
+	public int facilityTotalCount = 0;
 	
 	@Transient
 	public int facilityAccidentalCount = 0;

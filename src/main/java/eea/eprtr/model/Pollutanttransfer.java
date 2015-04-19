@@ -113,6 +113,9 @@ public class Pollutanttransfer implements Serializable,Cloneable {
 	public int facilityCount = 0;
 	
 	@Transient
+	public int facilityTotalCount = 0;
+	
+	@Transient
 	public List<Pollutanttransfer> sublevel;
 	
 	@Transient

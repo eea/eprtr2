@@ -1,5 +1,6 @@
 package eea.eprtr.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -75,6 +76,15 @@ public class WastetransferSearchController {
 		
 		if(searchtype != null && searchtype != "")
 		{
+			List<Integer> foundFacilities = new ArrayList<Integer>(); 
+			for(Wastetransfer po : wastetranfer)
+			{
+				if(!foundFacilities.contains(po.getFacilityID()))
+				{
+					foundFacilities.add(po.getFacilityID());
+				}
+			}
+			response.setHeader("facilitiesCount", String.valueOf(foundFacilities.size()));
 			return new DataHelperWasteTransfer().getSubdata(searchtype, wastetranfer,regionsearch);
 		}
 		return wastetranfer;

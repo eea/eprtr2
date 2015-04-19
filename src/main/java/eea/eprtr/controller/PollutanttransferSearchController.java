@@ -1,5 +1,6 @@
 package eea.eprtr.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -77,6 +78,15 @@ public class PollutanttransferSearchController {
 		List<Pollutanttransfer> pollutanttransfers = pollutanttransferSearchRepository.getPollutanttransfer(filter);
 		if(searchtype != null && searchtype != "")
 		{
+			List<Integer> foundFacilities = new ArrayList<Integer>(); 
+			for(Pollutanttransfer po : pollutanttransfers)
+			{
+				if(!foundFacilities.contains(po.getFacilityID()))
+				{
+					foundFacilities.add(po.getFacilityID());
+				}
+			}
+			response.setHeader("facilitiesCount", String.valueOf(foundFacilities.size()));
 			return new DataHelperPollutantTransfer().getSubdata(searchtype,pollutanttransfers);
 		}
 		return pollutanttransfers;

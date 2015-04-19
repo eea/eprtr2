@@ -12,6 +12,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import eea.eprtr.model.Wastetransfer;
+import eea.eprtr.model.WastetransferConfidential;
 
 @Repository
 public class WasteTransferSearchRepository {
@@ -32,4 +33,20 @@ public class WasteTransferSearchRepository {
 		List<Wastetransfer> results = q.getResultList();
 		return results;
 	}
+	
+	public List<WastetransferConfidential> getWastetransferConfidentialCodes(WasteTransferConfidentialSearchFilter filter) {
+		
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		
+		CriteriaQuery<WastetransferConfidential> cq = cb.createQuery(WastetransferConfidential.class);
+		Root<WastetransferConfidential> qr = cq.from(WastetransferConfidential.class);
+		cq.select(qr);
+		cq.where(filter.buildWhereClause(cb, qr));
+
+		TypedQuery<WastetransferConfidential> q = em.createQuery(cq);
+		List<WastetransferConfidential> results = q.getResultList();
+		return results;
+	}
+
+	
 }
