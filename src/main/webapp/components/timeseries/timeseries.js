@@ -163,26 +163,28 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 				case 'wastetransfer': 
 					$scope.title = 'Time Series - ' + $scope.tr_c.WasteTransfers;
 					$scope.ConfidentialityExplanation = $scope.tr_t.ConfidentialityExplanationWT1;
-					$scope.filter.wtsel = 'nonhw';
+					if ($scope.queryParams.WasteTypeCode != undefined){
+
+						for (var i=0; i< $scope.queryParams.WasteTypeCode.length; i++) {
+							$scope.queryParams.WasteTypeCode[i] = $scope.queryParams.WasteTypeCode[i].replace("-","");
+						};				
+						$scope.filter.wtsel = $scope.queryParams.WasteTypeCode[0];
+						if ($scope.queryParams.WasteTypeCode.length > 1){
+							$scope.reqWasteTransferRBHeader();
+						}
+					}
+					//$scope.filter.wtsel = 'NONHW';
 					//Request data
+					//$scope.reqWasteTransferSeriesData();
 					break;
 			}
 		}
 	});
 
 	
-	
-	
-	$scope.$watch('filter.wtsel', function(value) {
-    	//Wastetransfer hazard type changed
-        /*if ($scope.items) {
-            $scope.updateSummaryData();
-        }*/
-    });
-
     /*Pollutant Release Timeseries*/
     $scope.$watchCollection('[tscoll,filter.prsel,active]', function(value){
-    	if($scope.tscoll != undefined && $scope.tscoll.length > 0 && $scope.active.timeseries != undefined ){
+    	if($scope.content == 'pollutantrelease' && $scope.tscoll != undefined && $scope.tscoll.length > 0 && $scope.active.timeseries != undefined ){
 			$scope.setPRTScoll();
     	}
     });
@@ -192,9 +194,15 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 			$scope.setPTTScoll();
     	}
     });
+    /*Waste Transfer Timeseries*/
+    $scope.$watchCollection('[filter.wtsel,active]', function(value){
+    	if($scope.content == 'wastetransfer' && $scope.active.timeseries != undefined ){
+    		$scope.reqWasteTransferSeriesData();
+    	}
+    });
     /*Pollutant Release Compare*/
     $scope.$watchCollection('[reportingyears,tscompare.selectedStartYear,tscompare.selectedEndYear,filter.prsel,active]', function(value){
-    	if($scope.reportingyears != undefined && $scope.active.comparison != undefined ){
+    	if($scope.content == 'pollutantrelease' && $scope.reportingyears != undefined && $scope.active.comparison != undefined ){
 			$scope.reqPollutantReleaseCompareData();
     	}
     });
@@ -202,6 +210,12 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
     $scope.$watchCollection('[reportingyears,tscompare.selectedStartYear,tscompare.selectedEndYear,active]', function(value){
     	if($scope.content == 'pollutanttransfer' && $scope.reportingyears != undefined && $scope.active.comparison != undefined ){
 			$scope.reqPollutantTransferCompareData();
+    	}
+    });
+    /*Waste Transfer Compare*/
+    $scope.$watchCollection('[reportingyears,tscompare.selectedStartYear,tscompare.selectedEndYear,filter.wtsel,active]', function(value){
+    	if($scope.content == 'wastetransfer' && $scope.reportingyears != undefined && $scope.active.comparison != undefined ){
+			$scope.reqWasteTransferCompareData();
     	}
     });
         
@@ -230,6 +244,24 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 	        });
 		}
 	};
+
+	//Waste Transfer WasteTransferCode Selector Titles
+	$scope.reqWasteTransferRBHeader = function(){
+		if (_.keys($scope.queryParams).length > 0){
+			var rest = Restangular.withConfig(function(RestangularConfigurer) {
+	            RestangularConfigurer.setFullResponse(true);
+	        });
+	        var wastetransferSearchCounts = rest.one('wastetransferCounts');
+	        wastetransferSearchCounts.get($scope.queryParams).then(function(response) {
+//	            $scope.headitems = response.data;
+	            $scope.quantityNONHW = response.data.quantityNONHW;
+	            $scope.quantityHWIC = response.data.quantityHWIC;
+	            $scope.quantityHWOC = response.data.quantityHWOC;
+	        });
+		}
+	};
+	
+	
 	
 	$scope.reqPollutantReleaseSeriesData = function(){
 		if (_.keys($scope.queryParams).length > 0){
@@ -304,7 +336,48 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		}
 	};
 
-	/*
+	$scope.reqWasteTransferSeriesData = function(){
+		if (_.keys($scope.queryParams).length > 0){
+			//Create new qparams
+			$scope.tscoll = [];
+			var _coll = [];
+			var qp = {};
+			var qp = {};
+			qp.WasteType = $scope.filter.wtsel;
+		    for(var key in $scope.queryParams) {
+		        if(key != 'WasteTypeCode' && key != 'ReportingYear') {
+		        	qp[key] = $scope.queryParams[key];
+		        }
+		    }
+//	        qp['MediumCode'] = $scope.filter.prsel;
+	        var rest = Restangular.withConfig(function(RestangularConfigurer) {
+	            RestangularConfigurer.setFullResponse(true);
+	        });
+	        var wastetransferSeriesSearch = rest.all('wastetransferSeries');
+	        wastetransferSeriesSearch.getList(qp).then(function(response) {
+				for (var i = 0; i < $scope.reportingyears.length; i++){
+					var _y = $scope.reportingyears[i].year;
+					var _ts = null;
+					for (var j = 0; j < response.data.length; j++){
+						if(response.data[j].reportingYear == _y){
+							_ts = response.data[j];
+						}
+					}
+					if (_ts == null){
+						_ts = {"reportingYear":_y,"facilities":0,"wasteType":$scope.filter.wtsel,"countries":0,"quantityTotal":null,"quantityRecovery":null,"quantityDisposal":null,"quantityUnspec":null}
+					}
+					_ts.releaseYear = _ts.reportingYear;
+					_coll.push(_ts);
+				}
+	        	//$scope.tscoll = response.data;
+				$scope.tscoll = _coll;
+		        //Prepare data and show
+	    		$scope.setWTTScoll();
+	        });
+		}
+		
+	};
+	/**
 	 * Request Pollutant Release Compare data
 	 */
 	$scope.reqPollutantReleaseCompareData = function(){
@@ -337,7 +410,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		}
 	};
 	
-	/*
+	/**
 	 * Request Pollutant Release Compare data
 	 */
 	$scope.reqPollutantTransferCompareData = function(){
@@ -368,6 +441,39 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		}
 	};
 	
+	/**
+	 * Request Waste Transfer Compare data
+	 */
+	$scope.reqWasteTransferCompareData = function(){
+		if (_.keys($scope.queryParams).length > 0){
+			//$scope.tscoll = [];
+			$scope.tscompare.data = [];
+
+			//Create new qparams
+			var qp = {};
+			qp.ReportingYearStart = $scope.tscompare.selectedStartYear.year;
+			qp.ReportingYearEnd = $scope.tscompare.selectedEndYear.year;
+			qp.WasteType = $scope.filter.wtsel;
+
+			/*Filter Query parameters*/
+		    for(var key in $scope.queryParams) {
+		        if(key != 'WasteTypeCode' && key != 'ReportingYear') {
+		        	qp[key] = $scope.queryParams[key];
+		        }
+		    }
+//	        qp['MediumCode'] = $scope.filter.prsel;
+	        var rest = Restangular.withConfig(function(RestangularConfigurer) {
+	            RestangularConfigurer.setFullResponse(true);
+	        });
+	        var pollutantCompareSearch = rest.all('wastetransferCompare');
+	        pollutantCompareSearch.getList(qp).then(function(response) {
+				$scope.tscompare.data = response.data;
+				$scope.setWTCPcoll();
+				$scope.setWTCPtabcoll();
+	        });
+		}
+	};
+
 	
 	/**
 	 * 
@@ -377,8 +483,6 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 	/*Pollutant Release Timeseries*/
 	$scope.setPRTScoll = function(){
 		if ($scope.tscoll.length > 0){
-			//Need to group by year
-			var simple = {};
 			/*Column Bar*/
 			$scope.tsStackseriesObject.data = {"cols": [
 	              {id: "y", label: "Reporting year", type: "string"},
@@ -397,50 +501,45 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 				colors = [tsconf.colors.ColorSoilTotal,tsconf.colors.ColorSoilAccidental];
 			}
 			$scope.tsStackseriesObject.options.colors = colors;
-	
 			
 			var rows = [];
 			for (var i = 0; i < $scope.tscoll.length; i++){
 				var ts = $scope.tscoll[i];
-				var k = ts.releaseYear;
-				simple[k] = ts;
 				if ($scope.filter.prsel == 'AIR'){
-					simple[k].quantity = ts.quantityAir;
-					simple[k].quantityAccidental = ts.accidentalAir;
+					ts.quantity = ts.quantityAir;
+					ts.quantityAccidental = ts.accidentalAir;
 				}
 				else if ($scope.filter.prsel == 'WATER'){
-					simple[k].quantity = ts.quantityWater;
-					simple[k].quantityAccidental = ts.accidentalWater;
+					ts.quantity = ts.quantityWater;
+					ts.quantityAccidental = ts.accidentalWater;
 				}
 				else if ($scope.filter.prsel == 'LAND'){
-					simple[k].quantity = ts.quantitySoil;
-					simple[k].quantityAccidental = ts.accidentalSoil;
+					ts.quantity = ts.quantitySoil;
+					ts.quantityAccidental = ts.accidentalSoil;
 				}
 				/*Calculate accidental Percentage*/
-				if (simple[k].quantityAccidental > 0){
-					simple[k].accidentalPercent = formatStrFactory.DeterminePercent(simple[k].quantity, simple[k].quantityAccidental );
-					simple[k].tsquantity = parseFloat(simple[k].quantity) - parseFloat(simple[k].quantityAccidental);
+				if (ts.quantityAccidental > 0){
+					ts.accidentalPercent = formatStrFactory.DeterminePercent(ts.quantity, ts.quantityAccidental );
+					ts.tsquantity = parseFloat(ts.quantity) - parseFloat(ts.quantityAccidental);
 				}
 				else{
-					simple[k].accidentalPercent = 0;
-					simple[k].tsquantity = simple[k].quantity;
+					ts.accidentalPercent = 0;
+					ts.tsquantity = ts.quantity;
 				}
-				var tip = $scope.formatPRTooltip(simple[k]);
+				var tip = $scope.formatPRTooltip(ts);
 				var row = [{v: k},{v: tip}];
-				row.push({v: simple[k].quantityAccidental})
-				row.push({v: simple[k].tsquantity})
+				row.push({v: ts.quantityAccidental})
+				row.push({v: ts.tsquantity})
 				rows.push({c: row});
 	
 			}
 			$scope.tsStackseriesObject.data["rows"] = rows;
 		}
-	}
+	};
 
 	/*Pollutant Release Timeseries*/
 	$scope.setPTTScoll = function(){
 		if ($scope.tscoll.length > 0){
-			//Need to group by year
-			var simple = {};
 			/*Column Bar*/
 			$scope.tsStackseriesObject.data = {"cols": [
 	              {id: "y", label: "Reporting year", type: "string"},
@@ -452,11 +551,39 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 			var rows = [];
 			for (var i = 0; i < $scope.tscoll.length; i++){
 				var ts = $scope.tscoll[i];
-				var k = ts.releaseYear;
-				simple[k] = ts;
-				var tip = $scope.formatPTTooltip(simple[k]);
+				var tip = $scope.formatPTTooltip(ts);
 				var row = [{v: k},{v: tip}];
-				row.push({v: simple[k].quantity})
+				row.push({v: ts.quantity})
+				rows.push({c: row});
+			}
+			$scope.tsStackseriesObject.data["rows"] = rows;
+		}
+	}
+	
+	/*Waste Transfer Timeseries*/
+	$scope.setWTTScoll = function(){
+		if ($scope.tscoll.length > 0){
+			//Need to group by year
+			/*Column Bar*/
+			$scope.tsStackseriesObject.data = {"cols": [
+	              {id: "y", label: "Reporting year", type: "string"},
+	              {id: "t", type: "string", role: "tooltip", p: {html: true}},
+	              {id: "r", label: $scope.tr_c['TreatmentRecovery'], type: "number"}, 
+	              {id: "d", label: $scope.tr_c['TreatmentDisposal'], type: "number"}, 
+	              {id: "u", label: $scope.tr_c['TreatmentUnspecified'], type: "number"} 
+	        ]};
+
+			$scope.tsStackseriesObject.options.colors = [tsconf.colors.ColorWasteRecovery,tsconf.colors.ColorWasteDisposal,tsconf.colors.ColorWasteUnspec];
+	
+			var rows = [];
+			for (var i = 0; i < $scope.tscoll.length; i++){
+				var ts = $scope.tscoll[i];
+				/*Calculate accidental Percentage*/
+				var tip = $scope.formatWTTooltip(ts);
+				var row = [{v: ts.reportingYear},{v: tip}];
+				row.push({v: ts.quantityRecovery != null ? ts.quantityRecovery:0 });
+				row.push({v: ts.quantityDisposal != null ? ts.quantityDisposal:0 });
+				row.push({v:  ts.quantityUnspec != null ? ts.quantityUnspec:0 });
 				rows.push({c: row});
 	
 			}
@@ -464,6 +591,8 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		}
 	}
 
+	
+	
 	/*Pollutant Release Compare data for Chart*/
 	$scope.setPRCPcoll = function(){
 		if ($scope.tscompare.data != undefined && $scope.tscompare.data.length > 0){
@@ -486,26 +615,24 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 			}
 			$scope.tsStackCompareObject.options.colors = colors;
 			
-			var simple = {};
+			//var simple = {};
 			var rows = [];
 			for (var i = 0; i < $scope.tscompare.data.length; i++){
 				var ts = $scope.tscompare.data[i];
 				var k = ts.reportingYear;
-				simple[k] = ts;
-
 				/*Calculate accidental Percentage*/
-				if (simple[k].quantityBoth > 0){
-					simple[k].bothPercent = formatStrFactory.DeterminePercent(simple[k].quantityAll, simple[k].quantityBoth );
-					simple[k].compquantityall = parseFloat(simple[k].quantityAll) - parseFloat(simple[k].quantityBoth);
+				if (ts.quantityBoth > 0){
+					ts.bothPercent = formatStrFactory.DeterminePercent(ts.quantityAll, ts.quantityBoth );
+					ts.compquantityall = parseFloat(ts.quantityAll) - parseFloat(ts.quantityBoth);
 				}
 				else{
-					simple[k].bothPercent = 0;
-					simple[k].compquantityall = simple[k].quantityAll;
+					ts.bothPercent = 0;
+					ts.compquantityall = ts.quantityAll;
 				}
-				var tip = $scope.formatPCTooltip(simple[k]);
+				var tip = $scope.formatPCTooltip(ts);
 				var row = [{v: k},{v: tip}];
-				row.push({v: simple[k].quantityBoth})
-				row.push({v: simple[k].compquantityall})
+				row.push({v: ts.quantityBoth})
+				row.push({v: ts.compquantityall})
 				rows.push({c: row});
 	
 			}
@@ -526,26 +653,23 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 			                          	        ]};
 
 			$scope.tsStackCompareObject.options.colors = [tsconf.colors.ColorWasteTotal,tsconf.colors.ColorWasteWaterBothYears];
-			var simple = {};
 			var rows = [];
 			for (var i = 0; i < $scope.tscompare.data.length; i++){
 				var ts = $scope.tscompare.data[i];
-				var k = ts.reportingYear;
-				simple[k] = ts;
 
 				/*Calculate accidental Percentage*/
-				if (simple[k].quantityBoth > 0){
-					simple[k].bothPercent = formatStrFactory.DeterminePercent(simple[k].quantityAll, simple[k].quantityBoth );
-					simple[k].compquantityall = parseFloat(simple[k].quantityAll) - parseFloat(simple[k].quantityBoth);
+				if (ts.quantityBoth > 0){
+					ts.bothPercent = formatStrFactory.DeterminePercent(ts.quantityAll, ts.quantityBoth );
+					ts.compquantityall = parseFloat(ts.quantityAll) - parseFloat(ts.quantityBoth);
 				}
 				else{
-					simple[k].bothPercent = 0;
-					simple[k].compquantityall = simple[k].quantityAll;
+					ts.bothPercent = 0;
+					ts.compquantityall = ts.quantityAll;
 				}
-				var tip = $scope.formatPCTooltip(simple[k]);
+				var tip = $scope.formatPCTooltip(ts);
 				var row = [{v: k},{v: tip}];
-				row.push({v: simple[k].quantityBoth})
-				row.push({v: simple[k].compquantityall})
+				row.push({v: ts.quantityBoth})
+				row.push({v: ts.compquantityall})
 				rows.push({c: row});
 	
 			}
@@ -554,6 +678,46 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		}
 	};
 
+	/*Pollutant Release Compare data for Chart*/
+	$scope.setWTCPcoll = function(){
+		if ($scope.tscompare.data != undefined && $scope.tscompare.data.length > 0){
+			//tsStackCompareObject
+			$scope.tsStackCompareObject.data = {"cols": [
+			                          	              {id: "y", label: "Reporting year", type: "string"},
+			                          	              {id: "t", type: "string", role: "tooltip", p: {html: true}},
+			                          	              {id: "a", label: $scope.tr_c['FacilitiesBothYears'], type: "number"},
+			                          	              {id: "q", label: $scope.tr_c['AllFacilities'], type: "number"}
+			                          	        ]};
+			$scope.tsStackCompareObject.options.colors = [tsconf.colors.ColorWasteTotal,tsconf.colors.ColorWasteBothYears];
+			
+			var rows = [];
+			for (var i = 0; i < $scope.tscompare.data.length; i++){
+				var ts = $scope.tscompare.data[i];
+				ts.quantityAll = ts.quantityTotalAll; 
+				ts.quantityBoth  = ts.quantityTotalBoth;
+
+				/*Calculate accidental Percentage*/
+				if (ts.quantityBoth > 0){
+					ts.bothPercent = formatStrFactory.DeterminePercent(ts.quantityTotalAll, ts.quantityTotalBoth );
+					ts.compquantityall = parseFloat(ts.quantityTotalAll) - parseFloat(ts.quantityTotalBoth);
+				}
+				else{
+					ts.bothPercent = 0;
+					ts.compquantityall = ts.quantityTotalAll;
+				}
+				var tip = $scope.formatPCTooltip(ts);
+				var row = [{v: k},{v: tip}];
+				row.push({v: ts.quantityTotalBoth})
+				row.push({v: ts.compquantityall})
+				rows.push({c: row});
+	
+			}
+			$scope.tsStackCompareObject.data["rows"] = rows;
+
+		}
+	};
+
+	
 	/*Pollutant Release Compare data for Tables*/
 	$scope.setPRCPtabcoll = function(){
 		if ($scope.tscompare.data != undefined && $scope.tscompare.data.length > 0){
@@ -618,6 +782,57 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		};
 	};
 
+	/*Pollutant Release Compare data for Tables*/
+	$scope.setWTCPtabcoll = function(){
+		if ($scope.tscompare.data != undefined && $scope.tscompare.data.length > 0){
+			$scope.tscompare.alldata = [];
+			$scope.tscompare.bothdata = [];
+			var y1 = $scope.tscompare.data[0];
+			var y2 = $scope.tscompare.data[1];
+			/*ALL*/
+			$scope.tscompare.alldata.push(
+					{'title':$scope.tr_c['Total'], 
+						'col1':y1.quantityTotalAll != null ? formatStrFactory.formatMethod(y1.quantityTotalAll,false):'-', 
+						'col2':y2.quantityTotalAll != null ? formatStrFactory.formatMethod(y2.quantityTotalAll,false):'-'});
+			$scope.tscompare.alldata.push(
+					{'title':$scope.tr_c['Recovery'], 
+						'col1':y1.quantityRecoveryAll != null ? formatStrFactory.formatMethod(y1.quantityRecoveryAll,false):'-', 
+						'col2':y2.quantityRecoveryAll != null ? formatStrFactory.formatMethod(y2.quantityRecoveryAll,false):'-'});
+			$scope.tscompare.alldata.push(
+					{'title':$scope.tr_c['Disposal'], 
+						'col1':y1.quantityDisposalAll != null ? formatStrFactory.formatMethod(y1.quantityDisposalAll,false):'-', 
+						'col2':y2.quantityDisposalAll != null ? formatStrFactory.formatMethod(y2.quantityDisposalAll,false):'-'});
+			$scope.tscompare.alldata.push(
+					{'title':$scope.tr_c['Unspecified'], 
+						'col1':y1.quantityUnspecAll != null ? formatStrFactory.formatMethod(y1.quantityUnspecAll,false):'-', 
+						'col2':y2.quantityUnspecAll != null ? formatStrFactory.formatMethod(y2.quantityUnspecAll,false):'-'});
+			$scope.tscompare.alldata.push(
+					{'title':$scope.tr_c['Facilities'], 
+						'col1':$filter('number')(y1.facilitiesAll), 
+						'col2':$filter('number')(y2.facilitiesAll)});
+			/*BOTH*/
+			$scope.tscompare.bothdata.push(
+					{'title':$scope.tr_c['Total'], 
+						'col1':y1.quantityTotalBoth != null ? formatStrFactory.formatMethod(y1.quantityTotalBoth,false):'-', 
+						'col2':y2.quantityTotalBoth != null ? formatStrFactory.formatMethod(y2.quantityTotalBoth,false):'-'});
+			$scope.tscompare.bothdata.push(
+					{'title':$scope.tr_c['Recovery'], 
+						'col1':y1.quantityRecoveryBoth != null ? formatStrFactory.formatMethod(y1.quantityRecoveryBoth,false):'-', 
+						'col2':y2.quantityRecoveryBoth != null ? formatStrFactory.formatMethod(y2.quantityRecoveryBoth,false):'-'});
+			$scope.tscompare.bothdata.push(
+					{'title':$scope.tr_c['Disposal'], 
+						'col1':y1.quantityDisposalBoth != null ? formatStrFactory.formatMethod(y1.quantityDisposalBoth,false):'-', 
+						'col2':y2.quantityDisposalBoth != null ? formatStrFactory.formatMethod(y2.quantityDisposalBoth,false):'-'});
+			$scope.tscompare.bothdata.push(
+					{'title':$scope.tr_c['Unspecified'], 
+						'col1':y1.quantityUnspecBoth != null ? formatStrFactory.formatMethod(y1.quantityUnspecBoth,false):'-', 
+						'col2':y2.quantityUnspecBoth != null ? formatStrFactory.formatMethod(y2.quantityUnspecBoth,false):'-'});
+			$scope.tscompare.bothdata.push(
+					{'title':$scope.tr_c['Facilities'], 
+						'col1': $filter('number')(y1.facilitiesBoth), 
+						'col2':$filter('number')(y2.facilitiesBoth)});
+		};
+	};
 	
 	/**
 	 * TOOLTIP Formatting
@@ -631,7 +846,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		html += $scope.tr_p['ReleasesAccidentalReleases'] + '</td><td class="text-right">' + formatStrFactory.formatMethod(item.quantityAccidental,false) + '</td></tr><tr><td class="fdTitles">';
 		html += $scope.tr_p['ReleasesAccidentalPercentValue'] + '</td><td class="text-right">' + item.accidentalPercent  + '</td></tr></table></div>';
 		return html;
-	}
+	};
 	/*Pollutant Transfer Timeseries Chart*/
 	$scope.formatPTTooltip = function(item){
 		var html = '<div style="padding:5px 5px 5px 5px;"><table ><tr><td class="fdTitles">';
@@ -639,7 +854,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		html += $scope.tr_c['Facilities'] + '</td><td class="text-right">' + $filter('number')(item.facilities) + '</td></tr><tr><td class="fdTitles">';
 		html += $scope.tr_p['ReleasesTotal'] + '</td><td class="text-right">' + formatStrFactory.formatMethod(item.quantity,false)  + '</td></tr></table></div>';
 		return html;
-	}
+	};
 	/*Pollutant Release Compare Chart*/
 	$scope.formatPCTooltip = function(item){
 		var html = '<div style="padding:5px 5px 5px 5px;"><table ><tr><td class="fdTitles">';
@@ -648,7 +863,17 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		html += $scope.tr_c['FacilitiesBothYears'] + '</td><td class="text-right">' + formatStrFactory.formatMethod(item.quantityBoth,false) + '</td></tr><tr><td class="fdTitles">';
 		html += 'Percentage of reporting in both years' + '</td><td class="text-right">' + item.bothPercent  + '</td></tr></table></div>';
 		return html;
-	}
+	};
+	/*Pollutant Release Compare Chart*/
+	$scope.formatWTTooltip = function(item){
+		var html = '<div style="padding:5px 5px 5px 5px;"><table ><tr><td class="fdTitles">';
+		html += $scope.tr_c['Year'] + '</td><td class="text-right" style="min-width:100px;">' + item.reportingYear + '</td></tr><tr><td class="fdTitles">';
+		html += $scope.tr_c['Total'] + '</td><td class="text-right">' + formatStrFactory.formatMethod(item.quantityTotal,false) + '</td></tr><tr><td class="fdTitles">';
+		html += $scope.tr_c['Recovery'] + '</td><td class="text-right">' + formatStrFactory.formatMethod(item.quantityRecovery,false) + '</td></tr><tr><td class="fdTitles">';
+		html += $scope.tr_c['Disposal'] + '</td><td class="text-right">' + formatStrFactory.formatMethod(item.quantityDisposal,false) + '</td></tr><tr><td class="fdTitles">';
+		html += $scope.tr_c['Unspecified'] + '</td><td class="text-right">' + formatStrFactory.formatMethod(item.quantityUnspec,false) + '</td></tr></table></div>';
+		return html;
+	};
 
 
 	
@@ -818,54 +1043,6 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		/* HEADER PART FOR */
 	    /*FACILITY & ADRESS*/
 	};
-
-	
-	
-		//GetTimeSeries(PollutantReleasesTimeSeriesFilter filter, MediumFilter.Medium medium) -->
-		//	GetTimeSeries([AreaFilter,PeriodFilter,PollutantFilter,MediumFilter,ActivityFilter], MediumFilter.Medium medium)
-		//GetTimeSeries(int facilityid, string pollutantCode, MediumFilter.Medium medium)
-
-	//Pollutanttransfer
-		//GetTimeSeries([AreaFilter,PeriodFilter,PollutantFilter,ActivityFilter])
-		/*
-		 db.POLLUTANTTRANSFERs.Where(lambda).GroupBy(p => p.ReportingYear).OrderBy(p => p.Key).Select(x => new {
-                                                Year = x.Key, 
-                                                Quantity = x.Sum(p => p.Quantity), 
-                                                Facilities = x.Count()}).ToList();
-         Facility.GetReportingCountries(filter.AreaFilter).ToList(); and then clone   
-         return res.OrderBy(p => p.Year).ToList();                                   
-		 */
-		//GetTimeSeries(int facilityid, string pollutantCode)
-		/*
-		db.POLLUTANTTRANSFERs.Where(f => f.FacilityID == facilityid && f.PollutantCode == pollutantCode).GroupBy(p => p.ReportingYear).OrderBy(p => p.Key)
-                 .Select(x => new TimeSeriesClasses.PollutantTransfers(x.Key, x.Sum(p => p.Quantity)));
-        return data.ToList();
-		 */
-		
-		
-		//WasteTransfer
-		//GetTimeSeries(WasteTransferTimeSeriesFilter filter, WasteTypeFilter.Type wastetype) -->
-		//  GetTimeSeries([AreaFilter,PeriodFilter,ActivityFilter,WasteTypeFilter,WasteTreatmentFilter], WasteTypeFilter.Type wastetype)
-		/*
-           db.WASTETRANSFERs.Where(lambda).GroupBy(p => p.ReportingYear).OrderBy(p => p.Key);
-           switch (wastetype)
-            {
-                case HazardousCountry:
-                    data = group.Select(x => new TimeSeriesClasses.WasteTransfer(x.Key, x.Count(), WasteTypeFilter.Type.HazardousCountry, x.Sum(p => p.QuantityTotalHWIC), x.Sum(p => p.QuantityRecoveryHWIC), x.Sum(p => p.QuantityDisposalHWIC), x.Sum(p => p.QuantityUnspecHWIC)));
-                case HazardousTransboundary:
-                    data = group.Select(x => new TimeSeriesClasses.WasteTransfer(x.Key, x.Count(), WasteTypeFilter.Type.HazardousTransboundary, x.Sum(p => p.QuantityTotalHWOC), x.Sum(p => p.QuantityRecoveryHWOC), x.Sum(p => p.QuantityDisposalHWOC), x.Sum(p => p.QuantityUnspecHWOC)));
-                case NonHazardous:
-                    data = group.Select(x => new TimeSeriesClasses.WasteTransfer(x.Key, x.Count(), WasteTypeFilter.Type.NonHazardous, x.Sum(p => p.QuantityTotalNONHW), x.Sum(p => p.QuantityRecoveryNONHW), x.Sum(p => p.QuantityDisposalNONHW), x.Sum(p => p.QuantityUnspecNONHW)));
-                default:
-                    throw new ArgumentOutOfRangeException("wastetype", String.Format("Illegal wastetype: {0}", wastetype.ToString()));
-            }
-            then add no of reporting countries
-            Facility.GetReportingCountries(filter.AreaFilter).ToList();
-			l.Year, l.Facilities, l.WasteType, l.QuantityTotal, l.QuantityRecovery, l.QuantityDisposal, l.QuantityUnspec, r.Countries
-		 * */
-		
-
-		
 		
 /** 
  * CONFIDENTIALITY
@@ -881,12 +1058,14 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
                                                 Year = x.Key, 
                                                 Quantity = x.Sum(p => p.Quantity), 
                                                 Facilities = x.Count()}).ToList();
-		 * */
-	   /*    this.Year = year;
+		 
+		 
+	       this.Year = year;
            this.QuantityPollutant = quantityPollutant;
            this.QuantityConfidential = quantityConfidential;
            this.UnitPollutant = CODE_KG;
-           this.UnitConfidential = CODE_KG;*/
+           this.UnitConfidential = CODE_KG;
+           */
 		
 }])
 
@@ -1040,10 +1219,14 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		},
 		templateUrl: 'components/timeseries/timeseries.html',
 		link: function(scope, element, attrs){
-/*			scope.$watchCollection('[frid, fid, year]', function() {
-				console.log('FacilityReportID changed:' + scope.frid);
-	        	//scope.setwhere(scope.buildWhere(scope.queryparams));
-		    },true);*/
+			//scope.$watch('queryParams', function(value) {
+				/*JAVA Enum cannot handle the character - so NON-HW is converted into NONHW*/
+				/*if (scope.queryParams.WasteTypeCode != undefined){
+					for (var i=0; i< scope.queryParams.WasteTypeCode.length; i++) {
+						scope.queryParams.WasteTypeCode[i] = scope.queryParams.WasteTypeCode[i].replace("-","");
+					}				
+				}
+			});*/
 		}
 	};
 });

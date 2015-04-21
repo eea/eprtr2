@@ -21,6 +21,41 @@ public class WastetransferSearchFilter {
 		this.activityFilter = activityFilter;
 		this.wasteFilter = wasteFilter;
 	}
+
+	
+	public ReportingYearSearchFilter getReportingYearSearchFilter() {
+		return reportingYearFilter;
+	}
+
+	public void setReportingYearSearchFilter(ReportingYearSearchFilter reportingYearFilter) {
+		this.reportingYearFilter = reportingYearFilter;
+	}
+
+	public LocationSearchFilter getLocationSearchFilter() {
+		return locationFilter;
+	}
+
+	public void setLocationSearchFilter(LocationSearchFilter locationFilter) {
+		this.locationFilter = locationFilter;
+	}
+
+	public ActivitySearchFilter getActivitySearchFilter() {
+		return activityFilter;
+	}
+
+	public void setActivitySearchFilter(ActivitySearchFilter activityFilter) {
+		this.activityFilter = activityFilter;
+	}
+	
+	public WasteSearchFilter getWasteSearchFilter() {
+		return wasteFilter;
+	}
+
+	public void setWasteSearchFilter(WasteSearchFilter wasteFilter) {
+		this.wasteFilter = wasteFilter;
+	}
+
+
 	
 	public Predicate buildWhereClause(CriteriaBuilder cb, Root<Wastetransfer> qr) {
 		Predicate whereClause = cb.conjunction();

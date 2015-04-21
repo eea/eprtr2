@@ -8,7 +8,6 @@ import javax.persistence.criteria.Root;
 
 import eea.eprtr.model.FacilitySearchAll;
 import eea.eprtr.model.FacilitySearchAll_;
-import eea.eprtr.model.Pollutantrelease_;
 import eea.eprtr.model.Wastetransfer;
 import eea.eprtr.model.Wastetransfer_;
 

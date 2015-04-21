@@ -21,7 +21,6 @@ import eea.eprtr.dao.PollutantreleaseSearchRepository;
 import eea.eprtr.dao.ReportingYearSearchFilter;
 import eea.eprtr.model.MediumCode;
 import eea.eprtr.model.Pollutantrelease;
-import eea.eprtr.model.Pollutantrelease_;
 
 @RestController
 public class PollutantreleaseSearchController {
