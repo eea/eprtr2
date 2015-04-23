@@ -527,7 +527,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 					ts.tsquantity = ts.quantity;
 				}
 				var tip = $scope.formatPRTooltip(ts);
-				var row = [{v: k},{v: tip}];
+				var row = [{v: ts.reportingYear},{v: tip}];
 				row.push({v: ts.quantityAccidental})
 				row.push({v: ts.tsquantity})
 				rows.push({c: row});
@@ -552,7 +552,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 			for (var i = 0; i < $scope.tscoll.length; i++){
 				var ts = $scope.tscoll[i];
 				var tip = $scope.formatPTTooltip(ts);
-				var row = [{v: k},{v: tip}];
+				var row = [{v: ts.reportingYear},{v: tip}];
 				row.push({v: ts.quantity})
 				rows.push({c: row});
 			}
@@ -619,7 +619,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 			var rows = [];
 			for (var i = 0; i < $scope.tscompare.data.length; i++){
 				var ts = $scope.tscompare.data[i];
-				var k = ts.reportingYear;
+				//var k = ts.reportingYear;
 				/*Calculate accidental Percentage*/
 				if (ts.quantityBoth > 0){
 					ts.bothPercent = formatStrFactory.DeterminePercent(ts.quantityAll, ts.quantityBoth );
@@ -630,7 +630,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 					ts.compquantityall = ts.quantityAll;
 				}
 				var tip = $scope.formatPCTooltip(ts);
-				var row = [{v: k},{v: tip}];
+				var row = [{v: ts.reportingYear},{v: tip}];
 				row.push({v: ts.quantityBoth})
 				row.push({v: ts.compquantityall})
 				rows.push({c: row});
@@ -667,7 +667,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 					ts.compquantityall = ts.quantityAll;
 				}
 				var tip = $scope.formatPCTooltip(ts);
-				var row = [{v: k},{v: tip}];
+				var row = [{v: ts.reportingYear},{v: tip}];
 				row.push({v: ts.quantityBoth})
 				row.push({v: ts.compquantityall})
 				rows.push({c: row});
@@ -706,7 +706,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 					ts.compquantityall = ts.quantityTotalAll;
 				}
 				var tip = $scope.formatPCTooltip(ts);
-				var row = [{v: k},{v: tip}];
+				var row = [{v: ts.reportingYear},{v: tip}];
 				row.push({v: ts.quantityTotalBoth})
 				row.push({v: ts.compquantityall})
 				rows.push({c: row});

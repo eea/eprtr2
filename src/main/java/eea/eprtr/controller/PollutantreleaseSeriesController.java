@@ -15,7 +15,7 @@ import eea.eprtr.dao.LocationSearchFilter;
 import eea.eprtr.dao.PollutantSearchFilter;
 import eea.eprtr.dao.PollutantreleaseSearchFilter;
 import eea.eprtr.dao.PollutantreleaseSearchRepository;
-import eea.eprtr.dao.PollutantreleasesSeries;
+import eea.eprtr.model.PollutantreleasesSeries;
 import eea.eprtr.dao.ReportingYearSearchFilter;
 import eea.eprtr.model.MediumCode;
 

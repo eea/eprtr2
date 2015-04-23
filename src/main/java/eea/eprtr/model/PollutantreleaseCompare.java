@@ -1,4 +1,4 @@
-package eea.eprtr.dao;
+package eea.eprtr.model;
 
 public class PollutantreleaseCompare {
 	

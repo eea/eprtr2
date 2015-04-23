@@ -14,8 +14,13 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
+import eea.eprtr.model.NumOfCountriesPrYear;
 import eea.eprtr.model.Wastetransfer;
+import eea.eprtr.model.WastetransferCompare;
 import eea.eprtr.model.WastetransferConfidential;
+import eea.eprtr.model.WastetransferConfidential_;
+import eea.eprtr.model.WastetransferCounts;
+import eea.eprtr.model.WastetransferSeries;
 import eea.eprtr.model.Wastetransfer_;
 import eea.eprtr.model.WasteType;
 
@@ -45,7 +50,7 @@ public class WasteTransferSearchRepository {
 		
 		CriteriaQuery<WastetransferConfidential> cq = cb.createQuery(WastetransferConfidential.class);
 		Root<WastetransferConfidential> qr = cq.from(WastetransferConfidential.class);
-		cq.select(qr);
+		cq.select(qr).distinct(true);
 		cq.where(filter.buildWhereClause(cb, qr));
 
 		TypedQuery<WastetransferConfidential> q = em.createQuery(cq);
@@ -53,6 +58,35 @@ public class WasteTransferSearchRepository {
 		return results;
 	}
 
+	/*public List<WasteTransferConfidentialTS> getWasteTransferConfidentialTS(WasteTransferConfidentialSearchFilter filter, WasteType wastetype) {
+		
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		
+		CriteriaQuery<WastetransferConfidential> cq = cb.createQuery(WastetransferConfidential.class);
+		Root<WastetransferConfidential> qr = cq.from(WastetransferConfidential.class);
+
+		cq.select(
+				cb.construct(WastetransferConfidential.class, 
+						cb.sum(qr.get(WastetransferConfidential_.)), 
+						cb.sum(qr.get(WastetransferConfidential_.quantityTotalHWIC)), 
+						cb.sum(qr.get(WastetransferConfidential_.quantityTotalHWOC))));
+		cq.where(filter.buildWhereClause(cb, qr));
+		cq.groupBy(qr.get(Wastetransfer_.facilityID));
+
+		
+		
+		cq.select(qr);
+		cq.where(filter.buildWhereClause(cb, qr));
+
+		TypedQuery<WastetransferConfidential> q = em.createQuery(cq);
+		List<WastetransferConfidential> res = q.getResultList();
+
+		
+		List<WasteTransferConfidentialTS> results = null;
+		return results;
+	}
+*/
+	
 	public WastetransferCounts getWastetransferCounts(WastetransferSearchFilter filter) {
 		
 		/*This is a bad workaround because you cannot have a subquery in the from statement*/	

@@ -15,7 +15,7 @@ import eea.eprtr.dao.ActivitySearchFilter;
 import eea.eprtr.dao.CountryAreaGroupRepository;
 import eea.eprtr.dao.LocationSearchFilter;
 import eea.eprtr.dao.PollutantSearchFilter;
-import eea.eprtr.dao.PollutantreleaseCounts;
+import eea.eprtr.model.PollutantreleaseCounts;
 import eea.eprtr.dao.PollutantreleaseSearchFilter;
 import eea.eprtr.dao.PollutantreleaseSearchRepository;
 import eea.eprtr.dao.ReportingYearSearchFilter;

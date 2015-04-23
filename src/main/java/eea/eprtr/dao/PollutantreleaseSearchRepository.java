@@ -15,8 +15,12 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import eea.eprtr.model.MediumCode;
+import eea.eprtr.model.NumOfCountriesPrYear;
 import eea.eprtr.model.Pollutantrelease;
+import eea.eprtr.model.PollutantreleaseCompare;
+import eea.eprtr.model.PollutantreleaseCounts;
 import eea.eprtr.model.Pollutantrelease_;
+import eea.eprtr.model.PollutantreleasesSeries;
 
 @Repository
 public class PollutantreleaseSearchRepository {

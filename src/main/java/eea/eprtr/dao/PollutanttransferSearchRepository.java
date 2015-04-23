@@ -14,6 +14,9 @@ import javax.persistence.criteria.Predicate;
 
 import org.springframework.stereotype.Repository;
 
+import eea.eprtr.model.NumOfCountriesPrYear;
+import eea.eprtr.model.PollutanttransferCompare;
+import eea.eprtr.model.PollutanttransferSeries;
 import eea.eprtr.model.Pollutanttransfer_;
 import eea.eprtr.model.Pollutanttransfer;
 

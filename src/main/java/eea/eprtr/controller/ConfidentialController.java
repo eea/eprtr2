@@ -15,7 +15,7 @@ import eea.eprtr.dao.ActivitySearchFilter;
 import eea.eprtr.dao.CountryAreaGroupRepository;
 import eea.eprtr.dao.LocationSearchFilter;
 import eea.eprtr.dao.PollutantSearchFilter;
-import eea.eprtr.dao.PollutantreleaseCounts;
+import eea.eprtr.model.PollutantreleaseCounts;
 import eea.eprtr.dao.PollutantreleaseSearchFilter;
 import eea.eprtr.dao.PollutantreleaseSearchRepository;
 import eea.eprtr.dao.PollutanttransferSearchFilter;
@@ -23,6 +23,7 @@ import eea.eprtr.dao.PollutanttransferSearchRepository;
 import eea.eprtr.dao.ReportingYearSearchFilter;
 import eea.eprtr.dao.WasteSearchFilter;
 import eea.eprtr.dao.WasteTransferConfidentialSearchFilter;
+import eea.eprtr.model.WasteTransferConfidentialTS;
 import eea.eprtr.dao.WasteTransferSearchRepository;
 import eea.eprtr.dao.WastetransferSearchFilter;
 import eea.eprtr.model.MediumCode;
@@ -161,5 +162,46 @@ public class ConfidentialController {
 		}
 	}
 	
-	
+	public List<WasteTransferConfidentialTS> getWasteTransferConfidentialTS(    		
+    		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,	
+    		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
+    		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
+    		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
+    		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
+    		
+    		@RequestParam(value = "LOV_AISectorID", required = false) Integer aiSectorID,
+    		@RequestParam(value = "LOV_AIActivityID", required = false) Integer aiActivityID,
+    		@RequestParam(value = "LOV_AISubActivityID", required = false) Integer aiSubActivityID,
+    		@RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
+    		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
+    		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
+    		
+    		@RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
+    		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
+    		@RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
+    		@RequestParam(value = "Accidental", required = false) Integer accidental,
+    		
+    		@RequestParam(value = "WasteTypeCode", required = false) List<String> wasteTypeCode,
+    		@RequestParam(value = "WasteTreatmentCode", required = false) List<String> wasteTreatmentCode,
+    		@RequestParam(value = "WHPCountryID", required = false) Integer whpCountryID,
+    		
+    		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
+    		
+    		@RequestParam(value = "SearchType", required = false) String searchtype,
+    		
+    		@RequestParam(value = "RegionSearch", required = false) boolean regionsearch,
+    		
+    		HttpServletResponse response
+    		){
+		
+		ReportingYearSearchFilter reportingYearFilter = null;
+		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
+		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
+		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID);
+		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
+		//List<Wastetransfer> wastetranfer = wastetransferSearchrepository.getWastetransfer(filter);
+		List<WasteTransferConfidentialTS> results = null;
+		return results;
+
+	} 
 }

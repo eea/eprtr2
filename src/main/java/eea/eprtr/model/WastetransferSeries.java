@@ -1,4 +1,4 @@
-package eea.eprtr.dao;
+package eea.eprtr.model;
 
 import eea.eprtr.model.WasteType;
 
