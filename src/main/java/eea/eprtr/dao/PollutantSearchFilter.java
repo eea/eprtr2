@@ -8,6 +8,8 @@ import javax.persistence.criteria.Root;
 
 import eea.eprtr.model.FacilitySearchAll;
 import eea.eprtr.model.FacilitySearchAll_;
+import eea.eprtr.model.LovPollutant;
+import eea.eprtr.model.LovPollutant_;
 import eea.eprtr.model.MediumCode;
 import eea.eprtr.model.Pollutantrelease;
 import eea.eprtr.model.Pollutantrelease_;
@@ -29,6 +31,43 @@ public class PollutantSearchFilter {
 		this.accidental = accidental;
 		this.confidentialIndicator = confidentialIndicator;
 	}
+	
+	public Integer getPollutantID() {
+		return pollutantID;
+	}
+
+	public void setPollutantID(Integer pollutantID) {
+		this.pollutantID = pollutantID;
+	}
+	public Integer getPollutantGroupID() {
+		return pollutantGroupID;
+	}
+
+	public void setPollutantGroupID(Integer pollutantGroupID) {
+		this.pollutantGroupID = pollutantGroupID;
+	}
+	public List<MediumCode> getMediumCode() {
+		return mediumCode;
+	}
+
+	public void setMediumCode(List<MediumCode> mediumCode) {
+		this.mediumCode = mediumCode;
+	}
+	public Integer getAccidental() {
+		return accidental;
+	}
+
+	public void setAccidental(Integer accidental) {
+		this.accidental = accidental;
+	}
+	public Integer getConfidentialIndicator() {
+		return confidentialIndicator;
+	}
+
+	public void setConfidentialIndicator(Integer confidentialIndicator) {
+		this.confidentialIndicator = confidentialIndicator;
+	}
+	
 	
 	public Predicate buildWhereClause(CriteriaBuilder cb, Root<FacilitySearchAll> qr) {
 		Predicate whereClause = cb.conjunction();
@@ -107,4 +146,16 @@ public class PollutantSearchFilter {
 		}
 		return whereClause;
 	}
+	
+	public Predicate buildWhereClauseLOVPollutant(CriteriaBuilder cb, Root<LovPollutant> qr) {
+		Predicate whereClause = cb.conjunction();
+		if (pollutantID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(LovPollutant_.LOV_PollutantID), pollutantID));
+		}
+		if (pollutantGroupID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(LovPollutant_.parentID), pollutantGroupID));
+		}
+		return whereClause;
+	}
+
 }

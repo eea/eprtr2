@@ -11,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="POLLUTANTTRANSFER")
-@NamedQuery(name="Pollutanttransfer.findAll", query="SELECT p FROM Pollutanttransfer p")
+@NamedQuery(name="Pollutanttransfer.findAll", query="SELECT p FROM Pollutanttransfer p WHERE p.reportingYear > 2006")
 public class Pollutanttransfer implements Serializable,Cloneable {
 	private static final long serialVersionUID = 1L;
 	

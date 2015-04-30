@@ -10,7 +10,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="WASTETRANSFER_CONFIDENTIAL")
-@NamedQuery(name="WastetransferConfidential.findAll", query="SELECT w FROM WastetransferConfidential w")
+@NamedQuery(name="WastetransferConfidential.findAll", query="SELECT w FROM WastetransferConfidential w WHERE w.reportingYear > 2006")
 public class WastetransferConfidential implements Serializable {
 	private static final long serialVersionUID = 1L;
 

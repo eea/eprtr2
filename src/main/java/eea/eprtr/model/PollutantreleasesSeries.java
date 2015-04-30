@@ -2,7 +2,7 @@ package eea.eprtr.model;
 
 public class PollutantreleasesSeries {
 
-	private final Integer releaseYear;
+	private final Integer reportingYear;
 	private final Long facilities;
 	private Long countries;
 	private final Double quantityAir;
@@ -12,8 +12,8 @@ public class PollutantreleasesSeries {
 	private final Double quantitySoil;
 	private final Double accidentalSoil;
 	
-	public PollutantreleasesSeries(Integer releaseYear, Long facilities, Double quantityAir, Double accidentalAir, Double quantityWater, Double accidentalWater, Double quantitySoil, Double accidentalSoil) {
-		this.releaseYear = releaseYear;
+	public PollutantreleasesSeries(Integer reportingYear, Long facilities, Double quantityAir, Double accidentalAir, Double quantityWater, Double accidentalWater, Double quantitySoil, Double accidentalSoil) {
+		this.reportingYear = reportingYear;
 		this.facilities = facilities;
 		//this.countries = countries;
 		this.quantityAir = quantityAir;
@@ -24,8 +24,8 @@ public class PollutantreleasesSeries {
 		this.accidentalSoil = accidentalSoil;
 	}
 
-	public Integer getReleaseYear() {
-		return releaseYear;
+	public Integer getReportingYear() {
+		return reportingYear;
 	}
 
 	public Long getFacilities() {

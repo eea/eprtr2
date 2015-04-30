@@ -1,25 +1,25 @@
 package eea.eprtr.model;
 
 public class WastetransferCounts {
-	private final Double quantityNONHW;
-	private final Double quantityHWIC;
-	private final Double quantityHWOC;
+	private final long quantityNONHW;
+	private final long quantityHWIC;
+	private final long quantityHWOC;
 
-	public WastetransferCounts(Double quantityNONHW, Double quantityHWIC, Double quantityHWOC) {
+	public WastetransferCounts(long quantityNONHW, long quantityHWIC, long quantityHWOC) {
 		this.quantityNONHW = quantityNONHW;
 		this.quantityHWIC = quantityHWIC;
 		this.quantityHWOC = quantityHWOC;
 	}
 
-	public Double getQuantityNONHW() {
+	public long getQuantityNONHW() {
 		return quantityNONHW;
 	}
 
-	public Double getQuantityHWIC() {
+	public long getQuantityHWIC() {
 		return quantityHWIC;
 	}
 
-	public Double getQuantityHWOC() {
+	public long getQuantityHWOC() {
 		return quantityHWOC;
 	}
 

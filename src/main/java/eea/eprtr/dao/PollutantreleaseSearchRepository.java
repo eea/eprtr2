@@ -1,8 +1,10 @@
 package eea.eprtr.dao;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,10 +14,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import eea.eprtr.model.LovPollutant;
 import eea.eprtr.model.MediumCode;
 import eea.eprtr.model.NumOfCountriesPrYear;
+import eea.eprtr.model.PollutantConfidentiality;
 import eea.eprtr.model.Pollutantrelease;
 import eea.eprtr.model.PollutantreleaseCompare;
 import eea.eprtr.model.PollutantreleaseCounts;
@@ -24,6 +29,9 @@ import eea.eprtr.model.PollutantreleasesSeries;
 
 @Repository
 public class PollutantreleaseSearchRepository {
+
+	@Autowired
+	private PollutantSearchRepository pollutantSearchRepository;
 
 	@PersistenceContext
     private EntityManager em;
@@ -110,7 +118,7 @@ public class PollutantreleaseSearchRepository {
 		LinkedHashMap<Integer, Integer> countries = new LinkedHashMap<Integer, Integer>();
 		for (int i =0; i < results1.size(); i++){
 			NumOfCountriesPrYear pc = results1.get(i);
-			Integer y = pc.getReleaseYear();
+			Integer y = pc.getReportingYear();
 			if (!countries.containsKey(y)){
 				countries.put(y, 1);
 			}
@@ -123,7 +131,7 @@ public class PollutantreleaseSearchRepository {
 		
 		for (int i =0; i < results.size(); i++){
 			PollutantreleasesSeries ps = results.get(i);
-			ps.setCountries((long)countries.get(ps.getReleaseYear()));
+			ps.setCountries((long)countries.get(ps.getReportingYear()));
 		}
 		return results;
 	} 
@@ -351,4 +359,143 @@ public class PollutantreleaseSearchRepository {
 		List<Pollutantrelease> results = q.getResultList();
 		return results;
 	}
+
+	/// <summary>
+    /// return true if confidentiality might effect result
+    /// </summary>
+	public Boolean IsAffectedByConfidentiality(
+			PollutantreleaseSearchFilter filter) {
+    	PollutantSearchFilter pfilterorg = filter.getPollutantSearchFilter();
+        //create new filter with confidential within group instead of pollutant itself
+		Integer polGroup = pfilterorg.getPollutantGroupID();
+		if (polGroup == null){
+			List<LovPollutant> pollutants = pollutantSearchRepository.getLovPollutants(new PollutantSearchFilter(pfilterorg.getPollutantID(), null, null, null, null));
+			if (!pollutants.isEmpty()){
+				polGroup = pollutants.get(0).getParentID();
+			}
+		}
+    	PollutantSearchFilter pfilternew = new PollutantSearchFilter(polGroup,
+    			null,pfilterorg.getMediumCode(),pfilterorg.getAccidental(),pfilterorg.getConfidentialIndicator());
+    	
+    	PollutantreleaseSearchFilter prfilternew = new PollutantreleaseSearchFilter(filter.getReportingYearSearchFilter(), 
+    			filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), pfilternew); 
+    	
+    	List<PollutantreleasesSeries> result = getPollutantreleasesSeries(prfilternew);
+
+        return !result.isEmpty(); 
+	}
+
+	/**
+	 * Get confidential data for timeseries on aggregated level. If no confidentiality claims is found the list will be empty.
+	 * @param filter
+	 * @return List<PollutantConfidentiality>
+	 */
+	public List<PollutantConfidentiality> GetConfidentialTimeSeries(
+			PollutantreleaseSearchFilter filter, MediumCode medium) {
+        //Find data for confidential in the group of the pollutant
+    	PollutantSearchFilter pfilterorg = filter.getPollutantSearchFilter();
+		Integer polGroup = pfilterorg.getPollutantGroupID();
+		if (polGroup == null){
+			List<LovPollutant> pollutants = pollutantSearchRepository.getLovPollutants(new PollutantSearchFilter(pfilterorg.getPollutantID(), null, null, null, null));
+			if (!pollutants.isEmpty()){
+				polGroup = pollutants.get(0).getParentID();
+			}
+		}
+	
+        //create new filter with confidential within group instead of pollutant itself
+    	PollutantSearchFilter pfilternew = new PollutantSearchFilter(polGroup,
+    			null,pfilterorg.getMediumCode(),pfilterorg.getAccidental(),pfilterorg.getConfidentialIndicator());
+    	
+    	PollutantreleaseSearchFilter prfilternew = new PollutantreleaseSearchFilter(filter.getReportingYearSearchFilter(), 
+    			filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), pfilternew); 
+    	
+    	List<PollutantreleasesSeries> groupresult = getPollutantreleasesSeries(prfilternew);
+
+        if (!groupresult.isEmpty())
+        {
+            //Find data for pollutant
+        	List<PollutantreleasesSeries> pollutantresult = getPollutantreleasesSeries(filter);
+
+            //merge the two lists and return.
+            return mergeList(pollutantresult, groupresult,medium );
+        }
+ 
+        return new ArrayList<PollutantConfidentiality>();
+	}
+	
+	
+    private List<PollutantConfidentiality> mergeList(
+			List<PollutantreleasesSeries> pollutantdata,
+			List<PollutantreleasesSeries> confidentialData, MediumCode medium ) {
+    	
+    	//take all pollutants and add confidential data where avaialable
+    	List<PollutantConfidentiality> poldata = new ArrayList<PollutantConfidentiality>();
+		for (PollutantreleasesSeries pd: pollutantdata){
+			Double quantityGroup = null;
+			Double quantity = null;
+			for (PollutantreleasesSeries pg: confidentialData){
+				if(pg.getReportingYear().equals(pd.getReportingYear())){
+					switch (medium) {
+						case AIR:
+							quantity = pd.getQuantityAir();
+							quantityGroup = pg.getQuantityAir();
+							break;
+						case WATER:
+							quantity = pd.getQuantityWater();
+							quantityGroup = pg.getQuantityWater();
+							break;
+						case LAND:
+							quantity = pd.getQuantitySoil();
+							quantityGroup = pg.getQuantitySoil();
+							break;
+						default:
+							break;
+					}
+					break;
+				}
+			}
+			poldata.add(new PollutantConfidentiality(pd.getReportingYear(),quantity,quantityGroup));
+		}
+		//take all confidential data and add pollutant data where avaialable
+	   	List<PollutantConfidentiality> confdata = new ArrayList<PollutantConfidentiality>();
+		for (PollutantreleasesSeries pg: confidentialData){
+			Integer reportingYear = null;
+			Double quantity = null;
+			Double quantityGroup = null;
+			for (PollutantreleasesSeries pd: pollutantdata){
+				if(pd.getReportingYear().equals(pg.getReportingYear())){
+					reportingYear = pd.getReportingYear();
+					switch (medium) {
+						case AIR:
+							quantity = pd.getQuantityAir();
+							quantityGroup = pg.getQuantityAir();
+							break;
+						case WATER:
+							quantity = pd.getQuantityWater();
+							quantityGroup = pg.getQuantityWater();
+							break;
+						case LAND:
+							quantity = pd.getQuantitySoil();
+							quantityGroup = pg.getQuantitySoil();
+							break;
+						default:
+							break;
+					}
+					break;
+				}
+			}
+			if(reportingYear != null){
+				confdata.add(new PollutantConfidentiality(reportingYear,quantity,quantityGroup));
+			}
+		}
+		
+		Set<PollutantConfidentiality> set = new HashSet<>(poldata);
+		set.addAll(confdata);
+		poldata.clear();
+		poldata.addAll(set);
+		return poldata;
+	}
+
+    
+    
 }

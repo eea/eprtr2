@@ -1,8 +1,10 @@
 package eea.eprtr.dao;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,6 +17,7 @@ import javax.persistence.criteria.Predicate;
 import org.springframework.stereotype.Repository;
 
 import eea.eprtr.model.NumOfCountriesPrYear;
+import eea.eprtr.model.PollutantConfidentiality;
 import eea.eprtr.model.PollutanttransferCompare;
 import eea.eprtr.model.PollutanttransferSeries;
 import eea.eprtr.model.Pollutanttransfer_;
@@ -77,22 +80,20 @@ public class PollutanttransferSearchRepository {
 		List<NumOfCountriesPrYear> results1 = q1.getResultList();
 		
 		LinkedHashMap<Integer, Integer> countries = new LinkedHashMap<Integer, Integer>();
-		for (int i =0; i < results1.size(); i++){
-			NumOfCountriesPrYear pc = results1.get(i);
-			Integer y = pc.getReleaseYear();
+		for (NumOfCountriesPrYear pc: results1){
+			Integer y = pc.getReportingYear();
 			if (!countries.containsKey(y)){
 				countries.put(y, 1);
 			}
 			else{
-				Integer coun = (Integer)countries.get(y);
+				Integer coun = countries.get(y);
 				coun++; 
 				countries.put(y, coun);
 			}
 		}
 		
-		for (int i =0; i < results.size(); i++){
-			PollutanttransferSeries ps = results.get(i);
-			ps.setCountries((long)countries.get(ps.getReleaseYear()));
+		for (PollutanttransferSeries ps: results){
+			ps.setCountries((long)countries.get(ps.getReportingYear()));
 		}
 		return results;
 	} 
@@ -246,5 +247,105 @@ public class PollutanttransferSearchRepository {
 
 	} 
 
+	/**
+	 * Get confidential data for timeseries on aggregated level. If no confidentiality claims is found the list will be empty.
+	 * @param filter
+	 * @return List<PollutantConfidentiality>
+	 */
+	public List<PollutantConfidentiality> GetConfidentialTimeSeries(PollutanttransferSearchFilter filter)
+    {
+        //Find data for confidential in the group of the pollutant
+    	PollutantSearchFilter pfilterorg = filter.getPollutantSearchFilter();
+        //create new filter with confidential within group instead of pollutant itself
+    	PollutantSearchFilter pfilternew = new PollutantSearchFilter(pfilterorg.getPollutantGroupID(),
+    			null,pfilterorg.getMediumCode(),pfilterorg.getAccidental(),pfilterorg.getConfidentialIndicator());
+    	
+    	PollutanttransferSearchFilter ptfilternew = new PollutanttransferSearchFilter(filter.getReportingYearSearchFilter(), 
+    			filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), pfilternew); 
+    	
+    	List<PollutanttransferSeries> groupresult = getPollutanttransferSeries(ptfilternew);
+
+        if (!groupresult.isEmpty())
+        {
+            //Find data for pollutant
+        	List<PollutanttransferSeries> pollutantresult = getPollutanttransferSeries(filter);
+
+            //merge the two lists and return.
+            return mergeList(pollutantresult, groupresult );
+        }
+ 
+        return new ArrayList<PollutantConfidentiality>();
+    }
+
+	/**
+	 * Merge a list of timeseries for pollutants and confidential in group. 
+     * All years included in each of the two lists will be included in the merged list.
+	 * @param filter
+	 * @return
+	 */
+    private List<PollutantConfidentiality> mergeList(
+			List<PollutanttransferSeries> pollutantdata,
+			List<PollutanttransferSeries> confidentialData ) {
+    	
+    	//take all pollutants and add confidential data where avaialable
+    	List<PollutantConfidentiality> poldata = new ArrayList<PollutantConfidentiality>();
+		for (PollutanttransferSeries pd: pollutantdata){
+			Double QuantityGroup = null;
+			for (PollutanttransferSeries pg: confidentialData){
+				if(pg.getReportingYear().equals(pd.getReportingYear())){
+					QuantityGroup = pg.getQuantity();
+					break;
+				}
+			}
+			poldata.add(new PollutantConfidentiality(pd.getReportingYear(),pd.getQuantity(),QuantityGroup));
+		}
+		//take all confidential data and add pollutant data where avaialable
+	   	List<PollutantConfidentiality> confdata = new ArrayList<PollutantConfidentiality>();
+		for (PollutanttransferSeries pg: confidentialData){
+			Integer reportingYear = null;
+			Double quantity = null;
+			Double quantityGroup = null;
+			for (PollutanttransferSeries pd: pollutantdata){
+				if(pd.getReportingYear().equals(pg.getReportingYear())){
+					reportingYear = pd.getReportingYear();
+					quantity = pd.getQuantity();
+					quantityGroup = pg.getQuantity();
+					break;
+				}
+			}
+			if(reportingYear != null){
+				confdata.add(new PollutantConfidentiality(reportingYear,quantity,quantityGroup));
+			}
+		}
+		
+		Set<PollutantConfidentiality> set = new HashSet<>(poldata);
+		set.addAll(confdata);
+		poldata.clear();
+		poldata.addAll(set);
+//		List<PollutantConfidentiality> mergeList = new ArrayList<>(set);
+		
+		//List<PollutantConfidentiality> uniondata = ListUtils.union(poldata,confdata);
+		//Combinde the two lists. Union will remove any dublets
+		return poldata;
+	}
+
+
+	/// <summary>
+    /// return true if confidentiality might effect result
+    /// </summary>
+    public Boolean IsAffectedByConfidentiality(PollutanttransferSearchFilter filter)
+    {
+    	PollutantSearchFilter pfilterorg = filter.getPollutantSearchFilter();
+        //create new filter with confidential within group instead of pollutant itself
+    	PollutantSearchFilter pfilternew = new PollutantSearchFilter(pfilterorg.getPollutantGroupID(),
+    			null,pfilterorg.getMediumCode(),pfilterorg.getAccidental(),pfilterorg.getConfidentialIndicator());
+    	
+    	PollutanttransferSearchFilter ptfilternew = new PollutanttransferSearchFilter(filter.getReportingYearSearchFilter(), 
+    			filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), pfilternew); 
+    	
+    	List<PollutanttransferSeries> result = getPollutanttransferSeries(ptfilternew);
+
+        return !result.isEmpty(); 
+    }
 	
 }

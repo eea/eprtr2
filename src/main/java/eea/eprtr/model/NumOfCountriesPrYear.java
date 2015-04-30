@@ -2,16 +2,16 @@ package eea.eprtr.model;
 
 public class NumOfCountriesPrYear {
 
-	private final Integer releaseYear;
+	private final Integer reportingYear;
 	private final String countries;
 	
-	public NumOfCountriesPrYear(Integer releaseYear, String countries) {
-		this.releaseYear = releaseYear;
+	public NumOfCountriesPrYear(Integer reportingYear, String countries) {
+		this.reportingYear = reportingYear;
 		this.countries = countries;
 	}
 
-	public Integer getReleaseYear() {
-		return releaseYear;
+	public Integer getReportingYear() {
+		return reportingYear;
 	}
 
 	public String getCountries() {

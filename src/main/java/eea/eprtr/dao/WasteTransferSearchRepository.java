@@ -14,11 +14,13 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 
+
+//import eea.eprtr.controller.ConfidentialController.ConfidentialData;
 import eea.eprtr.model.NumOfCountriesPrYear;
+import eea.eprtr.model.WasteTransferConfidentialTS;
 import eea.eprtr.model.Wastetransfer;
 import eea.eprtr.model.WastetransferCompare;
 import eea.eprtr.model.WastetransferConfidential;
-import eea.eprtr.model.WastetransferConfidential_;
 import eea.eprtr.model.WastetransferCounts;
 import eea.eprtr.model.WastetransferSeries;
 import eea.eprtr.model.Wastetransfer_;
@@ -43,7 +45,24 @@ public class WasteTransferSearchRepository {
 		List<Wastetransfer> results = q.getResultList();
 		return results;
 	}
-	
+
+	public Wastetransfer getWastetransferByID(Integer facilityreportid) {
+		
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+					
+		CriteriaQuery<Wastetransfer> cq = cb.createQuery(Wastetransfer.class);
+		Root<Wastetransfer> qr = cq.from(Wastetransfer.class);
+		cq.select(qr);
+
+		Predicate whereClause = cb.conjunction();
+		whereClause.getExpressions().add(qr.get(Wastetransfer_.facilityReportID).in(facilityreportid));
+		cq.where(whereClause);
+
+		TypedQuery<Wastetransfer> q = em.createQuery(cq);
+		Wastetransfer result = q.getSingleResult();
+		return result;
+	}
+
 	public List<WastetransferConfidential> getWastetransferConfidentialCodes(WasteTransferConfidentialSearchFilter filter) {
 		
 		CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -58,34 +77,165 @@ public class WasteTransferSearchRepository {
 		return results;
 	}
 
-	/*public List<WasteTransferConfidentialTS> getWasteTransferConfidentialTS(WasteTransferConfidentialSearchFilter filter, WasteType wastetype) {
-		
+	public List<WasteTransferConfidentialTS> getWasteTransferConfidentialTS(WastetransferSearchFilter filter, WasteType wastetype) {
+
+		/*First we get the distinct list */
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		
 		CriteriaQuery<WastetransferConfidential> cq = cb.createQuery(WastetransferConfidential.class);
 		Root<WastetransferConfidential> qr = cq.from(WastetransferConfidential.class);
-
-		cq.select(
-				cb.construct(WastetransferConfidential.class, 
-						cb.sum(qr.get(WastetransferConfidential_.)), 
-						cb.sum(qr.get(WastetransferConfidential_.quantityTotalHWIC)), 
-						cb.sum(qr.get(WastetransferConfidential_.quantityTotalHWOC))));
-		cq.where(filter.buildWhereClause(cb, qr));
-		cq.groupBy(qr.get(Wastetransfer_.facilityID));
-
-		
-		
-		cq.select(qr);
-		cq.where(filter.buildWhereClause(cb, qr));
+		cq.select(qr).distinct(true);
+		cq.where(filter.buildWhereClauseWastetransferConfidential(cb, qr));
 
 		TypedQuery<WastetransferConfidential> q = em.createQuery(cq);
-		List<WastetransferConfidential> res = q.getResultList();
-
+		List<WastetransferConfidential> wcs = q.getResultList();
 		
-		List<WasteTransferConfidentialTS> results = null;
-		return results;
+		List<WasteTransferConfidentialTS> wtcts0 = new ArrayList<WasteTransferConfidentialTS>();
+		if(!wcs.isEmpty()){
+			//Convert Confidential to ConfidentialTS
+			wtcts0 = buildWasteTransferConfidentialTS(wcs, wastetype);
+		}
+
+		//Empty collection
+		List<WasteTransferConfidentialTS> wtcts = new ArrayList<WasteTransferConfidentialTS>();
+		
+		/*Are any Facilitie marked as Confidential?*/
+		Boolean isConf = isConfidential(filter, wastetype);
+
+		if(!wtcts0.isEmpty() && isConf){
+		    // Ger Total number of fatilities
+			List<WastetransferSeries> series = getWastetransferSeries(filter, wastetype);
+			//Merge collections
+			for (WastetransferSeries wts: series){
+				WasteTransferConfidentialTS wcts0 = new WasteTransferConfidentialTS(wts.getReportingYear(),(long)0,(long)0,(long)0);
+				for(WasteTransferConfidentialTS wcts : wtcts0) {
+			        if(wcts.getReportingYear().equals(wts.getReportingYear())) {
+			        	wcts0 = wcts;
+			        }
+			    }
+				wcts0.setCountTotal(wts.getFacilities());
+				wtcts.add(wcts0);
+			};
+		};
+
+		return wtcts;
 	}
-*/
+
+	/**
+	 * buildWasteTransferConfidentialTS converts WasteTransferConfidential list to WasteTransferConfidentialTS list
+	 * @param List<WastetransferConfidential>
+	 * @return List<WasteTransferConfidentialTS>
+	 */
+	private List<WasteTransferConfidentialTS> buildWasteTransferConfidentialTS(List<WastetransferConfidential> wcs, WasteType wastetype) {
+		List<WasteTransferConfidentialTS> wtctss = new ArrayList<WasteTransferConfidentialTS>();
+		
+		WasteTransferConfidentialTS wtcts = null;
+		Integer year = 0;
+		/*Now we need to group the results*/
+		for (WastetransferConfidential wc: wcs){
+			if(isConfidential(wc.getFacilityReportID(), wastetype)){
+				Integer wcy = wc.getReportingYear();
+				if(!wcy.equals(year)){
+					//Create new Object
+					if(year != 0){
+						wtctss.add(wtcts);
+					}
+					year = wc.getReportingYear();
+					wtcts = new WasteTransferConfidentialTS(wcy, (long)1,
+							(long)(wc.getConfidentialityOnQuantity()  ? 1 : 0),
+							(long)(wc.getConfidentialityOnTreatmant()  ? 1 : 0));
+				}
+				else{
+					//Update values
+					long count = wtcts.getCountConfTotal() + 1;
+					long Quantity = wtcts.getCountConfQuantity() +1;
+					long Treatmant = wtcts.getCountConfTreatment() +1;
+					wtcts.setCountConfTotal(count);
+					if (wc.getConfidentialityOnQuantity()){
+						wtcts.setCountConfQuantity(Quantity);
+					}
+					if (wc.getConfidentialityOnTreatmant()){
+						wtcts.setCountConfTreatment(Treatmant);
+					}
+				}
+				if(wcs.indexOf(wc) == (wcs.size() -1)){
+					//Last item
+					wtctss.add(wtcts);
+				}
+			}
+		}
+		return wtctss;
+	}
+	
+	public Boolean isConfidential(WastetransferSearchFilter filter, WasteType wastetype){
+		/*Are any Facilitie marked as Confidential?*/
+		Boolean isConfidential = false;
+		List<Wastetransfer> wastetranfer = getWastetransfer(filter);
+		for(Wastetransfer PO : wastetranfer)
+		{
+			if (wastetype != null){
+				switch (wastetype) {
+					case NONHW:
+						if( PO.isConfidentialIndicatorNONHW())
+						{
+							isConfidential = true;
+						}
+						break;
+					case HWOC:
+						if( PO.isConfidentialIndicatorHWOC())
+						{
+							isConfidential = true;
+						}
+						break;
+					case HWIC:
+						if( PO.isConfidentialIndicatorHWIC())
+						{
+							isConfidential = true;
+						}
+						break;
+				default:
+					break;
+				}
+			}
+			else{
+				if(PO.isConfidentialIndicatorNONHW() || PO.isConfidentialIndicatorHWOC() || PO.isConfidentialIndicatorHWIC()){
+					isConfidential = true;
+				}
+			}
+			if(isConfidential){break;}
+		}
+		return isConfidential;
+	} 
+	
+	public Boolean isConfidential(Integer facilityreportid, WasteType wastetype){
+		/*Are any Facilitie marked as Confidential?*/
+		Boolean isConfidential = false;
+		Wastetransfer wastetranfer = getWastetransferByID(facilityreportid);
+		switch (wastetype) {
+			case NONHW:
+				if( wastetranfer.isConfidentialIndicatorNONHW())
+				{
+					isConfidential = true;
+				}
+				break;
+			case HWOC:
+				if( wastetranfer.isConfidentialIndicatorHWOC())
+				{
+					isConfidential = true;
+				}
+				break;
+			case HWIC:
+				if( wastetranfer.isConfidentialIndicatorHWIC())
+				{
+					isConfidential = true;
+				}
+				break;
+		default:
+			break;
+		}
+		return isConfidential;
+	} 
+	
 	
 	public WastetransferCounts getWastetransferCounts(WastetransferSearchFilter filter) {
 		
@@ -97,9 +247,9 @@ public class WasteTransferSearchRepository {
 		
 		cq.select(
 				cb.construct(WastetransferCounts.class, 
-						cb.sum(qr.get(Wastetransfer_.quantityTotalNONHW)), 
-						cb.sum(qr.get(Wastetransfer_.quantityTotalHWIC)), 
-						cb.sum(qr.get(Wastetransfer_.quantityTotalHWOC))));
+						cb.sumAsLong(cb.<Integer>selectCase().when(cb.isNotNull(qr.get(Wastetransfer_.quantityTotalNONHW)),1).otherwise(0)), 
+						cb.sumAsLong(cb.<Integer>selectCase().when(cb.isNotNull(qr.get(Wastetransfer_.quantityTotalHWIC)),1).otherwise(0)), 
+						cb.sumAsLong(cb.<Integer>selectCase().when(cb.isNotNull(qr.get(Wastetransfer_.quantityTotalHWOC)),1).otherwise(0))));
 		cq.where(filter.buildWhereClause(cb, qr));
 		cq.groupBy(qr.get(Wastetransfer_.facilityID));
 
@@ -107,18 +257,18 @@ public class WasteTransferSearchRepository {
 		List <WastetransferCounts> result = q.getResultList();
 
 		/*Need to filter result*/
-		Double _quantityNONHW = (double) 0;
-		Double _quantityHWIC = (double) 0;
-		Double _quantityHWOC =(double) 0;
+		long _quantityNONHW = (long) 0;
+		long _quantityHWIC = (long) 0;
+		long _quantityHWOC =(long) 0;
 		for (int i =0; i < result.size(); i++){
 			WastetransferCounts pc = result.get(i);
-			if(pc.getQuantityNONHW() != null){
+			if(pc.getQuantityNONHW() >0){
 				_quantityNONHW ++;
 			}
-			if(pc.getQuantityHWIC() != null){
+			if(pc.getQuantityHWIC()  >0){
 				_quantityHWIC ++;
 			}
-			if(pc.getQuantityHWOC() != null){
+			if(pc.getQuantityHWOC()  >0){
 				_quantityHWOC ++;
 			}
 		} 
@@ -132,7 +282,8 @@ public class WasteTransferSearchRepository {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<WastetransferSeries> cq = cb.createQuery(WastetransferSeries.class);
 		Root<Wastetransfer> qr = cq.from(Wastetransfer.class);
-
+		
+		Predicate p1 = null;
 		switch (wastetype) {
 		case NONHW:
 			cq.select(cb.construct(WastetransferSeries.class, 
@@ -143,6 +294,11 @@ public class WasteTransferSearchRepository {
 					cb.sum(qr.get(Wastetransfer_.quantityDisposalNONHW)),
 					cb.sum(qr.get(Wastetransfer_.quantityUnspecNONHW)))
 					);
+			p1 = cb.or(qr.get(Wastetransfer_.quantityTotalNONHW).isNotNull(), 
+					qr.get(Wastetransfer_.quantityRecoveryNONHW).isNotNull(), 
+					qr.get(Wastetransfer_.quantityDisposalNONHW).isNotNull(),
+					qr.get(Wastetransfer_.quantityUnspecNONHW).isNotNull());
+			
 			break;
 		case HWIC:
 			cq.select(cb.construct(WastetransferSeries.class, 
@@ -153,6 +309,10 @@ public class WasteTransferSearchRepository {
 					cb.sum(qr.get(Wastetransfer_.quantityDisposalHWIC)),
 					cb.sum(qr.get(Wastetransfer_.quantityUnspecHWIC)))
 					);
+			p1 = cb.or(qr.get(Wastetransfer_.quantityTotalHWIC).isNotNull(), 
+					qr.get(Wastetransfer_.quantityRecoveryHWIC).isNotNull(), 
+					qr.get(Wastetransfer_.quantityDisposalHWIC).isNotNull(),
+					qr.get(Wastetransfer_.quantityUnspecHWIC).isNotNull());
 			break;
 		case HWOC:
 			cq.select(cb.construct(WastetransferSeries.class, 
@@ -163,12 +323,17 @@ public class WasteTransferSearchRepository {
 					cb.sum(qr.get(Wastetransfer_.quantityDisposalHWOC)),
 					cb.sum(qr.get(Wastetransfer_.quantityUnspecHWOC)))
 					);
+			p1 = cb.or(qr.get(Wastetransfer_.quantityTotalHWOC).isNotNull(), 
+					qr.get(Wastetransfer_.quantityRecoveryHWOC).isNotNull(), 
+					qr.get(Wastetransfer_.quantityDisposalHWOC).isNotNull(),
+					qr.get(Wastetransfer_.quantityUnspecHWOC).isNotNull());
 			break;
 		default:
 			break;
 		}
-			
-		cq.where(filter.buildWhereClause(cb, qr));
+		
+		//WastetransferSearchFilter.getExpressions().add(locationSearchWhereClause);	
+		cq.where(cb.and(filter.buildWhereClause(cb, qr),p1));
 		cq.groupBy(qr.get(Wastetransfer_.reportingYear));
 		cq.orderBy(cb.asc(qr.get(Wastetransfer_.reportingYear)));
 
@@ -194,7 +359,7 @@ public class WasteTransferSearchRepository {
 		LinkedHashMap<Integer, Integer> countries = new LinkedHashMap<Integer, Integer>();
 		for (int i =0; i < results1.size(); i++){
 			NumOfCountriesPrYear pc = results1.get(i);
-			Integer y = pc.getReleaseYear();
+			Integer y = pc.getReportingYear();
 			if (!countries.containsKey(y)){
 				countries.put(y, 1);
 			}
@@ -255,16 +420,7 @@ public class WasteTransferSearchRepository {
 		CriteriaQuery<WastetransferSeries> cq3 = cb3.createQuery(WastetransferSeries.class);
 		Root<Wastetransfer> qr3 = cq3.from(Wastetransfer.class);
 
-/*		cq3.select(cb3.construct(WastetransferSeries.class, 
-				qr3.get(Wastetransfer_.reportingYear),
-				cb3.count(qr3.get(Wastetransfer_.facilityID)),
-				cb3.sum(qr3.get(Wastetransfer_.quantityAir)), 
-				cb3.sum(qr3.get(Wastetransfer_.quantityAccidentalAir)), 
-				cb3.sum(qr3.get(Wastetransfer_.quantityWater)),
-				cb3.sum(qr3.get(Wastetransfer_.quantityAccidentalWater)),
-				cb3.sum(qr3.get(Wastetransfer_.quantitySoil)), 
-				cb3.sum(qr3.get(Wastetransfer_.quantityAccidentalSoil)))
-				);*/
+		Predicate p1 = null;
 
 		switch (wastetype) {
 		case NONHW:
@@ -276,6 +432,11 @@ public class WasteTransferSearchRepository {
 					cb3.sum(qr3.get(Wastetransfer_.quantityDisposalNONHW)),
 					cb3.sum(qr3.get(Wastetransfer_.quantityUnspecNONHW)))
 					);
+			p1 = cb3.or(qr3.get(Wastetransfer_.quantityTotalNONHW).isNotNull(), 
+					qr3.get(Wastetransfer_.quantityRecoveryNONHW).isNotNull(), 
+					qr3.get(Wastetransfer_.quantityDisposalNONHW).isNotNull(),
+					qr3.get(Wastetransfer_.quantityUnspecNONHW).isNotNull());
+
 			break;
 		case HWIC:
 			cq3.select(cb3.construct(WastetransferSeries.class, 
@@ -286,6 +447,10 @@ public class WasteTransferSearchRepository {
 					cb3.sum(qr3.get(Wastetransfer_.quantityDisposalHWIC)),
 					cb3.sum(qr3.get(Wastetransfer_.quantityUnspecHWIC)))
 					);
+			p1 = cb3.or(qr3.get(Wastetransfer_.quantityTotalHWIC).isNotNull(), 
+					qr3.get(Wastetransfer_.quantityRecoveryHWIC).isNotNull(), 
+					qr3.get(Wastetransfer_.quantityDisposalHWIC).isNotNull(),
+					qr3.get(Wastetransfer_.quantityUnspecHWIC).isNotNull());
 			break;
 		case HWOC:
 			cq3.select(cb3.construct(WastetransferSeries.class, 
@@ -296,12 +461,16 @@ public class WasteTransferSearchRepository {
 					cb3.sum(qr3.get(Wastetransfer_.quantityDisposalHWOC)),
 					cb3.sum(qr3.get(Wastetransfer_.quantityUnspecHWOC)))
 					);
+			p1 = cb3.or(qr3.get(Wastetransfer_.quantityTotalHWOC).isNotNull(), 
+					qr3.get(Wastetransfer_.quantityRecoveryHWOC).isNotNull(), 
+					qr3.get(Wastetransfer_.quantityDisposalHWOC).isNotNull(),
+					qr3.get(Wastetransfer_.quantityUnspecHWOC).isNotNull());
 			break;
 		default:
 			break;
 		}
 		
-		cq3.where(prsStart.buildWhereClause(cb3, qr3));
+		cq3.where(cb3.and(prsStart.buildWhereClause(cb3, qr3),p1));
 		cq3.groupBy(qr3.get(Wastetransfer_.reportingYear));
 		cq3.orderBy(cb3.asc(qr3.get(Wastetransfer_.reportingYear)));
 
@@ -318,6 +487,8 @@ public class WasteTransferSearchRepository {
 		CriteriaQuery<WastetransferSeries> cq4 = cb4.createQuery(WastetransferSeries.class);
 		Root<Wastetransfer> qr4 = cq4.from(Wastetransfer.class);
 
+		Predicate p2 = null;
+
 		switch (wastetype) {
 		case NONHW:
 			cq4.select(cb4.construct(WastetransferSeries.class, 
@@ -328,6 +499,10 @@ public class WasteTransferSearchRepository {
 					cb4.sum(qr4.get(Wastetransfer_.quantityDisposalNONHW)),
 					cb4.sum(qr4.get(Wastetransfer_.quantityUnspecNONHW)))
 					);
+			p2 = cb4.or(qr4.get(Wastetransfer_.quantityTotalNONHW).isNotNull(), 
+					qr4.get(Wastetransfer_.quantityRecoveryNONHW).isNotNull(), 
+					qr4.get(Wastetransfer_.quantityDisposalNONHW).isNotNull(),
+					qr4.get(Wastetransfer_.quantityUnspecNONHW).isNotNull());
 			break;
 		case HWIC:
 			cq4.select(cb4.construct(WastetransferSeries.class, 
@@ -338,6 +513,11 @@ public class WasteTransferSearchRepository {
 					cb4.sum(qr4.get(Wastetransfer_.quantityDisposalHWIC)),
 					cb4.sum(qr4.get(Wastetransfer_.quantityUnspecHWIC)))
 					);
+			p2 = cb4.or(qr4.get(Wastetransfer_.quantityTotalHWIC).isNotNull(), 
+					qr4.get(Wastetransfer_.quantityRecoveryHWIC).isNotNull(), 
+					qr4.get(Wastetransfer_.quantityDisposalHWIC).isNotNull(),
+					qr4.get(Wastetransfer_.quantityUnspecHWIC).isNotNull());
+
 			break;
 		case HWOC:
 			cq4.select(cb4.construct(WastetransferSeries.class, 
@@ -348,11 +528,15 @@ public class WasteTransferSearchRepository {
 					cb4.sum(qr4.get(Wastetransfer_.quantityDisposalHWOC)),
 					cb4.sum(qr4.get(Wastetransfer_.quantityUnspecHWOC)))
 					);
+			p2 = cb4.or(qr4.get(Wastetransfer_.quantityTotalHWOC).isNotNull(), 
+					qr4.get(Wastetransfer_.quantityRecoveryHWOC).isNotNull(), 
+					qr4.get(Wastetransfer_.quantityDisposalHWOC).isNotNull(),
+					qr4.get(Wastetransfer_.quantityUnspecHWOC).isNotNull());
 			break;
 		default:
 			break;
 		}
-		cq4.where(prsEnd.buildWhereClause(cb4, qr4));
+		cq4.where(cb4.and(prsEnd.buildWhereClause(cb4, qr4),p2));
 		cq4.groupBy(qr4.get(Wastetransfer_.reportingYear));
 		cq4.orderBy(cb4.asc(qr4.get(Wastetransfer_.reportingYear)));
 
@@ -371,7 +555,9 @@ public class WasteTransferSearchRepository {
 			CriteriaBuilder cb5 = em.getCriteriaBuilder();
 			CriteriaQuery<WastetransferSeries> cq5 = cb5.createQuery(WastetransferSeries.class);
 			Root<Wastetransfer> qr5 = cq5.from(Wastetransfer.class);
-	
+			
+			Predicate p3 = null;
+
 			switch (wastetype) {
 			case NONHW:
 				cq5.select(cb5.construct(WastetransferSeries.class, 
@@ -382,6 +568,10 @@ public class WasteTransferSearchRepository {
 						cb5.sum(qr5.get(Wastetransfer_.quantityDisposalNONHW)),
 						cb5.sum(qr5.get(Wastetransfer_.quantityUnspecNONHW)))
 						);
+				p3 = cb5.or(qr5.get(Wastetransfer_.quantityTotalNONHW).isNotNull(), 
+						qr5.get(Wastetransfer_.quantityRecoveryNONHW).isNotNull(), 
+						qr5.get(Wastetransfer_.quantityDisposalNONHW).isNotNull(),
+						qr5.get(Wastetransfer_.quantityUnspecNONHW).isNotNull());
 				break;
 			case HWIC:
 				cq5.select(cb5.construct(WastetransferSeries.class, 
@@ -392,6 +582,10 @@ public class WasteTransferSearchRepository {
 						cb5.sum(qr5.get(Wastetransfer_.quantityDisposalHWIC)),
 						cb5.sum(qr5.get(Wastetransfer_.quantityUnspecHWIC)))
 						);
+				p3 = cb5.or(qr5.get(Wastetransfer_.quantityTotalHWIC).isNotNull(), 
+						qr5.get(Wastetransfer_.quantityRecoveryHWIC).isNotNull(), 
+						qr5.get(Wastetransfer_.quantityDisposalHWIC).isNotNull(),
+						qr5.get(Wastetransfer_.quantityUnspecHWIC).isNotNull());
 				break;
 			case HWOC:
 				cq5.select(cb5.construct(WastetransferSeries.class, 
@@ -402,6 +596,10 @@ public class WasteTransferSearchRepository {
 						cb5.sum(qr5.get(Wastetransfer_.quantityDisposalHWOC)),
 						cb5.sum(qr5.get(Wastetransfer_.quantityUnspecHWOC)))
 						);
+				p3 = cb5.or(qr5.get(Wastetransfer_.quantityTotalHWOC).isNotNull(), 
+						qr5.get(Wastetransfer_.quantityRecoveryHWOC).isNotNull(), 
+						qr5.get(Wastetransfer_.quantityDisposalHWOC).isNotNull(),
+						qr5.get(Wastetransfer_.quantityUnspecHWOC).isNotNull());
 				break;
 			default:
 				break;
@@ -409,7 +607,7 @@ public class WasteTransferSearchRepository {
 			
 			Predicate whereBothStart = prsStart.buildWhereClause(cb5, qr5);
 			whereBothStart.getExpressions().add(qr5.get(Wastetransfer_.facilityID).in(fidTo));
-			cq5.where(whereBothStart);
+			cq5.where(cb5.and(whereBothStart,p3));
 			cq5.groupBy(qr5.get(Wastetransfer_.reportingYear));
 			cq5.orderBy(cb5.asc(qr5.get(Wastetransfer_.reportingYear)));
 	
@@ -427,7 +625,9 @@ public class WasteTransferSearchRepository {
 			CriteriaBuilder cb6 = em.getCriteriaBuilder();
 			CriteriaQuery<WastetransferSeries> cq6 = cb6.createQuery(WastetransferSeries.class);
 			Root<Wastetransfer> qr6 = cq6.from(Wastetransfer.class);
-	
+
+			Predicate p4 = null;
+
 			switch (wastetype) {
 			case NONHW:
 				cq6.select(cb6.construct(WastetransferSeries.class, 
@@ -438,6 +638,10 @@ public class WasteTransferSearchRepository {
 						cb6.sum(qr6.get(Wastetransfer_.quantityDisposalNONHW)),
 						cb6.sum(qr6.get(Wastetransfer_.quantityUnspecNONHW)))
 						);
+				p4 = cb6.or(qr6.get(Wastetransfer_.quantityTotalNONHW).isNotNull(), 
+						qr6.get(Wastetransfer_.quantityRecoveryNONHW).isNotNull(), 
+						qr6.get(Wastetransfer_.quantityDisposalNONHW).isNotNull(),
+						qr6.get(Wastetransfer_.quantityUnspecNONHW).isNotNull());
 				break;
 			case HWIC:
 				cq6.select(cb6.construct(WastetransferSeries.class, 
@@ -448,6 +652,10 @@ public class WasteTransferSearchRepository {
 						cb6.sum(qr6.get(Wastetransfer_.quantityDisposalHWIC)),
 						cb6.sum(qr6.get(Wastetransfer_.quantityUnspecHWIC)))
 						);
+				p4 = cb6.or(qr6.get(Wastetransfer_.quantityTotalHWIC).isNotNull(), 
+						qr6.get(Wastetransfer_.quantityRecoveryHWIC).isNotNull(), 
+						qr6.get(Wastetransfer_.quantityDisposalHWIC).isNotNull(),
+						qr6.get(Wastetransfer_.quantityUnspecHWIC).isNotNull());
 				break;
 			case HWOC:
 				cq6.select(cb6.construct(WastetransferSeries.class, 
@@ -458,13 +666,17 @@ public class WasteTransferSearchRepository {
 						cb6.sum(qr6.get(Wastetransfer_.quantityDisposalHWOC)),
 						cb6.sum(qr6.get(Wastetransfer_.quantityUnspecHWOC)))
 						);
+				p4 = cb6.or(qr6.get(Wastetransfer_.quantityTotalHWOC).isNotNull(), 
+						qr6.get(Wastetransfer_.quantityRecoveryHWOC).isNotNull(), 
+						qr6.get(Wastetransfer_.quantityDisposalHWOC).isNotNull(),
+						qr6.get(Wastetransfer_.quantityUnspecHWOC).isNotNull());
 				break;
 			default:
 				break;
 			}			
 			Predicate whereBothEnd = prsEnd.buildWhereClause(cb6, qr6);
 			whereBothEnd.getExpressions().add(qr6.get(Wastetransfer_.facilityID).in(fidFrom));
-			cq6.where(whereBothEnd);
+			cq6.where(cb6.and(whereBothEnd,p4));
 			cq6.groupBy(qr6.get(Wastetransfer_.reportingYear));
 			cq6.orderBy(cb6.asc(qr6.get(Wastetransfer_.reportingYear)));
 	

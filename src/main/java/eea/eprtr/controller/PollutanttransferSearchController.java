@@ -21,6 +21,7 @@ import eea.eprtr.dao.PollutanttransferSearchRepository;
 import eea.eprtr.model.PollutanttransferSeries;
 import eea.eprtr.dao.ReportingYearSearchFilter;
 import eea.eprtr.model.MediumCode;
+import eea.eprtr.model.PollutantConfidentiality;
 import eea.eprtr.model.Pollutanttransfer;
 
 @RestController
@@ -42,9 +43,9 @@ public class PollutanttransferSearchController {
     		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
     		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
     		
-    		@RequestParam(value = "LOV_AISectorID", required = false) Integer aiSectorID,
-    		@RequestParam(value = "LOV_AIActivityID", required = false) Integer aiActivityID,
-    		@RequestParam(value = "LOV_AISubActivityID", required = false) Integer aiSubActivityID,
+    		@RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
+    		@RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
+    		@RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
     		@RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
     		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
     		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
@@ -58,10 +59,11 @@ public class PollutanttransferSearchController {
     		HttpServletResponse response
     		) {
 
-		ReportingYearSearchFilter reportingYearFilter = null;
+		/*ReportingYearSearchFilter reportingYearFilter = null;
 		if (reportingYear != null) {
 			reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
-		}
+		}*/
+		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
@@ -102,9 +104,9 @@ public class PollutanttransferSearchController {
     		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
     		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
     		
-    		@RequestParam(value = "LOV_AISectorID", required = false) Integer aiSectorID,
-    		@RequestParam(value = "LOV_AIActivityID", required = false) Integer aiActivityID,
-    		@RequestParam(value = "LOV_AISubActivityID", required = false) Integer aiSubActivityID,
+    		@RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
+    		@RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
+    		@RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
     		@RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
     		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
     		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
@@ -118,7 +120,8 @@ public class PollutanttransferSearchController {
     		HttpServletResponse response
     		) {
 
-		ReportingYearSearchFilter reportingYearFilter = null;
+		//ReportingYearSearchFilter reportingYearFilter = null;
+		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
@@ -139,9 +142,9 @@ public class PollutanttransferSearchController {
     		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
     		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
     		
-    		@RequestParam(value = "LOV_AISectorID", required = false) Integer aiSectorID,
-    		@RequestParam(value = "LOV_AIActivityID", required = false) Integer aiActivityID,
-    		@RequestParam(value = "LOV_AISubActivityID", required = false) Integer aiSubActivityID,
+    		@RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
+    		@RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
+    		@RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
     		@RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
     		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
     		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
@@ -165,4 +168,77 @@ public class PollutanttransferSearchController {
 		return pollutanttransfercompare;
 	}
 
+	@RequestMapping("/pollutanttransferConfidentialityTS")
+    public List<PollutantConfidentiality> pollutanttransferConfidentialityTS(
+    		
+    		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
+    		
+    		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
+    		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
+    		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
+    		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
+    		
+    		@RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
+    		@RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
+    		@RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
+    		@RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
+    		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
+    		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
+    		
+    		@RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
+    		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
+    		@RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
+    		@RequestParam(value = "Accidental", required = false) Integer accidental,
+    		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
+    		@RequestParam(value = "SearchType", required = false) String searchtype,
+    		HttpServletResponse response
+    		) {
+
+		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
+		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
+		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
+		PollutanttransferSearchFilter filter = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter); 
+		
+		List<PollutantConfidentiality> pollutanttransfercompare = pollutanttransferSearchRepository.GetConfidentialTimeSeries(filter);
+		return pollutanttransfercompare;
+	}
+
+	@RequestMapping("/pollutanttransferIsConfidential")
+    public Boolean pollutanttransferIsConfidential(
+    		
+    		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
+    		
+    		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
+    		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
+    		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
+    		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
+    		
+    		@RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
+    		@RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
+    		@RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
+    		@RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
+    		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
+    		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
+    		
+    		@RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
+    		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
+    		@RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
+    		@RequestParam(value = "Accidental", required = false) Integer accidental,
+    		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
+    		@RequestParam(value = "SearchType", required = false) String searchtype,
+    		HttpServletResponse response
+    		) {
+
+		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
+		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
+		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
+		PollutanttransferSearchFilter filter = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter); 
+		
+		Boolean isconfidential = pollutanttransferSearchRepository.IsAffectedByConfidentiality(filter);
+		return isconfidential;
+	}
+	
+	
 }

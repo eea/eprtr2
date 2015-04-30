@@ -41,9 +41,9 @@ public class PollutantreleaseCompareController {
     		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
     		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
     		
-    		@RequestParam(value = "LOV_AISectorID", required = false) Integer aiSectorID,
-    		@RequestParam(value = "LOV_AIActivityID", required = false) Integer aiActivityID,
-    		@RequestParam(value = "LOV_AISubActivityID", required = false) Integer aiSubActivityID,
+    		@RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
+    		@RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
+    		@RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
     		@RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
     		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
     		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,

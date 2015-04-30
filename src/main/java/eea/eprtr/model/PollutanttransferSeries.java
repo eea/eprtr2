@@ -2,20 +2,20 @@ package eea.eprtr.model;
 
 public class PollutanttransferSeries {
 
-	private final Integer releaseYear;
+	private final Integer reportingYear;
 	private final Long facilities;
 	private Long countries;
 	private final Double quantity;
 	
-	public PollutanttransferSeries(Integer releaseYear, Long facilities, Double quantity) {
-		this.releaseYear = releaseYear;
+	public PollutanttransferSeries(Integer reportingYear, Long facilities, Double quantity) {
+		this.reportingYear = reportingYear;
 		this.facilities = facilities;
 		//this.countries = countries;
 		this.quantity = quantity;
 	}
 
-	public Integer getReleaseYear() {
-		return releaseYear;
+	public Integer getReportingYear() {
+		return reportingYear;
 	}
 
 	public Long getFacilities() {

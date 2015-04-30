@@ -78,11 +78,11 @@ angular.module('myApp.activitySearchFilter', ['restangular', 'myApp.search-filte
             },
             filter : function(filter, queryParams) {
                 if (filter.selectedSubActivities.length === 1 && filter.selectedSubActivities[0].code) {
-                    queryParams.LOV_AISubActivityID = filter.selectedSubActivities[0].lov_AnnexIActivityID;
+                    queryParams.LOV_IASubActivityID = filter.selectedSubActivities[0].lov_AnnexIActivityID;
                 } else if (filter.selectedActivities.length === 1 && filter.selectedActivities[0].code) {
-                    queryParams.LOV_AIActivityID = filter.selectedActivities[0].lov_AnnexIActivityID;
+                    queryParams.LOV_IAActivityID = filter.selectedActivities[0].lov_AnnexIActivityID;
                 } else if (filter.selectedSectors.length === 1 && filter.selectedSectors[0].code) {
-                    queryParams.LOV_AISectorID = filter.selectedSectors[0].lov_AnnexIActivityID;
+                    queryParams.LOV_IASectorID = filter.selectedSectors[0].lov_AnnexIActivityID;
                 }
             }
         };

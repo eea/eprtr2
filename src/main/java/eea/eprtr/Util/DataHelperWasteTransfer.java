@@ -3,7 +3,10 @@ package eea.eprtr.Util;
 import java.util.ArrayList;
 import java.util.List;
 
+import eea.eprtr.model.WasteTransferConfidentialTS;
+import eea.eprtr.model.WasteType;
 import eea.eprtr.model.Wastetransfer;
+import eea.eprtr.model.WastetransferConfidential;
 
 public class DataHelperWasteTransfer {
 
@@ -581,6 +584,11 @@ public class DataHelperWasteTransfer {
 		return list;
 	}
 
-	
+	private List<WasteTransferConfidentialTS> getTS(List<WastetransferConfidential> elements){
+		List<WasteTransferConfidentialTS> list = new ArrayList<WasteTransferConfidentialTS>();
+		//We 
+
+		return list;
+	} 
 	
 }

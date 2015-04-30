@@ -9,6 +9,8 @@ import javax.persistence.criteria.Root;
 import eea.eprtr.model.FacilitySearchAll;
 import eea.eprtr.model.FacilitySearchAll_;
 import eea.eprtr.model.Wastetransfer;
+import eea.eprtr.model.WastetransferConfidential;
+import eea.eprtr.model.WastetransferConfidential_;
 import eea.eprtr.model.Wastetransfer_;
 
 public class WasteSearchFilter {
@@ -116,5 +118,71 @@ public class WasteSearchFilter {
 		
 		
 		return whereClause;
+	}
+	public Predicate buildWhereClauseWastetransferConfidential(
+			CriteriaBuilder cb, Root<WastetransferConfidential> qr) {
+			Predicate whereClause = cb.conjunction();
+			if (wasteTypeCode != null) {
+			//	whereClause.getExpressions().add(qr.get(Wastetransfer_.wasteTypeCode).in(wasteTypeCode));
+			}
+			if (wasteTreatmentCode != null) {
+				for(String code : wasteTreatmentCode)
+				{
+					switch (code.toUpperCase()) {
+						case "R":
+							whereClause.getExpressions().add(cb.equal(qr.get(WastetransferConfidential_.hasReportedRecovery), 0));
+							break;
+						case "U":
+							whereClause.getExpressions().add(cb.equal(qr.get(WastetransferConfidential_.hasReportedUnspecified), 0));
+							break;
+						case "D":
+							whereClause.getExpressions().add(cb.equal(qr.get(WastetransferConfidential_.hasReportedDisposal), 0));
+							break;
+						default:
+							break;
+					}
+				}
+			}
+/*			if (whpCountryID != null) {
+				//whereClause.getExpressions().add(cb.equal(qr.get(Wastetransfer_.WHPCountryID), whpCountryID));
+			}
+			Predicate confidentialWhereClause = cb.disjunction();
+			if(confidentialIndicatorNONHW !=null)
+			{
+				//cb.or(
+				confidentialWhereClause.getExpressions().add(cb.equal(qr.get(WastetransferConfidential_.confidentialIndicatorNONHW),confidentialIndicatorNONHW));
+			}
+			if(confidentialIndicatorHWIC !=null)
+			{
+				confidentialWhereClause.getExpressions().add(cb.equal(qr.get(WastetransferConfidential_.confidentialIndicatorHWIC),confidentialIndicatorHWIC));
+			}
+			if(confidentialIndicatorHWOC !=null)
+			{
+				confidentialWhereClause.getExpressions().add(cb.equal(qr.get(WastetransferConfidential_.confidentialIndicatorHWOC),confidentialIndicatorHWOC));
+			}*/
+			Predicate confidentialReportedWhereClause = cb.disjunction();
+			if(hasReportedRecovery !=null)
+			{
+				confidentialReportedWhereClause.getExpressions().add(cb.equal(qr.get(WastetransferConfidential_.hasReportedRecovery),hasReportedRecovery));
+			}
+			if(hasReportedDisposal !=null)
+			{
+				confidentialReportedWhereClause.getExpressions().add(cb.equal(qr.get(WastetransferConfidential_.hasReportedDisposal),hasReportedDisposal));
+			}
+			if(hasReportedUnspecified !=null)
+			{
+				confidentialReportedWhereClause.getExpressions().add(cb.equal(qr.get(WastetransferConfidential_.hasReportedUnspecified),hasReportedUnspecified));
+			}
+			/*if(confidentialWhereClause.getExpressions().size() > 0)
+			{
+				whereClause.getExpressions().add(confidentialWhereClause);
+			}*/
+			if(confidentialReportedWhereClause.getExpressions().size() > 0)
+			{
+				whereClause.getExpressions().add(confidentialReportedWhereClause);
+			}
+			
+			
+			return whereClause;
 	}
 }
