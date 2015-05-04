@@ -4,13 +4,14 @@
         <h3>{{tr_ina.Headline}}</h3>
         <p>{{tr_ina.SubHeadline}}</p>
     </div>
-
+    
     <div class="row row-map">
 
         <div class="search_form col-md-6">
 
             <div class="panel panel-info">
-                <div class="panel-heading">Search</div>
+                <div class="panel-heading">Search
+                </div>
                 <div class="panel-body">
 
                     <div search-placement>
@@ -37,7 +38,7 @@
 
     </div>
 	<div ng-show="searchResults">
-        <tabset>
+  <tabset>
             <tab heading="Pollutant Releases">
 	           	<div>
 					<h3>{{tr_ina.IndustrialActivityPollutantReleases}}</h3>
@@ -86,8 +87,8 @@
                         <th>{{tr_c.Soil}}&nbsp;</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr ng-repeat-start="item in pollutantreleaseItems | orderBy: 'key'")>
+                     <tbody>
+                    <tr ng-repeat-start="item in pollutantreleaseItems | orderBy: 'key'">
                     	<td>
                      	{{tr_lpo[item.key]}}
                     	</td>
@@ -101,14 +102,19 @@
                     	<td></td>
                     </tr>
                      <tr ng-repeat-start="level2 in item.sublevel | orderBy: 'pollutantCode'">
-                	    <td><a href=""><img src="images/timeseries.png" class="timesericesImage" ng-click="showinfo(item2, this)" alt="" /></a> 
-                	    <!--  {{tr_lpo[level2.pollutantCode]}}</td>-->
-                	    {{level2.pollutantCode}}
-                    	<td>{{tr_p.ReleasesAccidentialTotal}}<br/>
+                	    <td>
+                	    <a href="">
+                	    <img src="images/timeseries.png" class="timesericesImage" ng-click="showinfo(item2, this)" alt="" />
+                	    </a>
+                	     {{level2.pollutantCode}}
+                	    </td> 
+                    	<td>
+                    	{{tr_p.ReleasesAccidentialTotal}}<br/>
                         {{tr_p.ReleasesAccidentalValue}}
                         </td>
                     	<td>{{getTypeCount(level2)}}<br />
-                    	{{getTypeCountAccidential(level2)}}</td>
+                    	{{getTypeCountAccidential(level2)}}
+                    	</td>
                     	<td>
                     	{{getformat(level2.quantityAir)}}<br />
                     	{{getformat(level2.quantityAccidentalAir)}}
@@ -126,10 +132,8 @@
                     <tr ng-repeat-end ng-hide="true"></tr>  
                     </tbody>
                 </table>
-				
            	</tab>
-           	
-           	<tab heading="Pollutant Transfer">
+           		<tab heading="Pollutant Transfer">
          		<div>
 					<h3>{{tr_ina.IndustrialActivityPollutantTransfers}}</h3>
 				</div>
@@ -455,7 +459,8 @@
                		  <br />
 	                </div>
                 </div>
-           	</tab>
+           	</tab>        
         </tabset>
+           
      </div>
 </div>
