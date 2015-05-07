@@ -1,80 +1,79 @@
-<div>
-<div class="row row-map">
-	<div class="col-md-4">
-	<h2>Welcome</h2>
-	<div class="panel panel-default">
-  		<div class="panel-body">
-		<p>
-			The <em>European Pollutant Release and Transfer Register (E-PRTR)</em>
-			is the Europe-wide register that provides easily accessible key
-			environmental data from industrial facilities in European Union Member
-			States and in Iceland, Liechtenstein, Norway, Serbia and Switzerland.
-			It replaced and improved upon the previous European Pollutant Emission
-			Register (EPER).
-		</p>
-		<p>
-			The new register contains data reported annually by more than&nbsp;<em>30,000
-				industrial facilities</em> covering 65 economic activities across Europe.
-		</p>
-		<p>
-			For each facility, information is provided concerning the amounts of
-			pollutant releases to air, water and land as well as off-site transfers
-			of waste and of pollutants in waste water from a list of 91 key
-			pollutants including heavy metals, pesticides, greenhouse gases and
-			dioxins <em>for years 2007 onwards</em>. Some information on releases
-			from diffuse sources is also available and will be gradually enhanced.
-		</p>
-		<p>
-			The register contributes to <em>transparency and public
-				participation in environmental decision-making</em>. It implements for the
-			European Community the <a href="http://www.unece.org/env/pp/prtr.htm"
-				target="_blank">UNECE (United Nations Economic Commission for
-				Europe) PRTR Protocol</a> to the <a
-				href="http://www.unece.org/env/pp/introduction.html" target="_blank">Aarhus
-				Convention</a> on Access to Information, Public Participation in
-			Decision-making and Access to Justice in Environmental Matters.
-		</p>
+<div class="container">
+  <div class="row row-map">
+	<!-- Left panel master-->
+	<div class="col-md-6">
+		<!-- Left panel welcome-->
+		<div class="col-md-12">
+			<h2>Welcome</h2>
+			<div class="panel panel-default">
+		  		<div class="panel-body">
+					<p dd-text-collapse dd-text-collapse-max-length="528" dd-text-collapse-text="{{welcome}}"></p>
+				</div>
+			</div>
 		</div>
-	</div>
-	
-	</div>
-	<div class="col-md-8" style="height:600px;">
+		<div class="col-md-12">
+			<h2>Main areas</h2>
+		</div>
+	<!-- Left panel first row-->
+	<div class="col-md-12">
+		<div class="col-md-6">
+			<div class="panel widget">
+               <div class="panel-body bg-blue">
+	                  <a class="white" href="#navsearch"><div class="col-md-4"><em class="white fa fa-bar-chart fa-2x"></em></div><div class="col-md-8">Database</br>searches</div></a>
+               </div>
+	        </div> 
+	   </div>
+		<div class="col-md-6">
+			<div class="panel widget">
+               <div class="panel-body bg-lightblue">
+	                  <a class="white" href="#navlibrary"><div class="col-md-4"><em class="white fa fa-book fa-2x"></em></div><div class="col-md-8">E-PRTR</br>library</div></a>
+               </div>
+            </div>   
+	   </div>
+   </div>
+
+		<!-- Left panel second row-->
+		<div class="col-md-12">
+			<div class="col-md-6">
+		      <!-- START panel-->
+				<div class="panel widget">
+	               <div class="panel-body bg-purple">
+	                  <a class="white" href="#diffuseemissions"><div class="col-md-4"><em class="white fa fa-leaf fa-2x"></em></div><div class="col-md-8">Diffuse</br>emissions</div></a>
+	               </div>
+	            </div>      <!-- END panel-->
+	   		</div>
+			<div class="col-md-6">
+				<div class="panel widget">
+	               <div class="panel-body bg-green">
+	                  <a class="white" href="#pollutantinfo"><div class="col-md-4"><em class="white fa fa-info fa-2x"></em></div><div class="col-md-8">Pollutant</br>description</div></a>
+	               </div>
+	        	</div> 
+	   		</div>
+	   </div>
+	   
+		<!-- Left panel third row-->
+		<div class="col-md-12">
+			<div class="col-md-6">
+				<div class="panel widget">
+		               <div class="panel-body bg-red">
+	                  <a class="white" href="#static?cont=faq"><div class="col-md-4"><em class="white fa fa-question fa-2x"></em></div><div class="col-md-8">Frequent</br>Questions</div></a>
+		               </div>
+		            </div>  
+		   </div>
+			<div class="col-md-6">
+		      <!-- START panel-->
+				<div class="panel widget">
+		               <div class="panel-body bg-orange">
+	                  <a class="white" href="#static?cont=feedback"><div class="col-md-4"><em class="white fa fa-comments fa-2x"></em></div><div class="col-md-8">Contact &</br>feedback</div></a>
+		               </div>
+		            </div>      <!-- END panel-->
+		   </div>
+	   </div>
+ 	</div>
+
+	<div class="col-md-6" style="height:620px;">
      	<h2>E-PRTR Facilities</h2>
      	<esri-leaf-map queryparams="queryParams" />
      </div>	
-
-     	
-    </div>
-     
   </div>
-<!--   <div class="row"> -->
-<!--      <div class="col-md-4""> 	 -->
-<!--             <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/EU_Social/lists/eu-agencies" data-widget-id="577415949751590912">Tweets fra https://twitter.com/EU_Social/lists/eu-agencies</a> -->
-<!--             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> -->
-<!--           	<div id="portlet-followus" class="portlet"> -->
-<!-- 		     	<div class="row"> -->
-<!-- 		     	<div class="col-md-12"> -->
-<!-- 		     	Follow us -->
-<!-- 		     	</div> -->
-<!-- 		     	</div> -->
-<!-- 		     	<div class="row"> -->
-<!-- 		     	<div class="col-md-2"> -->
-<!-- 		     	  <a id="twitter-link" title="Follow us on Twitter" href="http://twitter.com/euenvironment">&nbsp;</a> -->
-<!-- 		     	</div> -->
-<!-- 		     	<div class="col-md-2"> -->
-<!-- 		          <a id="facebook-link" title="Follow us on Facebook" href="http://www.facebook.com/European.Environment.Agency">&nbsp;</a> -->
-<!-- 		     	</div> -->
-<!-- 		     	<div class="col-md-2"> -->
-<!-- 		   	      <a id="youtube-link" title="Follow us on YouTube" href="http://www.youtube.com/user/EEAvideos">&nbsp;</a> -->
-<!-- 		     	</div> -->
-<!-- 				<div class="col-md-2">	     	 -->
-<!-- 		   	     	<a id="rss-link" title="Follow us on RSS-Feed" class="link-plain" href="http://www.eea.europa.eu/subscription/news-feeds">&nbsp;</a> -->
-<!-- 		     	</div> -->
-<!-- 		     	<div class="col-md-2"> -->
-<!-- 		   		   <a id="email-link" title="Subscribe via email" href="http://www.eea.europa.eu/subscription/targeted-subscription">&nbsp;</a> -->
-<!-- 		    	</div> -->
-<!-- 		    	</div>	     	 -->
-<!--      		</div> -->
-<!--      </div> -->
-<!-- </div> -->
 </div>

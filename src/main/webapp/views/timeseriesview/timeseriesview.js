@@ -9,7 +9,8 @@ angular.module('myApp.timeseriesview', ['ngRoute','myApp.timeseries', 'myApp.sea
   });
 }])
 
-.controller('TimeseriesViewController', ['$scope','$routeParams', '$filter', '$http', 'searchFilter', 'Restangular',  function($scope, $routeParams, $filter, $http, searchFilter, Restangular) {
+.controller('TimeseriesViewController', ['$scope','$routeParams', '$filter', '$modal', '$http', 'searchFilter', 'Restangular',  
+                                         function($scope, $routeParams, $filter, $modal, $http, searchFilter, Restangular) {
 	$scope.qparams = {};
 	$scope.year=2010;
 
@@ -134,17 +135,27 @@ $scope.performSearch = function() {
     
 };
 
-/*$scope.hasItems = function() {
-	return $scope.items.length > 0;
-};*/
 
-	
-	/**/
-	
-/*    $scope.fdrID = $routeParams.FacilityReportID !== undefined ? $routeParams.FacilityReportID: null;// 10;
-    if($scope.fdrID === null){
-	    $scope.fdID = $routeParams.FacilityID !== undefined ? $routeParams.FacilityID: 9893;//null;
-	    $scope.year = $routeParams.ReportingYear !== undefined ? $routeParams.ReportingYear: 2010;//null;
-    }*/
+$scope.openTSmodal = function (ct,qp) {
 
-}]);
+    var modalInstance = $modal.open({
+      templateUrl: 'components/timeseries/tsmodal.html',
+      controller: 'ModalTimeSeriesCtrl',
+//      size: size,
+      resolve: {
+    	  isoContType: function () {
+    		  return ct;
+    	  },
+       	  isoQP: function () {
+    		  return qp;
+    	  }
+ 
+      }
+    });
+};
+
+}])
+
+
+
+;

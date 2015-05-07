@@ -9,7 +9,12 @@ angular.module('myApp.home', ['ngRoute'])
   });
 }])
 
-.controller('HomeCtrl', ['$filter', function($filter) {
+.controller('HomeCtrl', ['$scope','$filter', 'translationService', function($scope, $filter, translationService) {
+	translationService.get('Static').then(function (data) {
+		$scope.welcome = data['HomeWelcomeText'];
+    });
+	//HomeWelcomeText
+	
 }])
 
 .factory('formatStrFactory', ['$filter', function($filter){

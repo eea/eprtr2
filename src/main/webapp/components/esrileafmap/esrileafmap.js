@@ -20,7 +20,8 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 	                 'LOV_NACEActivityID','LOV_NACESubActivityID','IAReportedActivityCode',
 	                 'IPPCReportedActivityCode','NACEReportedActivityCode',
 	                 'ConfidentialCode','LOV_ConfidentialityID'],
-	'sectors':['0','1','2','3','4','5','6','7','8','9']
+	'sectors':['0','1','2','3','4','5','6','7','8','9'],
+	'defquery':'ReportingYear=2012'
 	})
 
 .controller('esriLeafMapController', ['$scope',  'leafletData', 'elmconf', function($scope,  leafletData, elmconf) {
@@ -131,7 +132,7 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
         	$scope.where = "FacilityReportID=" + $scope.frid;
         }
         else {
-        	$scope.where = " ";
+        	$scope.where = elmconf.defquery;
         }
     };
 
@@ -157,7 +158,7 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 	//Here we initialize the map
 	leafletData.getMap().then(function(map) {
 		//Initial extent
-		//map.invalidateSize();
+		map.invalidateSize();
 		map.setView(elmconf.europebounds, elmconf.europezoom);
 		map.attributionControl = false;
 		

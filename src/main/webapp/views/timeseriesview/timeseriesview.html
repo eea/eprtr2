@@ -31,15 +31,19 @@
 
 					<div>
                         <input type="submit" value="Search" ng-click="search()" class="btn btn-default">
+                        <a title="Show timeseries" ng-click="openTSmodal('pollutanttransfer',{'ReportingYear':2011,'LOV_CountryID':22,'LOV_PollutantGroupID':3})" ><i class="fa fa-bar-chart"></i> Search</a>
 					</div>
 
-				</div>
 
 			</div>
 
 		</div>
 		<div class="col-md-6">
-		<timeseries content="{{contenttype1}}" query-params="qparams" year={{year}} />
+		<timeseries content="contenttype1" query-params="qparams" />
 		</div>
 </div>		
 </div>
+
+
+
+

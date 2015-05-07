@@ -28,8 +28,16 @@
 
 <div ng-controller="HeaderController">
     <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-
+      <div class="container-fluid">
+      <div class="row bs-header">
+       	<div class="col-md-6">
+       		<a href="#home" accesskey="0"><img id="logo" style="width:100px;margin-top:8px;" src="images/EPRTR-logo_white.png"></a>
+       	</div>
+       	<div class="col-md-6 text-right">
+       	<a href="http://www.eea.europa.eu" accesskey="2"><img src="images/logo.gif"></a>
+       	<a href="http://ec.europa.eu/index_da.htm" accesskey="1"><img id="europeancommission" src="images/europeancommission.gif"></a>
+       	</div>
+       </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
          	<li ng-class="{ active: isActive('/home')}"><a href="#home" ng-click="subtitle = 'Welcome to E-PRTR'">Home</a></li>
@@ -47,12 +55,35 @@
                 <li><a href="#facilitydetails">Facility details</a></li>
               </ul>
             </li>
-            <li ng-class="{ active: isActive('/about')}"><a href="#about" ng-click="subtitle = 'About E-PRTR'">About E-PRTR</a></li>
+            <li ng-class="{ active: isActive('/about')}"><a href="#static?cont=about" ng-click="subtitle = 'About E-PRTR'">About E-PRTR</a></li>
+            <li><a href="#static?cont=faq" ng-click="subtitle = 'faq'">FAQ</a></li>
+            <li><a href="#static?cont=feedback" ng-click="subtitle = 'faq'">Feedback</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#home">Download</a></li>
-            <li><a href="#">Links</a></li>
-            <li><a href="#">Library</a></li>
+            <li class="dropdown" dropdown>
+              <a href="#" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Download<span class="caret"></span></a>
+              <ul class="dropdown-menu" dropdown-menu role="menu">
+                <li><a href="#static?cont=downloaddata" ng-click="subtitle = 'Download Data'">E-PRTR Dataset</a></li>
+                <li><a href="#static?cont=downloadguidance" ng-click="subtitle = 'Download Guide'">E-PRTR Guidance document</a></li>
+              </ul>
+            </li>
+            <li class="dropdown" dropdown>
+              <a href="#" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Links<span class="caret"></span></a>
+              <ul class="dropdown-menu" dropdown-menu role="menu">
+                <li><a href="#static?cont=linksnational" ng-click="subtitle = 'Download Guide'">National Registers</a></li>
+                <li><a href="#static?cont=linkseu" ng-click="subtitle = 'Download Guide'">Intrnational Organisations</a></li>
+                <li><a href="#static?cont=linksresearch" ng-click="subtitle = 'Download Data'">Other Information Sources</a></li>
+              </ul>
+            </li>
+            <li class="dropdown" dropdown>
+              <a href="#" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Library<span class="caret"></span></a>
+              <ul class="dropdown-menu" dropdown-menu role="menu">
+                <li><a href="#static?cont=glossary" ng-click="subtitle = 'Glossary'">Glossary</a></li>
+                <li><a href="#static?cont=activity" ng-click="subtitle = 'Activities'">Activities</a></li>
+                <li><a href="#static?cont=pollutant" ng-click="subtitle = 'Pollutants'">Pollutants</a></li>
+                <li><a href="#static?cont=waste" ng-click="subtitle = 'Waste'">Waste</a></li>
+              </ul>
+            </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -62,10 +93,10 @@
 
 
   <div class="bs-header" id="content">
-      <div class="container">
+      <!-- div class="container">
        <div class="row">
        	<div class="col-md-6">
-       		<h1>E-PRTR</h1>
+       		<img id="europeancommission" src="images/europeancommission.gif">
        	</div>
        	<div class="col-md-1">
        	</div>
@@ -73,7 +104,7 @@
        	<a href="http://www.eea.europa.eu" accesskey="2"><img src="images/logo.gif"></a>
        	<a href="http://ec.europa.eu/index_da.htm" accesskey="1"><img id="europeancommission" src="images/europeancommission.gif"></a>
        	</div>
-       </div>
+       </div-->
 <!--          <h2>{{subtitle}}</h2>  -->
       </div>
     </div>
@@ -82,7 +113,7 @@
 
 
 
-    <div id="container" class="container">
+    <div id="container" class="container-fluid">
   	    <div class="col-md-12"> 
   	    <div ng-controller="HeaderController"> 
 <!--   	         <h2>{{subtitle}}</h2> -->
@@ -96,17 +127,16 @@
     </div>  <!-- container -->
  
 <footer class="footer">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3">			
+	<div class="container-fluid bs-footer">
+		<div class="row" >
+			<div class="col-md-5"><small>			
 			European Environment Agency (EEA)<br />
 			Kongens Nytorv 6<br />
 			1050 Copenhagen K<br />
 			Denmark<br />
-			Phone: +45 3336 7100<br /> 
+			Phone: +45 3336 7100<br /></small> 
 			</div>
-			<div class="col-md-5">
-	
+			<div class="col-md-5" style="padding-top:10px;" >
 			<div class="col-md-1">
 		     	  <a id="twitter-link" title="Follow us on Twitter" href="http://twitter.com/euenvironment">&nbsp;</a>
 		    </div>
@@ -123,14 +153,15 @@
 		   		   <a id="email-link" title="Subscribe via email" href="http://www.eea.europa.eu/subscription/targeted-subscription">&nbsp;</a>
 		    	</div>
 			</div>
-			<div class="col-md-4">
-				<div class="col-md-9">
-				The European Environment<br />Agency (EEA) is an agency of<br /> the European Union.<br />
-				<a href="http://europa.eu/geninfo/legal_notices_en.htm">Legal notice</a>
+			<div class="col-md-2 text-right">
+				<div class="row">
+				<div class="col-md-9 text-left" >
+				<small>The European Environment<br />Agency (EEA) is an agency of<br /> the European Union.<br />
+				<a href="http://europa.eu/geninfo/legal_notices_en.htm">Legal notice</a></small>
 				</div>
-				<div class="col-md-3">
+				<div  class="col-md-3" style="float: right;">
 				<img src="images/eu-flag.gif" alt="" />
-				</div>
+				</div></div>
 			</div>
 		</div>
 		<!-- http://www.eea.europa.eu/legal/ -->
@@ -193,6 +224,11 @@
   <script src="views/pollutanttransfers/pollutanttransfers.js"></script>
   <script src="views/wastetransfers/wastetransfers.js"></script>
   <script src="views/timeseriesview/timeseriesview.js"></script>
+  <script src="views/emissions/diffuseemissions.js"></script>
+  <script src="views/pollutantinfo/pollutantinfo.js"></script>
+  <script src="views/static/static.js"></script>
+  <script src="views/home/navsearch.js"></script>
+  <script src="views/home/navlibrary.js"></script>
   <script src="components/search-filter/search-filter.js"></script>
   <script src="components/facilitydetails/fd-main.js"></script>
   <script src="components/esrileafmap/esrileafmap.js"></script>
@@ -202,6 +238,7 @@
   <script src="components/pollutant-search-filter/pollutant-search-filter.js"></script>
   <script src="components/waste-search-filter/waste-search-filter.js"></script>
   <script src="components/timeseries/timeseries.js"></script>
+  <script src="directives/dd-text-collapse.js"></script>
   <!-- endbuild -->
 
 </body>

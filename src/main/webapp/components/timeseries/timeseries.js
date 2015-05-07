@@ -239,7 +239,6 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 			$scope.reqPollutantReleaseConfidentialityData();
     	}
     });
-
     
 	/**
 	 * Show Confidental indicator 
@@ -1328,7 +1327,17 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 
     return reportingYears;
 }])
+  .controller('ModalTimeSeriesCtrl', function ($scope, $modalInstance, isoContType, isoQP) {
+  $scope.isoContType = isoContType;
+  $scope.isoQP = isoQP;
+  $scope.ok = function () {
+    $modalInstance.close();
+  };
 
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+})
 /*
  * This directive enables us to define this module as a custom HTML element
  *  
@@ -1340,20 +1349,19 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		controller: 'TimeseriesController',
         transclude: true,
 		scope: {
-			content: '@', /*[pollutantrelease,pollutanttransfer,wastetransfer]*/
-			queryParams: '=queryParams', /* Filter needs to include area, activity, [pollutant, medium, wastetype ]/  */
-			year: '@'
+			content: '=content', /*[pollutantrelease,pollutanttransfer,wastetransfer]*/
+			queryParams: '=queryParams' /* Filter needs to include area, activity, [pollutant, medium, wastetype ]/  */
 		},
 		templateUrl: 'components/timeseries/timeseries.html',
 		link: function(scope, element, attrs){
-			//scope.$watch('queryParams', function(value) {
+			scope.$watch('queryParams', function(value) {
 				/*JAVA Enum cannot handle the character - so NON-HW is converted into NONHW*/
-				/*if (scope.queryParams.WasteTypeCode != undefined){
+				if (scope.queryParams.WasteTypeCode != undefined){
 					for (var i=0; i< scope.queryParams.WasteTypeCode.length; i++) {
 						scope.queryParams.WasteTypeCode[i] = scope.queryParams.WasteTypeCode[i].replace("-","");
 					}				
 				}
-			});*/
+			});
 		}
 	};
 });
