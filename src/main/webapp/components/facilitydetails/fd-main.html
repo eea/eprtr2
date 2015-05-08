@@ -19,9 +19,9 @@
       </div>
    </div>
    <div class="row" ng-hide="showalert? false: true">
-      <blockquote>
+      <div class="alert alert-warning">
       	<a class="text-danger" ng-click="activateTab('fdconf')" ><i class="fa fa-exclamation-triangle"></i>  {{tr_f.ConfidentialityAlertLink}}</a>
-      </blockquote>
+      </div>
    </div>
    <div class="row" >
    
@@ -86,10 +86,10 @@ DETAILS
 
     <!-- Disclaimer -->
     <div class="row" >
-		<blockquote>
+		<div class="alert alert-warning">
 		<h4>{{tr_c.DisclaimerHeader}}</h4>
 		<div ng-bind-html="tr_f.DisclaimerTextFacilityDetails"></div>
-		</blockquote>
+		</div>
 	</div>
 		</tab>
 

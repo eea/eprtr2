@@ -2,8 +2,12 @@
 
 angular.module('myApp.search-placement', ['myApp.search-filter'])
 
-.controller('SearchPlacementController', ['$scope', '$http', 'searchFilter', function($scope, $http, searchFilter) {
+.controller('SearchPlacementController', ['$scope', '$http', 'searchFilter','translationService', function($scope, $http, searchFilter,translationService) {
     
+	translationService.get().then(function (data) {
+		$scope.tr_c = data.Common;
+	});
+ 	
 	$scope.searchFilter = searchFilter;
 	
 	$http.get('/reportingYears').success(function(data, status, headers, config) {

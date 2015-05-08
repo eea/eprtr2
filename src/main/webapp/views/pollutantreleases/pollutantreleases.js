@@ -136,28 +136,34 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         };
 
         $scope.updateSummaryData = function() {
+        	//This filter filters summaryitems?
+        	$scope.summaryItems = [];
             $scope.summaryItems = $filter('filter')($scope.items, function (item) {
-                if (item['quantity' + $scope.mediumTypeSummary]) {
-                    return true;
+            	var qmstr = 'quantity' + $scope.mediumTypeSummary;
+                if (item[qmstr]) {
+                    //return true;
+                	return {qmstr:item[qmstr], iaactivityCode : $scope.tr_laa[item['iaactivityCode']]};
                 }
                 return false;
             });
      	
+/*            //We set translation codes
             for(var i = 0; i <$scope.summaryItems.length;i++)
             {
             	$scope.summaryItems[i].iaactivityCode = $scope.tr_laa[$scope.summaryItems[i].iaactivityCode];
-            }
+            }*/
 
+            //Reset graph data
             var graphData = {};
             for (var i = 0; i < $scope.summaryItems.length; i++) {
                 if (!graphData[$scope.summaryItems[i].iaactivityCode]) {
-                    graphData[$scope.summaryItems[i].iaactivityCode] = {c: [
-                        {v: $scope.summaryItems[i].iaactivityCode},
-                        {v: $scope.summaryItems[i]['quantity' + $scope.mediumTypeSummary]}
+                    		graphData[$scope.summaryItems[i].iaactivityCode] = {c: [
+                    		    {v: $scope.summaryItems[i].iaactivityCode},
+                    		    {v: $scope.summaryItems[i][qmstr]}
                     ]};
                 } else {
                     graphData[$scope.summaryItems[i].iaactivityCode].c[1].v =
-                        graphData[$scope.summaryItems[i].iaactivityCode].c[1].v + $scope.summaryItems[i]['quantity' + $scope.mediumTypeSummary];
+                        graphData[$scope.summaryItems[i].iaactivityCode].c[1].v + $scope.summaryItems[i][qmstr];
                 }
             }
 
@@ -206,15 +212,15 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                     graphData[$scope.areaComparisonItems[i].countryCode] = 
                     {c: [
                         {v: $scope.areaComparisonItems[i].countryCode},
-                        {v: $scope.areaComparisonItems[i]['quantity' + $scope.mediumTypeSummary]},
+                        {v: $scope.areaComparisonItems[i][qmstr]},
                         {v: "ff<br/>Dette er en test"} 
                     ]};
-                    totalquantity +=$scope.areaComparisonItems[i]['quantity' + $scope.mediumTypeSummary];
+                    totalquantity +=$scope.areaComparisonItems[i][qmstr];
                 } else {
                     graphData[$scope.areaComparisonItems[i].countryCode].c[1].v =
-                        graphData[$scope.areaComparisonItems[i].countryCode].c[1].v + $scope.areaComparisonItems[i]['quantity' + $scope.mediumTypeSummary];
+                        graphData[$scope.areaComparisonItems[i].countryCode].c[1].v + $scope.areaComparisonItems[i][qmstr];
                     graphData[$scope.areaComparisonItems[i].countryCode].c[2].v = "ff<br /> test";
-                    totalquantity +=$scope.areaComparisonItems[i]['quantity' + $scope.mediumTypeSummary];
+                    totalquantity +=$scope.areaComparisonItems[i][qmstr];
                 }
             }
 

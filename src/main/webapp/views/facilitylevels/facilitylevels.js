@@ -9,7 +9,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
   });
 }])
 
-.controller('FacilityLevelsCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular', function($scope, $filter, $http, searchFilter, Restangular) {
+.controller('FacilityLevelsCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular','translationService', function($scope, $filter, $http, searchFilter, Restangular,translationService) {
 
         $scope.showReceivingCountryInputField = true;
         $scope.showReleasesToInputField = true;
@@ -23,6 +23,30 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	$scope.queryParams = {};
 	$scope.queryParams.ReportingYear = -1;
 
+	translationService.get().then(function (data) {
+		$scope.tr_lco = data.LOV_COUNTRY;
+		$scope.tr_lnr = data.LOV_NUTSREGION;
+		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
+		$scope.tr_f = data.Facility;
+		$scope.tr_c = data.Common;
+		$scope.tr_p = data.Pollutant;
+		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
+		$scope.tr_lcon =data.LOV_CONFIDENTIALITY;
+		$scope.tr_con =data.Confidentiality;
+		$scope.tr_lpo = data.LOV_POLLUTANT;
+		$scope.tr_lnr = data.LOV_NUTSREGION;
+		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
+		$scope.tr_chart = data.ChartLabels;
+	  });
+
+    	$scope.active = {
+    		facilities: true
+    	};
+        $scope.activateTab = function(tab) {
+        	  $scope.active = {}; //reset
+        	  $scope.active[tab] = true;
+        	}
+
     $scope.sort = {
                 sortingOrder : 'facilityName',
                 reverse : false
@@ -32,7 +56,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
     
 	$scope.searchResults = false;
     $scope.items = [];
-    $scope.itemsPerPage = 30;
+    $scope.itemsPerPage = 15;
     $scope.pagedItems = [];
     $scope.currentPage = 1;
     $scope.totalItemCount = 0;

@@ -1,12 +1,13 @@
-<div>
-
-	<div>
-		<p>This report will display the reported releases and transfers of a specific facility.</p>
+	<div class="row">
+    <div  class="col-md-12">
+    	<h3>{{tr_f.Facilitylevel}}</h3>
+		<p>{{tr_f.SubHeadline}}</p>
+	</div>
 	</div>
 
 	<div class="row row-map">
 
-		<div class="search_form col-md-6">
+		<div class="search_form col-md-3">
 
 			<div class="panel panel-info">
 				<div class="panel-heading">Search</div>
@@ -16,11 +17,11 @@
 					</div>
 
 					<div class="form-group">
-						<label class="control-label" for="inputFacilityName">Facility Name</label> 
+						<label class="control-label" for="inputFacilityName">{{tr_c.FacilityName}}</label> 
 						<input type="text" class="form-control" id="inputFacilityName" placeholder="Enter facility name" ng-model="searchFilter.facilityName">
 					</div>
 					<div class="form-group">
-						<label class="control-label" for="inputTown">Town/village</label>
+						<label class="control-label" for="inputTown">{{tr_f.TownVillage}}</label>
 						<input type="text" class="form-control" id="inputTown" placeholder="Enter town" ng-model="searchFilter.cityName">
 					</div>
 
@@ -42,33 +43,26 @@
 			</div>
 
 		</div>
-		
-		<div class="col-md-6" style="height:400px;">
-             <esri-leaf-map queryparams="queryParams" />
-        </div>
 
-	</div>
-
-	<div ng-show="searchResults">
+		<div class="col-md-6">	
+                <div class="row" ng-show="confidentialFacilities">
+				    <div class="alert alert-warning">
+			      		<a class="text-danger" ng-click="activateTab('confidentiality')" ><i class="fa fa-exclamation-triangle"></i>  {{tr_f.ConfidentialityAlertLink}}</a>
+      				</div>
+			   </div>
+		<!--div ng-show="searchResults"-->
         <tabset>
-            <tab heading="Facilities" active="facilitiesTabActive">
+            <tab heading="{{tr_c.Facilities}}" active="active.facilities" >
                 <br/>
-                <div ng-show="confidentialFacilities">
-                    <div>
-                        <img src="images/alert.png" alt="alert" style="border-width:0px;">
-                        <a ng-click="confidentialityTabActive = true">Confidentiality claims may affect the result. See details &gt;&gt;</a>
-                    </div>
-                    <br/>
-                </div>
                 <table class="table table-striped table-condensed table-hover">
                     <thead>
                         <tr>
-                            <th class="facilityName" custom-sort order="'facilityName'" sort="sort">Facility&nbsp;</th>
-                            <th class="postalCode" custom-sort order="'postalCode'" sort="sort">Postal Code&nbsp;</th>
-                            <th class="address" custom-sort order="'address'" sort="sort">Address&nbsp;</th>
-                            <th class="city" custom-sort order="'city'" sort="sort">Town/Village&nbsp;</th>
-                            <th class="iaactivityCode" custom-sort order="'IAActivityCode'" sort="sort">Activity&nbsp;</th>
-                            <th class="countryCode" custom-sort order="'countryCode'" sort="sort">Country&nbsp;</th>
+                            <th class="facilityName" custom-sort order="'facilityName'" sort="sort">{{tr_f.FacilityName}}</th>
+                            <th class="postalCode" custom-sort order="'postalCode'" sort="sort">{{tr_f.PostalCode}}</th>
+                            <th class="address" custom-sort order="'address'" sort="sort">{{tr_f.Address}}</th>
+                            <th class="city" custom-sort order="'city'" sort="sort">{{tr_f.TownVillage}}</th>
+                            <th class="iaactivityCode" custom-sort order="'IAActivityCode'" sort="sort">{{tr_f.Activity}}</th>
+                            <th class="countryCode" custom-sort order="'countryCode'" sort="sort">{{tr_f.Country}}</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -90,20 +84,26 @@
                     </tbody>
                 </table>
             </tab>
-            <tab heading="Confidentiality" active="confidentialityTabActive">
+            <tab heading="{{tr_c.ContentConfidientiality}}"  active="active.confidentiality" >
                 <br/>
                 <div ng-show="confidentialFacilities">
                     <div>
                         <img src="images/alert.png" alt="alert" style="border-width:0px;">
-                        <a>Confidentiality claims may affect the result.</a>
+                        <a>{{tr_c.ConfidentialityAlert}}</a>
                     </div>
                     <br/>
                 </div>
-                <p>
-                    The total releases and off site transfers in waste water of single pollutants as well as aggregated amount of waste transferred off-site might be effected by confidentiality claims.
-                </p>
+                <p ng-bind-html="tr_c.ConfidentialityExplanationFacilityList"></p>
             </tab>
         </tabset>
+	<!-- /div-->
+</div>
+		
+		<div class="col-md-3" style="height:600px;">
+             <esri-leaf-map queryparams="queryParams" />
+        </div>
+
 	</div>
+
 
 </div>
