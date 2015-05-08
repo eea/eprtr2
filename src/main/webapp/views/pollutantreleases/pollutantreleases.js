@@ -137,9 +137,9 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
 
         $scope.updateSummaryData = function() {
         	//This filter filters summaryitems?
+        	var qmstr = 'quantity' + $scope.mediumTypeSummary;
         	$scope.summaryItems = [];
             $scope.summaryItems = $filter('filter')($scope.items, function (item) {
-            	var qmstr = 'quantity' + $scope.mediumTypeSummary;
                 if (item[qmstr]) {
                     //return true;
                 	return {qmstr:item[qmstr], iaactivityCode : $scope.tr_laa[item['iaactivityCode']]};
@@ -195,7 +195,8 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         };
 
         $scope.updateAreaComparisonData = function() {
-            $scope.areaComparisonItems = $filter('filter')($scope.items, function (item) {
+        	var qmstr = 'quantity' + $scope.mediumTypeSummary;
+        	$scope.areaComparisonItems = $filter('filter')($scope.items, function (item) {
                 if (item['quantity' + $scope.mediumTypeAreaComparison]) {
                     return true;
                 }

@@ -1,14 +1,13 @@
 <div>
     <div class="row row-map">
-    <div>
+    <div class=" col-md-12">
     	<h3>{{tr_p.PollutantTransfersHeadline}}</h3>
         <p>{{tr_p.AggregatedTransfersToWasteWater}}</p>
     </div>
 </div>
     <div class="row row-map">
 
-        <div class="search_form col-md-6">
-
+        <div class="search_form col-md-3">
             <div class="panel panel-info">
                 <div class="panel-heading">Search</div>
                 <div class="panel-body">
@@ -33,15 +32,11 @@
 
         </div>
 
-        <div class="col-md-6" style="height:400px;">
-            <esri-leaf-map queryparams="queryParams" />
-        </div>
-
-    </div>
-
-	<div ng-show="searchResults">
+        <div class="col-md-6">
         <tabset>
             <tab heading="Summary">
+            	<div ng-show="searchResults">
+            
             <div>
 				<h3>{{tr_c.PollutantTransfersSummary}}</h3>
 			</div>
@@ -82,9 +77,12 @@
                 {{tr_p.TransfersToWastePerIndustryActivity}}
                 <div google-chart chart="summaryChartObject" style="height:600px; width:100%;">
                 </div>
+               </div>
             </tab>
            
            <tab heading="Activities" active="activitiesTabActive">
+           	<div ng-show="searchResults">
+           
            <div>
 				<h3>{{tr_c.PollutantTransfersActivity}}</h3>
 			</div>
@@ -207,10 +205,12 @@
                     <tr ng-repeat-end ng-hide="true"></tr>
                     </tbody>
                 </table>    
-
+</div>
             </tab>
             
              <tab heading="Areas">
+             	<div ng-show="searchResults">
+             
              <div>
 				<h3>{{tr_c.PollutantTransAreas}}</h3>
 			</div>
@@ -314,10 +314,12 @@
                     <tr ng-repeat-end ng-hide="true"></tr>
                     </tbody>
                 </table>
-             
+             </div>
              </tab>
              
             <tab heading="Area Comparison">
+            	<div ng-show="searchResults">
+            
             	<div>
 				<h3>{{tr_c.PollutantTransfers}}</h3>
 			</div>
@@ -357,9 +359,12 @@
                  <br/>
                 <div google-chart chart="areaComparisonChartObject" style="height:600px; width:100%;">
                 </div>
+                </div>
             </tab>
             
             <tab heading="Facilities">
+            	<div ng-show="searchResults">
+            
             <div>
 				<h3>{{tr_c.PollutantTransFacilities}}</h3>
 			</div>
@@ -415,9 +420,12 @@
                     </tr>
                     </tbody>
                 </table>
+                </div>
             </tab>
             
             <tab heading="Confidentiality" active="confidentialityTabActive">
+            	<div ng-show="searchResults">
+            
             <div>
 				<h3>{{tr_c.PollutantTransConfidentiality}}</h3>
 			</div>
@@ -492,9 +500,16 @@
 	                	</div>
 	                </div>
                 </div>
+                </div>
             </tab>
         </tabset>
 	</div>
+
+        <div class="col-md-3" style="height:600px;">
+            <esri-leaf-map queryparams="queryParams" />
+        </div>
+
+    </div>
 
 </div>
 
