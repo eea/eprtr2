@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.search-placement', ['myApp.search-filter'])
+angular.module('myApp.search-placement', ['myApp.home', 'myApp.search-filter'])
 
 .controller('SearchPlacementController', ['$scope', '$http', 'searchFilter','translationService', function($scope, $http, searchFilter,translationService) {
     
