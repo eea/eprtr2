@@ -10,6 +10,13 @@ angular.module('myApp.home', ['ngRoute'])
 }])
 
 .controller('HomeCtrl', ['$scope','$filter', 'translationService', function($scope, $filter, translationService) {
+	/**
+	 * DO NOT REMOVE - part of home.test
+	 */
+	$scope.test = function(inp){
+		return inp;
+	}
+	
 	translationService.get('Static').then(function (data) {
 		$scope.welcome = data['HomeWelcomeText'];
     });

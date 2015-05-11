@@ -1,15 +1,16 @@
 'use strict';
 
-angular.module('myApp.search-placement', ['myApp.search-filter'])
+angular.module('myApp.search-placement', ['myApp.home', 'myApp.search-filter'])
 
-.controller('SearchPlacementController', ['$scope', '$http', 'searchFilter', function($scope, $http, searchFilter) {
+.controller('SearchPlacementController', ['$scope', '$http', 'searchFilter','translationService', function($scope, $http, searchFilter,translationService) {
     
-	/*translationService.get().then(function (data) {
-		$scope.tr_c = data.Common;
-	});*/
- 	
 	$scope.searchFilter = searchFilter;
-	
+	$scope.searchFilter.regionType = '1';
+
+	translationService.get().then(function (data) {
+		$scope.tr_c = data.Common;
+	});
+
 	$http.get('/reportingYears').success(function(data, status, headers, config) {
         $scope.reportingYears = data;
         $scope.searchFilter.selectedReportingYear = $scope.reportingYears[$scope.reportingYears.length - 1];
@@ -28,7 +29,7 @@ angular.module('myApp.search-placement', ['myApp.search-filter'])
         $scope.updateRegions();
     });
 
-    $scope.searchFilter.regionType = '1';
+    
     $scope.$watch('searchFilter.regionType', function(value) {
         $scope.updateRegions();
     });
