@@ -11,7 +11,7 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter', 'restang
 
 
 
-.controller('AreaOverviewCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular', function($scope, $filter, $http, searchFilter, Restangular) {
+.controller('AreaOverviewCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular', 'translationService', function($scope, $filter, $http, searchFilter, Restangular, translationService) {
 	
 	 $http.get('/pollutant').success(function(data, status, headers, config) {
 	        $scope.polutantMainGroup = data;
@@ -20,6 +20,24 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter', 'restang
 	
 	
 	$scope.searchFilter = searchFilter;
+	
+	translationService.get().then(function (data) {
+		$scope.tr_lco = data.LOV_COUNTRY;
+		$scope.tr_lnr = data.LOV_NUTSREGION;
+		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
+		$scope.tr_f = data.Facility;
+		$scope.tr_c = data.Common;
+		$scope.tr_p = data.Pollutant;
+		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
+		$scope.tr_lcon =data.LOV_CONFIDENTIALITY;
+		$scope.tr_con =data.Confidentiality;
+		$scope.tr_lpo = data.LOV_POLLUTANT;
+		$scope.tr_lnr = data.LOV_NUTSREGION;
+		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
+		$scope.tr_wt = data.WasteTransfers;
+		$scope.tr_ao = data.AreaOverview;
+		$scope.tr_lovwt = data.LOV_WASTETYPE;
+	  });
 	
 	$scope.expandButtonImage = 'images/expand_blue.jpg';
 	$scope.expandButtonText = 'Expand to include';

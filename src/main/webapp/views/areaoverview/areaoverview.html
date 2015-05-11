@@ -1,23 +1,21 @@
-<div class="info_area">
+<div >
 
-
-
-<!-- 	<script type="text/javasript" src="Charts/charts.js"></script> -->
-<!-- 	<script type="text/javascript" src="Scripts/jsValidation.js"></script> -->
-
-
-	<div class="info_box_search">
-		<h1>Area Overview</h1>
-		<p>This report will display the aggregated releases and transfers of a specific area</p>
-	</div>
+    <div>
+        <h3>{{tr_ao.Headline}}</h3>
+        <p>{{tr_ao.SubHeadline}}</p>
+    </div>
 
 	<div class="row row-map">
 
-		<div class="search_form col-md-6">
+		<div class="search_form col-md-3">
 
 			<div class="panel panel-info">
 				<div class="panel-heading">Search</div>
 				<div class="panel-body">
+                	<div class="btn-group pull-right">
+                        <input type="submit" value="Search >>" ng-click="search()" class="btn btn-success" />
+                    </div>
+                    </br>
 					<div search-placement>	</div>		
 					
 					<div id="ContentChoice">
@@ -35,35 +33,19 @@
 					</div>
 					<br/>
 					
-					<div id="SearchButton">
-						<input type="submit" value="Search" ng-click="search()" class="btn btn-primary"> 
-					</div>
 				</div>
 			</div>
 			
 		</div>
 		
-		<div class="col-md-6" style="height:400px;">
-             <esri-leaf-map facility-report-id="{{frID}}" />
-        </div>
-
-
-	</div>
-
-
+		<div class="col-md-6">
  
-
-	<div id="searchResults" ng-show="searchResults">
-	
-	
 		<h2>Polutant releases</h2>
-	
-
-		
-<div>
+		<div>
 		  <tabset>
 			    <tab heading="Air">
-
+					<div ng-show="searchResults">
+					
 				<table class="table table-striped table-condensed table-hover">
 	                <thead>
 	                    <tr>
@@ -86,10 +68,11 @@
 				            </tr>
 				        </tbody>
 				 </table>
-  
+  				</div>
 			</tab>
 			    <tab heading="Water">Water
-			    
+					<div ng-show="searchResults">
+							    
 				    <table class="table table-striped table-condensed table-hover">
 		                <thead>
 		                    <tr>
@@ -112,11 +95,12 @@
 					            </tr>
 					        </tbody>
 					 </table>
-			    
+			    	</div>
 			    
 			    </tab>
-			    <tab heading="Soil">Soil
-			    fasdfdasdf
+			    <tab heading="Soil">
+					<div ng-show="searchResults">
+					    fasdfdasdf
 			    
 			    asdfasdfafsd
 			    <br/>
@@ -149,11 +133,15 @@
 			    v
 			    asdfasdfafsd
 			    <br/>
-			    
+			    </div>
 			    </tab>
-			   
 			  </tabset>
-</div>		         
-		
-	</div> <!-- Search Result -->
-</div> <!-- Info Area -->
+			</div>
+			
+			</div>
+					         
+		<div class="col-md-3" style="height:600px;">
+            <esri-leaf-map queryparams="queryParams" />
+        </div>
+	</div> 
+</div> 

@@ -8,8 +8,14 @@
     <div class="row row-map">
         <div class="search_form col-md-3">
             <div class="panel panel-info">
-                <div class="panel-heading">Search</div>
+                <div class="panel-heading">
+                	<span class="panel-title lead">Search</span>
+                </div>
                 <div class="panel-body">
+                	<div class="btn-group pull-right">
+                        <input type="submit" value="Search >>" ng-click="search()" class="btn btn-success" />
+                    </div>
+                    </br>
                     <div search-placement>
                     </div>
                     <accordion close-others="{{false}}">
@@ -18,9 +24,6 @@
                         <div activity-search-filter-directive>
                         </div>
                     </accordion>
-                    <div>
-                        <input type="submit" value="Search" ng-click="search()" class="btn btn-default">
-                    </div>
                 </div>
             </div>
         </div>
@@ -133,7 +136,7 @@
                     <tbody>
                     <!-- Level1 -->
                     <tr ng-repeat-start="item in activities | orderBy: 'key'">
-                    <td><img src="images/timeseries.png" class="timesericesImage" ng-click="alert('TODO')" alt="" /></td>
+                    <td><img src="images/timeseries.png" class="timesericesImage" ng-click="openTSmodal(item.key,null,null)" alt="" /></td>
                         <td>
                         	<img class="handcursor" ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
                         	<img class="handcursor" ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
@@ -152,7 +155,7 @@
                     <!-- Level2 -->
                     <tr ng-show="showing" ng-repeat-start="level2 in item.data | orderBy: 'iaactivityCode'">
                     	<td>
-                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="alert('TODO')" alt="" />
+                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="openTSmodal(level2.lov_IASectorID,level2.lov_IAActivityID,null)" alt="" />
                     	</td>
                     	<td>
                     		<div class="innerlevel2">
@@ -176,7 +179,7 @@
                     <!-- Level3 -->
                     <tr  ng-show="showing2 && showing" ng-repeat-start="level3 in level2.sublevel | orderBy: 'iasubActivityCode'">
                     	<td>
-                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="alert('TODO')" alt="" />
+                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="openTSmodal(level3.lov_IASectorID,level3.lov_IAActivityID,level3.lov_IASubActivityID)" alt="" />
                     	</td>
                     	<td>
                     		<div class="innerlevel3"> 
@@ -552,7 +555,7 @@
     </div>
 
         <div class="col-md-3" style="height:600px;">
-            <esri-leaf-map queryparams="queryParams" />
+            <esri-leaf-map wherestr="mapQueryParams" />
         </div>
     </div>
 

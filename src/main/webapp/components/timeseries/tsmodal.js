@@ -7,7 +7,7 @@ var ModalTimeSeriesCtrl = function ($scope, $modalInstance, isoContType, isoQP) 
 	    $modalInstance.close();
 	  };
 
-	  $scope.cancel = function () {
+	 /* $scope.cancel = function () {
 	    $modalInstance.dismiss('cancel');
-	  };
+	  };*/
 };

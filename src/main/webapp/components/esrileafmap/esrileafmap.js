@@ -254,6 +254,9 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 			scope.$watch('queryparams', function() {
 	        	scope.setwhere(scope.buildWhere(scope.queryparams));
 		    },true);
+			scope.$watch('wherestr', function() {
+	        	scope.setwhere(scope.wherestr);
+		    },true);
 		}
 	};
 });

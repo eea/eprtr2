@@ -7,12 +7,14 @@
 
     <div class="row row-map">
 
-        <div class="search_form col-md-6">
-
+        <div class="search_form col-md-3">
             <div class="panel panel-info">
                 <div class="panel-heading">Search</div>
                 <div class="panel-body">
-
+                	<div class="btn-group pull-right">
+                        <input type="submit" value="Search >>" ng-click="search()" class="btn btn-success" />
+                    </div>                    </br>
+                    
                     <div search-placement>
                     </div>
 
@@ -22,25 +24,16 @@
                         <div activity-search-filter-directive>
                         </div>
                     </accordion>
-
-                    <div>
-                        <input type="submit" value="Search" ng-click="search()" class="btn btn-default">
-                    </div>
-
                 </div>
 
             </div>
 
         </div>
 
-        <div class="col-md-6" style="height:400px;">
-            <esri-leaf-map queryparams="queryParams" />
-        </div>
-
-    </div>
-	<div ng-show="searchResults">
+	<div class="search_form col-md-6">
         <tabset>
             <tab heading="Summary" ng-click="getTabData('SUMMARY')">
+            <div ng-show="searchResults">
            		 <div>
 				<h3>{{tr_wt.WasteTransferSummery}}</h3>
 			</div>
@@ -119,9 +112,11 @@
                      </tr>
                    </tbody>
             </table>
+            </div>
            	</tab>
            	
            	 <tab heading="Activities" ng-click="getTabData('Activities')">
+           	 <div ng-show="searchResults">
            	 <div>
 				<h3>{{tr_wt.WasteTransferActivities}}</h3>
 			</div>
@@ -338,9 +333,11 @@
                     <tr ng-repeat-end ng-hide="true"></tr>
                     </tbody>
                 </table>
+                </div>
            	</tab>
            	  	
            	<tab heading="Areas" ng-click="getTabData('areas')">
+           	<div ng-show="searchResults">
            	   <div>
 				<h3>{{tr_wt.WasteTransferAreas}}</h3>
 			</div>
@@ -526,18 +523,35 @@
                     <tr ng-repeat-end ng-hide="true"></tr>
                     </tbody>
                 </table>
+                </div>
            	</tab>
            	       	
            	<tab heading="Area Comparison" ng-click="getTabData('AREACOMPARISON')">
+           	<div ng-show="searchResults">
+           	</div>
            	</tab>
            	  <tab heading="Facilities" ng-click="getTabData('FACILITIES')">
+           	  <div ng-show="searchResults">
+           	  </div>
            	</tab>
            	  <tab heading="Haz. transboundary" ng-click="getTabData('HAZTRANSBOUNDARY')">
+           	  <div ng-show="searchResults">
+           	  </div>
            	</tab>
            	 <tab heading="Haz. receivers" ng-click="getTabData('HAZRECEIVERS')">
+           	 <div ng-show="searchResults">
+           	 </div>
            	</tab>
            	<tab heading="Confidentiality" ng-click="getTabData('CONFIDENTIALITY')">
+           	<div ng-show="searchResults">
+           	</div>
            	</tab>
         </tabset>
      </div>
+
+        <div class="col-md-3" style="height:600px;">
+            <esri-leaf-map queryparams="queryParams" />
+        </div>
+
+    </div>
 </div>

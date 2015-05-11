@@ -9,7 +9,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         });
     }])
 
-    .controller('PollutantReleasesCtrl', ['$scope', '$filter', 'searchFilter', 'Restangular','translationService','formatStrFactory', function($scope, $filter, searchFilter, Restangular,translationService,formatStrFactory) {
+    .controller('PollutantReleasesCtrl', ['$scope', '$filter', '$modal', 'searchFilter', 'Restangular','translationService','formatStrFactory', function($scope, $filter, $modal, searchFilter, Restangular,translationService,formatStrFactory) {
         $scope.pollutantPanel = true;
         $scope.showReleasesToInputField = true;
         $scope.pollutantPanelTitle = 'Pollutant releases';
@@ -65,16 +65,22 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 RestangularConfigurer.setFullResponse(true);
             });
             $scope.regionSearch = false;
-            var facilitySearch = rest.all('pollutantreleaseSearch');
+            var pollutantreleaseSearch = rest.all('pollutantreleaseSearch');
+            //var mapFilter = 'FacilityReportID IN (select FacilityReportID from dbo.POLLUTANTRELEASE where ';
             	
             var queryParams = {ReportingYear: $scope.currentSearchFilter.selectedReportingYear.year};
+            //mapFilter += '(((ReportingYear= ' +  $scope.currentSearchFilter.selectedReportingYear.year + ') ';
+            
             if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.countryId) {
                 queryParams.LOV_CountryID = $scope.currentSearchFilter.selectedReportingCountry.countryId;
+                //mapFilter += 'And (LOV_CountryID= ' + $scope.currentSearchFilter.selectedReportingCountry.countryId + ') ';
                 if ($scope.currentSearchFilter.selectedRegion.lov_NUTSRegionID) {
                     queryParams.LOV_NUTSRegionID = $scope.currentSearchFilter.selectedRegion.lov_NUTSRegionID;
+                    //mapFilter += 'And (LOV_NUTSRegionID= ' + $scope.currentSearchFilter.selectedRegion.lov_NUTSRegionID + ') ';
                 }
                 else if ($scope.currentSearchFilter.selectedRegion.lov_RiverBasinDistrictID) {
                     queryParams.LOV_RiverBasinDistrictID = $scope.currentSearchFilter.selectedRegion.lov_RiverBasinDistrictID;
+                    //mapFilter += 'And (LOV_RiverBasinDistrictID= ' + $scope.currentSearchFilter.selectedRegion.lov_RiverBasinDistrictID + ') ';
                 }
             }
             if(searchFilter.regionType == 0)
@@ -87,6 +93,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
             
             if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.groupId) {
                 queryParams.LOV_AreaGroupID = $scope.currentSearchFilter.selectedReportingCountry.groupId;
+                //mapFilter += 'And (LOV_AreaGroupID= ' + $scope.currentSearchFilter.selectedReportingCountry.groupId + ') ';
             }
             if ($scope.currentSearchFilter.activitySearchFilter) {
                 $scope.currentSearchFilter.activitySearchFilter.filter(queryParams);
@@ -106,7 +113,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
             }
             $scope.confidentialParams.ConfidentialIndicator = 1;
        
-            facilitySearch.getList(queryParams).then(function(response) {
+            pollutantreleaseSearch.getList(queryParams).then(function(response) {
                 $scope.items = response.data;
 
                 $scope.quantityAir = response.headers('X-QuantityAir');
@@ -129,11 +136,43 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
             });
             
             // Do confidential search
-            facilitySearch.getList($scope.confidentialParams).then(function(response) {
+            pollutantreleaseSearch.getList($scope.confidentialParams).then(function(response) {
                 $scope.itemsConfidentiality = response.data;
                 $scope.updateConfidentialityData();
             });
+            $scope.setMapQuery();
+            
         };
+        
+        $scope.setMapQuery = function(){
+        	$scope.mapQueryParams = {};
+        	/*FacilityReportID IN (select FacilityReportID from dbo.POLLUTANTRELEASE where 
+        	 * (
+        	 *  (
+        	 *   (
+        	 *    (ReportingYear= 2011) And 
+        	 *    (LOV_CountryID= 81)) And 
+        	 *    (LOV_PollutantID= 26)
+        	 *   ) And 
+        	 *   (
+        	 *    (
+        	 *     (QuantityAir IS NOT NULL) Or 
+        	 *     (QuantitySoil IS NOT NULL)
+        	 *    ) Or 
+        	 *    (QuantityWater IS NOT NULL)
+        	 *   )
+        	 *  )
+        	 * )*/
+        	var mqp = 'FacilityReportID IN (select FacilityReportID from dbo.POLLUTANTRELEASE where ';
+        	mqp += '((ReportingYear = ' + $scope.queryParams.ReportingYear + ') ';
+		    for(var key in $scope.queryParams) {
+		    	if(key != 'ReportingYear' && key != 'LOV_IAActivityID' && key != 'LOV_IASubActivityID') {
+		    		mqp += 'And (' + key + ' = ' + $scope.queryParams[key] + ') ';
+		        }
+		    }
+	    	mqp += 'AND ((QuantityAir IS NOT NULL) Or (QuantitySoil IS NOT NULL) Or (QuantityWater IS NOT NULL))';
+    		$scope.mapQueryParams = mqp;
+        }
 
         $scope.updateSummaryData = function() {
         	//This filter filters summaryitems?
@@ -777,5 +816,44 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         	$scope.totalareassumsoal = $scope.getSumTotal("areas","quantitySoil");
         	$scope.totalareassumasoil = $scope.getSumTotal("areas","quantityAccidentalSoil");
         };
+        
+        /**
+         * TimeSeries Modal popup
+         */
+        $scope.openTSmodal = function (lov_IASectorID, lov_IAActivityID, lov_IASubActivityID) {
+        	var ct = 'pollutantrelease';
+        	/*Convert item into Query params*/
+        	var qp = {};
+		    for(var key in $scope.queryParams) {
+		        if(key != 'LOV_IASectorID' && key != 'LOV_IAActivityID' && key != 'LOV_IASubActivityID') {
+		        	qp[key] = $scope.queryParams[key];
+		        }
+		    }
+        	
+        	if(lov_IASectorID !== null)
+        		{qp.LOV_IASectorID = lov_IASectorID;}
+        	if(lov_IAActivityID !== null)
+    			{qp.LOV_IAActivityID = lov_IAActivityID;}
+        	if(lov_IASubActivityID !== null)
+				//record.iasubActivityCode = "unspecified";
+
+    			{qp.LOV_IASubActivityID = lov_IASubActivityID;}
+            var modalInstance = $modal.open({
+              templateUrl: 'components/timeseries/tsmodal.html',
+              controller: 'ModalTimeSeriesCtrl',
+//              size: size,
+              resolve: {
+            	  isoContType: function () {
+            		  return ct;
+            	  },
+               	  isoQP: function () {
+            		  return qp;
+            	  }
+         
+              }
+            });
+        };
+        
+        
     }])
 ;
