@@ -12,9 +12,10 @@
 			<div class="panel panel-info">
 				<div class="panel-heading">Search</div>
 				<div class="panel-body">
-                	<div class="btn-group pull-right">
+				<div id="searchbtn" style="height:35px;">
+					<div class="btn-group pull-right">
                         <input type="submit" value="Search >>" ng-click="search()" class="btn btn-success" />
-                    </div></br>
+                    </div></div>
 					<div search-placement>
 					</div>
 
@@ -98,7 +99,7 @@
 </div>
 		
 		<div class="col-md-3" style="height:600px;">
-             <esri-leaf-map queryparams="queryParams" />
+             <esri-leaf-map contenttype="'facilitylevel'" queryparams="queryParams" />
         </div>
 
 	</div>

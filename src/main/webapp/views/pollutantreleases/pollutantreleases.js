@@ -140,39 +140,9 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 $scope.itemsConfidentiality = response.data;
                 $scope.updateConfidentialityData();
             });
-            $scope.setMapQuery();
+            //$scope.setMapQuery();
             
         };
-        
-        $scope.setMapQuery = function(){
-        	$scope.mapQueryParams = {};
-        	/*FacilityReportID IN (select FacilityReportID from dbo.POLLUTANTRELEASE where 
-        	 * (
-        	 *  (
-        	 *   (
-        	 *    (ReportingYear= 2011) And 
-        	 *    (LOV_CountryID= 81)) And 
-        	 *    (LOV_PollutantID= 26)
-        	 *   ) And 
-        	 *   (
-        	 *    (
-        	 *     (QuantityAir IS NOT NULL) Or 
-        	 *     (QuantitySoil IS NOT NULL)
-        	 *    ) Or 
-        	 *    (QuantityWater IS NOT NULL)
-        	 *   )
-        	 *  )
-        	 * )*/
-        	var mqp = 'FacilityReportID IN (select FacilityReportID from dbo.POLLUTANTRELEASE where ';
-        	mqp += '((ReportingYear = ' + $scope.queryParams.ReportingYear + ') ';
-		    for(var key in $scope.queryParams) {
-		    	if(key != 'ReportingYear' && key != 'LOV_IAActivityID' && key != 'LOV_IASubActivityID') {
-		    		mqp += 'And (' + key + ' = ' + $scope.queryParams[key] + ') ';
-		        }
-		    }
-	    	mqp += 'AND ((QuantityAir IS NOT NULL) Or (QuantitySoil IS NOT NULL) Or (QuantityWater IS NOT NULL))';
-    		$scope.mapQueryParams = mqp;
-        }
 
         $scope.updateSummaryData = function() {
         	//This filter filters summaryitems?
@@ -197,7 +167,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
             for (var i = 0; i < $scope.summaryItems.length; i++) {
                 if (!graphData[$scope.summaryItems[i].iaactivityCode]) {
                     		graphData[$scope.summaryItems[i].iaactivityCode] = {c: [
-                    		    {v: $scope.summaryItems[i].iaactivityCode},
+                    		    {v: $scope.tr_laa[$scope.summaryItems[i].iaactivityCode]},
                     		    {v: $scope.summaryItems[i][qmstr]}
                     ]};
                 } else {
@@ -804,6 +774,51 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         			{
         				record.facount = 0;
         			}
+    				if($scope.regionSearch){
+    					if (record.lov_NUTSRegionID == undefined){
+    						if (record.lov_NUTSRLevel3ID != null){
+    							record.lov_NUTSRegionID = record.lov_NUTSRLevel3ID;
+    						}
+    						else if (record.lov_NUTSRLevel2ID != null){
+    							record.lov_NUTSRegionID = record.lov_NUTSRLevel2ID;
+    						}
+    						else if (record.lov_NUTSRLevel1ID != null){
+    							record.lov_NUTSRegionID = record.lov_NUTSRLevel1ID;
+    						}
+    					}
+    					if (record.lov_NUTSRegionID == undefined){
+    						for ( var j = 1; j < $scope.items.length; j++ ) {
+    							if ($scope.items[j].lov_NUTSRegionID != undefined){
+    	    						if ($scope.items[j].lov_NUTSRLevel3ID != null){
+    	    							record.lov_NUTSRegionID = $scope.items[j].lov_NUTSRLevel3ID;
+        								break;
+    	    						}
+    	    						else if ($scope.items[j].lov_NUTSRLevel2ID != null){
+    	    							record.lov_NUTSRegionID = $scope.items[j].lov_NUTSRLevel2ID;
+        								break;
+    	    						}
+    	    						else if ($scope.items[j].lov_NUTSRLevel1ID != null){
+    	    							record.lov_NUTSRegionID = $scope.items[j].lov_NUTSRLevel1ID;
+        								break;
+    	    						}
+    							}
+    						}
+    					}
+    					record.riverBasinDistrictCode = null;
+    					record.lov_RiverBasinDistrictID = null;
+    				}
+    				else{
+    					if (record.lov_RiverBasinDistrictID == undefined){
+    						for ( var j = 1; j < $scope.items.length; j++ ) {
+    							if ($scope.items[j].lov_RiverBasinDistrictID != undefined){
+    								record.LOV_RiverBasinDistrictID = $scope.items[j].lov_RiverBasinDistrictID;
+    								break;
+    							}
+    						}
+    					}
+    					record.nutslevel2RegionCode = null;
+    					record.lov_NUTSRegionID = null;
+    				}
         			group.data.push(record);
         		}        		
         	}
@@ -820,7 +835,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         /**
          * TimeSeries Modal popup
          */
-        $scope.openTSmodal = function (lov_IASectorID, lov_IAActivityID, lov_IASubActivityID) {
+        $scope.openActTSmodal = function (lov_IASectorID, lov_IAActivityID, lov_IASubActivityID) {
         	var ct = 'pollutantrelease';
         	/*Convert item into Query params*/
         	var qp = {};
@@ -838,7 +853,17 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
 				//record.iasubActivityCode = "unspecified";
 
     			{qp.LOV_IASubActivityID = lov_IASubActivityID;}
-            var modalInstance = $modal.open({
+ 
+        	//$scope.qp = qp;
+/*        	 BootstrapDialog.show({
+                 message: $('<div></div>').load('components/timeseries/tsmodal.html'),
+                 data: {
+                     'isoContType': ct,
+                     'isoQP': qp
+                 }
+        	 });*/
+             
+        	var modalInstance = $modal.open({
               templateUrl: 'components/timeseries/tsmodal.html',
               controller: 'ModalTimeSeriesCtrl',
 //              size: size,
@@ -854,6 +879,38 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
             });
         };
         
-        
+        $scope.openAreaTSmodal = function (lov_CountryID, lov_NUTSRegionID, lov_RiverBasinDistrictID) {
+        	var ct = 'pollutantrelease';
+        	/*Convert item into Query params*/
+        	var qp = {};
+		    for(var key in $scope.queryParams) {
+		        if(key != 'lov_RiverBasinDistrictID' && key != 'lov_NUTSRegionID' && key != 'lov_CountryID') {
+		        	qp[key] = $scope.queryParams[key];
+		        }
+		    }
+        	
+        	if(lov_CountryID !== null)
+        		{qp.LOV_CountryID = lov_CountryID;}
+        	if(lov_NUTSRegionID !== null)
+    			{qp.LOV_NUTSRegionID = lov_NUTSRegionID;}
+        	if(lov_RiverBasinDistrictID !== null)
+    			{qp.LOV_RiverBasinDistrictID = lov_RiverBasinDistrictID;}
+ 
+        	var modalInstance = $modal.open({
+              templateUrl: 'components/timeseries/tsmodal.html',
+              controller: 'ModalTimeSeriesCtrl',
+//              size: size,
+              resolve: {
+            	  isoContType: function () {
+            		  return ct;
+            	  },
+               	  isoQP: function () {
+            		  return qp;
+            	  }
+         
+              }
+            });
+        };
+                
     }])
 ;

@@ -12,18 +12,19 @@
 			<div class="panel panel-info">
 				<div class="panel-heading">Search</div>
 				<div class="panel-body">
+					<div id="searchbtn" style="height:35px;">
                 	<div class="btn-group pull-right">
                         <input type="submit" value="Search >>" ng-click="search()" class="btn btn-success" />
                     </div>
-                    </br>
+                    </div>
 					<div search-placement>	</div>		
 					
 					<div id="ContentChoice">
 						<label class="form-label" for="contentdropdown"> Contents </label> 
 						<select	name="content" id="contentdropdown" class="form-control">
-							<option selected="selected" value="">Pollutant Releases</option>
-							<option value="1">Pollutant Transfers</option>
-							<option value="1">Waste Transfers</option>
+							<option selected="selected" value="pollutantrelease">Pollutant Releases</option>
+							<option value="pollutanttransfer">Pollutant Transfers</option>
+							<option value="wastetransfer">Waste Transfers</option>
 						</select>
 					</div>
 					<br/>
@@ -141,7 +142,7 @@
 			</div>
 					         
 		<div class="col-md-3" style="height:600px;">
-            <esri-leaf-map queryparams="queryParams" />
+            <esri-leaf-map contenttype="'pollutantrelease'" queryparams="queryParams" />
         </div>
 	</div> 
 </div> 

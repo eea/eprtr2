@@ -1,10 +1,14 @@
-        <div class="modal-header">
-            <h3 class="modal-title">Time Series</h3>
-        </div>
+        <div class="modal-header ">
+        	<div class="bootstrap-dialog-header">
+        		<div class="bootstrap-dialog-close-button" style="display: block;"><button ng-click="ok()" class="close"><span class="glyphicon glyphicon-remove"></button></div>
+        		<div class="bootstrap-dialog-title" >Time Series</div></div></div>
+        <!--div class="modal-header modal-primary">
+            <span class="modal-title">Time Series</span>
+            <div class="btn-group pull-right">
+ 	           		<a ng-click="ok()" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span></a>
+        		<div class="clearfix"></div>
+		    </div>
+        </div-->
         <div class="modal-body">
             <timeseries content="isoContType" query-params="isoQP" />
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
-            <!--button class="btn btn-warning" ng-click="cancel()">Cancel</button-->
         </div>

@@ -623,7 +623,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 			else if ($scope.filter.prsel == 'WATER'){
 				colors = [tsconf.colors.ColorWaterTotal,tsconf.colors.ColorWaterAccidental];
 			}
-			else if ($scope.filter.prsel == 'LAND'){
+			else if ($scope.filter.prsel == 'SOIL'){
 				colors = [tsconf.colors.ColorSoilTotal,tsconf.colors.ColorSoilAccidental];
 			}
 			$scope.tsStackseriesObject.options.colors = colors;
@@ -639,7 +639,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 					ts.quantity = ts.quantityWater;
 					ts.quantityAccidental = ts.accidentalWater;
 				}
-				else if ($scope.filter.prsel == 'LAND'){
+				else if ($scope.filter.prsel == 'SOIL'){
 					ts.quantity = ts.quantitySoil;
 					ts.quantityAccidental = ts.accidentalSoil;
 				}
@@ -736,7 +736,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 			else if ($scope.filter.prsel == 'WATER'){
 				colors = [tsconf.colors.ColorWaterTotal,tsconf.colors.ColorWaterAccidental];
 			}
-			else if ($scope.filter.prsel == 'LAND'){
+			else if ($scope.filter.prsel == 'SOIL'){
 				colors = [tsconf.colors.ColorSoilTotal,tsconf.colors.ColorSoilAccidental];
 			}
 			$scope.tsStackCompareObject.options.colors = colors;
@@ -1021,6 +1021,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 		}
 		else if($scope.queryParams.LOV_CountryID != undefined){
 			//We use LOV_NUTSRegionID for title
+			//"lov_NUTSRLevel1ID":704,"lov_NUTSRLevel2ID":709,"lov_NUTSRLevel3ID":null
 			if($scope.queryParams.LOV_NUTSRegionID != undefined){
 				lovNutsRegionType.getByID($scope.queryParams.LOV_NUTSRegionID).get().then(function(data) {
 					area.val = $scope.tr_lnr[data.code];

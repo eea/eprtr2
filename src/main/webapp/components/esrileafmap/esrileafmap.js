@@ -21,7 +21,13 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 	                 'IPPCReportedActivityCode','NACEReportedActivityCode',
 	                 'ConfidentialCode','LOV_ConfidentialityID'],
 	'sectors':['0','1','2','3','4','5','6','7','8','9'],
-	'defquery':'ReportingYear=2012'
+	'defquery':'ReportingYear=2012',
+	'contenttypes':{
+		'pollutantrelease':'dbo.pollutantrelease',
+		'pollutanttransfer':'dbo.pollutanttransfer',
+		'wastetransfer':'dbo.wastetransfer',
+		'facilitylevel':'dbo.FACILITYSEARCH_ALL'}
+
 	})
 
 .controller('esriLeafMapController', ['$scope',  'leafletData', 'elmconf', function($scope,  leafletData, elmconf) {
@@ -114,10 +120,100 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 	        		}
 	    		}
 	    	}
+			qstr = 'FacilityReportID IN (select FacilityReportID from ' + elmconf.contenttypes[$scope.contenttype] + ' where (';
+			switch($scope.contenttype){
+				case 'facilitylevel':
+					var arrfQue = [];
+					var arrmed = [];
+					if (queryparams['MediumCode'] ){
+						for (var med in qp['MediumCode']){
+							arrmed.push("(MediumCode = '" + med + "')");
+						}
+						arrfQue.push('('+arrmed.join(" OR ")+')');
+					}
+					var arrwt = [];
+					if (queryparams['WasteTypeCode'] ){
+						for (var wt in qp['WasteTypeCode']){
+							arrwt.push("(WasteTypeCode = '" + wt + "')");
+						}
+						arrfQue.push('('+arrwt.join(" OR ")+')');
+					}
+					var arrwtr = [];
+					if (queryparams['WasteTreatmentCode'] ){
+						for (var wtr in qp['WasteTreatmentCode']){
+							arrwtr.push("(WasteTreatmentCode = '" + wtr + "')");
+						}
+						arrfQue.push('('+arrwtr.join(" OR ")+')');
+					}
+					if (queryparams.Accidental){
+						arrfQue.push('(Accidental=1)');
+					}
+					if (queryparams.WHPCountryID){
+						arrfQue.push('(WHPCountryID='+queryparams.WHPCountryID+')');
+					}
+					if (queryparams.LOV_PollutantGroupID){
+						arrfQue.push('(LOV_PollutantGroupID='+queryparams.LOV_PollutantGroupID+')');
+					}
+					if (queryparams.LOV_PollutantID){
+						arrfQue.push('(LOV_PollutantID='+queryparams.LOV_PollutantID+')');
+					}
+					if (arrfQue.length > 0){
+	        			qstr += '('+ arrfQue.join(" AND ")+')))';
+		        		arrQue.push(qstr);
+	        		}
+					else{
+						qstr = '';
+					}
+					break;
+			
+				case 'pollutantrelease':
+		    		if (queryparams['LOV_PollutantID'] && queryparams['LOV_PollutantID'] != '' && $scope.contenttype != undefined){
+		    			qstr += 'LOV_PollutantID = '+queryparams['LOV_PollutantID'];
+		        		if (queryparams['LOV_PollutantGroupID'] && queryparams['LOV_PollutantGroupID'] != ''){
+		        			qstr += ' AND LOV_PollutantGroupID = '+queryparams['LOV_PollutantGroupID'];
+		        		}
+		        		qstr += $scope.getMediumQP(queryparams);
+		    			qstr += '))';
+		        		arrQue.push(qstr);
+		    		}
+		    		else if (queryparams['LOV_PollutantGroupID'] && queryparams['LOV_PollutantGroupID'] != ''){
+		    			qstr += 'LOV_PollutantGroupID = '+queryparams['LOV_PollutantGroupID'];
+		        		qstr += $scope.getMediumQP(queryparams);
+		    			qstr += '))';
+		        		arrQue.push(qstr);
+		    		}
+		    		break;
+				case 'pollutanttransfer':
+					var arrfQue = [];
+					if (queryparams.LOV_PollutantGroupID){
+						arrfQue.push('(LOV_PollutantGroupID='+queryparams.LOV_PollutantGroupID+')');
+					}
+					if (queryparams.LOV_PollutantID){
+						arrfQue.push('(LOV_PollutantID='+queryparams.LOV_PollutantID+')');
+					}
+					if (arrfQue.length > 0){
+	        			qstr += '('+ arrfQue.join(" AND ")+')';
+	        		}
+	    			qstr += '))';
+	        		arrQue.push(qstr);
+					break;
+				case 'wastetransfer':
+	    			var arrwt = [];
+	        		arrwt.push($scope.getWasteTypeQP(queryparams));
+	        		arrwt.push($scope.getWasteTreatmentQP(queryparams));
+
+	        		if (arrwt.length > 0){
+	        			qstr += '('+  arrQue.join(" AND ") +')';
+	        		}
+	        		qstr += '))';
+	        		arrQue.push(qstr);
+		    		break;
+			}
+    		
 	    	return (arrQue.length > 0)?arrQue.join(" AND "):" ";
 	    },
 	});
-	
+
 	/*
 	 * if the where string is empty or undefined then we build it 
 	 */
@@ -136,6 +232,59 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
         }
     };
 
+	//Sub function building QueryString
+    $scope.getMediumQP = function(qp){
+		var arrmed = [];
+		if (qp['MediumCode'] ){
+			$.each(qp['MediumCode'], function(k, v) {
+				if (v !== 'WASTEWATER'){
+					arrmed.push('(Quantity' + v + ' IS NOT NULL)');
+				}
+			});
+			
+		}
+		return (arrmed.length > 0)?' AND (' + arrmed.join(" OR ") + ') ':" ";
+	}
+
+	//Sub function building QueryString
+    $scope.getWasteTypeQP = function(qp){
+    	var arrwt = [];
+		if (qp['WasteTypeCode'] ){
+			$.each(qp['WasteTypeCode'], function(k, v) {
+				if (v !== 'HW'){
+					arrwt.push('(ConfidentialIndicator' + v.replace('-','') + ' IS NOT NULL)');
+				}
+			});
+		}
+		return (arrwt.length > 0)? ' (' + arrwt.join(" OR ") + ') ':" ";
+	}
+
+	//Sub function building QueryString
+    $scope.getWasteTreatmentQP = function(qp){
+    	var arrwt = [];
+		if (qp['WasteTreatmentCode'] ){
+			if(qp['WasteTreatmentCode']['R']){
+				arrwt.push('(HasReportedRecovery = 1)');
+			}
+			else{
+				arrwt.push('(HasReportedRecovery = 0)');
+			}
+			if(qp['WasteTreatmentCode']['D']){
+				arrwt.push('(HasReportedDisposal = 1)');
+			}
+			else{
+				arrwt.push('(HasReportedDisposal = 0)');
+			}
+			if(qp['WasteTreatmentCode']['U']){
+				arrwt.push('(HasReportedUnspecified = 1)');
+			}
+			else{
+				arrwt.push('(HasReportedUnspecified = 0)');
+			}
+		}
+		return (arrwt.length > 0)? ' (' +arrwt.join(" AND ") + ') ':" ";
+	}
+    
     //Internal function to filter min and max coordinates
 	$scope.getMinOrMax = function (feature, minOrMax, latOrLng) {
 		  return _[minOrMax](feature, function (value) {
@@ -247,7 +396,9 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 		scope: {
 			frid: '@facilityReportId',
 			wherestr: '=',
-			queryparams: '='
+			queryparams: '=',
+			contenttype: '='
+
 		},
 		templateUrl: 'components/esrileafmap/esrileafmap.html',
 		link: function(scope, element, attrs){
@@ -256,6 +407,9 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 		    },true);
 			scope.$watch('wherestr', function() {
 	        	scope.setwhere(scope.wherestr);
+		    },true);
+			scope.$watch('contenttype', function() {
+	        	scope.setwhere(scope.buildWhere(scope.queryparams));
 		    },true);
 		}
 	};

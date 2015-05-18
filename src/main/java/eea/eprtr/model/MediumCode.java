@@ -2,7 +2,7 @@ package eea.eprtr.model;
 
 public enum MediumCode {
 	AIR,
-	LAND,
+	SOIL,
 	WATER,
 	WASTEWATER
 }

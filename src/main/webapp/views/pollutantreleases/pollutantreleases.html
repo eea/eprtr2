@@ -12,10 +12,11 @@
                 	<span class="panel-title lead">Search</span>
                 </div>
                 <div class="panel-body">
+				<div id="searchbtn" style="height:35px;">
                 	<div class="btn-group pull-right">
                         <input type="submit" value="Search >>" ng-click="search()" class="btn btn-success" />
                     </div>
-                    </br>
+                    </div>
                     <div search-placement>
                     </div>
                     <accordion close-others="{{false}}">
@@ -76,7 +77,7 @@
                 <label class="radio-inline"><input type="radio" name="summaryMediumTypeOptionsRadios" id="summaryMediumTypeOptionsRadios_1" value="Water" ng-model="$parent.mediumTypeSummary"> Water ({{quantityWater}} facilities)</label>
                 <label class="radio-inline"><input type="radio" name="summaryMediumTypeOptionsRadios" id="summaryMediumTypeOptionsRadios_2" value="Soil" ng-model="$parent.mediumTypeSummary"> Soil ({{quantitySoil}} facilities)</label>
                 <br/>
-                <div google-chart chart="summaryChartObject" style="height:600px; width:100%;">
+                <div google-chart chart="summaryChartObject" style="height:400px; width:100%;">
                 </div>
                 </div>
             </tab>
@@ -136,7 +137,7 @@
                     <tbody>
                     <!-- Level1 -->
                     <tr ng-repeat-start="item in activities | orderBy: 'key'">
-                    <td><img src="images/timeseries.png" class="timesericesImage" ng-click="openTSmodal(item.key,null,null)" alt="" /></td>
+                    <td><img src="images/timeseries.png" class="timesericesImage" ng-click="openActTSmodal(item.key,null,null)" alt="" /></td>
                         <td>
                         	<img class="handcursor" ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
                         	<img class="handcursor" ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
@@ -155,7 +156,7 @@
                     <!-- Level2 -->
                     <tr ng-show="showing" ng-repeat-start="level2 in item.data | orderBy: 'iaactivityCode'">
                     	<td>
-                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="openTSmodal(level2.lov_IASectorID,level2.lov_IAActivityID,null)" alt="" />
+                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="openActTSmodal(level2.lov_IASectorID,level2.lov_IAActivityID,null)" alt="" />
                     	</td>
                     	<td>
                     		<div class="innerlevel2">
@@ -179,7 +180,7 @@
                     <!-- Level3 -->
                     <tr  ng-show="showing2 && showing" ng-repeat-start="level3 in level2.sublevel | orderBy: 'iasubActivityCode'">
                     	<td>
-                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="openTSmodal(level3.lov_IASectorID,level3.lov_IAActivityID,level3.lov_IASubActivityID)" alt="" />
+                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="openActTSmodal(level3.lov_IASectorID,level3.lov_IAActivityID,level3.lov_IASubActivityID)" alt="" />
                     	</td>
                     	<td>
                     		<div class="innerlevel3"> 
@@ -280,7 +281,7 @@
                     
                     <!-- First level -->
                     <tr ng-repeat-start="item in areas" >
-                        <td><img src="images/timeseries.png" class="timesericesImage" ng-click="alert('TODO')" alt="" /></td>
+                        <td><img src="images/timeseries.png" class="timesericesImage" ng-click="openAreaTSmodal(item.lov_CountryID, null, null)" alt="" /></td>
                         <td>
                         <img class="handcursor" ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
                         <img class="handcursor" ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
@@ -300,7 +301,7 @@
                     
                     <!-- Second level -->
                     <tr ng-show="showing" ng-repeat-start="item2 in item.data">
-                        	<td><img src="images/timeseries.png" class="timesericesImage" ng-click="showinfo(item2, this)" alt="" /></td>        	
+                        	<td><img src="images/timeseries.png" class="timesericesImage" ng-click="openAreaTSmodal(item2.lov_CountryID, item2.lov_NUTSRegionID, item2.lov_RiverBasinDistrictID)" alt="" /></td>        	
                         	<td ng-if="regionSearch">
                         		<div class="innerlevel2">
                         		{{tr_lnr[item2.nutslevel2RegionCode]}}
@@ -326,7 +327,7 @@
                     <tr ng-repeat-end></tr>
                        <tr ng-if="$last">
                     	<td>
-                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="alert('TODO')" alt="" />
+                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="openAreaTSmodal(null, null, null)" alt="" />
                     	</td>
                     	<td>
                     		{{tr_c.Total}}
@@ -391,7 +392,7 @@
                 <label class="radio-inline"><input type="radio" name="areaComparisonMediumTypeOptionsRadios" id="areaComparisonMediumTypeOptionsRadios_1" value="Water" ng-model="$parent.mediumTypeAreaComparison"> Water ({{quantityWater}} facilities)</label>
                 <label class="radio-inline"><input type="radio" name="areaComparisonMediumTypeOptionsRadios" id="areaComparisonMediumTypeOptionsRadios_2" value="Soil" ng-model="$parent.mediumTypeAreaComparison"> Soil ({{quantitySoil}} facilities)</label>
                 <br/>
-                <div google-chart chart="areaComparisonChartObject" style="height:600px; width:100%;">
+                <div google-chart chart="areaComparisonChartObject" style="height:400px; width:100%;">
                 </div>
                 </div>
             </tab>
@@ -452,7 +453,7 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="item in facilitiesItems">
-                        <td>{{formatText(item.facilityName, item.confidentialIndicatorFacility)}}</td>
+                        <td><a href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">{{formatText(item.facilityName, item.confidentialIndicatorFacility)}}</a></td>
                         <td>{{quantity(item)}}</td>
                         <td>{{quantityAccidental(item)}}</td>
                         <td>{{percentageAccidental(item)}}</td>
@@ -555,7 +556,7 @@
     </div>
 
         <div class="col-md-3" style="height:600px;">
-            <esri-leaf-map wherestr="mapQueryParams" />
+            <esri-leaf-map contenttype="'pollutantrelease'" queryparams="queryParams" />
         </div>
     </div>
 

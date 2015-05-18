@@ -13,6 +13,7 @@
     "angular-sanitize": "1.2.x",
     "angular-ui-grid":"*",
 	"bootstrap": "3.3.2",
+	"bootstrap3-dialog":"*",
     "html5-boilerplate": "~4.3.0",
     "components-font-awesome": "4.3.0", 
     "restangular": "1.4.0",

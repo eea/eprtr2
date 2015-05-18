@@ -319,7 +319,7 @@ public class PollutantreleaseSearchRepository {
 				//compares.add(prc));
 				break;
 	
-			case LAND:
+			case SOIL:
 				compares.add(new PollutantreleaseCompare(reportingYearStart, 
 						prsAllStart.getFacilities(), prsBothStart.getFacilities(), 
 						prsAllStart.getQuantitySoil(), prsBothStart.getQuantitySoil(),
@@ -444,7 +444,7 @@ public class PollutantreleaseSearchRepository {
 							quantity = pd.getQuantityWater();
 							quantityGroup = pg.getQuantityWater();
 							break;
-						case LAND:
+						case SOIL:
 							quantity = pd.getQuantitySoil();
 							quantityGroup = pg.getQuantitySoil();
 							break;
@@ -474,7 +474,7 @@ public class PollutantreleaseSearchRepository {
 							quantity = pd.getQuantityWater();
 							quantityGroup = pg.getQuantityWater();
 							break;
-						case LAND:
+						case SOIL:
 							quantity = pd.getQuantitySoil();
 							quantityGroup = pg.getQuantitySoil();
 							break;
