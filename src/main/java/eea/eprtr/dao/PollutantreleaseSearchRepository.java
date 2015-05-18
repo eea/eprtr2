@@ -375,7 +375,7 @@ public class PollutantreleaseSearchRepository {
 			}
 		}
     	PollutantSearchFilter pfilternew = new PollutantSearchFilter(polGroup,
-    			null,pfilterorg.getMediumCode(),pfilterorg.getAccidental(),pfilterorg.getConfidentialIndicator());
+    			null,pfilterorg.getMediumCode(),pfilterorg.getAccidental(),1);
     	
     	PollutantreleaseSearchFilter prfilternew = new PollutantreleaseSearchFilter(filter.getReportingYearSearchFilter(), 
     			filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), pfilternew); 
@@ -404,7 +404,7 @@ public class PollutantreleaseSearchRepository {
 	
         //create new filter with confidential within group instead of pollutant itself
     	PollutantSearchFilter pfilternew = new PollutantSearchFilter(polGroup,
-    			null,pfilterorg.getMediumCode(),pfilterorg.getAccidental(),pfilterorg.getConfidentialIndicator());
+    			null,pfilterorg.getMediumCode(),pfilterorg.getAccidental(),1);
     	
     	PollutantreleaseSearchFilter prfilternew = new PollutantreleaseSearchFilter(filter.getReportingYearSearchFilter(), 
     			filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), pfilternew); 

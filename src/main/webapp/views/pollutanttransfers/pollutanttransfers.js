@@ -9,30 +9,41 @@ angular.module('myApp.pollutanttransfers', ['ngRoute','googlechart', 'myApp.sear
         });
     }])
 
-    .controller('PollutantTransfersCtrl', ['$scope','$filter', 'searchFilter', 'Restangular','translationService','formatStrFactory', function($scope, $filter, searchFilter, Restangular,translationService,formatStrFactory) {
+    .controller('PollutantTransfersCtrl', ['$scope','$filter', '$modal', 'searchFilter', 'Restangular','translationService','formatStrFactory', function($scope, $filter, $modal, searchFilter, Restangular,translationService,formatStrFactory) {
         $scope.pollutantPanel = true;
         $scope.pollutantPanelTitle = 'Pollutant transfers';
         $scope.searchFilter = searchFilter;
         $scope.queryParams = {};
         $scope.queryParams.ReportingYear = -1;
-        $scope.translate = function()
-        {
-        	translationService.get().then(function (data) {
-        		$scope.tr_lco = data.LOV_COUNTRY;
-        		$scope.tr_lnr = data.LOV_NUTSREGION;
-        		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
-        		$scope.tr_f = data.Facility;
-        		$scope.tr_c = data.Common;
-        		$scope.tr_p = data.Pollutant;
-        		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
-        		$scope.tr_lcon =data.LOV_CONFIDENTIALITY;
-        		$scope.tr_con =data.Confidentiality;
-        		$scope.tr_lpo = data.LOV_POLLUTANT;
-        		$scope.tr_lnr = data.LOV_NUTSREGION;
-        		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
-        	  });
-        };
-        $scope.translate();
+    	translationService.get().then(function (data) {
+    		$scope.tr_lco = data.LOV_COUNTRY;
+    		$scope.tr_lnr = data.LOV_NUTSREGION;
+    		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
+    		$scope.tr_f = data.Facility;
+    		$scope.tr_c = data.Common;
+    		$scope.tr_p = data.Pollutant;
+    		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
+    		$scope.tr_lcon =data.LOV_CONFIDENTIALITY;
+    		$scope.tr_con =data.Confidentiality;
+    		$scope.tr_lpo = data.LOV_POLLUTANT;
+    		$scope.tr_lnr = data.LOV_NUTSREGION;
+    		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
+    	  });
+        
+        /*
+         * Tab handling
+         * */
+                
+        $scope.active = {
+    		fddetails: true
+    	};
+        $scope.activateTab = function(tab) {
+        	$scope.active = {}; //reset
+        	$scope.active[tab] = true;
+    	};
+    	$scope.setActiveTab = function(tab) {
+    		$scope.active[tab] = true;
+    	};
         
         $scope.search = function() {
             $scope.currentSearchFilter = $scope.searchFilter;
@@ -46,7 +57,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute','googlechart', 'myApp.sear
             });
             $scope.regionSearch = false;
             
-            var facilitySearch = rest.all('pollutanttransferSearch');
+            var pollutanttransferSearch = rest.all('pollutanttransferSearch');
             var queryParams = {ReportingYear: $scope.currentSearchFilter.selectedReportingYear.year};
             if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.countryId) {
                 queryParams.LOV_CountryID = $scope.currentSearchFilter.selectedReportingCountry.countryId;
@@ -87,7 +98,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute','googlechart', 'myApp.sear
             }
             $scope.confidentialParams.ConfidentialIndicator = 1;
        
-            facilitySearch.getList(queryParams).then(function(response) {
+            pollutanttransferSearch.getList(queryParams).then(function(response) {
                 $scope.items = response.data;
               
                 $scope.updateSummaryData();
@@ -97,11 +108,13 @@ angular.module('myApp.pollutanttransfers', ['ngRoute','googlechart', 'myApp.sear
                 $scope.updateFacilitiesData();
             });
             
-            facilitySearch.getList($scope.confidentialParams).then(function(response) {
-                $scope.itemsConfidentiality = response.data;
-                $scope.updateConfidentialityData();
-            });
-            
+            $scope.isConfidental();
+            if ($scope.hasConfidentionalData){
+                pollutanttransferSearch.getList($scope.confidentialParams).then(function(response) {
+                    $scope.itemsConfidentiality = response.data;
+                    $scope.updateConfidentialityData();
+                });
+            }
             
         };
         
@@ -146,6 +159,22 @@ angular.module('myApp.pollutanttransfers', ['ngRoute','googlechart', 'myApp.sear
               $scope.summaryChartObject.type = 'PieChart';
         	 
         };
+
+    	/**
+    	 * Show Confidental indicator 
+    	 * */
+        $scope.isConfidental = function(){
+    		if (_.keys($scope.queryParams).length > 0){
+    			var rest = Restangular.withConfig(function(RestangularConfigurer) {
+    	            RestangularConfigurer.setFullResponse(true);
+    	        });
+    			var isconfservice = rest.one('pollutanttransferIsConfidential');
+    			isconfservice.get($scope.queryParams).then(function(response) {
+    	            $scope.hasConfidentionalData = (response.data === 'true');
+    	        });
+    		}    	
+        };
+
         
         $scope.updateFacilitiesData = function() {
             $scope.facilitiesItems = angular.copy($scope.items);
@@ -214,7 +243,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute','googlechart', 'myApp.sear
         
         $scope.updateConfidentialityData = function()
         {
-        	$scope.hasConfidentionalData = $scope.itemsConfidentiality.length > 0? true: false;
+        	//$scope.hasConfidentionalData = $scope.itemsConfidentiality.length > 0? true: false;
         	
         	$scope.itemCon = [];
         	$scope.itemConReason = [];
@@ -547,6 +576,53 @@ angular.module('myApp.pollutanttransfers', ['ngRoute','googlechart', 'myApp.sear
         		{
         			record.fcount = 1;
         			record.facount = 0;
+        			
+    				if($scope.regionSearch){
+    					if (record.lov_NUTSRegionID == undefined){
+    						if (record.lov_NUTSRLevel3ID != null){
+    							record.lov_NUTSRegionID = record.lov_NUTSRLevel3ID;
+    						}
+    						else if (record.lov_NUTSRLevel2ID != null){
+    							record.lov_NUTSRegionID = record.lov_NUTSRLevel2ID;
+    						}
+    						else if (record.lov_NUTSRLevel1ID != null){
+    							record.lov_NUTSRegionID = record.lov_NUTSRLevel1ID;
+    						}
+    					}
+    					if (record.lov_NUTSRegionID == undefined){
+    						for ( var j = 1; j < $scope.items.length; j++ ) {
+    							if ($scope.items[j].lov_NUTSRegionID != undefined){
+    	    						if ($scope.items[j].lov_NUTSRLevel3ID != null){
+    	    							record.lov_NUTSRegionID = $scope.items[j].lov_NUTSRLevel3ID;
+        								break;
+    	    						}
+    	    						else if ($scope.items[j].lov_NUTSRLevel2ID != null){
+    	    							record.lov_NUTSRegionID = $scope.items[j].lov_NUTSRLevel2ID;
+        								break;
+    	    						}
+    	    						else if ($scope.items[j].lov_NUTSRLevel1ID != null){
+    	    							record.lov_NUTSRegionID = $scope.items[j].lov_NUTSRLevel1ID;
+        								break;
+    	    						}
+    							}
+    						}
+    					}
+    					record.riverBasinDistrictCode = null;
+    					record.lov_RiverBasinDistrictID = null;
+    				}
+    				else{
+    					if (record.lov_RiverBasinDistrictID == undefined){
+    						for ( var j = 1; j < $scope.items.length; j++ ) {
+    							if ($scope.items[j].lov_RiverBasinDistrictID != undefined){
+    								record.LOV_RiverBasinDistrictID = $scope.items[j].lov_RiverBasinDistrictID;
+    								break;
+    							}
+    						}
+    					}
+    					record.nutslevel2RegionCode = null;
+    					record.lov_NUTSRegionID = null;
+    				}
+
         			group.data.push(record);
         		}        		
         	}
@@ -554,4 +630,75 @@ angular.module('myApp.pollutanttransfers', ['ngRoute','googlechart', 'myApp.sear
         	$scope.totalareasq = $scope.getSumTotal("areas","quantity");
         };
         
+        /**
+         * TimeSeries Modal popup
+         */
+        $scope.openActTSmodal = function (lov_IASectorID, lov_IAActivityID, lov_IASubActivityID) {
+        	var ct = 'pollutanttransfer';
+        	/*Convert item into Query params*/
+        	var qp = {};
+		    for(var key in $scope.queryParams) {
+		        if(key != 'LOV_IASectorID' && key != 'LOV_IAActivityID' && key != 'LOV_IASubActivityID') {
+		        	qp[key] = $scope.queryParams[key];
+		        }
+		    }
+        	
+        	if(lov_IASectorID !== null)
+        		{qp.LOV_IASectorID = lov_IASectorID;}
+        	if(lov_IAActivityID !== null)
+    			{qp.LOV_IAActivityID = lov_IAActivityID;}
+        	if(lov_IASubActivityID !== null)
+				//record.iasubActivityCode = "unspecified";
+
+    			{qp.LOV_IASubActivityID = lov_IASubActivityID;}
+ 
+        	var modalInstance = $modal.open({
+              templateUrl: 'components/timeseries/tsmodal.html',
+              controller: 'ModalTimeSeriesCtrl',
+//              size: size,
+              resolve: {
+            	  isoContType: function () {
+            		  return ct;
+            	  },
+               	  isoQP: function () {
+            		  return qp;
+            	  }
+         
+              }
+            });
+        };
+        
+        $scope.openAreaTSmodal = function (lov_CountryID, lov_NUTSRegionID, lov_RiverBasinDistrictID) {
+        	var ct = 'pollutanttransfer';
+        	/*Convert item into Query params*/
+        	var qp = {};
+		    for(var key in $scope.queryParams) {
+		        if(key != 'lov_RiverBasinDistrictID' && key != 'lov_NUTSRegionID' && key != 'lov_CountryID') {
+		        	qp[key] = $scope.queryParams[key];
+		        }
+		    }
+        	
+        	if(lov_CountryID !== null)
+        		{qp.LOV_CountryID = lov_CountryID;}
+        	if(lov_NUTSRegionID !== null)
+    			{qp.LOV_NUTSRegionID = lov_NUTSRegionID;}
+        	if(lov_RiverBasinDistrictID !== null)
+    			{qp.LOV_RiverBasinDistrictID = lov_RiverBasinDistrictID;}
+ 
+        	var modalInstance = $modal.open({
+              templateUrl: 'components/timeseries/tsmodal.html',
+              controller: 'ModalTimeSeriesCtrl',
+//              size: size,
+              resolve: {
+            	  isoContType: function () {
+            		  return ct;
+            	  },
+               	  isoQP: function () {
+            		  return qp;
+            	  }
+         
+              }
+            });
+        };
+    
     }]);

@@ -258,7 +258,7 @@ public class PollutanttransferSearchRepository {
     	PollutantSearchFilter pfilterorg = filter.getPollutantSearchFilter();
         //create new filter with confidential within group instead of pollutant itself
     	PollutantSearchFilter pfilternew = new PollutantSearchFilter(pfilterorg.getPollutantGroupID(),
-    			null,pfilterorg.getMediumCode(),pfilterorg.getAccidental(),pfilterorg.getConfidentialIndicator());
+    			null,pfilterorg.getMediumCode(),pfilterorg.getAccidental(),1);
     	
     	PollutanttransferSearchFilter ptfilternew = new PollutanttransferSearchFilter(filter.getReportingYearSearchFilter(), 
     			filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), pfilternew); 
@@ -338,7 +338,7 @@ public class PollutanttransferSearchRepository {
     	PollutantSearchFilter pfilterorg = filter.getPollutantSearchFilter();
         //create new filter with confidential within group instead of pollutant itself
     	PollutantSearchFilter pfilternew = new PollutantSearchFilter(pfilterorg.getPollutantGroupID(),
-    			null,pfilterorg.getMediumCode(),pfilterorg.getAccidental(),pfilterorg.getConfidentialIndicator());
+    			null,pfilterorg.getMediumCode(),pfilterorg.getAccidental(),1);//pfilterorg.getConfidentialIndicator()
     	
     	PollutanttransferSearchFilter ptfilternew = new PollutanttransferSearchFilter(filter.getReportingYearSearchFilter(), 
     			filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), pfilternew); 

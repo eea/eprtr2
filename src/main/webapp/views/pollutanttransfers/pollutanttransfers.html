@@ -1,7 +1,7 @@
 <div>
     <div class="row row-map">
     <div class=" col-md-12">
-    	<h3>{{tr_p.PollutantTransfersHeadline}}</h3>
+    	<h4>{{tr_p.PollutantTransfersHeadline}}</h4>
         <p>{{tr_p.AggregatedTransfersToWasteWater}}</p>
     </div>
 </div>
@@ -33,93 +33,55 @@
         </div>
 
         <div class="col-md-6">
+<div ng-show="searchResults">
+          <table>
+			  <tr >
+			    <td class="fdTitles">{{ tr_c.Pollutant }}:</td>
+			    <td>{{ currentSearchFilter.pollutantSearchFilter.selectedPollutant.name }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{tr_c.Year }}:</td>
+			    <td>{{ queryParams.ReportingYear }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{ tr_c.Area }}:</td>
+			    <td>{{ currentSearchFilter.selectedReportingCountry.name }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{ tr_c.Facilities }}:</td>
+			    <td>{{ items.length }}</td>
+			  </tr>
+			</table>
+			</br>
+      <blockquote>
+			<div class="text-info"><small>{{tr_p.AllValuesAreYearlyTransfers}}</small></div>
+      </blockquote>
+   <div  ng-hide="(hasConfidentionalData? false: true)">
+      <blockquote>
+      	<small><a class="text-danger" ng-click="activateTab('confidentiality')" ><i class="fa fa-exclamation-triangle"></i>  {{tr_f.ConfidentialityAlertLink}}</a></small>
+      </blockquote>
+   </div>
+   </div>
+
         <tabset>
-            <tab heading="Summary">
+            <tab heading="Summary"  active="active.summary" ng-click="activateTab('summary')">
             	<div ng-show="searchResults">
             
-            <div>
-				<h3>{{tr_c.PollutantTransfersSummary}}</h3>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Pollutant}}:</div>
-       			<div class="col-md-3">
-       			{{currentSearchFilter.pollutantSearchFilter.selectedPollutant.name}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Year}}:
-       			</div>
-       			<div class="col-md-1">
-       			{{queryParams.ReportingYear}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Area}}:
-       			</div>
-       			<div class="col-md-3">
-       			{{currentSearchFilter.selectedReportingCountry.name}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Facilities}}:
-       			</div>
-       			<div class="col-md-1">
-       			{{items.length}}
-       			</div>
-			</div>
-                <br/>
-                {{tr_p.AllValuesAreYearlyTransfers}}
-                <br/>
-                {{tr_p.TransfersToWastePerIndustryActivity}}
-                <div google-chart chart="summaryChartObject" style="height:600px; width:100%;">
+            <!--div>
+				<h4>{{tr_p.PollutantTransfersSummary}}</h4>
+			</div-->
+                <div>{{tr_p.TransfersToWastePerIndustryActivity}}</div>
+                <div google-chart chart="summaryChartObject" style="height:500px; width:100%;">
                 </div>
                </div>
             </tab>
            
-           <tab heading="Activities" active="activitiesTabActive">
+           <tab heading="Activities" active="active.activities" ng-click="activateTab('activities')">
            	<div ng-show="searchResults">
            
-           <div>
-				<h3>{{tr_c.PollutantTransfersActivity}}</h3>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Pollutant}}:</div>
-       			<div class="col-md-3">
-       			{{currentSearchFilter.pollutantSearchFilter.selectedPollutant.name}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Year}}:
-       			</div>
-       			<div class="col-md-1">
-       			{{queryParams.ReportingYear}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Area}}:
-       			</div>
-       			<div class="col-md-3">
-       			{{currentSearchFilter.selectedReportingCountry.name}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Facilities}}:
-       			</div>
-       			<div class="col-md-1">
-       			{{items.length}}
-       			</div>
-			</div>
-			<br />
-			{{tr_p.AllValuesAreYearlyTransfers}}
-			<br/>
+           <!--div>
+				<h4>{{tr_p.PollutantTransfersActivity}}</h4>
+			</div-->
 	
 			<table class="table table-striped table-condensed table-hover">
                     <thead>
@@ -136,7 +98,7 @@
                     <tr ng-repeat-start="item in activities | orderBy: 'key'">
                     <td>
                     <!-- use link with img as content -->
-                    <img src="images/timeseries.png" class="timesericesImage" alt="" /></td>
+                    <img src="images/timeseries.png" class="timesericesImage" alt=""  ng-click="openActTSmodal(item.key,null,null)" /></td>
                         <td>
                         	<img class="handcursor" ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
                         	<img class="handcursor" ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
@@ -154,7 +116,7 @@
                     <!-- Level2 -->
                     <tr ng-show="showing" ng-repeat-start="level2 in item.data | orderBy: 'iaactivityCode'">
                     	<td>
-                    		<img src="images/timeseries.png" class="timesericesImage" alt="" />
+                    		<img src="images/timeseries.png" class="timesericesImage" alt="" ng-click="openActTSmodal(level2.lov_IASectorID,level2.lov_IAActivityID,null)" />
                     	</td>
                     	<td>
                     		<div class="innerlevel2">
@@ -174,7 +136,7 @@
                     <!-- Level3 -->
                     <tr ng-show="showing2 && showing" ng-repeat-start="level3 in level2.sublevel | orderBy: 'iasubActivityCode'">
                     	<td>
-                    		<img src="images/timeseries.png" class="timesericesImage" alt="" />
+                    		<img src="images/timeseries.png" class="timesericesImage" alt=""  ng-click="openActTSmodal(level3.lov_IASectorID,level3.lov_IAActivityID,level3.lov_IASubActivityID)" />
                     	</td>
                     	<td>
                     		<div class="innerlevel3"> 
@@ -192,7 +154,7 @@
                     <tr ng-repeat-end ng-hide="true"></tr>       
                     <tr ng-if="$last">
                     	<td>
-                    		<img src="images/timeseries.png" class="timesericesImage" alt="" />
+                    		<img src="images/timeseries.png" class="timesericesImage" alt=""  ng-click="openActTSmodal(null,null,null)" />
                     	</td>
                     	<td>
                     		{{tr_c.Total}}
@@ -208,48 +170,12 @@
 </div>
             </tab>
             
-             <tab heading="Areas">
+             <tab heading="Areas"  active="active.areas" ng-click="activateTab('areas')">
              	<div ng-show="searchResults">
              
-             <div>
-				<h3>{{tr_c.PollutantTransAreas}}</h3>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Pollutant}}:
-       			</div>
-       			<div class="col-md-3">
-       			{{currentSearchFilter.pollutantSearchFilter.selectedPollutant.name}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Year}}:
-       			</div>
-       			<div class="col-md-1">
-       			{{queryParams.ReportingYear}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Area}}:
-       			</div>
-       			<div class="col-md-3">
-       			{{currentSearchFilter.selectedReportingCountry.name}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Facilities}}:
-       			</div>
-       			<div class="col-md-1">
-       			{{items.length}}
-       			</div>
-			</div>
-			
-			<br />
-			{{tr_p.AllValuesAreYearlyTransfers}}
-			<br/>
+             <!--div>
+				<h4>{{tr_p.PollutantTransAreas}}</h4>
+			</div-->
 
 			 <table class="table table-striped table-condensed table-hover">
                     <thead>
@@ -265,7 +191,7 @@
                     
                     <!-- First level -->
                     <tr ng-repeat-start="item in areas" >
-                        <td><img src="images/timeseries.png" class="timesericesImage" alt="" /></td>
+                        <td><img src="images/timeseries.png" class="timesericesImage" alt=""  ng-click="openAreaTSmodal(item.lov_CountryID, null, null)" /></td>
                         <td>
                         <img class="handcursor" ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
                         <img class="handcursor" ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
@@ -280,7 +206,7 @@
                     
                     <!-- Second level -->
                     <tr ng-show="showing" ng-repeat-start="item2 in item.data">
-                        	<td><img src="images/timeseries.png" class="timesericesImage" alt="" /></td>        	
+                        	<td><img src="images/timeseries.png" class="timesericesImage" alt="" ng-click="openAreaTSmodal(item2.lov_CountryID, item2.lov_NUTSRegionID, item2.lov_RiverBasinDistrictID)"  /></td>        	
                         	<td ng-if="regionSearch">
                         		<div class="innerlevel2">
                         		{{tr_lnr[item2.nutslevel2RegionCode]}}
@@ -301,7 +227,7 @@
                     <tr ng-repeat-end></tr>
                        <tr ng-if="$last">
                     	<td>
-                    		<img src="images/timeseries.png" class="timesericesImage" alt="" />
+                    		<img src="images/timeseries.png" class="timesericesImage"  ng-click="openAreaTSmodal(null, null, null)"  alt="" />
                     	</td>
                     	<td>
                     		{{tr_c.Total}}
@@ -317,91 +243,23 @@
              </div>
              </tab>
              
-            <tab heading="Area Comparison">
+            <tab heading="Area Comparison" active="active.areacomparison" ng-click="activateTab('areacomparison')">
             	<div ng-show="searchResults">
             
-            	<div>
-				<h3>{{tr_c.PollutantTransfers}}</h3>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Pollutant}}:</div>
-       			<div class="col-md-3">
-       			{{currentSearchFilter.pollutantSearchFilter.selectedPollutant.name}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Year}}:
-       			</div>
-       			<div class="col-md-1">
-       			{{queryParams.ReportingYear}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Area}}:
-       			</div>
-       			<div class="col-md-3">
-       			{{currentSearchFilter.selectedReportingCountry.name}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Facilities}}:
-       			</div>
-       			<div class="col-md-1">
-       			{{items.length}}
-       			</div>
-			</div>
-                <br/>
-             	{{tr_p.AllValuesArePercentOfEuroTotal}}
-                 <br/>
-                <div google-chart chart="areaComparisonChartObject" style="height:600px; width:100%;">
+            	<!--div>
+				<h4>{{tr_p.AreaComparison}}</h4>
+			</div-->
+                <div google-chart chart="areaComparisonChartObject" style="height:500px; width:100%;">
                 </div>
                 </div>
             </tab>
             
-            <tab heading="Facilities">
+            <tab heading="Facilities" active="active.facilities" ng-click="activateTab('facilities')">
             	<div ng-show="searchResults">
             
-            <div>
-				<h3>{{tr_c.PollutantTransFacilities}}</h3>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Pollutant}}:</div>
-       			<div class="col-md-3">
-       			{{currentSearchFilter.pollutantSearchFilter.selectedPollutant.name}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Year}}:
-       			</div>
-       			<div class="col-md-1">
-       			{{queryParams.ReportingYear}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Area}}:
-       			</div>
-       			<div class="col-md-3">
-       			{{currentSearchFilter.selectedReportingCountry.name}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Facilities}}:
-       			</div>
-       			<div class="col-md-1">
-       			{{items.length}}
-       			</div>
-			</div>
-			<br />
-			{{tr_p.AllValuesAreYearlyTransfers}}
-			<br />
+            <!--div>
+				<h4>{{tr_p.PollutantTransFacilities}}</h4>
+			</div-->
             <table class="table table-striped table-condensed table-hover">
                     <thead>
                     <tr>
@@ -413,7 +271,7 @@
                     </thead>
                     <tbody>
                     <tr ng-repeat="item in facilitiesItems">
-                        <td>{{formatText(item.facilityName, item.confidentialIndicatorFacility)}}</td>
+                        <td><a href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">{{formatText(item.facilityName, item.confidentialIndicatorFacility)}}</a></td>
                         <td>{{quantity(item)}}</td>
                         <td>{{tr_laa[item.iaactivityCode]}}</td>
                         <td>{{tr_lco[item.countryCode]}}</td>
@@ -423,36 +281,12 @@
                 </div>
             </tab>
             
-            <tab heading="Confidentiality" active="confidentialityTabActive">
+            <tab heading="Confidentiality" active="active.confidentiality" ng-click="activateTab('confidentiality')">
             	<div ng-show="searchResults">
             
-            <div>
-				<h3>{{tr_c.PollutantTransConfidentiality}}</h3>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Pollutant}}:</div>
-       			<div class="col-md-3">
-       			{{currentSearchFilter.pollutantSearchFilter.selectedPollutant.name}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Year}}:
-       			</div>
-       			<div class="col-md-1">
-       			{{queryParams.ReportingYear}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Area}}:
-       			</div>
-       			<div class="col-md-3">
-       			{{currentSearchFilter.selectedReportingCountry.name}}
-       			</div>
-			</div>
-			<br />
+            <!--div>
+				<h4>{{tr_p.PollutantTransConfidentiality}}</h4>
+			</div-->
                 <div ng-if="!hasConfidentionalData" ng-bind-html="tr_con.NoConfidentialityInformation">
                 </div>
                 <br />
