@@ -146,11 +146,12 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 				case 'pollutantrelease': 
 					$scope.title = 'Time Series - ' + $scope.tr_c.PollutantReleases;
 					$scope.ConfidentialityExplanation = $scope.tr_t.ConfidentialityExplanationPR1;
-					if ($scope.queryParams.MediumCode != undefined){
-						$scope.filter.prsel = $scope.queryParams.MediumCode[0];
-						if ($scope.queryParams.MediumCode.length > 1){
-							$scope.reqPollutantReleaseRBHeader();
-						}
+					if ($scope.queryParams.MediumCode == undefined){
+						$scope.queryParams.MediumCode = ['AIR','SOIL','WATER'];
+					}
+					$scope.filter.prsel = $scope.queryParams.MediumCode[0];
+					if ($scope.queryParams.MediumCode.length > 1){
+						$scope.reqPollutantReleaseRBHeader();
 					}
 					//Request Pollutant Release Timeseries data
 					$scope.reqPollutantReleaseSeriesData();

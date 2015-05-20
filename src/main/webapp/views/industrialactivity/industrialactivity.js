@@ -9,13 +9,13 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
         });
     }])
 
-    .controller('IndustrialActivityCtrl', ['$scope', '$filter', 'searchFilter', 'Restangular','translationService','formatStrFactory', function($scope, $filter, searchFilter, Restangular,translationService,formatStrFactory) {
+    .controller('IndustrialActivityCtrl', ['$scope', '$filter', '$modal','searchFilter', 'Restangular','translationService','formatStrFactory', function($scope, $filter, $modal, searchFilter, Restangular,translationService,formatStrFactory) {
         $scope.activityPanel = true;
         $scope.searchFilter = searchFilter;
         $scope.queryParams = {};
         $scope.queryParams.ReportingYear = -1;
         $scope.regionSearch = false;
-        $scope.summaryItems = [];
+        //$scope.summaryItems = [];
         $scope.pollutantreleaseItems = [];
         $scope.pollutanttransferItems = [];
         $scope.itemsConfidentiality =[];
@@ -51,7 +51,22 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
         };
         $scope.translate();
         
-        $scope.showresult = function(value)
+        /**
+         * Tab handling
+         * */
+                
+        $scope.active = {
+    		fddetails: true
+    	};
+        $scope.activateTab = function(tab) {
+        	$scope.active = {}; //reset
+        	$scope.active[tab] = true;
+    	};
+    	$scope.setActiveTab = function(tab) {
+    		$scope.active[tab] = true;
+    	};
+
+    	$scope.showresult = function(value)
         {
         	if($scope.itemsConfidentiality)
         	{
@@ -404,6 +419,7 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
          			$scope.summaryItems[i].dpct = 0.0;
          			$scope.summaryItems[i].upct = 0.0;
          		}
+     			$scope.summaryItems[i].wt = $scope.summaryItems[i].wastetype.replace('-','');
          		$scope.summaryItems[i].wastetype = $scope.tr_lovwt[$scope.summaryItems[i].wastetype]
             }
          	  // Create grafs
@@ -564,7 +580,66 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
       		return value+"%";
           };
           
-        
+          /**
+           * TimeSeries Modal popup
+           */
+          $scope.openPTSmodal = function (contentype, pollutantId) {
+          	/*Convert item into Query params*/
+          	var qp = {};
+  		    for(var key in $scope.queryParams) {
+  		        if(key != 'lov_PollutantID') {
+  		        	qp[key] = $scope.queryParams[key];
+  		        }
+  		    }
+          	
+          	if(pollutantId !== null)
+          		{qp.LOV_PollutantID = pollutantId;}
+   
+          	var modalInstance = $modal.open({
+                templateUrl: 'components/timeseries/tsmodal.html',
+                controller: 'ModalTimeSeriesCtrl',
+//                size: size,
+                resolve: {
+              	  isoContType: function () {
+              		  return contentype;
+              	  },
+                 	  isoQP: function () {
+              		  return qp;
+              	  }
+           
+                }
+              });
+          };
+
+          //openWTTSmodal(level2.wastetype)         
+          $scope.openWTTSmodal = function (wastetype) {
+            	var ct = 'wastetransfer';
+            	/*Convert item into Query params*/
+            	var qp = {};
+    		    for(var key in $scope.queryParams) {
+    		        if(key != 'wastetype') {
+    		        	qp[key] = $scope.queryParams[key];
+    		        }
+    		    }
+            	
+            	if(wastetype !== null)
+            		{qp.WasteType = wastetype;}
+     
+            	var modalInstance = $modal.open({
+                  templateUrl: 'components/timeseries/tsmodal.html',
+                  controller: 'ModalTimeSeriesCtrl',
+//                  size: size,
+                  resolve: {
+                	  isoContType: function () {
+                		  return ct;
+                	  },
+                   	  isoQP: function () {
+                		  return qp;
+                	  }
+             
+                  }
+                });
+            };
         
     }])
 ;

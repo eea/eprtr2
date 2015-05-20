@@ -36,7 +36,23 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         };
         
         $scope.translate();
-        $scope.$watch('mediumTypeSummary', function(value) {
+
+        /**
+         * Tab handling
+         * */
+                
+        $scope.active = {
+    		fddetails: true
+    	};
+        $scope.activateTab = function(tab) {
+        	$scope.active = {}; //reset
+        	$scope.active[tab] = true;
+    	};
+    	$scope.setActiveTab = function(tab) {
+    		$scope.active[tab] = true;
+    	};
+
+    	$scope.$watch('mediumTypeSummary', function(value) {
             if ($scope.items) {
                 $scope.updateSummaryData();
             }
