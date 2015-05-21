@@ -328,6 +328,25 @@ public class WasteTransferSearchRepository {
 					qr.get(Wastetransfer_.quantityDisposalHWOC).isNotNull(),
 					qr.get(Wastetransfer_.quantityUnspecHWOC).isNotNull());
 			break;
+		case HW:
+			cq.select(cb.construct(WastetransferSeries.class, 
+					qr.get(Wastetransfer_.reportingYear),
+					cb.count(qr.get(Wastetransfer_.facilityID)),
+					cb.sum(cb.sum(qr.<Double>get(Wastetransfer_.quantityTotalHWOC), qr.<Double>get(Wastetransfer_.quantityTotalHWIC))), 
+					cb.sum(cb.sum(qr.<Double>get(Wastetransfer_.quantityRecoveryHWOC), qr.<Double>get(Wastetransfer_.quantityRecoveryHWIC))), 
+					cb.sum(cb.sum(qr.<Double>get(Wastetransfer_.quantityDisposalHWOC), qr.<Double>get(Wastetransfer_.quantityDisposalHWIC))), 
+					cb.sum(cb.sum(qr.<Double>get(Wastetransfer_.quantityUnspecHWOC), qr.<Double>get(Wastetransfer_.quantityUnspecHWIC))))
+					);
+			p1 = cb.or(qr.get(Wastetransfer_.quantityTotalHWOC).isNotNull(), 
+					qr.get(Wastetransfer_.quantityRecoveryHWOC).isNotNull(), 
+					qr.get(Wastetransfer_.quantityDisposalHWOC).isNotNull(),
+					qr.get(Wastetransfer_.quantityUnspecHWOC).isNotNull(),
+					qr.get(Wastetransfer_.quantityTotalHWIC).isNotNull(), 
+					qr.get(Wastetransfer_.quantityRecoveryHWIC).isNotNull(), 
+					qr.get(Wastetransfer_.quantityDisposalHWIC).isNotNull(),
+					qr.get(Wastetransfer_.quantityUnspecHWIC).isNotNull());
+
+			break;
 		default:
 			break;
 		}
@@ -466,6 +485,25 @@ public class WasteTransferSearchRepository {
 					qr3.get(Wastetransfer_.quantityDisposalHWOC).isNotNull(),
 					qr3.get(Wastetransfer_.quantityUnspecHWOC).isNotNull());
 			break;
+		case HW:
+			cq3.select(cb3.construct(WastetransferSeries.class, 
+					qr3.get(Wastetransfer_.reportingYear),
+					cb3.count(qr3.get(Wastetransfer_.facilityID)),
+					cb3.sum(cb3.sum(qr3.<Double>get(Wastetransfer_.quantityTotalHWOC), qr3.<Double>get(Wastetransfer_.quantityTotalHWIC))), 
+					cb3.sum(cb3.sum(qr3.<Double>get(Wastetransfer_.quantityRecoveryHWOC), qr3.<Double>get(Wastetransfer_.quantityRecoveryHWIC))), 
+					cb3.sum(cb3.sum(qr3.<Double>get(Wastetransfer_.quantityDisposalHWOC), qr3.<Double>get(Wastetransfer_.quantityDisposalHWIC))), 
+					cb3.sum(cb3.sum(qr3.<Double>get(Wastetransfer_.quantityUnspecHWOC), qr3.<Double>get(Wastetransfer_.quantityUnspecHWIC))))
+					);
+			p1 = cb3.or(qr3.get(Wastetransfer_.quantityTotalHWOC).isNotNull(), 
+					qr3.get(Wastetransfer_.quantityRecoveryHWOC).isNotNull(), 
+					qr3.get(Wastetransfer_.quantityDisposalHWOC).isNotNull(),
+					qr3.get(Wastetransfer_.quantityUnspecHWOC).isNotNull(),
+					qr3.get(Wastetransfer_.quantityTotalHWIC).isNotNull(), 
+					qr3.get(Wastetransfer_.quantityRecoveryHWIC).isNotNull(), 
+					qr3.get(Wastetransfer_.quantityDisposalHWIC).isNotNull(),
+					qr3.get(Wastetransfer_.quantityUnspecHWIC).isNotNull());
+
+			break;
 		default:
 			break;
 		}
@@ -532,6 +570,25 @@ public class WasteTransferSearchRepository {
 					qr4.get(Wastetransfer_.quantityRecoveryHWOC).isNotNull(), 
 					qr4.get(Wastetransfer_.quantityDisposalHWOC).isNotNull(),
 					qr4.get(Wastetransfer_.quantityUnspecHWOC).isNotNull());
+			break;
+		case HW:
+			cq4.select(cb4.construct(WastetransferSeries.class, 
+					qr4.get(Wastetransfer_.reportingYear),
+					cb4.count(qr4.get(Wastetransfer_.facilityID)),
+					cb4.sum(cb4.sum(qr4.<Double>get(Wastetransfer_.quantityTotalHWOC), qr4.<Double>get(Wastetransfer_.quantityTotalHWIC))), 
+					cb4.sum(cb4.sum(qr4.<Double>get(Wastetransfer_.quantityRecoveryHWOC), qr4.<Double>get(Wastetransfer_.quantityRecoveryHWIC))), 
+					cb4.sum(cb4.sum(qr4.<Double>get(Wastetransfer_.quantityDisposalHWOC), qr4.<Double>get(Wastetransfer_.quantityDisposalHWIC))), 
+					cb4.sum(cb4.sum(qr4.<Double>get(Wastetransfer_.quantityUnspecHWOC), qr4.<Double>get(Wastetransfer_.quantityUnspecHWIC))))
+					);
+			p2 = cb4.or(qr4.get(Wastetransfer_.quantityTotalHWOC).isNotNull(), 
+					qr4.get(Wastetransfer_.quantityRecoveryHWOC).isNotNull(), 
+					qr4.get(Wastetransfer_.quantityDisposalHWOC).isNotNull(),
+					qr4.get(Wastetransfer_.quantityUnspecHWOC).isNotNull(),
+					qr4.get(Wastetransfer_.quantityTotalHWIC).isNotNull(), 
+					qr4.get(Wastetransfer_.quantityRecoveryHWIC).isNotNull(), 
+					qr4.get(Wastetransfer_.quantityDisposalHWIC).isNotNull(),
+					qr4.get(Wastetransfer_.quantityUnspecHWIC).isNotNull());
+
 			break;
 		default:
 			break;
@@ -600,6 +657,25 @@ public class WasteTransferSearchRepository {
 						qr5.get(Wastetransfer_.quantityRecoveryHWOC).isNotNull(), 
 						qr5.get(Wastetransfer_.quantityDisposalHWOC).isNotNull(),
 						qr5.get(Wastetransfer_.quantityUnspecHWOC).isNotNull());
+				break;
+			case HW:
+				cq5.select(cb5.construct(WastetransferSeries.class, 
+						qr5.get(Wastetransfer_.reportingYear),
+						cb5.count(qr5.get(Wastetransfer_.facilityID)),
+						cb5.sum(cb5.sum(qr5.<Double>get(Wastetransfer_.quantityTotalHWOC), qr5.<Double>get(Wastetransfer_.quantityTotalHWIC))), 
+						cb5.sum(cb5.sum(qr5.<Double>get(Wastetransfer_.quantityRecoveryHWOC), qr5.<Double>get(Wastetransfer_.quantityRecoveryHWIC))), 
+						cb5.sum(cb5.sum(qr5.<Double>get(Wastetransfer_.quantityDisposalHWOC), qr5.<Double>get(Wastetransfer_.quantityDisposalHWIC))), 
+						cb5.sum(cb5.sum(qr5.<Double>get(Wastetransfer_.quantityUnspecHWOC), qr5.<Double>get(Wastetransfer_.quantityUnspecHWIC))))
+						);
+				p3 = cb5.or(qr5.get(Wastetransfer_.quantityTotalHWOC).isNotNull(), 
+						qr5.get(Wastetransfer_.quantityRecoveryHWOC).isNotNull(), 
+						qr5.get(Wastetransfer_.quantityDisposalHWOC).isNotNull(),
+						qr5.get(Wastetransfer_.quantityUnspecHWOC).isNotNull(),
+						qr5.get(Wastetransfer_.quantityTotalHWIC).isNotNull(), 
+						qr5.get(Wastetransfer_.quantityRecoveryHWIC).isNotNull(), 
+						qr5.get(Wastetransfer_.quantityDisposalHWIC).isNotNull(),
+						qr5.get(Wastetransfer_.quantityUnspecHWIC).isNotNull());
+
 				break;
 			default:
 				break;
@@ -670,6 +746,25 @@ public class WasteTransferSearchRepository {
 						qr6.get(Wastetransfer_.quantityRecoveryHWOC).isNotNull(), 
 						qr6.get(Wastetransfer_.quantityDisposalHWOC).isNotNull(),
 						qr6.get(Wastetransfer_.quantityUnspecHWOC).isNotNull());
+				break;
+			case HW:
+				cq6.select(cb6.construct(WastetransferSeries.class, 
+						qr6.get(Wastetransfer_.reportingYear),
+						cb6.count(qr6.get(Wastetransfer_.facilityID)),
+						cb6.sum(cb6.sum(qr6.<Double>get(Wastetransfer_.quantityTotalHWOC), qr6.<Double>get(Wastetransfer_.quantityTotalHWIC))), 
+						cb6.sum(cb6.sum(qr6.<Double>get(Wastetransfer_.quantityRecoveryHWOC), qr6.<Double>get(Wastetransfer_.quantityRecoveryHWIC))), 
+						cb6.sum(cb6.sum(qr6.<Double>get(Wastetransfer_.quantityDisposalHWOC), qr6.<Double>get(Wastetransfer_.quantityDisposalHWIC))), 
+						cb6.sum(cb6.sum(qr6.<Double>get(Wastetransfer_.quantityUnspecHWOC), qr6.<Double>get(Wastetransfer_.quantityUnspecHWIC))))
+						);
+				p4 = cb6.or(qr6.get(Wastetransfer_.quantityTotalHWOC).isNotNull(), 
+						qr6.get(Wastetransfer_.quantityRecoveryHWOC).isNotNull(), 
+						qr6.get(Wastetransfer_.quantityDisposalHWOC).isNotNull(),
+						qr6.get(Wastetransfer_.quantityUnspecHWOC).isNotNull(),
+						qr6.get(Wastetransfer_.quantityTotalHWIC).isNotNull(), 
+						qr6.get(Wastetransfer_.quantityRecoveryHWIC).isNotNull(), 
+						qr6.get(Wastetransfer_.quantityDisposalHWIC).isNotNull(),
+						qr6.get(Wastetransfer_.quantityUnspecHWIC).isNotNull());
+
 				break;
 			default:
 				break;

@@ -3,12 +3,28 @@
 	<!-- Left panel master-->
 	<div class="col-md-12">
 		<!-- Left panel welcome-->
-			<h2>E-PRTR Diffuse Emissions</h2>
+			<h2>Releases from Diffuse Sources </h2>
 			<div class="panel panel-default">
 		  		<div class="panel-body">
-					<p >{{aboutemissions}}</p>
+			  		<div class="col-md-12" ng-bind-html="aboutdiffemissions"></div>
 				</div>
 			</div>
 	</div>
   </div>
+  <div class="row">
+		<div class="col-md-6">
+		    <div class="panel bg-border-blue">
+		      <div class="panel-heading bg-header-blue">
+		      	<em class="white fa fa-bar-chart fa-2x"></em>  <a class="white" href="#diffemissionsair">Releases to air</a></div>
+		      <div class="panel-body">{{descair}}</div>
+		    </div>
+	   </div>
+		<div class="col-md-6">
+		    <div class="panel bg-border-lightblue">
+		      <div class="panel-heading bg-header-lightblue">
+		      	<em class="white fa fa-bar-chart fa-2x"></em>  <a class="white" href="#diffemissionswater">Releases to water</a></div>
+		      <div class="panel-body">{{descwater}}</div>
+		    </div>
+	   </div>
   </div>
+</div>

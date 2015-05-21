@@ -38,7 +38,7 @@
          	</label>
          	</div>
        </div>
-   <div class="row" style="padding-top:10px;" ng-if="content == 'wastetransfer' && queryParams.WasteTypeCode != undefined && queryParams.WasteTypeCode.length > 1">
+   <div class="row" style="padding-top:10px;" ng-if="showwastetype">
         	<div class="col-md-12"><strong>{{tr_w.ShowFacilitiesWithTransferOfWasteType}}</strong></br> 
         	<label class="col-md-4 radio-simple">
 	         <input type="radio" name="wtsel" ng-model="filter.wtsel" value="NONHW" /> {{tr_c.NoHazardouswaste}} </BR> ({{quantityNONHW | number}} {{tr_c.Facilities}})

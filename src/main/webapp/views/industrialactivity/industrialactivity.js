@@ -623,7 +623,7 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
     		    }
             	
             	if(wastetype !== null)
-            		{qp.WasteType = wastetype;}
+            		{qp.WasteTypeCode = wastetype;}
      
             	var modalInstance = $modal.open({
                   templateUrl: 'components/timeseries/tsmodal.html',

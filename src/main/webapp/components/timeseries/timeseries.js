@@ -35,6 +35,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 	$scope.headitms = [];
 	$scope.showalert = false;
 	$scope.showGroup = false;
+	$scope.showwastetype = false;
 	$scope.base = {};
 	$scope.filter = {}
 	$scope.fFactory = formatStrFactory;
@@ -167,19 +168,24 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 				case 'wastetransfer': 
 					$scope.title = 'Time Series - ' + $scope.tr_c.WasteTransfers;
 					$scope.ConfidentialityExplanation = $scope.tr_t.ConfidentialityExplanationWT1;
+					//WasteTypeCode is not undefined and is array
 					if ($scope.queryParams.WasteTypeCode != undefined){
-
-						for (var i=0; i< $scope.queryParams.WasteTypeCode.length; i++) {
-							$scope.queryParams.WasteTypeCode[i] = $scope.queryParams.WasteTypeCode[i].replace("-","");
-						};				
-						$scope.filter.wtsel = $scope.queryParams.WasteTypeCode[0];
-						if ($scope.queryParams.WasteTypeCode.length > 1){
-							$scope.reqWasteTransferRBHeader();
+						if (typeof $scope.queryParams.WasteTypeCode !== 'string' ){
+							for (var i=0; i< $scope.queryParams.WasteTypeCode.length; i++) {
+								$scope.queryParams.WasteTypeCode[i] = $scope.queryParams.WasteTypeCode[i].replace("-","");
+							};				
+							$scope.filter.wtsel = $scope.queryParams.WasteTypeCode[0];
+							if ($scope.queryParams.WasteTypeCode.length > 1){
+								$scope.showwastetype = true;
+								$scope.reqWasteTransferRBHeader();
+							}
+						}
+						//if string then 
+						else{
+							$scope.filter.wtsel = $scope.queryParams.WasteTypeCode;
+				    		$scope.reqWasteTransferSeriesData();
 						}
 					}
-					//$scope.filter.wtsel = 'NONHW';
-					//Request data
-					//$scope.reqWasteTransferSeriesData();
 					break;
 			}
 		}
@@ -1156,12 +1162,18 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 				var wast = {'order':6, 'clss':'fdTitles'};
 				wast.title = $scope.tr_c["WasteTransfers"];
 				var wt = [];
-				for (var i=0; i< $scope.queryParams.WasteTypeCode.length; i++) {
-					var w = $scope.queryParams.WasteTypeCode[i];
-		    		if (w != 'HW'){
-		    			wt.push($scope.tr_lwt[w]);
-		    		}
-		    	}
+				if (typeof $scope.queryParams.WasteTypeCode !== 'string'){
+					for (var i=0; i< $scope.queryParams.WasteTypeCode.length; i++) {
+						var w = $scope.queryParams.WasteTypeCode[i];
+			    		if (w != 'HW'){
+			    			wt.push($scope.tr_lwt[w]);
+			    		}
+			    	}
+					
+				}
+				else{
+	    			wt.push($scope.tr_lwt[$scope.queryParams.WasteTypeCode]);
+				}
 		    	if (wt.length > 0){
 		    		wast.val = wt.join(", ");
 					$scope.headitms.push(wast);
