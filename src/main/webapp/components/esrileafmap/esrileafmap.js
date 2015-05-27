@@ -126,21 +126,21 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 					var arrfQue = [];
 					var arrmed = [];
 					if (queryparams['MediumCode'] ){
-						for (var med in qp['MediumCode']){
+						for (var med in queryparams['MediumCode']){
 							arrmed.push("(MediumCode = '" + med + "')");
 						}
 						arrfQue.push('('+arrmed.join(" OR ")+')');
 					}
 					var arrwt = [];
 					if (queryparams['WasteTypeCode'] ){
-						for (var wt in qp['WasteTypeCode']){
+						for (var wt in queryparams['WasteTypeCode']){
 							arrwt.push("(WasteTypeCode = '" + wt + "')");
 						}
 						arrfQue.push('('+arrwt.join(" OR ")+')');
 					}
 					var arrwtr = [];
 					if (queryparams['WasteTreatmentCode'] ){
-						for (var wtr in qp['WasteTreatmentCode']){
+						for (var wtr in queryparams['WasteTreatmentCode']){
 							arrwtr.push("(WasteTreatmentCode = '" + wtr + "')");
 						}
 						arrfQue.push('('+arrwtr.join(" OR ")+')');
@@ -403,13 +403,22 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 		templateUrl: 'components/esrileafmap/esrileafmap.html',
 		link: function(scope, element, attrs){
 			scope.$watch('queryparams', function() {
-	        	scope.setwhere(scope.buildWhere(scope.queryparams));
+				if(scope.queryparams !== undefined){
+					scope.setwhere(scope.buildWhere(scope.queryparams));
+				}
 		    },true);
 			scope.$watch('wherestr', function() {
-	        	scope.setwhere(scope.wherestr);
+				if (scope.wherestr !== undefined){
+					scope.setwhere(scope.wherestr);
+				}
 		    },true);
 			scope.$watch('contenttype', function() {
-	        	scope.setwhere(scope.buildWhere(scope.queryparams));
+				if(scope.queryparams !== undefined){
+					scope.setwhere(scope.buildWhere(scope.queryparams));
+				}
+				else if (scope.wherestr !== undefined){
+					scope.setwhere(scope.wherestr);
+				}
 		    },true);
 		}
 	};

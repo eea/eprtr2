@@ -1,14 +1,47 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
 	<!-- Left panel master-->
 	<div class="col-md-12">
 		<!-- Left panel welcome-->
-			<h2>E-PRTR Diffuse Emissions Air</h2>
-			<div class="panel panel-default">
-		  		<div class="panel-body">
-					<p >{{aboutemissions}}</p>
-				</div>
-			</div>
+			<h3>{{de.DiffuseSourcesAirPageHeader}}</h3>
+			<div ng-bind-html="de.aSubheadline"></div>
+</div>
+<p>&nbsp;</p>
+</div>
+
+ <div class="row">
+        <div class="search_form col-md-3">
+            <div class="panel panel-info">
+                <div class="panel-heading">Search</div>
+                <div class="panel-body">
+                    <div search-emission></div>
+                </div>
+            </div>
+        </div>
+
+ <div class="col-md-5">
+		<small><h4>{{title}}</h4></small>
+		  <tabset>
+            <tab heading="{{de.GeneralInfo}}" active="active.generalinfo" ng-click="activateTab('generalinfo')">
+	<div ng-show="searchResults">
+	<div ng-bind-html="generalinfo"></div>
+		</div>
+		</tab>
+            <tab heading="{{de.Methodology}}" active="active.methodology" ng-click="activateTab('methodology')">
+	<div ng-show="searchResults">
+	<div ng-bind-html="methodology"></div>
+		</div>
+		</tab>
+            <tab heading="{{de.SourceData}}" active="active.sourcedata" ng-click="activateTab('sourcedata')">
+	<div ng-show="searchResults">
+	<div ng-bind-html="sourcedata"></div>
+		</div>
+		</tab>
+</tabset>		
+</div>
+
+   <div class="col-md-4" style="height:500px;">
+       <emission-map-air layerid="searchFilter.selectedLayer" />
+   </div>
 	</div>
-  </div>
   </div>

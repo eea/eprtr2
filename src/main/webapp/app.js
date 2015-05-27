@@ -26,6 +26,7 @@ var myApp = angular.module('myApp', [
         'myApp.diffuseemissions',
         'myApp.diffemissionsair',
         'myApp.diffemissionswater',
+        'myApp.emissionmapair',
         'myApp.pollutantinfo'
     ])
     .config(['$routeProvider', function($routeProvider) {
