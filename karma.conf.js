@@ -11,7 +11,6 @@ module.exports = function(config){
       'src/main/webapp/bower_components/angular-loader/angular-loader.js',
       'src/main/webapp/bower_components/angular-mocks/angular-mocks.js',
       'src/main/webapp/bower_components/angular-sanitize/angular-sanitize.js',
-      'src/main/webapp/bower_components/angular-ui-grid/ui-grid.js',
       'src/main/webapp/bower_components/bootstrap/dist/js/bootstrap.js',
       'src/main/webapp/bower_components/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js',
       'src/main/webapp/bower_components/lodash/dist/lodash.compat.js',

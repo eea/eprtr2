@@ -28,7 +28,7 @@ angular.module('myApp.wasteSearchFilter', ['restangular', 'myApp.search-filter']
 
                 var type = [];
                 if (this.nonHazardousWasteTransfer) {
-                    type = type.concat('NON-HW');
+                    type = type.concat('NONHW');
                 }
                 if (this.hazardousWasteCountryTransfer) {
                     type = type.concat('HWIC');

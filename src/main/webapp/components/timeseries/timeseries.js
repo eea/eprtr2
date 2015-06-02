@@ -1341,7 +1341,21 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googl
 
     return reportingYears;
 }])
-  .controller('ModalTimeSeriesCtrl', function ($scope, $modalInstance, isoContType, isoQP) {
+  .controller('ModalTimeSeriesCtrl', function ($scope, $modalInstance, translationService, isoContType, isoQP) {
+	translationService.get('Common').then(function (data) {
+		switch(isoContType){
+		case 'pollutantrelease': 
+			$scope.title = 'Time Series - ' + data.PollutantReleases;
+			break;
+		case 'pollutanttransfer': 
+			$scope.title = 'Time Series - ' + data.PollutantTransfers;
+			break;
+
+		case 'wastetransfer': 
+			$scope.title = 'Time Series - ' + data.WasteTransfers;
+			break;
+		}
+	});
   $scope.isoContType = isoContType;
   $scope.isoQP = isoQP;
   $scope.ok = function () {

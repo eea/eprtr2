@@ -640,5 +640,22 @@ public class Wastetransfer implements Serializable,Cloneable{
 	public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
+	
+	public void setTotal(){
+		this.total =  getQuantityTotalHWIC() + getQuantityTotalHWOC() + getQuantityTotalNONHW(); 
+	}
+	
+	public void setRecovery(){
+		this.recovery =  getQuantityRecoveryHWIC() + getQuantityRecoveryHWOC() + getQuantityRecoveryNONHW(); 
+	}
+	
+	public void setDisposal(){
+		this.disposal =  getQuantityDisposalHWIC() + getQuantityDisposalHWOC() + getQuantityDisposalNONHW(); 
+	}
+
+	public void setUnspec(){
+		this.unspec = getQuantityUnspecHWIC() + getQuantityUnspecHWOC() + getQuantityUnspecNONHW(); 
+	}
+
 		
 }

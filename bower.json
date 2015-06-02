@@ -11,7 +11,6 @@
     "angular-loader": "1.2.x",
     "angular-mocks": "~1.2.x",
     "angular-sanitize": "1.2.x",
-    "angular-ui-grid":"*",
 	"bootstrap": "3.3.2",
 	"bootstrap3-dialog":"*",
     "html5-boilerplate": "~4.3.0",

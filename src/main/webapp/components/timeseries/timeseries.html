@@ -3,8 +3,8 @@
 
 
    <div class="row">
-      <div class="col-md-8 " style="display: inline-block; vertical-align: bottom;">
-          <h2><small>{{title}}</small></h2>
+      <div class="col-md-10 " style="display: inline-block; vertical-align: bottom;">
+          <!--h2><small>{{title}}</small></h2 -->
           <table>
 			  <tr ng-repeat="x in headitms | orderBy : 'order'" >
 			    <td class="{{x.clss}}">{{ x.title }}:</td>
@@ -13,7 +13,7 @@
 			</table>
 		    </br>
       </div>
-      <div class="col-md-4 text-right" style="padding-top:5px;">
+      <div class="col-md-2 text-right" style="padding-top:5px;">
       	  <!-- <button class="btn btn-default btn-xs" title="Print"><i class="fa fa-print"></i></button> -->
 	      <button class="btn btn-default btn-xs" title="Download"><i class="fa fa-download"></i></button>
 	  </div>

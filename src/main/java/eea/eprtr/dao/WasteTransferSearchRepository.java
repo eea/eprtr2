@@ -46,6 +46,30 @@ public class WasteTransferSearchRepository {
 		return results;
 	}
 
+	//Used for pager
+	public long getFacilityCount(WastetransferSearchFilter filter) {
+		List<Wastetransfer> res = getWastetransfer(filter);
+		return res.size();
+	}
+	
+	public List<Wastetransfer> getWastetransfer(WastetransferSearchFilter filter, OrderBy orderBy, QueryPager pager) {
+		
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		
+		CriteriaQuery<Wastetransfer> cq = cb.createQuery(Wastetransfer.class);
+		Root<Wastetransfer> qr = cq.from(Wastetransfer.class);
+		cq.select(qr);
+		cq.where(filter.buildWhereClause(cb, qr));
+		
+		orderBy.apply(cb, cq, qr);
+		
+		TypedQuery<Wastetransfer> q = em.createQuery(cq);
+		pager.apply(q);
+
+		List<Wastetransfer> results = q.getResultList();
+		return results;
+	}
+
 	public Wastetransfer getWastetransferByID(Integer facilityreportid) {
 		
 		CriteriaBuilder cb = em.getCriteriaBuilder();

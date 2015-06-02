@@ -117,7 +117,7 @@ public class ConfidentialController {
 			String type ="";
 			if( PO.isConfidentialIndicatorNONHW())
 			{
-				type = "NON-HW";
+				type = "NONHW";
 			}else if(PO.isConfidentialIndicatorHWIC()){
 				type= "HWIC";
 			}else if(PO.isConfidentialIndicatorHWOC()){

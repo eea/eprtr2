@@ -15,16 +15,11 @@
         </div>
     </div>
     <div  class="form-group">
-        <label class="control-label">Treatment</label>
-        <div class="checkbox">
-            <label><input type="checkbox" name="recoveryTreatmentCheck" id="recoveryTreatmentCheck_0" ng-model="wasteSearchFilter.recoveryTreatment"> Recovery</label>
-        </div>
-        <div class="checkbox">
-            <label><input type="checkbox" name="disposalTreatmentCheck" id="disposalTreatmentCheck_0" ng-model="wasteSearchFilter.disposalTreatment"> Disposal</label>
-        </div>
-        <div class="checkbox">
-            <label><input type="checkbox" name="unspecifiedTreatmentCheck" id="unspecifiedTreatmentCheck_0" ng-model="wasteSearchFilter.unspecifiedTreatment"> Unspecified</label>
-        </div>
+        <label class="control-label">Treatment</label></br>
+        <label class="checkbox-inline" for="recoveryTreatmentCheck_0" ><input type="checkbox" name="recoveryTreatmentCheck" id="recoveryTreatmentCheck_0" ng-model="wasteSearchFilter.recoveryTreatment"> Recovery</label>
+        <label class="checkbox-inline" for="disposalTreatmentCheck_0" ><input type="checkbox" name="disposalTreatmentCheck" id="disposalTreatmentCheck_0" ng-model="wasteSearchFilter.disposalTreatment"> Disposal</label>
+        <label class="checkbox-inline" for="unspecifiedTreatmentCheck_0" ><input type="checkbox" name="unspecifiedTreatmentCheck" id="unspecifiedTreatmentCheck_0" ng-model="wasteSearchFilter.unspecifiedTreatment"> Unspecified</label>
+        
     </div>
     <div class="form-group" ng-show="showReceivingCountryInputField">
         <label class="control-label" for="inputReceivingCountry">Receiving Country</label>

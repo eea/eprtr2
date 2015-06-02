@@ -57,7 +57,34 @@ public class WasteSearchFilter {
 	public Predicate buildWhereClauseWastetransfer(CriteriaBuilder cb, Root<Wastetransfer> qr) {
 		Predicate whereClause = cb.conjunction();
 		if (wasteTypeCode != null) {
-		//	whereClause.getExpressions().add(qr.get(Wastetransfer_.wasteTypeCode).in(wasteTypeCode));
+			Predicate wasteTypeWhereClause = cb.disjunction();
+			for(String code : wasteTypeCode)
+			{
+				switch (code) {
+					case "NONHW":
+						wasteTypeWhereClause.getExpressions().add(cb.greaterThan(qr.get(Wastetransfer_.quantityTotalNONHW), 0.0));
+						break;
+					case "HWIC":
+						wasteTypeWhereClause.getExpressions().add(cb.greaterThan(qr.get(Wastetransfer_.quantityTotalHWIC), 0.0));
+						break;
+					case "HWOC":
+						wasteTypeWhereClause.getExpressions().add(cb.greaterThan(qr.get(Wastetransfer_.quantityTotalHWOC), 0.0));
+						break;
+					case "HW":
+						wasteTypeWhereClause.getExpressions().add(cb.or(cb.greaterThan(qr.get(Wastetransfer_.quantityTotalNONHW), 0.0)
+								,cb.greaterThan(qr.get(Wastetransfer_.quantityTotalNONHW), 0.0)));
+						break;
+					default:
+						break;
+				}
+			}
+			if (wasteTypeWhereClause.getExpressions().size() > 0) {
+				whereClause.getExpressions().add(wasteTypeWhereClause);
+			} else {
+				whereClause.getExpressions().add(cb.or());
+			}
+
+			
 		}
 		if (wasteTreatmentCode != null) {
 			for(String code : wasteTreatmentCode)

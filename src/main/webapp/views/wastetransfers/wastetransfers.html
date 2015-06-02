@@ -32,39 +32,37 @@
         </div>
 
 	<div class="search_form col-md-6">
-        <tabset>
-            <tab heading="Summary" ng-click="getTabData('SUMMARY')">
             <div ng-show="searchResults">
-           		 <div>
-				<h3>{{tr_wt.WasteTransferSummery}}</h3>
-			</div>
+   <div  ng-hide="(hasConfidentionalData? false: true)">
+      <blockquote>
+      	<small><a class="text-danger" ng-click="activateTab('confidentiality')" ><i class="fa fa-exclamation-triangle"></i>  {{tr_f.ConfidentialityAlertLink}}</a></small>
+      </blockquote>
+   </div>
+</div>
+        <tabset>
+            <tab heading="Summary" ng-click="getTabData('SUMMARY');activateTab('summary')" active="active.summary">
+            <div ng-show="searchResults">
 			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Year}}:
-       			</div>
-       			<div class="col-md-1">
-       			{{queryParams.ReportingYear}}
-       			</div>
+			</br>
+          <table>
+			  <tr >
+			    <td class="fdTitles">{{tr_c.Year }}:</td>
+			    <td>{{ queryParams.ReportingYear }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{ tr_c.Area }}:</td>
+			    <td>{{ currentSearchFilter.selectedReportingCountry.name }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{tr_c.Facilities}}:</td>
+			    <td>{{getTypeCount(summaryItems)}}</td>
+			  </tr>
+			</table>
+			</br>
+      <blockquote>
+			<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
+      </blockquote>
 			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Area}}:
-       			</div>
-       			<div class="col-md-3">
-       			{{currentSearchFilter.selectedReportingCountry.name}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Facilities}}:
-       			</div>
-       			<div class="col-md-1">
-       			{{getTypeCount(summaryItems)}}
-       			</div>
-			</div>
-			<br />
-			{{tr_wt.AllValuesAreYearlyTransfers}}
-			<br/>
 			<div class="row">
 			<div class="col-md-6">
 				<div google-chart chart="summaryChartObject2" style="height:400px; width:100%;">
@@ -91,7 +89,7 @@
                     <tbody>
                      <tr ng-repeat="item in summaryItems">
                      <td>
-                     <a href=""><img src="images/timeseries.png" class="timesericesImage" alt="" /></a>
+                     <a href=""><img src="images/timeseries.png" class="timesericesImage" ng-click="openSumTSmodal(item.wt)" alt="" /></a>
                      {{item.wastetype}}
                      </td>
                      <td>
@@ -116,38 +114,30 @@
             </div>
            	</tab>
            	
-           	 <tab heading="Activities" ng-click="getTabData('Activities')">
+           	 <tab heading="Activities" ng-click="getTabData('Activities');activateTab('activities')" active="active.activities">
            	 <div ng-show="searchResults">
-           	 <div>
-				<h3>{{tr_wt.WasteTransferActivities}}</h3>
-			</div>
 			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Year}}:
-       			</div>
-       			<div class="col-md-1">
-       			{{queryParams.ReportingYear}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Area}}:
-       			</div>
-       			<div class="col-md-3">
-       			{{currentSearchFilter.selectedReportingCountry.name}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Facilities}}:
-       			</div>
-       			<div class="col-md-1">
-       			{{getTotalCount("activities","facilityCount")}}
-       			</div>
-			</div>
-			<br />
-			{{tr_wt.AllValuesAreYearlyTransfers}}
-			<br/>
+			</br>
+          <table>
+          			  <tr >
+			    <td class="fdTitles">{{tr_c.Year }}:</td>
+			    <td>{{ queryParams.ReportingYear }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{ tr_c.Area }}:</td>
+			    <td>{{ currentSearchFilter.selectedReportingCountry.name }}</td>
+			  </tr>
+          
+			  <tr >
+			    <td class="fdTitles">{{tr_c.Facilities}}:</td>
+			    <td>{{getTotalCount("activities","facilityCount")}}</td>
+			  </tr>
+			</table>
+			</br>
+      <blockquote>
+			<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
+      </blockquote>
+      
 			<table class="table table-striped table-condensed table-hover">
                     <thead>
                     <tr>
@@ -164,7 +154,7 @@
                     <!-- Level1 -->
                     <tr ng-repeat-start="item in activities | orderBy: 'key'">
        				<td>
-       				<a href=""><img src="images/timeseries.png" class="timesericesImage" alt="" /></a>
+       				<a href=""><img src="images/timeseries.png" class="timesericesImage" alt="" ng-click="openActTSmodal(item.key,null,null)"  /></a>
                         	<img class="handcursor" ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
                         	<img class="handcursor" ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
                         	<a ng-click="showing=!showing">{{tr_laa[item.key]}}</a>         	
@@ -206,7 +196,7 @@
                     <!-- Level2 -->
                     <tr ng-show="showing" ng-repeat-start="level2 in item.data | orderBy: 'iaActivityCode'">
                     	<td>
-                    	<a href=""><img src="images/timeseries.png" class="timesericesImage" alt="" /></a>
+                    	<a href=""><img src="images/timeseries.png" class="timesericesImage" ng-click="openActTSmodal(level2.lov_IASectorID,level2.lov_IAActivityID,null)"  alt="" /></a>
                     		<div class="innerlevel2">
                     		<img class="handcursor" ng-click="showing2=!showing2" ng-show="!showing2 && level2.sublevel" src="images/plus.gif" />
                         	<img class="handcursor" ng-click="showing2=!showing2" ng-show="showing2" src="images/minus.gif" /> 
@@ -250,6 +240,7 @@
                     <!-- Level3 -->
                     <tr ng-show="showing2 && showing" ng-repeat-start="level3 in level2.sublevel | orderBy: 'iaSubActivityCode'">
                     	<td>
+  	                    	<a href=""><img src="images/timeseries.png" class="timesericesImage" ng-click="openActTSmodal(level3.lov_IASectorID,level3.lov_IAActivityID,level3.lov_IASubActivityID)"  alt="" /></a>
                     		<div class="innerlevel3"> 
                     		{{tr_laa[level3.iaSubActivityCode]}}
                     		</div>
@@ -293,7 +284,7 @@
                     <tr ng-if="$last">
                     	<td>
                     	<a href="">
-                    	<img src="images/timeseries.png" class="timesericesImage" alt="" />
+                    	<img src="images/timeseries.png" class="timesericesImage" ng-click="openActTSmodal(null,null,null)" alt="" />
                     	</a>
                     	{{tr_c.Total}}
                     	</td>
@@ -334,43 +325,30 @@
                     <tr ng-repeat-end ng-hide="true"></tr>
                     </tbody>
                 </table>
-                </div>
+                </div></div>
            	</tab>
            	  	
-           	<tab heading="Areas" ng-click="getTabData('areas')">
+           	<tab heading="Areas" ng-click="getTabData('areas');activateTab('areas')" active="active.areas">
            	<div ng-show="searchResults">
-           	   <div>
-				<h3>{{tr_wt.WasteTransferAreas}}</h3>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Year}}:
-       			</div>
-       			<div class="col-md-1">
-       			{{queryParams.ReportingYear}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Area}}:
-       			</div>
-       			<div class="col-md-3">
-       			{{currentSearchFilter.selectedReportingCountry.name}}
-       			</div>
-			</div>
-			<div class="row">
-			   	<div class="col-md-1">
-       			{{tr_c.Facilities}}:
-       			</div>
-       			<div class="col-md-1">
-       			{{getTotalCount("areas","facilityCount")}}
-       			</div>
-			</div>
-			
-			<br />
-			{{tr_wt.AllValuesAreYearlyTransfers}}
-			<br/>
-
+			</br>
+          <table>
+			  <tr >
+			    <td class="fdTitles">{{tr_c.Year }}:</td>
+			    <td>{{ queryParams.ReportingYear }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{ tr_c.Area }}:</td>
+			    <td>{{ currentSearchFilter.selectedReportingCountry.name }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{tr_c.Facilities}}:</td>
+			    <td>{{getTotalCount("areas","facilityCount")}}</td>
+			  </tr>
+			</table>
+			</br>
+      <blockquote>
+			<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
+      </blockquote>
 			 <table class="table table-striped table-condensed table-hover">
                     <thead>
                     <tr>
@@ -388,7 +366,9 @@
                     <!-- First level -->
                     <tr ng-repeat-start="item in areas" >
                         <td>
-                        <a href=""><img src="images/timeseries.png" class="timesericesImage" alt="" /></a>
+                        <a href="">
+                        	<img src="images/timeseries.png" class="timesericesImage" ng-click="openAreaTSmodal(item.lov_CountryID, null, null)" alt="" />
+                        </a>
                         <img class="handcursor" ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
                         <img class="handcursor" ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
                         <a ng-click="showing=!showing">{{tr_lco[item.key]}}</a>
@@ -430,18 +410,17 @@
                     
                     <!-- Second level -->
                     <tr ng-show="showing" ng-repeat-start="item2 in item.data">
-                        	        	
-                        	<td ng-if="regionSearch">
+                       	<td ng-if="regionSearch">
                         	<a href="">
-                        		<img src="images/timeseries.png" class="timesericesImage" alt="" />
-                        		</a>
-                        		<div class="innerlevel2">
-                        		{{tr_lnr[item2.nutslevel2RegionCode]}}
-                        		</div>
-                        	</td>
+                        		<img src="images/timeseries.png" class="timesericesImage" ng-click="openAreaTSmodal(item2.lov_CountryID, item2.lov_NUTSRegionID, item2.lov_RiverBasinDistrictID)" alt="" />
+                       		</a>
+                       		<div class="innerlevel2">
+                       		{{tr_lnr[item2.nutsLevel2RegionCode]}}
+                       		</div>
+                       	</td>
                         	<td ng-if="!regionSearch">
                         		<a href="">
-                        		<img src="images/timeseries.png" class="timesericesImage" alt="" />
+                        		<img src="images/timeseries.png" class="timesericesImage" ng-click="openAreaTSmodal(item2.lov_CountryID, item2.lov_NUTSRegionID, item2.lov_RiverBasinDistrictID)" alt="" />
                         		</a>
                         		<div class="innerlevel2">
                         		{{tr_lrbd[item2.riverBasinDistrictCode]}}
@@ -484,7 +463,7 @@
                     <tr ng-repeat-end></tr>
                        <tr ng-if="$last">
                     	<td>
-                    	<a href=""><img src="images/timeseries.png" class="timesericesImage" alt="" /></a>
+                    	<a href=""><img src="images/timeseries.png" class="timesericesImage" ng-click="openAreaTSmodal(null, null, null)" alt="" /></a>
                     		{{tr_c.Total}}
                     	</td>
                     	<td>
@@ -527,23 +506,59 @@
                 </div>
            	</tab>
            	       	
-           	<tab heading="Area Comparison" ng-click="getTabData('AREACOMPARISON')">
+           	<tab heading="Area Comparison" ng-click="getTabData('AREACOMPARISON');activateTab('areacomparison')" active="active.areacomparison">
            	<div ng-show="searchResults">
            	</div>
            	</tab>
-           	  <tab heading="Facilities" ng-click="getTabData('FACILITIES')">
+           	  <tab heading="Facilities" ng-click="getTabData('FACILITIES');activateTab('facilities')" active="active.facilities">
+           	  <div ng-show="searchResults">
+				<div class="row">
+				<div class="col-md-12" wt-selector queryparams="queryParams" wtsel="wtfilter.wtsel"></div>
+           	                  </div><br/>
+                <table class="table table-striped table-condensed table-hover">
+                    <thead>
+                    <tr>
+                        <th custom-sort order="'facilityName'" sort="sort">{{tr_c.Facility}}&nbsp;</th>
+                        <th >{{tr_c.Total}}&nbsp;</th>
+                        <th >{{tr_c.Recovery}}&nbsp;</th>
+                        <th >{{tr_c.Disposal}}&nbsp;</th>
+                        <th >{{tr_c.Unspec}} %&nbsp;</th>
+                        <th custom-sort order="'LOV_IAActivityID'" sort="sort">{{tr_c.Activity}}&nbsp;</th>
+                        <th custom-sort order="'LOV_CountryID'" sort="sort">{{tr_c.Country}}&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                        <td colspan="6">
+                            <div ng-show="hasItems()">
+                                <pagination boundary-links="true" ng-model="$parent.currentPage" total-items="totalItemCount" items-per-page="itemsPerPage" max-size="gap" class="pagination pull-right" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+                            </div>
+                        </td>
+                    </tfoot>
+                    <tbody>
+                    <tr ng-repeat="item in facilitiesItems">
+                        <td><a href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">
+                        	{{item.facilityName}}</a>
+                        </td>
+                        <td>{{ff.formatMethod(item.total,item.confidentialIndicator)}}</td>
+                        <td>{{ff.formatMethod(item.recovery,item.confidentialIndicator)}}</td>
+                        <td>{{ff.formatMethod(item.disposal,item.confidentialIndicator)}}</td>
+                        <td>{{ff.formatMethod(item.unspec,item.confidentialIndicator)}}</td>
+                        <td>{{item.iaActivityCode}}</td>
+                        <td>{{tr_lco[item.countryCode]}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+           	  </div>
+           	</tab>
+           	  <tab heading="Haz. transboundary" ng-click="getTabData('HAZTRANSBOUNDARY');activateTab('haztransboundary')" active="active.haztransboundary">
            	  <div ng-show="searchResults">
            	  </div>
            	</tab>
-           	  <tab heading="Haz. transboundary" ng-click="getTabData('HAZTRANSBOUNDARY')">
-           	  <div ng-show="searchResults">
-           	  </div>
-           	</tab>
-           	 <tab heading="Haz. receivers" ng-click="getTabData('HAZRECEIVERS')">
+           	 <tab heading="Haz. receivers" ng-click="getTabData('HAZRECEIVERS');activateTab('hazreceivers')" active="active.hazreceivers">
            	 <div ng-show="searchResults">
            	 </div>
            	</tab>
-           	<tab heading="Confidentiality" ng-click="getTabData('CONFIDENTIALITY')">
+           	<tab heading="Confidentiality" ng-click="getTabData('CONFIDENTIALITY');activateTab('confidentiality')" active="active.confidentiality">
            	<div ng-show="searchResults">
            	</div>
            	</tab>

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import eea.eprtr.dao.ActivitySearchFilter;
 import eea.eprtr.dao.CountryAreaGroupRepository;
 import eea.eprtr.dao.LocationSearchFilter;
+import eea.eprtr.dao.OrderBy;
+import eea.eprtr.dao.QueryPager;
 import eea.eprtr.dao.ReportingYearSearchFilter;
 import eea.eprtr.dao.WasteSearchFilter;
 import eea.eprtr.model.WastetransferCompare;
@@ -65,6 +67,11 @@ public class WastetransferSearchController {
     		@RequestParam(value = "SearchType", required = false) String searchtype,
     		
     		@RequestParam(value = "RegionSearch", required = false) boolean regionsearch,
+
+    		@RequestParam(value = "offset", required = false) Integer offset,
+    		@RequestParam(value = "limit", required = false) Integer limit,
+    		@RequestParam(value = "order", required = false) String order,
+    		@RequestParam(value = "desc", required = false) Boolean desc,
     		
     		HttpServletResponse response
     		){
@@ -78,8 +85,18 @@ public class WastetransferSearchController {
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID);
 		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
-		List<Wastetransfer> wastetranfer = wastetransferSearchrepository.getWastetransfer(filter);
-		
+
+		List<Wastetransfer> wastetranfer = null;
+		if(order != null && order != "" && desc != null && offset != null && limit != null){
+			OrderBy orderBy = new OrderBy(order, desc.booleanValue());
+			QueryPager pager = new QueryPager(offset.intValue(), limit.intValue());
+			wastetranfer = wastetransferSearchrepository.getWastetransfer(filter, orderBy, pager);
+			long facilitiesCount = wastetransferSearchrepository.getFacilityCount(filter);
+			response.setHeader("X-Count", String.valueOf(facilitiesCount));
+		}
+		else{
+			wastetranfer = wastetransferSearchrepository.getWastetransfer(filter);
+		}
 		if(searchtype != null && searchtype != "")
 		{
 			List<Integer> foundFacilities = new ArrayList<Integer>(); 
@@ -92,6 +109,7 @@ public class WastetransferSearchController {
 			}
 			response.setHeader("facilitiesCount", String.valueOf(foundFacilities.size()));
 			return new DataHelperWasteTransfer().getSubdata(searchtype, wastetranfer,regionsearch);
+			
 		}
 		return wastetranfer;
 	}

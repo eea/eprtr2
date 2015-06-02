@@ -3,10 +3,7 @@ package eea.eprtr.Util;
 import java.util.ArrayList;
 import java.util.List;
 
-import eea.eprtr.model.WasteTransferConfidentialTS;
-import eea.eprtr.model.WasteType;
 import eea.eprtr.model.Wastetransfer;
-import eea.eprtr.model.WastetransferConfidential;
 
 public class DataHelperWasteTransfer {
 
@@ -28,7 +25,7 @@ public class DataHelperWasteTransfer {
 		case "AREACOMPARISON":
 			return null;
 		case "FACILITIES":
-			return null;
+			return updateFacilities(elements);
 		case "HAZTRANSBOUNDARY":
 			return null;
 		case "HAZRECEIVERS":
@@ -69,7 +66,7 @@ public class DataHelperWasteTransfer {
 	{
 		List<Wastetransfer> list = new ArrayList<Wastetransfer>();
 		Wastetransfer wt = new Wastetransfer();
-		wt.wastetype ="NON-HW";
+		wt.wastetype ="NONHW";
 		list.add(wt);
 		
 		wt = new Wastetransfer();
@@ -132,6 +129,19 @@ public class DataHelperWasteTransfer {
 		return list;
 	}
 	
+	private List<Wastetransfer> updateFacilities(List<Wastetransfer> elements)
+	{
+		List<Wastetransfer> list = new ArrayList<Wastetransfer>();
+		for(Wastetransfer obj: elements)
+		{
+			obj.setTotal();
+			obj.setRecovery();
+			obj.setDisposal();
+			obj.setUnspec();
+			list.add(obj);
+		}
+		return list;
+	}
 	private List<Wastetransfer> getActivitet(List<Wastetransfer> elements)
 	{
 		List<Wastetransfer> list = new ArrayList<Wastetransfer>();
@@ -481,95 +491,98 @@ public class DataHelperWasteTransfer {
 			{
 				element = new Wastetransfer();
 				element.key = obj.getCountryCode();
-				element.data = new ArrayList<Wastetransfer>();	
+				element.data = new ArrayList<Wastetransfer>();
+				
+
 				list.add(element);
 			}
 			
 			boolean exist = false;
-			for(int j = 0;j< element.data.size(); j++)
+			for(Wastetransfer rec : element.data)
     		{	
-    			if((regionsearch && element.data.get(j).getNutsLevel2RegionCode().equals(obj.getNutsLevel2RegionCode())) ||
-    				(!regionsearch && element.data.get(j).getRiverBasinDistrictCode().equals(obj.getRiverBasinDistrictCode())))
+    			
+				if((regionsearch && rec.getNutsLevel2RegionCode().equals(obj.getNutsLevel2RegionCode())) ||
+    				(!regionsearch && rec.getRiverBasinDistrictCode().equals(obj.getRiverBasinDistrictCode())))
     			{	
     				exist = true;
-    				if(element.data.get(j).isHasReportedRecovery())
+    				if(rec.isHasReportedRecovery())
     				{
     					if(obj.getQuantityRecoveryNONHW() > 0)
     					{	
-    						element.data.get(j).setQuantityRecoveryNONHW(element.data.get(j).getQuantityRecoveryNONHW() + obj.getQuantityRecoveryNONHW());
+    						rec.setQuantityRecoveryNONHW(rec.getQuantityRecoveryNONHW() + obj.getQuantityRecoveryNONHW());
     					}
     					if(obj.getQuantityRecoveryHWOC() > 0)
     					{
-    						element.data.get(j).setQuantityRecoveryHWOC(element.data.get(j).getQuantityRecoveryHWOC() + obj.getQuantityRecoveryHWOC());	
-    						element.data.get(j).recovery += obj.getQuantityRecoveryHWOC();
+    						rec.setQuantityRecoveryHWOC(rec.getQuantityRecoveryHWOC() + obj.getQuantityRecoveryHWOC());	
+    						rec.recovery += obj.getQuantityRecoveryHWOC();
     					}
     					if(obj.getQuantityRecoveryHWIC() > 0)
     					{
-							element.data.get(j).setQuantityRecoveryHWIC(element.data.get(j).getQuantityRecoveryHWIC() + obj.getQuantityRecoveryHWIC());
-    						element.data.get(j).recovery += obj.getQuantityRecoveryHWIC();
+							rec.setQuantityRecoveryHWIC(rec.getQuantityRecoveryHWIC() + obj.getQuantityRecoveryHWIC());
+    						rec.recovery += obj.getQuantityRecoveryHWIC();
     					}
     				}
     				
-    				if(element.data.get(j).isHasReportedDisposal())
+    				if(rec.isHasReportedDisposal())
     				{
     					if(obj.getQuantityDisposalNONHW() > 0)
     					{
-    						element.data.get(j).setQuantityDisposalNONHW(element.data.get(j).getQuantityDisposalNONHW() + obj.getQuantityDisposalNONHW());
+    						rec.setQuantityDisposalNONHW(rec.getQuantityDisposalNONHW() + obj.getQuantityDisposalNONHW());
     					}
     					if(obj.getQuantityDisposalHWIC() > 0)
     					{
-    						element.data.get(j).setQuantityDisposalHWIC(element.data.get(j).getQuantityDisposalHWIC() + obj.getQuantityDisposalHWIC());
-    						element.data.get(j).disposal +=obj.getQuantityDisposalHWIC();
+    						rec.setQuantityDisposalHWIC(rec.getQuantityDisposalHWIC() + obj.getQuantityDisposalHWIC());
+    						rec.disposal +=obj.getQuantityDisposalHWIC();
     					}
     					if(obj.getQuantityDisposalHWOC() > 0)
     					{
-    						element.data.get(j).setQuantityDisposalHWOC(element.data.get(j).getQuantityDisposalHWOC() + obj.getQuantityDisposalHWOC());
-    						element.data.get(j).disposal +=obj.getQuantityDisposalHWOC();
+    						rec.setQuantityDisposalHWOC(rec.getQuantityDisposalHWOC() + obj.getQuantityDisposalHWOC());
+    						rec.disposal +=obj.getQuantityDisposalHWOC();
     					}
     				}
     			
-    				if(element.data.get(j).isHasReportedUnspecified())
+    				if(rec.isHasReportedUnspecified())
     				{
     					if(obj.getQuantityUnspecNONHW() > 0)
     					{
     					
-    						element.data.get(j).setQuantityUnspecNONHW(element.data.get(j).getQuantityUnspecNONHW() + obj.getQuantityUnspecNONHW());
+    						rec.setQuantityUnspecNONHW(rec.getQuantityUnspecNONHW() + obj.getQuantityUnspecNONHW());
     					}
     					if(obj.getQuantityUnspecHWIC() > 0)
     					{
-    						element.data.get(j).setQuantityUnspecHWIC(element.data.get(j).getQuantityUnspecHWIC() + obj.getQuantityUnspecHWIC());
-    						element.data.get(j).unspec +=  obj.getQuantityUnspecHWIC();
+    						rec.setQuantityUnspecHWIC(rec.getQuantityUnspecHWIC() + obj.getQuantityUnspecHWIC());
+    						rec.unspec +=  obj.getQuantityUnspecHWIC();
     					}
     					if(obj.getQuantityUnspecHWOC() > 0)
     					{
-    						element.data.get(j).setQuantityUnspecHWOC(element.data.get(j).getQuantityUnspecHWOC() + obj.getQuantityUnspecHWOC());
-    						element.data.get(j).unspec +=obj.getQuantityUnspecHWOC();
+    						rec.setQuantityUnspecHWOC(rec.getQuantityUnspecHWOC() + obj.getQuantityUnspecHWOC());
+    						rec.unspec +=obj.getQuantityUnspecHWOC();
     					}		
     				}
     			
     				// Total		
     				if(obj.getQuantityTotalHWIC() > 0)
 					{
-						element.data.get(j).setQuantityTotalHWIC(element.data.get(j).getQuantityTotalHWIC() + obj.getQuantityTotalHWIC());
+						rec.setQuantityTotalHWIC(rec.getQuantityTotalHWIC() + obj.getQuantityTotalHWIC());
 					}
     				if(obj.getQuantityTotalHWOC() > 0)
 					{
-    					element.data.get(j).setQuantityTotalHWOC(element.data.get(j).getQuantityTotalHWOC() + obj.getQuantityTotalHWOC());
+    					rec.setQuantityTotalHWOC(rec.getQuantityTotalHWOC() + obj.getQuantityTotalHWOC());
 					}
     				if(obj.getQuantityTotalNONHW() > 0)
 					{
-    					element.data.get(j).setQuantityTotalNONHW(element.data.get(j).getQuantityTotalNONHW() + obj.getQuantityTotalNONHW());
+    					rec.setQuantityTotalNONHW(rec.getQuantityTotalNONHW() + obj.getQuantityTotalNONHW());
 					}
     				
     				if(obj.getQuantityTotalHWOC() > 0)
     				{
-    					element.data.get(j).total += obj.getQuantityTotalHWOC();
+    					rec.total += obj.getQuantityTotalHWOC();
     				}
     				if(obj.getQuantityTotalHWIC() > 0)
     				{
-    					element.data.get(j).total += obj.getQuantityTotalHWIC();
+    					rec.total += obj.getQuantityTotalHWIC();
     				}
-    				element.data.get(j).facilityCount+=1;
+    				rec.facilityCount+=1;
     				break;
     			}
     		}// End foreach
@@ -578,16 +591,10 @@ public class DataHelperWasteTransfer {
     		{
     			obj.facilityCount = 1;
     			element.data.add(obj);
+    			
     		}
 		}
 		System.out.println("List size: "+list.size());
-		return list;
-	}
-
-	private List<WasteTransferConfidentialTS> getTS(List<WastetransferConfidential> elements){
-		List<WasteTransferConfidentialTS> list = new ArrayList<WasteTransferConfidentialTS>();
-		//We 
-
 		return list;
 	} 
 	

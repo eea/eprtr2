@@ -3,6 +3,10 @@ em, dfn  { font-style: italic; color: #993300;}
 
 body {margin-top:120px;}
 
+.tab{
+	margin-left: 40px; 
+}
+
 .navbar-default .navbar-collapse,
 .navbar-default .navbar-form {
   border-color: #39778C;

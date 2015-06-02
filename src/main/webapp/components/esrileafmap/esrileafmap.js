@@ -199,12 +199,14 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 					break;
 				case 'wastetransfer':
 	    			var arrwt = [];
-	        		arrwt.push($scope.getWasteTypeQP(queryparams));
-	        		arrwt.push($scope.getWasteTreatmentQP(queryparams));
+	    			if (queryparams['WasteTypeCode'] ){
+		        		arrwt.push($scope.getWasteTypeQP(queryparams));
+		        		arrwt.push($scope.getWasteTreatmentQP(queryparams));
 
-	        		if (arrwt.length > 0){
-	        			qstr += '('+  arrQue.join(" AND ") +')';
-	        		}
+		        		if (arrwt.length > 0){
+		        			qstr += '('+  arrQue.join(" AND ") +')';
+		        		}
+	    			}
 	        		qstr += '))';
 	        		arrQue.push(qstr);
 		    		break;
@@ -244,7 +246,7 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 			
 		}
 		return (arrmed.length > 0)?' AND (' + arrmed.join(" OR ") + ') ':" ";
-	}
+	};
 
 	//Sub function building QueryString
     $scope.getWasteTypeQP = function(qp){
@@ -256,8 +258,8 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 				}
 			});
 		}
-		return (arrwt.length > 0)? ' (' + arrwt.join(" OR ") + ') ':" ";
-	}
+		return (arrwt.length > 0)? ' AND (' + arrwt.join(" OR ") + ') ':" ";
+	};
 
 	//Sub function building QueryString
     $scope.getWasteTreatmentQP = function(qp){

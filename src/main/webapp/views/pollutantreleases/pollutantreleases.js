@@ -9,7 +9,9 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         });
     }])
 
-    .controller('PollutantReleasesCtrl', ['$scope', '$filter', '$modal', 'searchFilter', 'Restangular','translationService','formatStrFactory', function($scope, $filter, $modal, searchFilter, Restangular,translationService,formatStrFactory) {
+    .controller('PollutantReleasesCtrl', ['$scope', '$filter', '$modal', 'searchFilter', 'Restangular',
+                                          'translationService','formatStrFactory', function($scope, $filter, $modal, 
+                                        		  searchFilter, Restangular,translationService,formatStrFactory) {
         $scope.pollutantPanel = true;
         $scope.showReleasesToInputField = true;
         $scope.pollutantPanelTitle = 'Pollutant releases';

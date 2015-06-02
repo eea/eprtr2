@@ -351,7 +351,7 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
 	        				polutent.countHWOC = 0;
 	        				$scope.itemCon.push(polutent);
 	        			}
-	        			if($scope.itemsConfidentiality[i].wastetype ==="NON-HW")
+	        			if($scope.itemsConfidentiality[i].wastetype ==="NONHW")
 	        			{
 	        				$scope.itemCon[0].countNONHW +=1;
 	        			}
@@ -428,7 +428,7 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
          	  
             for (var i = 0; i < $scope.summaryItems.length; i++) {
                 // Create graph data
-          	  if ($scope.summaryItems[i].wastetype === $scope.tr_lovwt["NON-HW"]) {
+          	  if ($scope.summaryItems[i].wastetype === $scope.tr_lovwt["NONHW"]) {
                     graphData[$scope.tr_wt["Recovery"]] = {c: [
                         {v: $scope.tr_wt["Recovery"]},
                         {v: $scope.summaryItems[i].rpct}]};
