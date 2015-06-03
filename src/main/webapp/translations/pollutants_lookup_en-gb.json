@@ -1,0 +1,2719 @@
+{
+    "phrases": {
+        "phrase": [
+            {
+                "_classification_id": "E",
+                "_text": "Explosive"
+            },
+            {
+                "_classification_id": "O",
+                "_text": "Oxidizing"
+            },
+            {
+                "_classification_id": "F",
+                "_text": "Highly flammable"
+            },
+            {
+                "_classification_id": "F+",
+                "_text": "Extremely flammable"
+            },
+            {
+                "_classification_id": "T",
+                "_text": "Toxic"
+            },
+            {
+                "_classification_id": "T+",
+                "_text": "Very toxic"
+            },
+            {
+                "_classification_id": "C",
+                "_text": "Corrosive"
+            },
+            {
+                "_classification_id": "Xn",
+                "_text": "Harmful"
+            },
+            {
+                "_classification_id": "Xi",
+                "_text": "Irritant"
+            },
+            {
+                "_classification_id": "N",
+                "_text": "Dangerous for the environment"
+            },
+            {
+                "_s_phrase_id": "V1",
+                "_text": "There are no Risk or Safety phrases associated with this pollutant."
+            },
+            {
+                "_s_phrase_id": "S1",
+                "_text": "Keep locked up."
+            },
+            {
+                "_s_phrase_id": "S1/2",
+                "_text": "Keep locked up and out of reach of children."
+            },
+            {
+                "_s_phrase_id": "S12",
+                "_text": "Do not keep the container sealed."
+            },
+            {
+                "_s_phrase_id": "S13",
+                "_text": "Keep away from food, drink and animal feedingstuffs."
+            },
+            {
+                "_s_phrase_id": "S14",
+                "_text": "Keep away from ... (incompatible materials to be indicated by the manufacturer)."
+            },
+            {
+                "_s_phrase_id": "S15",
+                "_text": "Keep away from heat."
+            },
+            {
+                "_s_phrase_id": "S16",
+                "_text": "Keep away from sources of ignition - No smoking."
+            },
+            {
+                "_s_phrase_id": "S17",
+                "_text": "Keep away from combustible material."
+            },
+            {
+                "_s_phrase_id": "S18",
+                "_text": "Handle and open container with care."
+            },
+            {
+                "_s_phrase_id": "S2",
+                "_text": "Keep out of the reach of children."
+            },
+            {
+                "_s_phrase_id": "S20",
+                "_text": "When using do not eat or drink."
+            },
+            {
+                "_s_phrase_id": "S20/21",
+                "_text": "When using do not eat, drink or smoke."
+            },
+            {
+                "_s_phrase_id": "S21",
+                "_text": "When using do not smoke."
+            },
+            {
+                "_s_phrase_id": "S22",
+                "_text": "Do not breathe dust."
+            },
+            {
+                "_s_phrase_id": "S23",
+                "_text": "Do not breathe gas/fumes/vapour/spray (appropriate wording to be specified by the manufacturer)."
+            },
+            {
+                "_s_phrase_id": "S24",
+                "_text": "Avoid contact with skin."
+            },
+            {
+                "_s_phrase_id": "S24/25",
+                "_text": "Avoid contact with skin and eyes."
+            },
+            {
+                "_s_phrase_id": "S25",
+                "_text": "Avoid contact with eyes."
+            },
+            {
+                "_s_phrase_id": "S26",
+                "_text": "In case of contact with eyes, rinse immediately with plenty of water and seek medical advice."
+            },
+            {
+                "_s_phrase_id": "S27",
+                "_text": "Take off immediately all contaminated clothing."
+            },
+            {
+                "_s_phrase_id": "S27/28",
+                "_text": "After contact with skin, take off immediately all contaminated clothing, and wash immediately with plenty of ... (to be specified by the manufacturer)."
+            },
+            {
+                "_s_phrase_id": "S28",
+                "_text": "After contact with skin, wash immediately with plenty of ... (to be specified by the manufacturer)."
+            },
+            {
+                "_s_phrase_id": "S29",
+                "_text": "Do not empty into drains."
+            },
+            {
+                "_s_phrase_id": "S29/35",
+                "_text": "Do not empty into drains; dispose of this material and its container in a safe way."
+            },
+            {
+                "_s_phrase_id": "S29/56",
+                "_text": "Do not empty into drains; dispose of this material and its container at hazardous or special waste collection point."
+            },
+            {
+                "_s_phrase_id": "S3",
+                "_text": "Keep in a cool place."
+            },
+            {
+                "_s_phrase_id": "S3/14",
+                "_text": "Keep in a cool place away from ... (incompatible materials to be indicated by the manufacturer)."
+            },
+            {
+                "_s_phrase_id": "S3/7",
+                "_text": "Keep container tightly closed in a cool place."
+            },
+            {
+                "_s_phrase_id": "S3/9/14",
+                "_text": "Keep in a cool, well-ventilated place away from ... (incompatible materials to be indicated by the manufacturer)."
+            },
+            {
+                "_s_phrase_id": "S3/9/14/49",
+                "_text": "Keep only in the original container in a cool, well-ventilated place away from ... (incompatible materials to be indicated by the manufacturer)."
+            },
+            {
+                "_s_phrase_id": "S3/9/49",
+                "_text": "Keep only in the original container in a cool, well-ventilated place."
+            },
+            {
+                "_s_phrase_id": "S30",
+                "_text": "Never add water to this product."
+            },
+            {
+                "_s_phrase_id": "S33",
+                "_text": "Take precautionary measures against static discharges."
+            },
+            {
+                "_s_phrase_id": "S35",
+                "_text": "This material and its container must be disposed of in a safe way."
+            },
+            {
+                "_s_phrase_id": "S36",
+                "_text": "Wear suitable protective clothing."
+            },
+            {
+                "_s_phrase_id": "S36/37",
+                "_text": "Wear suitable protective clothing and gloves."
+            },
+            {
+                "_s_phrase_id": "S36/37/39",
+                "_text": "Wear suitable protective clothing, gloves and eye/face protection."
+            },
+            {
+                "_s_phrase_id": "S36/39",
+                "_text": "Wear suitable protective clothing and eye/face protection."
+            },
+            {
+                "_s_phrase_id": "S37",
+                "_text": "Wear suitable gloves."
+            },
+            {
+                "_s_phrase_id": "S37/39",
+                "_text": "Wear suitable gloves and eye/face protection."
+            },
+            {
+                "_s_phrase_id": "S38",
+                "_text": "In case of insufficient ventilation, wear suitable respiratory equipment."
+            },
+            {
+                "_s_phrase_id": "S39",
+                "_text": "Wear eye/face protection."
+            },
+            {
+                "_s_phrase_id": "S4",
+                "_text": "Keep away from living quarters."
+            },
+            {
+                "_s_phrase_id": "S40",
+                "_text": "To clean the floor and all objects contaminated by this material, use  ... (to be specified by the manufacturer)."
+            },
+            {
+                "_s_phrase_id": "S41",
+                "_text": "In case of fire and/or explosion do not breathe fumes."
+            },
+            {
+                "_s_phrase_id": "S42",
+                "_text": "During fumigation/spraying wear suitable respiratory equipment (appropriate wording to be specified by the manufacturer)."
+            },
+            {
+                "_s_phrase_id": "S43",
+                "_text": "In case of fire, use ... (indicate in the space the precise type of fire-fighting equipment. If water increases risk, add 'Never use water')."
+            },
+            {
+                "_s_phrase_id": "S45",
+                "_text": "In case of accident or if you feel unwell, seek medical advice immediately (show the label where possible)."
+            },
+            {
+                "_s_phrase_id": "S46",
+                "_text": "If swallowed, seek medical advice immediately and show this container or lable."
+            },
+            {
+                "_s_phrase_id": "S47",
+                "_text": "Keep at temperature not exceeding ...°C (to be specified by the manufacturer)."
+            },
+            {
+                "_s_phrase_id": "S47/49",
+                "_text": "Keep only in the original container at a temperature not exceeding ...°C (to be specified by the manufacturer)."
+            },
+            {
+                "_s_phrase_id": "S48",
+                "_text": "Keep wet with ... (appropriate material to be specified by the manu facturer)."
+            },
+            {
+                "_s_phrase_id": "S49",
+                "_text": "Keep only in the original container."
+            },
+            {
+                "_s_phrase_id": "S5",
+                "_text": "Keep contents under... (appropriate liquid to be specified by the manufacturer)."
+            },
+            {
+                "_s_phrase_id": "S50",
+                "_text": "Do not mix with ... (to be specified by the manufacturer)."
+            },
+            {
+                "_s_phrase_id": "S51",
+                "_text": "Use only in well-ventilated areas."
+            },
+            {
+                "_s_phrase_id": "S52",
+                "_text": "Not recommended for interior use on large surface areas."
+            },
+            {
+                "_s_phrase_id": "S53",
+                "_text": "Avoid exposure - obtain special instructions before use."
+            },
+            {
+                "_s_phrase_id": "S56",
+                "_text": "Dispose of this material and its container to hazardous or special waste collection point."
+            },
+            {
+                "_s_phrase_id": "S57",
+                "_text": "Use appropriate container to avoid environmental contamination."
+            },
+            {
+                "_s_phrase_id": "S59",
+                "_text": "Refer to manufacturer/supplier for information on recovery/recycling."
+            },
+            {
+                "_s_phrase_id": "S6",
+                "_text": "Keep under ... (inert gas to be specified by the manufacturer)."
+            },
+            {
+                "_s_phrase_id": "S60",
+                "_text": "This material and its container must be disposed of as hazardous waste."
+            },
+            {
+                "_s_phrase_id": "S61",
+                "_text": "Avoid release to the environment. Refer to special instructions/safety data sheets."
+            },
+            {
+                "_s_phrase_id": "S62",
+                "_text": "If swallowed, do not induce vomiting: seek medical advice immediately and show this container or label."
+            },
+            {
+                "_s_phrase_id": "S63",
+                "_text": "In case of accident by inhalation: remove casualty to fresh air and keep at rest."
+            },
+            {
+                "_s_phrase_id": "S64",
+                "_text": "If swallowed, rinse mouth with water (only if the person is conscious)."
+            },
+            {
+                "_s_phrase_id": "S7",
+                "_text": "Keep container tightly closed."
+            },
+            {
+                "_s_phrase_id": "S7/8",
+                "_text": "Keep container tightly closed and dry."
+            },
+            {
+                "_s_phrase_id": "S7/9",
+                "_text": "Keep container tightly closed and in a well-ventilated place."
+            },
+            {
+                "_s_phrase_id": "S8",
+                "_text": "Keep container dry."
+            },
+            {
+                "_s_phrase_id": "S9",
+                "_text": "Keep container in a well-ventilated place."
+            },
+            {
+                "_r_phrase_id": "R1",
+                "_text": "Explosive when dry."
+            },
+            {
+                "_r_phrase_id": "R10",
+                "_text": "Flammable."
+            },
+            {
+                "_r_phrase_id": "R11",
+                "_text": "Highly flammable."
+            },
+            {
+                "_r_phrase_id": "R12",
+                "_text": "Extremely flammable."
+            },
+            {
+                "_r_phrase_id": "R14",
+                "_text": "Reacts violently with water."
+            },
+            {
+                "_r_phrase_id": "R14/15",
+                "_text": "Reacts violently with water, liberating extremely flammable gases."
+            },
+            {
+                "_r_phrase_id": "R15",
+                "_text": "Contact with water liberates extremely flammable gases."
+            },
+            {
+                "_r_phrase_id": "R15/29",
+                "_text": "Contact with water liberates toxic, extremely flammable gas."
+            },
+            {
+                "_r_phrase_id": "R16",
+                "_text": "Explosive when mixed with oxidising substances."
+            },
+            {
+                "_r_phrase_id": "R17",
+                "_text": "Spontaneously flammable in air."
+            },
+            {
+                "_r_phrase_id": "R18",
+                "_text": "In use, may form flammable/explosive vapour-air mixture."
+            },
+            {
+                "_r_phrase_id": "R19",
+                "_text": "May form explosive peroxides."
+            },
+            {
+                "_r_phrase_id": "R2",
+                "_text": "Risk of explosion by shock, friction, fire or other sources of ignition."
+            },
+            {
+                "_r_phrase_id": "R20",
+                "_text": "Harmful by inhalation."
+            },
+            {
+                "_r_phrase_id": "R20/21",
+                "_text": "Harmful by inhalation and in contact with skin."
+            },
+            {
+                "_r_phrase_id": "R20/21/22",
+                "_text": "Harmful by inhalation, in contact with skin and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R20/22",
+                "_text": "Harmful by inhalation and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R21",
+                "_text": "Harmful in contact with skin."
+            },
+            {
+                "_r_phrase_id": "R21/22",
+                "_text": "Harmful in contact with skin and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R22",
+                "_text": "Harmful if swallowed."
+            },
+            {
+                "_r_phrase_id": "R23",
+                "_text": "Toxic by inhalation."
+            },
+            {
+                "_r_phrase_id": "R23/24",
+                "_text": "Toxic by inhalation and in contact with skin."
+            },
+            {
+                "_r_phrase_id": "R23/24/25",
+                "_text": "Toxic by inhalation, in contact with skin and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R23/25",
+                "_text": "Toxic by inhalation and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R24",
+                "_text": "Toxic in contact with skin."
+            },
+            {
+                "_r_phrase_id": "R24/25",
+                "_text": "Toxic in contact with skin and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R25",
+                "_text": "Toxic if swallowed."
+            },
+            {
+                "_r_phrase_id": "R26",
+                "_text": "Very toxic by inhalation."
+            },
+            {
+                "_r_phrase_id": "R26/27",
+                "_text": "Very toxic by inhalation and in contact with skin."
+            },
+            {
+                "_r_phrase_id": "R26/27/28",
+                "_text": "Very toxic by inhalation, in contact with skin and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R26/28",
+                "_text": "Very toxic by inhalation and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R27",
+                "_text": "Very toxic in contact with skin."
+            },
+            {
+                "_r_phrase_id": "R45",
+                "_text": "May cause cancer."
+            },
+            {
+                "_r_phrase_id": "R46",
+                "_text": "May cause heritable genetic damage."
+            },
+            {
+                "_r_phrase_id": "R48",
+                "_text": "Danger of serious damage to health by prolonged exposure."
+            },
+            {
+                "_r_phrase_id": "R48/20",
+                "_text": "Harmful: danger of serious damage to health by prolonged exposure through inhalation."
+            },
+            {
+                "_r_phrase_id": "R48/20/21",
+                "_text": "Harmful: danger of serious damage to health by prolonged exposure through inhalation and in contact with skin."
+            },
+            {
+                "_r_phrase_id": "R7",
+                "_text": "May cause fire."
+            },
+            {
+                "_r_phrase_id": "R8",
+                "_text": "Contact with combustible material may cause fire."
+            },
+            {
+                "_r_phrase_id": "R27/28",
+                "_text": "Very toxic in contact with skin and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R28",
+                "_text": "Very toxic if swallowed."
+            },
+            {
+                "_r_phrase_id": "R29",
+                "_text": "Contact with water liberates toxic gas."
+            },
+            {
+                "_r_phrase_id": "R3",
+                "_text": "Extreme risk of explosion by shock, friction, fire or other sources of ignition."
+            },
+            {
+                "_r_phrase_id": "R30",
+                "_text": "Can become highly flammable in use."
+            },
+            {
+                "_r_phrase_id": "R31",
+                "_text": "Contact with acids liberates toxic gas."
+            },
+            {
+                "_r_phrase_id": "R32",
+                "_text": "Contact with acids liberates very toxic gas."
+            },
+            {
+                "_r_phrase_id": "R33",
+                "_text": "Danger of cumulative effects."
+            },
+            {
+                "_r_phrase_id": "R34",
+                "_text": "Causes burns."
+            },
+            {
+                "_r_phrase_id": "R35",
+                "_text": "Causes severe burns."
+            },
+            {
+                "_r_phrase_id": "R36",
+                "_text": "Irritating to eyes."
+            },
+            {
+                "_r_phrase_id": "R36/37",
+                "_text": "Irritating to eyes and respiratory system."
+            },
+            {
+                "_r_phrase_id": "R36/37/38",
+                "_text": "Irritating to eyes, respiratory system and skin."
+            },
+            {
+                "_r_phrase_id": "R36/38",
+                "_text": "Irritating to eyes and skin."
+            },
+            {
+                "_r_phrase_id": "R37",
+                "_text": "Irritating to respiratory system."
+            },
+            {
+                "_r_phrase_id": "R37/38",
+                "_text": "Irritating to respiratory system and skin."
+            },
+            {
+                "_r_phrase_id": "R38",
+                "_text": "Irritating to skin."
+            },
+            {
+                "_r_phrase_id": "R39",
+                "_text": "Danger of very serious irreversible effects."
+            },
+            {
+                "_r_phrase_id": "R39/23",
+                "_text": "Toxic: danger of very serious irreversible effects through inhalation."
+            },
+            {
+                "_r_phrase_id": "R39/23/24",
+                "_text": "Toxic: danger of very serious irreversible effects through inhalation and in contact with skin."
+            },
+            {
+                "_r_phrase_id": "R39/23/24/25",
+                "_text": "Toxic: danger of very serious irreversible effects through inhalation, in contact with skin and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R39/23/25",
+                "_text": "Toxic: danger of very serious irreversible effects through inhalation and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R39/24",
+                "_text": "Toxic: danger of very serious irreversible effects in contact with skin."
+            },
+            {
+                "_r_phrase_id": "R39/24/25",
+                "_text": "Toxic: danger of very serious irreversible effects in contact with skin and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R39/25",
+                "_text": "Toxic: danger of very serious irreversible effects if swallowed."
+            },
+            {
+                "_r_phrase_id": "R39/26",
+                "_text": "Very toxic: danger of very serious irreversible effects through inhalation."
+            },
+            {
+                "_r_phrase_id": "R39/26/27",
+                "_text": "Very toxic: danger of very serious irreversible effects through inhalation and in contact with skin."
+            },
+            {
+                "_r_phrase_id": "R39/26/27/28",
+                "_text": "Very toxic: danger of very serious irreversible effects through inhalation, in contact with skin and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R39/26/28",
+                "_text": "Very toxic: danger of very serious irreversible effects through inhalation and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R39/27",
+                "_text": "Very toxic: danger of very serious irreversible effects in contact with skin."
+            },
+            {
+                "_r_phrase_id": "R39/27/28",
+                "_text": "Very toxic: danger of very serious irreversible effects in contact with skin and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R39/28",
+                "_text": "Very toxic: danger of very serious irreversible effects if swallowed."
+            },
+            {
+                "_r_phrase_id": "R4",
+                "_text": "Forms very sensitive explosive metallic compounds."
+            },
+            {
+                "_r_phrase_id": "R40",
+                "_text": "Limited evidence of a carcinogenic effect."
+            },
+            {
+                "_r_phrase_id": "R41",
+                "_text": "Risk of serious damage to eyes."
+            },
+            {
+                "_r_phrase_id": "R42",
+                "_text": "May cause sensitisation by inhalation."
+            },
+            {
+                "_r_phrase_id": "R42/43",
+                "_text": "May cause sensitisation by inhalation and skin contact."
+            },
+            {
+                "_r_phrase_id": "R43",
+                "_text": "May cause sensitisation by skin contact."
+            },
+            {
+                "_r_phrase_id": "R44",
+                "_text": "Risk of explosion if heated under confinement."
+            },
+            {
+                "_r_phrase_id": "R48/20/21/22",
+                "_text": "Harmful: danger of serious damage to health by prolonged exposure through inhalation, in contact with skin and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R48/20/22",
+                "_text": "Harmful: danger of serious damage to health by prolonged exposure through inhalation and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R48/21",
+                "_text": "Harmful: danger of serious damage to health by prolonged exposure in contact with skin."
+            },
+            {
+                "_r_phrase_id": "R48/21/22",
+                "_text": "Harmful: danger of serious damage to health by prolonged exposure in contact with skin and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R48/22",
+                "_text": "Harmful: danger of serious damage to health by prolonged exposure if swallowed."
+            },
+            {
+                "_r_phrase_id": "R48/23",
+                "_text": "Toxic: danger of serious damage to health by prolonged exposure through inhalation."
+            },
+            {
+                "_r_phrase_id": "R48/23/24",
+                "_text": "Toxic: danger of serious damage to health by prolonged exposure through inhalation and in contact with skin."
+            },
+            {
+                "_r_phrase_id": "R48/23/24/25",
+                "_text": "Toxic: danger of serious damage to health by prolonged exposure through inhalation, in contact with skin and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R48/23/25",
+                "_text": "Toxic: danger of serious damage to health by prolonged exposure through inhalation and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R48/24",
+                "_text": "Toxic: danger of serious damage to health by prolonged exposure in contact with skin."
+            },
+            {
+                "_r_phrase_id": "R48/24/25",
+                "_text": "Toxic: danger of serious damage to health by prolonged exposure in contact with skin and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R48/25",
+                "_text": "Toxic: danger of serious damage to health by prolonged exposure if swallowed."
+            },
+            {
+                "_r_phrase_id": "R49",
+                "_text": "May cause cancer by inhalation."
+            },
+            {
+                "_r_phrase_id": "R5",
+                "_text": "Heating may cause an explosion."
+            },
+            {
+                "_r_phrase_id": "R50",
+                "_text": "Very toxic to aquatic organisms."
+            },
+            {
+                "_r_phrase_id": "R50/53",
+                "_text": "Very toxic to aquatic organisms, may cause long-term adverse effects in the aquatic environment."
+            },
+            {
+                "_r_phrase_id": "R51",
+                "_text": "Toxic to aquatic organisms."
+            },
+            {
+                "_r_phrase_id": "R51/53",
+                "_text": "Toxic to aquatic organisms, may cause long-term adverse effects in the aquatic environment."
+            },
+            {
+                "_r_phrase_id": "R52",
+                "_text": "Harmful to aquatic organisms."
+            },
+            {
+                "_r_phrase_id": "R52/53",
+                "_text": "Harmful to aquatic organisms, may cause long-term adverse effects in the aquatic environment."
+            },
+            {
+                "_r_phrase_id": "R53",
+                "_text": "May cause long-term adverse effects in the aquatic environment."
+            },
+            {
+                "_r_phrase_id": "R54",
+                "_text": "Toxic to flora."
+            },
+            {
+                "_r_phrase_id": "R55",
+                "_text": "Toxic to fauna."
+            },
+            {
+                "_r_phrase_id": "R56",
+                "_text": "Toxic to soil organisms."
+            },
+            {
+                "_r_phrase_id": "R57",
+                "_text": "Toxic to bees."
+            },
+            {
+                "_r_phrase_id": "R58",
+                "_text": "May cause long-term adverse effects in the environment."
+            },
+            {
+                "_r_phrase_id": "R59",
+                "_text": "Dangerous for the ozone layer."
+            },
+            {
+                "_r_phrase_id": "R6",
+                "_text": "Explosive with or without contact with air."
+            },
+            {
+                "_r_phrase_id": "R60",
+                "_text": "May impair fertility."
+            },
+            {
+                "_r_phrase_id": "R61",
+                "_text": "May cause harm to the unborn child."
+            },
+            {
+                "_r_phrase_id": "R62",
+                "_text": "Possible risk of impaired fertility."
+            },
+            {
+                "_r_phrase_id": "R63",
+                "_text": "Possible risk of harm to the unborn child."
+            },
+            {
+                "_r_phrase_id": "R64",
+                "_text": "May cause harm to breastfed babies."
+            },
+            {
+                "_r_phrase_id": "R65",
+                "_text": "Harmful: may cause lung damage if swallowed."
+            },
+            {
+                "_r_phrase_id": "R66",
+                "_text": "Repeated exposure may cause skin dryness or cracking."
+            },
+            {
+                "_r_phrase_id": "R67",
+                "_text": "Vapours may cause drowsiness and dizziness."
+            },
+            {
+                "_r_phrase_id": "R68",
+                "_text": "Possible risk of irreversible effects."
+            },
+            {
+                "_r_phrase_id": "R68/20",
+                "_text": "Harmful: possible risk of irreversible effects through inhalation."
+            },
+            {
+                "_r_phrase_id": "R68/20/21",
+                "_text": "Harmful: possible risk of irreversible effects through inhalation and in contact with skin."
+            },
+            {
+                "_r_phrase_id": "R68/20/21/22",
+                "_text": "Harmful: possible risk of irreversible effects through inhalation, in contact with skin and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R68/20/22",
+                "_text": "Harmful: possible risk of irreversible effects through inhalation and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R68/21",
+                "_text": "Harmful: possible risk of irreversible effects in contact with skin."
+            },
+            {
+                "_r_phrase_id": "R68/21/22",
+                "_text": "Harmful: possible risk of irreversible effects in contact with skin and if swallowed."
+            },
+            {
+                "_r_phrase_id": "R68/22",
+                "_text": "Harmful: possible risk of irreversible effects if swallowed."
+            },
+            {
+                "_r_phrase_id": "R9",
+                "_text": "Explosive when mixed with combustible material."
+            },
+            {
+                "_clp_phrase_id": "NoData",
+                "_text": "No classification assigned."
+            },
+            {
+                "_clp_phrase_id": "Acute Tox. 1",
+                "_text": "Acute Toxicity, Category 1"
+            },
+            {
+                "_clp_phrase_id": "Acute Tox. 2",
+                "_text": "Acute Toxicity, Category 2"
+            },
+            {
+                "_clp_phrase_id": "Acute Tox. 3",
+                "_text": "Acute Toxicity, Category 3"
+            },
+            {
+                "_clp_phrase_id": "Acute Tox. 4",
+                "_text": "Acute Toxicity, Category 4"
+            },
+            {
+                "_clp_phrase_id": "Aquatic Acute 1",
+                "_text": "Acute hazards to the aquatic environment, Category 1"
+            },
+            {
+                "_clp_phrase_id": "Aquatic Chronic 1",
+                "_text": "Chronic hazards to the aquatic environment, Category 1"
+            },
+            {
+                "_clp_phrase_id": "Aquatic Chronic 2",
+                "_text": "Chronic hazards to the aquatic environment, Category 2"
+            },
+            {
+                "_clp_phrase_id": "Aquatic Chronic 3",
+                "_text": "Chronic hazards to the aquatic environment, Category 3"
+            },
+            {
+                "_clp_phrase_id": "Asp. Tox. 1",
+                "_text": "Aspiration hazard"
+            },
+            {
+                "_clp_phrase_id": "Carc. 1A",
+                "_text": "Carcinogenic, Category 1A"
+            },
+            {
+                "_clp_phrase_id": "Carc. 1B",
+                "_text": "Carcinogenic, Category 1B"
+            },
+            {
+                "_clp_phrase_id": "Carc. 2",
+                "_text": "Carcinogenic, Category 2"
+            },
+            {
+                "_clp_phrase_id": "Eye Irrit. 2",
+                "_text": "Eye Irritant, Category 2"
+            },
+            {
+                "_clp_phrase_id": "Flam. Gas 1",
+                "_text": "Flammable Gas, Category 1"
+            },
+            {
+                "_clp_phrase_id": "Flam. Gas 2",
+                "_text": "Flammable Gas, Category 2"
+            },
+            {
+                "_clp_phrase_id": "Flam. Liq. 1",
+                "_text": "Flammable liquid, Category 1"
+            },
+            {
+                "_clp_phrase_id": "Flam. Liq. 2",
+                "_text": "Flammable liquid, Category 2"
+            },
+            {
+                "_clp_phrase_id": "Flam. Liq. 3",
+                "_text": "Flammable liquid, Category 3"
+            },
+            {
+                "_clp_phrase_id": "Flam. Sol. 1",
+                "_text": "Flammable solid, Category 1"
+            },
+            {
+                "_clp_phrase_id": "H400",
+                "_text": "Very toxic to aquatic life."
+            },
+            {
+                "_clp_phrase_id": "H410",
+                "_text": "Very toxic to aquatic life with long lasting effects."
+            },
+            {
+                "_clp_phrase_id": "Lact.",
+                "_text": "Effects on or via lactation"
+            },
+            {
+                "_clp_phrase_id": "Muta. 1B",
+                "_text": "Mutagen category 1B"
+            },
+            {
+                "_clp_phrase_id": "Muta. 2",
+                "_text": "Mutagen category 1B"
+            },
+            {
+                "_clp_phrase_id": "Ox. Gas 1",
+                "_text": "Oxidising Gas, Category 1"
+            },
+            {
+                "_clp_phrase_id": "Ozone",
+                "_text": "Hazardous to the Ozone Layer"
+            },
+            {
+                "_clp_phrase_id": "Press. Gas",
+                "_text": "Pressurised Gas"
+            },
+            {
+                "_clp_phrase_id": "Repr. 1A",
+                "_text": "Toxic to reproduction, Category 1A"
+            },
+            {
+                "_clp_phrase_id": "Repr. 1B",
+                "_text": "Toxic to reproduction, Category 1B"
+            },
+            {
+                "_clp_phrase_id": "Repr. 2",
+                "_text": "Toxic to reproduction, category 2"
+            },
+            {
+                "_clp_phrase_id": "Skin Corr. 1A",
+                "_text": "Skin corrosion, Category 1A"
+            },
+            {
+                "_clp_phrase_id": "Skin Corr. 1B",
+                "_text": "Skin corrosion, Category 1B"
+            },
+            {
+                "_clp_phrase_id": "Skin Irrit. 2",
+                "_text": "Skin irritation, Category 2"
+            },
+            {
+                "_clp_phrase_id": "Skin Sens. 1",
+                "_text": "Skin Sensitiser, Category 1"
+            },
+            {
+                "_clp_phrase_id": "STOT RE 1",
+                "_text": "Specific target organ toxicity, following repeated exposure, Category 1"
+            },
+            {
+                "_clp_phrase_id": "STOT RE 2",
+                "_text": "Specific target organ toxicity, following repeated exposure, Category 1"
+            },
+            {
+                "_clp_phrase_id": "STOT SE 3",
+                "_text": "Specific target organ toxicity, following single exposure, Category 1"
+            },
+            {
+                "_ghs_phrase_id": "NoData",
+                "_lang": "EN",
+                "_text": "No hazards assigned."
+            },
+            {
+                "_ghs_phrase_id": "H200",
+                "_lang": "EN",
+                "_text": "Unstable explosives."
+            },
+            {
+                "_ghs_phrase_id": "H201",
+                "_lang": "EN",
+                "_text": "Explosive; mass explosion hazard."
+            },
+            {
+                "_ghs_phrase_id": "H202",
+                "_lang": "EN",
+                "_text": "Explosive, severe projection hazard."
+            },
+            {
+                "_ghs_phrase_id": "H203",
+                "_lang": "EN",
+                "_text": "Explosive; fire, blast or projection hazard."
+            },
+            {
+                "_ghs_phrase_id": "H204",
+                "_lang": "EN",
+                "_text": "Fire or projection hazard."
+            },
+            {
+                "_ghs_phrase_id": "H205",
+                "_lang": "EN",
+                "_text": "May mass explode in fire."
+            },
+            {
+                "_ghs_phrase_id": "H220",
+                "_lang": "EN",
+                "_text": "Extremely flammable gas."
+            },
+            {
+                "_ghs_phrase_id": "H221",
+                "_lang": "EN",
+                "_text": "Flammable gas."
+            },
+            {
+                "_ghs_phrase_id": "H222",
+                "_lang": "EN",
+                "_text": "Extremely flammable aerosol."
+            },
+            {
+                "_ghs_phrase_id": "H223",
+                "_lang": "EN",
+                "_text": "Flammable aerosol."
+            },
+            {
+                "_ghs_phrase_id": "H224",
+                "_lang": "EN",
+                "_text": "Extremely flammable liquid and vapour."
+            },
+            {
+                "_ghs_phrase_id": "H225",
+                "_lang": "EN",
+                "_text": "Highly flammable liquid and vapour."
+            },
+            {
+                "_ghs_phrase_id": "H226",
+                "_lang": "EN",
+                "_text": "Flammable liquid and vapour."
+            },
+            {
+                "_ghs_phrase_id": "H228",
+                "_lang": "EN",
+                "_text": "Flammable solid."
+            },
+            {
+                "_ghs_phrase_id": "H240",
+                "_lang": "EN",
+                "_text": "Heating may cause an explosion."
+            },
+            {
+                "_ghs_phrase_id": "H241",
+                "_lang": "EN",
+                "_text": "Heating may cause a fire or explosion."
+            },
+            {
+                "_ghs_phrase_id": "H242",
+                "_lang": "EN",
+                "_text": "Heating may cause a fire."
+            },
+            {
+                "_ghs_phrase_id": "H250",
+                "_lang": "EN",
+                "_text": "Catches fire spontaneously if exposed to air."
+            },
+            {
+                "_ghs_phrase_id": "H251",
+                "_lang": "EN",
+                "_text": "Self-heating: may catch fire."
+            },
+            {
+                "_ghs_phrase_id": "H252",
+                "_lang": "EN",
+                "_text": "Self-heating in large quantities; may catch fire."
+            },
+            {
+                "_ghs_phrase_id": "H260",
+                "_lang": "EN",
+                "_text": "In contact with water releases flammable gases which may ignite spontaneously."
+            },
+            {
+                "_ghs_phrase_id": "H261",
+                "_lang": "EN",
+                "_text": "In contact with water releases flammable gases."
+            },
+            {
+                "_ghs_phrase_id": "H270",
+                "_lang": "EN",
+                "_text": "May cause or intensify fire; oxidiser."
+            },
+            {
+                "_ghs_phrase_id": "H271",
+                "_lang": "EN",
+                "_text": "May cause fire or explosion; strong oxidiser."
+            },
+            {
+                "_ghs_phrase_id": "H272",
+                "_lang": "EN",
+                "_text": "May intensify fire; oxidiser."
+            },
+            {
+                "_ghs_phrase_id": "H280",
+                "_lang": "EN",
+                "_text": "Contains gas under pressure; may explode if heated."
+            },
+            {
+                "_ghs_phrase_id": "H281",
+                "_lang": "EN",
+                "_text": "Contains refrigerated gas; may cause cryogenic burns or injury."
+            },
+            {
+                "_ghs_phrase_id": "H290",
+                "_lang": "EN",
+                "_text": "May be corrosive to metals."
+            },
+            {
+                "_ghs_phrase_id": "H300",
+                "_lang": "EN",
+                "_text": "Fatal if swallowed."
+            },
+            {
+                "_ghs_phrase_id": "H301",
+                "_lang": "EN",
+                "_text": "Toxic if swallowed."
+            },
+            {
+                "_ghs_phrase_id": "H302",
+                "_lang": "EN",
+                "_text": "Harmful if swallowed."
+            },
+            {
+                "_ghs_phrase_id": "H304",
+                "_lang": "EN",
+                "_text": "May be fatal if swallowed and enters airways."
+            },
+            {
+                "_ghs_phrase_id": "H310",
+                "_lang": "EN",
+                "_text": "Fatal in contact with skin."
+            },
+            {
+                "_ghs_phrase_id": "H311",
+                "_lang": "EN",
+                "_text": "Toxic in contact with skin."
+            },
+            {
+                "_ghs_phrase_id": "H312",
+                "_lang": "EN",
+                "_text": "Harmful in contact with skin."
+            },
+            {
+                "_ghs_phrase_id": "H314",
+                "_lang": "EN",
+                "_text": "Causes severe skin burns and eye damage."
+            },
+            {
+                "_ghs_phrase_id": "H315",
+                "_lang": "EN",
+                "_text": "Causes skin irritation."
+            },
+            {
+                "_ghs_phrase_id": "H317",
+                "_lang": "EN",
+                "_text": "May cause an allergic skin reaction."
+            },
+            {
+                "_ghs_phrase_id": "H318",
+                "_lang": "EN",
+                "_text": "Causes serious eye damage."
+            },
+            {
+                "_ghs_phrase_id": "H319",
+                "_lang": "EN",
+                "_text": "Causes serious eye irritation."
+            },
+            {
+                "_ghs_phrase_id": "H330",
+                "_lang": "EN",
+                "_text": "Fatal if inhaled."
+            },
+            {
+                "_ghs_phrase_id": "H331",
+                "_lang": "EN",
+                "_text": "Toxic if inhaled."
+            },
+            {
+                "_ghs_phrase_id": "H332",
+                "_lang": "EN",
+                "_text": "Harmful if inhaled."
+            },
+            {
+                "_ghs_phrase_id": "H334",
+                "_lang": "EN",
+                "_text": "May cause allergy or asthma symptoms or breathing difficulties if inhaled."
+            },
+            {
+                "_ghs_phrase_id": "H335",
+                "_lang": "EN",
+                "_text": "May cause respiratory irritation."
+            },
+            {
+                "_ghs_phrase_id": "H336",
+                "_lang": "EN",
+                "_text": "May cause drowsiness or dizziness."
+            },
+            {
+                "_ghs_phrase_id": "H340",
+                "_lang": "EN",
+                "_text": "May cause genetic defects <state route of exposure if it is conclusively proven that no other routes of exposure cause the hazard>."
+            },
+            {
+                "_ghs_phrase_id": "H341",
+                "_lang": "EN",
+                "_text": "Suspected of causing genetic defects <state route of exposure if it is conclusively proven that no other routes of exposure cause the hazard>."
+            },
+            {
+                "_ghs_phrase_id": "H350",
+                "_lang": "EN",
+                "_text": "May cause cancer <state route of exposure if it is conclusively proven that no other routes of exposure cause the hazard>."
+            },
+            {
+                "_ghs_phrase_id": "H351",
+                "_lang": "EN",
+                "_text": "Suspected of causing cancer <state route of exposure if it is conclusively proven that no other routs of exposure cause the hazard>."
+            },
+            {
+                "_ghs_phrase_id": "H360",
+                "_lang": "EN",
+                "_text": "May damage fertility or the unborn child <state specific effect if known > <state route of exposure if it is conclusively proven that no other routes of exposure cause the hazard>."
+            },
+            {
+                "_ghs_phrase_id": "H361",
+                "_lang": "EN",
+                "_text": "Suspected of damaging fertility or the unborn child <state specific effect if known> <state route of exposure if it is conclusively proven that no other routes of exposure cause the hazard>."
+            },
+            {
+                "_ghs_phrase_id": "H362",
+                "_lang": "EN",
+                "_text": "May cause harm to breast-fed children."
+            },
+            {
+                "_ghs_phrase_id": "H370",
+                "_lang": "EN",
+                "_text": "Causes damage to organs <or state all organs affected, if known> <state route of exposure if it is conclusively proven that no other routes of exposure cause the hazard>."
+            },
+            {
+                "_ghs_phrase_id": "H371",
+                "_lang": "EN",
+                "_text": "May cause damage to organs <or state all organs affected, if known> <state route of exposure if it is conclusively proven that no other routes of exposure cause the hazard>."
+            },
+            {
+                "_ghs_phrase_id": "H372",
+                "_lang": "EN",
+                "_text": "Causes damage to organs <or state all organs affected, if known> through prolonged or repeated exposure <state route of exposure if it is conclusively proven that no other routes of exposure cause the hazard>."
+            },
+            {
+                "_ghs_phrase_id": "H373",
+                "_lang": "EN",
+                "_text": "May cause damage to organs <or state all organs affected, if known> through prolonged or repeated exposure <state route of exposure if it is conclusively proven that no other routes of exposure cause the hazard>."
+            },
+            {
+                "_ghs_phrase_id": "H400",
+                "_lang": "EN",
+                "_text": "Very toxic to aquatic life."
+            },
+            {
+                "_ghs_phrase_id": "H410",
+                "_lang": "EN",
+                "_text": "Very toxic to aquatic life with long lasting effects."
+            },
+            {
+                "_ghs_phrase_id": "H411",
+                "_lang": "EN",
+                "_text": "Toxic to aquatic life with long lasting effects."
+            },
+            {
+                "_ghs_phrase_id": "H412",
+                "_lang": "EN",
+                "_text": "Harmful to aquatic life with long lasting effects."
+            },
+            {
+                "_ghs_phrase_id": "H413",
+                "_lang": "EN",
+                "_text": "May cause long lasting harmful effects to aquatic life."
+            },
+            {
+                "_ghs_phrase_id": "H350i",
+                "_lang": "EN",
+                "_text": "May cause cancer by inhalation."
+            },
+            {
+                "_ghs_phrase_id": "H360F",
+                "_lang": "EN",
+                "_text": "May damage fertility."
+            },
+            {
+                "_ghs_phrase_id": "H360D",
+                "_lang": "EN",
+                "_text": "May damage the unborn child."
+            },
+            {
+                "_ghs_phrase_id": "H361f",
+                "_lang": "EN",
+                "_text": "Suspected of damaging fertility."
+            },
+            {
+                "_ghs_phrase_id": "H361d",
+                "_lang": "EN",
+                "_text": "Suspected of damaging the unborn child."
+            },
+            {
+                "_ghs_phrase_id": "H360FD",
+                "_lang": "EN",
+                "_text": "May damage fertility. May damage the unborn child."
+            },
+            {
+                "_ghs_phrase_id": "H361fd",
+                "_lang": "EN",
+                "_text": "Suspected of damaging fertility. Suspected of damaging the unborn child."
+            },
+            {
+                "_ghs_phrase_id": "H360Fd",
+                "_lang": "EN",
+                "_text": "May damage fertility. Suspected of damaging the unborn child."
+            },
+            {
+                "_ghs_phrase_id": "H360Df",
+                "_lang": "EN",
+                "_text": "May damage the unborn child. Suspected of damaging fertility."
+            },
+            {
+                "_ghs_phrase_id": "EUH001",
+                "_lang": "EN",
+                "_text": "Explosive when dry."
+            },
+            {
+                "_ghs_phrase_id": "EUH002",
+                "_lang": "EN",
+                "_text": "Explosive with or without contact with air."
+            },
+            {
+                "_ghs_phrase_id": "EUH014",
+                "_lang": "EN",
+                "_text": "Reacts violently with water."
+            },
+            {
+                "_ghs_phrase_id": "EUH018",
+                "_lang": "EN",
+                "_text": "In use may form flammable/explosive vapour-air mixture."
+            },
+            {
+                "_ghs_phrase_id": "EUH019",
+                "_lang": "EN",
+                "_text": "May form explosive peroxides."
+            },
+            {
+                "_ghs_phrase_id": "EUH044",
+                "_lang": "EN",
+                "_text": "Risk of explosion if heated under confinement."
+            },
+            {
+                "_ghs_phrase_id": "EUH029",
+                "_lang": "EN",
+                "_text": "Contact with water liberates toxic gas."
+            },
+            {
+                "_ghs_phrase_id": "EUH031",
+                "_lang": "EN",
+                "_text": "Contact with acids liberates toxic gas."
+            },
+            {
+                "_ghs_phrase_id": "EUH032",
+                "_lang": "EN",
+                "_text": "Contact with acids liberates very toxic gas."
+            },
+            {
+                "_ghs_phrase_id": "EUH066",
+                "_lang": "EN",
+                "_text": "Repeated exposure may cause skin dryness or cracking."
+            },
+            {
+                "_ghs_phrase_id": "EUH070",
+                "_lang": "EN",
+                "_text": "Toxic by eye contact."
+            },
+            {
+                "_ghs_phrase_id": "EUH071",
+                "_lang": "EN",
+                "_text": "Corrosive to the respiratory tract."
+            },
+            {
+                "_ghs_phrase_id": "EUH059",
+                "_lang": "EN",
+                "_text": "Hazardous to the ozone layer."
+            },
+            {
+                "_ghs_phrase_id": "EUH201",
+                "_lang": "EN",
+                "_text": "Contains lead. Should not be used on surfaces liable to be chewed or sucked by children."
+            },
+            {
+                "_ghs_phrase_id": "EUH201A",
+                "_lang": "EN",
+                "_text": "Warning! Contains lead."
+            },
+            {
+                "_ghs_phrase_id": "EUH202",
+                "_lang": "EN",
+                "_text": "Cyanoacrylate. Danger. Bonds skin and eyes in seconds. Keep out of the reach of children."
+            },
+            {
+                "_ghs_phrase_id": "EUH203",
+                "_lang": "EN",
+                "_text": "Contains chromium (VI). May produce an allergic reaction."
+            },
+            {
+                "_ghs_phrase_id": "EUH204",
+                "_lang": "EN",
+                "_text": "Contains isocyanates. May produce an allergic reaction."
+            },
+            {
+                "_ghs_phrase_id": "EUH205",
+                "_lang": "EN",
+                "_text": "Contains epoxy constituents. May produce an allergic reaction."
+            },
+            {
+                "_ghs_phrase_id": "EUH206",
+                "_lang": "EN",
+                "_text": "Warning! Do not use together with other products. May release dangerous gases (chlorine)."
+            },
+            {
+                "_ghs_phrase_id": "EUH207",
+                "_lang": "EN",
+                "_text": "Warning! Contains cadmium. Dangerous fumes are formed during use. See information supplied by the manufacturer. Comply with the safety instructions."
+            },
+            {
+                "_ghs_phrase_id": "EUH208",
+                "_lang": "EN",
+                "_text": "Contains <name of sensitising substance>. May produce an allergic reaction."
+            },
+            {
+                "_ghs_phrase_id": "EUH209",
+                "_lang": "EN",
+                "_text": "Can become highly flammable in use."
+            },
+            {
+                "_ghs_phrase_id": "EUH210",
+                "_lang": "EN",
+                "_text": "Safety data sheet available on request."
+            },
+            {
+                "_ghs_phrase_id": "EUH401",
+                "_lang": "EN",
+                "_text": "To avoid risks to human health and the environment, comply with the instructions for use."
+            },
+            {
+                "_id": "state",
+                "_text": "State @ 20 °C & 101.3kPA"
+            },
+            {
+                "_id": "melt_freeze_point",
+                "_text": "Melting / freezing point °C"
+            },
+            {
+                "_id": "boiling_point",
+                "_text": "Boiling Point °C"
+            },
+            {
+                "_id": "vapour_pressure",
+                "_text": "Vapour pressure mm Hg @ 20/25 °C"
+            },
+            {
+                "_id": "water_solubility",
+                "_text": "Water solubility,  mg/l @ 25 °C"
+            },
+            {
+                "_id": "partition_coeff",
+                "_text": "Partition coefficient: n-octanol / water (log value)"
+            },
+            {
+                "_id": "dissocation_const",
+                "_text": "Dissociation constant"
+            },
+            {
+                "_id": "ph",
+                "_text": "pH"
+            },
+            {
+                "_id": "flammable_limits",
+                "_text": "Flammable limits"
+            },
+            {
+                "_id": "flash_point",
+                "_text": "Flash point °C"
+            },
+            {
+                "_id": "autoignition_temp",
+                "_text": "Autoignition temperature °C"
+            },
+            {
+                "_id": "density",
+                "_text": "Density g/cm³"
+            },
+            {
+                "_id": "vapour_density",
+                "_text": "Vapour Density Air=1"
+            },
+            {
+                "_id": "aquatic_tox_ec50",
+                "_text": "Aquatic Toxicity EC50"
+            },
+            {
+                "_id": "aquatic_tox_lc50",
+                "_text": "Aquatic Toxicity LC50"
+            },
+            {
+                "_id": "aquatic_tox_lclod",
+                "_text": "Aquatic Toxicity LCLOD"
+            },
+            {
+                "_id": "aquatic_tox_lg50",
+                "_text": "Aquatic Toxicity LG50"
+            },
+            {
+                "_id": "bioaccumulation",
+                "_text": "Bioaccumulation log POW"
+            },
+            {
+                "_id": "biological_ox_demand",
+                "_text": "Biological Oxygen Demand BOD"
+            },
+            {
+                "_id": "carcinogenicity",
+                "_text": "Carcinogenicity / IARC Group"
+            },
+            {
+                "_id": "marine_tox",
+                "_text": "Marine Toxicity"
+            },
+            {
+                "_id": "mutagenicity",
+                "_text": "Mutagenicity"
+            },
+            {
+                "_id": "persistence",
+                "_text": "Persistence"
+            },
+            {
+                "_id": "toxicity",
+                "_text": "Toxicity LD50 / LC50 mg/kg, ppm (gases)"
+            },
+            {
+                "_id": "WEL_OEL",
+                "_text": "WEL/OEL"
+            },
+            {
+                "_groupId": "1",
+                "_text": "Chlorinated Organic Substances"
+            },
+            {
+                "_groupId": "2",
+                "_text": "Greenhouse Gases"
+            },
+            {
+                "_groupId": "3",
+                "_text": "Heavy Metals"
+            },
+            {
+                "_groupId": "4",
+                "_text": "Pesticides"
+            },
+            {
+                "_groupId": "5",
+                "_text": "Other Gases"
+            },
+            {
+                "_groupId": "6",
+                "_text": "Inorganic substances"
+            },
+            {
+                "_groupId": "7",
+                "_text": "Other Organic substances"
+            },
+            {
+                "_groupIdtip": "1",
+                "_text": "Chlorinated organic substances are those that are based on organic compounds (i.e. carbon-containing) with one or more chlorine atoms. Chlorinated organic substances are important in the chemical industry and they are also formed in nature in large quantities."
+            },
+            {
+                "sub": [
+                    "2",
+                    "2",
+                    "2",
+                    "4",
+                    "3",
+                    "6"
+                ],
+                "_groupIdtip": "2",
+                "_text": "Greenhouse gases are those gaseous constituents of the atmosphere, both natural and anthropogenic that tend to trap heat radiating from the Earth's surface, thus causing warming in the lower atmosphere, which is considered to lead to climate change. This property causes the greenhouse effect. Water vapour (H\nO), carbon dioxide (CO\n), nitrous oxide (N\nO), methane (CH\n), and ozone (O\n) are the primary greenhouse gases in the Earth’s atmosphere. Moreover there are a number of entirely human-made greenhouse gases in the atmosphere, such as hydrofluorocarbons (HFCs), perfluorocarbons (PFCs) and sulphur hexafluoride (SF\n)."
+            },
+            {
+                "_groupIdtip": "3",
+                "_text": "Heavy metals are subset of chemical elements, which are generally natural constituents of the Earth's crust that exhibit metallic properties. They are considered to be associated with contamination and potential toxicity or ecotoxicity."
+            },
+            {
+                "_groupIdtip": "4",
+                "_text": "Pesticides are substances and products intended to influence fundamental processes in living organisms. They are used to kill or control harmful organisms such as weeds or insects vectors of disease. Some pesticides can contribute to high agricultural yields and help to ensure that good quality food is available at reasonable prices. Other pesticides are important for public health protection and for preservation of materials. At the same time, pesticides can have very negative effects on human health and the environment."
+            },
+            {
+                "_groupIdtip": "5",
+                "_text": "Gases are chemical compounds, both natural or man-made, that are found in the gaseous state. For the purpose of this E-PRTR register, this category covers the other following gases:"
+            },
+            {
+                "_groupIdtip": "6",
+                "_text": "Inorganic substances are those substances in which two or more chemical elements, other than carbon, are combined. They generally lack carbon-to-carbon bonds."
+            },
+            {
+                "_groupIdtip": "7",
+                "_text": "Other organic substances\" are substances containing carbon atoms (C) not covered by other pollutant groups. For the purpose of the E-PRTR register, this category covers the other following organic substances:"
+            },
+            {
+                "_other_provision_instrument": "2",
+                "_text": "The  Stockholm Convention on Persistent Organic Pollutants "
+            },
+            {
+                "_other_provision_overview": "2",
+                "_text": "The  Stockholm Convention on Persistent Organic Pollutants  is a global treaty to protect human health and the environment from highly dangerous, long-lasting chemicals. It requires Parties to take measures to eliminate or reduce release of both intentionally and unintentionally produced POPs into the environment. Adopted in 2001,  the Convention entered into force in 2004 and is administered by the United Nationals Environment Programme.  It applies to Aldrin, Chlordane, Dieldrin, Endrin, Heptachlor, Hexachlorobenzene, Mirex, Toxaphene, Polychlorinated Biphenyls, DDT, PCDD (Dioxins) and PCDF (Furans)  As of 2009 it also covers alpha and beta hexachlorocyclohexanes, lindane, chlordecone, tetrabromodiphenyl ethers, pentabromodiphenyl ethers, hexabromodiphenyl ethers, heptabromodiphenyl ethers, hexabromobiphenyl, pentachlorobenzene, perfluorooctane sulfonic acid, its salts and perfluorooctane sulfonyl fluoride"
+            },
+            {
+                "_other_provision_reporting": "2",
+                "_text": "Article 5 requires Parties to develop as part of their implementation plan an action plan designed to identify, characterize and address the release of the chemicals listed in Annex C including the development and maintenance of source inventories and release estimates. Each party shall perform a review and evaluation of the action plan and its outcomes should be reported to the Secretariat. Article 9 requires that Parties facilitate or undertake the exchange of information relevant to the reduction or elimination of the production, use and release of POPs. Article 15 requires to report every 4 years party's measures taken to implement the provisions of this Convention, party's statistical data on total quantities of production, import and export of each of the chemicals listed in Annexes A and B and a list of the States to which or from which it has exported or imported each such substance. Annex A, Part II (G) requires parties to provide a report every five years on progress in eliminating polychlorinated biphenyls and submit it to the Conference of the Parties. "
+            },
+            {
+                "_other_provision_instrument": "3",
+                "_text": "The United Nations Framework Convention on Climate Change "
+            },
+            {
+                "_other_provision_overview": "3",
+                "_text": "The United Nations Framework Convention on Climate Change (1992), via the Kyoto Protocol (1998), set binding obligations on its signatories to reduce their emissions of greenhouse gases (GHGs).   "
+            },
+            {
+                "sub": "2",
+                "_other_provision_reporting": "3",
+                "_text": "Annex I Parties to the Convention shall report national GHG emissions annually (aggregate emissions and removals of greenhouse gases expressed in CO\n equivalent terms) using Global Warming Potential (GWP) values published by the Intergovernmental Panel on Climate Change (IPCC). Articles 5 and 7 of the Kyoto Protocol require reporting according to the Revised 1996 IPCC Guidelines for National Greenhouse Gas Inventories (1996 IPCC Guidelines), together with the Good Practice Guidance and Uncertainty Management in National Greenhouse Gas Inventories (GPG2000) and the Good Practice Guidance for Land Use, Land-Use Change and Forestry."
+            },
+            {
+                "_other_provision_instrument": "4",
+                "_text": "The Montreal Protocol on Substances that Deplete the Ozone Layer"
+            },
+            {
+                "_other_provision_overview": "4",
+                "_text": "The Montreal Protocol on Substances that Deplete the Ozone Layer establishes  phase-out schedules for production and consumption of the most harmful ozone depleting substances (ODS)."
+            },
+            {
+                "_other_provision_reporting": "4",
+                "_text": "Article 7 requires Parties to report annually on chlorofluorocarbons, other fully halogenated chlorofluorocarbons, halons, carbon tetrachloride, 1,1,1-trichloroethane, methyl bromide, hydrobromofluorocarbons, hydrochlorofluorocarbons and bromochloromethane. Several implementing decisions require reporting on specific uses (e.g. feedstock uses, process agent uses or quarantine and pre-shipment uses)"
+            },
+            {
+                "_other_provision_instrument": "5",
+                "_text": "Regulation (EC) on substances that deplete the ozone layer"
+            },
+            {
+                "_other_provision_overview": "5",
+                "_text": "Regulation  (EC) on substances that deplete the ozone layer implements, at Community level, the Montreal Protocol on Substances that Deplete the Ozone Layer."
+            },
+            {
+                "_other_provision_reporting": "5",
+                "_text": "Articles 26 and 27 require annual reporting of the production, import, export, placing on the market, use, emissions, recovery, recycling and reclamation, and destruction of all substances controlled under the Regulation."
+            },
+            {
+                "_other_provision_instrument": "6",
+                "_text": "Convention on Long-range Transboundary Air Pollution"
+            },
+            {
+                "_other_provision_overview": "6",
+                "_text": "The  UN ECE Convention on Long-range Transboundary Air Pollution (1979), via eight protocols, establishes mechanisms for the monitoring, evaluating, and regulating the long-range transmission of air pollutants in Europe.  "
+            },
+            {
+                "_other_provision_reporting": "6",
+                "_text": "In response to Article 8 of CLRTAP Parties exchange available information on annual emissions of agreed air pollutants in accordance with reporting intervals and reporting details determined by CLRTAP in the 2003 Guidelines for Estimating and Reporting Emission Data under the Convention on Long-range Transboundary Air Pollution."
+            },
+            {
+                "_other_provision_instrument": "7",
+                "_text": "National Emission Ceilings Directive"
+            },
+            {
+                "_other_provision_overview": "7",
+                "_text": "Directive 2001/81/EC of 23 October 2001 on national emission ceilings for certain atmospheric pollutants aims to limit emissions of the acidifying and eutrophying pollutants and ozone precursors  responsible for acidification, eutrophication, and ground level ozone."
+            },
+            {
+                "_other_provision_reporting": "7",
+                "_text": "Articles 7, 8, and Annex III require Member States to prepare and report annual emission inventories and emission projections, using the methodology of the UN ECE Convention on Long-range Transboundary Air Pollution (CLRTAP), for: sulphur dioxide;  nitrogen oxides; volatile organic compounds and ammonia, from all sources of air pollution."
+            },
+            {
+                "_other_provision_instrument": "8",
+                "_text": "Large Combustion Plants Directive"
+            },
+            {
+                "_other_provision_overview": "8",
+                "_text": "Directive 2001/80/EC on the limitation of emissions of certain pollutants into the air from large combustion plants applies to plant equal to, or greater than, 50 MW, irrespective of the type of fuel used."
+            },
+            {
+                "_other_provision_reporting": "8",
+                "_text": "Annex VIII B requires an annual emission inventory to be compiled by Member States for applicable plants and reported to Commission at 3 year intervals. Plans report annually energy input broken down into five categories; a summary of this inventory is reported every three years to the Commission (within 12 months of the end of the three year period). They also report annual emissions to show compliance with the emission limit values (ELVs). "
+            },
+            {
+                "_other_provision_instrument": "9",
+                "_text": "Solvent Emissions Directive"
+            },
+            {
+                "_other_provision_overview": "9",
+                "_text": "Council Directive 1999/13/EC on the limitation of emissions of volatile organic compounds into air due to the use of organic solvents in certain activities and installations aims to reduce photochemical pollution and applies to a range of industrial processes."
+            },
+            {
+                "_other_provision_reporting": "9",
+                "_text": "The Directive limits the emissions of volatile organic compounds into air from installations operating the activities listed in Annex I, where the organic solvent consumption threshold mentioned in Annex II is exceeded. Installations have either to meet the emission limit values set out in Annex II or to apply an equivalent reduction scheme. Article 11 of the Directive requires Member States to report progress on implementation to the Commission at 3 year intervals. The Directive has no specific reporting requirements for individual pollutants. "
+            },
+            {
+                "_other_provision_instrument": "10",
+                "_text": "The Water Framework Directive (Directive 2000/60/EC) "
+            },
+            {
+                "_other_provision_overview": "10",
+                "_text": "The Water  Framework Directive (WFD) 2000/60/EC aims to provide at European level a harmonised way to protect all surface and groundwater water bodies and to prevent any deterioration of status in order to achieve a 'good chemical status' by 2015. Groundwater Directive 2006/118/EC, Environmental Quality Standards Directive 2008/105/EC and Dangerous substances Directive 2006/11/EC complement the overall framework for integrated management. A combined approach should be applied by the Members State to control pollution with emission controls and quality objectives (established by the Directive 2008/105/EC on Environmental Quality Standards (Environmental Quality Standards).\nIn particular Decision 2455/2001/EC (which forms Annex X of the Water Framework Directive) establishes the list of priority substances and priority hazardous substances for which measures must be adopted.\nDirective 2006/118/EC also complements the provisions preventing or limiting inputs of pollutants into groundwater already contained in the WFD. \n "
+            },
+            {
+                "_other_provision_reporting": "10",
+                "_text": "Under Articles 15(1) of the Water Framework Directive, Member States shall send copies of their River Basin Management Plans (RBMPs) containing an estimation of the significant anthropogenic pressures (point and diffuse sources) according to Annex II (1.4 and 2.1) of the WFD and an assessment of the impact on the water body status to the anthropogenic pressures according to Annex II (1.5 and 2.1) of the WFD; the identification and mapping of protected areas and shall be reviewed and updated every six years thereafter. \nMember States shall also submit summary analysis reports (required under Article 5), and the monitoring programmes (required under Article 8). \nIn addition, Member States shall submit, within three years of the publication of each river basin management plan, an interim report describing progress on the implementation of the planned programme of measures. \n "
+            },
+            {
+                "_other_provision_instrument": "11",
+                "_text": "Directive 91/271/EEC concerning Urban Waste Water Treatment"
+            },
+            {
+                "_other_provision_overview": "11",
+                "_text": "The objective of Directive 91/271/EEC is to protect the environment from the adverse effects of waste water discharges from urban treatment plants and from certain industrial sectors. "
+            },
+            {
+                "_other_provision_reporting": "11",
+                "_text": "Under Article 15 the Commission may request information from Member States on the loads (p.e.) and volumes of discharges of waste water from agglomerations covered by the Directive. For urban waste water treatment plants discharging to sensitive areas subject to eutrophication information on discharge of Total Phosphorus and Total Nitrogen should also be reported.  Information on the amount and composition of sludges disposed of to surface waters could also be requested. The information should be reported according to the technical specifications within WISE (Water Reporting System for Europe). Direct discharges to receiving waters for plants representing 4 000 p.e. or more for the industrial sectors listed in Annex III are subject to specific reporting obligations. Under Article 16 relevant authorities or bodies shall publish and submit to the Commission situation reports on the disposal of urban waste water and sludge in their areas every two years."
+            },
+            {
+                "_other_provision_instrument": "12",
+                "_text": "The EU Monitoring Mechanism "
+            },
+            {
+                "_other_provision_overview": "12",
+                "_text": "The EU Monitoring Mechanism (MM) Decision No 280/2004/EC and its Implementing Provisions (Decision 2005/166), refer to emissions of the greenhouse gases listed in Annex A to the Kyoto Protocol, and certain of the substances regulated under the UN ECE Convention on Long-range Transboundary Air Pollution. This establishes a mechanism for reporting emissions of greenhouse gases and certain other gases."
+            },
+            {
+                "sub": [
+                    "2",
+                    "4",
+                    "2",
+                    "6",
+                    "X",
+                    "2"
+                ],
+                "_other_provision_reporting": "12",
+                "_text": "Article 3 of the MM Decision requires that Member States report annually emissions of: CO\n, CH\n, N\n0, HFCs, PFCs, SF\n, NO\n, NMVOC, CO and SO\n emissions from energy, industrial processes and other solvent use, agriculture, waste and other sources. "
+            },
+            {
+                "_other_provision_instrument": "13",
+                "_text": "Fluorinated Greenhouse Gases Regulation."
+            },
+            {
+                "sub": "6",
+                "_other_provision_overview": "13",
+                "_text": "Regulation (EC) No 842/2006 on certain fluorinated greenhouse gases aims to contain, prevent and thereby reduce emissions of the fluorinated gases currently covered by the Kyoto Protocol: HFC, PFC and SF\n. It covers emission containment, import/export and use of those fluorinated gases in EU Member States."
+            },
+            {
+                "_other_provision_reporting": "13",
+                "_text": "Article 6 lays down reporting requirements. All producers, importers and exporters of more than 1 tonne per annum have to report on the implementation, quantities, and type of F gas used annually to the Commission."
+            },
+            {
+                "_other_provision_instrument": "14",
+                "_text": "Waste Incineration Directive"
+            },
+            {
+                "_other_provision_overview": "14",
+                "_text": "Directive 2000/76/EC on the incineration of waste aims to prevent or to limit pollution from the incineration and co-incineration of waste. The Directive applies to incineration and co-incineration plants, with some exceptions, such as those treating only biomass (e.g. vegetable waste from agriculture and forestry)."
+            },
+            {
+                "_other_provision_reporting": "14",
+                "_text": " Article 12 requires operators of plants with a nominal capacity of 2 tonnes or more per hour to provide the competent authority with an annual report including emissions into air and water but there is no specific requirement for an emission inventory. Member States provide reports to the Commission on implementation progress based on a questionnaire sent by the Commission to Member States every three years."
+            },
+            {
+                "_other_provision_instrument": "15",
+                "_text": "Large Combustion Plants Directive"
+            },
+            {
+                "_other_provision_overview": "15",
+                "_text": "Directive 2001/80/EC on the limitation of emissions of certain pollutantsinto the air from large combustion plants applies to plant equal to, or greater than, 50 MW, irrespective of the type of fuel used.."
+            },
+            {
+                "_other_provision_reporting": "15",
+                "_text": "Annex VIII B requires an annual emission inventory to be compiled by Member States for applicable plants and reported to Commission at 3 year intervals.  Plans report annually  energy input boken down into five categories; a summary of this inventory is reported every three years to the Commission within 12 months of the end of the three year period. They also report annual emissions to show compliance with the emission limit values (ELVs). "
+            },
+            {
+                "_other_provision_instrument": "16",
+                "_text": "EU Emission Trading Scheme"
+            },
+            {
+                "_other_provision_overview": "16",
+                "_text": "Directive 2003/87/EC establishing a scheme for greenhouse gas emission allowance trading within the Community creates a cap-and-trade system for reducing  greenhouse gas emissions from certain industrial activities."
+            },
+            {
+                "_other_provision_reporting": "16",
+                "_text": "Article 21 requires Member States to report to the Commission, annually, emissions of GHGs from certain individual installations undertaking the industrial activities listed in Annex I."
+            },
+            {
+                "_other_provision_instrument": "17",
+                "_text": "Persistent Organic Pollutants Regulation"
+            },
+            {
+                "_other_provision_overview": "17",
+                "_text": "Regulation EC 850/2004 of the European Parliament on persistent organic pollutants and amending Directive 79/117/EC implements the Community's obligations under the Stockholm Convention and the CLRTAP Protocol on POPs with the aims to protect the environment and human health through limiting the releases of persistent organic pollutants. The provisions include control of production, placing on the market and use of intentionally produced POPs and release reduction, minimisation and elimination of unintentionally produced POPs. Level of control depends on which of the Annexes a substance is listed. Listed substances are Aldrin, Chlordane, Chlordecone, DDT (1,1,1-trichloro-2,2- bis(4-chlorophenyl)ethane), Dieldrin, Endrin, Heptachlor, Hexabromobiphenyl, Hexachlorocyclohexane (HCH), including Lindane, Hexachlorobenzene, Mirex, Polychlorinated Biphenyls (PCB), Polychlorinated dibenzo-p-dioxins and Dibenzofurans (PCDD/PCDF), Polycyclic aromatic hydrocarbons (PAHs), and Toxaphene. "
+            },
+            {
+                "_other_provision_reporting": "17",
+                "_text": "Article 12 of the regulations requires annual reports of statistical data on the actual or estimated total production and placing on the market of any substance listed in Annex I or II. In addition, Article 12 requires reports on the application of the Regulation, summary information compiled from the notifications concerning stockpiles of substances listed in Annex I or II, summary information compiled from the release inventories drawn up for substances listed in Annex III and summary information on the presence of dioxins, furans and PCBs in the environment as compiled pursuant to monitoring obligations. This was to be done within three years of the date of entry into force of the Regulation (2004) and every three years thereafter.  "
+            },
+            {
+                "sub": [
+                    "2",
+                    "4",
+                    "2",
+                    "6"
+                ],
+                "_other_provision_reporting": "3.1",
+                "_text": "Annex I Parties shall establish a national system for estimating (and reporting annually) anthropogenic emissions by sources and removals by sinks of all direct greenhouse gases not controlled by the Montreal Protocol: carbon dioxide (CO\n), methane (CH\n), hydro-fluorocarbons (HFCs), nitrous oxide (N\nO), sulphur hexafluoride (SF\n), perfluorocarbons (PFCs)."
+            },
+            {
+                "_other_provision_reporting": "12.1",
+                "_text": "Member States shall report emissions of CO2, CH4, N20, HFCs, PFCs, and SF6 to the Commission by 15 January  each year (year X)  for the year before last (year X-2). "
+            },
+            {
+                "sub": "2",
+                "_other_provision_reporting": "16.1",
+                "_text": "Annex IV of the Directive describes the principles for monitoring and reporting. Standardised or accepted methods, developed by the Commission, shall be used for non-CO\n greenhouse gases."
+            },
+            {
+                "_other_provision_reporting": "3.2",
+                "_text": "Annex I Parties shall report annual emissions of the indirect greenhouse gases: carbon monoxide (CO), nitrogen oxides (NOX) non-methane volatile organic compounds (NMVOCs), and sulphur oxides (SOx)."
+            },
+            {
+                "_other_provision_reporting": "12.2",
+                "_text": " Member States shall report emissions of NOx, VOC, CO, and SO2 to the Commisson by 15 January each year (year X),  provisional data for the year before last (year X-2) and final data for the year before that (year X-3)."
+            },
+            {
+                "_other_provision_reporting": "14.2",
+                "_text": "Continuous measurement is required but no annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "3.3",
+                "_text": "Annex I Parties shall establish a national system for estimating (and reporting annually) anthropogenic emissions by sources and removals by sinks of all direct greenhouse gases not controlled by the Montreal Protocol: carbon dioxide (CO2),.methane (CH4), hydro-fluorocarbons (HFCs), nitrous oxide (N2O), sulphur hexafluoride (SF6), perfluorocarbons (PFCs)."
+            },
+            {
+                "sub": [
+                    "2",
+                    "2",
+                    "4",
+                    "2",
+                    "6"
+                ],
+                "_other_provision_reporting": "12.3",
+                "_text": "Member States shall report emissions as CO\n equivalents of CO\n, CH\n, N\n0, HFCs, PFCs, and SF\n to the Commission by 15 January each year (year X) for the year before last (year X-2). "
+            },
+            {
+                "_other_provision_reporting": "16.3",
+                "_text": "Annex IV of the Directive describes the principles for monitoring.  Emissions of carbon dioxide shall be monitored either by calculation or on the basis of measurement."
+            },
+            {
+                "_other_provision_reporting": "3.4",
+                "_text": "Annex I Parties shall establish a national system for estimating (and reporting annually) anthropogenic emissions by sources and removals by sinks of all direct greenhouse gases not controlled by the Montreal Protocol: carbon dioxide (CO2),.methane (CH4), hydro-fluorocarbons (HFCs), nitrous oxide (N2O), sulphur hexafluoride (SF6), perfluorocarbons (PFCs)."
+            },
+            {
+                "_other_provision_reporting": "12.4",
+                "_text": "Member States shall report emissions of CO2, CH4, N20, HFCs, PFCs, and SF6 to the Commission by 15 January  each year (year X)  for the year before last (year X-2). "
+            },
+            {
+                "_other_provision_reporting": "13.4",
+                "_text": "Operators are obliged to report data on production, imports, and exports of each substance as well as their intended applications. Reports were due in 2008 for the first time and each year thereafter. Article 9 prohibits the placing on the market of  products and equipment containing F gas listed in Annex II."
+            },
+            {
+                "_other_provision_reporting": "16.4",
+                "_text": "Annex IV of the Directive describes the principles for monitoring and reporting.  Standardised or accepted methods, developed by the Commission, shall be used for non-CO2 greenhouse gases."
+            },
+            {
+                "_other_provision_reporting": "3.5",
+                "_text": "Annex I Parties shall establish a national system for estimating (and reporting annually) anthropogenic emissions by sources and removals by sinks of all direct greenhouse gases not controlled by the Montreal Protocol: carbon dioxide (CO2),.methane (CH4), hydro-fluorocarbons (HFCs), nitrous oxide (N2O), sulphur hexafluoride (SF6), perfluorocarbons (PFCs)."
+            },
+            {
+                "_other_provision_reporting": "12.5",
+                "_text": "Member States shall report emissions of CO2, CH4, N20, HFCs, PFCs, and SF6 to the Commission by 15 January  each year (year X)  for the year before last (year X-2). "
+            },
+            {
+                "_other_provision_reporting": "16.5",
+                "_text": "Annex IV of the Directive describes the principles for monitoring and reporting.  Standardised or accepted methods, developed by the Commission, shall be used for non-CO2 greenhouse gases."
+            },
+            {
+                "_other_provision_reporting": "6.6",
+                "_text": "Article 6 of the 1999 Gothenburg Protocol to Abate Acidification, Eutrophication and Ground-level Ozone require signatories to collect information on emissions of ammonia.  Article 7 requires reporting of  current and projected levels of emissions according to reporting intervals and reporting details determined by CLRTAP;  Article 7 also requires the provision of calculations of oxidised and reduced nitrogen budgets."
+            },
+            {
+                "_other_provision_reporting": "7.6",
+                "_text": "Articles 7, 8 and annex III, require that Member States, by the 31st December each year, report their updated national emission inventories and their emission projections for 2010 using reporting details determined by CLRTAP; Member States are encouraged to use the EMEP/EEA air pollutant emission inventory guidebook methodologies."
+            },
+            {
+                "_other_provision_reporting": "10.6",
+                "_text": "Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive. This substance may contribute to the ecological status (but not to the chemical status) identification if Member States identified that this is discharged in significant quantities in the river basin/sub-basin. If so, the general reporting obligation mentioned above have to be applied."
+            },
+            {
+                "_other_provision_reporting": "3.7",
+                "_text": "Annex I Parties shall report annual emissions of the indirect greenhouse gases: carbon monoxide (CO), nitrogen oxides (NOX) non-methane volatile organic compounds (NMVOCs), and sulphur oxides (SOx)."
+            },
+            {
+                "_other_provision_reporting": "6.7",
+                "_text": "Article 8 of the 1991 Geneva Protocol on the Control of Emissions of Volatile Organic Compounds or their Transboundary Fluxes requires signatories to report annual VOC emissions. Article 6 of the 1999 Gothenburg Protocol to Abate Acidification, Eutrophication and Ground-level Ozone require signatories to report, annually, emissions of sulphur, nitrogen compounds and VOCs."
+            },
+            {
+                "_other_provision_reporting": "7.7",
+                "_text": "Articles 7, 8 and annex III, require that Member States, by the 31st December each year,  report their updated national emission inventories and their emission projections for 2010 using reporting details determined by CLRTAP; Member States are encouraged to use EMEP/EEA air pollutant emission inventory guidebook methodologies."
+            },
+            {
+                "_other_provision_reporting": "9.7",
+                "_text": "Releases by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "12.7",
+                "_text": " Member States shall report emissions of NOx, VOC, CO, and SO2 to the Commisson by 15 January each year (year X),  provisional data for the year before last (year X-2) and final data for the year before that (year X-3)."
+            },
+            {
+                "_other_provision_reporting": "14.7",
+                "_text": "Continuous measurement of Total Organic Carbon (i.e. non-methane VOC) are required but no annual inventory data collection is required nor reported."
+            },
+            {
+                "_other_provision_reporting": "3.8",
+                "_text": "Annex I Parties shall report annual emissions of the indirect greenhouse gases: carbon monoxide (CO), nitrogen oxides (NOX) non-methane volatile organic compounds (NMVOCs), and sulphur oxides (SOx)."
+            },
+            {
+                "_other_provision_reporting": "6.8",
+                "_text": "Article 8 of the 1988 Protocol concerning the Control of Nitrogen Oxides or their Transboundary Fluxes requires Parties to report national annual emissions of nitrogen oxides and the basis on which they are calculated. Article 6 of the 1999 Gothenburg Protocol to Abate Acidification, Eutrophication and Ground-level Ozone require signatories to collect information on emissions of nitrogen oxides. Article 7 requires reporting of  current and projected levels of emissions according to reporting intervals and reporting details determined by CLRTAP; Article 7 also requires the provision of calculations of oxidised and reduced nitrogen budgets."
+            },
+            {
+                "_other_provision_reporting": "7.8",
+                "_text": "Articles 7, 8 and annex III, require that Member States, by the 31st December each year,  report their updated national emission inventories and their emission projections for 2010 using reporting details determined by CLRTAP; Member States are encouraged to use EMEP/EEA air pollutant emission inventory guidebook methodologies."
+            },
+            {
+                "_other_provision_reporting": "8.8",
+                "_text": "Member States shall establish annual inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years.  "
+            },
+            {
+                "_other_provision_reporting": "12.8",
+                "_text": " Member States shall report emissions of NOx, VOC, CO, and SO2 to the Commisson by 15 January each year (year X),  provisional data for the year before last (year X-2) and final data for the year before that (year X-3)."
+            },
+            {
+                "_other_provision_reporting": "14.8",
+                "_text": "Continuous measurement is required provided that emission limit values are set but no annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "15.8",
+                "_text": "Member States shall establish annual inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years.  "
+            },
+            {
+                "_other_provision_reporting": "3.9",
+                "_text": "Each Party included in Annex I shall have in place a national system for the estimation of anthropogenic emissions by sources and removals by sinks of all greenhouse gases not controlled by the Montreal Protocol. Each Party included in Annex I shall submit the above information in accordance with the relevant decisions of the Conference of the Parties."
+            },
+            {
+                "_other_provision_reporting": "9.9",
+                "_text": "Releases by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "12.9",
+                "_text": "Member States shall report emissions of CO2, CH4, N20, HFCs, PFCs, and SF6 to the Commission by 15 January  each year (year X)  for the year before last (year X-2). "
+            },
+            {
+                "_other_provision_reporting": "13.9",
+                "_text": "Operators are obliged to report data on production, imports, and exports of each substance as well as their intended applications. Reports were due in 2008 for the first time and each year thereafter. Article 9 prohibits the placing on the market of  products and equipment containing F gas listed in Annex II."
+            },
+            {
+                "_other_provision_reporting": "16.9",
+                "_text": "Annex IV of the Directive describes the principles for monitoring and reporting.  Standardised or accepted methods, developed by the Commission, shall be used for non-CO2 greenhouse gases."
+            },
+            {
+                "_other_provision_reporting": "3.10",
+                "_text": "Each Party included in Annex I shall have in place a national system for the estimation of anthropogenic emissions by sources and removals by sinks of all greenhouse gases not controlled by the Montreal Protocol. Each Party included in Annex I shall submit the above information in accordance with the relevant decisions of the Conference of the Parties."
+            },
+            {
+                "_other_provision_reporting": "12.10",
+                "_text": "Member States shall report emissions of CO2, CH4, N20, HFCs, PFCs, and SF6 to the Commission by 15 January  each year (year X)  for the year before last (year X-2). "
+            },
+            {
+                "_other_provision_reporting": "13.10",
+                "_text": "Operators are obliged to report data on production, imports, and exports of each substance as well as their intended applications. Reports were due in 2008 for the first time and each year thereafter. Article 8  prohibits the use of more than 850 kg of SF6 in magnesium die-casting production as of 2008."
+            },
+            {
+                "_other_provision_reporting": "16.10",
+                "_text": "Annex IV of the Directive describes the principles for monitoring and reporting.  Standardised or accepted methods, developed by the Commission, shall be used for non-CO2 greenhouse gases."
+            },
+            {
+                "_other_provision_reporting": "3.11",
+                "_text": "Annex I Parties shall report annual emissions of the indirect greenhouse gases: carbon monoxide (CO), nitrogen oxides (NOX) non-methane volatile organic compounds (NMVOCs), and sulphur oxides (SOx)."
+            },
+            {
+                "_other_provision_reporting": "6.11",
+                "_text": "Article 4 of the 1985 Protocol to CLRTAP on the Reduction of Sulphur Emissions or their Transboundary Fluxes by at least 30 per cent require signatories to report national annual sulphur emissions and the basis upon which they have been calculated. Article 5 of the 1994 Protocol on Further Reduction of Sulphur Emissions require signatories to report national annual sulphur emissions according to reporting intervals and reporting details determined by CLRTAP. Article 6 of the 1999 Gothenburg Protocol to Abate Acidification, Eutrophication and Ground-level Ozone require signatories to collect information on emissions of sulphur; Article 7 requires reporting of  current and projected levels of emissions according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "7.11",
+                "_text": "Articles 7, 8 and annex III, require that Member States, by the 31st December each year,  report their updated national emission inventories and their emission projections for 2010 using reporting details determined by CLRTAP; Member States are encouraged to use EMEP/EEA air pollutant emission inventory guidebook methodologies."
+            },
+            {
+                "_other_provision_reporting": "8.11",
+                "_text": "Member States shall establish annual inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years.  "
+            },
+            {
+                "_other_provision_reporting": "12.11",
+                "_text": " Member States shall report emissions of NOx, VOC, CO, and SO2 to the Commisson by 15 January each year (year X),  provisional data for the year before last (year X-2) and final data for the year before that (year X-3)."
+            },
+            {
+                "_other_provision_reporting": "14.11",
+                "_text": "Continuous measurement is generally required but no annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "15.11",
+                "_text": "Member States shall establish annual inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years.  "
+            },
+            {
+                "_other_provision_reporting": "10.12",
+                "_text": "Ecological status classification of each body of water to be reported within the river basin management plans, interim reports and summary reports.  The criteria for classification is the Annual Average for the Environmental Quality Standards set by the Member State for this substance."
+            },
+            {
+                "_other_provision_reporting": "11.12",
+                "_text": "Under Article 16 relevant authorities or bodies shall publish situation reports (with copies to the Commission) on the disposal of urban waste water and sludge in their areas every two years.   The reports should include information on the efficiency with which urban waste water treatment plants remove total nitrogen and total phosphorus."
+            },
+            {
+                "_other_provision_reporting": "10.13",
+                "_text": "Ecological status classification of each body of water to be reported within the river basin management plans, interim reports and summary reports.  The criteria for classification is the Annual Average for the Environmental Quality Standards set by the Member State for this substance."
+            },
+            {
+                "_other_provision_reporting": "11.13",
+                "_text": "Under Article 16 relevant authorities or bodies shall publish situation reports (with copies to the Commission) on the disposal of urban waste water and sludge in their areas every two years.   The reports should include information on the efficiency with which urban waste water treatment plants remove total nitrogen and total phosphorus."
+            },
+            {
+                "_other_provision_reporting": "4.14",
+                "_text": "Parties shall report annually consumption, import, export, production and destruction of hydrochlorofluorocarbons by substance and by sector"
+            },
+            {
+                "_other_provision_reporting": "5.14",
+                "_text": "Annual reporting is required of the production, import, export, placing on the market, use, recovery, recycling, reclamation and destruction."
+            },
+            {
+                "_other_provision_reporting": "9.14",
+                "_text": "Releases by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "4.15",
+                "_text": "Parties shall report annually consumption, import, export, production and destruction of chlorofluorocarbons and fully halogenated chlorofluorocarbons by substance and by sector"
+            },
+            {
+                "_other_provision_reporting": "5.15",
+                "_text": "Annual reporting is required of the production, import, export, placing on the market, use, recovery, recycling, reclamation and destruction."
+            },
+            {
+                "_other_provision_reporting": "9.15",
+                "_text": "Releases by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "4.16",
+                "_text": "Parties shall report annually consumption, import, export, production and destruction of halons by substance and by sector"
+            },
+            {
+                "_other_provision_reporting": "5.16",
+                "_text": "Annual reporting is required of the production, import, export, placing on the market, use, recovery, recycling and reclamation and destruction of halons. Additionally, annual reporting is required of quantities installed, stored and emitted and of measures being taken to replace remaining halon uses."
+            },
+            {
+                "_other_provision_reporting": "9.16",
+                "_text": "Releases by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "6.17",
+                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties are encouraged to report the non-Annex 1 heavy metals (arsenic, chromium, copper, nickel, selenium, zinc) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.17",
+                "_text": " Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "14.17",
+                "_text": "Periodic measurement is required but no obligation for an obligation for an annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "6.18",
+                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties shall report the Annex 1 heavy metals (cadmium, lead and mercury) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.18",
+                "_text": "Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only. For cadmium and its compounds (No 6) the Environmental Quality Standards values vary depending on the hardness of the water as specified in five class categories (Class 1: < 40 mg CaCO3/l, Class 2: 40 to < 50 mg CaCO3/l, Class 3: 50 to < 100 mg CaCO3/l, Class 4: 100 to < 200 mg CaCO3/l and Class 5: ≥ 200 mg CaCO3/l)."
+            },
+            {
+                "_other_provision_reporting": "14.18",
+                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "6.19",
+                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties are encouraged to report the non-Annex 1 heavy metals (arsenic, chromium, copper, nickel, selenium, zinc) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.19",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "14.19",
+                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "6.20",
+                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties are encouraged to report the non-Annex 1 heavy metals (arsenic, chromium, copper, nickel, selenium, zinc) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.20",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "14.20",
+                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "6.21",
+                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties shall report the Annex 1 heavy metals (cadmium, lead and mercury) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.21",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only.  If Member States do not apply Environmental Quality Standards for biota they shall introduce stricter Environmental Quality Standards for water in order to achieve the same level of protection as the Environmental Quality Standards for biota set out in Article 3(2) of this Directive. They shall notify the Commission and other Member States, through the Committee referred to in Article 21 of Directive 2000/60/EC, of the reasons and basis for using this approach, the alternative Environmental Quality Standards for water established, including the data and the methodology by which the alternative Environmental Quality Standards were derived, and the categories of surface water to which they would apply."
+            },
+            {
+                "_other_provision_reporting": "14.21",
+                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "6.22",
+                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties are encouraged to report the non-Annex 1 heavy metals (arsenic, chromium, copper, nickel, selenium, zinc) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.22",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only."
+            },
+            {
+                "_other_provision_reporting": "14.22",
+                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "6.23",
+                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties shall report the Annex 1 heavy metals (cadmium, lead and mercury) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.23",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only."
+            },
+            {
+                "_other_provision_reporting": "14.23",
+                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "6.24",
+                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties are encouraged to report the non-Annex 1 heavy metals (arsenic, chromium, copper, nickel, selenium, zinc) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.24",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "10.25",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "2.26",
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "6.26",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.26",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009."
+            },
+            {
+                "_other_provision_reporting": "17.26",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
+            },
+            {
+                "_other_provision_reporting": "10.27",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "2.28",
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "6.28",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.28",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "17.28",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
+            },
+            {
+                "_other_provision_reporting": "2.29",
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "6.29",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.29",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "17.29",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
+            },
+            {
+                "_other_provision_reporting": "10.30",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "9.31",
+                "_text": "Releases by specific activities are covered, for compounds having risk phrases R40, R68, R45, R46, R49, R60 or R61 specific requirements apply."
+            },
+            {
+                "_other_provision_reporting": "10.31",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only."
+            },
+            {
+                "_other_provision_reporting": "10.32",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "2.33",
+                "_text": "Listed in Annex B - Each party shall provide details of the measures taken by to control and restrict production and use of this product. This shall accompany statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "6.33",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of DDT, which is an  Annex I  substance scheduled for elimination and an Annex II substance with restrictions on its use, according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.33",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009.  DDT total comprises the sum of the isomers 1,1,1-trichloro-2,2 bis (p-chlorophenyl) ethane (CAS number 50-29-3; EU number 200-024-3); 1,1,1-trichloro-2(o-chlorophenyl)-2-(p-chlorophenyl) ethane (CAS number 789-02-6; EU number 212-332-5); 1,1-dichloro-2,2 bis (p-chlorophenyl) ethylene (CAS number 72-55-9; EU number 200-784-6); and 1,1-dichloro-2,2 bis (p-chlorophenyl) ethane (CAS number 72-54-8; EU number 200-783-0)."
+            },
+            {
+                "_other_provision_reporting": "17.33",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market. Specific exemptions exist for DDT which allow the production of DDT as an intermediate in the production of dicofol until the 1st January 2014"
+            },
+            {
+                "_other_provision_reporting": "9.34",
+                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R45 and therefore specific requirements apply."
+            },
+            {
+                "_other_provision_reporting": "10.34",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "9.35",
+                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R40 and therefore specific requirements apply."
+            },
+            {
+                "_other_provision_reporting": "10.35",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "2.36",
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "6.36",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.36",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009."
+            },
+            {
+                "_other_provision_reporting": "17.36",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market"
+            },
+            {
+                "_other_provision_reporting": "10.37",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "10.38",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "2.39",
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "6.39",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.39",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009."
+            },
+            {
+                "_other_provision_reporting": "17.39",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market"
+            },
+            {
+                "_other_provision_reporting": "10.40",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "2.41",
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "6.41",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.41",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "17.41",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market"
+            },
+            {
+                "_other_provision_reporting": "2.42",
+                "_text": "Listed in Annex A and C - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years. Under Annex C, an action plan must be developed to minimise the unintentional release of hexachlorobenzne, this is subject to a review, which must be completed every five years.Such reviews shall be included in reports submitted to the Convention pursuant to Article 15 on general reporting."
+            },
+            {
+                "_other_provision_reporting": "6.42",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of HCB, an Annex I - substances for elimination and an Annex III substance subject to controls on its emission, according to reporting intervals and reporting details determined by CLRTAP.  "
+            },
+            {
+                "_other_provision_reporting": "9.42",
+                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R45 and therefore specific requirements apply."
+            },
+            {
+                "_other_provision_reporting": "10.42",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. If Member States do not apply Environmental Quality Standards for biota they shall introduce stricter Environmental Quality Standards for water in order to achieve the same level of protection as the Environmental Quality Standards for biota set out in Article 3(2) of this Directive. They shall notify the Commission and other Member States, through the Committee referred to in Article 21 of Directive 2000/60/EC, of the reasons and basis for using this approach, the alternative Environmental Quality Standards for water established, including the data and the methodology by which the alternative Environmental Quality Standards were derived, and the categories of surface water to which they would apply."
+            },
+            {
+                "_other_provision_reporting": "17.42",
+                "_text": "This substance is listed both in Annex I and III of the regulations. Under Annex I of the regulation this substance is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information on stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market. Annex III - requires emission inventories (for air, land and water) to be drawn up by each Member State, along with a National Implementation Plan detailing the strategies to minimise the release of this substance to the environment."
+            },
+            {
+                "_other_provision_reporting": "10.43",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only.  If Member States do not apply Environmental Quality Standards for biota they shall introduce stricter Environmental Quality Standards for water in order to achieve the same level of protection as the Environmental Quality Standards for biota set out in Article 3(2) of this Directive. They shall notify the Commission and other Member States, through the Committee referred to in Article 21 of Directive 2000/60/EC, of the reasons and basis for using this approach, the alternative Environmental Quality Standards for water established, including the data and the methodology by which the alternative Environmental Quality Standards were derived, and the categories of surface water to which they would apply."
+            },
+            {
+                "_other_provision_reporting": "2.44",
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "6.44",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants;  according to reporting intervals and reporting details determined by CLRTAP.  HCH is an Annex  II substance with restrictions on its use. "
+            },
+            {
+                "_other_provision_reporting": "10.44",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "17.44",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
+            },
+            {
+                "_other_provision_reporting": "2.45",
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "6.45",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants;  according to reporting intervals and reporting details determined by CLRTAP.  Lindane is an Annex  II substance with restrictions on its use. "
+            },
+            {
+                "_other_provision_reporting": "10.45",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "17.45",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
+            },
+            {
+                "_other_provision_reporting": "2.46",
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "6.46",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.46",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "17.46",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market"
+            },
+            {
+                "_other_provision_reporting": "2.47",
+                "_text": "Listed in Annex C - Unintentional production subject to the provisions of Article 5. This requires Member States to draw up action plans to minimise the release of these substances. These plans are subject to a review, which must be completed every five years. Such reviews shall be included in reports submitted pursuant to Article 15 general reporting."
+            },
+            {
+                "_other_provision_reporting": "6.47",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of the dioxins and furans listed Annex III as subject to emission controls,  according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.47",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "14.47",
+                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified. Toxic Equivalency Factors for reporting provided at Annex 1 of Directive."
+            },
+            {
+                "_other_provision_reporting": "17.47",
+                "_text": "These substances are listed in Annex III of the regulation. This requires Member States to draw up release inventories (air, land and water) along with a National Implementation Plan detailing the strategies to minimise the release of these substance to the environment. A summary of this information is to be supplied to the Commission every three years, along with details on the regulation implementation including information on infringements and penalties."
+            },
+            {
+                "_other_provision_reporting": "2.48",
+                "_text": "Listed in Annex A and C - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years. Under Annex C, an action plan must be developed to minimise the unintentional release of hexachlorobenzne, this is subject to a review, which must be completed every five years.Such reviews shall be included in reports submitted to the Convention pursuant to Article 15 on general reporting."
+            },
+            {
+                "_other_provision_reporting": "10.48",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "10.49",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "2.50",
+                "_text": "Listed in Annex A and C - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years. Under Annex C, an action plan must be developed to minimise the unintentional release of hexachlorobenzne, this is subject to a review, which must be completed every five years.Such reviews shall be included in reports submitted to the Convention pursuant to Article 15 on general reporting. Under Annex A, Part II parties are required to provide a report every five years on progress in eliminating polychlorinated biphenyls and submit it to the Conference of the Parties. "
+            },
+            {
+                "_other_provision_reporting": "6.50",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of PCBs,  Annex I - substances for elimination and  Annex II substance subject to restrictions on use, according to reporting intervals and reporting details determined by CLRTAP.  "
+            },
+            {
+                "_other_provision_reporting": "10.50",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "17.50",
+                "_text": "This substance is listed both in Annex I and III of the regulations. Under Annex I of the regulation this substance is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information on stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market. Annex III - requires emission inventories (for air, land and water) to be drawn up by each Member State, along with a National Implementation Plan detailing the strategies to minimise the release of this substance to the environment."
+            },
+            {
+                "_other_provision_reporting": "10.51",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "9.52",
+                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R40 and therefore specific requirements apply."
+            },
+            {
+                "_other_provision_reporting": "10.52",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009."
+            },
+            {
+                "_other_provision_reporting": "4.53",
+                "_text": "Parties shall report annually consumption, import, export, production and destruction of tetrachloromethane."
+            },
+            {
+                "_other_provision_reporting": "5.53",
+                "_text": "Annual reporting is required of the production, import, export, placing on the market, use, recovery, recycling, reclamation and destruction."
+            },
+            {
+                "_other_provision_reporting": "9.53",
+                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R40 and therefore specific requirements apply."
+            },
+            {
+                "_other_provision_reporting": "10.53",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009."
+            },
+            {
+                "_other_provision_reporting": "9.54",
+                "_text": "Releases by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "10.54",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "9.55",
+                "_text": "Releases by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "10.55",
+                "_text": "Member States shall take specific measures to reduce pollution caused by this substance pursuant to the Dangerous Substance Directive; Environmental Quality Standard for this substance is derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification. "
+            },
+            {
+                "_other_provision_reporting": "9.56",
+                "_text": "Releases by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "10.56",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "9.57",
+                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R45 and therefore specific requirements apply."
+            },
+            {
+                "_other_provision_reporting": "10.57",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009"
+            },
+            {
+                "_other_provision_reporting": "4.58",
+                "_text": "Parties shall report annually consumption, import, export, production and destruction of 1,1,1-trichloromethane."
+            },
+            {
+                "_other_provision_reporting": "5.58",
+                "_text": "Annual reporting is required of the production, import, export, placing on the market, use, recovery, recycling, reclamation and destruction."
+            },
+            {
+                "_other_provision_reporting": "9.58",
+                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R40 and therefore specific requirements apply."
+            },
+            {
+                "_other_provision_reporting": "10.58",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "2.59",
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "6.59",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.59",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "17.59",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market"
+            },
+            {
+                "_other_provision_reporting": "10.60",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "10.61",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "9.62",
+                "_text": "Releases by specific activities are covered; compound is carrying risk phrases R45 and R46 and therefore specific requirements apply."
+            },
+            {
+                "_other_provision_reporting": "10.62",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "2.63",
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "10.63",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only. For the group of priority substances covered by brominated diphenylethers (No 5) listed in Decision No 2455/2001/EC, an Environmental Quality Standards is established only for congener numbers 28, 47, 99, 100, 153 and 154."
+            },
+            {
+                "_other_provision_reporting": "10.64",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "10.67",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "9.68",
+                "_text": "Releases by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "10.68",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "10.69",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification. Other than those identified in Annex X of the WFD."
+            },
+            {
+                "_other_provision_reporting": "10.70",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "6.72",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of the PAHs listed Annex III as subject to emission controls,  according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "9.72",
+                "_text": "Releases by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "10.72",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only. For the group of priority substances of polyaromatic hydrocarbons (PAH) (No 28), each individual Environmental Quality Standards is applicable, i.e. the Environmental Quality Standards for Benzo(a)pyrene, the Environmental Quality Standards for the sum of Benzo(b)fluoranthene and Benzo(k)fluoranthene and the Environmental Quality Standards for the sum of Benzo(g,h,i)perylene and Indeno(1,2,3-cd)pyrene must be met."
+            },
+            {
+                "_other_provision_reporting": "17.72",
+                "_text": "These substances are subject to Annex III of the regulation. This requires Member States to draw up release inventories (air, land and water) along with a National Implementation Plan detailing the strategies to minimise the release of these substance to the environment. A summary of this information is to be supplied to the Commission every three years, along with details on the regulations implementation including information on infringements and penalties."
+            },
+            {
+                "_other_provision_reporting": "9.73",
+                "_text": "Releases to air by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "10.73",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "10.74",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only."
+            },
+            {
+                "_other_provision_reporting": "10.75",
+                "_text": "Emissions reported to the Commission by Member States within their original River Basin Management Plans (Art. 15), with interim reports to be submitted within three years. Emissions reported to the Commission by Member States in their summary reports outlining the required analyses under Article 5, and monitoring programmes designed under Article 8."
+            },
+            {
+                "_other_provision_reporting": "10.77",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "9.78",
+                "_text": "Releases to air by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "14.80",
+                "_text": "Continuous measurement is generally required but no annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "10.81",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "10.82",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "10.83",
+                "_text": "Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive. These substances may contribute to the ecological status (but not to the chemical status) identification if Member States identified that these are discharged in significant quantities in the river basin/sub-basin. If so, the general reporting obligation mentioned above have to be applied."
+            },
+            {
+                "_other_provision_reporting": "14.84",
+                "_text": "Continuous measurement is generally required but no annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "10.85",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "8.86",
+                "_text": "The Directive requires reporting of dust (total PM) not PM10 (PM10 is a part of dust emissions). Member States shall establish annual emission inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years.  "
+            },
+            {
+                "_other_provision_reporting": "14.86",
+                "_text": "Continuous measurement is required (of total dust not PM10) but no annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "15.86",
+                "_text": "The Directive requires reporting of dust (total PM) not PM10 (PM10 is a part of dust emissions). Member States shall establish annual emission inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years. "
+            },
+            {
+                "_other_provision_reporting": "10.87",
+                "_text": "Included in the water framework list of priority substances 2000/60/EC. Member States shall take measures to progressively reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "10.88",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "17.88",
+                "_text": "These substances are subject to Annex III of the regulation. This requires Member States to draw up release inventories (air, land and water) along with a National Implementation Plan detailing the strategies to minimise the release of these substance to the environment. A summary of this information is to be supplied to the Commission every three years, along with details on the regulations implementation including information on infringements and penalties."
+            },
+            {
+                "_other_provision_reporting": "10.89",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009."
+            },
+            {
+                "_other_provision_reporting": "2.90",
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "6.90",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "17.90",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
+            },
+            {
+                "_other_provision_reporting": "10.91",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only."
+            },
+            {
+                "_other_provision_reporting": "17.91",
+                "_text": "These substances are subject to Annex III of the regulation. This requires Member States to draw up release inventories (air, land and water) along with a National Implementation Plan detailing the strategies to minimise the release of these substance to the environment. A summary of this information is to be supplied to the Commission every three years, along with details on the regulation implementation including information on infringements and penalties."
+            }
+        ]
+    }
+}

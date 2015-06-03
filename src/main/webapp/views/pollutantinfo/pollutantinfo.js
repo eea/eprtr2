@@ -17,5 +17,5 @@ angular.module('myApp.pollutantinfo', ['ngRoute'])
 		$scope.welcome = data['HomeWelcomeText'];
     });*/
 	//HomeWelcomeText
-	
+	$scope.pollutantid = 25;
 }]);

@@ -18,7 +18,7 @@ describe('myApp.home module', function() {
       var $scope = {};
       //var controller = $controller('HomeCtrl', { $scope: $scope });
       var homeCtrl = $controller('HomeCtrl', { $scope: $scope });
-      expect($scope.test('hej')).toEqual('hej');
+      expect(homeCtrl).toBeDefined();
     }));
 
   });

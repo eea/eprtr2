@@ -1,0 +1,205 @@
+<div ng-controller="PdController" class="container-fluid" >
+
+	<tabset>
+
+	<h4>Pollutant</h4>
+	<p>{{ pollutant_details.pollutant_name }}</p>
+
+	<h4>Pollutant Group</h4>
+	<p>{{ pollutant_group_details.pollutant_group}}</p>
+
+	<br />
+
+	
+		<tab heading="General information">
+			<table>
+				<tr>
+					<td>{{ label_pollutant_id }} :</td>
+					<td>{{ pollutant_details._id}}</td>
+				</tr>
+				<tr>
+					<td>{{ label_iupac }} :</td>
+					<td>{{ pollutant_group_details.IUPAC_Name }}</td>
+				</tr>
+				<tr>
+					<td>{{ label_cas_number }} :</td>
+					<td>{{ pollutant_group_details.cas_no }} </td>
+				</tr>
+				<tr>
+					<td>{{ label_ec_number }} :</td>
+					<td>{{ pollutant_group_details.ec_no }}</td>
+				</tr>
+				<tr>
+					<td>{{ label_smiles }} :</td>
+					<td>{{ pollutant_group_details.smiles_code }}</td>
+				</tr>
+				<tr>
+					<td>{{ label_chemspider }} :</td>
+					<td>{{ pollutant_group_details.chemspider.id }}</td>
+				</tr>
+				<tr>
+					<td>{{ label_formula }} :</td>
+					<td><span ng-bind-html="pollutant_group_details.calculated_molecular_formula"></span> </td>
+				</tr>
+				<tr>
+					<td>{{ label_classification }} :</td>
+					<td>{{ pollutant_group_details.classifications.classification }}</td>
+				</tr>
+			</table>
+
+			<h4>{{ label_description }}</h4>
+			<p>{{ pollutant_details.description }}</p>
+
+			<h4>{{ label_main_uses }}</h4>
+			<p>{{ pollutant_details.main_uses }}</p>
+
+			<h4>{{ label_main_methods_release }}</h4>
+			<p ng-repeat="mr in pollutant_details.main_methods_of_release.text">{{ mr }}</p>
+
+			<h4>{{ label_health_affects }}</h4>
+			<p ng-repeat="ha in pollutant_details.calculated_health_affects"><span ng-bind-html="ha"></span></p>
+
+		</tab>
+
+		<tab heading="Pollutant Group">
+			<h4>{{ label_pollutant_group }} - {{ pollutant_group_name }} </h4>
+
+			<p><span ng-bind-html="pollutant_group_tip"></span>	</p>
+
+		</tab>
+
+		<tab heading="Ppollutant thresholds">
+			<h4>{{ label_provprtr }}</h4>
+
+			<p>
+				<b>{{ label_threshold }}</b>
+			</p>
+
+			<table border="1">
+			<tr>
+				<td>{{ label_air }}</td>
+				<td>{{ label_water }}</td>
+				<td>{{ label_land }}</td>
+			</tr>
+			<tr>
+				<td>{{ pollutant_group_details.prtr_provisions.prtr_provision[0] }}</td>
+				<td>{{ pollutant_group_details.prtr_provisions.prtr_provision[1] }}</td>
+				<td>{{ pollutant_group_details.prtr_provisions.prtr_provision[2] }}</td>
+			</tr>
+			</table>
+
+			<p>{{ label_provision_prtr_note }} </p>
+			
+			<p> F.x. Benzene should display Note2 </p>
+
+		</tab>
+
+		<tab heading="Measurements and calculations methods">
+
+			<h4>{{ label_proviso }}</h4>
+
+			<table border="1">
+				<tr>
+					<th>{{ label_iso_standard }}</th>
+					<th>{{ label_iso_title }}</th>
+					<th>{{ label_iso_target }}</th>
+					<th>{{ label_iso_uncertainty }}</th>
+				</tr>
+				<tr ng-repeat="provision in pollutant_details.iso_provisions.provision">
+					<td>{{ provision.standard }}</td>
+					<td>{{ provision.title }} </td>
+					<td>{{ provision.target }}</td>
+					<td><span ng-bind-html="provision.uncertainty"></span></td>
+				</tr>
+			</table>
+
+			<p>{{ label_iso_foot_note_title }}</p>
+
+			<p>{{ label_iso_foot_note1 }}</p>
+
+			<p>{{ label_iso_foot_note2 }}</p>
+
+			<p>{{ label_iso_foot_note3 }} <a href="{{ label_iso_foot_note_link1 }}">{{ label_iso_foot_note_link1 }}</a>{{ label_iso_foot_note4 }}
+			<a href="{{ label_iso_foot_note_link2 }}">{{ label_iso_foot_note_link2 }}</a>{{ label_iso_foot_note5 }}</p>
+
+			<p>{{ label_iso_foot_note6 }}</p>
+
+		</tab>
+
+		<tab heading="Synonyms or other commercial names">
+
+			<h4>{{ label_synonyms }}</h4>
+
+			<p ng-repeat="synonym in pollutant_group_details.synonyms.synonym">{{ synonym }}</p>
+
+		</tab>
+
+		<tab heading="Other relevant reporting requirements">
+			<h4>{{ label_provision_other }}</h4>
+
+			<div ng-repeat="provision in other_provisions">
+				<h4><span ng-bind-html="provision.instrument"></span></h4>
+				<h4>{{ label_provision_overview }}</h4>
+				<p><span ng-bind-html="provision.overview"></span></p>
+				<h4>{{ label_provision_report_generic }}</h4>
+				<p><span ng-bind-html="provision.generic_reporting"></span></p>
+				<h4>{{ label_provision_report_specific }}</h4>
+				<p><span ng-bind-html="provision.specific_reporting"></span></p>
+			</div>
+		</tab>
+
+		<tab heading="Hazards and other technical characteristics">
+			Remember case with no phrases like Hydro-fluorocarbons (HFCs)
+			
+				<h4>{{ label_safety_phrases }}</h4>
+				<p> {{ label_safety_phrases_text }} </p>
+				<table border="1">
+					<tr ng-repeat="phrase in r_phrases">
+						<td>{{ phrase.label }}</td>
+						<td>{{ phrase.value }}</td>
+					</tr>
+					<tr ng-repeat="phrase in s_phrases">
+						<td>{{ phrase.label }}</td>
+						<td>{{ phrase.value }}</td>
+					</tr>
+				</table>
+				
+				<h4>{{ label_classification_labelling }}</h4>
+				<p> {{ label_classification_labelling_text }} </p>
+				<p><a href='{{ label_classification_labelling_link_url }}'>{{ label_classification_labelling_link_text }}</a> </p>
+				
+				<h4>{{ label_classification_labelling_hazard_class }} </h4>
+				<table border="1">
+					<tr ng-repeat="h in hazard_class">
+						<td> {{ h.label }}</td>
+						<td> {{ h.value }}</td>
+					</tr>
+				</table>
+				
+				<h4>{{ label_classification_labelling_hazard_statements }}</h4>
+				<table border="1">
+					<tr ng-repeat="h in hazard_statement">
+						<td> {{ h.label }}</td>
+						<td> {{ h.value }}</td>
+					</tr>
+				</table>
+				
+				<h4>{{ label_physical }} </h4>
+				<table border="1" class=".table">
+					<tr ng-repeat="property in physical_properties">
+						<td>{{ property.label }}</td>
+						<td>{{ property.value }}</td>
+					</tr>
+				</table>
+				
+				<h4>{{ label_impacts }} </h4>
+				<table border="1">
+					<tr ng-repeat="hazard in hazards">
+						<td> {{hazard.label}}</td>
+						<td> {{hazard.value}}</td>
+					</tr>
+				</table>
+		</tab>
+	</tabset>
+
+</div>
