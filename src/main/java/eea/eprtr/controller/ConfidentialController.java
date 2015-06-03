@@ -26,8 +26,10 @@ import eea.eprtr.dao.WastetransferSearchFilter;
 import eea.eprtr.model.MediumCode;
 import eea.eprtr.model.Pollutantrelease;
 import eea.eprtr.model.Pollutanttransfer;
+import eea.eprtr.model.WasteConfidentialReason;
 import eea.eprtr.model.Wastetransfer;
 import eea.eprtr.model.WastetransferConfidential;
+import eea.eprtr.model.WastetransferCounts;
 
 @RestController
 public class ConfidentialController {
@@ -108,7 +110,7 @@ public class ConfidentialController {
 		WasteSearchFilter wastefilter = new WasteSearchFilter(1,1,1,1,1,1);
 		WastetransferSearchFilter filter3 = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
 		List<Wastetransfer> wastetranfer = wastetransferSearchRepository.getWastetransfer(filter3);
-		WasteTransferConfidentialSearchFilter filter4  = new WasteTransferConfidentialSearchFilter(reportingYearFilter);
+		WasteTransferConfidentialSearchFilter filter4  = new WasteTransferConfidentialSearchFilter(reportingYearFilter, null);
 		List<WastetransferConfidential> confidentialCodes = wastetransferSearchRepository.getWastetransferConfidentialCodes(filter4);
 		for(Wastetransfer PO : wastetranfer)
 		{
@@ -129,6 +131,103 @@ public class ConfidentialController {
 			data.add(obj);
 		}
 		return data;
+	}
+	
+	@RequestMapping("/wastetransferConfidentialCounts")
+    public WastetransferCounts wastetransferConfidentialCounts(
+    		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
+    		
+    		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
+    		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
+    		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
+    		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
+    		
+    		@RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
+    		@RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
+    		@RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
+    		@RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
+    		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
+    		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
+    		
+    		@RequestParam(value = "Accidental", required = false) Integer accidental,
+    		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
+    		HttpServletResponse response
+    		) {
+
+		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
+
+		WasteTransferConfidentialSearchFilter filter  = new WasteTransferConfidentialSearchFilter(reportingYearFilter, locationFilter);
+		List<WastetransferConfidential> confidentialCodes = wastetransferSearchRepository.getWastetransferConfidentialCodes(filter);
+
+		/*Need to filter result*/
+		long _quantityNONHW = (long) 0;
+		long _quantityHWIC = (long) 0;
+		long _quantityHWOC =(long) 0;
+		for(WastetransferConfidential co : confidentialCodes){
+			switch (co.getWasteTypeCode()) {
+				case "NON-HW":
+					_quantityNONHW ++;
+					break;
+				case "NONHW":
+					_quantityNONHW ++;
+					break;
+				case "HWOC":
+					_quantityHWOC ++;
+					break;
+				case "HWIC":
+					_quantityHWIC ++;
+					break;
+				default:
+					break;
+			}
+		} 
+		WastetransferCounts result_1 = new WastetransferCounts(_quantityNONHW, _quantityHWIC, _quantityHWOC) ;
+		return result_1;
+	}
+	
+	@RequestMapping("/wastetransferConfidentialReason")
+	public List<WasteConfidentialReason> GetWasteConfidentialReason(
+    		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
+    		
+    		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
+    		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
+    		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
+    		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
+    		
+    		@RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
+    		@RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
+    		@RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
+    		@RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
+    		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
+    		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
+    		
+    		@RequestParam(value = "Accidental", required = false) Integer accidental,
+    		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
+    		HttpServletResponse response
+    		) {
+
+		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
+
+		WasteTransferConfidentialSearchFilter filter  = new WasteTransferConfidentialSearchFilter(reportingYearFilter, locationFilter);
+		List<WastetransferConfidential> confidentialCodes = wastetransferSearchRepository.getWastetransferConfidentialCodes(filter);
+		
+		List<WasteConfidentialReason> result_1 = new ArrayList<WasteConfidentialReason>();
+		
+		for(WastetransferConfidential co : confidentialCodes){
+			Boolean isin = false;
+			for(WasteConfidentialReason wr : result_1){
+				if (co.getWasteTypeCode().equals(wr.getWasteTypeCode())	&& co.getConfidentialCode().equals(wr.getReasonCode())){
+					wr.setFacilities(wr.getFacilities()+1);
+					isin = true; 
+				}
+			}
+			if (!isin){
+				result_1.add(new WasteConfidentialReason(1, co.getWasteTypeCode(),co.getConfidentialCode()));
+			}
+		}
+		return result_1;
 	}
 	
 	private String findCode(List<WastetransferConfidential> codes, int reportID, String wastetypeCode)

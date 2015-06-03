@@ -15,6 +15,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 
+
 //import eea.eprtr.controller.ConfidentialController.ConfidentialData;
 import eea.eprtr.model.NumOfCountriesPrYear;
 import eea.eprtr.model.WasteTransferConfidentialTS;
@@ -259,7 +260,8 @@ public class WasteTransferSearchRepository {
 		}
 		return isConfidential;
 	} 
-	
+
+
 	
 	public WastetransferCounts getWastetransferCounts(WastetransferSearchFilter filter) {
 		
@@ -823,6 +825,12 @@ public class WasteTransferSearchRepository {
 
 		return compares;
 
-	} 
+	}
+
+	/*public List<WastetransferConfidential> getWastetransferConfidentialReason(
+			WasteTransferConfidentialSearchFilter filter) {
+		// TODO Auto-generated method stub
+		return null;
+	} */
 
 }

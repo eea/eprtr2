@@ -21,14 +21,16 @@ public class WasteSearchFilter {
 	private Integer confidentialIndicatorNONHW;
 	private Integer confidentialIndicatorHWIC;
 	private Integer confidentialIndicatorHWOC;
+	private Integer confidentialIndicator;
 	private Integer hasReportedRecovery;
 	private Integer hasReportedDisposal;
 	private Integer hasReportedUnspecified;
 	
-	public WasteSearchFilter(List<String> wasteTypeCode, List<String> wasteTreatmentCode, Integer whpCountryID) {
+	public WasteSearchFilter(List<String> wasteTypeCode, List<String> wasteTreatmentCode, Integer whpCountryID, Integer confidentialIndicator) {
 		this.wasteTypeCode = wasteTypeCode;
 		this.wasteTreatmentCode = wasteTreatmentCode;
 		this.whpCountryID = whpCountryID;
+		this.confidentialIndicator = confidentialIndicator;
 	}
 	public WasteSearchFilter(Integer confidentialIndicatorNONHW, Integer confidentialIndicatorHWIC,Integer confidentialIndicatorHWOC,
 			Integer hasReportedRecovery, Integer hasReportedDisposal, Integer hasReportedUnspecified) {
@@ -83,7 +85,6 @@ public class WasteSearchFilter {
 			} else {
 				whereClause.getExpressions().add(cb.or());
 			}
-
 			
 		}
 		if (wasteTreatmentCode != null) {
@@ -121,6 +122,12 @@ public class WasteSearchFilter {
 		{
 			confidentialWhereClause.getExpressions().add(cb.equal(qr.get(Wastetransfer_.confidentialIndicatorHWOC),confidentialIndicatorHWOC));
 		}
+		if(confidentialIndicator !=null)
+		{
+			confidentialWhereClause.getExpressions().add(cb.equal(qr.get(Wastetransfer_.confidentialIndicatorNONHW),confidentialIndicator));
+			confidentialWhereClause.getExpressions().add(cb.equal(qr.get(Wastetransfer_.confidentialIndicatorHWIC),confidentialIndicator));
+			confidentialWhereClause.getExpressions().add(cb.equal(qr.get(Wastetransfer_.confidentialIndicatorHWOC),confidentialIndicator));
+		}
 		Predicate confidentialReportedWhereClause = cb.disjunction();
 		if(hasReportedRecovery !=null)
 		{
@@ -142,8 +149,6 @@ public class WasteSearchFilter {
 		{
 			whereClause.getExpressions().add(confidentialReportedWhereClause);
 		}
-		
-		
 		return whereClause;
 	}
 	public Predicate buildWhereClauseWastetransferConfidential(

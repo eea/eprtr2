@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-filter', 'restangular','ngSanitize'])
+angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-filter', 'restangular','ngSanitize','myApp.wastetransferconfidential'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/wastetransfers', {
@@ -15,8 +15,11 @@ angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-f
         $scope.wastePanel = true;
         $scope.searchFilter = searchFilter;
         $scope.ff = formatStrFactory;
+        $scope.isConfidential = false;
         $scope.queryParams = {};
         $scope.wtfilter = {};
+        $scope.wtconfcoll = [];
+        $scope.wtconfreasoncoll = [];
         $scope.queryParams.ReportingYear = -1;
         $scope.SearchType="SUMMARY";
         $scope.translate = function()
@@ -193,6 +196,7 @@ angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-f
             $scope.confidentialParams.ConfidentialIndicator = 1;
             
             $scope.getData(queryParams);
+            $scope.getIsConfidential();
                  
             /*facilitySearch.getList($scope.confidentialParams).then(function(response) {
                 $scope.itemsConfidentiality = response.data;
@@ -201,6 +205,21 @@ angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-f
                       
         };
         
+        $scope.getIsConfidential = function(){
+			var qp = {};
+		    for(var key in $scope.queryParams) {
+		        if(key != 'WasteTypeCode') {
+		        	qp[key] = $scope.queryParams[key];
+		        }
+		    }
+			var rest = Restangular.withConfig(function(RestangularConfigurer) {
+	            RestangularConfigurer.setFullResponse(true);
+	        });
+			var isconfservice = rest.one('wastetransferIsConfidential');
+			isconfservice.get(qp).then(function(response) {
+	            $scope.isConfidential = (response.data === 'true');
+	        });
+        };
         $scope.getTabData = function(type)
         {
         

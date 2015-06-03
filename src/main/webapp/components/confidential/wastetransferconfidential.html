@@ -1,0 +1,68 @@
+<!-- WASTETRANSFER No data -->
+   <div class="row" style="padding-top:10px;" ng-if="confidential != true">
+        <div class="col-md-12" >{{tr_lcon.NoConfidentialityInformation}} </div>
+   </div>
+<!-- WASTETRANSFER Header-->
+    <div class="row" ng-if="confidential">
+    	<br />
+		<div class="col-md-12" ng-bind-html="tr_c.ConfidentialityExplanationWT1" ></div>
+   </div>
+<!-- WASTETRANSFER confidential vs all-->
+    <div class="row" ng-if="confidential">
+   <div class="col-md-12" >
+	<table class="table table-striped table-condensed table-hover" ng-hide="wtconfcoll.length > 0 ? false : true ">
+      <thead>
+           <tr class="generalListStyle_headerRow">
+             <th> </th>
+             <th class="text-right">{{tr_lovwt.NONHW}}</th>
+             <th class="text-right">{{tr_lovwt.HWIC}}</th>
+             <th class="text-right">{{tr_lovwt.HWOC}}</th>
+           </tr>
+       </thead>
+       <tbody>
+         <tr ng-repeat="item in wtconfcoll | orderBy: 'descr'">
+	         <td>{{tr_wt[item.descr]}}</td>
+	         <td class="text-right">{{item.quantityNONHW | number }}</td>
+	         <td class="text-right">{{item.quantityHWIC | number }}</td>
+	         <td class="text-right">{{item.quantityHWOC | number }}</td>
+	     </tr>
+       </tbody>
+   </table>
+   <p class="text-warning" ng-hide="wtconfcoll.length > 0">{{tr_c.NoResultsFound}}</p>
+	</div>
+   </div>
+<!-- WASTETRANSFER claimed text -->
+    <div class="row" ng-if="confidential">
+		<br />
+		<div class="col-md-12" ng-bind-html="tr_c.ConfidentialityClaimed" ></div>
+   </div>
+<!-- WASTETRANSFER confidential reason-->
+    <div class="row" ng-if="confidential">
+   <div class="col-md-12" >
+	<table class="table table-striped table-condensed table-hover" ng-hide="wtconfreasoncoll.length > 0 ? false : true ">
+      <thead>
+           <tr class="generalListStyle_headerRow">
+             <th>{{tr_c.WasteType}}</th>
+             <th>{{tr_c.Reason}}</th>
+             <th class="text-right">{{tr_f.Facilities}}</th>
+           </tr>
+       </thead>
+       <tbody>
+         <tr ng-repeat="item in wtconfreasoncoll | orderBy: 'wasteTypeCode'">
+	         <td>{{tr_lovwt[item.wasteTypeCode]}}</td>
+	         <td>{{tr_lcon[item.reasonCode]}}</td>
+	         <td class="text-right">{{item.facilities | number }}</td>
+	     </tr>
+       </tbody>
+   </table>
+   <p class="text-warning" ng-hide="wtconfcoll.length > 0">{{tr_c.NoResultsFound}}</p>
+	</div>
+   </div>
+    <!-- Disclaimer -->
+    <div class="row" >
+		<div class="alert alert-warning">
+		<h4>{{tr_c.DisclaimerHeader}}</h4>
+		<div ng-bind-html="tr_f.DisclaimerTextConfidentiality"></div>
+		</div>
+	</div>
+

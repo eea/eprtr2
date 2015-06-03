@@ -559,7 +559,10 @@
            	 </div>
            	</tab>
            	<tab heading="Confidentiality" ng-click="getTabData('CONFIDENTIALITY');activateTab('confidentiality')" active="active.confidentiality">
-           	<div ng-show="searchResults">
+           	<div ng-show="isConfidential">
+
+				<wastetransferconfidential  confidential="isConfidential" queryparams="queryParams" />
+
            	</div>
            	</tab>
         </tabset>

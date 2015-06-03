@@ -72,7 +72,7 @@ public class FacilitySearchController {
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
-		WasteSearchFilter wasteFilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID);
+		WasteSearchFilter wasteFilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID, confidentialIndicator);
 		FacilitySearchFilter filter = new FacilitySearchFilter(facilityName, cityName, reportingYearFilter, locationFilter, activityFilter, pollutantFilter, wasteFilter);
 		
 		long facilitiesWithConfidentialityCount = facilitySearchRepository.getFacilityCount(filter.createConfidentialityFilter());

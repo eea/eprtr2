@@ -83,7 +83,7 @@ public class WastetransferSearchController {
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
-		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID);
+		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID, confidentialIndicator);
 		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
 
 		List<Wastetransfer> wastetranfer = null;
@@ -155,7 +155,7 @@ public class WastetransferSearchController {
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
-		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID);
+		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID, confidentialIndicator);
 		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
 		
 		WastetransferCounts wastetranfercounts = wastetransferSearchrepository.getWastetransferCounts(filter);
@@ -205,7 +205,7 @@ public class WastetransferSearchController {
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
-		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID);
+		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID, confidentialIndicator);
 		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
 		
 		List<WastetransferSeries> wastetranferseries = wastetransferSearchrepository.getWastetransferSeries(filter, wastetype);
@@ -257,7 +257,7 @@ public class WastetransferSearchController {
 		ReportingYearSearchFilter reportingYearFilter = null;//new ReportingYearSearchFilter(reportingYear);
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
-		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID);
+		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID, confidentialIndicator);
 		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
 		
 		List<WastetransferCompare> wastetranfercompare = wastetransferSearchrepository.getWastetransferCompare(filter, reportingYearStart, reportingYearEnd, wastetype);
@@ -307,7 +307,7 @@ public class WastetransferSearchController {
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
-		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID);
+		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID, confidentialIndicator);
 		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
 		
 		List<WasteTransferConfidentialTS> wastetranferconfidentialts = wastetransferSearchrepository.getWasteTransferConfidentialTS(filter, wastetype);
@@ -358,7 +358,7 @@ public class WastetransferSearchController {
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
-		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID);
+		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID, confidentialIndicator);
 		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
 		
 		Boolean isConfidential = wastetransferSearchrepository.isConfidential(filter, wastetype);
