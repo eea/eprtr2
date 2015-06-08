@@ -1,6 +1,6 @@
 <div class="form-group">
 	<label class="control-label" for="inputCountry">{{de.AvailableSectors}}</label>
-	<select class="form-control" ng-model="searchFilter.sector" ng-options="c.name for c in diffemissionsectors" id="inputSector"></select>
+	<select class="form-control" ng-model="searchFilter.sector" ng-options="de[c.name] for c in diffemissionsectors" id="inputSector"></select>
 </div>
 <div class="form-group">
 	<label class="control-label" for="inputCountry">{{de.AvailableLayers}}</label>

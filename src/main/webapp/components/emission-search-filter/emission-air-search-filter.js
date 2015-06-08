@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('myApp.emission-search-filter', ['myApp.home', 'myApp.search-filter'])
+angular.module('myApp.emission-air-search-filter', ['myApp.home', 'myApp.search-filter'])
 
-.constant('deconf',{
+.constant('deconf_air',{
 	sectors:[
 	        {'code':'-','name':'Select Sector'},
 			{'code':'SECTOR_CODE_INDUSTRIAL','name':'IndustrialReleases'}, 			
@@ -48,12 +48,12 @@ angular.module('myApp.emission-search-filter', ['myApp.home', 'myApp.search-filt
 
 })
 
-.controller('SearchEmissionController', ['$scope', '$http', '$filter', 'deconf', 'searchFilter','emissionsService', 
-                                         function($scope, $http, $filter, deconf, searchFilter,emissionsService) {
+.controller('SearchEmissionAirController', ['$scope', '$http', '$filter', 'deconf_air', 'searchFilter','emissionsService', 
+                                         function($scope, $http, $filter, deconf_air, searchFilter,emissionsService) {
     
 	$scope.searchFilter = searchFilter;
 
-	$scope.diffemissionsectors = deconf.sectors;
+	$scope.diffemissionsectors = deconf_air.sectors;
 	$scope.diffemissionlayers = [];//deconf.layers;
 	$scope.searchFilter.sector = $scope.diffemissionsectors[0];
 	
@@ -65,7 +65,7 @@ angular.module('myApp.emission-search-filter', ['myApp.home', 'myApp.search-filt
     	//if ($scope.searchFilter.sector !== '-'){
 //        	$scope.diffemissionlayers = $filter('inSector')(deconf.layers);
         	
-        	$scope.diffemissionlayers = $filter('filter')(deconf.layers, function (item) {
+        	$scope.diffemissionlayers = $filter('filter')(deconf_air.layers, function (item) {
                 if (item.sec === $scope.searchFilter.sector.name){
                 	return true;//{'code':item.cms_id, 'name':$scope.de[item.cms_id+'.TitleShort']} ;
                 }
@@ -81,9 +81,9 @@ angular.module('myApp.emission-search-filter', ['myApp.home', 'myApp.search-filt
     
 	
 }])
-.directive('searchEmission', function() {
+.directive('searchAirEmission', function() {
 	return {
-		controller: 'SearchEmissionController',
-		templateUrl: 'components/emission-search-filter/emission-search-filter.html'
+		controller: 'SearchEmissionAirController',
+		templateUrl: 'components/emission-search-filter/emission-air-search-filter.html'
 	};
 });

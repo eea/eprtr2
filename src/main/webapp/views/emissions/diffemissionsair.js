@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.diffemissionsair', ['ngRoute','ngSanitize', 'myApp.emission-search-filter'])
+angular.module('myApp.diffemissionsair', ['ngRoute','ngSanitize', 'myApp.emission-air-search-filter'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/diffemissionsair', {
