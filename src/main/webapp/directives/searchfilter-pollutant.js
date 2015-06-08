@@ -1,19 +1,19 @@
 
 'use strict';
-// a directive to auto-collapse long text
-// in elements with the "dd-text-collapse" attribute
-//angular.module('myApp.textcollapse', [])
+/**
+ * Pollutant filter 
+ */
 myApp.directive('sfPollutant', ['$compile','$http', '$filter', 'Restangular', 'translationService', 'pollutantService', 
                                 function($compile,$http, $filter, Restangular, translationService, pollutantService) {
 
     return {
         restrict: 'A',
         scope: {
-        	queryparams: '=',
-        	pgselect: '=',
-        	pselect: '=',
-        	grpOnly: '=',
-        	useheaders: '='
+        	queryparams: '=?',  //Updates queryparams with selections
+        	pgselect: '=', //Selected Pollutant Group
+        	pselect: '=?', //Selected Pollutant
+        	grpOnly: '=?', //Include only Pollutant Groupes selector
+        	useheaders: '=?' //Include a default first item in list
         },
         replace: true,
         transclude: true,
@@ -26,6 +26,8 @@ myApp.directive('sfPollutant', ['$compile','$http', '$filter', 'Restangular', 't
     			scope.tr_lpo = data.LOV_POLLUTANT;
     	    });
     		scope.polfilter = {};
+    		scope.grpOnly = false;
+    		scope.useheaders = true;
 
             scope.$watch('polfilter.selectedPollutantGroup', function(value){
             	if(scope.polfilter.selectedPollutantGroup != undefined 
