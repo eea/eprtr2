@@ -55,7 +55,7 @@ public class DataHelperWasteTransfer {
 	{
 		for(Wastetransfer obj : elements)
 		{
-			if(obj.getIaActivityCode() == testelement.getIaActivityCode() && obj.getIaSubActivityCode() != null &&
+			if(obj.getIaActivityCode().equals(testelement.getIaActivityCode()) && obj.getIaSubActivityCode() != null &&
 					obj.getIaSubActivityCode() != "")
 			{
 				return true;
@@ -332,7 +332,7 @@ public class DataHelperWasteTransfer {
     			}
     		}// End foreach
 
-			if(obj.getIaSubActivityCode() != null && obj.getIaSubActivityCode().trim() != "") 
+			if(obj.getIaSubActivityCode() != null && !obj.getIaSubActivityCode().trim().equals("")) 
 			{
 				try {
 					sublist.add((Wastetransfer)obj.clone());

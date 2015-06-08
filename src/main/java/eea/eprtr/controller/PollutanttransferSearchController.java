@@ -78,7 +78,7 @@ public class PollutanttransferSearchController {
 		
 		//POLLUTANTTRANSFERSUM
 		List<Pollutanttransfer> pollutanttransfers = pollutanttransferSearchRepository.getPollutanttransfer(filter);
-		if(searchtype != null && searchtype != "")
+		if(searchtype != null && !searchtype.equals(""))
 		{
 			List<Integer> foundFacilities = new ArrayList<Integer>(); 
 			for(Pollutanttransfer po : pollutanttransfers)
