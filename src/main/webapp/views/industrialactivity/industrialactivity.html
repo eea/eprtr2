@@ -86,7 +86,7 @@
                     	<td>
                         </td>
                     	<td>
-                    	{{getFacilityCount(item.sublevel)}}
+                    	{{cf.getFacilityCount(item.sublevel)}}
                     	</td>
                     	<td></td>
                     	<td></td>
@@ -107,16 +107,16 @@
                     	{{getTypeCountAccidential(level2)}}
                     	</td>
                     	<td>
-                    	{{getformat(level2.quantityAir)}}<br />
-                    	{{getformat(level2.quantityAccidentalAir)}}
+                    	{{cf.getformat(level2.quantityAir)}}<br />
+                    	{{cf.getformat(level2.quantityAccidentalAir)}}
                     	</td>
                     	<td>
-                    	{{getformat(level2.quantityWater)}}<br />
-                    	{{getformat(level2.quantityAccidentalWater)}}
+                    	{{cf.getformat(level2.quantityWater)}}<br />
+                    	{{cf.getformat(level2.quantityAccidentalWater)}}
                     	</td>
                     	<td>
-                    	{{getformat(level2.quantitySoil)}}<br />
-                    	{{getformat(level2.quantityAccidentalSoil)}}
+                    	{{cf.getformat(level2.quantitySoil)}}<br />
+                    	{{cf.getformat(level2.quantityAccidentalSoil)}}
                     	</td>
                     </tr>
                     <tr ng-repeat-end></tr>
@@ -149,7 +149,7 @@
                     	<td>
                     	{{tr_lpo[item.key]}}
                     	</td>
-                    	<td>{{getFacilityCount(item.sublevel)}}</td>
+                    	<td>{{cf.getFacilityCount(item.sublevel)}}</td>
                     	<td></td>
                     </tr>
                     <tr ng-repeat-start="level2 in item.sublevel | orderBy: 'pollutantCode'">
@@ -157,8 +157,8 @@
                     	<a href=""><img src="images/timeseries.png" class="timesericesImage"  ng-click="openPTSmodal('pollutanttransfer',level2.lov_PollutantID)" alt="" /></a>
                     	{{tr_lpo[level2.pollutantCode]}}
                     	</td>
-                    	<td>{{getTypeCount(level2)}}</td>
-                    	<td>{{getformat(level2.totalQuantity)}}</td>                  
+                    	<td>{{cf.getTypeCount(level2)}}</td>
+                    	<td>{{cf.getformat(level2.totalQuantity)}}</td>                  
                     </tr>
                     <tr ng-repeat-end></tr>
                     <tr ng-repeat-end ng-hide="true"></tr>   
@@ -212,18 +212,18 @@
                      {{item.facilityCount}}
                      </td>
                      <td>
-                     {{getformat(item.recovery)}}<br />
-                     {{getpctformat(item.rpct)}}
+                     {{cf.getformat(item.recovery)}}<br />
+                     {{cf.getpctformat(item.rpct)}}
                      </td>
                      <td>
-                     {{getformat(item.disposal)}}<br />
-                     {{getpctformat(item.dpct)}}
+                     {{cf.getformat(item.disposal)}}<br />
+                     {{cf.getpctformat(item.dpct)}}
                      </td>
                      <td>
-                     {{getformat(item.unspec)}}<br />
-                     {{getpctformat(item.upct)}}
+                     {{cf.getformat(item.unspec)}}<br />
+                     {{cf.getpctformat(item.upct)}}
                      </td>
-                     <td>{{getformat(item.total)}}</td>
+                     <td>{{cf.getformat(item.total)}}</td>
                      </tr>
                    </tbody>
             </table>

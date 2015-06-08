@@ -178,6 +178,42 @@ public class Wastetransfer implements Serializable,Cloneable{
 	public int facilityCount = 0;
 	
 	@Transient
+	public int facilityCountHW = 0;
+
+	@Transient
+	public int facilityCountNONHW = 0;
+
+	@Transient
+	public int facilityCountHWIC = 0;
+
+	@Transient
+	public int facilityCountHWOC = 0;
+
+	@Transient
+	public double quantityTotalHW = 0.0;
+	
+	@Transient
+	public double quantityRecoveryHW = 0.0;
+	
+	@Transient
+	public double quantityDisposalHW = 0.0;
+	
+	@Transient
+	public double quantityUnspecHW = 0.0;
+
+	@Transient
+	public double quantityTotal = 0.0;
+	
+	@Transient
+	public double quantityRecovery = 0.0;
+	
+	@Transient
+	public double quantityDisposal = 0.0;
+	
+	@Transient
+	public double quantityUnspec = 0.0;
+
+/*	@Transient
 	public double total = 0.0;
 	
 	@Transient
@@ -188,7 +224,7 @@ public class Wastetransfer implements Serializable,Cloneable{
 	
 	@Transient
 	public double unspec = 0.0;
-	
+	*/
 	
 	
 	public Integer getFacilityReportID() {
@@ -391,6 +427,34 @@ public class Wastetransfer implements Serializable,Cloneable{
 		this.unitCodeHWOC = unitCodeHWOC;
 	}
 
+	
+	/**
+	 * Extended Start
+	 * */
+	public double getQuantityRecoveryHW() {
+		this.quantityRecoveryHW = getQuantityRecoveryHWIC() + getQuantityRecoveryHWOC();
+		return quantityRecoveryHW;
+	}
+
+	public double getQuantityDisposalHW() {
+		this.quantityDisposalHW = getQuantityDisposalHWIC() + getQuantityDisposalHWOC();
+		return quantityDisposalHW;
+	}
+
+	public double getQuantityUnspecHW() {
+		this.quantityUnspecHW = getQuantityUnspecHWIC() + getQuantityUnspecHWOC();
+		return quantityUnspecHW;
+	}
+
+	public double getQuantityTotalHW() {
+		this.quantityTotalHW = getQuantityTotalHWIC() + getQuantityTotalHWOC();
+		return quantityTotalHW;
+	}
+	/**
+	 * Extended End
+	 * */
+
+	
 	public String getCountryCode() {
 		return countryCode;
 	}
@@ -641,20 +705,20 @@ public class Wastetransfer implements Serializable,Cloneable{
         return super.clone();
     }
 	
-	public void setTotal(){
-		this.total =  getQuantityTotalHWIC() + getQuantityTotalHWOC() + getQuantityTotalNONHW(); 
+	public void setQuantityTotal(){
+		this.quantityTotal =  getQuantityTotalHWIC() + getQuantityTotalHWOC() + getQuantityTotalNONHW(); 
 	}
 	
-	public void setRecovery(){
-		this.recovery =  getQuantityRecoveryHWIC() + getQuantityRecoveryHWOC() + getQuantityRecoveryNONHW(); 
+	public void setQuantityRecovery(){
+		this.quantityRecovery =  getQuantityRecoveryHWIC() + getQuantityRecoveryHWOC() + getQuantityRecoveryNONHW(); 
 	}
 	
-	public void setDisposal(){
-		this.disposal =  getQuantityDisposalHWIC() + getQuantityDisposalHWOC() + getQuantityDisposalNONHW(); 
+	public void setQuantityDisposal(){
+		this.quantityDisposal =  getQuantityDisposalHWIC() + getQuantityDisposalHWOC() + getQuantityDisposalNONHW(); 
 	}
 
-	public void setUnspec(){
-		this.unspec = getQuantityUnspecHWIC() + getQuantityUnspecHWOC() + getQuantityUnspecNONHW(); 
+	public void setQuantityUnspec(){
+		this.quantityUnspec = getQuantityUnspecHWIC() + getQuantityUnspecHWOC() + getQuantityUnspecNONHW(); 
 	}
 
 		

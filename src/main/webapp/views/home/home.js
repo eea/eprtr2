@@ -209,6 +209,135 @@ angular.module('myApp.home', ['ngRoute'])
 	}
 }])
 
+.factory('countFactory', ['$filter', 'formatStrFactory', function($filter,formatStrFactory){
+	return {
+		getTypeCount : function(elements){  
+		  	if(!elements.length)
+		  	{
+		  		elements = jQuery.makeArray(elements);
+		  	}  
+		      var total = 0;
+		      for(var i = 0; i < elements.length; i++){
+		          	total += elements[i].facilityCount;
+		       
+		      }
+		      return total;
+		},
+        getFacilityCount : function(elements){  
+      
+	    	if(!elements.length)
+	    	{
+	    		elements = jQuery.makeArray(elements);
+	    	}  
+	        var total = 0;
+	        for(var i = 0; i < elements.length; i++){
+	            	total += elements[i].facilityTotalCount;
+	         
+	        }
+	        return total;
+        },
+        getSum : function(elements, type, unit)
+        {
+        	if(!elements.length)
+        	{
+        		elements = jQuery.makeArray(elements);
+        	}
+        	var sum = 0;
+    		for(var i = 0; i < elements.length; i++)
+			{
+				 var temp = elements[i][type];
+				 if(temp)
+				 {
+					 sum += temp;
+				 }
+			}
+    		if(sum === 0)
+    		{
+    			return "-";
+    		}
+    		if (unit){
+        		return formatStrFactory.getStrFormat(sum);
+    		}
+    		else{
+    			return $filter('number')(sum);
+    		}
+        },
+        getSubSum : function(elements,property,unit){  
+	      
+	    	if(!elements.length)
+	    	{
+	    		elements = jQuery.makeArray(elements);
+	    	}  
+
+	    	var total = 0;
+	        for(var i = 0; i < elements.length; i++){
+	        	if(elements[i].sublevel)
+	        	{ 
+		        	for(var j = 0; j < elements[i].sublevel.length; j++){
+		        		total += elements[i].sublevel[j][property];
+		        	}
+	        	}
+	        	else if(elements[i].data)
+	        	{ 
+		        	for(var j = 0; j < elements[i].data.length; j++){
+		        		total += elements[i].data[j][property];
+		        	}
+	        	}
+	        	else
+	        	{ 
+	        		continue;
+	        	}
+	        }
+    		if (unit){
+        		return formatStrFactory.getStrFormat(total);
+    		}
+    		else{
+    			return $filter('number')(total);
+    		}
+//	        return total;
+	    },
+	    getTypeCountAccidential : function(elements){  
+      
+	    	if(!elements.length)
+	    	{
+	    		elements = jQuery.makeArray(elements);
+	    	}  
+	        var total = 0;
+	        for(var i = 0; i < elements.length; i++){
+	            	total += elements[i].facilityAccidentalCount; 
+	        }
+	        return total;
+	    },
+	  
+		getformat : function(value)
+		{
+			if(!value || value === 0)
+			{
+				return "-";
+			}
+			return formatStrFactory.getStrFormat(value);
+		},
+  
+		  getpctformat : function(value)
+		  {
+				if(value === 0)
+				{
+					return "-";
+				}
+				return value+"%";
+		  },
+		  findGroup : function(collection,key)
+	        {
+	        	for(var i = 0; i < collection.length;i++)
+	        	{
+	        		if(collection[i].key === key)
+	        		{
+	        			return collection[i];
+	        		}
+	        	}
+	        }
+	}
+}])
 /*
  * This service returns the resource part (type) requested
  * Look at the resource files in \translations folder for part overview

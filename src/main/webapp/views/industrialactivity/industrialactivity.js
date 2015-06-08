@@ -9,7 +9,9 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
         });
     }])
 
-    .controller('IndustrialActivityCtrl', ['$scope', '$filter', '$modal','searchFilter', 'Restangular','translationService','formatStrFactory', function($scope, $filter, $modal, searchFilter, Restangular,translationService,formatStrFactory) {
+    .controller('IndustrialActivityCtrl', ['$scope', '$filter', '$modal','searchFilter', 'Restangular','translationService'
+                                           ,'formatStrFactory', 'countFactory', 
+                                           function($scope, $filter, $modal, searchFilter, Restangular,translationService,formatStrFactory,countFactory) {
         $scope.activityPanel = true;
         $scope.searchFilter = searchFilter;
         $scope.queryParams = {};
@@ -24,6 +26,7 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
         $scope.summaryItems = [];
         $scope.sectorIA ="";
         $scope.totalSearchResult = 0;
+        $scope.cf = countFactory;
         
     	$scope.restconfig = Restangular.withConfig(function(RestangularConfigurer) {
             RestangularConfigurer.setFullResponse(true);
@@ -500,7 +503,9 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
             $scope.summaryChartObject1.type = 'PieChart';
           };
           
-          
+          /*
+           * See count factory
+           * 
           $scope.getTypeCount = function(elements){  
               
           	if(!elements.length)
@@ -578,7 +583,7 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
       			return "-";
       		}
       		return value+"%";
-          };
+          };*/
           
           /**
            * TimeSeries Modal popup

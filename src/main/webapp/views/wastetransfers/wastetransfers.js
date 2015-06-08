@@ -10,11 +10,12 @@ angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-f
     }])
 
     .controller('WasteTransfersCtrl', ['$scope', '$filter', '$modal', 'searchFilter', 'Restangular',
-                                       'translationService','formatStrFactory', function($scope, $filter, $modal, 
-                                    		   searchFilter, Restangular,translationService,formatStrFactory) {
+                                       'translationService','formatStrFactory','countFactory', function($scope, $filter, $modal, 
+                                    		   searchFilter, Restangular,translationService,formatStrFactory,countFactory) {
         $scope.wastePanel = true;
         $scope.searchFilter = searchFilter;
         $scope.ff = formatStrFactory;
+        $scope.cf = countFactory;
         $scope.isConfidential = false;
         $scope.queryParams = {};
         $scope.wtfilter = {};
@@ -304,12 +305,12 @@ angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-f
        	 	// Handle data
        	  for(var i = 0; i <$scope.summaryItems.length;i++)
           {
-       		if($scope.summaryItems[i].total > 0)
+       		if($scope.summaryItems[i].quantityTotal > 0)
        		{
-       			$scope.summaryItems[i].rpct = Math.round((($scope.summaryItems[i].recovery * 100 / $scope.summaryItems[i].total)*100)) /100;
-       			$scope.summaryItems[i].dpct = Math.round((($scope.summaryItems[i].disposal * 100 / $scope.summaryItems[i].total)*100)) /100;
-       			$scope.summaryItems[i].upct = Math.round((($scope.summaryItems[i].unspec * 100 / $scope.summaryItems[i].total)*100)) /100;
-       			formatStrFactory.getStrFormat($scope.summaryItems[i].recovery);
+       			$scope.summaryItems[i].rpct = Math.round((($scope.summaryItems[i].quantityRecovery * 100 / $scope.summaryItems[i].quantityTotal)*100)) /100;
+       			$scope.summaryItems[i].dpct = Math.round((($scope.summaryItems[i].quantityDisposal * 100 / $scope.summaryItems[i].quantityTotal)*100)) /100;
+       			$scope.summaryItems[i].upct = Math.round((($scope.summaryItems[i].quantityUnspec * 100 / $scope.summaryItems[i].quantityTotal)*100)) /100;
+       			formatStrFactory.getStrFormat($scope.summaryItems[i].quantityRecovery);
        		}else
        		{
        			$scope.summaryItems[i].rpct = 0.0;
@@ -339,24 +340,24 @@ angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-f
         	  if ($scope.summaryItems[i].wastetype === $scope.tr_lovwt["HWIC"]) {
         		  graphData2[$scope.tr_wt["RecoveryDomestic"]] = {c: [
                      {v: $scope.tr_wt["RecoveryDomestic"]},
-                     {v: $scope.summaryItems[i].recovery}]};
+                     {v: $scope.summaryItems[i].quantityRecovery}]};
         		  graphData2[$scope.tr_wt["DisposalDomestic"]] = {c: [
                     {v: $scope.tr_wt["DisposalDomestic"]},
-                    {v: $scope.summaryItems[i].disposal}]};
+                    {v: $scope.summaryItems[i].quantityDisposal}]};
         		  graphData2[$scope.tr_wt["UnspecifiedDomestic"]] = {c: [
                         {v: $scope.tr_wt["UnspecifiedDomestic"]},
-                        {v: $scope.summaryItems[i].unspec}]};
+                        {v: $scope.summaryItems[i].quantityUnspec}]};
         	  }
         	  if ($scope.summaryItems[i].wastetype === $scope.tr_lovwt["HWOC"]) {
         		  graphData2[$scope.tr_wt["RecoveryTransboundary"]] = {c: [
                          {v: $scope.tr_wt["RecoveryTransboundary"]},
-                         {v: $scope.summaryItems[i].recovery}]};
+                         {v: $scope.summaryItems[i].quantityRecovery}]};
         		  graphData2[$scope.tr_wt["DisposalTransboundary"]] = {c: [
                     {v: $scope.tr_wt["DisposalTransboundary"]},
-                    {v: $scope.summaryItems[i].disposal}]};
+                    {v: $scope.summaryItems[i].quantityDisposal}]};
         		  graphData2[$scope.tr_wt["UnspecifiedTransboundary"]] = {c: [
                     {v: $scope.tr_wt["UnspecifiedTransboundary"]},
-                    {v: $scope.summaryItems[i].unspec}]};
+                    {v: $scope.summaryItems[i].quantityUnspec}]};
         	  }          
           }
 
@@ -403,52 +404,52 @@ angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-f
         $scope.updateActivitiesData = function()
         {
         	$scope.activities = angular.copy($scope.items);
-          	$scope.totalactivitiesfac = $scope.getTotalCount("activities","facilityCount");
-        	$scope.totaltHWIC = $scope.getSumTotal("activities","quantityTotalHWIC");
-        	$scope.totalrHWIC = $scope.getSumTotal("activities","quantityRecoveryHWIC");
-        	$scope.totaldHWIC = $scope.getSumTotal("activities","quantityDisposalHWIC");
-        	$scope.totaluHWIC = $scope.getSumTotal("activities","quantityUnspecHWIC");
+          	$scope.totalactivitiesfac = $scope.cf.getSubSum($scope.activities,"facilityCount",false);
+        	$scope.totaltHWIC = $scope.cf.getSubSum($scope.activities,"quantityTotalHWIC",true);
+        	$scope.totalrHWIC = $scope.cf.getSubSum($scope.activities,"quantityRecoveryHWIC",true);
+        	$scope.totaldHWIC = $scope.cf.getSubSum($scope.activities,"quantityDisposalHWIC",true);
+        	$scope.totaluHWIC = $scope.cf.getSubSum($scope.activities,"quantityUnspecHWIC",true);
         	
-        	$scope.totaltHWOC = $scope.getSumTotal("activities","quantityTotalHWOC");
-        	$scope.totalrHWOC = $scope.getSumTotal("activities","quantityRecoveryHWOC");
-        	$scope.totaldHWOC = $scope.getSumTotal("activities","quantityDisposalHWOC");
-        	$scope.totaluHWOC = $scope.getSumTotal("activities","quantityUnspecHWOC");
+        	$scope.totaltHWOC = $scope.cf.getSubSum($scope.activities,"quantityTotalHWOC",true);
+        	$scope.totalrHWOC = $scope.cf.getSubSum($scope.activities,"quantityRecoveryHWOC",true);
+        	$scope.totaldHWOC = $scope.cf.getSubSum($scope.activities,"quantityDisposalHWOC",true);
+        	$scope.totaluHWOC = $scope.cf.getSubSum($scope.activities,"quantityUnspecHWOC",true);
         	
-        	$scope.totalthaz = $scope.getSumTotal("activities","total");
-        	$scope.totalrhaz = $scope.getSumTotal("activities","recovery");
-        	$scope.totaldhaz = $scope.getSumTotal("activities","disposal");
-        	$scope.totaluhaz = $scope.getSumTotal("activities","unspec");
+        	$scope.totalthaz = $scope.cf.getSubSum($scope.activities,"quantityTotalHW",true);
+        	$scope.totalrhaz = $scope.cf.getSubSum($scope.activities,"quantityRecoveryHW",true);
+        	$scope.totaldhaz = $scope.cf.getSubSum($scope.activities,"quantityDisposalHW",true);
+        	$scope.totaluhaz = $scope.cf.getSubSum($scope.activities,"quantityUnspecHW",true);
         	
-        	$scope.totaltNONHW = $scope.getSumTotal("activities","quantityTotalNONHW");
-        	$scope.totalrNONHW = $scope.getSumTotal("activities","quantityRecoveryNONHW");
-        	$scope.totaldNONHW = $scope.getSumTotal("activities","quantityDisposalNONHW");
-        	$scope.totaluNONHW = $scope.getSumTotal("activities","quantityUnspecNONHW");
+        	$scope.totaltNONHW = $scope.cf.getSubSum($scope.activities,"quantityTotalNONHW",true);
+        	$scope.totalrNONHW = $scope.cf.getSubSum($scope.activities,"quantityRecoveryNONHW",true);
+        	$scope.totaldNONHW = $scope.cf.getSubSum($scope.activities,"quantityDisposalNONHW",true);
+        	$scope.totaluNONHW = $scope.cf.getSubSum($scope.activities,"quantityUnspecNONHW",true);
         	
         };
         
         $scope.updateAreasData = function()
         {
         	$scope.areas = angular.copy($scope.items);
-         	$scope.totalareasfac = $scope.getTotalCount("areas","facilityCount");
-        	$scope.totalareastHWIC = $scope.getSumTotal("areas","quantityTotalHWIC");
-        	$scope.totalareasrHWIC = $scope.getSumTotal("areas","quantityRecoveryHWIC");
-        	$scope.totalareasdHWIC = $scope.getSumTotal("areas","quantityDisposalHWIC");
-        	$scope.totalareasuHWIC = $scope.getSumTotal("areas","quantityUnspecHWIC");
+         	$scope.totalareasfac = $scope.cf.getSubSum($scope.areas,"facilityCount");
+        	$scope.totalareastHWIC = $scope.cf.getSubSum($scope.areas,"quantityTotalHWIC",true);
+        	$scope.totalareasrHWIC = $scope.cf.getSubSum($scope.areas,"quantityRecoveryHWIC",true);
+        	$scope.totalareasdHWIC = $scope.cf.getSubSum($scope.areas,"quantityDisposalHWIC",true);
+        	$scope.totalareasuHWIC = $scope.cf.getSubSum($scope.areas,"quantityUnspecHWIC",true);
         	
-        	$scope.totalareastHWOC = $scope.getSumTotal("areas","quantityTotalHWOC");
-        	$scope.totalareasrHWOC = $scope.getSumTotal("areas","quantityRecoveryHWOC");
-        	$scope.totalareasdHWOC = $scope.getSumTotal("areas","quantityDisposalHWOC");
-        	$scope.totalareasuHWOC = $scope.getSumTotal("areas","quantityUnspecHWOC");
+        	$scope.totalareastHWOC = $scope.cf.getSubSum($scope.areas,"quantityTotalHWOC",true);
+        	$scope.totalareasrHWOC = $scope.cf.getSubSum($scope.areas,"quantityRecoveryHWOC",true);
+        	$scope.totalareasdHWOC = $scope.cf.getSubSum($scope.areas,"quantityDisposalHWOC",true);
+        	$scope.totalareasuHWOC = $scope.cf.getSubSum($scope.areas,"quantityUnspecHWOC",true);
         	
-        	$scope.totalareasthaz = $scope.getSumTotal("areas","total");
-        	$scope.totalareasrhaz = $scope.getSumTotal("areas","recovery");
-        	$scope.totalareasdhaz = $scope.getSumTotal("areas","disposal");
-        	$scope.totalareasuhaz = $scope.getSumTotal("areas","unspec");
+        	$scope.totalareasthaz = $scope.cf.getSubSum($scope.areas,"quantityTotalHW",true);
+        	$scope.totalareasrhaz = $scope.cf.getSubSum($scope.areas,"quantityRecoveryHW",true);
+        	$scope.totalareasdhaz = $scope.cf.getSubSum($scope.areas,"quantityDisposalHW",true);
+        	$scope.totalareasuhaz = $scope.cf.getSubSum($scope.areas,"quantityUnspecHW",true);
         	
-        	$scope.totalareastNONHW = $scope.getSumTotal("areas","quantityTotalNONHW");
-        	$scope.totalareasrNONHW = $scope.getSumTotal("areas","quantityRecoveryNONHW");
-        	$scope.totalareasdNONHW = $scope.getSumTotal("areas","quantityDisposalNONHW");
-        	$scope.totalareasuNONHW = $scope.getSumTotal("areas","quantityUnspecNONHW");
+        	$scope.totalareastNONHW = $scope.cf.getSubSum($scope.areas,"quantityTotalNONHW",true);
+        	$scope.totalareasrNONHW = $scope.cf.getSubSum($scope.areas,"quantityRecoveryNONHW",true);
+        	$scope.totalareasdNONHW = $scope.cf.getSubSum($scope.areas,"quantityDisposalNONHW",true);
+        	$scope.totalareasuNONHW = $scope.cf.getSubSum($scope.areas,"quantityUnspecNONHW",true);
         	$scope.setAreaRegion();
         };
         
@@ -475,190 +476,6 @@ angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-f
         $scope.updateConfidentialityData = function()
         {
         	
-        };
-        
-/**
- * Facility functions
- */
-        $scope.quantity = function(item) {
-            if (item['quantity'])
-            {
-                return item['quantity'];
-            }
-            else if (item.confidentialIndicator)
-            {
-                return "CONFIDENTIAL";
-            }
-            else
-            {
-                return "-";
-            }
-        };
-
-        $scope.quantityAccidental = function(item) {
-            if (item['quantityAccidental'])
-            {
-                return item['quantityAccidental'];
-            }
-            else if (item.confidentialIndicator)
-            {
-                return "CONFIDENTIAL";
-            }
-            else
-            {
-                return "-";
-            }
-        };
-
-        $scope.percentageAccidental = function(item) {
-            if (item['percentageAccidental'])
-            {
-                return item['percentageAccidental'];
-            }
-            else
-            {
-                return "-";
-            }
-        };
-            
-
-        
-        
-        $scope.findGroup = function(collection,key)
-        {
-        	for(var i = 0; i < collection.length;i++)
-        	{
-        		if(collection[i].key === key)
-        		{
-        			return collection[i];
-        		}
-        	}
-        };
-        
-        $scope.getTypeCount = function(elements){  
-            
-        	if(!elements.length)
-        	{
-        		elements = jQuery.makeArray(elements);
-        	}  
-            var total = 0;
-            for(var i = 0; i < elements.length; i++){
-                	total += elements[i].facilityCount;
-             
-            }
-            return total;
-        };
-        
-        $scope.getTotalCount = function(type,property)
-        {
-        	var count = 0;
-        	switch(type.toLocaleLowerCase())
-        	{
-        		case "activities":
-        			for(var i = 0; i < $scope.activities.length; i++ )
-        			{
-        				for(var j = 0; j < $scope.activities[i].data.length; j++)
-        				{
-        					if($scope.activities[i].data[j][property]);
-        					{
-        						count+=	$scope.activities[i].data[j][property];
-        					}
-        				}
-        			}
-        			break;
-        		case "areas":
-        			for(var i = 0; i < $scope.areas.length; i++ )
-        			{
-        				for(var j = 0; j < $scope.areas[i].data.length; j++)
-        				{
-        					if($scope.areas[i].data[j][property]);
-        					{
-        						count+=	$scope.areas[i].data[j][property];
-        					}
-        				}
-        			}
-        			break;
-        		default:
-        			break;
-        	}
-        	return count;
-        };
-        
-        $scope.getformat = function(value)
-        {
-     		if(value === 0)
-    		{
-    			return "-";
-    		}
-    		return formatStrFactory.getStrFormat(value);
-        };
-        
-        $scope.getpctformat = function(value)
-        {
-     		if(value === 0)
-    		{
-    			return "-";
-    		}
-    		return value+"%";
-        };
-        
-        
-        $scope.getSum = function(elements, type)
-        {
-        	if(!elements.length)
-        	{
-        		elements = jQuery.makeArray(elements);
-        	}
-        	var sum = 0;
-    		for(var i = 0; i < elements.length; i++)
-			{
-				 var temp = elements[i][type];
-				 if(temp)
-				 {
-					 sum += temp;
-				 }
-			}
-    		if(sum === 0)
-    		{
-    			return "-";
-    		}
-    		return formatStrFactory.getStrFormat(sum);
-        };
-        
-        $scope.getSumTotal = function(type,property1)
-        {
-        	var sumtotal = 0;
-        	switch(type.toLocaleLowerCase())
-        	{
-        		case "activities":
-        			for(var i = 0; i < $scope.activities.length; i++ )
-        			{
-        				for(var j = 0; j < $scope.activities[i].data.length; j++)
-        				{
-        					if($scope.activities[i].data[j][property1]);
-        					{
-        						sumtotal+= $scope.activities[i].data[j][property1];
-        					}
-        					
-        				}
-        			}
-        			break;
-        		case "areas":
-        			for(var i = 0; i < $scope.areas.length; i++ )
-        			{
-        				for(var j = 0; j < $scope.areas[i].data.length; j++)
-        				{
-        					if($scope.areas[i].data[j][property1]);
-        					{
-        						sumtotal+= $scope.areas[i].data[j][property1];
-        					}
-        				}
-        			}
-        			break;
-        		default:
-        			break;
-        	}
-        	return formatStrFactory.getStrFormat(sumtotal);
         };
         
         $scope.setAreaRegion = function(){
