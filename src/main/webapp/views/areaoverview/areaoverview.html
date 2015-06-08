@@ -75,7 +75,7 @@
   				</div>
 			</tab>
 			    <tab heading="Pollutant Transfer"  active="active.pollutanttransfer" ng-click="activateTab('pollutanttransfer')">
-					<div ng-show="searchResults">
+					<!--div ng-show="searchResults"-->
 	              <table class="top-buffer10">
 					  <tr ng-repeat="x in headitms | orderBy : 'order'" >
 					    <td class="{{x.clss}}">{{ x.title }}:</td>
@@ -85,8 +85,8 @@
 			      <blockquote>
 						<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
 			      </blockquote>
-				  <area-overview-pol-trans-tab queryparams="queryParams" visible="active.pollutanttransfer != undefined" />
-			    	</div>
+				  <area-overview-pt-tab queryparams="queryParams" visible="true" />
+			    	<!-- active.pollutanttransfer != undefined  /div -->
 			    </tab>
 			    <tab  heading="Waste Transfer"  active="active.wastetransfer" ng-click="activateTab('wastetransfer')">
 	              <table class="top-buffer10">

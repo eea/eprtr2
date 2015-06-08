@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter', 'restangular','myApp.areaOverviewWasteTab'])
+angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter', 
+                                      'restangular','myApp.areaOverviewWasteTab', 'myApp.areaOverviewPtTab'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/areaoverview', {

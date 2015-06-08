@@ -81,18 +81,18 @@ myApp.directive('wtSelector', ['$compile','$http', '$filter', 'Restangular', 'tr
                     var title = $compile('<label class="control-label"><strong>'+scope.tr_w.ShowFacilitiesWithTransferOfWasteType+':</strong></label></br>')(scope); 
                     
                     var body = '<label class="radio-inline tab" for="NONHW"><input type="radio" id="NONHW" name="wtsel" ng-model="filter.wtsel" value="NONHW" /> ';
-                    body += scope.tr_c.NoHazardouswaste + ' <span class="badge" title="'+ $filter('number')(scope.quantityNONHW);
+                    body += scope.tr_c.NoHazardouswaste + ' <span class="label label-success label-as-badge" title="'+ $filter('number')(scope.quantityNONHW);
                     body += ' ' + scope.tr_c.Facilities+'">' + $filter('number')(scope.quantityNONHW) + '</span></label>';
                     //var hNONHW = $compile(sNONHW)(scope);
                     
                     body += '<label class="radio-inline" for="HWIC"><input type="radio" id="HWIC" name="wtsel" ng-model="filter.wtsel" value="HWIC" /> ';
-                    body += scope.tr_c.HazardouswasteWithinCountry + ' <span class="badge" title="'+ $filter('number')(scope.quantityHWIC); 
+                    body += scope.tr_c.HazardouswasteWithinCountry + ' <span class="label label-success label-as-badge" title="'+ $filter('number')(scope.quantityHWIC); 
                     body += ' ' + scope.tr_c.Facilities+'">' + $filter('number')(scope.quantityHWIC) +  '</span></label>';
  //                   sHWIC += scope.tr_c.HazardouswasteWithinCountry + '</BR> (' + $filter('number')(scope.quantityHWIC) + ' ' + scope.tr_c.Facilities + ') </label>';
                     //var hHWIC = $compile(sHWIC)(scope);
 
                     body += '<label class="radio-inline"  for="HWOC"><input type="radio" id="HWOC" name="wtsel" ng-model="filter.wtsel" value="HWOC" /> ';
-                    body += scope.tr_c.HazardouswasteTransboundary + ' <span class="badge" title="'+ $filter('number')(scope.quantityHWOC);
+                    body += scope.tr_c.HazardouswasteTransboundary + ' <span class="label label-success label-as-badge" title="'+ $filter('number')(scope.quantityHWOC);
                     body += ' ' + scope.tr_c.Facilities+'">' + $filter('number')(scope.quantityHWOC) +  '</span></label>';
                     var hbody = $compile(body)(scope);
 
