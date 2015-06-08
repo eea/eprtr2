@@ -1,0 +1,323 @@
+{
+    "labels": {
+        "label": [
+            {
+                "_id": "threshold",
+                "_text": "Threshold for releases"
+            },
+            {
+                "_id": "air",
+                "_text": "to air kg/year"
+            },
+            {
+                "_id": "water",
+                "_text": "to water kg/year"
+            },
+            {
+                "_id": "land",
+                "_text": "to land kg/year"
+            },
+            {
+                "_id": "Search",
+                "_text": "Search"
+            },
+            {
+                "_id": "All",
+                "_text": "All"
+            },
+            {
+                "_id": "pollutanthead",
+                "_text": "Pollutant Descriptions"
+            },
+            {
+                "_id": "pollutantheadnotes",
+                "_text": "This page will display information and the reporting thresholds relating to the 91 pollutants covered under E-PRTR (reporting year 2007 and followings). You can search for a pollutant by pollutant group or by selecting a specific pollutant."
+            },
+            {
+                "_id": "pollutantheadlink",
+                "_text": "http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2000:192:0036:0043:"
+            },
+            {
+                "_id": "pollutantheadlink2",
+                "_text": ":PDF#page=3"
+            },
+            {
+                "_id": "pollutantheadlinkLabel",
+                "_text": " Annex A1 of EPER Decision 2000/479/EC"
+            },
+            {
+                "_id": "pollutantheadnotes2",
+                "_text": "For information and reporting thresholds relating to the 50 pollutants covered under EPER (reporting year 2001 and 2004), please refer to"
+            },
+            {
+                "sub": "2",
+                "_id": "pollutantheadnotes3",
+                "_text": "Almost all the EPER pollutants correspond to the E-PRTR pollutants except for BTEX and PAHs. The CO\n emissions for EPER and E-PRTR are reported differently (EPER does exclude emissions from biomass)."
+            },
+            {
+                "_id": "Group",
+                "_text": "Pollutant Group"
+            },
+            {
+                "_id": "Pollutant",
+                "_text": "Pollutant"
+            },
+            {
+                "_id": "PollutantId",
+                "_text": "E-PRTR Pollutant No"
+            },
+            {
+                "_id": "Contents",
+                "_text": "Contents"
+            },
+            {
+                "_id": "synonyms",
+                "_text": "Synonyms or other commercial names"
+            },
+            {
+                "_id": "physical",
+                "_text": "Physical Properties"
+            },
+            {
+                "_id": "IUPAC",
+                "_text": "IUPAC Name"
+            },
+            {
+                "_id": "IUPACTooltip",
+                "_text": "tooltip for IUPAC Name:"
+            },
+            {
+                "_id": "smiles",
+                "_text": "SMILES tooltip;"
+            },
+            {
+                "_id": "CASNumber",
+                "_text": "CAS Number"
+            },
+            {
+                "_id": "CASToolTip",
+                "_text": "The CAS number is a unique reference for a chemical provides by the Chemical Abstracts Service."
+            },
+            {
+                "_id": "ECNumber",
+                "_text": "EC Number"
+            },
+            {
+                "_id": "ECToolTip",
+                "_text": "The EC number is a unique reference number for a chemical that is commercially available within the EU."
+            },
+            {
+                "_id": "Formula",
+                "_text": "Formula"
+            },
+            {
+                "_id": "Classification",
+                "_text": "Classification"
+            },
+            {
+                "_id": "ClassificationTooltip",
+                "_text": "The classification of a chemical under the Dangerous Substances Directive (67/548/EEC)"
+            },
+            {
+                "_id": "description",
+                "_text": "Description"
+            },
+            {
+                "_id": "mainuses",
+                "_text": "Main Uses"
+            },
+            {
+                "_id": "print",
+                "_text": "Print"
+            },
+            {
+                "_id": "PollutantInfo",
+                "_text": "Pollutant Info"
+            },
+            {
+                "_id": "Pollutants",
+                "_text": "Pollutants"
+            },
+            {
+                "_id": "Name",
+                "_text": "Name"
+            },
+            {
+                "_id": "structure",
+                "_text": "Structure"
+            },
+            {
+                "_id": "provprtr",
+                "_text": "Provisions under E-PRTR Regulation"
+            },
+            {
+                "_id": "provprtrNote",
+                "_text": "* - indicates that the parameter and medium in question do not trigger a reporting requirement."
+            },
+            {
+                "_id": "provprtrNote2",
+                "_text": "BTEX - sum parameter of benzene, toluene, ethyl benzene, xylenes."
+            },
+            {
+                "_id": "chemspider",
+                "_text": "Chemspider id"
+            },
+            {
+                "_id": "noData",
+                "_text": "No Data Available"
+            },
+            {
+                "_id": "isostandard",
+                "_text": "Standard"
+            },
+            {
+                "_id": "isotitle",
+                "_text": "Title"
+            },
+            {
+                "_id": "isotarget",
+                "_text": "Target"
+            },
+            {
+                "_id": "isouncert",
+                "_text": "Uncertainty"
+            },
+            {
+                "_id": "provOverview",
+                "_text": "Overview"
+            },
+            {
+                "_id": "provReportGeneric",
+                "_text": "General Reporting"
+            },
+            {
+                "_id": "provReportSpecific",
+                "_text": "Specific Reporting"
+            },
+            {
+                "_id": "Summary",
+                "_text": "General information"
+            },
+            {
+                "_id": "provisions",
+                "_text": "Other relevant reporting requirements"
+            },
+            {
+                "_id": "rands",
+                "_text": "Risk and Safety Phrases (R&S)"
+            },
+            {
+                "_id": "clp",
+                "_text": "Hazard Class"
+            },
+            {
+                "_id": "ghs",
+                "_text": "Hazard Statements"
+            },
+            {
+                "_id": "clpghs",
+                "_text": "Classification & Labelling"
+            },
+            {
+                "_id": "clpex",
+                "_text": "The Regulation (EC) No 1272/2008 establishes a standard classification and labelling system for substances distinguishing a) Hazard Class and b) Hazard Statements"
+            },
+            {
+                "_id": "provother",
+                "_text": "Overview of relevant reporting requirements for the selected pollutant or compound set by European Regulations or Multilateral Environmental Agreements (MEAs)."
+            },
+            {
+                "_id": "mainmethodsrelease",
+                "_text": "Where do the releases originate?"
+            },
+            {
+                "_id": "proviso",
+                "_text": "Methods and uncertainty"
+            },
+            {
+                "_id": "impacts",
+                "_text": "Human Health & Environmental Hazard Assessment"
+            },
+            {
+                "_id": "randsex",
+                "_text": "Risk and Safety phrases describe the risks of a substance and safety measures that should be taken."
+            },
+            {
+                "_id": "eprtrProvisions",
+                "_text": "Pollutant thresholds"
+            },
+            {
+                "_id": "measurement",
+                "_text": "Measurement & calculation methods"
+            },
+            {
+                "_id": "hazards",
+                "_text": "Hazards and other technical characteristics"
+            },
+            {
+                "_id": "healthAffects",
+                "_text": "How do the releases affect you and your environment?"
+            },
+            {
+                "_id": "noRandS",
+                "_text": "There are no Risk and Safety phrases assigned."
+            },
+            {
+                "_id": "noClp",
+                "_text": "There is no classification and labelling assigned."
+            },
+            {
+                "_id": "isoFootNoteTitle",
+                "_text": "Footnotes"
+            },
+            {
+                "_id": "isoFootNote1",
+                "_text": "(*) indicates that performance information is included in the standard but not in a suitable form for inclusion."
+            },
+            {
+                "_id": "isoFootNote2",
+                "_text": "(-) Indicates that no information is available."
+            },
+            {
+                "_id": "isoFootNote3",
+                "_text": "Notes:  This table is based on the following published information: the 2003 General Principles of Monitoring BREF "
+            },
+            {
+                "_id": "isoFootNoteLink1",
+                "_text": "http://eippcb.jrc.es/reference/"
+            },
+            {
+                "_id": "isoFootNote4",
+                "_text": ";  CEN and ISO websites and those of their relevant Technical Committees (TCs) for details and publication dates ( i.e. CEN TC230 – water analysis and CEN TC 264 – air quality, ISO TC 147 – water quality and ISO TC 146 – air quality); and current UK guidance on monitoring for air and water for IPPC Directive installations (Environment Agency documents M2 Version 6 - January 2010  and M18 Version 2 - April 2009 covering air and water respectively) available on "
+            },
+            {
+                "_id": "isoFootNoteLink2",
+                "_text": "http://www.environment-agency.gov.uk/business/regulation/31831.aspx "
+            },
+            {
+                "_id": "isoFootNote5",
+                "_text": ").  Standard numbers have been checked against CEN and ISO websites and, to best of our knowledge, are both available and consistent with EN or ISO publication dates.  "
+            },
+            {
+                "_id": "isoFootNote6",
+                "_text": "Information related to uncertainty is included where it is available, in a suitable form, in the standard.  The information given for Stationary source emissions generally refers to sampling and analysis, that for Water quality data refers to the coefficient of variation of reproducibility - CVR - of the analysis alone.   CVR is the reproducibility standard deviation/mean concentration, expressed as a %, this has been expressed to one significant decimal place %. Wherever possible we have taken the sample matrix most similar to the industrial discharges to be reported under the EPRTR Regulation.   Where the Standard allows a choice of technique we have taken the 'worst' case - on the basis that if an operator reports a discharge as having been measured in accordance with the Standard and not necessarily a particular variation of it."
+            },
+            {
+                "_id": "clpLinkText",
+                "_text": "Regulation (EC) No 1272/2008, OJ L 353"
+            },
+            {
+                "_id": "clpLinkUrl",
+                "_text": "http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2008:353:0001:1355:"
+            },
+            {
+                "_id": "clpLinkUrl2",
+                "_text": ":PDF"
+            },
+            {
+                "_id": "ghsex",
+                "_text": "Hazard descriptions from the CLP Regulations"
+            }
+        ]
+    }
+}
