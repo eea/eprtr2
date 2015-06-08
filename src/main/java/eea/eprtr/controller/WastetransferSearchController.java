@@ -87,7 +87,7 @@ public class WastetransferSearchController {
 		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
 
 		List<Wastetransfer> wastetranfer = null;
-		if(order != null && !order.equals("") && desc != null && offset != null && limit != null){
+		if(order != null && order != "" && desc != null && offset != null && limit != null){
 			OrderBy orderBy = new OrderBy(order, desc.booleanValue());
 			QueryPager pager = new QueryPager(offset.intValue(), limit.intValue());
 			wastetranfer = wastetransferSearchrepository.getWastetransfer(filter, orderBy, pager);
@@ -97,7 +97,7 @@ public class WastetransferSearchController {
 		else{
 			wastetranfer = wastetransferSearchrepository.getWastetransfer(filter);
 		}
-		if(searchtype != null && !searchtype.equals(""))
+		if(searchtype != null && searchtype != "")
 		{
 			List<Integer> foundFacilities = new ArrayList<Integer>(); 
 			for(Wastetransfer po : wastetranfer)
