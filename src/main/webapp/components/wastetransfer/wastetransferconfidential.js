@@ -121,7 +121,7 @@ angular.module('myApp.wastetransferconfidential', ['restangular','ngSanitize'])
 			confidential: '=', 
 			queryparams: '=' 
 		},
-		templateUrl: 'components/confidential/wastetransferconfidential.html',
+		templateUrl: 'components/wastetransfer/wastetransferconfidential.html',
 		link: function(scope, element, attrs){
 				scope.$watch('queryparams', function(value) {
 				/*JAVA Enum cannot handle the character - so NON-HW is converted into NONHW*/

@@ -1,0 +1,10 @@
+<div class="row">
+	<div class="col-md-12" wt-selector queryparams="queryParams" wtsel="wtfilter.wtsel" ng-if="doshow"></div>
+</div><br/>
+<div class="row">
+    <div google-chart chart="areaComparisonChartObject" style="height:400px; width:100%;"  ng-if="doshow">
+</div>
+<!-- WASTETRANSFER No data -->
+<div class="row" style="padding-top:10px;" ng-if="nodata">
+     <div class="col-md-12" >{{tr_lcon.NoConfidentialityInformation}} </div>
+</div>
