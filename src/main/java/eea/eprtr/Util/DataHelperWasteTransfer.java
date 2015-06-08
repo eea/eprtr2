@@ -56,7 +56,7 @@ public class DataHelperWasteTransfer {
 		for(Wastetransfer obj : elements)
 		{
 			if(obj.getIaActivityCode().equals(testelement.getIaActivityCode()) && obj.getIaSubActivityCode() != null &&
-					obj.getIaSubActivityCode() != "")
+					!obj.getIaSubActivityCode().equals(""))
 			{
 				return true;
 			}
