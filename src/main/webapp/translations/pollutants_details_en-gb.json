@@ -44,7 +44,7 @@
                                 ],
                                 "_text": "Typical uncertainty, at a 95% level of confidence, ranges between  +/-0.8mg/m\n for values about 10 mg/m\n and +/-29 mg/m\n at values about 200 mg/m\n "
                             },
-                            "_id": "1"
+                            "lov_pollutant_id": "9"
                         },
                         {
                             "standard": "EN 12619:1999",
@@ -59,11 +59,11 @@
                                 ],
                                 "_text": "Typical uncertainty, at a 95% level of confidence, ranges between  +/-0.3 mg/m\n for values about 1 mg/m\n and +/-0.4 mg/m\n at values about 10 to 15 mg/m"
                             },
-                            "_id": "1"
+                            "lov_pollutant_id": "9"
                         }
                     ]
                 },
-                "_id": "1"
+                "lov_pollutant_id": "9"
             },
             {
                 "pollutant_name": "Carbon monoxide (CO)",
@@ -101,18 +101,18 @@
                                 ],
                                 "_text": "Typical uncertainty, at a 95% level of confidence, is +/- 2.8 mg/m\n for values at about 50 mg/m"
                             },
-                            "_id": "2"
+                            "lov_pollutant_id": "15"
                         },
                         {
                             "standard": "ISO 12039:2001",
                             "title": "Determination of carbon monoxide, carbon dioxide and oxygen - Performance characteristics and calibration of automated measuring systems",
                             "target": "Stationary source emissions ",
                             "uncertainty": "Typical uncertainty, at a 95% level of confidence, is less than 10% of full scale. ",
-                            "_id": "2"
+                            "lov_pollutant_id": "15"
                         }
                     ]
                 },
-                "_id": "2"
+                "lov_pollutant_id": "15"
             },
             {
                 "pollutant_name": "Carbon Dioxide (CO2)",
@@ -156,10 +156,10 @@
                         "title": "Determination of carbon monoxide, carbon dioxide and oxygen - Performance characteristics and calibration of automated measuring systems",
                         "target": "Stationary source emissions ",
                         "uncertainty": "Typical uncertainty, at a 95% level of confidence, is less than 10% of full scale.",
-                        "_id": "3"
+                        "lov_pollutant_id": "10"
                     }
                 },
-                "_id": "3"
+                "lov_pollutant_id": "10"
             },
             {
                 "pollutant_name": "Hydro-fluorocarbons (HFCs)",
@@ -190,10 +190,10 @@
                         "title": "The 2006 IPCC Guidelines for National Greenhouse Gas Inventories provide information on estimating emissions (Volume 3)",
                         "target": "",
                         "uncertainty": "",
-                        "_id": "4"
+                        "lov_pollutant_id": "11"
                     }
                 },
-                "_id": "4"
+                "lov_pollutant_id": "11"
             },
             {
                 "pollutant_name": "Nitrous Oxide (N2O)",
@@ -220,10 +220,10 @@
                         "title": "Sampling for the automated determination of gas emission concentrations for permanently-installed monitoring systems",
                         "target": "Stationary source emissions",
                         "uncertainty": "-",
-                        "_id": "5"
+                        "lov_pollutant_id": "12"
                     }
                 },
-                "_id": "5"
+                "lov_pollutant_id": "12"
             },
             {
                 "pollutant_name": "Ammonia (NH3)",
@@ -258,18 +258,18 @@
                             "title": "Determination of ammonium nitrogen -- Method by flow analysis (CFA and FIA) and spectrometric detection",
                             "target": "Water Quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 3.4%",
-                            "_id": "6"
+                            "lov_pollutant_id": "16"
                         },
                         {
                             "standard": "No International reference for emissions to air",
                             "title": "The 2009 EMEP/EEA air pollutant emission inventory guidebook provides information on calculating emissions.",
                             "target": "Stationary source emissions",
                             "uncertainty": "-",
-                            "_id": "6"
+                            "lov_pollutant_id": "16"
                         }
                     ]
                 },
-                "_id": "6"
+                "lov_pollutant_id": "16"
             },
             {
                 "pollutant_name": "Non-methane volatile organic compounds (NMVOC)",
@@ -296,10 +296,10 @@
                             ],
                             "_text": "Typical uncertainty, at a 95% level of confidence, ranges between ± 4 mg/m\n and ± 11 mg/m\n, depending on sampling procedure, analyse and concentration"
                         },
-                        "_id": "7"
+                        "lov_pollutant_id": "17"
                     }
                 },
-                "_id": "7"
+                "lov_pollutant_id": "17"
             },
             {
                 "pollutant_name": "Nitrogen dioxides (NOX/NO2)",
@@ -334,7 +334,7 @@
                                 ],
                                 "_text": "Typical uncertainty, at a 95% level of confidence, is ± 17 mg/m\n for values about 200 mg/m"
                             },
-                            "_id": "8"
+                            "lov_pollutant_id": "18"
                         },
                         {
                             "standard": "ISO 11564:1998",
@@ -349,18 +349,18 @@
                                 ],
                                 "_text": "Typical uncertainty ranges between ± 3 mg/m\n for values about 50 mg/m\n and ± 12.2 mg/m\n for values about 420 mg/m"
                             },
-                            "_id": "8"
+                            "lov_pollutant_id": "18"
                         },
                         {
                             "standard": "ISO 10849:1996",
                             "title": "Determination of the mass concentration of nitrogen oxides. Method: Performance characteristics of automated measuring systems",
                             "target": "Stationary source emissions",
                             "uncertainty": "Typical uncertainty, reported with a 95% level of confidence, is less than 10% of full scale",
-                            "_id": "8"
+                            "lov_pollutant_id": "18"
                         }
                     ]
                 },
-                "_id": "8"
+                "lov_pollutant_id": "18"
             },
             {
                 "pollutant_name": "Perfluorocarbons (PFCs)",
@@ -387,10 +387,10 @@
                         "title": "The 2006 IPCC Guidelines for National Greenhouse Gas Inventories provide information on calculating emissions (Volume 3)",
                         "target": "",
                         "uncertainty": "",
-                        "_id": "9"
+                        "lov_pollutant_id": "13"
                     }
                 },
-                "_id": "9"
+                "lov_pollutant_id": "13"
             },
             {
                 "pollutant_name": "Sulphur hexafluoride (SF6)",
@@ -418,10 +418,10 @@
                         "title": "The 2006 IPCC Guidelines for National Greenhouse Gas Inventories provide information on calculating emissions (Volume 3)",
                         "target": "-",
                         "uncertainty": "-",
-                        "_id": "10"
+                        "lov_pollutant_id": "14"
                     }
                 },
-                "_id": "10"
+                "lov_pollutant_id": "14"
             },
             {
                 "pollutant_name": "Sulphur oxides (SOx/SO2)",
@@ -454,7 +454,7 @@
                                 ],
                                 "_text": "Typical uncertainty, reported with a 95% level of confidence, is ± 4.8 mg/m\n for values about 15 mg/m"
                             },
-                            "_id": "11"
+                            "lov_pollutant_id": "19"
                         },
                         {
                             "standard": "ISO 7934:1989",
@@ -469,14 +469,14 @@
                                 ],
                                 "_text": "The standard deviation reported ranges between ± 8.8 mg/m\n for values about 16 mg/m\n and ± 158 mg/m\n for values about 2000 mg/m"
                             },
-                            "_id": "11"
+                            "lov_pollutant_id": "19"
                         },
                         {
                             "standard": "ISO 7935:1992",
                             "title": "Determination of the mass concentration of sulfur dioxide; performance characteristics of automated measuring methods",
                             "target": "Stationary source emissions",
                             "uncertainty": "Typical uncertainty, at a 95% level of confidence, is less than 10% of full scale",
-                            "_id": "11"
+                            "lov_pollutant_id": "19"
                         },
                         {
                             "standard": "ISO 11632:1998",
@@ -491,11 +491,11 @@
                                 ],
                                 "_text": "Typical uncertainty, at a 95% level of confidence ranges between ± 3.4 mg/m\n for values about 6 mg/m\n and ± 30 mg/m\n for values about 333 mg/m"
                             },
-                            "_id": "11"
+                            "lov_pollutant_id": "19"
                         }
                     ]
                 },
-                "_id": "11"
+                "lov_pollutant_id": "19"
             },
             {
                 "pollutant_name": "Total nitrogen",
@@ -526,18 +526,18 @@
                             "title": "Determination of nitrogen - Determination of bound nitrogen (TNb), following oxidation to nitrogen oxides",
                             "target": "Water Quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 9.8%",
-                            "_id": "12"
+                            "lov_pollutant_id": "93"
                         },
                         {
                             "standard": "EN ISO 11905-1:1998",
                             "title": "Determination of nitrogen - Part 1: Method using oxidative digestion with peroxodisulfate (ISO 11905-1:1997)",
                             "target": "Water Quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 6.5%",
-                            "_id": "12"
+                            "lov_pollutant_id": "93"
                         }
                     ]
                 },
-                "_id": "12"
+                "lov_pollutant_id": "93"
             },
             {
                 "pollutant_name": "Total phosphorus",
@@ -565,32 +565,32 @@
                             "title": "Determination of orthophosphate and total phosphorus contents by flow analysis (FIA and CFA) - Part 1: Method by flow injection analysis (FIA) (ISO 15681-1:2003)",
                             "target": "Water Quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 7.5%",
-                            "_id": "13"
+                            "lov_pollutant_id": "94"
                         },
                         {
                             "standard": "EN ISO 15681-2:2004",
                             "title": "Determination of orthophosphate and total phosphorus contents by flow analysis (FIA and CFA) - Part 2: Method by continuous flow analysis (CFA) (ISO 15681-1:2003)",
                             "target": "Water Quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 13.6%",
-                            "_id": "13"
+                            "lov_pollutant_id": "94"
                         },
                         {
                             "standard": "EN ISO 11885:2009",
                             "title": "Determination of 33 elements by inductively coupled plasma atomic emission spectroscopy (ISO 11885:2007)",
                             "target": "Water Quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 7.4%",
-                            "_id": "13"
+                            "lov_pollutant_id": "94"
                         },
                         {
                             "standard": "EN ISO 6878:2004",
                             "title": "Determination of phosphorus - Ammonium molybdate spectrometric method (ISO 6878:2004)",
                             "target": "Water Quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 8 and 12%",
-                            "_id": "13"
+                            "lov_pollutant_id": "94"
                         }
                     ]
                 },
-                "_id": "13"
+                "lov_pollutant_id": "94"
             },
             {
                 "pollutant_name": "Hydrochlorofluorocarbons (HCFCs)",
@@ -622,10 +622,10 @@
                         "title": "2006 IPCC Guidelines for National Greenhouse Gas Inventories (Volume 3) ",
                         "target": "Stationary source emissions",
                         "uncertainty": "",
-                        "_id": "14"
+                        "lov_pollutant_id": "20"
                     }
                 },
-                "_id": "14"
+                "lov_pollutant_id": "20"
             },
             {
                 "pollutant_name": "Chlorofluorocarbons (CFCs)",
@@ -657,10 +657,10 @@
                         "title": "2006 IPCC Guidelines for National Greenhouse Gas Inventories (Volume 3) ",
                         "target": "Stationary source emissions",
                         "uncertainty": "-",
-                        "_id": "15"
+                        "lov_pollutant_id": "21"
                     }
                 },
-                "_id": "15"
+                "lov_pollutant_id": "21"
             },
             {
                 "pollutant_name": "Halons",
@@ -686,10 +686,10 @@
                         "title": "Determination of free chlorine and total chlorine by titration (Pt 1), colorimetric method (Pt 2), iodometric titration (Pt 3).\nISO 7393-1,2:1985, ISO 7393-3:1990)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 0.1 and 0.4 mg/l",
-                        "_id": "16"
+                        "lov_pollutant_id": "22"
                     }
                 },
-                "_id": "16"
+                "lov_pollutant_id": "22"
             },
             {
                 "pollutant_name": "Arsenic and compounds (as As)",
@@ -718,25 +718,25 @@
                             "title": "Determination of the total emission of As, Cd, Cr, Co, Cu, Mn, Ni, Pb, Sb, TI and V",
                             "target": "Stationary source emissions",
                             "uncertainty": "Uncertainties not quoted in the standard",
-                            "_id": "17"
+                            "lov_pollutant_id": "26"
                         },
                         {
                             "standard": "EN ISO 11969:1996",
                             "title": "Determination of arsenic - Atomic absorption spectrometric method (hydride technique) (ISO 11969:1996)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 7.1%",
-                            "_id": "17"
+                            "lov_pollutant_id": "26"
                         },
                         {
                             "standard": "EN 26595:1992",
                             "title": "Determination of total arsenic; silver diethyldithiocarbamate spectrophotometric method (ISO 6595:1982)",
                             "target": "Water quality",
                             "uncertainty": "-",
-                            "_id": "17"
+                            "lov_pollutant_id": "26"
                         }
                     ]
                 },
-                "_id": "17"
+                "lov_pollutant_id": "26"
             },
             {
                 "pollutant_name": "Cadmium and compounds (as Cd)",
@@ -765,25 +765,25 @@
                             "title": "Determination of the total emission of As, Cd, Cr, Co, Cu, Mn, Ni, Pb, Sb, TI and V",
                             "target": "Stationary source emissions",
                             "uncertainty": "*",
-                            "_id": "18"
+                            "lov_pollutant_id": "27"
                         },
                         {
                             "standard": "EN ISO 5961:1995",
                             "title": "Determination of cadmium by atomic absorption spectrometry (ISO 5961:1994)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 26.2%",
-                            "_id": "18"
+                            "lov_pollutant_id": "27"
                         },
                         {
                             "standard": "EN ISO 11885:2009",
                             "title": "Determination of 33 elements by inductively coupled plasma atomic emission spectroscopy (ISO 11885:2007)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 6.8%",
-                            "_id": "18"
+                            "lov_pollutant_id": "27"
                         }
                     ]
                 },
-                "_id": "18"
+                "lov_pollutant_id": "27"
             },
             {
                 "pollutant_name": "Chromium and compounds(as Cr)",
@@ -816,25 +816,25 @@
                             "title": "Determination of the total emission of As, Cd, Cr, Co, Cu, Mn, Ni, Pb, Sb, TI and V",
                             "target": "Stationary source emissions",
                             "uncertainty": "*",
-                            "_id": "19"
+                            "lov_pollutant_id": "28"
                         },
                         {
                             "standard": "EN 1233:1997",
                             "title": "Determination of chromium - Atomic absorption spectrometric methods",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 37%",
-                            "_id": "19"
+                            "lov_pollutant_id": "28"
                         },
                         {
                             "standard": "EN ISO 11885:2009",
                             "title": "Determination of 33 elements by inductively coupled plasma atomic emission spectroscopy (ISO 11885:2007)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 5.6%",
-                            "_id": "19"
+                            "lov_pollutant_id": "28"
                         }
                     ]
                 },
-                "_id": "19"
+                "lov_pollutant_id": "28"
             },
             {
                 "pollutant_name": "Copper and compounds (as Cu)",
@@ -863,18 +863,18 @@
                             "title": "Determination of the total emission of As, Cd, Cr, Co, Cu, Mn, Ni, Pb, Sb, TI and V",
                             "target": "Stationary source emissions",
                             "uncertainty": "*",
-                            "_id": "20"
+                            "lov_pollutant_id": "29"
                         },
                         {
                             "standard": "EN ISO 11885:2009",
                             "title": "Determination of 33 elements by inductively coupled plasma atomic emission spectroscopy",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 4 and 11%",
-                            "_id": "20"
+                            "lov_pollutant_id": "29"
                         }
                     ]
                 },
-                "_id": "20"
+                "lov_pollutant_id": "29"
             },
             {
                 "pollutant_name": "Mercury and compounds (as Hg)",
@@ -913,39 +913,39 @@
                                 ],
                                 "_text": "Typical uncertainty, reported with a 95% level of confidence, ranges between ± 2.5  g/m\n for values at about 4  g/m\n and ± 26  g/m\n for values about 100  g/m"
                             },
-                            "_id": "21"
+                            "lov_pollutant_id": "30"
                         },
                         {
                             "standard": "EN 14884:2005",
                             "title": "Determination of total mercury: Automated measuring systems",
                             "target": "Stationary source emissions",
                             "uncertainty": "*",
-                            "_id": "21"
+                            "lov_pollutant_id": "30"
                         },
                         {
                             "standard": "EN 1483:2007",
                             "title": "Determination of mercury - Method using atomic absorption spectrometry",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 23.7%",
-                            "_id": "21"
+                            "lov_pollutant_id": "30"
                         },
                         {
                             "standard": "EN 12338:1998",
                             "title": "Determination of mercury - Methods after enrichment by amalgamation",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 28.9%",
-                            "_id": "21"
+                            "lov_pollutant_id": "30"
                         },
                         {
                             "standard": "EN 17852:2008",
                             "title": "Determination of mercury - Method using atomic fluorescence spectrometry (ISO 17852:2006)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 19.8%",
-                            "_id": "21"
+                            "lov_pollutant_id": "30"
                         }
                     ]
                 },
-                "_id": "21"
+                "lov_pollutant_id": "30"
             },
             {
                 "pollutant_name": "Nickel and compounds (as Ni)",
@@ -976,18 +976,18 @@
                             "title": "Determination of the total emission of As, Cd, Cr, Co, Cu, Mn, Ni, Pb, Sb, TI and V",
                             "target": "Stationary source emissions",
                             "uncertainty": "*",
-                            "_id": "22"
+                            "lov_pollutant_id": "31"
                         },
                         {
                             "standard": "EN ISO 11885:2009",
                             "title": "Determination of 33 elements by inductively coupled plasma atomic emission spectroscopy (ISO 11885:2007)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 5.1%",
-                            "_id": "22"
+                            "lov_pollutant_id": "31"
                         }
                     ]
                 },
-                "_id": "22"
+                "lov_pollutant_id": "31"
             },
             {
                 "pollutant_name": "Lead and compounds (as Pb)",
@@ -1019,18 +1019,18 @@
                             "title": "Determination of the total emission of As, Cd, Cr, Co, Cu, Mn, Ni, Pb, Sb, TI and V",
                             "target": "Stationary source emissions",
                             "uncertainty": "*",
-                            "_id": "23"
+                            "lov_pollutant_id": "32"
                         },
                         {
                             "standard": "EN ISO 11885:2009",
                             "title": "Determination of 33 elements by inductively coupled plasma atomic emission spectroscopy (ISO 11885:2007)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 7.2%",
-                            "_id": "23"
+                            "lov_pollutant_id": "32"
                         }
                     ]
                 },
-                "_id": "23"
+                "lov_pollutant_id": "32"
             },
             {
                 "pollutant_name": "Zinc and compounds (as Zn)",
@@ -1059,10 +1059,10 @@
                         "title": "Determination of 33 elements by inductively coupled plasma atomic emission spectroscopy (ISO 11885:2007)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility is 5.9%",
-                        "_id": "24"
+                        "lov_pollutant_id": "33"
                     }
                 },
-                "_id": "24"
+                "lov_pollutant_id": "33"
             },
             {
                 "pollutant_name": "Alachlor",
@@ -1092,10 +1092,10 @@
                         "title": "",
                         "target": "",
                         "uncertainty": "",
-                        "_id": "25"
+                        "lov_pollutant_id": "34"
                     }
                 },
-                "_id": "25"
+                "lov_pollutant_id": "34"
             },
             {
                 "pollutant_name": "Aldrin",
@@ -1128,10 +1128,10 @@
                         "title": "Determination of certain organochlorine insecticides, polychlorinated biphenyls and chlorobenzenes - Gas-chromatographic method after liquid-liquid extraction (ISO 6468:1996)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 12 and 40%",
-                        "_id": "26"
+                        "lov_pollutant_id": "35"
                     }
                 },
-                "_id": "26"
+                "lov_pollutant_id": "35"
             },
             {
                 "pollutant_name": "Atrazine",
@@ -1168,10 +1168,10 @@
                         "title": "Determination of selected organic nitrogen and phosphorus compounds - Gas chromatographic methods (ISO 10695:2000)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 12 and 19%",
-                        "_id": "27"
+                        "lov_pollutant_id": "36"
                     }
                 },
-                "_id": "27"
+                "lov_pollutant_id": "36"
             },
             {
                 "pollutant_name": "Chlordane",
@@ -1207,10 +1207,10 @@
                         "title": "",
                         "target": "",
                         "uncertainty": "",
-                        "_id": "28"
+                        "lov_pollutant_id": "28"
                     }
                 },
-                "_id": "28"
+                "lov_pollutant_id": "28"
             },
             {
                 "pollutant_name": "Chlordecone",
@@ -1245,10 +1245,10 @@
                         "title": "",
                         "target": "",
                         "uncertainty": "",
-                        "_id": "29"
+                        "lov_pollutant_id": "38"
                     }
                 },
-                "_id": "29"
+                "lov_pollutant_id": "38"
             },
             {
                 "pollutant_name": "Chlorfenvinphos",
@@ -1279,10 +1279,10 @@
                         "title": "",
                         "target": "",
                         "uncertainty": "",
-                        "_id": "30"
+                        "lov_pollutant_id": "39"
                     }
                 },
-                "_id": "30"
+                "lov_pollutant_id": "39"
             },
             {
                 "pollutant_name": "Chloro-alkanes C10-C13",
@@ -1304,10 +1304,10 @@
                         "title": "",
                         "target": "",
                         "uncertainty": "",
-                        "_id": "31"
+                        "lov_pollutant_id": "57"
                     }
                 },
-                "_id": "31"
+                "lov_pollutant_id": "57"
             },
             {
                 "pollutant_name": "Chlorpyrifos",
@@ -1340,10 +1340,10 @@
                         "title": "",
                         "target": "",
                         "uncertainty": "",
-                        "_id": "32"
+                        "lov_pollutant_id": "40"
                     }
                 },
-                "_id": "32"
+                "lov_pollutant_id": "40"
             },
             {
                 "pollutant_name": "DDT",
@@ -1376,13 +1376,13 @@
                         "title": "Determination of certain organochlorine insecticides, polychlorinated biphenyls and chlorobenzenes - Gas-chromatographic method after liquid-liquid extraction (ISO 6468:1996)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 12 and 40%",
-                        "_id": "33"
+                        "lov_pollutant_id": "41"
                     }
                 },
-                "_id": "33"
+                "lov_pollutant_id": "41"
             },
             {
-                "pollutant_name": "1,2-dichloroethane (EDC)",
+                "pollutant_name": "1,2-dichloroethane (DCE)",
                 "main_uses": "The main use of 1,2-dichloroethane is in the manufacture of other chemicals such as vinyl chloride, used to manufacture PVC. In the past it was used in domestic cleaning products and paint removers, and as a scavenger for lead in petrol. ",
                 "main_methods_of_release": {
                     "text": "Most releases to the environment are from its use in chemical manufacture. Previously large quantities were release from leaded petrol. There are no natural sources. "
@@ -1412,18 +1412,18 @@
                             "title": "Determination of highly volatile halogenated hydrocarbons - Gas-chromatographic methods (ISO 10301:1997)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 28.8%",
-                            "_id": "34"
+                            "lov_pollutant_id": "58"
                         },
                         {
                             "standard": "EN ISO 15680:2003",
                             "title": "Gas-chromatographic determination of a number of monocyclic aromatic hydrocarbons, naphthalene and several chlorinated compounds using purge-and-trap and thermal desorption (ISO 15680:2003)",
                             "target": "Water quality",
                             "uncertainty": "*",
-                            "_id": "34"
+                            "lov_pollutant_id": "58"
                         }
                     ]
                 },
-                "_id": "34"
+                "lov_pollutant_id": "58"
             },
             {
                 "pollutant_name": "Dichloromethane (DCM)",
@@ -1456,18 +1456,18 @@
                             "title": "Determination of highly volatile halogenated hydrocarbons - Gas-chromatographic methods (ISO 10301:1997)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 40 and 46%",
-                            "_id": "35"
+                            "lov_pollutant_id": "59"
                         },
                         {
                             "standard": "EN ISO 15680:2003",
                             "title": "Gas-chromatographic determination of a number of monocyclic aromatic hydrocarbons, naphthalene and several chlorinated compounds using purge-and-trap and thermal desorption (ISO 15680:2003)",
                             "target": "Water quality",
                             "uncertainty": "*",
-                            "_id": "35"
+                            "lov_pollutant_id": "59"
                         }
                     ]
                 },
-                "_id": "35"
+                "lov_pollutant_id": "59"
             },
             {
                 "pollutant_name": "Dieldrin",
@@ -1499,10 +1499,10 @@
                         "title": "Determination of certain organochlorine insecticides, polychlorinated biphenyls and chlorobenzenes - Gas-chromatographic method after liquid-liquid extraction (ISO 6468:1996)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 12 and 40%",
-                        "_id": "36"
+                        "lov_pollutant_id": "42"
                     }
                 },
-                "_id": "36"
+                "lov_pollutant_id": "42"
             },
             {
                 "pollutant_name": "Diuron",
@@ -1536,10 +1536,10 @@
                         "title": "Determination of selected plant treatment agents - Method using high performance liquid chromatography with UV detection after solid-liquid extraction (ISO 11369:1997)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility is 20.3%",
-                        "_id": "37"
+                        "lov_pollutant_id": "43"
                     }
                 },
-                "_id": "37"
+                "lov_pollutant_id": "43"
             },
             {
                 "pollutant_name": "Endosulphan",
@@ -1569,10 +1569,10 @@
                         "title": "Determination of certain organochlorine insecticides, polychlorinated biphenyls and chlorobenzenes - Gas-chromatographic method after liquid-liquid extraction (ISO 6468:1996)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 12 and 40%",
-                        "_id": "38"
+                        "lov_pollutant_id": "44"
                     }
                 },
-                "_id": "38"
+                "lov_pollutant_id": "44"
             },
             {
                 "pollutant_name": "Endrin",
@@ -1606,10 +1606,10 @@
                         "title": "Determination of certain organochlorine insecticides, polychlorinated biphenyls and chlorobenzenes - Gas-chromatographic method after liquid-liquid extraction (ISO 6468:1996)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 12 and 40%",
-                        "_id": "39"
+                        "lov_pollutant_id": "45"
                     }
                 },
-                "_id": "39"
+                "lov_pollutant_id": "45"
             },
             {
                 "pollutant_name": "Halogenated organic compounds (as AOX)",
@@ -1646,10 +1646,10 @@
                         "title": "Determination of adsorbable organically bound halogens (AOX) (ISO 9562:2004)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 12 and 19%",
-                        "_id": "40"
+                        "lov_pollutant_id": "60"
                     }
                 },
-                "_id": "40"
+                "lov_pollutant_id": "60"
             },
             {
                 "pollutant_name": "Heptachlor",
@@ -1683,10 +1683,10 @@
                         "title": "Determination of certain organochlorine insecticides, polychlorinated biphenyls and chlorobenzenes - Gas-chromatographic method after liquid-liquid extraction (ISO 6468:1996)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 12 and 40%",
-                        "_id": "41"
+                        "lov_pollutant_id": "46"
                     }
                 },
-                "_id": "41"
+                "lov_pollutant_id": "46"
             },
             {
                 "pollutant_name": "Hexachlorobenzene (HCB)",
@@ -1718,10 +1718,10 @@
                         "title": "Determination of certain organochlorine insecticides, polychlorinated biphenyls and chlorobenzenes - Gas-chromatographic method after liquid-liquid extraction (ISO 6468:1996)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 12 and 40%",
-                        "_id": "42"
+                        "lov_pollutant_id": "61"
                     }
                 },
-                "_id": "42"
+                "lov_pollutant_id": "61"
             },
             {
                 "pollutant_name": "Hexachlorobutadiene (HCBD)",
@@ -1751,10 +1751,10 @@
                         "title": "",
                         "target": "",
                         "uncertainty": "",
-                        "_id": "43"
+                        "lov_pollutant_id": "62"
                     }
                 },
-                "_id": "43"
+                "lov_pollutant_id": "62"
             },
             {
                 "pollutant_name": "1,2,3,4,5,6-hexachlorocyclohexane (HCH)",
@@ -1788,10 +1788,10 @@
                         "title": "Determination of certain organochlorine insecticides, polychlorinated biphenyls and chlorobenzenes - Gas-chromatographic method after liquid-liquid extraction (ISO 6468:1996)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 12 and 40%",
-                        "_id": "44"
+                        "lov_pollutant_id": "47"
                     }
                 },
-                "_id": "44"
+                "lov_pollutant_id": "47"
             },
             {
                 "pollutant_name": "Lindane",
@@ -1826,10 +1826,10 @@
                         "title": "Determination of certain organochlorine insecticides, polychlorinated biphenyls and chlorobenzenes - Gas-chromatographic method after liquid-liquid extraction (ISO 6468:1996)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 12 and 40%",
-                        "_id": "45"
+                        "lov_pollutant_id": "48"
                     }
                 },
-                "_id": "45"
+                "lov_pollutant_id": "48"
             },
             {
                 "pollutant_name": "Mirex",
@@ -1860,10 +1860,10 @@
                         "title": "",
                         "target": "",
                         "uncertainty": "",
-                        "_id": "46"
+                        "lov_pollutant_id": "49"
                     }
                 },
-                "_id": "46"
+                "lov_pollutant_id": "49"
             },
             {
                 "pollutant_name": "PCDD + PCDF (dioxins + furans) (as Teq)",
@@ -1899,18 +1899,18 @@
                                 ],
                                 "_text": "Typical uncertainty, at a 95% level of confidence, is ± 0.05 ng I-TEQ/m\n for values about 0.035 ng I-TEQ/ m"
                             },
-                            "_id": "47"
+                            "lov_pollutant_id": "63"
                         },
                         {
                             "standard": "ISO 18073:2004",
                             "title": "Determination of tetra- to octa-chlorinated dioxins and furans - Method using isotope dilution HRGC/HRMS",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 8 and 14%",
-                            "_id": "47"
+                            "lov_pollutant_id": "63"
                         }
                     ]
                 },
-                "_id": "47"
+                "lov_pollutant_id": "63"
             },
             {
                 "pollutant_name": "Pentachlorobenzene",
@@ -1940,10 +1940,10 @@
                         "title": "Determination of certain organochlorine insecticides, polychlorinated biphenyls and chlorobenzenes - Gas-chromatographic method after liquid-liquid extraction (ISO 6468:1996)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 12 and 40%",
-                        "_id": "48"
+                        "lov_pollutant_id": "64"
                     }
                 },
-                "_id": "48"
+                "lov_pollutant_id": "64"
             },
             {
                 "pollutant_name": "Pentachlorophenol (PCP)",
@@ -1975,10 +1975,10 @@
                         "title": "",
                         "target": "",
                         "uncertainty": "",
-                        "_id": "49"
+                        "lov_pollutant_id": "65"
                     }
                 },
-                "_id": "49"
+                "lov_pollutant_id": "65"
             },
             {
                 "pollutant_name": "Polychlorinated biphenyls (PCBs)",
@@ -2009,25 +2009,25 @@
                             "title": "Determination of the mass concentration of PCDDs/PCDFs and dioxin-like PCBs - Part 1: Sampling of PCDDs/PCDFs. Part 2: Extraction and clean-up of PCDDs/PCDFs.  Part 3: Identification and quantification of PCDDs/PCDFs",
                             "target": "Stationary source emissions",
                             "uncertainty": "The coefficient of variation for measurement ranges between about 20 - 50%",
-                            "_id": "50"
+                            "lov_pollutant_id": "66"
                         },
                         {
                             "standard": "CEN/TS 1948-4:2007",
                             "title": "Determination of the mass concentration of PCDDs/PCDFs and dioxin-like PCBs - Part 4: Sampling and analysis of dioxin-like PCBs",
                             "target": "Stationary source emissions",
                             "uncertainty": "*",
-                            "_id": "50"
+                            "lov_pollutant_id": "66"
                         },
                         {
                             "standard": "EN ISO 6468:1996",
                             "title": "Determination of certain organochlorine insecticides, polychlorinated biphenyls and chlorobenzenes - Gas-chromatographic method after liquid-liquid extraction (ISO 6468:1996)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 12 and 40%",
-                            "_id": "50"
+                            "lov_pollutant_id": "66"
                         }
                     ]
                 },
-                "_id": "50"
+                "lov_pollutant_id": "66"
             },
             {
                 "pollutant_name": "Simazine",
@@ -2064,18 +2064,18 @@
                             "title": "Determination of selected organic nitrogen and phosphorus compounds - Gas chromatographic methods (ISO 10695:2000)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 21 and 46%",
-                            "_id": "51"
+                            "lov_pollutant_id": "50"
                         },
                         {
                             "standard": "EN ISO 11369:1997",
                             "title": "Determination of selected plant treatment agents - Method using high performance liquid chromatography with UV detection after solid-liquid extraction (ISO 11369:1997)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 23.3%",
-                            "_id": "51"
+                            "lov_pollutant_id": "50"
                         }
                     ]
                 },
-                "_id": "51"
+                "lov_pollutant_id": "50"
             },
             {
                 "pollutant_name": "Tetrachloroethylene (PER)",
@@ -2109,18 +2109,18 @@
                             "title": "Gas-chromatographic determination of a number of monocyclic aromatic hydrocarbons, naphthalene and several chlorinated compounds using purge-and-trap and thermal desorption. (ISO 15680:2003)",
                             "target": "Water quality",
                             "uncertainty": "*",
-                            "_id": "52"
+                            "lov_pollutant_id": "67"
                         },
                         {
                             "standard": "EN ISO 10301:1997",
                             "title": "Determination of highly volatile halogenated hydrocarbons - Gas-chromatographic methods (ISO 10301:1997)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 40 and 50%",
-                            "_id": "52"
+                            "lov_pollutant_id": "67"
                         }
                     ]
                 },
-                "_id": "52"
+                "lov_pollutant_id": "67"
             },
             {
                 "pollutant_name": "Tetrachloromethane (TCM)",
@@ -2153,10 +2153,10 @@
                         "title": "Determination of highly volatile halogenated hydrocarbons - Gas-chromatographic methods (ISO 10301:1997)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 40 and 50%",
-                        "_id": "53"
+                        "lov_pollutant_id": "68"
                     }
                 },
-                "_id": "53"
+                "lov_pollutant_id": "68"
             },
             {
                 "pollutant_name": "Trichlorobenzenes (TCBs)",
@@ -2187,10 +2187,10 @@
                         "title": "Gas-chromatographic determination of a number of monocyclic aromatic hydrocarbons, naphthalene and several chlorinated compounds using purge-and-trap and thermal desorption (ISO 15680:2003)",
                         "target": "Water quality",
                         "uncertainty": "*",
-                        "_id": "54"
+                        "lov_pollutant_id": "69"
                     }
                 },
-                "_id": "54"
+                "lov_pollutant_id": "69"
             },
             {
                 "pollutant_name": "1,1,1-trichloroethane",
@@ -2223,10 +2223,10 @@
                         "title": "",
                         "target": "",
                         "uncertainty": "",
-                        "_id": "55"
+                        "lov_pollutant_id": "70"
                     }
                 },
-                "_id": "55"
+                "lov_pollutant_id": "70"
             },
             {
                 "pollutant_name": "1,1,2,2-tetrachloroethane",
@@ -2257,10 +2257,10 @@
                         "title": "",
                         "target": "",
                         "uncertainty": "",
-                        "_id": "56"
+                        "lov_pollutant_id": "71"
                     }
                 },
-                "_id": "56"
+                "lov_pollutant_id": "71"
             },
             {
                 "pollutant_name": "Trichloroethylene",
@@ -2295,18 +2295,18 @@
                             "title": "Gas-chromatographic determination of a number of monocyclic aromatic hydrocarbons, naphthalene and several chlorinated compounds using purge-and-trap and thermal desorption (ISO 15680:2003)",
                             "target": "Water quality",
                             "uncertainty": "*",
-                            "_id": "57"
+                            "lov_pollutant_id": "72"
                         },
                         {
                             "standard": "EN ISO 10301:1997",
                             "title": "Determination of highly volatile halogenated hydrocarbons - Gas-chromatographic methods (ISO 10301:1997)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 40 and 50%",
-                            "_id": "57"
+                            "lov_pollutant_id": "72"
                         }
                     ]
                 },
-                "_id": "57"
+                "lov_pollutant_id": "72"
             },
             {
                 "pollutant_name": "Trichloromethane",
@@ -2337,18 +2337,18 @@
                             "title": "Gas-chromatographic determination of a number of monocyclic aromatic hydrocarbons, naphthalene and several chlorinated compounds using purge-and-trap and thermal desorption (ISO 15680:2003)",
                             "target": "Water quality",
                             "uncertainty": "*",
-                            "_id": "58"
+                            "lov_pollutant_id": "73"
                         },
                         {
                             "standard": "EN ISO 10301:1997",
                             "title": "Determination of highly volatile halogenated hydrocarbons - Gas-chromatographic methods (ISO 10301:1997)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 40 and 50%",
-                            "_id": "58"
+                            "lov_pollutant_id": "73"
                         }
                     ]
                 },
-                "_id": "58"
+                "lov_pollutant_id": "73"
             },
             {
                 "pollutant_name": "Toxaphene",
@@ -2383,10 +2383,10 @@
                         "title": "",
                         "target": "",
                         "uncertainty": "",
-                        "_id": "59"
+                        "lov_pollutant_id": "51"
                     }
                 },
-                "_id": "59"
+                "lov_pollutant_id": "51"
             },
             {
                 "pollutant_name": "Vinyl chloride",
@@ -2419,10 +2419,10 @@
                         "title": "Gas-chromatographic determination of a number of monocyclic aromatic hydrocarbons, naphthalene and several chlorinated compounds using purge-and-trap and thermal desorption (ISO 15680:2003)",
                         "target": "Water quality",
                         "uncertainty": "*",
-                        "_id": "60"
+                        "lov_pollutant_id": "74"
                     }
                 },
-                "_id": "60"
+                "lov_pollutant_id": "74"
             },
             {
                 "pollutant_name": "Anthracene",
@@ -2465,18 +2465,18 @@
                                 ],
                                 "_text": "Typical uncertainty reported is ± 25% for values  between 0.1  g/m\n to 1 g/ m"
                             },
-                            "_id": "61"
+                            "lov_pollutant_id": "77"
                         },
                         {
                             "standard": "EN ISO 17993:2003",
                             "title": "Determination of 15 polycyclic aromatic hydrocarbons (PAH) in water by HPLC with fluorescence detection after liquid-liquid extraction (ISO 17993:2002)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 2 and 5%",
-                            "_id": "61"
+                            "lov_pollutant_id": "77"
                         }
                     ]
                 },
-                "_id": "61"
+                "lov_pollutant_id": "77"
             },
             {
                 "pollutant_name": "Benzene",
@@ -2517,32 +2517,32 @@
                                 "sup": "3",
                                 "_text": "Typical uncertainty, at a 95% level of confidence, ranges between ±  4 and ± 11mg/m\n, depending on sampling procedure, analyte and concentration"
                             },
-                            "_id": "62"
+                            "lov_pollutant_id": "89"
                         },
                         {
                             "standard": "ISO 11423-1:1997",
                             "title": "Determination of benzene and some derivatives - Part 1: Head-space gas chromatograhic method",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 1 and 50%",
-                            "_id": "62"
+                            "lov_pollutant_id": "89"
                         },
                         {
                             "standard": "ISO 11423-2:1997",
                             "title": "Determination of benzene and some derivatives - Part 2: Method using extraction and gas chromatography",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 22 and 47%",
-                            "_id": "62"
+                            "lov_pollutant_id": "89"
                         },
                         {
                             "standard": "EN ISO 15680:2003",
                             "title": "Gas-chromatographic determination of a number of monocyclic aromatic hydrocarbons, naphthalene and several chlorinated compounds using purge-and-trap and thermal desorption (ISO 15680:2003)",
                             "target": "Water quality",
                             "uncertainty": "*",
-                            "_id": "62"
+                            "lov_pollutant_id": "89"
                         }
                     ]
                 },
-                "_id": "62"
+                "lov_pollutant_id": "89"
             },
             {
                 "pollutant_name": "Brominated diphenylethers (PBDE)",
@@ -2571,10 +2571,10 @@
                         "title": "Determination of selected polybrominated diphenyl ethers in sediment and sewage sludge - Method using extraction and gas chromatography/mass spectrometry",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility is 50%",
-                        "_id": "63"
+                        "lov_pollutant_id": "75"
                     }
                 },
-                "_id": "63"
+                "lov_pollutant_id": "75"
             },
             {
                 "pollutant_name": "Nonylphenol and Nonylphenol ethoxylates (NP/NPEs)",
@@ -2608,10 +2608,10 @@
                         "title": "",
                         "target": "",
                         "uncertainty": "",
-                        "_id": "64"
+                        "lov_pollutant_id": "78"
                     }
                 },
-                "_id": "64"
+                "lov_pollutant_id": "78"
             },
             {
                 "pollutant_name": "Ethyl benzene",
@@ -2648,10 +2648,10 @@
                         "title": "Gas-chromatographic determination of a number of monocyclic aromatic hydrocarbons, naphthalene and several chlorinated compounds using purge-and-trap and thermal desorption (ISO 15680:2003)",
                         "target": "Water quality",
                         "uncertainty": "*",
-                        "_id": "65"
+                        "lov_pollutant_id": "90"
                     }
                 },
-                "_id": "65"
+                "lov_pollutant_id": "90"
             },
             {
                 "pollutant_name": "Ethylene oxide",
@@ -2685,10 +2685,10 @@
                         "title": "",
                         "target": "",
                         "uncertainty": "",
-                        "_id": "66"
+                        "lov_pollutant_id": "79"
                     }
                 },
-                "_id": "66"
+                "lov_pollutant_id": "79"
             },
             {
                 "pollutant_name": "Isoproturon",
@@ -2720,10 +2720,10 @@
                         "title": "",
                         "target": "",
                         "uncertainty": "",
-                        "_id": "67"
+                        "lov_pollutant_id": "52"
                     }
                 },
-                "_id": "67"
+                "lov_pollutant_id": "52"
             },
             {
                 "pollutant_name": "Naphthalene",
@@ -2764,25 +2764,25 @@
                                 ],
                                 "_text": "Typical uncertainty  is ± 25% for values  between 0.1 g/m\n and 1 g/m"
                             },
-                            "_id": "68"
+                            "lov_pollutant_id": "80"
                         },
                         {
                             "standard": "EN ISO 15680:2003",
                             "title": "Gas-chromatographic determination of a number of monocyclic aromatic hydrocarbons, naphthalene and several chlorinated compounds using purge-and-trap and thermal desorption (ISO 15680:2003)",
                             "target": "Water quality",
                             "uncertainty": "*",
-                            "_id": "68"
+                            "lov_pollutant_id": "80"
                         },
                         {
                             "standard": "EN ISO 17993:2003",
                             "title": "Determination of 15 polycyclic aromatic hydrocarbons (PAH) in water by HPLC with fluorescence detection after liquid-liquid extraction (ISO 17993:2002)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 2 and 5% ",
-                            "_id": "68"
+                            "lov_pollutant_id": "80"
                         }
                     ]
                 },
-                "_id": "68"
+                "lov_pollutant_id": "80"
             },
             {
                 "pollutant_name": "Organotin compounds (as total Sn)",
@@ -2811,10 +2811,10 @@
                         "title": "Determination of selected organotin compounds - Gas chromatographic method (ISO 17353:2004)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 16 and 39%",
-                        "_id": "69"
+                        "lov_pollutant_id": "81"
                     }
                 },
-                "_id": "69"
+                "lov_pollutant_id": "81"
             },
             {
                 "pollutant_name": "Di-(2-ethyl hexyl) phthalate (DEHP)",
@@ -2847,10 +2847,10 @@
                         "title": "Determination of selected phthalates using gas chromatography/mass spectrometry (ISO 18856:2004)",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 18 and 86%",
-                        "_id": "70"
+                        "lov_pollutant_id": "82"
                     }
                 },
-                "_id": "70"
+                "lov_pollutant_id": "82"
             },
             {
                 "pollutant_name": "Phenols (as total C)",
@@ -2886,10 +2886,10 @@
                         "title": "Determination of phenol index by flow analysis (FIA and CFA) (ISO 14402:1999)",
                         "target": "Water quality",
                         "uncertainty": " The coefficient of variation of reproducibility is 81%",
-                        "_id": "71"
+                        "lov_pollutant_id": "83"
                     }
                 },
-                "_id": "71"
+                "lov_pollutant_id": "83"
             },
             {
                 "pollutant_name": "Polycyclic aromatic hydrocarbons (PAHs)",
@@ -2929,32 +2929,32 @@
                                 ],
                                 "_text": " Typical  uncertainty is +/- 25% for values  between 0.1 g/m\n  and 1 g/m\n   "
                             },
-                            "_id": "72"
+                            "lov_pollutant_id": "84"
                         },
                         {
                             "standard": "EN ISO 17993:2003",
                             "title": "Determination of 15 polycyclic aromatic hydrocarbons (PAH) in water by HPLC with fluorescence detection after liquid-liquid extraction (ISO 17993:2002)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 2 and 5%",
-                            "_id": "72"
+                            "lov_pollutant_id": "84"
                         },
                         {
                             "standard": "ISO 7981-1:2005",
                             "title": "Determination of polycyclic aromatic hydrocarbons (PAH) - Part 1: Determination of six PAH by high-performance thin-layer chromatography with fluorescence detection after liquid-liquid extraction",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 16 and 24%",
-                            "_id": "72"
+                            "lov_pollutant_id": "84"
                         },
                         {
                             "standard": "ISO 7981-2:2005",
                             "title": "Determination of polycyclic aromatic hydrocarbons (PAH) - Part 2: Determination of six PAH by high-performance liquid chromatography with fluorescence detection after liquid-liquid extraction",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 14.80%",
-                            "_id": "72"
+                            "lov_pollutant_id": "84"
                         }
                     ]
                 },
-                "_id": "72"
+                "lov_pollutant_id": "84"
             },
             {
                 "pollutant_name": "Toluene",
@@ -2991,10 +2991,10 @@
                         "title": "Gas-chromatographic determination of a number of monocyclic aromatic hydrocarbons, naphthalene and several chlorinated compounds using purge-and-trap and thermal desorption (ISO 15680:2003)",
                         "target": "Water quality",
                         "uncertainty": "*",
-                        "_id": "73"
+                        "lov_pollutant_id": "91"
                     }
                 },
-                "_id": "73"
+                "lov_pollutant_id": "91"
             },
             {
                 "pollutant_name": "Tributyltin and compounds",
@@ -3025,10 +3025,10 @@
                         "title": "Determination of selected organotin compounds - Gas chromatographic method (ISO 17353:2004) ",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 16 and 39%",
-                        "_id": "74"
+                        "lov_pollutant_id": "53"
                     }
                 },
-                "_id": "74"
+                "lov_pollutant_id": "53"
             },
             {
                 "pollutant_name": "Triphenyltin and compounds",
@@ -3054,10 +3054,10 @@
                         "title": "Determination of selected organotin compounds - Gas chromatographic method (ISO 17353:2004) ",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 16 and 39%",
-                        "_id": "75"
+                        "lov_pollutant_id": "54"
                     }
                 },
-                "_id": "75"
+                "lov_pollutant_id": "54"
             },
             {
                 "pollutant_name": "Total organic carbon (TOC) (as total C or COD/3)",
@@ -3078,10 +3078,10 @@
                         "title": "Guidelines for the determination of total organic carbon (TOC) and dissolved organic carbon (DOC)",
                         "target": "Water analysis",
                         "uncertainty": "The coefficient of variation of reproducibility is 4.5%",
-                        "_id": "76"
+                        "lov_pollutant_id": "85"
                     }
                 },
-                "_id": "76"
+                "lov_pollutant_id": "85"
             },
             {
                 "pollutant_name": "Trifluralin",
@@ -3111,7 +3111,7 @@
                 "aquatic_tox_ec50": "EC50 - Algae selenastrum capricornutum - 12.2 mg/l",
                 "description": "Pure trifluralin is in the form of orange crystals with no odour, it also evaporates easily. When heated, toxic and corrosive fumes are formed.",
                 "iso_provisions": "",
-                "_id": "77"
+                "lov_pollutant_id": "55"
             },
             {
                 "pollutant_name": "Xylenes",
@@ -3149,10 +3149,10 @@
                         "title": "Gas-chromatographic determination of a number of monocyclic aromatic hydrocarbons, naphthalene and several chlorinated compounds using purge-and-trap and thermal desorption (ISO 15680:2003) ",
                         "target": "Water quality",
                         "uncertainty": "*",
-                        "_id": "78"
+                        "lov_pollutant_id": "92"
                     }
                 },
-                "_id": "78"
+                "lov_pollutant_id": "92"
             },
             {
                 "pollutant_name": "Chlorides (as total Cl)",
@@ -3177,32 +3177,32 @@
                             "title": "Determination of dissolved fluoride, chloride, nitrite, orthophosphate, bromide, nitrate and sulfate ions, using liquid chromatography of ions - Part 1: Method for water with low contamination (ISO 10304-1:2007) ",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 0.5 and 2.5%",
-                            "_id": "79"
+                            "lov_pollutant_id": "95"
                         },
                         {
                             "standard": "EN ISO 10304-2:1997",
                             "title": "Determination of dissolved anions by liquid chromatography of ions - Part 2: Determination of bromide, chloride, nitrate, nitrite, orthophosphate and sulfate in waste water",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 0.5 and 2.5%",
-                            "_id": "79"
+                            "lov_pollutant_id": "95"
                         },
                         {
                             "standard": "EN ISO 10304-4:1999",
                             "title": "Determination of dissolved anions by liquid chromatography of ions - Part 4: Determination of chlorate, chloride and chlorite in water with low contamination (ISO 10304-4:1997)",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 5.4%",
-                            "_id": "79"
+                            "lov_pollutant_id": "95"
                         },
                         {
                             "standard": "EN ISO 15682:2001",
                             "title": "Determination of chloride by flow analysis (CFA and FIA) and photometric or potentiometric detection (ISO 15682:2000) ",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility is 2.8%",
-                            "_id": "79"
+                            "lov_pollutant_id": "95"
                         }
                     ]
                 },
-                "_id": "79"
+                "lov_pollutant_id": "95"
             },
             {
                 "pollutant_name": "Chlorine and inorganic compounds (as HCl)",
@@ -3241,10 +3241,10 @@
                             ],
                             "_text": "Typical uncertainty, at a 95% level of confidence, ranges  between  +/- 0.15 mg/m\n  for values  about  0.1 mg/m\n  and +/-12 mg/m\n  for values about 215 mg/m"
                         },
-                        "_id": "80"
+                        "lov_pollutant_id": "23"
                     }
                 },
-                "_id": "80"
+                "lov_pollutant_id": "23"
             },
             {
                 "pollutant_name": "Asbestos",
@@ -3272,10 +3272,10 @@
                         "title": "Determination of asbestos plant emissions; method by fibre count measurement",
                         "target": "Stationary source emissions",
                         "uncertainty": "-",
-                        "_id": "81"
+                        "lov_pollutant_id": "96"
                     }
                 },
-                "_id": "81"
+                "lov_pollutant_id": "96"
             },
             {
                 "pollutant_name": "Cyanides (as total CN)",
@@ -3307,10 +3307,10 @@
                         "title": "Determination of total cyanide and free cyanide by continuous flow analysis (ISO 14403:2002",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility is 28.1%",
-                        "_id": "82"
+                        "lov_pollutant_id": "97"
                     }
                 },
-                "_id": "82"
+                "lov_pollutant_id": "97"
             },
             {
                 "pollutant_name": "Fluorides (as total F)",
@@ -3330,10 +3330,10 @@
                         "title": "Determination of dissolved fluoride, chloride, nitrite, orthophosphate, bromide, nitrate and sulfate ions, using liquid chromatography of ions - Part 1: Method for water with low contamination (ISO 10304-1:2007) ",
                         "target": "Water quality",
                         "uncertainty": "-",
-                        "_id": "83"
+                        "lov_pollutant_id": "98"
                     }
                 },
-                "_id": "83"
+                "lov_pollutant_id": "98"
             },
             {
                 "pollutant_name": "Fluorine and inorganic compounds (as HF)",
@@ -3361,10 +3361,10 @@
                         "title": "Sampling and determination of gaseous fluoride content",
                         "target": "Stationary source emissions",
                         "uncertainty": "-",
-                        "_id": "84"
+                        "lov_pollutant_id": "24"
                     }
                 },
-                "_id": "84"
+                "lov_pollutant_id": "24"
             },
             {
                 "pollutant_name": "Hydrogen cyanide (HCN)",
@@ -3398,10 +3398,10 @@
                         "title": "Determination of total cyanide and free cyanide by continuous flow analysis (ISO 14403:2002) ",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility is 7.9%",
-                        "_id": "85"
+                        "lov_pollutant_id": "25"
                     }
                 },
-                "_id": "85"
+                "lov_pollutant_id": "25"
             },
             {
                 "pollutant_name": "Particulate matter (PM10)",
@@ -3435,7 +3435,7 @@
                                 ],
                                 "_text": "Typical uncertainty, at a 95% level of confidence, ranges between  +/- 0.6 mg/m\n for values about  5.6 mg/m\n and +/- 4.8 mg/m\n at values about 35 mg/m\n "
                             },
-                            "_id": "86"
+                            "lov_pollutant_id": "99"
                         },
                         {
                             "standard": "EN 13284-1:2001",
@@ -3448,25 +3448,25 @@
                                 ],
                                 "_text": "Typical uncertainty is about +/- 1.8 mg/m\n at levels of about 2.5 mg/m"
                             },
-                            "_id": "86"
+                            "lov_pollutant_id": "99"
                         },
                         {
                             "standard": "EN 13284-2:2004",
                             "title": "Determination of low range mass concentration of dust - Part 2: Automated measuring systems",
                             "target": "Stationary source emissions",
                             "uncertainty": "*",
-                            "_id": "86"
+                            "lov_pollutant_id": "99"
                         },
                         {
                             "standard": "ISO 9096:2003",
                             "title": "Manual determination of mass concentration of particulate matter",
                             "target": "Stationary source emissions",
                             "uncertainty": "*",
-                            "_id": "86"
+                            "lov_pollutant_id": "99"
                         }
                     ]
                 },
-                "_id": "86"
+                "lov_pollutant_id": "99"
             },
             {
                 "pollutant_name": "Octylphenols and Octylphenol ethoxylates",
@@ -3487,7 +3487,7 @@
                 "density": "0.89",
                 "description": "Octyl phenols and octyl phenol ethoxylates are usually white crystalline solids, they are generally unreactive and have a low solubility in water. Considering the low vapour pressure of octylphenol and its tendency to adsorb to soils and sediments, it can be expected that atmospheric concentrations will be low.  4-Octylphenol is provided as an example.",
                 "iso_provisions": "",
-                "_id": "87"
+                "lov_pollutant_id": "86"
             },
             {
                 "pollutant_name": "Fluoranthene",
@@ -3524,18 +3524,18 @@
                                 ],
                                 "_text": "Typical uncertainty is +/- 25% for values  between 0.1 g/m\n to 1 g/m\n  "
                             },
-                            "_id": "88"
+                            "lov_pollutant_id": "87"
                         },
                         {
                             "standard": "EN ISO 17993:2003",
                             "title": "Determination of 15 polycyclic aromatic hydrocarbons (PAH) in water by HPLC with fluorescence detection after liquid-liquid extraction (ISO 17993:2002) ",
                             "target": "Water quality",
                             "uncertainty": "The coefficient of variation of reproducibility ranges between about 2 and 5%",
-                            "_id": "88"
+                            "lov_pollutant_id": "87"
                         }
                     ]
                 },
-                "_id": "88"
+                "lov_pollutant_id": "87"
             },
             {
                 "pollutant_name": "Isodrin",
@@ -3558,7 +3558,7 @@
                 "persistence": "Inadequate evidence",
                 "description": "A white crystalline solid with a chemical-like odour.",
                 "iso_provisions": "",
-                "_id": "89"
+                "lov_pollutant_id": "56"
             },
             {
                 "pollutant_name": "Hexabromobiphenyl",
@@ -3582,7 +3582,7 @@
                 "aquatic_tox_lc50": "LC50 - Colinus virginianus - 428 mg/kg 8 d",
                 "description": "Hexabromobiphenyl is a white solid, non-volatile and non-flammable.",
                 "iso_provisions": "",
-                "_id": "90"
+                "lov_pollutant_id": "76"
             },
             {
                 "pollutant_name": "Benzo(g,h,i)perylene",
@@ -3614,10 +3614,10 @@
                         "title": "Determination of 15 polycyclic aromatic hydrocarbons (PAH) in water by HPLC with fluorescence detection after liquid-liquid extraction (ISO 17993:2002) ",
                         "target": "Water quality",
                         "uncertainty": "The coefficient of variation of reproducibility ranges between about 2 and 5%",
-                        "_id": "91"
+                        "lov_pollutant_id": "88"
                     }
                 },
-                "_id": "91"
+                "lov_pollutant_id": "88"
             }
         ]
     }

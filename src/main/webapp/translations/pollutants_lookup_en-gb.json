@@ -1563,11 +1563,11 @@
                 "_text": "WEL/OEL"
             },
             {
-                "_groupId": "1",
+                "_groupId": "5",
                 "_text": "Chlorinated Organic Substances"
             },
             {
-                "_groupId": "2",
+                "_groupId": "1",
                 "_text": "Greenhouse Gases"
             },
             {
@@ -1579,19 +1579,19 @@
                 "_text": "Pesticides"
             },
             {
-                "_groupId": "5",
+                "_groupId": "2",
                 "_text": "Other Gases"
             },
             {
-                "_groupId": "6",
+                "_groupId": "7",
                 "_text": "Inorganic substances"
             },
             {
-                "_groupId": "7",
+                "_groupId": "6",
                 "_text": "Other Organic substances"
             },
             {
-                "_groupIdtip": "1",
+                "_groupIdtip": "5",
                 "_text": "Chlorinated organic substances are those that are based on organic compounds (i.e. carbon-containing) with one or more chlorine atoms. Chlorinated organic substances are important in the chemical industry and they are also formed in nature in large quantities."
             },
             {
@@ -1603,7 +1603,7 @@
                     "3",
                     "6"
                 ],
-                "_groupIdtip": "2",
+                "_groupIdtip": "1",
                 "_text": "Greenhouse gases are those gaseous constituents of the atmosphere, both natural and anthropogenic that tend to trap heat radiating from the Earth's surface, thus causing warming in the lower atmosphere, which is considered to lead to climate change. This property causes the greenhouse effect. Water vapour (H\nO), carbon dioxide (CO\n), nitrous oxide (N\nO), methane (CH\n), and ozone (O\n) are the primary greenhouse gases in the Earth’s atmosphere. Moreover there are a number of entirely human-made greenhouse gases in the atmosphere, such as hydrofluorocarbons (HFCs), perfluorocarbons (PFCs) and sulphur hexafluoride (SF\n)."
             },
             {
@@ -1615,15 +1615,15 @@
                 "_text": "Pesticides are substances and products intended to influence fundamental processes in living organisms. They are used to kill or control harmful organisms such as weeds or insects vectors of disease. Some pesticides can contribute to high agricultural yields and help to ensure that good quality food is available at reasonable prices. Other pesticides are important for public health protection and for preservation of materials. At the same time, pesticides can have very negative effects on human health and the environment."
             },
             {
-                "_groupIdtip": "5",
+                "_groupIdtip": "2",
                 "_text": "Gases are chemical compounds, both natural or man-made, that are found in the gaseous state. For the purpose of this E-PRTR register, this category covers the other following gases:"
             },
             {
-                "_groupIdtip": "6",
+                "_groupIdtip": "7",
                 "_text": "Inorganic substances are those substances in which two or more chemical elements, other than carbon, are combined. They generally lack carbon-to-carbon bonds."
             },
             {
-                "_groupIdtip": "7",
+                "_groupIdtip": "6",
                 "_text": "Other organic substances\" are substances containing carbon atoms (C) not covered by other pollutant groups. For the purpose of the E-PRTR register, this category covers the other following organic substances:"
             },
             {
@@ -1835,32 +1835,32 @@
                     "2",
                     "6"
                 ],
-                "_other_provision_reporting": "3.1",
+                "_other_provision_reporting": "3.9",
                 "_text": "Annex I Parties shall establish a national system for estimating (and reporting annually) anthropogenic emissions by sources and removals by sinks of all direct greenhouse gases not controlled by the Montreal Protocol: carbon dioxide (CO\n), methane (CH\n), hydro-fluorocarbons (HFCs), nitrous oxide (N\nO), sulphur hexafluoride (SF\n), perfluorocarbons (PFCs)."
             },
             {
-                "_other_provision_reporting": "12.1",
+                "_other_provision_reporting": "12.9",
                 "_text": "Member States shall report emissions of CO2, CH4, N20, HFCs, PFCs, and SF6 to the Commission by 15 January  each year (year X)  for the year before last (year X-2). "
             },
             {
                 "sub": "2",
-                "_other_provision_reporting": "16.1",
+                "_other_provision_reporting": "16.9",
                 "_text": "Annex IV of the Directive describes the principles for monitoring and reporting. Standardised or accepted methods, developed by the Commission, shall be used for non-CO\n greenhouse gases."
             },
             {
-                "_other_provision_reporting": "3.2",
+                "_other_provision_reporting": "3.15",
                 "_text": "Annex I Parties shall report annual emissions of the indirect greenhouse gases: carbon monoxide (CO), nitrogen oxides (NOX) non-methane volatile organic compounds (NMVOCs), and sulphur oxides (SOx)."
             },
             {
-                "_other_provision_reporting": "12.2",
+                "_other_provision_reporting": "12.15",
                 "_text": " Member States shall report emissions of NOx, VOC, CO, and SO2 to the Commisson by 15 January each year (year X),  provisional data for the year before last (year X-2) and final data for the year before that (year X-3)."
             },
             {
-                "_other_provision_reporting": "14.2",
+                "_other_provision_reporting": "14.15",
                 "_text": "Continuous measurement is required but no annual inventory is specified."
             },
             {
-                "_other_provision_reporting": "3.3",
+                "_other_provision_reporting": "3.10",
                 "_text": "Annex I Parties shall establish a national system for estimating (and reporting annually) anthropogenic emissions by sources and removals by sinks of all direct greenhouse gases not controlled by the Montreal Protocol: carbon dioxide (CO2),.methane (CH4), hydro-fluorocarbons (HFCs), nitrous oxide (N2O), sulphur hexafluoride (SF6), perfluorocarbons (PFCs)."
             },
             {
@@ -1871,516 +1871,440 @@
                     "2",
                     "6"
                 ],
-                "_other_provision_reporting": "12.3",
+                "_other_provision_reporting": "12.10",
                 "_text": "Member States shall report emissions as CO\n equivalents of CO\n, CH\n, N\n0, HFCs, PFCs, and SF\n to the Commission by 15 January each year (year X) for the year before last (year X-2). "
             },
             {
-                "_other_provision_reporting": "16.3",
+                "_other_provision_reporting": "16.10",
                 "_text": "Annex IV of the Directive describes the principles for monitoring.  Emissions of carbon dioxide shall be monitored either by calculation or on the basis of measurement."
             },
             {
-                "_other_provision_reporting": "3.4",
-                "_text": "Annex I Parties shall establish a national system for estimating (and reporting annually) anthropogenic emissions by sources and removals by sinks of all direct greenhouse gases not controlled by the Montreal Protocol: carbon dioxide (CO2),.methane (CH4), hydro-fluorocarbons (HFCs), nitrous oxide (N2O), sulphur hexafluoride (SF6), perfluorocarbons (PFCs)."
-            },
-            {
-                "_other_provision_reporting": "12.4",
-                "_text": "Member States shall report emissions of CO2, CH4, N20, HFCs, PFCs, and SF6 to the Commission by 15 January  each year (year X)  for the year before last (year X-2). "
-            },
-            {
-                "_other_provision_reporting": "13.4",
-                "_text": "Operators are obliged to report data on production, imports, and exports of each substance as well as their intended applications. Reports were due in 2008 for the first time and each year thereafter. Article 9 prohibits the placing on the market of  products and equipment containing F gas listed in Annex II."
-            },
-            {
-                "_other_provision_reporting": "16.4",
-                "_text": "Annex IV of the Directive describes the principles for monitoring and reporting.  Standardised or accepted methods, developed by the Commission, shall be used for non-CO2 greenhouse gases."
-            },
-            {
-                "_other_provision_reporting": "3.5",
-                "_text": "Annex I Parties shall establish a national system for estimating (and reporting annually) anthropogenic emissions by sources and removals by sinks of all direct greenhouse gases not controlled by the Montreal Protocol: carbon dioxide (CO2),.methane (CH4), hydro-fluorocarbons (HFCs), nitrous oxide (N2O), sulphur hexafluoride (SF6), perfluorocarbons (PFCs)."
-            },
-            {
-                "_other_provision_reporting": "12.5",
-                "_text": "Member States shall report emissions of CO2, CH4, N20, HFCs, PFCs, and SF6 to the Commission by 15 January  each year (year X)  for the year before last (year X-2). "
-            },
-            {
-                "_other_provision_reporting": "16.5",
-                "_text": "Annex IV of the Directive describes the principles for monitoring and reporting.  Standardised or accepted methods, developed by the Commission, shall be used for non-CO2 greenhouse gases."
-            },
-            {
-                "_other_provision_reporting": "6.6",
-                "_text": "Article 6 of the 1999 Gothenburg Protocol to Abate Acidification, Eutrophication and Ground-level Ozone require signatories to collect information on emissions of ammonia.  Article 7 requires reporting of  current and projected levels of emissions according to reporting intervals and reporting details determined by CLRTAP;  Article 7 also requires the provision of calculations of oxidised and reduced nitrogen budgets."
-            },
-            {
-                "_other_provision_reporting": "7.6",
-                "_text": "Articles 7, 8 and annex III, require that Member States, by the 31st December each year, report their updated national emission inventories and their emission projections for 2010 using reporting details determined by CLRTAP; Member States are encouraged to use the EMEP/EEA air pollutant emission inventory guidebook methodologies."
-            },
-            {
-                "_other_provision_reporting": "10.6",
-                "_text": "Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive. This substance may contribute to the ecological status (but not to the chemical status) identification if Member States identified that this is discharged in significant quantities in the river basin/sub-basin. If so, the general reporting obligation mentioned above have to be applied."
-            },
-            {
-                "_other_provision_reporting": "3.7",
-                "_text": "Annex I Parties shall report annual emissions of the indirect greenhouse gases: carbon monoxide (CO), nitrogen oxides (NOX) non-methane volatile organic compounds (NMVOCs), and sulphur oxides (SOx)."
-            },
-            {
-                "_other_provision_reporting": "6.7",
-                "_text": "Article 8 of the 1991 Geneva Protocol on the Control of Emissions of Volatile Organic Compounds or their Transboundary Fluxes requires signatories to report annual VOC emissions. Article 6 of the 1999 Gothenburg Protocol to Abate Acidification, Eutrophication and Ground-level Ozone require signatories to report, annually, emissions of sulphur, nitrogen compounds and VOCs."
-            },
-            {
-                "_other_provision_reporting": "7.7",
-                "_text": "Articles 7, 8 and annex III, require that Member States, by the 31st December each year,  report their updated national emission inventories and their emission projections for 2010 using reporting details determined by CLRTAP; Member States are encouraged to use EMEP/EEA air pollutant emission inventory guidebook methodologies."
-            },
-            {
-                "_other_provision_reporting": "9.7",
-                "_text": "Releases by specific activities are covered."
-            },
-            {
-                "_other_provision_reporting": "12.7",
-                "_text": " Member States shall report emissions of NOx, VOC, CO, and SO2 to the Commisson by 15 January each year (year X),  provisional data for the year before last (year X-2) and final data for the year before that (year X-3)."
-            },
-            {
-                "_other_provision_reporting": "14.7",
-                "_text": "Continuous measurement of Total Organic Carbon (i.e. non-methane VOC) are required but no annual inventory data collection is required nor reported."
-            },
-            {
-                "_other_provision_reporting": "3.8",
-                "_text": "Annex I Parties shall report annual emissions of the indirect greenhouse gases: carbon monoxide (CO), nitrogen oxides (NOX) non-methane volatile organic compounds (NMVOCs), and sulphur oxides (SOx)."
-            },
-            {
-                "_other_provision_reporting": "6.8",
-                "_text": "Article 8 of the 1988 Protocol concerning the Control of Nitrogen Oxides or their Transboundary Fluxes requires Parties to report national annual emissions of nitrogen oxides and the basis on which they are calculated. Article 6 of the 1999 Gothenburg Protocol to Abate Acidification, Eutrophication and Ground-level Ozone require signatories to collect information on emissions of nitrogen oxides. Article 7 requires reporting of  current and projected levels of emissions according to reporting intervals and reporting details determined by CLRTAP; Article 7 also requires the provision of calculations of oxidised and reduced nitrogen budgets."
-            },
-            {
-                "_other_provision_reporting": "7.8",
-                "_text": "Articles 7, 8 and annex III, require that Member States, by the 31st December each year,  report their updated national emission inventories and their emission projections for 2010 using reporting details determined by CLRTAP; Member States are encouraged to use EMEP/EEA air pollutant emission inventory guidebook methodologies."
-            },
-            {
-                "_other_provision_reporting": "8.8",
-                "_text": "Member States shall establish annual inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years.  "
-            },
-            {
-                "_other_provision_reporting": "12.8",
-                "_text": " Member States shall report emissions of NOx, VOC, CO, and SO2 to the Commisson by 15 January each year (year X),  provisional data for the year before last (year X-2) and final data for the year before that (year X-3)."
-            },
-            {
-                "_other_provision_reporting": "14.8",
-                "_text": "Continuous measurement is required provided that emission limit values are set but no annual inventory is specified."
-            },
-            {
-                "_other_provision_reporting": "15.8",
-                "_text": "Member States shall establish annual inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years.  "
-            },
-            {
-                "_other_provision_reporting": "3.9",
-                "_text": "Each Party included in Annex I shall have in place a national system for the estimation of anthropogenic emissions by sources and removals by sinks of all greenhouse gases not controlled by the Montreal Protocol. Each Party included in Annex I shall submit the above information in accordance with the relevant decisions of the Conference of the Parties."
-            },
-            {
-                "_other_provision_reporting": "9.9",
-                "_text": "Releases by specific activities are covered."
-            },
-            {
-                "_other_provision_reporting": "12.9",
-                "_text": "Member States shall report emissions of CO2, CH4, N20, HFCs, PFCs, and SF6 to the Commission by 15 January  each year (year X)  for the year before last (year X-2). "
-            },
-            {
-                "_other_provision_reporting": "13.9",
-                "_text": "Operators are obliged to report data on production, imports, and exports of each substance as well as their intended applications. Reports were due in 2008 for the first time and each year thereafter. Article 9 prohibits the placing on the market of  products and equipment containing F gas listed in Annex II."
-            },
-            {
-                "_other_provision_reporting": "16.9",
-                "_text": "Annex IV of the Directive describes the principles for monitoring and reporting.  Standardised or accepted methods, developed by the Commission, shall be used for non-CO2 greenhouse gases."
-            },
-            {
-                "_other_provision_reporting": "3.10",
-                "_text": "Each Party included in Annex I shall have in place a national system for the estimation of anthropogenic emissions by sources and removals by sinks of all greenhouse gases not controlled by the Montreal Protocol. Each Party included in Annex I shall submit the above information in accordance with the relevant decisions of the Conference of the Parties."
-            },
-            {
-                "_other_provision_reporting": "12.10",
-                "_text": "Member States shall report emissions of CO2, CH4, N20, HFCs, PFCs, and SF6 to the Commission by 15 January  each year (year X)  for the year before last (year X-2). "
-            },
-            {
-                "_other_provision_reporting": "13.10",
-                "_text": "Operators are obliged to report data on production, imports, and exports of each substance as well as their intended applications. Reports were due in 2008 for the first time and each year thereafter. Article 8  prohibits the use of more than 850 kg of SF6 in magnesium die-casting production as of 2008."
-            },
-            {
-                "_other_provision_reporting": "16.10",
-                "_text": "Annex IV of the Directive describes the principles for monitoring and reporting.  Standardised or accepted methods, developed by the Commission, shall be used for non-CO2 greenhouse gases."
-            },
-            {
                 "_other_provision_reporting": "3.11",
-                "_text": "Annex I Parties shall report annual emissions of the indirect greenhouse gases: carbon monoxide (CO), nitrogen oxides (NOX) non-methane volatile organic compounds (NMVOCs), and sulphur oxides (SOx)."
-            },
-            {
-                "_other_provision_reporting": "6.11",
-                "_text": "Article 4 of the 1985 Protocol to CLRTAP on the Reduction of Sulphur Emissions or their Transboundary Fluxes by at least 30 per cent require signatories to report national annual sulphur emissions and the basis upon which they have been calculated. Article 5 of the 1994 Protocol on Further Reduction of Sulphur Emissions require signatories to report national annual sulphur emissions according to reporting intervals and reporting details determined by CLRTAP. Article 6 of the 1999 Gothenburg Protocol to Abate Acidification, Eutrophication and Ground-level Ozone require signatories to collect information on emissions of sulphur; Article 7 requires reporting of  current and projected levels of emissions according to reporting intervals and reporting details determined by CLRTAP."
-            },
-            {
-                "_other_provision_reporting": "7.11",
-                "_text": "Articles 7, 8 and annex III, require that Member States, by the 31st December each year,  report their updated national emission inventories and their emission projections for 2010 using reporting details determined by CLRTAP; Member States are encouraged to use EMEP/EEA air pollutant emission inventory guidebook methodologies."
-            },
-            {
-                "_other_provision_reporting": "8.11",
-                "_text": "Member States shall establish annual inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years.  "
+                "_text": "Annex I Parties shall establish a national system for estimating (and reporting annually) anthropogenic emissions by sources and removals by sinks of all direct greenhouse gases not controlled by the Montreal Protocol: carbon dioxide (CO2),.methane (CH4), hydro-fluorocarbons (HFCs), nitrous oxide (N2O), sulphur hexafluoride (SF6), perfluorocarbons (PFCs)."
             },
             {
                 "_other_provision_reporting": "12.11",
-                "_text": " Member States shall report emissions of NOx, VOC, CO, and SO2 to the Commisson by 15 January each year (year X),  provisional data for the year before last (year X-2) and final data for the year before that (year X-3)."
+                "_text": "Member States shall report emissions of CO2, CH4, N20, HFCs, PFCs, and SF6 to the Commission by 15 January  each year (year X)  for the year before last (year X-2). "
             },
             {
-                "_other_provision_reporting": "14.11",
-                "_text": "Continuous measurement is generally required but no annual inventory is specified."
+                "_other_provision_reporting": "13.11",
+                "_text": "Operators are obliged to report data on production, imports, and exports of each substance as well as their intended applications. Reports were due in 2008 for the first time and each year thereafter. Article 9 prohibits the placing on the market of  products and equipment containing F gas listed in Annex II."
             },
             {
-                "_other_provision_reporting": "15.11",
-                "_text": "Member States shall establish annual inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years.  "
+                "_other_provision_reporting": "16.11",
+                "_text": "Annex IV of the Directive describes the principles for monitoring and reporting.  Standardised or accepted methods, developed by the Commission, shall be used for non-CO2 greenhouse gases."
             },
             {
-                "_other_provision_reporting": "10.12",
-                "_text": "Ecological status classification of each body of water to be reported within the river basin management plans, interim reports and summary reports.  The criteria for classification is the Annual Average for the Environmental Quality Standards set by the Member State for this substance."
+                "_other_provision_reporting": "3.12",
+                "_text": "Annex I Parties shall establish a national system for estimating (and reporting annually) anthropogenic emissions by sources and removals by sinks of all direct greenhouse gases not controlled by the Montreal Protocol: carbon dioxide (CO2),.methane (CH4), hydro-fluorocarbons (HFCs), nitrous oxide (N2O), sulphur hexafluoride (SF6), perfluorocarbons (PFCs)."
             },
             {
-                "_other_provision_reporting": "11.12",
-                "_text": "Under Article 16 relevant authorities or bodies shall publish situation reports (with copies to the Commission) on the disposal of urban waste water and sludge in their areas every two years.   The reports should include information on the efficiency with which urban waste water treatment plants remove total nitrogen and total phosphorus."
+                "_other_provision_reporting": "12.12",
+                "_text": "Member States shall report emissions of CO2, CH4, N20, HFCs, PFCs, and SF6 to the Commission by 15 January  each year (year X)  for the year before last (year X-2). "
             },
             {
-                "_other_provision_reporting": "10.13",
-                "_text": "Ecological status classification of each body of water to be reported within the river basin management plans, interim reports and summary reports.  The criteria for classification is the Annual Average for the Environmental Quality Standards set by the Member State for this substance."
+                "_other_provision_reporting": "16.12",
+                "_text": "Annex IV of the Directive describes the principles for monitoring and reporting.  Standardised or accepted methods, developed by the Commission, shall be used for non-CO2 greenhouse gases."
             },
             {
-                "_other_provision_reporting": "11.13",
-                "_text": "Under Article 16 relevant authorities or bodies shall publish situation reports (with copies to the Commission) on the disposal of urban waste water and sludge in their areas every two years.   The reports should include information on the efficiency with which urban waste water treatment plants remove total nitrogen and total phosphorus."
+                "_other_provision_reporting": "6.16",
+                "_text": "Article 6 of the 1999 Gothenburg Protocol to Abate Acidification, Eutrophication and Ground-level Ozone require signatories to collect information on emissions of ammonia.  Article 7 requires reporting of  current and projected levels of emissions according to reporting intervals and reporting details determined by CLRTAP;  Article 7 also requires the provision of calculations of oxidised and reduced nitrogen budgets."
             },
             {
-                "_other_provision_reporting": "4.14",
-                "_text": "Parties shall report annually consumption, import, export, production and destruction of hydrochlorofluorocarbons by substance and by sector"
+                "_other_provision_reporting": "7.16",
+                "_text": "Articles 7, 8 and annex III, require that Member States, by the 31st December each year, report their updated national emission inventories and their emission projections for 2010 using reporting details determined by CLRTAP; Member States are encouraged to use the EMEP/EEA air pollutant emission inventory guidebook methodologies."
             },
             {
-                "_other_provision_reporting": "5.14",
-                "_text": "Annual reporting is required of the production, import, export, placing on the market, use, recovery, recycling, reclamation and destruction."
+                "_other_provision_reporting": "10.16",
+                "_text": "Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive. This substance may contribute to the ecological status (but not to the chemical status) identification if Member States identified that this is discharged in significant quantities in the river basin/sub-basin. If so, the general reporting obligation mentioned above have to be applied."
             },
             {
-                "_other_provision_reporting": "9.14",
-                "_text": "Releases by specific activities are covered."
-            },
-            {
-                "_other_provision_reporting": "4.15",
-                "_text": "Parties shall report annually consumption, import, export, production and destruction of chlorofluorocarbons and fully halogenated chlorofluorocarbons by substance and by sector"
-            },
-            {
-                "_other_provision_reporting": "5.15",
-                "_text": "Annual reporting is required of the production, import, export, placing on the market, use, recovery, recycling, reclamation and destruction."
-            },
-            {
-                "_other_provision_reporting": "9.15",
-                "_text": "Releases by specific activities are covered."
-            },
-            {
-                "_other_provision_reporting": "4.16",
-                "_text": "Parties shall report annually consumption, import, export, production and destruction of halons by substance and by sector"
-            },
-            {
-                "_other_provision_reporting": "5.16",
-                "_text": "Annual reporting is required of the production, import, export, placing on the market, use, recovery, recycling and reclamation and destruction of halons. Additionally, annual reporting is required of quantities installed, stored and emitted and of measures being taken to replace remaining halon uses."
-            },
-            {
-                "_other_provision_reporting": "9.16",
-                "_text": "Releases by specific activities are covered."
+                "_other_provision_reporting": "3.17",
+                "_text": "Annex I Parties shall report annual emissions of the indirect greenhouse gases: carbon monoxide (CO), nitrogen oxides (NOX) non-methane volatile organic compounds (NMVOCs), and sulphur oxides (SOx)."
             },
             {
                 "_other_provision_reporting": "6.17",
-                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties are encouraged to report the non-Annex 1 heavy metals (arsenic, chromium, copper, nickel, selenium, zinc) according to reporting intervals and reporting details determined by CLRTAP."
+                "_text": "Article 8 of the 1991 Geneva Protocol on the Control of Emissions of Volatile Organic Compounds or their Transboundary Fluxes requires signatories to report annual VOC emissions. Article 6 of the 1999 Gothenburg Protocol to Abate Acidification, Eutrophication and Ground-level Ozone require signatories to report, annually, emissions of sulphur, nitrogen compounds and VOCs."
             },
             {
-                "_other_provision_reporting": "10.17",
-                "_text": " Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
+                "_other_provision_reporting": "7.17",
+                "_text": "Articles 7, 8 and annex III, require that Member States, by the 31st December each year,  report their updated national emission inventories and their emission projections for 2010 using reporting details determined by CLRTAP; Member States are encouraged to use EMEP/EEA air pollutant emission inventory guidebook methodologies."
+            },
+            {
+                "_other_provision_reporting": "9.17",
+                "_text": "Releases by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "12.17",
+                "_text": " Member States shall report emissions of NOx, VOC, CO, and SO2 to the Commisson by 15 January each year (year X),  provisional data for the year before last (year X-2) and final data for the year before that (year X-3)."
             },
             {
                 "_other_provision_reporting": "14.17",
-                "_text": "Periodic measurement is required but no obligation for an obligation for an annual inventory is specified."
+                "_text": "Continuous measurement of Total Organic Carbon (i.e. non-methane VOC) are required but no annual inventory data collection is required nor reported."
+            },
+            {
+                "_other_provision_reporting": "3.18",
+                "_text": "Annex I Parties shall report annual emissions of the indirect greenhouse gases: carbon monoxide (CO), nitrogen oxides (NOX) non-methane volatile organic compounds (NMVOCs), and sulphur oxides (SOx)."
             },
             {
                 "_other_provision_reporting": "6.18",
-                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties shall report the Annex 1 heavy metals (cadmium, lead and mercury) according to reporting intervals and reporting details determined by CLRTAP."
+                "_text": "Article 8 of the 1988 Protocol concerning the Control of Nitrogen Oxides or their Transboundary Fluxes requires Parties to report national annual emissions of nitrogen oxides and the basis on which they are calculated. Article 6 of the 1999 Gothenburg Protocol to Abate Acidification, Eutrophication and Ground-level Ozone require signatories to collect information on emissions of nitrogen oxides. Article 7 requires reporting of  current and projected levels of emissions according to reporting intervals and reporting details determined by CLRTAP; Article 7 also requires the provision of calculations of oxidised and reduced nitrogen budgets."
             },
             {
-                "_other_provision_reporting": "10.18",
-                "_text": "Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only. For cadmium and its compounds (No 6) the Environmental Quality Standards values vary depending on the hardness of the water as specified in five class categories (Class 1: < 40 mg CaCO3/l, Class 2: 40 to < 50 mg CaCO3/l, Class 3: 50 to < 100 mg CaCO3/l, Class 4: 100 to < 200 mg CaCO3/l and Class 5: ≥ 200 mg CaCO3/l)."
+                "_other_provision_reporting": "7.18",
+                "_text": "Articles 7, 8 and annex III, require that Member States, by the 31st December each year,  report their updated national emission inventories and their emission projections for 2010 using reporting details determined by CLRTAP; Member States are encouraged to use EMEP/EEA air pollutant emission inventory guidebook methodologies."
+            },
+            {
+                "_other_provision_reporting": "8.18",
+                "_text": "Member States shall establish annual inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years.  "
+            },
+            {
+                "_other_provision_reporting": "12.18",
+                "_text": " Member States shall report emissions of NOx, VOC, CO, and SO2 to the Commisson by 15 January each year (year X),  provisional data for the year before last (year X-2) and final data for the year before that (year X-3)."
             },
             {
                 "_other_provision_reporting": "14.18",
-                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
+                "_text": "Continuous measurement is required provided that emission limit values are set but no annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "15.18",
+                "_text": "Member States shall establish annual inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years.  "
+            },
+            {
+                "_other_provision_reporting": "3.13",
+                "_text": "Each Party included in Annex I shall have in place a national system for the estimation of anthropogenic emissions by sources and removals by sinks of all greenhouse gases not controlled by the Montreal Protocol. Each Party included in Annex I shall submit the above information in accordance with the relevant decisions of the Conference of the Parties."
+            },
+            {
+                "_other_provision_reporting": "9.13",
+                "_text": "Releases by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "12.13",
+                "_text": "Member States shall report emissions of CO2, CH4, N20, HFCs, PFCs, and SF6 to the Commission by 15 January  each year (year X)  for the year before last (year X-2). "
+            },
+            {
+                "_other_provision_reporting": "13.13",
+                "_text": "Operators are obliged to report data on production, imports, and exports of each substance as well as their intended applications. Reports were due in 2008 for the first time and each year thereafter. Article 9 prohibits the placing on the market of  products and equipment containing F gas listed in Annex II."
+            },
+            {
+                "_other_provision_reporting": "16.13",
+                "_text": "Annex IV of the Directive describes the principles for monitoring and reporting.  Standardised or accepted methods, developed by the Commission, shall be used for non-CO2 greenhouse gases."
+            },
+            {
+                "_other_provision_reporting": "3.14",
+                "_text": "Each Party included in Annex I shall have in place a national system for the estimation of anthropogenic emissions by sources and removals by sinks of all greenhouse gases not controlled by the Montreal Protocol. Each Party included in Annex I shall submit the above information in accordance with the relevant decisions of the Conference of the Parties."
+            },
+            {
+                "_other_provision_reporting": "12.14",
+                "_text": "Member States shall report emissions of CO2, CH4, N20, HFCs, PFCs, and SF6 to the Commission by 15 January  each year (year X)  for the year before last (year X-2). "
+            },
+            {
+                "_other_provision_reporting": "13.14",
+                "_text": "Operators are obliged to report data on production, imports, and exports of each substance as well as their intended applications. Reports were due in 2008 for the first time and each year thereafter. Article 8  prohibits the use of more than 850 kg of SF6 in magnesium die-casting production as of 2008."
+            },
+            {
+                "_other_provision_reporting": "16.14",
+                "_text": "Annex IV of the Directive describes the principles for monitoring and reporting.  Standardised or accepted methods, developed by the Commission, shall be used for non-CO2 greenhouse gases."
+            },
+            {
+                "_other_provision_reporting": "3.19",
+                "_text": "Annex I Parties shall report annual emissions of the indirect greenhouse gases: carbon monoxide (CO), nitrogen oxides (NOX) non-methane volatile organic compounds (NMVOCs), and sulphur oxides (SOx)."
             },
             {
                 "_other_provision_reporting": "6.19",
-                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties are encouraged to report the non-Annex 1 heavy metals (arsenic, chromium, copper, nickel, selenium, zinc) according to reporting intervals and reporting details determined by CLRTAP."
+                "_text": "Article 4 of the 1985 Protocol to CLRTAP on the Reduction of Sulphur Emissions or their Transboundary Fluxes by at least 30 per cent require signatories to report national annual sulphur emissions and the basis upon which they have been calculated. Article 5 of the 1994 Protocol on Further Reduction of Sulphur Emissions require signatories to report national annual sulphur emissions according to reporting intervals and reporting details determined by CLRTAP. Article 6 of the 1999 Gothenburg Protocol to Abate Acidification, Eutrophication and Ground-level Ozone require signatories to collect information on emissions of sulphur; Article 7 requires reporting of  current and projected levels of emissions according to reporting intervals and reporting details determined by CLRTAP."
             },
             {
-                "_other_provision_reporting": "10.19",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
+                "_other_provision_reporting": "7.19",
+                "_text": "Articles 7, 8 and annex III, require that Member States, by the 31st December each year,  report their updated national emission inventories and their emission projections for 2010 using reporting details determined by CLRTAP; Member States are encouraged to use EMEP/EEA air pollutant emission inventory guidebook methodologies."
+            },
+            {
+                "_other_provision_reporting": "8.19",
+                "_text": "Member States shall establish annual inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years.  "
+            },
+            {
+                "_other_provision_reporting": "12.19",
+                "_text": " Member States shall report emissions of NOx, VOC, CO, and SO2 to the Commisson by 15 January each year (year X),  provisional data for the year before last (year X-2) and final data for the year before that (year X-3)."
             },
             {
                 "_other_provision_reporting": "14.19",
-                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
+                "_text": "Continuous measurement is generally required but no annual inventory is specified."
             },
             {
-                "_other_provision_reporting": "6.20",
-                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties are encouraged to report the non-Annex 1 heavy metals (arsenic, chromium, copper, nickel, selenium, zinc) according to reporting intervals and reporting details determined by CLRTAP."
+                "_other_provision_reporting": "15.19",
+                "_text": "Member States shall establish annual inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years.  "
             },
             {
-                "_other_provision_reporting": "10.20",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
+                "_other_provision_reporting": "10.93",
+                "_text": "Ecological status classification of each body of water to be reported within the river basin management plans, interim reports and summary reports.  The criteria for classification is the Annual Average for the Environmental Quality Standards set by the Member State for this substance."
             },
             {
-                "_other_provision_reporting": "14.20",
-                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
+                "_other_provision_reporting": "11.93",
+                "_text": "Under Article 16 relevant authorities or bodies shall publish situation reports (with copies to the Commission) on the disposal of urban waste water and sludge in their areas every two years.   The reports should include information on the efficiency with which urban waste water treatment plants remove total nitrogen and total phosphorus."
             },
             {
-                "_other_provision_reporting": "6.21",
-                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties shall report the Annex 1 heavy metals (cadmium, lead and mercury) according to reporting intervals and reporting details determined by CLRTAP."
+                "_other_provision_reporting": "10.94",
+                "_text": "Ecological status classification of each body of water to be reported within the river basin management plans, interim reports and summary reports.  The criteria for classification is the Annual Average for the Environmental Quality Standards set by the Member State for this substance."
             },
             {
-                "_other_provision_reporting": "10.21",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only.  If Member States do not apply Environmental Quality Standards for biota they shall introduce stricter Environmental Quality Standards for water in order to achieve the same level of protection as the Environmental Quality Standards for biota set out in Article 3(2) of this Directive. They shall notify the Commission and other Member States, through the Committee referred to in Article 21 of Directive 2000/60/EC, of the reasons and basis for using this approach, the alternative Environmental Quality Standards for water established, including the data and the methodology by which the alternative Environmental Quality Standards were derived, and the categories of surface water to which they would apply."
+                "_other_provision_reporting": "11.94",
+                "_text": "Under Article 16 relevant authorities or bodies shall publish situation reports (with copies to the Commission) on the disposal of urban waste water and sludge in their areas every two years.   The reports should include information on the efficiency with which urban waste water treatment plants remove total nitrogen and total phosphorus."
             },
             {
-                "_other_provision_reporting": "14.21",
-                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
+                "_other_provision_reporting": "4.20",
+                "_text": "Parties shall report annually consumption, import, export, production and destruction of hydrochlorofluorocarbons by substance and by sector"
             },
             {
-                "_other_provision_reporting": "6.22",
-                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties are encouraged to report the non-Annex 1 heavy metals (arsenic, chromium, copper, nickel, selenium, zinc) according to reporting intervals and reporting details determined by CLRTAP."
+                "_other_provision_reporting": "5.20",
+                "_text": "Annual reporting is required of the production, import, export, placing on the market, use, recovery, recycling, reclamation and destruction."
             },
             {
-                "_other_provision_reporting": "10.22",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only."
+                "_other_provision_reporting": "9.20",
+                "_text": "Releases by specific activities are covered."
             },
             {
-                "_other_provision_reporting": "14.22",
-                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
+                "_other_provision_reporting": "4.21",
+                "_text": "Parties shall report annually consumption, import, export, production and destruction of chlorofluorocarbons and fully halogenated chlorofluorocarbons by substance and by sector"
             },
             {
-                "_other_provision_reporting": "6.23",
-                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties shall report the Annex 1 heavy metals (cadmium, lead and mercury) according to reporting intervals and reporting details determined by CLRTAP."
+                "_other_provision_reporting": "5.21",
+                "_text": "Annual reporting is required of the production, import, export, placing on the market, use, recovery, recycling, reclamation and destruction."
             },
             {
-                "_other_provision_reporting": "10.23",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only."
+                "_other_provision_reporting": "9.21",
+                "_text": "Releases by specific activities are covered."
             },
             {
-                "_other_provision_reporting": "14.23",
-                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
+                "_other_provision_reporting": "4.22",
+                "_text": "Parties shall report annually consumption, import, export, production and destruction of halons by substance and by sector"
             },
             {
-                "_other_provision_reporting": "6.24",
-                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties are encouraged to report the non-Annex 1 heavy metals (arsenic, chromium, copper, nickel, selenium, zinc) according to reporting intervals and reporting details determined by CLRTAP."
+                "_other_provision_reporting": "5.22",
+                "_text": "Annual reporting is required of the production, import, export, placing on the market, use, recovery, recycling and reclamation and destruction of halons. Additionally, annual reporting is required of quantities installed, stored and emitted and of measures being taken to replace remaining halon uses."
             },
             {
-                "_other_provision_reporting": "10.24",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
-            },
-            {
-                "_other_provision_reporting": "10.25",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
-            },
-            {
-                "_other_provision_reporting": "2.26",
-                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+                "_other_provision_reporting": "9.22",
+                "_text": "Releases by specific activities are covered."
             },
             {
                 "_other_provision_reporting": "6.26",
-                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties are encouraged to report the non-Annex 1 heavy metals (arsenic, chromium, copper, nickel, selenium, zinc) according to reporting intervals and reporting details determined by CLRTAP."
             },
             {
                 "_other_provision_reporting": "10.26",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009."
+                "_text": " Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
             },
             {
-                "_other_provision_reporting": "17.26",
-                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
+                "_other_provision_reporting": "14.26",
+                "_text": "Periodic measurement is required but no obligation for an obligation for an annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "6.27",
+                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties shall report the Annex 1 heavy metals (cadmium, lead and mercury) according to reporting intervals and reporting details determined by CLRTAP."
             },
             {
                 "_other_provision_reporting": "10.27",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+                "_text": "Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only. For cadmium and its compounds (No 6) the Environmental Quality Standards values vary depending on the hardness of the water as specified in five class categories (Class 1: < 40 mg CaCO3/l, Class 2: 40 to < 50 mg CaCO3/l, Class 3: 50 to < 100 mg CaCO3/l, Class 4: 100 to < 200 mg CaCO3/l and Class 5: ≥ 200 mg CaCO3/l)."
             },
             {
-                "_other_provision_reporting": "2.28",
-                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+                "_other_provision_reporting": "14.27",
+                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
             },
             {
                 "_other_provision_reporting": "6.28",
-                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties are encouraged to report the non-Annex 1 heavy metals (arsenic, chromium, copper, nickel, selenium, zinc) according to reporting intervals and reporting details determined by CLRTAP."
             },
             {
                 "_other_provision_reporting": "10.28",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
             },
             {
-                "_other_provision_reporting": "17.28",
-                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
-            },
-            {
-                "_other_provision_reporting": "2.29",
-                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+                "_other_provision_reporting": "14.28",
+                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
             },
             {
                 "_other_provision_reporting": "6.29",
-                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties are encouraged to report the non-Annex 1 heavy metals (arsenic, chromium, copper, nickel, selenium, zinc) according to reporting intervals and reporting details determined by CLRTAP."
             },
             {
                 "_other_provision_reporting": "10.29",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
             },
             {
-                "_other_provision_reporting": "17.29",
-                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
+                "_other_provision_reporting": "14.29",
+                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "6.30",
+                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties shall report the Annex 1 heavy metals (cadmium, lead and mercury) according to reporting intervals and reporting details determined by CLRTAP."
             },
             {
                 "_other_provision_reporting": "10.30",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only.  If Member States do not apply Environmental Quality Standards for biota they shall introduce stricter Environmental Quality Standards for water in order to achieve the same level of protection as the Environmental Quality Standards for biota set out in Article 3(2) of this Directive. They shall notify the Commission and other Member States, through the Committee referred to in Article 21 of Directive 2000/60/EC, of the reasons and basis for using this approach, the alternative Environmental Quality Standards for water established, including the data and the methodology by which the alternative Environmental Quality Standards were derived, and the categories of surface water to which they would apply."
             },
             {
-                "_other_provision_reporting": "9.31",
-                "_text": "Releases by specific activities are covered, for compounds having risk phrases R40, R68, R45, R46, R49, R60 or R61 specific requirements apply."
+                "_other_provision_reporting": "14.30",
+                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "6.31",
+                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties are encouraged to report the non-Annex 1 heavy metals (arsenic, chromium, copper, nickel, selenium, zinc) according to reporting intervals and reporting details determined by CLRTAP."
             },
             {
                 "_other_provision_reporting": "10.31",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only."
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only."
+            },
+            {
+                "_other_provision_reporting": "14.31",
+                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "6.32",
+                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties shall report the Annex 1 heavy metals (cadmium, lead and mercury) according to reporting intervals and reporting details determined by CLRTAP."
             },
             {
                 "_other_provision_reporting": "10.32",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only."
             },
             {
-                "_other_provision_reporting": "2.33",
-                "_text": "Listed in Annex B - Each party shall provide details of the measures taken by to control and restrict production and use of this product. This shall accompany statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+                "_other_provision_reporting": "14.32",
+                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified."
             },
             {
                 "_other_provision_reporting": "6.33",
-                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of DDT, which is an  Annex I  substance scheduled for elimination and an Annex II substance with restrictions on its use, according to reporting intervals and reporting details determined by CLRTAP."
+                "_text": "Under Article 7 of the 1998 Protocol on Heavy Metals Parties are encouraged to report the non-Annex 1 heavy metals (arsenic, chromium, copper, nickel, selenium, zinc) according to reporting intervals and reporting details determined by CLRTAP."
             },
             {
                 "_other_provision_reporting": "10.33",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009.  DDT total comprises the sum of the isomers 1,1,1-trichloro-2,2 bis (p-chlorophenyl) ethane (CAS number 50-29-3; EU number 200-024-3); 1,1,1-trichloro-2(o-chlorophenyl)-2-(p-chlorophenyl) ethane (CAS number 789-02-6; EU number 212-332-5); 1,1-dichloro-2,2 bis (p-chlorophenyl) ethylene (CAS number 72-55-9; EU number 200-784-6); and 1,1-dichloro-2,2 bis (p-chlorophenyl) ethane (CAS number 72-54-8; EU number 200-783-0)."
-            },
-            {
-                "_other_provision_reporting": "17.33",
-                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market. Specific exemptions exist for DDT which allow the production of DDT as an intermediate in the production of dicofol until the 1st January 2014"
-            },
-            {
-                "_other_provision_reporting": "9.34",
-                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R45 and therefore specific requirements apply."
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
             },
             {
                 "_other_provision_reporting": "10.34",
                 "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
             },
             {
-                "_other_provision_reporting": "9.35",
-                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R40 and therefore specific requirements apply."
+                "_other_provision_reporting": "2.35",
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "6.35",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
             },
             {
                 "_other_provision_reporting": "10.35",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009."
             },
             {
-                "_other_provision_reporting": "2.36",
-                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
-            },
-            {
-                "_other_provision_reporting": "6.36",
-                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+                "_other_provision_reporting": "17.35",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
             },
             {
                 "_other_provision_reporting": "10.36",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009."
-            },
-            {
-                "_other_provision_reporting": "17.36",
-                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market"
-            },
-            {
-                "_other_provision_reporting": "10.37",
                 "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
             },
             {
-                "_other_provision_reporting": "10.38",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
-            },
-            {
-                "_other_provision_reporting": "2.39",
+                "_other_provision_reporting": "2.37",
                 "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
             },
             {
-                "_other_provision_reporting": "6.39",
+                "_other_provision_reporting": "6.37",
                 "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.37",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "17.37",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
+            },
+            {
+                "_other_provision_reporting": "2.38",
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "6.38",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.38",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "17.38",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
             },
             {
                 "_other_provision_reporting": "10.39",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009."
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
             },
             {
-                "_other_provision_reporting": "17.39",
-                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market"
+                "_other_provision_reporting": "9.57",
+                "_text": "Releases by specific activities are covered, for compounds having risk phrases R40, R68, R45, R46, R49, R60 or R61 specific requirements apply."
+            },
+            {
+                "_other_provision_reporting": "10.57",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only."
             },
             {
                 "_other_provision_reporting": "10.40",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
             },
             {
                 "_other_provision_reporting": "2.41",
-                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+                "_text": "Listed in Annex B - Each party shall provide details of the measures taken by to control and restrict production and use of this product. This shall accompany statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
             },
             {
                 "_other_provision_reporting": "6.41",
-                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of DDT, which is an  Annex I  substance scheduled for elimination and an Annex II substance with restrictions on its use, according to reporting intervals and reporting details determined by CLRTAP."
             },
             {
                 "_other_provision_reporting": "10.41",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009.  DDT total comprises the sum of the isomers 1,1,1-trichloro-2,2 bis (p-chlorophenyl) ethane (CAS number 50-29-3; EU number 200-024-3); 1,1,1-trichloro-2(o-chlorophenyl)-2-(p-chlorophenyl) ethane (CAS number 789-02-6; EU number 212-332-5); 1,1-dichloro-2,2 bis (p-chlorophenyl) ethylene (CAS number 72-55-9; EU number 200-784-6); and 1,1-dichloro-2,2 bis (p-chlorophenyl) ethane (CAS number 72-54-8; EU number 200-783-0)."
             },
             {
                 "_other_provision_reporting": "17.41",
-                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market"
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market. Specific exemptions exist for DDT which allow the production of DDT as an intermediate in the production of dicofol until the 1st January 2014"
             },
             {
-                "_other_provision_reporting": "2.42",
-                "_text": "Listed in Annex A and C - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years. Under Annex C, an action plan must be developed to minimise the unintentional release of hexachlorobenzne, this is subject to a review, which must be completed every five years.Such reviews shall be included in reports submitted to the Convention pursuant to Article 15 on general reporting."
-            },
-            {
-                "_other_provision_reporting": "6.42",
-                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of HCB, an Annex I - substances for elimination and an Annex III substance subject to controls on its emission, according to reporting intervals and reporting details determined by CLRTAP.  "
-            },
-            {
-                "_other_provision_reporting": "9.42",
+                "_other_provision_reporting": "9.58",
                 "_text": "Releases by specific activities are covered; compound is carrying risk phrase R45 and therefore specific requirements apply."
             },
             {
-                "_other_provision_reporting": "10.42",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. If Member States do not apply Environmental Quality Standards for biota they shall introduce stricter Environmental Quality Standards for water in order to achieve the same level of protection as the Environmental Quality Standards for biota set out in Article 3(2) of this Directive. They shall notify the Commission and other Member States, through the Committee referred to in Article 21 of Directive 2000/60/EC, of the reasons and basis for using this approach, the alternative Environmental Quality Standards for water established, including the data and the methodology by which the alternative Environmental Quality Standards were derived, and the categories of surface water to which they would apply."
+                "_other_provision_reporting": "10.58",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
             },
             {
-                "_other_provision_reporting": "17.42",
-                "_text": "This substance is listed both in Annex I and III of the regulations. Under Annex I of the regulation this substance is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information on stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market. Annex III - requires emission inventories (for air, land and water) to be drawn up by each Member State, along with a National Implementation Plan detailing the strategies to minimise the release of this substance to the environment."
+                "_other_provision_reporting": "9.59",
+                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R40 and therefore specific requirements apply."
             },
             {
-                "_other_provision_reporting": "10.43",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only.  If Member States do not apply Environmental Quality Standards for biota they shall introduce stricter Environmental Quality Standards for water in order to achieve the same level of protection as the Environmental Quality Standards for biota set out in Article 3(2) of this Directive. They shall notify the Commission and other Member States, through the Committee referred to in Article 21 of Directive 2000/60/EC, of the reasons and basis for using this approach, the alternative Environmental Quality Standards for water established, including the data and the methodology by which the alternative Environmental Quality Standards were derived, and the categories of surface water to which they would apply."
+                "_other_provision_reporting": "10.59",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
             },
             {
-                "_other_provision_reporting": "2.44",
+                "_other_provision_reporting": "2.42",
                 "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
             },
             {
-                "_other_provision_reporting": "6.44",
-                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants;  according to reporting intervals and reporting details determined by CLRTAP.  HCH is an Annex  II substance with restrictions on its use. "
+                "_other_provision_reporting": "6.42",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "10.42",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009."
+            },
+            {
+                "_other_provision_reporting": "17.42",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market"
+            },
+            {
+                "_other_provision_reporting": "10.43",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
             },
             {
                 "_other_provision_reporting": "10.44",
                 "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
-            },
-            {
-                "_other_provision_reporting": "17.44",
-                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
             },
             {
                 "_other_provision_reporting": "2.45",
@@ -2388,15 +2312,19 @@
             },
             {
                 "_other_provision_reporting": "6.45",
-                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants;  according to reporting intervals and reporting details determined by CLRTAP.  Lindane is an Annex  II substance with restrictions on its use. "
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
             },
             {
                 "_other_provision_reporting": "10.45",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009."
             },
             {
                 "_other_provision_reporting": "17.45",
-                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market"
+            },
+            {
+                "_other_provision_reporting": "10.60",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
             },
             {
                 "_other_provision_reporting": "2.46",
@@ -2415,303 +2343,375 @@
                 "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market"
             },
             {
+                "_other_provision_reporting": "2.61",
+                "_text": "Listed in Annex A and C - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years. Under Annex C, an action plan must be developed to minimise the unintentional release of hexachlorobenzne, this is subject to a review, which must be completed every five years.Such reviews shall be included in reports submitted to the Convention pursuant to Article 15 on general reporting."
+            },
+            {
+                "_other_provision_reporting": "6.61",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of HCB, an Annex I - substances for elimination and an Annex III substance subject to controls on its emission, according to reporting intervals and reporting details determined by CLRTAP.  "
+            },
+            {
+                "_other_provision_reporting": "9.61",
+                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R45 and therefore specific requirements apply."
+            },
+            {
+                "_other_provision_reporting": "10.61",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. If Member States do not apply Environmental Quality Standards for biota they shall introduce stricter Environmental Quality Standards for water in order to achieve the same level of protection as the Environmental Quality Standards for biota set out in Article 3(2) of this Directive. They shall notify the Commission and other Member States, through the Committee referred to in Article 21 of Directive 2000/60/EC, of the reasons and basis for using this approach, the alternative Environmental Quality Standards for water established, including the data and the methodology by which the alternative Environmental Quality Standards were derived, and the categories of surface water to which they would apply."
+            },
+            {
+                "_other_provision_reporting": "17.61",
+                "_text": "This substance is listed both in Annex I and III of the regulations. Under Annex I of the regulation this substance is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information on stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market. Annex III - requires emission inventories (for air, land and water) to be drawn up by each Member State, along with a National Implementation Plan detailing the strategies to minimise the release of this substance to the environment."
+            },
+            {
+                "_other_provision_reporting": "10.62",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only.  If Member States do not apply Environmental Quality Standards for biota they shall introduce stricter Environmental Quality Standards for water in order to achieve the same level of protection as the Environmental Quality Standards for biota set out in Article 3(2) of this Directive. They shall notify the Commission and other Member States, through the Committee referred to in Article 21 of Directive 2000/60/EC, of the reasons and basis for using this approach, the alternative Environmental Quality Standards for water established, including the data and the methodology by which the alternative Environmental Quality Standards were derived, and the categories of surface water to which they would apply."
+            },
+            {
                 "_other_provision_reporting": "2.47",
-                "_text": "Listed in Annex C - Unintentional production subject to the provisions of Article 5. This requires Member States to draw up action plans to minimise the release of these substances. These plans are subject to a review, which must be completed every five years. Such reviews shall be included in reports submitted pursuant to Article 15 general reporting."
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
             },
             {
                 "_other_provision_reporting": "6.47",
-                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of the dioxins and furans listed Annex III as subject to emission controls,  according to reporting intervals and reporting details determined by CLRTAP."
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants;  according to reporting intervals and reporting details determined by CLRTAP.  HCH is an Annex  II substance with restrictions on its use. "
             },
             {
                 "_other_provision_reporting": "10.47",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
-            },
-            {
-                "_other_provision_reporting": "14.47",
-                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified. Toxic Equivalency Factors for reporting provided at Annex 1 of Directive."
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
             },
             {
                 "_other_provision_reporting": "17.47",
-                "_text": "These substances are listed in Annex III of the regulation. This requires Member States to draw up release inventories (air, land and water) along with a National Implementation Plan detailing the strategies to minimise the release of these substance to the environment. A summary of this information is to be supplied to the Commission every three years, along with details on the regulation implementation including information on infringements and penalties."
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
             },
             {
                 "_other_provision_reporting": "2.48",
-                "_text": "Listed in Annex A and C - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years. Under Annex C, an action plan must be developed to minimise the unintentional release of hexachlorobenzne, this is subject to a review, which must be completed every five years.Such reviews shall be included in reports submitted to the Convention pursuant to Article 15 on general reporting."
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "6.48",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants;  according to reporting intervals and reporting details determined by CLRTAP.  Lindane is an Annex  II substance with restrictions on its use. "
             },
             {
                 "_other_provision_reporting": "10.48",
                 "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
             },
             {
-                "_other_provision_reporting": "10.49",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+                "_other_provision_reporting": "17.48",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
             },
             {
-                "_other_provision_reporting": "2.50",
-                "_text": "Listed in Annex A and C - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years. Under Annex C, an action plan must be developed to minimise the unintentional release of hexachlorobenzne, this is subject to a review, which must be completed every five years.Such reviews shall be included in reports submitted to the Convention pursuant to Article 15 on general reporting. Under Annex A, Part II parties are required to provide a report every five years on progress in eliminating polychlorinated biphenyls and submit it to the Conference of the Parties. "
-            },
-            {
-                "_other_provision_reporting": "6.50",
-                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of PCBs,  Annex I - substances for elimination and  Annex II substance subject to restrictions on use, according to reporting intervals and reporting details determined by CLRTAP.  "
-            },
-            {
-                "_other_provision_reporting": "10.50",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
-            },
-            {
-                "_other_provision_reporting": "17.50",
-                "_text": "This substance is listed both in Annex I and III of the regulations. Under Annex I of the regulation this substance is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information on stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market. Annex III - requires emission inventories (for air, land and water) to be drawn up by each Member State, along with a National Implementation Plan detailing the strategies to minimise the release of this substance to the environment."
-            },
-            {
-                "_other_provision_reporting": "10.51",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
-            },
-            {
-                "_other_provision_reporting": "9.52",
-                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R40 and therefore specific requirements apply."
-            },
-            {
-                "_other_provision_reporting": "10.52",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009."
-            },
-            {
-                "_other_provision_reporting": "4.53",
-                "_text": "Parties shall report annually consumption, import, export, production and destruction of tetrachloromethane."
-            },
-            {
-                "_other_provision_reporting": "5.53",
-                "_text": "Annual reporting is required of the production, import, export, placing on the market, use, recovery, recycling, reclamation and destruction."
-            },
-            {
-                "_other_provision_reporting": "9.53",
-                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R40 and therefore specific requirements apply."
-            },
-            {
-                "_other_provision_reporting": "10.53",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009."
-            },
-            {
-                "_other_provision_reporting": "9.54",
-                "_text": "Releases by specific activities are covered."
-            },
-            {
-                "_other_provision_reporting": "10.54",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
-            },
-            {
-                "_other_provision_reporting": "9.55",
-                "_text": "Releases by specific activities are covered."
-            },
-            {
-                "_other_provision_reporting": "10.55",
-                "_text": "Member States shall take specific measures to reduce pollution caused by this substance pursuant to the Dangerous Substance Directive; Environmental Quality Standard for this substance is derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification. "
-            },
-            {
-                "_other_provision_reporting": "9.56",
-                "_text": "Releases by specific activities are covered."
-            },
-            {
-                "_other_provision_reporting": "10.56",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
-            },
-            {
-                "_other_provision_reporting": "9.57",
-                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R45 and therefore specific requirements apply."
-            },
-            {
-                "_other_provision_reporting": "10.57",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009"
-            },
-            {
-                "_other_provision_reporting": "4.58",
-                "_text": "Parties shall report annually consumption, import, export, production and destruction of 1,1,1-trichloromethane."
-            },
-            {
-                "_other_provision_reporting": "5.58",
-                "_text": "Annual reporting is required of the production, import, export, placing on the market, use, recovery, recycling, reclamation and destruction."
-            },
-            {
-                "_other_provision_reporting": "9.58",
-                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R40 and therefore specific requirements apply."
-            },
-            {
-                "_other_provision_reporting": "10.58",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
-            },
-            {
-                "_other_provision_reporting": "2.59",
+                "_other_provision_reporting": "2.49",
                 "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
             },
             {
-                "_other_provision_reporting": "6.59",
+                "_other_provision_reporting": "6.49",
                 "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
             },
             {
-                "_other_provision_reporting": "10.59",
+                "_other_provision_reporting": "10.49",
                 "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
             },
             {
-                "_other_provision_reporting": "17.59",
+                "_other_provision_reporting": "17.49",
                 "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market"
             },
             {
-                "_other_provision_reporting": "10.60",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
-            },
-            {
-                "_other_provision_reporting": "10.61",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
-            },
-            {
-                "_other_provision_reporting": "9.62",
-                "_text": "Releases by specific activities are covered; compound is carrying risk phrases R45 and R46 and therefore specific requirements apply."
-            },
-            {
-                "_other_provision_reporting": "10.62",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
-            },
-            {
                 "_other_provision_reporting": "2.63",
-                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+                "_text": "Listed in Annex C - Unintentional production subject to the provisions of Article 5. This requires Member States to draw up action plans to minimise the release of these substances. These plans are subject to a review, which must be completed every five years. Such reviews shall be included in reports submitted pursuant to Article 15 general reporting."
+            },
+            {
+                "_other_provision_reporting": "6.63",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of the dioxins and furans listed Annex III as subject to emission controls,  according to reporting intervals and reporting details determined by CLRTAP."
             },
             {
                 "_other_provision_reporting": "10.63",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only. For the group of priority substances covered by brominated diphenylethers (No 5) listed in Decision No 2455/2001/EC, an Environmental Quality Standards is established only for congener numbers 28, 47, 99, 100, 153 and 154."
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "14.63",
+                "_text": "Periodic measurement is required but no obligation for an annual inventory is specified. Toxic Equivalency Factors for reporting provided at Annex 1 of Directive."
+            },
+            {
+                "_other_provision_reporting": "17.63",
+                "_text": "These substances are listed in Annex III of the regulation. This requires Member States to draw up release inventories (air, land and water) along with a National Implementation Plan detailing the strategies to minimise the release of these substance to the environment. A summary of this information is to be supplied to the Commission every three years, along with details on the regulation implementation including information on infringements and penalties."
+            },
+            {
+                "_other_provision_reporting": "2.64",
+                "_text": "Listed in Annex A and C - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years. Under Annex C, an action plan must be developed to minimise the unintentional release of hexachlorobenzne, this is subject to a review, which must be completed every five years.Such reviews shall be included in reports submitted to the Convention pursuant to Article 15 on general reporting."
             },
             {
                 "_other_provision_reporting": "10.64",
                 "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
             },
             {
-                "_other_provision_reporting": "10.67",
+                "_other_provision_reporting": "10.65",
                 "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
             },
             {
-                "_other_provision_reporting": "9.68",
-                "_text": "Releases by specific activities are covered."
+                "_other_provision_reporting": "2.66",
+                "_text": "Listed in Annex A and C - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years. Under Annex C, an action plan must be developed to minimise the unintentional release of hexachlorobenzne, this is subject to a review, which must be completed every five years.Such reviews shall be included in reports submitted to the Convention pursuant to Article 15 on general reporting. Under Annex A, Part II parties are required to provide a report every five years on progress in eliminating polychlorinated biphenyls and submit it to the Conference of the Parties. "
             },
             {
-                "_other_provision_reporting": "10.68",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+                "_other_provision_reporting": "6.66",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of PCBs,  Annex I - substances for elimination and  Annex II substance subject to restrictions on use, according to reporting intervals and reporting details determined by CLRTAP.  "
             },
             {
-                "_other_provision_reporting": "10.69",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification. Other than those identified in Annex X of the WFD."
-            },
-            {
-                "_other_provision_reporting": "10.70",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
-            },
-            {
-                "_other_provision_reporting": "6.72",
-                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of the PAHs listed Annex III as subject to emission controls,  according to reporting intervals and reporting details determined by CLRTAP."
-            },
-            {
-                "_other_provision_reporting": "9.72",
-                "_text": "Releases by specific activities are covered."
-            },
-            {
-                "_other_provision_reporting": "10.72",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only. For the group of priority substances of polyaromatic hydrocarbons (PAH) (No 28), each individual Environmental Quality Standards is applicable, i.e. the Environmental Quality Standards for Benzo(a)pyrene, the Environmental Quality Standards for the sum of Benzo(b)fluoranthene and Benzo(k)fluoranthene and the Environmental Quality Standards for the sum of Benzo(g,h,i)perylene and Indeno(1,2,3-cd)pyrene must be met."
-            },
-            {
-                "_other_provision_reporting": "17.72",
-                "_text": "These substances are subject to Annex III of the regulation. This requires Member States to draw up release inventories (air, land and water) along with a National Implementation Plan detailing the strategies to minimise the release of these substance to the environment. A summary of this information is to be supplied to the Commission every three years, along with details on the regulations implementation including information on infringements and penalties."
-            },
-            {
-                "_other_provision_reporting": "9.73",
-                "_text": "Releases to air by specific activities are covered."
-            },
-            {
-                "_other_provision_reporting": "10.73",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
-            },
-            {
-                "_other_provision_reporting": "10.74",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only."
-            },
-            {
-                "_other_provision_reporting": "10.75",
-                "_text": "Emissions reported to the Commission by Member States within their original River Basin Management Plans (Art. 15), with interim reports to be submitted within three years. Emissions reported to the Commission by Member States in their summary reports outlining the required analyses under Article 5, and monitoring programmes designed under Article 8."
-            },
-            {
-                "_other_provision_reporting": "10.77",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
-            },
-            {
-                "_other_provision_reporting": "9.78",
-                "_text": "Releases to air by specific activities are covered."
-            },
-            {
-                "_other_provision_reporting": "14.80",
-                "_text": "Continuous measurement is generally required but no annual inventory is specified."
-            },
-            {
-                "_other_provision_reporting": "10.81",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
-            },
-            {
-                "_other_provision_reporting": "10.82",
+                "_other_provision_reporting": "10.66",
                 "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
             },
             {
-                "_other_provision_reporting": "10.83",
-                "_text": "Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive. These substances may contribute to the ecological status (but not to the chemical status) identification if Member States identified that these are discharged in significant quantities in the river basin/sub-basin. If so, the general reporting obligation mentioned above have to be applied."
+                "_other_provision_reporting": "17.66",
+                "_text": "This substance is listed both in Annex I and III of the regulations. Under Annex I of the regulation this substance is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information on stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market. Annex III - requires emission inventories (for air, land and water) to be drawn up by each Member State, along with a National Implementation Plan detailing the strategies to minimise the release of this substance to the environment."
             },
             {
-                "_other_provision_reporting": "14.84",
-                "_text": "Continuous measurement is generally required but no annual inventory is specified."
-            },
-            {
-                "_other_provision_reporting": "10.85",
-                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
-            },
-            {
-                "_other_provision_reporting": "8.86",
-                "_text": "The Directive requires reporting of dust (total PM) not PM10 (PM10 is a part of dust emissions). Member States shall establish annual emission inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years.  "
-            },
-            {
-                "_other_provision_reporting": "14.86",
-                "_text": "Continuous measurement is required (of total dust not PM10) but no annual inventory is specified."
-            },
-            {
-                "_other_provision_reporting": "15.86",
-                "_text": "The Directive requires reporting of dust (total PM) not PM10 (PM10 is a part of dust emissions). Member States shall establish annual emission inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years. "
-            },
-            {
-                "_other_provision_reporting": "10.87",
-                "_text": "Included in the water framework list of priority substances 2000/60/EC. Member States shall take measures to progressively reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD this substance contribute to the chemical status indentification only."
-            },
-            {
-                "_other_provision_reporting": "10.88",
+                "_other_provision_reporting": "10.50",
                 "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
             },
             {
-                "_other_provision_reporting": "17.88",
-                "_text": "These substances are subject to Annex III of the regulation. This requires Member States to draw up release inventories (air, land and water) along with a National Implementation Plan detailing the strategies to minimise the release of these substance to the environment. A summary of this information is to be supplied to the Commission every three years, along with details on the regulations implementation including information on infringements and penalties."
+                "_other_provision_reporting": "9.67",
+                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R40 and therefore specific requirements apply."
             },
             {
-                "_other_provision_reporting": "10.89",
+                "_other_provision_reporting": "10.67",
                 "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009."
             },
             {
-                "_other_provision_reporting": "2.90",
+                "_other_provision_reporting": "4.68",
+                "_text": "Parties shall report annually consumption, import, export, production and destruction of tetrachloromethane."
+            },
+            {
+                "_other_provision_reporting": "5.68",
+                "_text": "Annual reporting is required of the production, import, export, placing on the market, use, recovery, recycling, reclamation and destruction."
+            },
+            {
+                "_other_provision_reporting": "9.68",
+                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R40 and therefore specific requirements apply."
+            },
+            {
+                "_other_provision_reporting": "10.68",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009."
+            },
+            {
+                "_other_provision_reporting": "9.69",
+                "_text": "Releases by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "10.69",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "9.70",
+                "_text": "Releases by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "10.70",
+                "_text": "Member States shall take specific measures to reduce pollution caused by this substance pursuant to the Dangerous Substance Directive; Environmental Quality Standard for this substance is derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification. "
+            },
+            {
+                "_other_provision_reporting": "9.71",
+                "_text": "Releases by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "10.71",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "9.72",
+                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R45 and therefore specific requirements apply."
+            },
+            {
+                "_other_provision_reporting": "10.72",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009"
+            },
+            {
+                "_other_provision_reporting": "4.73",
+                "_text": "Parties shall report annually consumption, import, export, production and destruction of 1,1,1-trichloromethane."
+            },
+            {
+                "_other_provision_reporting": "5.73",
+                "_text": "Annual reporting is required of the production, import, export, placing on the market, use, recovery, recycling, reclamation and destruction."
+            },
+            {
+                "_other_provision_reporting": "9.73",
+                "_text": "Releases by specific activities are covered; compound is carrying risk phrase R40 and therefore specific requirements apply."
+            },
+            {
+                "_other_provision_reporting": "10.73",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "2.51",
                 "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
             },
             {
-                "_other_provision_reporting": "6.90",
+                "_other_provision_reporting": "6.51",
                 "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
             },
             {
-                "_other_provision_reporting": "17.90",
-                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
+                "_other_provision_reporting": "10.51",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "17.51",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market"
+            },
+            {
+                "_other_provision_reporting": "10.74",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "10.77",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "9.89",
+                "_text": "Releases by specific activities are covered; compound is carrying risk phrases R45 and R46 and therefore specific requirements apply."
+            },
+            {
+                "_other_provision_reporting": "10.89",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "2.75",
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "10.75",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only. For the group of priority substances covered by brominated diphenylethers (No 5) listed in Decision No 2455/2001/EC, an Environmental Quality Standards is established only for congener numbers 28, 47, 99, 100, 153 and 154."
+            },
+            {
+                "_other_provision_reporting": "10.78",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "10.52",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "9.80",
+                "_text": "Releases by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "10.80",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "10.81",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification. Other than those identified in Annex X of the WFD."
+            },
+            {
+                "_other_provision_reporting": "10.82",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "6.84",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of the PAHs listed Annex III as subject to emission controls,  according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "9.84",
+                "_text": "Releases by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "10.84",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only. For the group of priority substances of polyaromatic hydrocarbons (PAH) (No 28), each individual Environmental Quality Standards is applicable, i.e. the Environmental Quality Standards for Benzo(a)pyrene, the Environmental Quality Standards for the sum of Benzo(b)fluoranthene and Benzo(k)fluoranthene and the Environmental Quality Standards for the sum of Benzo(g,h,i)perylene and Indeno(1,2,3-cd)pyrene must be met."
+            },
+            {
+                "_other_provision_reporting": "17.84",
+                "_text": "These substances are subject to Annex III of the regulation. This requires Member States to draw up release inventories (air, land and water) along with a National Implementation Plan detailing the strategies to minimise the release of these substance to the environment. A summary of this information is to be supplied to the Commission every three years, along with details on the regulations implementation including information on infringements and penalties."
+            },
+            {
+                "_other_provision_reporting": "9.91",
+                "_text": "Releases to air by specific activities are covered."
             },
             {
                 "_other_provision_reporting": "10.91",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "10.53",
                 "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only."
             },
             {
-                "_other_provision_reporting": "17.91",
+                "_other_provision_reporting": "10.54",
+                "_text": "Emissions reported to the Commission by Member States within their original River Basin Management Plans (Art. 15), with interim reports to be submitted within three years. Emissions reported to the Commission by Member States in their summary reports outlining the required analyses under Article 5, and monitoring programmes designed under Article 8."
+            },
+            {
+                "_other_provision_reporting": "10.55",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "9.92",
+                "_text": "Releases to air by specific activities are covered."
+            },
+            {
+                "_other_provision_reporting": "14.23",
+                "_text": "Continuous measurement is generally required but no annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "10.96",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "10.97",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive; Environmental Quality Standards for these substances is derived at national level by each Member State; these substances will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "10.98",
+                "_text": "Member States shall take measures to reduce pollution caused by these substances pursuant to Dangerous Substances Directive. These substances may contribute to the ecological status (but not to the chemical status) identification if Member States identified that these are discharged in significant quantities in the river basin/sub-basin. If so, the general reporting obligation mentioned above have to be applied."
+            },
+            {
+                "_other_provision_reporting": "14.24",
+                "_text": "Continuous measurement is generally required but no annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "10.25",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance pursuant to Dangerous Substances Directive; Environmental Quality Standards for this substance are derived at national level by each Member State; this substance will contribute to the ecological status, but not to the chemical status identification."
+            },
+            {
+                "_other_provision_reporting": "8.99",
+                "_text": "The Directive requires reporting of dust (total PM) not PM10 (PM10 is a part of dust emissions). Member States shall establish annual emission inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years.  "
+            },
+            {
+                "_other_provision_reporting": "14.99",
+                "_text": "Continuous measurement is required (of total dust not PM10) but no annual inventory is specified."
+            },
+            {
+                "_other_provision_reporting": "15.99",
+                "_text": "The Directive requires reporting of dust (total PM) not PM10 (PM10 is a part of dust emissions). Member States shall establish annual emission inventories of sulphur dioxide, nitrogen oxides and dust from LCP and report them to the Commission every three years. "
+            },
+            {
+                "_other_provision_reporting": "10.86",
+                "_text": "Included in the water framework list of priority substances 2000/60/EC. Member States shall take measures to progressively reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "10.87",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only."
+            },
+            {
+                "_other_provision_reporting": "17.87",
+                "_text": "These substances are subject to Annex III of the regulation. This requires Member States to draw up release inventories (air, land and water) along with a National Implementation Plan detailing the strategies to minimise the release of these substance to the environment. A summary of this information is to be supplied to the Commission every three years, along with details on the regulations implementation including information on infringements and penalties."
+            },
+            {
+                "_other_provision_reporting": "10.56",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to reduce pollution caused by this substance (Article 4(1)(iv) of the WFD); Environmental Quality Standards for this substance is harmonised at EU level and is listed in Annex I (Part A and B) of the EQSD; this substance contribute to the chemical status indentification only. This substance is not a priority substance but one of the other pollutants for which the Environmental Quality Standards are identical to those laid down in the legislation that applied prior to 13 January 2009."
+            },
+            {
+                "_other_provision_reporting": "2.76",
+                "_text": "Listed in Annex A - Each party shall provide to the Secretariat details of the measures taken to eliminate production and use of this product. This shall accompany details of statistical data on total quantities of production, import and export of the chemical, or a reasonable estimate of the data. Reporting shall be completed once every four years."
+            },
+            {
+                "_other_provision_reporting": "6.76",
+                "_text": "Under Article 9 of the 1998 Protocol on Persistent Organic Pollutants Parties shall report emissions of certain persistent organic pollutants (Annex I - substances for elimination) according to reporting intervals and reporting details determined by CLRTAP."
+            },
+            {
+                "_other_provision_reporting": "17.76",
+                "_text": "This substance is listed in Annex I of the regulation and is prohibited from being produced, placed on the market and used. Member States shall every three years forward to the Commission information on the application of the Regulation, including information on infringements and penalties, and summary information concerning stockpiles. Every year the Member States shall provide statistical data on the actual or estimated total production and placing on the market."
+            },
+            {
+                "_other_provision_reporting": "10.88",
+                "_text": "General reporting obligation mentioned above. Apart from these, the following have to be considered: Member States shall take measures to cease or phase out emissions, discharges and losses of these types of substances (Article 4(1)(iv) of the WFD); Environmental Quality Standards for these types of substances are harmonised at EU level and are listed in Annex I (Part A and B) of the EQSD; these substances contribute to the chemical status identification only."
+            },
+            {
+                "_other_provision_reporting": "17.88",
                 "_text": "These substances are subject to Annex III of the regulation. This requires Member States to draw up release inventories (air, land and water) along with a National Implementation Plan detailing the strategies to minimise the release of these substance to the environment. A summary of this information is to be supplied to the Commission every three years, along with details on the regulation implementation including information on infringements and penalties."
             }
         ]
