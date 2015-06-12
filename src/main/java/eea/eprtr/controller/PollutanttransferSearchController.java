@@ -15,11 +15,14 @@ import eea.eprtr.dao.ActivitySearchFilter;
 import eea.eprtr.dao.CountryAreaGroupRepository;
 import eea.eprtr.dao.LocationSearchFilter;
 import eea.eprtr.dao.PollutantSearchFilter;
+import eea.eprtr.dao.PollutantSearchRepository;
 import eea.eprtr.model.PollutanttransferCompare;
 import eea.eprtr.dao.PollutanttransferSearchFilter;
 import eea.eprtr.dao.PollutanttransferSearchRepository;
 import eea.eprtr.model.PollutanttransferSeries;
 import eea.eprtr.dao.ReportingYearSearchFilter;
+import eea.eprtr.model.ActivityPollutantQuantity;
+import eea.eprtr.model.LovPollutant;
 import eea.eprtr.model.MediumCode;
 import eea.eprtr.model.PollutantConfidentiality;
 import eea.eprtr.model.Pollutanttransfer;
@@ -29,7 +32,10 @@ public class PollutanttransferSearchController {
 
 	@Autowired
 	private PollutanttransferSearchRepository pollutanttransferSearchRepository;
-	
+
+	@Autowired
+	private PollutantSearchRepository pollutantSearchRepository;
+
 	@Autowired
 	private CountryAreaGroupRepository countryAreaGroupRepository;
 	
@@ -239,6 +245,32 @@ public class PollutanttransferSearchController {
 		Boolean isconfidential = pollutanttransferSearchRepository.IsAffectedByConfidentiality(filter);
 		return isconfidential;
 	}
+	
+	
+	@RequestMapping("/pollutanttransferAreaoverview")
+    public List<ActivityPollutantQuantity> pollutanttransferAreaoverview(
+    		
+    		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
+    		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
+    		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
+    		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
+    		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
+    		@RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
+    		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
+    		HttpServletResponse response
+    		) throws CloneNotSupportedException {
+		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
+		ActivitySearchFilter activityFilter = new ActivitySearchFilter(null, null, null, null, null, null);
+		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, null, null,null);
+		PollutanttransferSearchFilter filter = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter); 
+		
+		List<Pollutanttransfer> pollutanttransfers = pollutanttransferSearchRepository.getPollutanttransfer(filter);
+		List<LovPollutant> pollist = pollutantSearchRepository.getLovPollutants(new PollutantSearchFilter(null, pollutantGroupID, null, null, null));
+
+		return new DataHelperPollutantTransfer().getAreaOverview(pollutanttransfers, pollist, pollutantGroupID);
+	}
+
 	
 	
 }

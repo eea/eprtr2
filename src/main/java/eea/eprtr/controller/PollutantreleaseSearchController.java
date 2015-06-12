@@ -15,10 +15,13 @@ import eea.eprtr.dao.ActivitySearchFilter;
 import eea.eprtr.dao.CountryAreaGroupRepository;
 import eea.eprtr.dao.LocationSearchFilter;
 import eea.eprtr.dao.PollutantSearchFilter;
+import eea.eprtr.dao.PollutantSearchRepository;
 import eea.eprtr.model.PollutantreleaseCounts;
 import eea.eprtr.dao.PollutantreleaseSearchFilter;
 import eea.eprtr.dao.PollutantreleaseSearchRepository;
 import eea.eprtr.dao.ReportingYearSearchFilter;
+import eea.eprtr.model.ActivityPollutantQuantity;
+import eea.eprtr.model.LovPollutant;
 import eea.eprtr.model.MediumCode;
 import eea.eprtr.model.PollutantConfidentiality;
 import eea.eprtr.model.Pollutantrelease;
@@ -28,6 +31,9 @@ public class PollutantreleaseSearchController {
 
 	@Autowired
 	private PollutantreleaseSearchRepository pollutantreleaseSearchRepository;
+
+	@Autowired
+	private PollutantSearchRepository pollutantSearchRepository;
 
 	@Autowired
 	private CountryAreaGroupRepository countryAreaGroupRepository;
@@ -164,5 +170,30 @@ public class PollutantreleaseSearchController {
 	}
 	
 
+	@RequestMapping("/pollutantreleaseAreaoverview")
+    public List<ActivityPollutantQuantity> pollutantreleaseAreaoverview(
+    		
+    		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
+    		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
+    		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
+    		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
+    		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
+    		@RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
+    		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
+    		HttpServletResponse response
+    		) throws CloneNotSupportedException {
+		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
+		ActivitySearchFilter activityFilter = new ActivitySearchFilter(null, null, null, null, null, null);
+		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, null, null,null);
+		PollutantreleaseSearchFilter filter = new PollutantreleaseSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter);
+		
+		List<Pollutantrelease> pollutantreleases = pollutantreleaseSearchRepository.getPollutantreleases(filter);
+		List<LovPollutant> pollist = pollutantSearchRepository.getLovPollutants(new PollutantSearchFilter(null, pollutantGroupID, null, null, null));
+
+		return new DataHelperPollutantRelease().getAreaOverview(pollutantreleases, pollist, pollutantGroupID);
+	}
+
+	
 	
 }

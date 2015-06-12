@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter', 
-                                      'restangular','myApp.areaOverviewWasteTab', 'myApp.areaOverviewPtTab'])
+                                      'restangular','myApp.areaOverviewWasteTab', 'myApp.areaOverviewPtTab', 'myApp.areaOverviewPrTab'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/areaoverview', {
@@ -21,7 +21,13 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
     $scope.queryParams = {};
     $scope.queryParams.ReportingYear = -1;
 	$scope.headitms = [];
-
+	$scope.prMedium = {};
+/*	$scope.prfilter = {};// .polsearch
+    $scope.prfilter.pgselect = {};
+	$scope.ptfilter = {};// .polsearch
+    $scope.ptfilter.pgselect = {};*/
+    $scope.searchResults = false;
+    
 /*    $scope.regionSearch = false;
     //$scope.summaryItems = [];
     $scope.pollutantreleaseItems = [];
@@ -44,11 +50,33 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 			$scope.tr_lnr = data.LOV_NUTSREGION;
 			$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
 			$scope.tr_lag = data.LOV_AREAGROUP;
+			$scope.tr_con =data.Confidentiality;
     		$scope.tr_wt = data.WasteTransfers;
 	    });
     };
     $scope.translate();
 	
+    $scope.$watch('prMedium', function(value){
+    	if($scope.prfilter && $scope.prfilter.prsel){
+    		$scope.medium = $scope.prMedium;
+    	}
+    });
+    
+    $scope.$watch('prfilter.pgselect', function(value){
+    	if($scope.prfilter && $scope.prfilter.prsel){
+    		$scope.medium = $scope.prMedium;
+    	}
+    });
+    
+    $scope.$watchCollection('[queryParams,prfilter]', function(value){
+    	if($scope.queryParams){
+//        	if($scope.queryParams && $scope.queryParams.LOV_PollutantGroupID){
+    		$scope.mediumParams = angular.copy($scope.queryParams);
+    		//$scope.medium = $scope.prMedium;
+    	}
+    });
+    
+    
     $scope.active = {
     		fddetails: true
     	};
@@ -59,7 +87,8 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
     	$scope.setActiveTab = function(tab) {
     		$scope.active[tab] = true;
     	};
-
+    	$scope.active.pollutantrelease = true;
+    	
     	$scope.createheader = function(){
     		$scope.headitms = [];
     		/* HEADER PART FOR ReleaseYear*/
@@ -122,7 +151,49 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
         
         $scope.headitms = [];
         $scope.createheader();
+        $scope.hasConfidential();
+        
+        $scope.searchResults = true;
 	}
+	
+	$scope.hasConfidential = function(){
+		$scope.hasConfidentionalData = false;
+		
+        var confidentialParams = angular.copy($scope.queryParams);
+        if(confidentialParams.LOV_PollutantID)
+        {
+        	delete confidentialParams.LOV_PollutantID;
+        }
+        if(confidentialParams.LOV_PollutantGroupID)
+        {
+        	delete confidentialParams.LOV_PollutantGroupID;
+        }
+        confidentialParams.ConfidentialIndicator = 1;
+
+        var rest = Restangular.withConfig(function(RestangularConfigurer) {
+            RestangularConfigurer.setFullResponse(true);
+        });
+
+        // Pollutant Releases
+        var isPRconfservice = rest.all('pollutantreleaseSearch');
+        isPRconfservice.getList(confidentialParams).then(function(response) {
+        	$scope.hasConfidentionalData = (response.data === 'true');
+        });
+
+        // Pollutant Transfers
+		var isPTconfservice = rest.one('pollutanttransferIsConfidential');
+		isPTconfservice.get(confidentialParams).then(function(response) {
+            $scope.hasConfidentionalData = (response.data === 'true');
+        });
+
+        // Waste Transfers
+		var isWTconfservice = rest.one('wastetransferIsConfidential');
+		isWTconfservice.get(confidentialParams).then(function(response) {
+            $scope.hasConfidentionalData = (response.data === 'true');
+        });
+		
+	}
+	
 }])
 
 ;

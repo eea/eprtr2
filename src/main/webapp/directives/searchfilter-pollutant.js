@@ -1,19 +1,19 @@
 
 'use strict';
-// a directive to auto-collapse long text
-// in elements with the "dd-text-collapse" attribute
-//angular.module('myApp.textcollapse', [])
+/**
+ * Pollutant filter 
+ */
 myApp.directive('sfPollutant', ['$compile','$http', '$filter', 'Restangular', 'translationService', 'pollutantService', 
                                 function($compile,$http, $filter, Restangular, translationService, pollutantService) {
 
     return {
         restrict: 'A',
         scope: {
-        	queryparams: '=',
-        	pgselect: '=',
-        	pselect: '=',
-        	grpOnly: '=',
-        	useheaders: '='
+        	queryParams: '=?queryparams',  //Updates queryParams with selections
+        	pgSelect: '=pgselect', //Selected Pollutant Group
+        	pSelect: '=?pselect', //Selected Pollutant
+        	grpOnly: '=?grponly', //Include only Pollutant Groupes selector
+        	useHeaders: '=?useheaders' //Include a default first item in list
         },
         replace: true,
         transclude: true,
@@ -26,18 +26,36 @@ myApp.directive('sfPollutant', ['$compile','$http', '$filter', 'Restangular', 't
     			scope.tr_lpo = data.LOV_POLLUTANT;
     	    });
     		scope.polfilter = {};
+    		if (scope.grpOnly == undefined){
+    			scope.grpOnly = false;
+    		}
+    		if (scope.useHeaders == undefined){
+    			scope.useHeaders = true;
+    		}
+    		if (scope.pSelect == undefined){
+    			scope.pSelect = {};
+    		}
+    		if (scope.queryParams == undefined){
+    			scope.queryParams = {};
+    		}
 
             scope.$watch('polfilter.selectedPollutantGroup', function(value){
             	if(scope.polfilter.selectedPollutantGroup != undefined 
             			&& scope.polfilter.selectedPollutantGroup != allPollutantGroups){
-            		scope.pgselect = scope.polfilter.selectedPollutantGroup;
+            		scope.pgSelect = scope.polfilter.selectedPollutantGroup;
+            	}
+            	else{
+            		scope.pgSelect = {};
             	}
             });
 
             scope.$watch('polfilter.selectedPollutant', function(value){
             	if(scope.polfilter.selectedPollutant != undefined &&
             			scope.polfilter.selectedPollutant != allPollutants){
-            		scope.pselect = scope.polfilter.selectedPollutant;
+            		scope.pSelect = scope.polfilter.selectedPollutant;
+            	}
+            	else{
+            		scope.pSelect = {};
             	}
             });
     		
@@ -47,7 +65,7 @@ myApp.directive('sfPollutant', ['$compile','$http', '$filter', 'Restangular', 't
 		            if (scope.polfilter.selectedPollutantGroup != undefined){
 		            	delete (scope.polfilter.selectedPollutantGroup);
 		            }
-		            if (scope.useheaders) {
+		            if (scope.useHeaders) {
 		                scope.pollutantGroups = [allPollutantGroups];
 		                scope.polfilter.selectedPollutantGroup = allPollutantGroups;
 		            }
@@ -63,7 +81,7 @@ myApp.directive('sfPollutant', ['$compile','$http', '$filter', 'Restangular', 't
 	                if (scope.polfilter.selectedPollutant != undefined){
 	                	delete (scope.polfilter.selectedPollutant);
 	                }
-	                if (scope.useheaders) {
+	                if (scope.useHeaders) {
 	                    scope.pollutants = [allPollutants];
 	                    scope.polfilter.selectedPollutant = allPollutants;
 	                }
@@ -75,7 +93,7 @@ myApp.directive('sfPollutant', ['$compile','$http', '$filter', 'Restangular', 't
 	                }
 	                if (scope.polfilter.selectedPollutantGroup && scope.polfilter.selectedPollutantGroup.lov_PollutantID) {
 	                	//scope.polfilter.PollutantGroup = scope.polfilter.selectedPollutant;
-	            		scope.queryparams.LOV_PollutantGroupID = scope.polfilter.selectedPollutantGroup.lov_PollutantID;
+	            		scope.queryParams.LOV_PollutantGroupID = scope.polfilter.selectedPollutantGroup.lov_PollutantID;
 	            	}
     			}
             });
@@ -84,7 +102,7 @@ myApp.directive('sfPollutant', ['$compile','$http', '$filter', 'Restangular', 't
     			if (scope.polfilter!= undefined){
 	                if (scope.polfilter.selectedPollutant && scope.polfilter.selectedPollutant.lov_PollutantID) {
 	                	//scope.polfilter.Pollutant = scope.polfilter.selectedPollutant;
-	                	scope.queryparams.LOV_PollutantID = scope.polfilter.selectedPollutant.lov_PollutantID;
+	                	scope.queryParams.LOV_PollutantID = scope.polfilter.selectedPollutant.lov_PollutantID;
 	                } 
     			}
             });

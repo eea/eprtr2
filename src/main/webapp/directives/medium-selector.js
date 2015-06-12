@@ -10,7 +10,7 @@ myApp.directive('prSelector', ['$compile','$http', '$filter', 'Restangular', 'tr
         restrict: 'A',
         scope: {
         	queryparams: '=',
-        	prsel: '=',
+        	medium: '=',
         },
         replace: true,
         transclude: true,
@@ -18,25 +18,20 @@ myApp.directive('prSelector', ['$compile','$http', '$filter', 'Restangular', 'tr
 
     		translationService.get().then(function (data) {
     			scope.tr_c = data.Common;
-    			scope.tr_lpo = data.LOV_POLLUTANT;
+    			scope.tr_p = data.Pollutant;
     	    });
-    		scope.filter = {};
+    		scope.medfilter = {};
 
     		/*
-    		 * $scope.filter.prsel = $scope.queryParams.MediumCode[0];
-					if ($scope.queryParams.MediumCode.length > 1){
-						$scope.reqPollutantReleaseRBHeader();
+    		 * scope.filter.prsel = scope.queryParams.MediumCode[0];
+					if (scope.queryParams.MediumCode.length > 1){
+						scope.reqPollutantReleaseRBHeader();
 					}
     		 * */
-    		
-            scope.$watch('filter.prsel', function(value){
-            	if(scope.filter.prsel != undefined){
-            		scope.prsel = scope.filter.prsel;
-            	}
-            });
-            
-            scope.$watch('queryparams', function(value){
-        		if (scope.queryparams != undefined){
+            scope.$watch('queryparams', function(newValue, oldValue) {
+                if (newValue)
+                    console.log("I see a data change!");
+        		if (scope.queryparams){
         			//We don't want WasteTypeCode in query
         			var qp = {};
         		    for(var key in scope.queryparams) {
@@ -49,38 +44,77 @@ myApp.directive('prSelector', ['$compile','$http', '$filter', 'Restangular', 'tr
         	            RestangularConfigurer.setFullResponse(true);
         	        });
         	        var pollutantSearchCounts = rest.one('pollutantreleasecounts');
-        	        pollutantSearchCounts.get($scope.queryParams).then(function(response) {
-//        	            $scope.headitems = response.data;
-        	            $scope.quantityAir = response.data.quantityAir;
-        	            $scope.quantityWater = response.data.quantityWater;
-        	            $scope.quantitySoil = response.data.quantitySoil;
+        	        pollutantSearchCounts.get(scope.queryparams).then(function(response) {
+//        	            scope.headitems = response.data;
+        	            scope.quantityAir = response.data.quantityAir;
+        	            scope.quantityWater = response.data.quantityWater;
+        	            scope.quantitySoil = response.data.quantitySoil;
         	            
         	            if(scope.queryparams.MediumCode != undefined){
-        	            	scope.filter.prsel = scope.queryParams.MediumCode[0];
+        	            	scope.medfilter.prsel = scope.queryparams.MediumCode[0];
+        	            }
+        	            else{
+        	            	scope.medfilter.prsel = 'AIR';
         	            }
         	        });
         		}
+            }, true);
+            
+            scope.$watch('medfilter.prsel', function(value){
+            	if(scope.medfilter.prsel != undefined){
+            		scope.medium = scope.medfilter.prsel;
+            	}
             });
             
-    		scope.$watchCollection('[quantityAir,quantityWater,quantitySoil,tr_c,tr_lpo]', function(value) {
+            /*scope.$watch('queryparams', function(value){
+        		if (scope.queryparams){
+        			//We don't want WasteTypeCode in query
+        			var qp = {};
+        		    for(var key in scope.queryparams) {
+        		        if(key != 'MediumCode') {
+        		        	qp[key] = scope.queryparams[key];
+        		        }
+        		    }
+        		    
+        			var rest = Restangular.withConfig(function(RestangularConfigurer) {
+        	            RestangularConfigurer.setFullResponse(true);
+        	        });
+        	        var pollutantSearchCounts = rest.one('pollutantreleasecounts');
+        	        pollutantSearchCounts.get(scope.queryparams).then(function(response) {
+//        	            scope.headitems = response.data;
+        	            scope.quantityAir = response.data.quantityAir;
+        	            scope.quantityWater = response.data.quantityWater;
+        	            scope.quantitySoil = response.data.quantitySoil;
+        	            
+        	            if(scope.queryparams.MediumCode != undefined){
+        	            	scope.medfilter.prsel = scope.queryparams.MediumCode[0];
+        	            }
+        	            else{
+        	            	scope.medfilter.prsel = 'AIR';
+        	            }
+        	        });
+        		}
+            });*/
+            
+    		scope.$watchCollection('[quantityAir,quantityWater,quantitySoil,tr_c,tr_p]', function(value) {
     			
-                if (scope.quantityAir != undefined && scope.tr_c != undefined ) {
+                if (scope.quantityAir != undefined && scope.tr_p != undefined ) {
 
                     // create some new html elements to hold the separate info
-                    var title = $compile('<label class="control-label"><strong>'+scope.tr_c.ShowFacilitiesReleasingToMedium+':</strong></label></br>')(scope); 
+                    var title = $compile('<label class="control-label"><strong>'+scope.tr_p.ShowFacilitiesReleasingToMedium+':</strong></label></br>')(scope); 
                     
-                    var body = '<label class="radio-inline tab" for="AIR"><input type="radio" id="AIR" name="prsel" ng-model="filter.prsel" value="AIR" /> ';
+                    var body = '<label class="radio-inline" for="AIR"><input type="radio" id="AIR" name="prsel" ng-model="medfilter.prsel" value="AIR" /> ';
                     body += scope.tr_c.Air + ' <span class="label label-success label-as-badge" title="'+ $filter('number')(scope.quantityAir);
                     body += ' ' + scope.tr_c.Facilities+'">' + $filter('number')(scope.quantityAir) + '</span></label>';
                     //var hNONHW = $compile(sNONHW)(scope);
                     
-                    body += '<label class="radio-inline" for="WATER"><input type="radio" id="WATER" name="prsel" ng-model="filter.prsel" value="WATER" /> ';
+                    body += '<label class="radio-inline" for="WATER"><input type="radio" id="WATER" name="prsel" ng-model="medfilter.prsel" value="WATER" /> ';
                     body += scope.tr_c.Water + ' <span class="label label-success label-as-badge" title="'+ $filter('number')(scope.quantityWater); 
                     body += ' ' + scope.tr_c.Facilities+'">' + $filter('number')(scope.quantityWater) +  '</span></label>';
  //                   sWATER += scope.tr_c.HazardouswasteWithinCountry + '</BR> (' + $filter('number')(scope.quantityWater) + ' ' + scope.tr_c.Facilities + ') </label>';
                     //var hWATER = $compile(sWATER)(scope);
 
-                    body += '<label class="radio-inline"  for="SOIL"><input type="radio" id="SOIL" name="prsel" ng-model="filter.prsel" value="SOIL" /> ';
+                    body += '<label class="radio-inline"  for="SOIL"><input type="radio" id="SOIL" name="prsel" ng-model="medfilter.prsel" value="SOIL" /> ';
                     body += scope.tr_c.Soil + ' <span class="label label-success label-as-badge" title="'+ $filter('number')(scope.quantitySoil);
                     body += ' ' + scope.tr_c.Facilities+'">' + $filter('number')(scope.quantitySoil) +  '</span></label>';
                     var hbody = $compile(body)(scope);

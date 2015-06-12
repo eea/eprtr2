@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'restangular', 'myApp.activitySearchFilter', 'myApp.pollutantSearchFilter', 'myApp.wasteSearchFilter'])
+angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'restangular', 'myApp.activitySearchFilter', 'myApp.pollutantSearchFilter', 'myApp.wasteSearchFilter','angularSpinner'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/facilitylevels', {
@@ -9,7 +9,8 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
   });
 }])
 
-.controller('FacilityLevelsCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular','translationService', function($scope, $filter, $http, searchFilter, Restangular,translationService) {
+.controller('FacilityLevelsCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular','translationService','usSpinnerService', 
+                                   function($scope, $filter, $http, searchFilter, Restangular,translationService,usSpinnerService) {
 
         $scope.showReceivingCountryInputField = true;
         $scope.showReleasesToInputField = true;
@@ -39,6 +40,9 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 		$scope.tr_chart = data.ChartLabels;
 	  });
 
+	/**
+	 * Tabs
+	 */
     	$scope.active = {
     		facilities: true
     	};
@@ -46,7 +50,28 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
         	  $scope.active = {}; //reset
         	  $scope.active[tab] = true;
         	}
+        
+    	/**
+    	 * Spinner
+    	 */
+        $scope.startSpin = function() {
+            if (!$scope.spinneractive) {
+              usSpinnerService.spin('spinner-1');
+              $scope.spinneractive = true;
+            }
+          };
 
+          $scope.stopSpin = function() {
+            if ($scope.spinneractive) {
+              usSpinnerService.stop('spinner-1');
+              $scope.spinneractive = false;
+            }
+          };
+          $scope.spinneractive = false;
+
+/**
+ * Sorting
+ */
     $scope.sort = {
                 sortingOrder : 'facilityName',
                 reverse : false
@@ -82,12 +107,17 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
     	}
     });
 	
+    
+    /**
+     * Search
+     */
 	$scope.search = function() {
 		$scope.currentSearchFilter = $scope.searchFilter;
 	    $scope.searchResults = true;
         $scope.currentPage = 1;
         $scope.sort.sortingOrder = 'facilityName';
         $scope.sort.reverse = false;
+        $scope.startSpin();
         $scope.performSearch();
     };
 	
@@ -136,6 +166,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
             $scope.items = response.data;
 	        $scope.totalItemCount = response.headers('X-Count');
 	        $scope.confidentialFacilities = response.headers('X-Confidentiality');
+	        $scope.stopSpin();
 	    });
 	};
 

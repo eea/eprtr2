@@ -52,7 +52,8 @@
 		<!--div ng-show="searchResults"-->
         <tabset>
             <tab heading="{{tr_c.Facilities}}" active="active.facilities" >
-                <br/>
+            	<span us-spinner="{radius:16, width:6, length: 12}" spinner-key="spinner-1"></span>
+				<div class="col-md-12 table-responsive top-buffer10" >
                 <table class="table table-striped table-condensed table-hover">
                     <thead>
                         <tr>
@@ -82,6 +83,7 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
             </tab>
             <tab heading="{{tr_c.ContentConfidientiality}}"  active="active.confidentiality" >
                 <br/>
