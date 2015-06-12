@@ -19,6 +19,7 @@ import eea.eprtr.dao.PollutantSearchFilter;
 import eea.eprtr.dao.QueryPager;
 import eea.eprtr.dao.ReportingYearSearchFilter;
 import eea.eprtr.dao.WasteSearchFilter;
+import eea.eprtr.model.FacilityCounts;
 import eea.eprtr.model.FacilitySearchMainActivity;
 import eea.eprtr.model.MediumCode;
 
@@ -91,4 +92,51 @@ public class FacilitySearchController {
 		
 		return new FacilitySearchMainActivity[0];
     }
+	
+	@RequestMapping("/facilityCount")
+    public FacilityCounts facilityCount(
+    		
+    		@RequestParam(value = "ReportingYear") Integer reportingYear,
+    		
+    		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
+    		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
+    		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
+    		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
+    		
+    		@RequestParam(value = "FacilityName", required = false) String facilityName,
+    		@RequestParam(value = "CityName", required = false) String cityName,
+    		
+    		@RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
+    		@RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
+    		@RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
+    		@RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
+    		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
+    		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
+    		
+    		@RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
+    		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
+    		@RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
+    		@RequestParam(value = "Accidental", required = false) Integer accidental,
+    		
+    		@RequestParam(value = "WasteTypeCode", required = false) List<String> wasteTypeCode,
+    		@RequestParam(value = "WasteTreatmentCode", required = false) List<String> wasteTreatmentCode,
+    		@RequestParam(value = "WHPCountryID", required = false) Integer whpCountryID,
+    		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
+    		
+    		HttpServletResponse response) {
+
+		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
+		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
+		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
+		WasteSearchFilter wasteFilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID, confidentialIndicator);
+		FacilitySearchFilter filter = new FacilitySearchFilter(facilityName, cityName, reportingYearFilter, locationFilter, activityFilter, pollutantFilter, wasteFilter);
+		
+		long facilitiesWithConfidentialityCount = facilitySearchRepository.getFacilityCount(filter.createConfidentialityFilter());
+		
+		long facilitiesCount = facilitySearchRepository.getFacilityCount(filter);
+		
+		return new FacilityCounts(facilitiesCount,facilitiesWithConfidentialityCount);
+    }
+
 }

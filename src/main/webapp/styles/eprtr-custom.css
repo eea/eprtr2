@@ -13,8 +13,14 @@ body {margin-top:120px;}
 
 .top-buffer10 { margin-top:10px; }
 
+.col-Min75 { min-width:75px; }
+.col-Min100 { min-width:100px; }
+.col-Min150 { min-width:150px; }
+.col-Min200 { min-width:200px; }
 
+.ontop{z-index: 500;}
 
+        
 .axis path,
 .axis line {
   fill: none;

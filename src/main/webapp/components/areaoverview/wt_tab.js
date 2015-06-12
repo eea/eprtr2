@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('myApp.areaOverviewWasteTab', ['restangular','ngSanitize'])
+angular.module('myApp.areaOverviewWasteTab', ['restangular','ngSanitize','angularSpinner'])
 
    .controller('AreaOverviewWasteTabCtrl', ['$scope', '$filter', 'Restangular',
-                                       'translationService','formatStrFactory', 'countFactory', function($scope, $filter,  
-                                    		   Restangular,translationService,formatStrFactory,countFactory) {
+                                       'translationService','formatStrFactory', 'countFactory','usSpinnerService', function($scope, $filter,  
+                                    		   Restangular,translationService,formatStrFactory,countFactory, usSpinnerService) {
         //$scope.ff = formatStrFactory;
 	    $scope.cf = countFactory;
         //$scope.queryParams = {};
@@ -14,20 +14,30 @@ angular.module('myApp.areaOverviewWasteTab', ['restangular','ngSanitize'])
         		$scope.tr_c = data.Common;
         		$scope.tr_wt = data.WasteTransfers;
         		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
-/*        		$scope.tr_f = data.Facility;
- *        		$scope.tr_lovwt = data.LOV_WASTETYPE;
- 				$scope.tr_lco = data.LOV_COUNTRY;
-        		$scope.tr_lnr = data.LOV_NUTSREGION;
-        		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
-        		$scope.tr_p = data.Pollutant;
-        		$scope.tr_lcon =data.LOV_CONFIDENTIALITY;
-        		$scope.tr_con =data.Confidentiality;
-        		$scope.tr_lpo = data.LOV_POLLUTANT;
-        		$scope.tr_lnr = data.LOV_NUTSREGION;
-        		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
-*/        	  });
+        	  });
         };
         $scope.translate();
+    	$scope.showTable = false;
+        
+        /**
+         * Spinner
+         */
+        $scope.startSpin = function() {
+            if (!$scope.spinneractive) {
+              usSpinnerService.spin('spinner-1');
+              $scope.spinneractive = true;
+            }
+          };
+
+          $scope.stopSpin = function() {
+            if ($scope.spinneractive) {
+              usSpinnerService.stop('spinner-1');
+              $scope.spinneractive = false;
+            }
+          };
+          $scope.spinneractive = false;
+
+
         
     	$scope.restconfig = Restangular.withConfig(function(RestangularConfigurer) {
             RestangularConfigurer.setFullResponse(true);
@@ -39,6 +49,7 @@ angular.module('myApp.areaOverviewWasteTab', ['restangular','ngSanitize'])
         		//Clear collection
         		$scope.items = [];
         		//get data
+        		$scope.startSpin();
         		$scope.getData();
         	}
         });
@@ -74,7 +85,8 @@ angular.module('myApp.areaOverviewWasteTab', ['restangular','ngSanitize'])
         	$scope.facilityCountHWOC = $scope.cf.getSubSum($scope.activities,"facilityCountHWOC",false);
         	$scope.facilityCountHW = $scope.cf.getSubSum($scope.activities,"facilityCountHW",false);
         	$scope.facilityCountNONHW = $scope.cf.getSubSum($scope.activities,"facilityCountNONHW",false);
-
+        	$scope.showTable = true;
+        	$scope.stopSpin();
         };
 
         

@@ -42,9 +42,9 @@ module.exports = function(config){
       'src/main/webapp/bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js',
       'src/main/webapp/bower_components/underscore/underscore.js',
       'src/main/webapp/bower_components/angular-google-chart/ng-google-chart.js',
-      'src/main/webapp/bower_components/d3/d3.js',
-      'src/main/webapp/bower_components/nvd3/nv.d3.js',
-      'src/main/webapp/bower_components/angular-nvd3/dist/angular-nvd3.min.js',
+      'src/main/webapp/bower_components/spin.js/spin.js',
+      'src/main/webapp/bower_components/angular-spinner/angular-spinner.js',
+      'src/main/webapp/bower_components/spin/javascripts/jquery.spin.js',
       // endbower
       'src/main/webapp/components/**/*.js',
       'src/main/webapp/view*/**/*.js'

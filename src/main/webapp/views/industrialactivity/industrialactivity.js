@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.search-filter', 'restangular','ngSanitize'])
+angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.search-filter', 'restangular','ngSanitize','angularSpinner'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/industrialactivity', {
@@ -10,8 +10,9 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
     }])
 
     .controller('IndustrialActivityCtrl', ['$scope', '$filter', '$modal','searchFilter', 'Restangular','translationService'
-                                           ,'formatStrFactory', 'countFactory', 
-                                           function($scope, $filter, $modal, searchFilter, Restangular,translationService,formatStrFactory,countFactory) {
+                                           ,'formatStrFactory', 'countFactory','usSpinnerService', 
+                                           function($scope, $filter, $modal, searchFilter, Restangular,translationService,
+                                        		   formatStrFactory,countFactory,usSpinnerService) {
         $scope.activityPanel = true;
         $scope.searchFilter = searchFilter;
         $scope.queryParams = {};
@@ -25,7 +26,7 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
         $scope.itemConReason = [];
         $scope.summaryItems = [];
         $scope.sectorIA ="";
-        $scope.totalSearchResult = 0;
+        $scope.quantityTotalSearchResult = 0;
         $scope.cf = countFactory;
         
     	$scope.restconfig = Restangular.withConfig(function(RestangularConfigurer) {
@@ -54,7 +55,38 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
         };
         $scope.translate();
         
-        /**
+    	/**
+    	 * Spinner
+    	 */
+        $scope.startSpin = function() {
+            if (!$scope.spinneractive) {
+              usSpinnerService.spin('spinner-1');
+              $scope.spinneractive = true;
+            }
+          };
+
+          $scope.stopSpin = function() {
+            if ($scope.spinneractive) {
+              usSpinnerService.stop('spinner-1');
+              $scope.spinneractive = false;
+            }
+          };
+          $scope.spinneractive = false;
+          
+          $scope.stopSpinPart = function(part){
+          	$scope.reqStatus[part] = 1;
+          	var done = 0;
+            angular.forEach($scope.reqStatus, function(value, key) {
+                if (value === 0) {
+                    done ++;
+                }
+            });
+            if(done < 1){
+            	$scope.stopSpin();
+            }
+          }
+          
+          /**
          * Tab handling
          * */
                 
@@ -79,6 +111,8 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
         };
         
         $scope.search = function() {
+        	$scope.reqStatus = {'pr':0,'pt':0,'wt':0,'co':0 };
+    		$scope.startSpin();
             $scope.currentSearchFilter = $scope.searchFilter;
             $scope.searchResults = true;
             $scope.performSearch();
@@ -124,12 +158,14 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
             // Create confidential search
             $scope.confidentialParams = angular.copy(queryParams);
             $scope.confidentialParams.ConfidentialIndicator = 1;
-            $scope.totalSearchResult = 0;
+            $scope.quantityTotalSearchResult = 0;
         	$scope.showConfidential = 'polRelease';
             $scope.getTabData("pollutantrelease");
             $scope.getTabData("pollutanttransfer");
             $scope.getTabData("wastetransfer");
             $scope.getTabData("confidentiality");
+            
+            $scope.getTotalInSearch();
                       
         };
         
@@ -176,19 +212,19 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
     				case "POLLUTANTRELEASESUM":
     					$scope.pollutantreleaseItems = response.data;
     					$scope.polreleasecount = response.headers('facilitiesCount');
-    					$scope.totalSearchResult += parseInt($scope.polreleasecount);
+    					//$scope.quantityTotalSearchResult += parseInt($scope.polreleasecount);
     					$scope.updatePollutantReleaseData();
     					break;
     				case "POLLUTANTTRANSFERSUM":
     					$scope.pollutanttransferItems = response.data;
     					$scope.poltransfercount = response.headers('facilitiesCount');
-    					$scope.totalSearchResult += parseInt($scope.poltransfercount);
+    					//$scope.quantityTotalSearchResult += parseInt($scope.poltransfercount);
     					$scope.updatePollutantTransferData();
     					break;
                   	case "SUMMARY":
                   		$scope.summaryItems = response.data;
                   		$scope.wastetransfercount = response.headers('facilitiesCount');
-                  		$scope.totalSearchResult += parseInt($scope.wastetransfercount);
+                  		//$scope.quantityTotalSearchResult += parseInt($scope.wastetransfercount);
                   		$scope.updateSummaryData();
                   		break;
                   	case "ALLCONF":
@@ -201,6 +237,14 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
                   }
               });
         };
+        
+        $scope.getTotalInSearch = function(){
+        	
+        	var facilityService = $scope.restconfig.one('facilityCount');
+        	facilityService.get($scope.queryParams).then(function(response) {
+        		$scope.quantityTotalSearchResult = response.data.facilityCount;
+        	});
+        }
         
         $scope.updateConfidentialData = function()
         {
@@ -391,17 +435,20 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
 	        		break;
 	        	default:
 	        		break;
-        	}	
+        	}
+        	$scope.stopSpinPart('co');
         };
         
         $scope.updatePollutantReleaseData = function()
         {
         	//$scope.pollutantreleaseItems = angular.copy($scope.items);
+        	$scope.stopSpinPart('pr');
         };
         
         $scope.updatePollutantTransferData = function()
         {
         	//$scope.pollutanttransferItems = angular.copy($scope.items);
+        	$scope.stopSpinPart('pt');
         };
         
         $scope.updateSummaryData = function() {
@@ -410,12 +457,12 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
          	 	// Handle data
          	for(var i = 0; i <$scope.summaryItems.length;i++)
             {
-         		if($scope.summaryItems[i].total > 0)
+         		if($scope.summaryItems[i].quantityTotal > 0)
          		{
-         			$scope.summaryItems[i].rpct = Math.round((($scope.summaryItems[i].recovery * 100 / $scope.summaryItems[i].total)*100)) /100;
-         			$scope.summaryItems[i].dpct = Math.round((($scope.summaryItems[i].disposal * 100 / $scope.summaryItems[i].total)*100)) /100;
-         			$scope.summaryItems[i].upct = Math.round((($scope.summaryItems[i].unspec * 100 / $scope.summaryItems[i].total)*100)) /100;
-         			formatStrFactory.getStrFormat($scope.summaryItems[i].recovery);
+         			$scope.summaryItems[i].rpct = Math.round((($scope.summaryItems[i].quantityRecovery * 100 / $scope.summaryItems[i].quantityTotal)*100)) /100;
+         			$scope.summaryItems[i].dpct = Math.round((($scope.summaryItems[i].quantityDisposal * 100 / $scope.summaryItems[i].quantityTotal)*100)) /100;
+         			$scope.summaryItems[i].upct = Math.round((($scope.summaryItems[i].quantityUnspec * 100 / $scope.summaryItems[i].quantityTotal)*100)) /100;
+         			formatStrFactory.getStrFormat($scope.summaryItems[i].quantityRecovery);
          		}else
          		{
          			$scope.summaryItems[i].rpct = 0.0;
@@ -445,24 +492,24 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
           	  if ($scope.summaryItems[i].wastetype === $scope.tr_lovwt["HWIC"]) {
           		  graphData2[$scope.tr_wt["RecoveryDomestic"]] = {c: [
                        {v: $scope.tr_wt["RecoveryDomestic"]},
-                       {v: $scope.summaryItems[i].recovery}]};
+                       {v: $scope.summaryItems[i].quantityRecovery}]};
           		  graphData2[$scope.tr_wt["DisposalDomestic"]] = {c: [
                       {v: $scope.tr_wt["DisposalDomestic"]},
-                      {v: $scope.summaryItems[i].disposal}]};
+                      {v: $scope.summaryItems[i].quantityDisposal}]};
           		  graphData2[$scope.tr_wt["UnspecifiedDomestic"]] = {c: [
                           {v: $scope.tr_wt["UnspecifiedDomestic"]},
-                          {v: $scope.summaryItems[i].unspec}]};
+                          {v: $scope.summaryItems[i].quantityUnspec}]};
           	  }
           	  if ($scope.summaryItems[i].wastetype === $scope.tr_lovwt["HWOC"]) {
           		  graphData2[$scope.tr_wt["RecoveryTransboundary"]] = {c: [
                            {v: $scope.tr_wt["RecoveryTransboundary"]},
-                           {v: $scope.summaryItems[i].recovery}]};
+                           {v: $scope.summaryItems[i].quantityRecovery}]};
           		  graphData2[$scope.tr_wt["DisposalTransboundary"]] = {c: [
                       {v: $scope.tr_wt["DisposalTransboundary"]},
-                      {v: $scope.summaryItems[i].disposal}]};
+                      {v: $scope.summaryItems[i].quantityDisposal}]};
           		  graphData2[$scope.tr_wt["UnspecifiedTransboundary"]] = {c: [
                       {v: $scope.tr_wt["UnspecifiedTransboundary"]},
-                      {v: $scope.summaryItems[i].unspec}]};
+                      {v: $scope.summaryItems[i].quantityUnspec}]};
           	  }          
             }
 
@@ -501,6 +548,9 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
             };
             $scope.summaryChartObject1.options = {"title":$scope.tr_wt["Nonhazardouswaste"],"sliceVisibilityThreshold": 0,"height": 300};
             $scope.summaryChartObject1.type = 'PieChart';
+            
+        	$scope.stopSpinPart('wt');
+
           };
           
           /*

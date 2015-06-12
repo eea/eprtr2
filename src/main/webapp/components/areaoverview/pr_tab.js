@@ -1,18 +1,18 @@
 'use strict';
 
-angular.module('myApp.areaOverviewPtTab', ['restangular','ngSanitize','angularSpinner'])
+angular.module('myApp.areaOverviewPrTab', ['restangular','ngSanitize','angularSpinner'])
 
-   .controller('AreaOverviewPtTabCtrl', ['$scope', '$filter', 'Restangular',
+   .controller('AreaOverviewPrTabCtrl', ['$scope', '$rootScope','$filter', 'Restangular',
                                        'translationService','formatStrFactory', 'countFactory','usSpinnerService', function($scope, $filter,  
-                                    		   Restangular,translationService,formatStrFactory,countFactory, usSpinnerService) {
+                                    		   $rootScope, Restangular,translationService,formatStrFactory,countFactory,usSpinnerService) {
         $scope.ff = formatStrFactory;
 	    $scope.cf = countFactory;
-/*	    $scope.prfilter = {};// .polsearch
-	    $scope.prfilter.pgselect = {};
-	*/    
+	    $scope.prqueryparams = $scope.queryparams;
+	    
+	    $scope.med = 'quantityAir';
+
 	    $scope.headeritems = [];
-//	    $scope.prfilter.pselect = {};
-	    //        $scope.queryParams = {};
+    	$scope.pttotal = [];
         $scope.translate = function()
         {
         	translationService.get().then(function (data) {
@@ -25,9 +25,13 @@ angular.module('myApp.areaOverviewPtTab', ['restangular','ngSanitize','angularSp
         };
         $scope.translate();
         
-/**
- * Spinner
- */
+    	$scope.restconfig = Restangular.withConfig(function(RestangularConfigurer) {
+            RestangularConfigurer.setFullResponse(true);
+        });
+
+    	/**
+    	 * Spinner
+    	 */
         $scope.startSpin = function() {
             if (!$scope.spinneractive) {
               usSpinnerService.spin('spinner-1');
@@ -43,30 +47,45 @@ angular.module('myApp.areaOverviewPtTab', ['restangular','ngSanitize','angularSp
           };
           $scope.spinneractive = false;
 
-        
-    	$scope.restconfig = Restangular.withConfig(function(RestangularConfigurer) {
-            RestangularConfigurer.setFullResponse(true);
-        });
+   /*       $rootScope.$on('us-spinner:spin', function(event, key) {
+            $scope.spinneractive = true;
+          });
 
+          $rootScope.$on('us-spinner:stop', function(event, key) {
+            $scope.spinneractive = false;
+          });
+*/
+    	
         $scope.$watchCollection('[pollutant, queryparams]', function(value){
-//        	if($scope.prfilter.pgselect && $scope.prfilter.pgselect.lov_PollutantID && $scope.queryparams){
+//        	if($scope.prtabfilter.pgselect && $scope.prtabfilter.pgselect.lov_PollutantID && $scope.queryparams){
            	if($scope.pollutant && $scope.queryparams){
         		//Clear collection
+        	    $scope.prqueryparams = $scope.queryparams;
         		$scope.items = [];
+        	    $scope.headeritems = [];
         		//get data
         		if($scope.pollutant.lov_PollutantID){
-        			$scope.startSpin();
+            		if(!$scope.prqueryparams.LOV_PollutantGroupID){
+            			$scope.prqueryparams.LOV_PollutantGroupID = $scope.pollutant.lov_PollutantID;
+            		}
+            		$scope.startSpin();
         			$scope.getData();
         		}
         	}
         });
 
+        $scope.$watch('medium', function(value){
+        	if($scope.items && $scope.items.length > 0){
+        		$scope.startSpin();
+          		$scope.updateData();
+        	}
+        });
+ 
         $scope.getData = function(){
-        	$scope.searchService = $scope.restconfig.all('pollutanttransferAreaoverview');
-    		$scope.searchService.getList($scope.queryparams).then(function(response) {
+        	$scope.searchService = $scope.restconfig.all('pollutantreleaseAreaoverview');
+    		$scope.searchService.getList($scope.prqueryparams).then(function(response) {
         		$scope.items = response.data;
 //          		$scope.totalSearchResult += parseInt($scope.wastetransfercount);
-        		$scope.startSpin();
           		$scope.updateData();
 
     		});
@@ -78,6 +97,22 @@ angular.module('myApp.areaOverviewPtTab', ['restangular','ngSanitize','angularSp
         $scope.updateData = function()
         {
         	if($scope.items.length > 0){
+        		
+            	switch($scope.medium){
+					case 'AIR':
+						$scope.med = 'quantityAir';
+						break;
+					case 'WATER':
+						$scope.med = 'quantityWater';
+						break;
+					case 'SOIL':
+						$scope.med = 'quantitySoil';
+						break;
+					default:
+						$scope.med = 'quantityAir';
+						break;
+	        	}
+        		
 	        	$scope.headeritems = [];
 	        	$scope.pttotal = [];
 	        	//first col:
@@ -97,9 +132,10 @@ angular.module('myApp.areaOverviewPtTab', ['restangular','ngSanitize','angularSp
 		        	$scope.getTotalValues(pollst[i].lov_pollutantid);
 			    }
 			    /* - - - */
-	        	$scope.stopSpin();
+			    
 			    
 		    }
+        	$scope.stopSpin();
         };
         $scope.getTotalValues = function(polid){
         	var fac = 0;
@@ -110,9 +146,13 @@ angular.module('myApp.areaOverviewPtTab', ['restangular','ngSanitize','angularSp
 	        	for (var j = 0; j < act.pollutantquantitys.length; j++) {
 	        		var pol = act.pollutantquantitys[j];
 	        		if (pol.lov_pollutantid == polid){
-	        			fac += pol.facilities;
-	        			qua += pol.quantity;
-	        			polcode = pol.pollutantCode;
+	        			if(pol[$scope.med]>0){
+	        				fac += pol.facilities;
+	        				qua += pol[$scope.med];
+	        			}
+	        			if(polcode == ''){
+		        			polcode = pol.pollutantCode;
+	        			}
 	        			continue;
 	        		}
 	        	}
@@ -133,17 +173,18 @@ angular.module('myApp.areaOverviewPtTab', ['restangular','ngSanitize','angularSp
         
    }])
 
-   .directive('areaOverviewPtTab', function() {
+   .directive('areaOverviewPrTab', function() {
   	return {
   		restrict: 'E',
-  		controller: 'AreaOverviewPtTabCtrl',
+  		controller: 'AreaOverviewPrTabCtrl',
           transclude: true,
   		scope: {
   			queryparams: '=',
   			visible: '=',
-  			pollutant: '='
+  			pollutant: '=',
+  			medium: '='
   		},
-  		templateUrl: 'components/areaoverview/pt_tab.html',
+  		templateUrl: 'components/areaoverview/pr_tab.html',
   		link: function(scope, element, attrs){
   			scope.$watch('queryparams', function(value){
   				//lets debug

@@ -1,7 +1,11 @@
-			<div class="row" ng-if="visible">
+			<div class="row" >
+	<!--div class="col-md-12 top-buffer10" pr-selector queryparams="prqueryparams" prsel="prsel" ></div-->
+     
+  	<!--div class="col-md-4 top-buffer10" sf-pollutant queryparams="queryparams" pgselect="prfilter.pgselect"  pselect="prfilter.pselect" grponly="true" ></div -->
 <!-- Insert table here -->
-	<span us-spinner="{radius:16, width:6, length: 12}" spinner-key="spinner-1"></span>
-	<div class="table-responsive" style="max-height:500px">
+	<div class="col-md-12 table-responsive top-buffer10" style="max-height:500px">
+	        <span us-spinner="{radius:16, width:6, length: 12}" spinner-key="spinner-1"></span>
+	
 			<table class="table table-striped table-condensed table-hover" >
                     <thead>
                     <tr>
@@ -21,8 +25,8 @@
                     {{tr_c.Facilities}}
                     </td>
                     <td ng-repeat="polq in item.pollutantquantitys | orderBy: 'pollutantCode'" class="text-right">
-                    {{ff.formatMethod(polq.quantity)}}<br />
-                    {{polq.facilities | number}}
+                    {{ff.formatMethod(polq[med])}}<br />
+                    {{(polq[med]>0)?polq.facilities:0  | number}}
                     </td>
                     </tr>
 
@@ -40,8 +44,8 @@
                     {{tr_c.Facilities}}
                     </td>
                     <td ng-repeat="polq2 in level2.pollutantquantitys | orderBy: 'pollutantCode'" class="text-right">
-                    {{ff.formatMethod(polq2.quantity)}}<br />
-                    {{polq2.facilities | number}}
+                    {{ff.formatMethod(polq2[med])}}<br />
+                    {{(polq2[med]>0)?polq2.facilities:0 | number}}
                     </td>
                    	</tr>
                     <!-- Level3 -->
@@ -56,8 +60,8 @@
                     {{tr_c.Facilities}}
                     </td>
                     <td ng-repeat="polq3 in level3.pollutantquantitys | orderBy: 'pollutantCode'" class="text-right">
-                    {{ff.formatMethod(polq3.quantity)}}<br />
-                    {{polq3.facilities | number}}
+                    {{ff.formatMethod(polq3[med])}}<br />
+                    {{(polq3[med]>0)?polq3.facilities:0 | number}}
                     </td>
                     </tr>
                     <tr ng-repeat-end></tr>

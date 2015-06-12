@@ -20,25 +20,6 @@ myApp.directive('wtSelector', ['$compile','$http', '$filter', 'Restangular', 'tr
     			scope.tr_w = data.WasteTransfers;
     	    });
     		scope.filter = {};
-/*
-    		// wait for changes on the text
-            attrs.$observe('wtSelectorQueryParams', function(text) {
-            	
-        		if (attrs.wtSelectorQueryParams.length > 20){
-        			var qp = JSON.parse(attrs.wtSelectorQueryParams);
-        			var rest = Restangular.withConfig(function(RestangularConfigurer) {
-        	            RestangularConfigurer.setFullResponse(true);
-        	        });
-        	        var wastetransferSearchCounts = rest.one('wastetransferCounts');
-        	        wastetransferSearchCounts.get(qp).then(function(response) {
-//        	            $scope.headitems = response.data;
-        	            scope.quantityNONHW = response.data.quantityNONHW;
-        	            scope.quantityHWIC = response.data.quantityHWIC;
-        	            scope.quantityHWOC = response.data.quantityHWOC;
-        	            scope.wtsel = qp.WasteTypeCode[0];//'NONHW';
-        	        });
-        		}
-            });*/
             scope.$watch('filter.wtsel', function(value){
             	if(scope.filter.wtsel != undefined){
             		scope.wtsel = scope.filter.wtsel;
@@ -68,6 +49,9 @@ myApp.directive('wtSelector', ['$compile','$http', '$filter', 'Restangular', 'tr
         	            scope.quantityHWOC = response.data.quantityHWOC;
         	            if(scope.queryparams.WasteTypeCode != undefined){
             	            scope.filter.wtsel = scope.queryparams.WasteTypeCode[0];//'NONHW';
+        	            }
+        	            else{
+        	            	scope.filter.wtsel = 'NONHW';
         	            }
         	        });
         		}
