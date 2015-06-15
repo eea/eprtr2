@@ -1,6 +1,8 @@
 package eea.eprtr.model;
 
 import java.io.Serializable;
+import java.util.Comparator;
+
 import javax.persistence.*;
 
 
@@ -8,10 +10,11 @@ import javax.persistence.*;
  * The persistent class for the LOV_POLLUTANT database table.
  * 
  */
+
 @Entity
 @Table(name="LOV_POLLUTANT")
 @NamedQuery(name="LovPollutant.findPolutants", query="SELECT l FROM LovPollutant l where l.parentID = :parentID")
-public class LovPollutant implements Serializable {
+public class LovPollutant implements Serializable, Cloneable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="CAS")
@@ -114,5 +117,22 @@ public class LovPollutant implements Serializable {
 	public void setStartYear(Integer startYear) {
 		this.startYear = startYear;
 	}
+	
+	public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+	
+	public static Comparator<LovPollutant> LovPollutantByCodeComparator = new Comparator<LovPollutant>() {
+
+	public int compare(LovPollutant s1, LovPollutant s2) {
+	   String Code1 = s1.getCode().toUpperCase();
+	   String Code2 = s2.getCode().toUpperCase();
+
+	   //ascending order
+	   return Code1.compareTo(Code2);
+
+	   //descending order
+	   //return StudentName2.compareTo(StudentName1);
+    }};
 
 }
