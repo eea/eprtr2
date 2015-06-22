@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.search-filter', 'restangular','ngSanitize','angularSpinner'])
+angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize','angularSpinner'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/pollutantreleases', {
@@ -111,24 +111,6 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         	}
         });
 
-/*    	$scope.$watch('mediumTypeSummary', function(value) {
-            if ($scope.items) {
-                $scope.updateSummaryData();
-            }
-        });
-
-        $scope.$watch('mediumTypeFacilities', function(value) {
-            if ($scope.items) {
-                $scope.updateFacilitiesData();
-            }
-        });
-
-        $scope.$watch('mediumTypeAreaComparison', function(value) {
-            if ($scope.items) {
-                $scope.updateAreaComparisonData();
-            }
-        });*/
-
         $scope.search = function() {
         	$scope.reqStatus = {'sum':0,'act':0,'are':0,'aco':0,'fac':0,'con':0 };
             $scope.currentSearchFilter = $scope.searchFilter;
@@ -161,9 +143,11 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
             }
             if(searchFilter.regionType == 0)
             {
+            	//Filter by NUTS regions
             	$scope.regionSearch = true;
             }else
             {
+            	//Filter by River Basin District
             	$scope.regionSearch = false;
             }
             
@@ -199,7 +183,6 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 $scope.mediumFilter.prSumMedium = 'AIR';
                 $scope.mediumFilter.prFacMedium = 'AIR';
                 $scope.mediumFilter.prAreaMedium = 'AIR';
-                
 
                 $scope.updateSummaryData();
                 $scope.updateFacilitiesData();
@@ -255,15 +238,19 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 }
             }
 
-            $scope.summaryChartObject = {};
-            $scope.summaryChartObject.data = {
+            var heigh = Object.keys(graphData).length * 40;
+            heigh = (heigh<400)?400:heigh;
+            $scope.summaryChart = {};
+            $scope.summaryChart.data = {
                 "cols": [
                     {id: "t", label: "Name", type: "string"},
                     {id: "s", label: "Total", type: "number"}
                 ],
                 "rows": graphDataArray
             };
-            $scope.summaryChartObject.type = 'PieChart';
+            $scope.summaryChart.type = 'PieChart';
+            $scope.summaryChart.options = {height:heigh, width:'100%',
+              		"chartArea": {left:'5%',top:'5%',width:'90%'}};
             $scope.stopSpinPart('sum');
         };
 
@@ -286,49 +273,83 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 return false;
             });
             
+        	var gr = ($scope.regionSearch)?'n':'r';
+        	var group = ($scope.regionSearch)?'nutslevel2RegionCode':'riverBasinDistrictCode';
+        	
+        	if ($scope.queryParams.LOV_AreaGroupID){
+        		gr = 'c';
+        		group = 'countryCode';
+        	}
+
+        	//nutslevel2RegionCode
+        	//riverBasinDistrictCode
+        	
             var totalquantity = 0;
             var graphData = {};
             for (var i = 0; i < $scope.areaComparisonItems.length; i++) {
+            	var gkey = $scope.areaComparisonItems[i][group];
+            	switch (gr) {
+				case 'n':
+					gkey = $scope.tr_lnr[$scope.areaComparisonItems[i][group]];
+					break;
+				case 'r':
+					gkey = $scope.tr_lrbd[$scope.areaComparisonItems[i][group]];
+					break;
+				case 'c':
+					gkey = $scope.tr_lco[$scope.areaComparisonItems[i][group]];
+					break;
+				default:
+					break;
+				}
                 // Test for creating country
-            	if (!graphData[$scope.areaComparisonItems[i].countryCode]) {
+            	if (!graphData[gkey]) {
             		
             		//$scope.tr_chart.AREA
-                    graphData[$scope.areaComparisonItems[i].countryCode] = 
+                    graphData[gkey] = 
                     {c: [
-                        {v: $scope.areaComparisonItems[i].countryCode},
+                        {v: gkey},
                         {v: $scope.areaComparisonItems[i][qmstr]},
                         {v: "ff<br/>Dette er en test"} 
                     ]};
                     totalquantity +=$scope.areaComparisonItems[i][qmstr];
                 } else {
-                    graphData[$scope.areaComparisonItems[i].countryCode].c[1].v =
-                        graphData[$scope.areaComparisonItems[i].countryCode].c[1].v + $scope.areaComparisonItems[i][qmstr];
-                    graphData[$scope.areaComparisonItems[i].countryCode].c[2].v = "ff<br /> test";
+                    graphData[gkey].c[1].v =
+                        graphData[gkey].c[1].v + $scope.areaComparisonItems[i][qmstr];
+                    graphData[gkey].c[2].v = "ff<br /> test";
                     totalquantity +=$scope.areaComparisonItems[i][qmstr];
                 }
             }
 
             var graphDataArray = [];
+            var numOfKeys = 0;
             for (var key in graphData) {
                 if (graphData.hasOwnProperty(key)) {
                 	// Calculate % of total quantity
                 	graphData[key].c[1].v =  Math.round(((graphData[key].c[1].v * 100) / totalquantity)*100)/100;
                     graphDataArray = graphDataArray.concat(graphData[key]);
                 }
+                numOfKeys ++;
             }
             graphDataArray = _.sortBy(graphDataArray, function(element) {  return element.c[1].v;}).reverse();
-        	
+        	var heigh = (numOfKeys*30)+30;
             // $scope.tr_chart.PERCENT_TOTAL;
-            $scope.areaComparisonChartObject = {};
-            $scope.areaComparisonChartObject.data = {
+            $scope.areaComparisonChart = {};
+            $scope.areaComparisonChart.data = {
                 "cols": [
                     {id: "t", label: "Name", type: "string"},
                     {id: "s", label: "Total", type: "number"}
                 ],
                 "rows": graphDataArray
             };
-            $scope.areaComparisonChartObject.options = {"tooltip": {"isHtml": false}};
-            $scope.areaComparisonChartObject.type = 'BarChart';
+            $scope.areaComparisonChart.options = {
+            		"tooltip": {"isHtml": false}, 
+            		"height": heigh, 
+            		"legend": {"position": 'none'},
+            		"hAxis": {format: '#\'%\''},
+            		"chartArea": {"left":200}
+            		};
+            $scope.areaComparisonChart.type = 'BarChart';
+            //$scope.areaComparisonChartObject.draw();
             $scope.stopSpinPart('aco');
         };
         
@@ -424,36 +445,6 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
         	$scope.stopSpinPart('con');
         };
 
-        
-        /***
-         * 
-         * 
-         * OLD 
-         * 
-         * 
-         */
-        
-        
-        /*$scope.formatText = function(txt, confidential) {
-            if (txt)
-            {
-                return txt;
-            }
-            else if (confidential)
-            {
-                return "CONFIDENTIAL";
-            }
-            else
-            {
-                return "-";
-            }
-        };
-        
-        $scope.formatNumber = function(value)
-        {
-        	return value 
-        };*/
-        
         $scope.quantity = function(item) {
         	var qm = $scope.getQuantityStr($scope.mediumType);
             if (item[qm])
@@ -495,139 +486,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'googlechart', 'myApp.sear
                 return "-";
             }
         };
-        /*    
-        $scope.getSum = function(elements, type)
-        {
-        	if(!elements.length)
-        	{
-        		elements = jQuery.makeArray(elements);
-        	}
-        	var sum = 0;
-    		for(var i = 0; i < elements.length; i++)
-			{
-				 var temp = elements[i][type];
-				 if(temp)
-				 {
-					 sum += temp;
-				 }
-			}
-    		if(sum === 0)
-    		{
-    			return "-";
-    		}
-    		return $scope.ff.getStrFormat(sum);
-        };
         
-        $scope.getSumTotal = function(type,property1)
-        {
-        	var sumtotal = 0;
-        	switch(type.toLocaleLowerCase())
-        	{
-        		case "activities":
-        			for(var i = 0; i < $scope.activities.length; i++ )
-        			{
-        				for(var j = 0; j < $scope.activities[i].data.length; j++)
-        				{
-        					if($scope.activities[i].data[j][property1]);
-        					{
-        						sumtotal+= $scope.activities[i].data[j][property1];
-        					}
-        					
-        				}
-        			}
-        			break;
-        		case "areas":
-        			for(var i = 0; i < $scope.areas.length; i++ )
-        			{
-        				for(var j = 0; j < $scope.areas[i].data.length; j++)
-        				{
-        					if($scope.areas[i].data[j][property1]);
-        					{
-        						sumtotal+= $scope.areas[i].data[j][property1];
-        					}
-        				}
-        			}
-        			break;
-        		default:
-        			break;
-        	}
-        	return $scope.ff.getStrFormat(sumtotal);
-        };
-        
-        $scope.getTotalCount = function(type,property)
-        {
-        	var count = 0;
-        	switch(type.toLocaleLowerCase())
-        	{
-        		case "activities":
-        			for(var i = 0; i < $scope.activities.length; i++ )
-        			{
-        				for(var j = 0; j < $scope.activities[i].data.length; j++)
-        				{
-        					if($scope.activities[i].data[j][property]);
-        					{
-        						count+=	$scope.activities[i].data[j][property];
-        					}
-        				}
-        			}
-        			break;
-        		case "areas":
-        			for(var i = 0; i < $scope.areas.length; i++ )
-        			{
-        				for(var j = 0; j < $scope.areas[i].data.length; j++)
-        				{
-        					if($scope.areas[i].data[j][property]);
-        					{
-        						count+=	$scope.areas[i].data[j][property];
-        					}
-        				}
-        			}
-        			break;
-        		default:
-        			break;
-        	}
-        	return count;
-        };
-        
-        $scope.getTypeCount = function(elements, type){  
-            
-        	if(!elements.length)
-        	{
-        		elements = jQuery.makeArray(elements);
-        	}
-            
-            var total = 0;
-            for(var i = 0; i < elements.length; i++){
-                if(type==="facility")
-                {
-                	total += elements[i].fcount;
-                }else
-                {
-                	total += elements[i].facount;
-                }
-            }
-            return total;
-        };
-        */
-        
-        
-        
-        /***
-         * 
-         * 
-         * 
-         */
-        
-/*        $scope.cf.findGroup = function(collection,key)
-        {
-        	for(var i = 0; i < collection.length;i++)
-        	{
-        		if(collection[i].key === key)
-        		{
-        			return collection[i];
-        		}
-        	}
-        };*/
         
         $scope.groupbyActivitet = function(propertyGP1,propertyGP2,propertyGP3, collection)
         {

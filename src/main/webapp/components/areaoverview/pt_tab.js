@@ -97,9 +97,9 @@ angular.module('myApp.areaOverviewPtTab', ['restangular','ngSanitize','angularSp
 		        	$scope.getTotalValues(pollst[i].lov_pollutantid);
 			    }
 			    /* - - - */
-	        	$scope.stopSpin();
 			    
 		    }
+        	$scope.stopSpin();
         };
         $scope.getTotalValues = function(polid){
         	var fac = 0;

@@ -11,15 +11,15 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.SingularAttribute;
 
 import org.springframework.stereotype.Repository;
-
-
 
 //import eea.eprtr.controller.ConfidentialController.ConfidentialData;
 import eea.eprtr.model.NumOfCountriesPrYear;
 import eea.eprtr.model.WasteTransferConfidentialTS;
 import eea.eprtr.model.Wastetransfer;
+import eea.eprtr.model.WastetransferAreaCompare;
 import eea.eprtr.model.WastetransferCompare;
 import eea.eprtr.model.WastetransferConfidential;
 import eea.eprtr.model.WastetransferCounts;
@@ -833,4 +833,177 @@ public class WasteTransferSearchRepository {
 		return null;
 	} */
 
+	public List<WastetransferAreaCompare> getWastetransferAreaOverview(WastetransferSearchFilter filter, WasteType wastetype, boolean regionsearch){
+		
+		/*Define regional parameters*/
+		LocationSearchFilter loc = filter.getLocationSearchFilter();
+		boolean area = (loc.getAreaGroupID() != null);
+		
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<WastetransferAreaCompare> cq = cb.createQuery(WastetransferAreaCompare.class);
+		Root<Wastetransfer> qr = cq.from(Wastetransfer.class);
+
+		SingularAttribute<Wastetransfer, String> areacol = null; 
+		if (area){
+			areacol = Wastetransfer_.countryCode;
+		}
+		else if(regionsearch){
+			areacol = Wastetransfer_.nutsLevel2RegionCode;
+		}
+		else {
+			areacol = Wastetransfer_.riverBasinDistrictCode;
+		}
+		
+		switch (wastetype) {
+		case NONHW:
+			cq.select(cb.construct(WastetransferAreaCompare.class, 
+					qr.get(Wastetransfer_.reportingYear),
+					cb.<String>selectCase().when(cb.isNull(qr.get(areacol)), "UNKNOWN").otherwise(qr.get(areacol)),
+					cb.count(qr.get(Wastetransfer_.facilityID)),
+					cb.sum(qr.get(Wastetransfer_.quantityTotalNONHW)), 
+					cb.sum(qr.get(Wastetransfer_.quantityRecoveryNONHW)), 
+					cb.sum(qr.get(Wastetransfer_.quantityDisposalNONHW)),
+					cb.sum(qr.get(Wastetransfer_.quantityUnspecNONHW))));
+			break;
+
+		case HWIC:
+			cq.select(cb.construct(WastetransferAreaCompare.class, 
+					qr.get(Wastetransfer_.reportingYear),
+					cb.<String>selectCase().when(cb.isNull(qr.get(areacol)), "UNKNOWN").otherwise(qr.get(areacol)),
+					cb.count(qr.get(Wastetransfer_.facilityID)),
+					cb.sum(qr.get(Wastetransfer_.quantityTotalHWIC)), 
+					cb.sum(qr.get(Wastetransfer_.quantityRecoveryHWIC)), 
+					cb.sum(qr.get(Wastetransfer_.quantityDisposalHWIC)),
+					cb.sum(qr.get(Wastetransfer_.quantityUnspecHWIC))));
+			break;
+		case HWOC:
+			cq.select(cb.construct(WastetransferAreaCompare.class, 
+					qr.get(Wastetransfer_.reportingYear),
+					cb.<String>selectCase().when(cb.isNull(qr.get(areacol)), "UNKNOWN").otherwise(qr.get(areacol)),
+					cb.count(qr.get(Wastetransfer_.facilityID)),
+					cb.sum(qr.get(Wastetransfer_.quantityTotalHWOC)), 
+					cb.sum(qr.get(Wastetransfer_.quantityRecoveryHWOC)), 
+					cb.sum(qr.get(Wastetransfer_.quantityDisposalHWOC)),
+					cb.sum(qr.get(Wastetransfer_.quantityUnspecHWOC))));
+			break;
+		
+		default:
+			break;
+		}
+		cq.where(filter.buildWhereClause(cb, qr));
+		cq.groupBy(qr.get(Wastetransfer_.reportingYear), qr.get(areacol));
+		
+		TypedQuery<WastetransferAreaCompare> q = em.createQuery(cq);
+		List<WastetransferAreaCompare> results1 = q.getResultList();
+		/*Call Group by Area */
+		
+		
+		/*AreaComparisonAnnex*/
+		CriteriaBuilder cb1 = em.getCriteriaBuilder();
+		CriteriaQuery<WastetransferAreaCompare> cq1 = cb1.createQuery(WastetransferAreaCompare.class);
+		Root<Wastetransfer> qr1 = cq1.from(Wastetransfer.class);
+		
+		
+		switch (wastetype) {
+		case NONHW:
+			cq1.select(cb1.construct(WastetransferAreaCompare.class, 
+					qr1.get(Wastetransfer_.reportingYear),
+					cb1.<String>selectCase().when(cb1.isNull(qr1.get(areacol)), "UNKNOWN").otherwise(qr1.get(areacol)),
+					cb1.count(qr1.get(Wastetransfer_.facilityID)),
+					cb1.sum(qr1.get(Wastetransfer_.quantityTotalNONHW)), 
+					cb1.sum(qr1.get(Wastetransfer_.quantityRecoveryNONHW)), 
+					cb1.sum(qr1.get(Wastetransfer_.quantityDisposalNONHW)),
+					cb1.sum(qr1.get(Wastetransfer_.quantityUnspecNONHW))));
+			break;
+
+		case HWIC:
+			cq1.select(cb1.construct(WastetransferAreaCompare.class, 
+					qr1.get(Wastetransfer_.reportingYear),
+					cb1.<String>selectCase().when(cb1.isNull(qr1.get(areacol)), "UNKNOWN").otherwise(qr1.get(areacol)),
+					cb1.count(qr1.get(Wastetransfer_.facilityID)),
+					cb1.sum(qr1.get(Wastetransfer_.quantityTotalHWIC)), 
+					cb1.sum(qr1.get(Wastetransfer_.quantityRecoveryHWIC)), 
+					cb1.sum(qr1.get(Wastetransfer_.quantityDisposalHWIC)),
+					cb1.sum(qr1.get(Wastetransfer_.quantityUnspecHWIC))));
+			break;
+		case HWOC:
+			cq1.select(cb1.construct(WastetransferAreaCompare.class, 
+					qr1.get(Wastetransfer_.reportingYear),
+					cb1.<String>selectCase().when(cb1.isNull(qr1.get(areacol)), "UNKNOWN").otherwise(qr1.get(areacol)),
+					cb1.count(qr1.get(Wastetransfer_.facilityID)),
+					cb1.sum(qr1.get(Wastetransfer_.quantityTotalHWOC)), 
+					cb1.sum(qr1.get(Wastetransfer_.quantityRecoveryHWOC)), 
+					cb1.sum(qr1.get(Wastetransfer_.quantityDisposalHWOC)),
+					cb1.sum(qr1.get(Wastetransfer_.quantityUnspecHWOC))));
+			break;
+		
+		default:
+			break;
+		}
+		
+		Predicate p1 = cb1.or(cb1.equal(qr1.get(Wastetransfer_.iaActivityCode),"5.(a)"), 
+				cb1.equal(qr1.get(Wastetransfer_.iaActivityCode),"5.(b)"), 
+				cb1.equal(qr1.get(Wastetransfer_.iaActivityCode),"5.(c)"),
+				cb1.equal(qr1.get(Wastetransfer_.iaActivityCode),"5.(d)"),
+				cb1.equal(qr1.get(Wastetransfer_.iaActivityCode),"5.(e)"));
+		cq1.where(cb1.and(filter.buildWhereClause(cb1, qr1),p1));
+		cq1.groupBy(qr1.get(Wastetransfer_.reportingYear), qr1.get(areacol));
+
+		TypedQuery<WastetransferAreaCompare> q1 = em.createQuery(cq1);
+		List<WastetransferAreaCompare> results2 = q1.getResultList();
+		/*Call Group by Area */
+		
+		/*Merge list*/
+		MergeWastetransferAreaOverviewLists(results1,results2);
+		
+		/* Get Total  */
+		double totalq = 0.0; 
+		for (WastetransferAreaCompare wac: results1){
+			totalq += wac.getQuantityTotal();
+		}
+
+		/*New array with % values*/
+		//List<WastetransferAreaCompare> finalList = new ArrayList<WastetransferAreaCompare>();
+		for (WastetransferAreaCompare wac: results1){
+			//WastetransferAreaCompare nwac = new WastetransferAreaCompare(wac.getReportingYear(), wac.getArea(), wac.getFacilities(), null, null, null, null);
+			wac.setPctTotalAnnexI((double)Math.round(((wac.getQuantityTotalAnnexI() * 100) / totalq)*100)/100);
+			wac.setPctTotal(((double)Math.round(((wac.getQuantityTotal() * 100) / totalq)*100)/100));//-nwac.getQuantityTotalAnnexI());
+			wac.setPctDisposalAnnexI((double)Math.round(((wac.getQuantityDisposalAnnexI() * 100) / totalq)*100)/100);
+			wac.setPctDisposal(((double)Math.round(((wac.getQuantityDisposal() * 100) / totalq)*100)/100));//-nwac.getQuantityDisposalAnnexI());
+			wac.setPctRecoveryAnnexI((double)Math.round(((wac.getQuantityRecoveryAnnexI() * 100) / totalq)*100)/100);
+			wac.setPctRecovery(((double)Math.round(((wac.getQuantityRecovery() * 100) / totalq)*100)/100));//-nwac.getQuantityRecoveryAnnexI());
+			wac.setPctUnspecAnnexI((double)Math.round(((wac.getQuantityUnspecAnnexI() * 100) / totalq)*100)/100);
+			wac.setPctUnspec(((double)Math.round(((wac.getQuantityUnspec() * 100) / totalq)*100)/100));//-nwac.getQuantityUnspecAnnexI());
+			wac.setFacilitiesAnnexI(wac.getFacilitiesAnnexI());
+			//finalList.add(nwac);
+		}
+			
+		return results1;
+		//return finalList;
+	}
+	
+	/*
+	 *             Expression prop = Expression.Property(param, "IAActivityCode");
+            Expression exp = Expression.Equal(prop, Expression.Constant("5.(a)"));
+            exp = Expression.Or(exp, Expression.Equal(prop, Expression.Constant("5.(b)")));
+            exp = Expression.Or(exp, Expression.Equal(prop, Expression.Constant("5.(c)")));
+            exp = Expression.Or(exp, Expression.Equal(prop, Expression.Constant("5.(d)")));
+            exp = Expression.Or(exp, Expression.Equal(prop, Expression.Constant("5.(e)")));
+	 * */
+	
+	
+	private void MergeWastetransferAreaOverviewLists(List<WastetransferAreaCompare> mainlist, List<WastetransferAreaCompare> otherlist){
+		for (WastetransferAreaCompare mwac: mainlist){
+			for (WastetransferAreaCompare owac: otherlist){
+				if(mwac.getArea().contains(owac.getArea())){
+					mwac.setFacilitiesAnnexI(owac.getFacilities());
+					mwac.setQuantityTotalAnnexI(owac.getQuantityTotal());
+					mwac.setQuantityDisposalAnnexI(owac.getQuantityDisposal());
+					mwac.setQuantityRecoveryAnnexI(owac.getQuantityRecovery());
+					mwac.setQuantityUnspecAnnexI(owac.getQuantityUnspec());
+				}
+			}
+		}
+	}
+	
 }

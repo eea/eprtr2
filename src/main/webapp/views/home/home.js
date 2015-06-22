@@ -338,6 +338,32 @@ angular.module('myApp.home', ['ngRoute'])
 	        }
 	}
 }])
+
+/*.factory('ChartService', function() {
+    return {
+        loadGoogleVisualization: function() {
+            
+            // Using a try/catch block to guard against unanticipated 
+            // errors when loading the visualization lib
+            try {
+
+                // Arbitrary callback required in google.load() to 
+                // support loading after initial page rendering
+                google.load('visualization', '1', {
+                    'callback':'console.log(\'success\');', 
+                    'packages':['bar']
+                });
+               
+                return true;
+            
+            } catch(e) {
+                console.log('Could not load Google lib', e);
+                return false;  
+            }
+
+        }
+    };
+})*/
 /*
  * This service returns the resource part (type) requested
  * Look at the resource files in \translations folder for part overview

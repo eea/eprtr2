@@ -51,9 +51,13 @@
 				      <div class="top-buffer10" id="prPollutantGroup" sf-pollutant queryparams="queryParams" pgselect="prfilter.pgselect" pselect="prfilter.pselect" grponly="true" ></div>
 				      <div class="top-buffer10" id="prMediumSelector" pr-selector queryparams="queryParams" medium="prMedium" ></div>
 				  </div>			      
+			      <div class="col-md-12 top-buffer10" ng-if="!prfilter.pgselect.code">
+						<div class="alert alert-success"><strong>You need to select a Pollutant Group</strong></div>
+			      </div>
 			      <div class="col-md-12">
 				  <area-overview-pr-tab queryparams="queryParams" visible="true" pollutant="prfilter.pgselect" medium="prMedium" />
 			    	<!-- active.pollutanttransfer != undefined  /div -->
+			    	 
 			    	</div>
   				</div>
 			</tab>
@@ -73,6 +77,9 @@
 			      </blockquote>
 			      </div>
 			      <div class="col-md-4 top-buffer10"  id="ptPollutantGroup" sf-pollutant queryparams="queryParams" pgselect="ptfilter.pgselect" grponly="true" ></div>
+			      <div class="col-md-12 top-buffer10" ng-if="!prfilter.pgselect.code">
+						<div class="alert alert-success"><strong>You need to select a Pollutant Group</strong></div>
+			      </div>
 			      <div class="col-md-12">
 				  <area-overview-pt-tab queryparams="queryParams" visible="true" pollutant="ptfilter.pgselect" />
 			    	<!-- active.pollutanttransfer != undefined  /div -->

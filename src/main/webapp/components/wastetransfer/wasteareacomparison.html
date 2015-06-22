@@ -1,8 +1,9 @@
 <div class="row">
-	<div class="col-md-12" wt-selector queryparams="queryParams" wtsel="wtfilter.wtsel" ng-if="doshow"></div>
+<span us-spinner="{radius:16, width:6, length: 12}" spinner-key="spinner-2"></span>
+	<div class="col-md-12" wt-selector queryparams="queryparams" wtsel="wtfilter.wtsel" ></div>
 </div><br/>
 <div class="row">
-    <div google-chart chart="areaComparisonChartObject" style="height:400px; width:100%;"  ng-if="doshow">
+	<div google-chart chart="myChart" ng-if="items.length > 0"></div>
 </div>
 <!-- WASTETRANSFER No data -->
 <div class="row" style="padding-top:10px;" ng-if="nodata">

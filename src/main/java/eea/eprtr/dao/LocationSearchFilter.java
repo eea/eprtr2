@@ -37,6 +37,10 @@ public class LocationSearchFilter {
 		this.regionID = regionID;
 		this.rbdID = rbdID;
 	}
+	
+	public Integer getAreaGroupID(){
+		return areaGroupID;
+	}
 
 	public Predicate buildWhereClause(CriteriaBuilder cb, Root<FacilitySearchAll> qr) {
 		Predicate whereClause = cb.conjunction();
