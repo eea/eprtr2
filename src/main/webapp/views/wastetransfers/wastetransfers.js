@@ -245,6 +245,12 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         	{
         		return;
         	}
+        	if(type.toUpperCase() === "AREACOMPARISON" )
+        	{
+        		//$scope.areacomparisonrefresh = true;
+        	}
+        	
+        	areacomparisonrefresh
         	if(type.toUpperCase() === "FACILITIES")
         	{
 

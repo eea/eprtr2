@@ -1,9 +1,11 @@
-<div class="row">
+<div class="row  top-buffer10">
 <span us-spinner="{radius:16, width:6, length: 12}" spinner-key="spinner-2"></span>
 	<div class="col-md-12" wt-selector queryparams="queryparams" wtsel="wtfilter.wtsel" ></div>
-</div><br/>
-<div class="row">
-	<div google-chart chart="myChart" ng-if="items.length > 0"></div>
+<div class="col-md-12 top-buffer10" ng-bind-html="tr_wt.DoubleCounting"></div>
+</div>
+
+<div class="row top-buffer10">
+	<div google-chart chart="myChart" ng-if="items.length > 0" style="width:100%"></div>
 </div>
 <!-- WASTETRANSFER No data -->
 <div class="row" style="padding-top:10px;" ng-if="nodata">

@@ -4,7 +4,7 @@ angular.module('myApp.emission-air-search-filter', ['myApp.home', 'myApp.search-
 
 .constant('deconf_air',{
 	sectors:[
-	        {'code':'-','name':'Select Sector'},
+	        {'code':'-','name':'SelectSector'},
 			{'code':'SECTOR_CODE_INDUSTRIAL','name':'IndustrialReleases'}, 			
 			{'code':'SECTOR_CODE_NON_INDUSTRIAL','name':'NonIndustrialCombustion'}, 			
 			{'code':'SECTOR_CODE_ROAD','name':'RoadTransport'}, 			
@@ -78,7 +78,15 @@ angular.module('myApp.emission-air-search-filter', ['myApp.home', 'myApp.search-
         return $scope.de[id+'.TitleShort'];
     };
     
+    /*$scope.doload = function(){
+    	$scope.diffemissionsectors = [{'name':'Select Sector'}]
+    	$scope.searchFilter.sector = {'name':'Select Sector'};
+    	$scope.diffemissionsectors.concat(deconf_air.sectors); 
+        $scope.diffemissionsectors = $scope.diffemissionsectors.concat(deconf_air.sectors);
+        $scope.searchFilter.sector = $scope.diffemissionsectors[0];
+    }
     
+    $scope.doload();*/
 	
 }])
 .directive('searchAirEmission', function() {
