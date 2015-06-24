@@ -68,12 +68,14 @@
 			<div class="row top-buffer10">
 
 			<div class="col-md-6">
-				<div google-chart="summaryChartObject2" style="height:400px; width:100%;">
-	            </div> 
+			<div google-chart chart="summaryChart2"  style="width:100%"></div>
+				<!--div google-chart="summaryChart2" style="height:400px; width:100%;">
+	            </div --> 
             </div>
 	         <div class="col-md-6">
-	            <div google-chart="summaryChartObject1" style="height:400px; width:100%;">
-	            </div>
+	         <div google-chart chart="summaryChart1"  style="width:100%"></div>
+	            <!--div google-chart="summaryChart1" style="height:400px; width:100%;">
+	            </div -->
 	         </div>
             </div>
 
@@ -579,6 +581,33 @@
            	</tab>
            	  <tab heading="Haz. transboundary" ng-click="getTabData('HAZTRANSBOUNDARY');activateTab('haztransboundary')" active="active.haztransboundary">
            	  <div ng-show="searchResults">
+           	  <div class="row top-buffer10">
+           	  			<div class="col-md-5">
+			
+          <table>
+          			  <tr >
+			    <td class="fdTitles">{{tr_c.Year }}:</td>
+			    <td>{{ queryParams.ReportingYear }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{ tr_c.Area }}:</td>
+			    <td>{{ currentSearchFilter.selectedReportingCountry.name }}</td>
+			  </tr>
+          
+			  <tr >
+			    <td class="fdTitles">{{tr_c.Facilities}}:</td>
+			    <td>{{cf.getSubSum(activities,"facilityCount",false)}}</td>
+			  </tr>
+			</table>
+			</div>
+			<div class="col-md-7">
+		      <blockquote>
+					<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
+		      </blockquote>
+			</div>   
+			</div>   
+			
+           	     <haz-transboundary queryparams="queryParams" />
            	  </div>
            	</tab>
            	 <tab heading="Haz. receivers" ng-click="getTabData('HAZRECEIVERS');activateTab('hazreceivers')" active="active.hazreceivers">

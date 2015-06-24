@@ -16,11 +16,13 @@ import eea.eprtr.dao.LocationSearchFilter;
 import eea.eprtr.dao.OrderBy;
 import eea.eprtr.dao.QueryPager;
 import eea.eprtr.dao.ReportingYearSearchFilter;
+import eea.eprtr.dao.TransboundaryHazardousWasteRepository;
 import eea.eprtr.dao.WasteSearchFilter;
 import eea.eprtr.model.WastetransferCompare;
 import eea.eprtr.model.WastetransferCounts;
 import eea.eprtr.dao.WastetransferSearchFilter;
 import eea.eprtr.dao.WasteTransferSearchRepository;
+import eea.eprtr.model.TransboundaryHazardousWasteData;
 import eea.eprtr.model.WasteTransferConfidentialTS;
 import eea.eprtr.model.WastetransferAreaCompare;
 import eea.eprtr.model.WastetransferSeries;
@@ -37,6 +39,9 @@ public class WastetransferSearchController {
 	
 	@Autowired
 	private WasteTransferSearchRepository wastetransferSearchrepository;
+
+	@Autowired
+	private TransboundaryHazardousWasteRepository transboundaryHazardousWasteRepository;
 	
 	@RequestMapping("/wastetransferSearch")
     public List<Wastetransfer> wastetransferSearch(
@@ -410,5 +415,57 @@ public class WastetransferSearchController {
 		return wastetransferSearchrepository.getWastetransferAreaOverview(filter, wastetype, regionsearch);
 	}
 
+	
+	@RequestMapping("/transboundaryHazardousWaste")
+    public List<TransboundaryHazardousWasteData> getTransboundaryHazardousWaste(
+    		
+    		@RequestParam(value = "AggregateOthers", required = false) Boolean aggregateOthers,	
+    		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,	
+    		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
+    		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
+    		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
+    		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
+    		
+    		@RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
+    		@RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
+    		@RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
+    		@RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
+    		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
+    		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
+    		
+    		@RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
+    		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
+    		@RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
+    		@RequestParam(value = "Accidental", required = false) Integer accidental,
+    		
+    		@RequestParam(value = "WasteTypeCode", required = false) List<String> wasteTypeCode,
+    		@RequestParam(value = "WasteTreatmentCode", required = false) List<String> wasteTreatmentCode,
+    		@RequestParam(value = "WHPCountryID", required = false) Integer whpCountryID,
+    		
+    		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
+    		
+    		@RequestParam(value = "SearchType", required = false) String searchtype,
+    		
+    		@RequestParam(value = "RegionSearch", required = false) boolean regionsearch,
+    		
+    		HttpServletResponse response
+    		){
+		
+	/*	ReportingYearSearchFilter reportingYearFilter = null;
+		if (reportingYear != null) {
+			reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		}*/
+		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
+		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
+		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID, confidentialIndicator);
+		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
+
+		List<TransboundaryHazardousWasteData> transboundaryHazardousWaste = transboundaryHazardousWasteRepository.GetTransboundaryHazardousWasteData(filter, aggregateOthers);
+		return transboundaryHazardousWaste;
+	}
+
+	
+	
 }
 

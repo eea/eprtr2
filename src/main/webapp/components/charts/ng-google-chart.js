@@ -83,7 +83,9 @@ angular.module('myApp.eprtrgooglechart', [])
                 chart: '=chart',
                 onReady: '&',
                 onSelect: '&',
-                select: '&'
+                select: '&'/*,
+                onMouseover: '&',
+                onMouseout: '&'*/
             },
             link: function ($scope, $elm, $attrs) {
                 /* Watches, to refresh the chart when its data, formatters, options, view,
@@ -105,7 +107,7 @@ angular.module('myApp.eprtrgooglechart', [])
                 }, function () {
                     drawAsync();
                 }, true); // true is for deep object equality checking
-
+                
                 // Redraw the chart if the window is resized
                 var resizeHandler = $rootScope.$on('resizeMsg', function () {
                     $timeout(function () {
@@ -207,6 +209,7 @@ angular.module('myApp.eprtrgooglechart', [])
                                         }
                                     });
                                 });
+                                
                             }
                             else {
                                 $scope.chartWrapper.setChartType($scope.chart.type);
@@ -237,6 +240,17 @@ angular.module('myApp.eprtrgooglechart', [])
                                     applyFormat(name, customFormatters[name], $scope.chartWrapper.getDataTable());
                                 }
                             }
+                            /*if($scope.onMouseover){
+                            	google.visualization.events.addListener($scope.chart, 'onmouseover', function(e){
+                            		$scope.onMouseover(e);
+                            	}); 
+                            };
+                            if($scope.onMouseout){
+                    	        google.visualization.events.addListener($scope.chart, 'onmouseout',  function(e){
+                    	        	$scope.onMouseout(e);
+                    	        });
+                            };*/
+
 
                             $timeout(function () {
                                 $scope.beforeDraw({ chartWrapper: $scope.chartWrapper });
@@ -252,7 +266,10 @@ angular.module('myApp.eprtrgooglechart', [])
                         draw();
                     })
                 }
+
+
             }
+            
         };
     }])
 

@@ -16,7 +16,7 @@ angular.module('myApp.search-placement', ['myApp.home', 'myApp.search-filter'])
         $scope.searchFilter.selectedReportingYear = $scope.reportingYears[$scope.reportingYears.length - 1];
     });
 
-    $http.get('/reportingCountries').success(function(data, status, headers, config) {
+    $http.get('/areagroupReportingCountries').success(function(data, status, headers, config) {
         $scope.reportingCountries = data;
         $scope.searchFilter.selectedReportingCountry = $scope.reportingCountries[0];
     });

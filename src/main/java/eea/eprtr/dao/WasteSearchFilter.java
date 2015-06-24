@@ -11,6 +11,8 @@ import eea.eprtr.model.FacilitySearchAll_;
 import eea.eprtr.model.Wastetransfer;
 import eea.eprtr.model.WastetransferConfidential;
 import eea.eprtr.model.WastetransferConfidential_;
+import eea.eprtr.model.WastetransferReceivingcountry;
+import eea.eprtr.model.WastetransferReceivingcountry_;
 import eea.eprtr.model.Wastetransfer_;
 
 public class WasteSearchFilter {
@@ -216,5 +218,99 @@ public class WasteSearchFilter {
 			
 			
 			return whereClause;
+	}
+	public Predicate buildWhereClauseWastetransferReceivingcountry(CriteriaBuilder cb, Root<WastetransferReceivingcountry> qr) {
+		Predicate whereClause = cb.conjunction();
+/*		if (wasteTypeCode != null) {
+			Predicate wasteTypeWhereClause = cb.disjunction();
+			for(String code : wasteTypeCode)
+			{
+				switch (code) {
+					case "NONHW":
+						wasteTypeWhereClause.getExpressions().add(cb.greaterThan(qr.get(WastetransferReceivingcountry_. quantityTotalNONHW), 0.0));
+						break;
+					case "HWIC":
+						wasteTypeWhereClause.getExpressions().add(cb.greaterThan(qr.get(WastetransferReceivingcountry_.quantityTotalHWIC), 0.0));
+						break;
+					case "HWOC":
+						wasteTypeWhereClause.getExpressions().add(cb.greaterThan(qr.get(WastetransferReceivingcountry_.quantityTotalHWOC), 0.0));
+						break;
+					case "HW":
+						wasteTypeWhereClause.getExpressions().add(cb.or(cb.greaterThan(qr.get(WastetransferReceivingcountry_.quantityTotalNONHW), 0.0)
+								,cb.greaterThan(qr.get(WastetransferReceivingcountry_.quantityTotalNONHW), 0.0)));
+						break;
+					default:
+						break;
+				}
+			}
+			if (wasteTypeWhereClause.getExpressions().size() > 0) {
+				whereClause.getExpressions().add(wasteTypeWhereClause);
+			} else {
+				whereClause.getExpressions().add(cb.or());
+			}
+			
+		}*/
+		if (wasteTreatmentCode != null) {
+			for(String code : wasteTreatmentCode)
+			{
+				switch (code.toUpperCase()) {
+					case "R":
+						whereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.hasReportedRecovery), 0));
+						break;
+					case "U":
+						whereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.hasReportedUnspecified), 0));
+						break;
+					case "D":
+						whereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.hasReportedDisposal), 0));
+						break;
+					default:
+						break;
+				}
+			}
+		}
+		if (whpCountryID != null) {
+			//whereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.WHPCountryID), whpCountryID));
+		}
+		Predicate confidentialWhereClause = cb.disjunction();
+		/*if(confidentialIndicatorNONHW !=null)
+		{
+			//cb.or(
+			confidentialWhereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.confidentialIndicatorNONHW),confidentialIndicatorNONHW));
+		}
+		if(confidentialIndicatorHWIC !=null)
+		{
+			confidentialWhereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.confidentialIndicatorHWIC),confidentialIndicatorHWIC));
+		}
+		if(confidentialIndicatorHWOC !=null)
+		{
+			confidentialWhereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.confidentialIndicatorHWOC),confidentialIndicatorHWOC));
+		}*/
+		if(confidentialIndicator !=null)
+		{
+			confidentialWhereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.confidentialIndicator),confidentialIndicator));
+			confidentialWhereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.confidentialIndicatorFacility),confidentialIndicator));
+		}
+		Predicate confidentialReportedWhereClause = cb.disjunction();
+		if(hasReportedRecovery !=null)
+		{
+			confidentialReportedWhereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.hasReportedRecovery),hasReportedRecovery));
+		}
+		if(hasReportedDisposal !=null)
+		{
+			confidentialReportedWhereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.hasReportedDisposal),hasReportedDisposal));
+		}
+		if(hasReportedUnspecified !=null)
+		{
+			confidentialReportedWhereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.hasReportedUnspecified),hasReportedUnspecified));
+		}
+		if(confidentialWhereClause.getExpressions().size() > 0)
+		{
+			whereClause.getExpressions().add(confidentialWhereClause);
+		}
+		if(confidentialReportedWhereClause.getExpressions().size() > 0)
+		{
+			whereClause.getExpressions().add(confidentialReportedWhereClause);
+		}
+		return whereClause;
 	}
 }
