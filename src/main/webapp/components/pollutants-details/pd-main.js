@@ -10,7 +10,7 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 	$scope.getPollutantData = function(){
 		$http.get('translations/pollutants_details_en-gb.json').success(function(data, status) {
 			for(var i = 0; i<data.pollutants.pollutant.length;i++){
-				if(data.pollutants.pollutant[i]._id == $scope.pollutantid){
+				if(data.pollutants.pollutant[i].lov_pollutant_id == $scope.pollutantid){
 					$scope.pollutant_details = data.pollutants.pollutant[i];
 				}
 			}
@@ -18,9 +18,10 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 				var txt = $scope.pollutant_details.main_methods_of_release.text;
 				$scope.pollutant_details.main_methods_of_release.text = [txt];
 			}
-			if (!($scope.pollutant_details.iso_provisions.provision instanceof Array)){
-				var provision = $scope.pollutant_details.iso_provisions.provision;
-				$scope.pollutant_details.iso_provisions.provision = [provision];
+			if($scope.pollutant_details.iso_provisions.hasOwnProperty('provision')){
+				if (!($scope.pollutant_details.iso_provisions.provision instanceof Array)){
+					$scope.pollutant_details.iso_provisions.provision = [$scope.pollutant_details.iso_provisions.provision];
+				}
 			}
 			if (!($scope.pollutant_details.health_affects.text instanceof Array)){
 				$scope.pollutant_details.health_affects.text = [$scope.pollutant_details.health_affects.text];
@@ -41,7 +42,8 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 					}
 				}
 			}
-			if(!($scope.pollutant_group_details.other_provisions.other_provision instanceof Array)){
+			if(!($scope.pollutant_group_details.other_provisions.other_provision instanceof Array) && 
+					$scope.pollutant_group_details.other_provisions.hasOwnProperty('other_provision')){
 				$scope.pollutant_group_details.other_provisions.other_provision = [$scope.pollutant_group_details.other_provisions.other_provision];
 			}
 			if($scope.pollutant_group_details.classifications.classification instanceof Array){
@@ -50,6 +52,11 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 					str += ", "+ $scope.pollutant_group_details.classifications.classification[a];
 				}
 				$scope.pollutant_group_details.classifications.classification = str;
+			}
+			if(!($scope.pollutant_group_details.synonyms.synonym instanceof Array) && $scope.pollutant_group_details.synonyms.hasOwnProperty('synonym')){
+				var synonym = $scope.pollutant_group_details.synonyms.synonym;
+				$scope.pollutant_group_details.synonyms.synonym = new Array();
+				$scope.pollutant_group_details.synonyms.synonym = [synonym];
 			}
 			
 			pollutant_group_details = $scope.pollutant_group_details;
@@ -70,9 +77,12 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 			var hazard_statement = new Array();
 			
 			$scope.lookup = new Array();
-			for(var i=0; i< pollutant_group_details.other_provisions.other_provision.length; i++){
-				other_provisions[i]={instrument:null, overview:null, generic_reporting:null, specific_reporting:null};
+			if($scope.pollutant_group_details.other_provisions.hasOwnProperty('other_provision')){
+				for(var i=0; i< pollutant_group_details.other_provisions.other_provision.length; i++){
+					other_provisions[i]={instrument:null, overview:null, generic_reporting:null, specific_reporting:null};
+				}
 			}
+			
 			
 			for(var i = 0; i<data.phrases.phrase.length;i++){
 				var lookup_phrase = data.phrases.phrase[i];
@@ -162,32 +172,34 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 					break;
 				}
 				
-				for(var j =0; j< pollutant_group_details.other_provisions.other_provision.length;j++){
-					var other_provision_id = pollutant_group_details.other_provisions.other_provision[j];
-					if(lookup_phrase._other_provision_instrument == other_provision_id){
-						other_provisions[j].instrument = lookup_phrase._text;
-					}
-					if(lookup_phrase._other_provision_overview == other_provision_id){
-						if(lookup_phrase.hasOwnProperty('sub')){
-							other_provisions[j].overview  = lookup_phrase._text;	
-						}else{
-							other_provisions[j].overview = $scope.stringReplaceSub(lookup_phrase._text, lookup_phrase.sub);
+				if(pollutant_group_details.other_provisions.hasOwnProperty('other_provision')){
+					for(var j =0; j< pollutant_group_details.other_provisions.other_provision.length;j++){
+						var other_provision_id = pollutant_group_details.other_provisions.other_provision[j];
+						if(lookup_phrase._other_provision_instrument == other_provision_id){
+							other_provisions[j].instrument = lookup_phrase._text;
 						}
-					}
-					if(lookup_phrase._other_provision_reporting == other_provision_id){
-						if(lookup_phrase.hasOwnProperty('sub')){
-							other_provisions[j].generic_reporting = lookup_phrase._text;
-						}else{
-							other_provisions[j].generic_reporting = $scope.stringReplaceSub(lookup_phrase._text, lookup_phrase.sub);
+						if(lookup_phrase._other_provision_overview == other_provision_id){
+							if(lookup_phrase.hasOwnProperty('sub')){
+								other_provisions[j].overview  = lookup_phrase._text;	
+							}else{
+								other_provisions[j].overview = $scope.stringReplaceSub(lookup_phrase._text, lookup_phrase.sub);
+							}
 						}
-					}
-					if(lookup_phrase._other_provision_reporting == other_provision_id+"."+$scope.pollutantid){
-						if(lookup_phrase.hasOwnProperty('sub')){
-							other_provisions[j].specific_reporting = lookup_phrase._text;
-						}else{
-							other_provisions[j].specific_reporting = $scope.stringReplaceSub(lookup_phrase._text, lookup_phrase.sub);
+						if(lookup_phrase._other_provision_reporting == other_provision_id){
+							if(lookup_phrase.hasOwnProperty('sub')){
+								other_provisions[j].generic_reporting = lookup_phrase._text;
+							}else{
+								other_provisions[j].generic_reporting = $scope.stringReplaceSub(lookup_phrase._text, lookup_phrase.sub);
+							}
 						}
-					}
+						if(lookup_phrase._other_provision_reporting == other_provision_id+"."+$scope.pollutantid){
+							if(lookup_phrase.hasOwnProperty('sub')){
+								other_provisions[j].specific_reporting = lookup_phrase._text;
+							}else{
+								other_provisions[j].specific_reporting = $scope.stringReplaceSub(lookup_phrase._text, lookup_phrase.sub);
+							}
+						}
+					}	
 				}
 				
 				r_phrases = r_phrases.concat($scope.createLookupArray(pollutant_group_details.r_phrases.r_phrase, lookup_phrase._r_phrase_id, lookup_phrase._text  ));
@@ -216,6 +228,12 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 			for(var i = 0; i<data.labels.label.length;i++){
 				var label = data.labels.label[i];
 				switch(label._id){
+				case 'pollutanthead':
+					$scope.label_pollutant_head = label._text;
+					break;
+				case 'pollutantheadnotes':
+					$scope.label_pollutant_headnotes = label._text;
+					break;
 				case 'PollutantId':
 					$scope.label_pollutant_id = label._text;
 					break;
@@ -549,23 +567,30 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 			$scope.pollutant_group_details.calculated_molecular_formula = pollutant_group_details.molecular_formula;
 		}
 
-		$scope.pollutant_details.calculated_health_affects= new Array();
-		for(var i = 0; i<$scope.pollutant_details.health_affects.text.length;i++){
-			if(!$scope.pollutant_details.health_affects.text[i].hasOwnProperty('sub')){
-				$scope.pollutant_details.calculated_health_affects[i] = $scope.pollutant_details.health_affects.text[i];
-			}else{
-				var str = $scope.pollutant_details.health_affects.text[i]._text;
-				var sub = $scope.pollutant_details.health_affects.text[i].sub;
-				$scope.pollutant_details.calculated_health_affects[i] = $scope.stringReplaceSub(str,sub);
+		if($scope.pollutant_details.hasOwnProperty('health_affects')){
+			$scope.pollutant_details.calculated_health_affects= new Array();
+			if(!($scope.pollutant_details.health_affects.text instanceof Array)){
+				$scope.pollutant_details.health_affects.text = [$scope.pollutant_details.health_affects.text];
 			}
-		}
-		for(var i = 0; i<$scope.pollutant_details.iso_provisions.provision.length;i++){
-			if($scope.pollutant_details.iso_provisions.provision[i].uncertainty.hasOwnProperty('sup')){
-				$scope.pollutant_details.iso_provisions.provision[i].uncertainty = 
-					$scope.stringReplaceSup($scope.pollutant_details.iso_provisions.provision[i].uncertainty._text, $scope.pollutant_details.iso_provisions.provision[i].uncertainty.sup);
+			for(var i = 0; i<$scope.pollutant_details.health_affects.text.length;i++){
+				if(!$scope.pollutant_details.health_affects.text[i].hasOwnProperty('sub')){
+					$scope.pollutant_details.calculated_health_affects[i] = $scope.pollutant_details.health_affects.text[i];
+				}else{
+					var str = $scope.pollutant_details.health_affects.text[i]._text;
+					var sub = $scope.pollutant_details.health_affects.text[i].sub;
+					$scope.pollutant_details.calculated_health_affects[i] = $scope.stringReplaceSub(str,sub);
+				}
 			}
 		}
 		
+		if($scope.pollutant_details.hasOwnProperty('iso_provisions') && $scope.pollutant_details.iso_provisions.hasOwnProperty('provision')){
+			for(var i = 0; i<$scope.pollutant_details.iso_provisions.provision.length;i++){
+				if($scope.pollutant_details.iso_provisions.provision[i].uncertainty.hasOwnProperty('sup')){
+					$scope.pollutant_details.iso_provisions.provision[i].uncertainty = 
+						$scope.stringReplaceSup($scope.pollutant_details.iso_provisions.provision[i].uncertainty._text, $scope.pollutant_details.iso_provisions.provision[i].uncertainty.sup);
+				}
+			}
+		}
 	}
 	
 	$scope.$watch('pollutantid', function(value){

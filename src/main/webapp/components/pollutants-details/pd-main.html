@@ -6,7 +6,7 @@
 	<p>{{ pollutant_details.pollutant_name }}</p>
 
 	<h4>Pollutant Group</h4>
-	<p>{{ pollutant_group_details.pollutant_group}}</p>
+	<p>{{ pollutant_group_name}}</p>
 
 	<br />
 
@@ -15,7 +15,7 @@
 			<table>
 				<tr>
 					<td>{{ label_pollutant_id }} :</td>
-					<td>{{ pollutant_details._id}}</td>
+					<td>{{ pollutant_details.lov_pollutant_id}}</td>
 				</tr>
 				<tr>
 					<td>{{ label_iupac }} :</td>
@@ -68,7 +68,7 @@
 
 		</tab>
 
-		<tab heading="Ppollutant thresholds">
+		<tab heading="Pollutant thresholds">
 			<h4>{{ label_provprtr }}</h4>
 
 			<p>
@@ -90,7 +90,7 @@
 
 			<p>{{ label_provision_prtr_note }} </p>
 			
-			<p> F.x. Benzene should display Note2 </p>
+			<p> {{ label_provision_prtr_note2 }}</p>
 
 		</tab>
 
@@ -149,7 +149,6 @@
 		</tab>
 
 		<tab heading="Hazards and other technical characteristics">
-			Remember case with no phrases like Hydro-fluorocarbons (HFCs)
 			
 				<h4>{{ label_safety_phrases }}</h4>
 				<p> {{ label_safety_phrases_text }} </p>

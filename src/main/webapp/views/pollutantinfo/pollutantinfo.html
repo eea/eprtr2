@@ -1,20 +1,28 @@
 <div class="container" ng-controller="PollutantInfoCtrl">
-  <div class="row">
-	<!-- Left panel master-->
-	<div class="col-md-12">
-		<!-- Left panel welcome-->
-			<h2>Pollutant Information</h2>
+	<div class="row">
+		<!-- Left panel master-->
+		<div class="col-md-12">
+			<!-- Left panel welcome-->
+			<h2>{{ label_pollutant_head }}</h2>
 			<div class="panel panel-default">
-		  		<div class="panel-body">
-					<p >{{aboutpollutantinfo}}</p>
+				<div class="panel-body">
+					<p>{{ label_pollutant_headnotes}}</p>
 				</div>
 			</div>
+		</div>
 	</div>
-  </div>
-  <div class="row">
-	<div class="col-md-12">
-		 <pollutant-details pollutantid="pollutantid" />
-	</div>  
-  
-  </div>
-  </div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-4">
+			      <div class="top-buffer10" id="prPollutantGroup" sf-pollutant queryparams="queryParams" pgselect="prfilter.pgselect" pselect="prfilter.pselect" grponly="false" ></div>
+				</div>
+			</div>
+			<div class="row" ng-if=" showPollutantDetails ">
+				<div class="col-md-12">
+					<pollutant-details pollutantid="pollutants[1].lov_PollutantID" />
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
