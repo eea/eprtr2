@@ -62,7 +62,7 @@ TIMESERIES
   <tab heading="Time Series" active="active.timeseries" ng-click="activateTab('timeseries')">
    <div class="row" style="padding-top:10px;" >
         <div class="col-md-12">
-        	<div google-chart chart="tsStackseriesObject" style="height:250px; width:100%;"></div>
+        	<div google-chart="tsStackseriesObject" style="height:250px; width:100%;"></div>
         </div>
    </div>
    <div class="row" style="padding-top:10px;" >
@@ -99,7 +99,7 @@ COMPARISON
         		<p>{{tr_c.TimeSeriesCompareYears}}</p>
         		<select style="width:70px;" ng-model="tscompare.selectedStartYear" ng-options="y.year for y in reportingyears" id="startYear" ></select>  {{tr_c.TimeSeriesCompareAnd}}  <select style="width:70px;" ng-model="tscompare.selectedEndYear" ng-options="y.year for y in reportingyears" id="endYear" ></select>
         		</br>
-              	<div google-chart chart="tsStackCompareObject" style="height:250px; width:100%;"></div>
+              	<div google-chart="tsStackCompareObject" style="height:250px; width:100%;"></div>
         	</div>
         </div>
         <div class="col-md-7"  >	

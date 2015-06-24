@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize', 'googlechart'])
+angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 
 .constant('tsconf',{
 	colors:{

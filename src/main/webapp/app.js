@@ -28,7 +28,6 @@ var myApp = angular.module('myApp', [
         'myApp.diffemissionswater',
         'myApp.emissionmapair',
         'myApp.pollutantinfo',
-        'myApp.testchart',
         'myApp.pd-main'
     ])
     .config(['$routeProvider', function($routeProvider) {
@@ -41,3 +40,9 @@ var myApp = angular.module('myApp', [
         };
     })
     ;
+/*
+google.setOnLoadCallback(function() {
+    angular.bootstrap(document, ['myApp']);
+});
+
+google.load('visualization', '1', {packages: ['corechart']});*/

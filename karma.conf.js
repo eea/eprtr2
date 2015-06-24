@@ -41,7 +41,6 @@ module.exports = function(config){
       'src/main/webapp/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js',
       'src/main/webapp/bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js',
       'src/main/webapp/bower_components/underscore/underscore.js',
-      'src/main/webapp/bower_components/angular-google-chart/ng-google-chart.js',
       'src/main/webapp/bower_components/spin.js/spin.js',
       'src/main/webapp/bower_components/angular-spinner/angular-spinner.js',
       'src/main/webapp/bower_components/spin/javascripts/jquery.spin.js',

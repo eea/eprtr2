@@ -25,7 +25,6 @@
     "angular-leaflet-directive": "0.7.8",
     "Leaflet.awesome-markers": "2.0.2",
     "underscore": "*",
-    "angular-google-chart": "*",
     "angular-spinner":"*",
     "spin":"*"
   },

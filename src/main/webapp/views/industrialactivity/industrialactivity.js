@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.search-filter', 'restangular','ngSanitize','angularSpinner'])
+angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize','angularSpinner','myApp.eprtrgooglechart'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/industrialactivity', {
@@ -470,7 +470,7 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
          			$scope.summaryItems[i].upct = 0.0;
          		}
      			$scope.summaryItems[i].wt = $scope.summaryItems[i].wastetype.replace('-','');
-         		$scope.summaryItems[i].wastetype = $scope.tr_lovwt[$scope.summaryItems[i].wastetype]
+         		$scope.summaryItems[i].wastetype = $scope.tr_lovwt[$scope.summaryItems[i].wastetype];
             }
          	  // Create grafs
          	  var graphData = {};
@@ -481,35 +481,35 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
           	  if ($scope.summaryItems[i].wastetype === $scope.tr_lovwt["NONHW"]) {
                     graphData[$scope.tr_wt["Recovery"]] = {c: [
                         {v: $scope.tr_wt["Recovery"]},
-                        {v: $scope.summaryItems[i].rpct}]};
+                        {v: Math.round($scope.summaryItems[i].rpct * 100) / 100}]};
                     graphData[$scope.tr_wt["Disposal"]] = {c: [
                        {v: $scope.tr_wt["Disposal"]},
-                       {v: $scope.summaryItems[i].dpct}]};
+                       {v: Math.round($scope.summaryItems[i].dpct * 100) / 100}]};
                     graphData[$scope.tr_wt["Unspecified"]] = {c: [
-                       {v: $scope.tr_wt["Unspecified"]},
-                       {v: $scope.summaryItems[i].upct}]};
+                       {v:$scope.tr_wt["Unspecified"]},
+                       {v: Math.round($scope.summaryItems[i].upct * 100) / 100}]};
                 }
           	  if ($scope.summaryItems[i].wastetype === $scope.tr_lovwt["HWIC"]) {
           		  graphData2[$scope.tr_wt["RecoveryDomestic"]] = {c: [
                        {v: $scope.tr_wt["RecoveryDomestic"]},
-                       {v: $scope.summaryItems[i].quantityRecovery}]};
+                       {v: Math.round($scope.summaryItems[i].quantityRecovery * 100) / 100}]};
           		  graphData2[$scope.tr_wt["DisposalDomestic"]] = {c: [
                       {v: $scope.tr_wt["DisposalDomestic"]},
-                      {v: $scope.summaryItems[i].quantityDisposal}]};
+                      {v: Math.round($scope.summaryItems[i].quantityDisposal * 100) / 100}]};
           		  graphData2[$scope.tr_wt["UnspecifiedDomestic"]] = {c: [
                           {v: $scope.tr_wt["UnspecifiedDomestic"]},
-                          {v: $scope.summaryItems[i].quantityUnspec}]};
+                          {v: Math.round($scope.summaryItems[i].quantityUnspec * 100) / 100}]};
           	  }
           	  if ($scope.summaryItems[i].wastetype === $scope.tr_lovwt["HWOC"]) {
           		  graphData2[$scope.tr_wt["RecoveryTransboundary"]] = {c: [
                            {v: $scope.tr_wt["RecoveryTransboundary"]},
-                           {v: $scope.summaryItems[i].quantityRecovery}]};
+                           {v: Math.round($scope.summaryItems[i].quantityRecovery * 100) / 100}]};
           		  graphData2[$scope.tr_wt["DisposalTransboundary"]] = {c: [
                       {v: $scope.tr_wt["DisposalTransboundary"]},
-                      {v: $scope.summaryItems[i].quantityDisposal}]};
+                      {v: Math.round($scope.summaryItems[i].quantityDisposal * 100) / 100}]};
           		  graphData2[$scope.tr_wt["UnspecifiedTransboundary"]] = {c: [
                       {v: $scope.tr_wt["UnspecifiedTransboundary"]},
-                      {v: $scope.summaryItems[i].quantityUnspec}]};
+                      {v: Math.round($scope.summaryItems[i].quantityUnspec * 100) / 100}]};
           	  }          
             }
 
@@ -521,16 +521,16 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
                 }
             }
 
-            $scope.summaryChartObject2 = {};
-            $scope.summaryChartObject2.data = {
+            $scope.summaryChart2 = {};
+            $scope.summaryChart2.data = {
                     "cols": [
                         {id: "t", label: "Name", type: "string"},
                         {id: "s", label: "Total", type: "number"}
                     ],
                     "rows": graphDataArray2
                 };
-            $scope.summaryChartObject2.options = {"title":$scope.tr_c["HazardousWwaste"],"sliceVisibilityThreshold": 0,"height": 300};
-            $scope.summaryChartObject2.type = 'PieChart';
+            $scope.summaryChart2.options = {"title":$scope.tr_c["HazardousWwaste"],"sliceVisibilityThreshold": 0,"height": 300};
+            $scope.summaryChart2.type = 'PieChart';
             
             var graphDataArray = [];
             for (var key in graphData) {
@@ -538,16 +538,17 @@ angular.module('myApp.industrialactivity', ['ngRoute','googlechart', 'myApp.sear
                     graphDataArray = graphDataArray.concat(graphData[key]);
                 }
             }
-            $scope.summaryChartObject1 = {};
-            $scope.summaryChartObject1.data = {
+            $scope.summaryChart1 = {};
+            $scope.summaryChart1.data = {
                 "cols": [
                     {id: "t", label: "Name", type: "string"},
                     {id: "s", label: "Total", type: "number"}
                 ],
                 "rows": graphDataArray
             };
-            $scope.summaryChartObject1.options = {"title":$scope.tr_wt["Nonhazardouswaste"],"sliceVisibilityThreshold": 0,"height": 300};
-            $scope.summaryChartObject1.type = 'PieChart';
+            $scope.summaryChart1.options = {"title":$scope.tr_wt["Nonhazardouswaste"],"sliceVisibilityThreshold": 0,"height": 300};
+            //$scope.summaryChartObject1.type = 'PieChart';
+            $scope.summaryChart1.type = 'PieChart';
             
         	$scope.stopSpinPart('wt');
 

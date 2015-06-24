@@ -32,7 +32,7 @@
       <div class="container-fluid">
       <div class="row bs-header">
        	<div class="col-md-6">
-       		<a href="#home" accesskey="0"><img id="logo" style="width:100px;margin-top:8px;" src="images/EPRTR-logo_white.png"></a>
+       		<a href="#home" accesskey="0" title="European Pollutant Release and Transfer Register"><img id="logo" style="width:100px;margin-top:8px;" src="images/EPRTR-logo_white100.png"></a>
        	</div>
        	<div class="col-md-6 text-right">
        	<a href="http://www.eea.europa.eu" accesskey="2"><img src="images/logo.gif"></a>
@@ -207,14 +207,13 @@
   <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
   <script src="bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js"></script>
   <script src="bower_components/underscore/underscore.js"></script>
-  <script src="bower_components/angular-google-chart/ng-google-chart.js"></script>
   <script src="bower_components/spin.js/spin.js"></script>
   <script src="bower_components/angular-spinner/angular-spinner.js"></script>
   <script src="bower_components/spin/javascripts/jquery.spin.js"></script>
   <!-- endbower -->
   <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
   <!-- endbuild --> 
-  
+  <!-- script type="text/javascript" src="https://www.google.com/jsapi"></script-->
  
   <!-- build:js(src/main/webapp) scripts/scripts.js -->
   <script src="app.js"></script>
@@ -235,8 +234,6 @@
   <script src="views/static/static.js"></script>
   <script src="views/home/navsearch.js"></script>
   <script src="views/home/navlibrary.js"></script>
-  <script src="views/charts/testchart.js"></script>
-  <!--  script src="views/charts/reusable_chart.js"></script -->
   
   <script src="components/search-filter/search-filter.js"></script>
   <script src="components/facilitydetails/fd-main.js"></script>
@@ -256,6 +253,7 @@
   <script src="components/areaoverview/pr_tab.js"></script>
   <script src="components/areaoverview/pt_tab.js"></script>
   <script src="components/pollutants-details/pd-main.js"></script>
+  <script src="components/charts/ng-google-chart.js"></script>
   <script src="directives/dd-text-collapse.js"></script>
   <script src="directives/wastetype-selector.js"></script>
   <script src="directives/medium-selector.js"></script>

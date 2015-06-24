@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.pollutanttransfers', ['ngRoute','googlechart', 'myApp.search-filter', 'restangular','ngSanitize'])
+angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/pollutanttransfers', {
@@ -9,7 +9,9 @@ angular.module('myApp.pollutanttransfers', ['ngRoute','googlechart', 'myApp.sear
         });
     }])
 
-    .controller('PollutantTransfersCtrl', ['$scope','$filter', '$modal', 'searchFilter', 'Restangular','translationService','formatStrFactory', function($scope, $filter, $modal, searchFilter, Restangular,translationService,formatStrFactory) {
+    .controller('PollutantTransfersCtrl', ['$scope','$filter', '$modal', '$rootScope','searchFilter', 'Restangular','translationService',
+                                           'formatStrFactory', function($scope, $filter, $modal, $rootScope, searchFilter, Restangular,
+                                        		   translationService,formatStrFactory) {
         $scope.pollutantPanel = true;
         $scope.pollutantPanelTitle = 'Pollutant transfers';
         $scope.searchFilter = searchFilter;
@@ -148,15 +150,19 @@ angular.module('myApp.pollutanttransfers', ['ngRoute','googlechart', 'myApp.sear
                   }
               }
 
-              $scope.summaryChartObject = {};
-              $scope.summaryChartObject.data = {
+              var heigh = Object.keys(graphData).length * 40;
+              heigh = (heigh<400)?400:heigh;
+              $scope.summaryChart = {};
+              $scope.summaryChart.data = {
                   "cols": [
                       {id: "t", label: "Name", type: "string"},
                       {id: "s", label: "Total", type: "number"}
                   ],
                   "rows": graphDataArray
               };
-              $scope.summaryChartObject.type = 'PieChart';
+              $scope.summaryChart.options = {height:heigh, width:'100%',
+              		"chartArea": {left:'5%',top:'5%',width:'90%'}};
+              $scope.summaryChart.type = 'PieChart';
         	 
         };
 
@@ -185,48 +191,84 @@ angular.module('myApp.pollutanttransfers', ['ngRoute','googlechart', 'myApp.sear
 
              var totalquantity = 0;
              var graphData = {};
+             
+         	var gr = ($scope.regionSearch)?'n':'r';
+        	var group = ($scope.regionSearch)?'nutslevel2RegionCode':'riverBasinDistrictCode';
+        	
+        	if ($scope.queryParams.LOV_AreaGroupID){
+        		gr = 'c';
+        		group = 'countryCode';
+        	}
+             
              for (var i = 0; i < $scope.areaComparisonItems.length; i++) {
                  // Test for creating country
-             	if (!graphData[$scope.areaComparisonItems[i].countryCode]) {
+            	 var gkey = '$scope.areaComparisonItems[i][group]';
+             	switch (gr) {
+				case 'n':
+					gkey = $scope.tr_lnr[$scope.areaComparisonItems[i][group]];
+					break;
+				case 'r':
+					gkey = $scope.tr_lrbd[$scope.areaComparisonItems[i][group]];
+					break;
+				case 'c':
+					gkey = $scope.tr_lco[$scope.areaComparisonItems[i][group]];
+					break;
+				default:
+					break;
+				}
+
+             	if (!graphData[gkey]) {
              		
              		//$scope.tr_chart.AREA
-                     graphData[$scope.areaComparisonItems[i].countryCode] = 
+                     graphData[gkey] = 
                      {c: [
-                         {v: $scope.areaComparisonItems[i].countryCode},
+                         {v: gkey},
                          {v: $scope.areaComparisonItems[i]['quantity']}
 
                      ]};
                      totalquantity +=$scope.areaComparisonItems[i]['quantity'];
                  } else {
-                     graphData[$scope.areaComparisonItems[i].countryCode].c[1].v =
-                         graphData[$scope.areaComparisonItems[i].countryCode].c[1].v + $scope.areaComparisonItems[i]['quantity'];
+                     graphData[gkey].c[1].v =
+                         graphData[gkey].c[1].v + $scope.areaComparisonItems[i]['quantity'];
                      totalquantity +=$scope.areaComparisonItems[i]['quantity'];
                  }
              }
 
              var graphDataArray = [];
+             var numOfKeys = 0;
              for (var key in graphData) {
                  if (graphData.hasOwnProperty(key)) {
                  	// Calculate % of total quantity
                  	graphData[key].c[1].v =  Math.round(((graphData[key].c[1].v * 100) / totalquantity)*100)/100;
                      graphDataArray = graphDataArray.concat(graphData[key]);
                  }
+                 numOfKeys ++;
              }
              
              graphDataArray = _.sortBy(graphDataArray, function(element) {  return element.c[1].v;}).reverse();
-         	
+         	 var heigh = (numOfKeys*30)+30;
+
              // $scope.tr_chart.PERCENT_TOTAL;
-             $scope.areaComparisonChartObject = {};
-             $scope.areaComparisonChartObject.data = {
+             $scope.areaComparisonChart = {};
+             $scope.areaComparisonChart.data = {
                  "cols": [
                      {id: "t", label: "Name", type: "string"},
                      {id: "s", label: "Total", type: "number"}
                  ],
                  "rows": graphDataArray
              };
-             
-             
-             $scope.areaComparisonChartObject.type = 'BarChart';
+             $scope.areaComparisonChart.options= {
+         		"tooltip": {"isHtml": false}, 
+         		"height": heigh, 
+         		"width": '100%', 
+         		"legend": {"position": 'none'},
+         		"hAxis": {format: '#\'%\''},
+         		"chartArea": {"left":200}
+         		};
+             $scope.areaComparisonChart.type = 'BarChart';
+             $rootScope.$emit('resizeMsg');
+             //$scope.areaComparisonChart.draw();
+
         };
         
         $scope.updateActivitiesData = function()

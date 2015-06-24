@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-filter', 'restangular','ngSanitize','myApp.wastetransferconfidential'])
+angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize',
+                                        'myApp.wastetransferconfidential','myApp.wasteAreaComparison'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/wastetransfers', {
@@ -244,6 +245,12 @@ angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-f
         	{
         		return;
         	}
+        	if(type.toUpperCase() === "AREACOMPARISON" )
+        	{
+        		//$scope.areacomparisonrefresh = true;
+        	}
+        	
+        	areacomparisonrefresh
         	if(type.toUpperCase() === "FACILITIES")
         	{
 

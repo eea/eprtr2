@@ -151,9 +151,11 @@ public class PollutantSearchFilter {
 		Predicate whereClause = cb.conjunction();
 		if (pollutantID != null) {
 			whereClause.getExpressions().add(cb.equal(qr.get(LovPollutant_.LOV_PollutantID), pollutantID));
+			whereClause.getExpressions().add(cb.isNull(qr.get(LovPollutant_.endYear)));
 		}
 		if (pollutantGroupID != null) {
 			whereClause.getExpressions().add(cb.equal(qr.get(LovPollutant_.parentID), pollutantGroupID));
+			whereClause.getExpressions().add(cb.isNull(qr.get(LovPollutant_.endYear)));
 		}
 		return whereClause;
 	}

@@ -9,7 +9,7 @@ myApp.directive('prSelector', ['$compile','$http', '$filter', 'Restangular', 'tr
     return {
         restrict: 'A',
         scope: {
-        	queryparams: '=',
+        	queryparams: '=?',
         	medium: '=',
         },
         replace: true,
@@ -60,7 +60,7 @@ myApp.directive('prSelector', ['$compile','$http', '$filter', 'Restangular', 'tr
         		}
             }, true);
             
-            scope.$watch('medfilter.prsel', function(value){
+            scope.$watch('medfilter.prsel', function(newvalue,oldvalue){
             	if(scope.medfilter.prsel != undefined){
             		scope.medium = scope.medfilter.prsel;
             	}
