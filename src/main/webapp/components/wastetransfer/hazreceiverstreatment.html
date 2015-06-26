@@ -1,0 +1,38 @@
+			<span class="col-md-12 ontop" us-spinner="{radius:16, width:6, length: 12}" spinner-key="spinner-1"></span>
+			<div class="row" ng-if="visible">
+			<div class="col-md-12 table-responsive top-buffer10" ng-if="showTable" >
+			               <table class="table table-striped table-condensed table-hover">
+                    <thead>
+                    <tr>
+                        <th class="col-Min150" custom-sort order="'fromFacilityName'" sort="sort">{{tr_f.TransferedFrom}}&nbsp;</th>
+                        <th class="col-Min75" custom-sort order="'treatment'" sort="sort">{{tr_c.Treatment}}&nbsp;</th>
+                        <th class="col-Min75" custom-sort order="'treaterName'" sort="sort">{{tr_c.TreaterName}}&nbsp;</th>
+                        <th class="col-Min75">{{tr_c.Address}}&nbsp;</th>
+                        <th class="col-Min75">{{tr_f.SiteAddress}} %&nbsp;</th>
+                        <th class="text-right col-Min75" custom-sort order="'quantity'" sort="sort">{{tr_c.Quantity}}&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                        <td colspan="6">
+                            <div ng-show="hasItems()">
+                                <pagination boundary-links="true" ng-model="$parent.currentPage" total-items="totalItemCount" items-per-page="itemsPerPage" max-size="gap" class="pagination pull-right" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+                            </div>
+                        </td>
+                    </tfoot>
+                    <tbody>
+                    <tr ng-repeat="item in items">
+                        <td>
+                        	{{tr_tr_lco[item.fromFacilityName]}}
+                        </td>
+                        <td >{{tr_tr_lwt[item.treatment]}}</td>
+                        <td >{{item.treaterName}}</td>
+                        <td >{{item.treaterAddress}}, {{item.treaterPostalCode}}, {{item.treaterCity}}, {{tr_tr_lco[item.treaterCountryCode]}}</p></td>
+                        <td >{{item.treaterSiteAddress}}, {{item.treaterSitePostalCode}}, {{item.treaterSiteCity}}, {{tr_tr_lco[item.treaterSiteCountryCode]}}</p></td>
+                        <td class="text-right">{{ff.formatMethod(item.quantity,item.confidentialIndicator)}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                
+                   <p class="text-warning" ng-if="items.length < 1">{{tr_c.NoResultsFound}}</p>
+                </div>
+                </div>

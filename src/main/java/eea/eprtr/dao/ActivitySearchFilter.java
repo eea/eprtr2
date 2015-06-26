@@ -13,6 +13,10 @@ import eea.eprtr.model.Pollutanttransfer_;
 import eea.eprtr.model.Wastetransfer;
 import eea.eprtr.model.WastetransferConfidential;
 import eea.eprtr.model.WastetransferConfidential_;
+import eea.eprtr.model.WastetransferHazardoustreater;
+import eea.eprtr.model.WastetransferHazardoustreater_;
+import eea.eprtr.model.WastetransferReceivingcountry;
+import eea.eprtr.model.WastetransferReceivingcountry_;
 import eea.eprtr.model.Wastetransfer_;
 
 
@@ -126,6 +130,46 @@ public class ActivitySearchFilter {
 			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferConfidential_.LOV_NACEActivityID), naceActivityID));
 		} else if (naceSubActivityID != null) {
 			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferConfidential_.LOV_NACESubActivityID), naceSubActivityID));
+		}
+		 
+		return whereClause;
+	}
+
+	public Predicate buildWhereClauseWastetransferReceivingcountry(
+			CriteriaBuilder cb, Root<WastetransferReceivingcountry> qr) {
+		Predicate whereClause = cb.conjunction();
+		if (aiSectorID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.LOV_IASectorID), aiSectorID));
+		} else if (aiActivityID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.LOV_IAActivityID), aiActivityID));
+		} else if (aiSubActivityID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.LOV_IASubActivityID), aiSubActivityID));
+		} else if (naceSectorID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.LOV_NACESectorID), naceSectorID));
+		} else if (naceActivityID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.LOV_NACEActivityID), naceActivityID));
+		} else if (naceSubActivityID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.LOV_NACESubActivityID), naceSubActivityID));
+		}
+		 
+		return whereClause;
+	}
+
+	public Predicate buildWhereClauseWastetransferHazardoustreater(
+			CriteriaBuilder cb, Root<WastetransferHazardoustreater> qr) {
+		Predicate whereClause = cb.conjunction();
+		if (aiSectorID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferHazardoustreater_.LOV_IASectorID), aiSectorID));
+		} else if (aiActivityID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferHazardoustreater_.LOV_IAActivityID), aiActivityID));
+		} else if (aiSubActivityID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferHazardoustreater_.LOV_IASubActivityID), aiSubActivityID));
+		} else if (naceSectorID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferHazardoustreater_.LOV_NACESectorID), naceSectorID));
+		} else if (naceActivityID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferHazardoustreater_.LOV_NACEActivityID), naceActivityID));
+		} else if (naceSubActivityID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferHazardoustreater_.LOV_NACESubActivityID), naceSubActivityID));
 		}
 		 
 		return whereClause;

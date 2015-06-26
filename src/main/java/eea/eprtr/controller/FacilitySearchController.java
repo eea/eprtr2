@@ -59,7 +59,7 @@ public class FacilitySearchController {
     		
     		@RequestParam(value = "WasteTypeCode", required = false) List<String> wasteTypeCode,
     		@RequestParam(value = "WasteTreatmentCode", required = false) List<String> wasteTreatmentCode,
-    		@RequestParam(value = "WHPCountryID", required = false) Integer whpCountryID,
+    		@RequestParam(value = "whpCountryCode", required = false) String whpCountryCode,
     		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
     		
     		@RequestParam(value = "offset") Integer offset,
@@ -73,7 +73,7 @@ public class FacilitySearchController {
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
-		WasteSearchFilter wasteFilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID, confidentialIndicator);
+		WasteSearchFilter wasteFilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryCode, confidentialIndicator);
 		FacilitySearchFilter filter = new FacilitySearchFilter(facilityName, cityName, reportingYearFilter, locationFilter, activityFilter, pollutantFilter, wasteFilter);
 		
 		long facilitiesWithConfidentialityCount = facilitySearchRepository.getFacilityCount(filter.createConfidentialityFilter());
@@ -120,7 +120,7 @@ public class FacilitySearchController {
     		
     		@RequestParam(value = "WasteTypeCode", required = false) List<String> wasteTypeCode,
     		@RequestParam(value = "WasteTreatmentCode", required = false) List<String> wasteTreatmentCode,
-    		@RequestParam(value = "WHPCountryID", required = false) Integer whpCountryID,
+    		@RequestParam(value = "whpCountryCode", required = false) String whpCountryCode,
     		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
     		
     		HttpServletResponse response) {
@@ -129,7 +129,7 @@ public class FacilitySearchController {
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
-		WasteSearchFilter wasteFilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryID, confidentialIndicator);
+		WasteSearchFilter wasteFilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryCode, confidentialIndicator);
 		FacilitySearchFilter filter = new FacilitySearchFilter(facilityName, cityName, reportingYearFilter, locationFilter, activityFilter, pollutantFilter, wasteFilter);
 		
 		long facilitiesWithConfidentialityCount = facilitySearchRepository.getFacilityCount(filter.createConfidentialityFilter());

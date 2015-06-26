@@ -8,19 +8,19 @@ import javax.persistence.TypedQuery;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import eea.eprtr.model.Reportingcountry;
+import eea.eprtr.model.AreagroupReportingcountry;
 
 @RestController
-public class ReportingCountryController {
+public class AreagroupReportingcountryController {
 
 	@PersistenceContext
     private EntityManager em;
 	
-	@RequestMapping("/reportingCountries")
-    public Reportingcountry[] reportingCountries() {
+	@RequestMapping("/areagroupReportingCountries")
+    public AreagroupReportingcountry[] getAreagroupReportingCountries() {
 		
-		TypedQuery<Reportingcountry> query = em.createNamedQuery("Reportingcountry.findAll", Reportingcountry.class);
-		return query.getResultList().toArray(new Reportingcountry[0]);
+		TypedQuery<AreagroupReportingcountry> query = em.createNamedQuery("AreagroupReportingcountry.findAll", AreagroupReportingcountry.class);
+		return query.getResultList().toArray(new AreagroupReportingcountry[0]);
 		
 		/*TypedQuery<Reportingcountry> query = em.createQuery("SELECT r FROM Reportingcountry r", Reportingcountry.class);
 		return query.getResultList();//.toArray(new Reportingcountry[0]);*/

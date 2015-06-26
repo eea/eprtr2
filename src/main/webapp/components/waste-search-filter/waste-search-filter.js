@@ -58,7 +58,7 @@ angular.module('myApp.wasteSearchFilter', ['restangular', 'myApp.search-filter']
                 }
 
                 if (this.selectedReceivingCountry.code) {
-                    queryParams.WHPCountryID = this.selectedReceivingCountry.lov_CountryID;
+                    queryParams.WHPCountryCode = this.selectedReceivingCountry.code;
                 }
             }
         };

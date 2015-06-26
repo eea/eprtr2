@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize',
-                                        'myApp.wastetransferconfidential','myApp.wasteAreaComparison'])
+                                        'myApp.wastetransferconfidential','myApp.wasteAreaComparison','myApp.hazTransboundary','myApp.HazReceiversWasteTab'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/wastetransfers', {
@@ -24,6 +24,10 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.wtconfreasoncoll = [];
         $scope.queryParams.ReportingYear = -1;
         $scope.SearchType="SUMMARY";
+
+        $scope.showhazreceivers = false;
+
+        
         $scope.translate = function()
         {
         	translationService.get().then(function (data) {
@@ -224,6 +228,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         };
         $scope.getTabData = function(type)
         {
+            $scope.showhazreceivers = false;
         
         	if(!$scope.queryParams.SearchType)
         	{
@@ -245,12 +250,18 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         	{
         		return;
         	}
+
+        	
+
         	if(type.toUpperCase() === "AREACOMPARISON" )
         	{
         		//$scope.areacomparisonrefresh = true;
         	}
-        	
-        	areacomparisonrefresh
+        	if(type.toUpperCase() === "HAZRECEIVERS" )
+        	{
+                $scope.showhazreceivers = true;
+                return;
+        	}
         	if(type.toUpperCase() === "FACILITIES")
         	{
 
@@ -376,16 +387,16 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
               }
           }
 
-          $scope.summaryChartObject2 = {};
-          $scope.summaryChartObject2.data = {
+          $scope.summaryChart2 = {};
+          $scope.summaryChart2.data = {
                   "cols": [
                       {id: "t", label: "Name", type: "string"},
                       {id: "s", label: "Total", type: "number"}
                   ],
                   "rows": graphDataArray2
               };
-          $scope.summaryChartObject2.options = {"title":$scope.tr_c["HazardousWwaste"],"sliceVisibilityThreshold": 0};
-          $scope.summaryChartObject2.type = 'PieChart';
+          $scope.summaryChart2.options = {"title":$scope.tr_c["HazardousWwaste"],"sliceVisibilityThreshold": 0};
+          $scope.summaryChart2.type = 'PieChart';
           
           var graphDataArray = [];
           for (var key in graphData) {
@@ -393,16 +404,16 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
                   graphDataArray = graphDataArray.concat(graphData[key]);
               }
           }
-          $scope.summaryChartObject1 = {};
-          $scope.summaryChartObject1.data = {
+          $scope.summaryChart1 = {};
+          $scope.summaryChart1.data = {
               "cols": [
                   {id: "t", label: "Name", type: "string"},
                   {id: "s", label: "Total", type: "number"}
               ],
               "rows": graphDataArray
           };
-          $scope.summaryChartObject1.options = {"title":$scope.tr_wt["Nonhazardouswaste"],"sliceVisibilityThreshold": 0};
-          $scope.summaryChartObject1.type = 'PieChart';
+          $scope.summaryChart1.options = {"title":$scope.tr_wt["Nonhazardouswaste"],"sliceVisibilityThreshold": 0};
+          $scope.summaryChart1.type = 'PieChart';
         };
         
         /**

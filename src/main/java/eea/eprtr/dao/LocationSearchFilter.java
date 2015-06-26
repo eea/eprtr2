@@ -15,6 +15,10 @@ import eea.eprtr.model.Pollutanttransfer_;
 import eea.eprtr.model.Wastetransfer;
 import eea.eprtr.model.WastetransferConfidential;
 import eea.eprtr.model.WastetransferConfidential_;
+import eea.eprtr.model.WastetransferHazardoustreater;
+import eea.eprtr.model.WastetransferHazardoustreater_;
+import eea.eprtr.model.WastetransferReceivingcountry;
+import eea.eprtr.model.WastetransferReceivingcountry_;
 import eea.eprtr.model.Wastetransfer_;
 
 public class LocationSearchFilter {
@@ -122,5 +126,38 @@ public class LocationSearchFilter {
 		}
 		return whereClause;
 	}
+
+	public Predicate buildWhereClauseWastetransferReceivingcountry(
+			CriteriaBuilder cb, Root<WastetransferReceivingcountry> qr) {
+		Predicate whereClause = cb.conjunction();
+		if (areaGroupID != null) {
+			List<Integer> countryIDs = repository.getCountryIDs(areaGroupID);
+			whereClause.getExpressions().add(qr.get(WastetransferReceivingcountry_.LOV_CountryID).in(countryIDs));
+		} else if (countryID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.LOV_CountryID), countryID));
+			if (regionID != null) {
+				whereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.LOV_NUTSRLevel2ID), regionID));
+			} else if (rbdID != null) {
+				whereClause.getExpressions().add(cb.equal(qr.get(WastetransferReceivingcountry_.LOV_RiverBasinDistrictID), rbdID));
+			}
+		}
+		return whereClause;
+	}
+
+	public Predicate buildWhereClauseWastetransferHazardoustreater(
+			CriteriaBuilder cb, Root<WastetransferHazardoustreater> qr) {
+	Predicate whereClause = cb.conjunction();
+	if (areaGroupID != null) {
+		List<Integer> countryIDs = repository.getCountryIDs(areaGroupID);
+		whereClause.getExpressions().add(qr.get(WastetransferHazardoustreater_.LOV_CountryID).in(countryIDs));
+	} else if (countryID != null) {
+		whereClause.getExpressions().add(cb.equal(qr.get(WastetransferHazardoustreater_.LOV_CountryID), countryID));
+		if (regionID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferHazardoustreater_.LOV_NUTSRLevel2ID), regionID));
+		} else if (rbdID != null) {
+			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferHazardoustreater_.LOV_RiverBasinDistrictID), rbdID));
+		}
+	}
+	return whereClause;	}
 	
 }
