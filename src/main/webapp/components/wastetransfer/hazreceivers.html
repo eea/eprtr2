@@ -1,0 +1,56 @@
+			<span class="col-md-12 ontop" us-spinner="{radius:16, width:6, length: 12}" spinner-key="spinner-1"></span>
+			<div class="row" ng-if="visible">
+			<div class="col-md-12 table-responsive top-buffer10" ng-if="showTable" >
+			<table class="table table-striped table-condensed table-hover" >
+                    <thead>
+                    <tr>
+                        <th class="col-Min200">{{tr_c.Country}}&nbsp;</th>
+                        <th class="text-right col-Min75">{{tr_c.Facilities}}&nbsp;</th>
+                        <th class="text-right col-Min75">{{tr_c.Total}}&nbsp;</th>
+                        <th class="text-right col-Min75">{{tr_c.TreatmentRecovery}}&nbsp;</th>
+                        <th class="text-right col-Min75">{{tr_c.TreatmentDisposal}}&nbsp;</th>
+                        <th class="text-right col-Min75">{{tr_c.TreatmentUnspecified}}&nbsp;</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- Level1 -->
+                    <tr ng-repeat-start="item in items">
+       				<td ng-if="item.recievingCountryCode != 'TOTAL_KEY' && item.recievingCountryCode != 'CONF' ">
+                       	<img class="handcursor" ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
+                       	<img class="handcursor" ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
+                       	<a ng-click="showing=!showing">{{tr_lco[item.recievingCountryCode]}}</a>         	
+                     </td>
+       				<td ng-if="item.recievingCountryCode == 'TOTAL_KEY' || item.recievingCountryCode == 'CONF' ">
+						{{tr_lco[item.recievingCountryCode]}}         	
+                     </td>
+                    <td >
+                    {{$filter('number')(item.facilities)}}
+                    </td>
+                    <td class="text-right">
+                    {{ff.formatMethod(item.quantityTotal)}}
+                    </td>
+                    <td class="text-right">
+                    {{ff.formatMethod(item.quantityRecovery)}}
+                    </td>
+                    <td class="text-right">
+                    {{ff.formatMethod(item.quantityDisposal)}}
+                    </td>
+                    <td class="text-right">
+                    {{ff.formatMethod(item.quantityUnspec)}}
+                    </td>
+                    </tr>
+                    <!-- Level2 -->
+                    <tr ng-show="showing" >
+                    	<td colspan="6">
+                    		<div class="innerlevel2">{{item.recievingCountryCode}}
+								<!-- haz-receivers-treatment-tab  queryparams="queryparams" whpcountrycode={{item.recievingCountryCode}} visible="showing" -->
+                    		</div>
+                    	</td>
+                   	</tr>
+                    <tr ng-repeat-end ng-hide="true"></tr>
+                    </tbody>
+                </table>
+                
+                   <p class="text-warning" ng-if="items.length < 1">{{tr_c.NoResultsFound}}</p>
+                </div>
+                </div>

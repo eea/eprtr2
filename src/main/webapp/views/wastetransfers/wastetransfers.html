@@ -612,6 +612,7 @@
            	</tab>
            	 <tab heading="Haz. receivers" ng-click="getTabData('HAZRECEIVERS');activateTab('hazreceivers')" active="active.hazreceivers">
            	 <div ng-show="searchResults">
+           	 	<haz-receivers-waste-tab queryparams="queryParams" visible="showhazreceivers" />
            	 </div>
            	</tab>
            	<tab heading="Confidentiality" ng-click="getTabData('CONFIDENTIALITY');activateTab('confidentiality')" active="active.confidentiality">

@@ -13,6 +13,8 @@ import eea.eprtr.model.Pollutanttransfer_;
 import eea.eprtr.model.Wastetransfer;
 import eea.eprtr.model.WastetransferConfidential;
 import eea.eprtr.model.WastetransferConfidential_;
+import eea.eprtr.model.WastetransferHazardoustreater;
+import eea.eprtr.model.WastetransferHazardoustreater_;
 import eea.eprtr.model.WastetransferReceivingcountry;
 import eea.eprtr.model.WastetransferReceivingcountry_;
 import eea.eprtr.model.Wastetransfer_;
@@ -88,6 +90,18 @@ public class ReportingYearSearchFilter {
 		}
 		else{
 			whereClause.getExpressions().add(cb.greaterThan(qr.get(WastetransferReceivingcountry_.reportingYear),2006));
+		}
+		return whereClause;
+	}
+
+	public Predicate buildWhereClauseWastetransferHazardoustreater(
+			CriteriaBuilder cb, Root<WastetransferHazardoustreater> qr) {
+		Predicate whereClause = cb.conjunction();
+		if (reportingYear != null){
+			whereClause.getExpressions().add(cb.equal(qr.get(WastetransferHazardoustreater_.reportingYear), reportingYear));
+		}
+		else{
+			whereClause.getExpressions().add(cb.greaterThan(qr.get(WastetransferHazardoustreater_.reportingYear),2006));
 		}
 		return whereClause;
 	}

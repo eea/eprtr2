@@ -6,6 +6,7 @@ import javax.persistence.criteria.Root;
 
 import eea.eprtr.model.Wastetransfer;
 import eea.eprtr.model.WastetransferConfidential;
+import eea.eprtr.model.WastetransferHazardoustreater;
 import eea.eprtr.model.WastetransferReceivingcountry;
 
 public class WastetransferSearchFilter {
@@ -122,6 +123,31 @@ public class WastetransferSearchFilter {
 			whereClause.getExpressions().add(activitySearchWhereClause);
 		}
 		Predicate wasteSearchWhereClause = wasteFilter.buildWhereClauseWastetransferReceivingcountry(cb, qr);
+		if (wasteSearchWhereClause.getExpressions().size() > 0) {
+			whereClause.getExpressions().add(wasteSearchWhereClause);
+		}
+		return whereClause;
+	}
+
+
+	public Predicate buildWhereClauseWastetransferHazardoustreater(
+			CriteriaBuilder cb, Root<WastetransferHazardoustreater> qr) {
+		Predicate whereClause = cb.conjunction();
+		if (reportingYearFilter != null){
+			Predicate reportingYearSearchWhereClause = reportingYearFilter.buildWhereClauseWastetransferHazardoustreater(cb, qr);
+			if (reportingYearSearchWhereClause.getExpressions().size() > 0) {
+				whereClause.getExpressions().add(reportingYearSearchWhereClause);
+			}
+		}
+		Predicate locationSearchWhereClause = locationFilter.buildWhereClauseWastetransferHazardoustreater(cb, qr);
+		if (locationSearchWhereClause.getExpressions().size() > 0) {
+			whereClause.getExpressions().add(locationSearchWhereClause);
+		}
+		Predicate activitySearchWhereClause = activityFilter.buildWhereClauseWastetransferHazardoustreater(cb, qr);
+		if (activitySearchWhereClause.getExpressions().size() > 0) {
+			whereClause.getExpressions().add(activitySearchWhereClause);
+		}
+		Predicate wasteSearchWhereClause = wasteFilter.buildWhereClauseWastetransferHazardoustreater(cb, qr);
 		if (wasteSearchWhereClause.getExpressions().size() > 0) {
 			whereClause.getExpressions().add(wasteSearchWhereClause);
 		}

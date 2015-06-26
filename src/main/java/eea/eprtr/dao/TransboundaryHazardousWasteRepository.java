@@ -14,11 +14,14 @@ import javax.persistence.criteria.Subquery;
 
 import org.springframework.stereotype.Repository;
 
+import eea.eprtr.model.HazardousWasteTreater;
 import eea.eprtr.model.Receivingcountry;
 import eea.eprtr.model.Receivingcountry_;
 import eea.eprtr.model.Reportingcountry;
 import eea.eprtr.model.Reportingcountry_;
 import eea.eprtr.model.TransboundaryHazardousWasteData;
+import eea.eprtr.model.WastetransferHazardoustreater;
+import eea.eprtr.model.WastetransferHazardoustreater_;
 import eea.eprtr.model.WastetransferReceivingcountry;
 import eea.eprtr.model.WastetransferReceivingcountry_;
 
@@ -48,7 +51,7 @@ public class TransboundaryHazardousWasteRepository {
 					qr.get(WastetransferReceivingcountry_.reportingYear),
 					cb.countDistinct(qr.get(WastetransferReceivingcountry_.facilityReportID)).as(Integer.class),
 					cb.<String>selectCase().when(cb.isNull(qr.get(WastetransferReceivingcountry_.receivingCountryCode))
-							, "UKN").otherwise(qr.get(WastetransferReceivingcountry_.receivingCountryCode)),
+							, "CONF").otherwise(qr.get(WastetransferReceivingcountry_.receivingCountryCode)),
 					qr.get(WastetransferReceivingcountry_.countryCode),
 					cb.sum(qr.get(WastetransferReceivingcountry_.quantityTotal)),
 					cb.sum(qr.get(WastetransferReceivingcountry_.quantityRecovery)),
@@ -144,6 +147,87 @@ public class TransboundaryHazardousWasteRepository {
 		
 		return thwd;
 	}
-	
+/**
+ * Remember to set the whpCountryID in the WasteSearchFilter 
+ * @param WastetransferSearchFilter
+ * @param orderBy
+ * @param pager
+ * @return List<HazardousWasteTreater>
+ */
+	public List<HazardousWasteTreater> getHazardousWasteTreaterList(WastetransferSearchFilter filter, OrderBy orderBy, QueryPager pager){
+		
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		
+		CriteriaQuery<HazardousWasteTreater> cq = cb.createQuery(HazardousWasteTreater.class);
+		Root<WastetransferHazardoustreater> qr = cq.from(WastetransferHazardoustreater.class);
+		
+		/*new HazardousWasteTreater(
+		 * 		fromFacilityName, 
+		 * 		facilityConfidentialIndicator, 
+		 * 		treaterName, 
+		 * 		treaterAddress, 
+		 * 		treaterCity, 
+		 * 		treaterPostalCode, 
+		 * 		treaterCountryCode, 
+		 * 		treaterSiteAddress, 
+		 * 		treaterSiteCity, 
+		 * 		treaterSitePostalCode, 
+		 * 		treaterSiteCountryCode,
+		 * 		quantity, 
+		 * 		unit, 
+		 * 		treatment, 
+		 * 		confidentialIndicator);*/
+		cq.select(cb.construct(HazardousWasteTreater.class, 
+				qr.get(WastetransferHazardoustreater_.facilityName),
+				qr.get(WastetransferHazardoustreater_.confidentialIndicatorFacility),
+				qr.get(WastetransferHazardoustreater_.WHPName),
+				qr.get(WastetransferHazardoustreater_.WHPAddress),
+				qr.get(WastetransferHazardoustreater_.WHPCity),
+				qr.get(WastetransferHazardoustreater_.WHPPostalCode),
+				qr.get(WastetransferHazardoustreater_.WHPCountryCode),
+				qr.get(WastetransferHazardoustreater_.WHPSiteAddress),
+				qr.get(WastetransferHazardoustreater_.WHPSiteCity),
+				qr.get(WastetransferHazardoustreater_.WHPSitePostalCode),
+				qr.get(WastetransferHazardoustreater_.WHPSiteCountryCode),
+				qr.get(WastetransferHazardoustreater_.quantity),
+				qr.get(WastetransferHazardoustreater_.unitCode),
+				qr.get(WastetransferHazardoustreater_.wasteTreatmentCode),
+				qr.get(WastetransferHazardoustreater_.confidentialIndicator)));
+		
+		/*Predicate myfilter = ;
+		myfilter.getExpressions().add(cb.equal(qr.get(WastetransferHazardoustreater_.WHPCountryCode),receivingCountryCode));*/
+		cq.where(filter.buildWhereClauseWastetransferHazardoustreater(cb, qr));
+		
+		orderBy.apply(cb, cq, qr);
+		TypedQuery<HazardousWasteTreater> q = em.createQuery(cq);
+		pager.apply(q);
+
+		List<HazardousWasteTreater> data = q.getResultList();
+		return data;
+	}
+
+	/**
+	 * Remember to set the whpCountryID in the WasteSearchFilter 
+	 * @param WastetransferSearchFilter
+	 * @return Integer
+	 */
+		public Integer getHazardousWasteTreaterCount(WastetransferSearchFilter filter){
+			
+			CriteriaBuilder cb = em.getCriteriaBuilder();
+			
+			CriteriaQuery<Integer> cq = cb.createQuery(Integer.class);
+			Root<WastetransferHazardoustreater> qr = cq.from(WastetransferHazardoustreater.class);
+			
+			cq.select(cb.construct(Integer.class, 
+					cb.count(qr.get(WastetransferHazardoustreater_.facilityName))));
+			
+			cq.where(filter.buildWhereClauseWastetransferHazardoustreater(cb, qr));
+			
+			TypedQuery<Integer> q = em.createQuery(cq);
+
+			Integer data = q.getSingleResult();
+			return data;
+		}
+
 }
 	

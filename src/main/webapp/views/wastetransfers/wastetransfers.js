@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize',
-                                        'myApp.wastetransferconfidential','myApp.wasteAreaComparison','myApp.hazTransboundary'])
+                                        'myApp.wastetransferconfidential','myApp.wasteAreaComparison','myApp.hazTransboundary','myApp.HazReceiversWasteTab'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/wastetransfers', {
@@ -24,6 +24,10 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.wtconfreasoncoll = [];
         $scope.queryParams.ReportingYear = -1;
         $scope.SearchType="SUMMARY";
+
+        $scope.showhazreceivers = false;
+
+        
         $scope.translate = function()
         {
         	translationService.get().then(function (data) {
@@ -224,6 +228,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         };
         $scope.getTabData = function(type)
         {
+            $scope.showhazreceivers = false;
         
         	if(!$scope.queryParams.SearchType)
         	{
@@ -245,9 +250,17 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         	{
         		return;
         	}
+
+        	
+
         	if(type.toUpperCase() === "AREACOMPARISON" )
         	{
         		//$scope.areacomparisonrefresh = true;
+        	}
+        	if(type.toUpperCase() === "HAZRECEIVERS" )
+        	{
+                $scope.showhazreceivers = true;
+                return;
         	}
         	if(type.toUpperCase() === "FACILITIES")
         	{
