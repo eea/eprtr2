@@ -40,10 +40,52 @@ angular.module('myApp.pollutantinfo', ['ngRoute'])
 				case 'pollutantheadnotes':
 					$scope.label_pollutant_headnotes = label._text;
 					break;
+				case 'pollutantheadlink':
+					$scope.label_pollutant_headlink = label._text;
+					break;
+				case 'pollutantheadlink2':
+					$scope.label_pollutant_headlink2 = label._text;
+					break;
+				case 'pollutantheadlinkLabel':
+					$scope.label_pollutant_headlink_label = label._text;
+					break;
+				case 'pollutantheadnotes2':
+					$scope.label_pollutant_headnotes2 = label._text;
+					break;
+				case 'pollutantheadnotes3':
+					var text = label._text;
+					var sub = label.sub;
+					$scope.label_pollutant_headnotes3 = $scope.stringReplaceSub(text,sub);
+					break;
 				}
 			}
 		})
 	};
+	
+	$scope.stringReplaceSub = function(str, subs){
+		if(subs == undefined || subs.length<1){
+			return str;
+		}
+		var sub_length = 0;
+		if(subs instanceof Array){
+			sub_length = subs.length;
+		}else{
+			sub_length=1;
+			subs = [subs];
+		}
+		
+		var counter = 0;
+		for(var i = 0; i<subs.length; i++){
+			var index = str.indexOf("\n");
+			if(index == -1){
+				str += '<sub>'+subs[i]+'</sub>';
+			}else{
+				str = str.substring(0,index)+ '<sub>'+subs[i]+'</sub>'+str.substring(index+1,str.length);
+			}
+		}
+		return str;
+	}
+	
 	$scope.getHeadData();
 		
 }]);

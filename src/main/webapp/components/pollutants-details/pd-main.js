@@ -9,7 +9,9 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 	
 	$scope.getPollutantData = function(){
 		$http.get('translations/pollutants_details_en-gb.json').success(function(data, status) {
+			$scope.pollutants_details = new Array();
 			for(var i = 0; i<data.pollutants.pollutant.length;i++){
+				$scope.pollutants_details[data.pollutants.pollutant[i].lov_pollutant_id] =data.pollutants.pollutant[i];
 				if(data.pollutants.pollutant[i].lov_pollutant_id == $scope.pollutantid){
 					$scope.pollutant_details = data.pollutants.pollutant[i];
 				}
@@ -57,6 +59,16 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 				var synonym = $scope.pollutant_group_details.synonyms.synonym;
 				$scope.pollutant_group_details.synonyms.synonym = new Array();
 				$scope.pollutant_group_details.synonyms.synonym = [synonym];
+			}
+			
+			if($scope.pollutant_group_details.pollutant_group_info.group_member instanceof Array){
+				$scope.pollutant_group_details.group_members = new Array();
+				for(var i=0; i<$scope.pollutant_group_details.pollutant_group_info.group_member.length;i++){
+					var id = $scope.pollutant_group_details.pollutant_group_info.group_member[i].pollutantno;
+					$scope.pollutant_group_details.group_members[i] = new Object();
+					$scope.pollutant_group_details.group_members[i].id = id;
+					$scope.pollutant_group_details.group_members[i].name = $scope.pollutants_details[id].pollutant_name;
+				}
 			}
 			
 			pollutant_group_details = $scope.pollutant_group_details;
@@ -180,23 +192,23 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 						}
 						if(lookup_phrase._other_provision_overview == other_provision_id){
 							if(lookup_phrase.hasOwnProperty('sub')){
-								other_provisions[j].overview  = lookup_phrase._text;	
-							}else{
 								other_provisions[j].overview = $scope.stringReplaceSub(lookup_phrase._text, lookup_phrase.sub);
+							}else{
+								other_provisions[j].overview  = lookup_phrase._text;
 							}
 						}
 						if(lookup_phrase._other_provision_reporting == other_provision_id){
 							if(lookup_phrase.hasOwnProperty('sub')){
-								other_provisions[j].generic_reporting = lookup_phrase._text;
-							}else{
 								other_provisions[j].generic_reporting = $scope.stringReplaceSub(lookup_phrase._text, lookup_phrase.sub);
+							}else{
+								other_provisions[j].generic_reporting = lookup_phrase._text;
 							}
 						}
 						if(lookup_phrase._other_provision_reporting == other_provision_id+"."+$scope.pollutantid){
 							if(lookup_phrase.hasOwnProperty('sub')){
-								other_provisions[j].specific_reporting = lookup_phrase._text;
-							}else{
 								other_provisions[j].specific_reporting = $scope.stringReplaceSub(lookup_phrase._text, lookup_phrase.sub);
+							}else{
+								other_provisions[j].specific_reporting = lookup_phrase._text;
 							}
 						}
 					}	
@@ -292,7 +304,12 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 					$scope.label_provision_prtr_note = label._text;
 					break;
 				case 'provprtrNote2':
-					$scope.label_provision_prtr_note2 = label._text;
+					if($scope.pollutantid == 89 || $scope.pollutantid == 90 || $scope.pollutantid == 91 || $scope.pollutantid == 92){
+						$scope.label_provision_prtr_note2 = label._text;
+					}else{
+						$scope.label_provision_prtr_note2 = "";
+					}
+					
 					break;
 				case 'proviso':
 					$scope.label_proviso = label._text;
@@ -360,7 +377,7 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 				case 'clpghs':
 					$scope.label_classification_labelling = label._text;
 					break;
-				case 'clpghsex':
+				case 'clpex':
 					$scope.label_classification_labelling_text = label._text;
 					break;
 				case 'clpLinkText':
@@ -380,7 +397,7 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 					break;
 				case 'impacts':
 					$scope.label_impacts= label._text;
-					break;
+					break;	
 				}
 			}
 			}).error(function(data, status) {
