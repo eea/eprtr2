@@ -4,9 +4,9 @@
 			               <table class="table table-striped table-condensed table-hover">
                     <thead>
                     <tr>
-                        <th class="col-Min150" custom-sort order="'fromFacilityName'" sort="sort">{{tr_f.TransferedFrom}}&nbsp;</th>
-                        <th class="col-Min75" custom-sort order="'treatment'" sort="sort">{{tr_c.Treatment}}&nbsp;</th>
-                        <th class="col-Min75" custom-sort order="'treaterName'" sort="sort">{{tr_c.TreaterName}}&nbsp;</th>
+                        <th class="col-Min150" custom-sort order="'facilityName'" sort="sort">{{tr_f.TransferedFrom}}&nbsp;</th>
+                        <th class="col-Min75" custom-sort order="'wasteTreatmentCode'" sort="sort">{{tr_c.Treatment}}&nbsp;</th>
+                        <th class="col-Min75" custom-sort order="'WHPName'" sort="sort">{{tr_f.TreaterName}}&nbsp;</th>
                         <th class="col-Min75">{{tr_c.Address}}&nbsp;</th>
                         <th class="col-Min75">{{tr_f.SiteAddress}} %&nbsp;</th>
                         <th class="text-right col-Min75" custom-sort order="'quantity'" sort="sort">{{tr_c.Quantity}}&nbsp;</th>
@@ -22,9 +22,9 @@
                     <tbody>
                     <tr ng-repeat="item in items">
                         <td>
-                        	{{tr_tr_lco[item.fromFacilityName]}}
+                        	{{item.fromFacilityName}}
                         </td>
-                        <td >{{tr_tr_lwt[item.treatment]}}</td>
+                        <td >{{tr_lwt[item.treatment]}}</td>
                         <td >{{item.treaterName}}</td>
                         <td >{{item.treaterAddress}}, {{item.treaterPostalCode}}, {{item.treaterCity}}, {{tr_tr_lco[item.treaterCountryCode]}}</p></td>
                         <td >{{item.treaterSiteAddress}}, {{item.treaterSitePostalCode}}, {{item.treaterSiteCity}}, {{tr_tr_lco[item.treaterSiteCountryCode]}}</p></td>

@@ -570,7 +570,7 @@ public class WastetransferSearchController {
 		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryCode, confidentialIndicator);
 		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
 
-		Integer totalcount = transboundaryHazardousWasteRepository.getHazardousWasteTreaterCount(filter);
+		Long totalcount = transboundaryHazardousWasteRepository.getHazardousWasteTreaterCount(filter);
 		response.setHeader("X-Count", String.valueOf(totalcount));
 		
 		OrderBy orderBy = new OrderBy(order, desc.booleanValue());

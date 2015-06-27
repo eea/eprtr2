@@ -16,15 +16,15 @@
                     <!-- Level1 -->
                     <tr ng-repeat-start="item in items">
        				<td ng-if="item.recievingCountryCode != 'TOTAL_KEY' && item.recievingCountryCode != 'CONF' ">
-                       	<img class="handcursor" ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
-                       	<img class="handcursor" ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
-                       	<a ng-click="showing=!showing">{{tr_lco[item.recievingCountryCode]}}</a>         	
+                       	<img class="handcursor" ng-click="item.showing=!item.showing" ng-show="!item.showing" src="images/plus.gif" />
+                       	<img class="handcursor" ng-click="item.showing=!item.showing" ng-show="item.showing" src="images/minus.gif" />
+                       	<a ng-click="item.showing=!item.showing">{{tr_lco[item.recievingCountryCode]}}</a>         	
                      </td>
        				<td ng-if="item.recievingCountryCode == 'TOTAL_KEY' || item.recievingCountryCode == 'CONF' ">
 						{{tr_lco[item.recievingCountryCode]}}         	
                      </td>
-                    <td >
-                    {{$filter('number')(item.facilities)}}
+                    <td class="text-right">
+                    {{item.facilities}}
                     </td>
                     <td class="text-right">
                     {{ff.formatMethod(item.quantityTotal)}}
@@ -40,14 +40,14 @@
                     </td>
                     </tr>
                     <!-- Level2 -->
-                    <tr ng-show="showing" >
+                    <tr ng-show="item.showing" >
                     	<td colspan="6">
-                    		<div class="innerlevel2">{{item.recievingCountryCode}}
-								<!-- haz-receivers-treatment-tab  queryparams="queryparams" whpcountrycode={{item.recievingCountryCode}} visible="showing" -->
+                    		<div class="innerlevel2">
+                    			<haz-receivers-treatment-tab  queryparams="queryparams" whpcountrycode=item.recievingCountryCode visible="item.showing" >
                     		</div>
                     	</td>
-                   	</tr>
-                    <tr ng-repeat-end ng-hide="true"></tr>
+                   	</tr >
+                    <tr ng-repeat-end ></tr>
                     </tbody>
                 </table>
                 

@@ -211,21 +211,21 @@ public class TransboundaryHazardousWasteRepository {
 	 * @param WastetransferSearchFilter
 	 * @return Integer
 	 */
-		public Integer getHazardousWasteTreaterCount(WastetransferSearchFilter filter){
+		public Long getHazardousWasteTreaterCount(WastetransferSearchFilter filter){
 			
 			CriteriaBuilder cb = em.getCriteriaBuilder();
 			
-			CriteriaQuery<Integer> cq = cb.createQuery(Integer.class);
+			CriteriaQuery<Long> cq = cb.createQuery(Long.class);
 			Root<WastetransferHazardoustreater> qr = cq.from(WastetransferHazardoustreater.class);
 			
-			cq.select(cb.construct(Integer.class, 
+			cq.select(cb.construct(Long.class, 
 					cb.count(qr.get(WastetransferHazardoustreater_.facilityName))));
 			
 			cq.where(filter.buildWhereClauseWastetransferHazardoustreater(cb, qr));
 			
-			TypedQuery<Integer> q = em.createQuery(cq);
+			TypedQuery<Long> q = em.createQuery(cq);
 
-			Integer data = q.getSingleResult();
+			Long data = q.getSingleResult();
 			return data;
 		}
 

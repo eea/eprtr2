@@ -2,10 +2,11 @@
 
 angular.module('myApp.HazReceiversTreatmentTab', ['restangular','ngSanitize','angularSpinner'])
 
-   .controller('HazReceiversTreatmentCtrl', ['$scope', '$filter', 'Restangular',
+   .controller('HazReceiversTreatmentTabCtrl', ['$scope', '$filter', 'Restangular',
                                        'translationService','formatStrFactory', 'countFactory','usSpinnerService', function($scope, $filter,  
                                     		   Restangular,translationService,formatStrFactory,countFactory, usSpinnerService) {
-        $scope.ff = formatStrFactory;
+	   
+	   $scope.ff = formatStrFactory;
 	    $scope.cf = countFactory;
         //$scope.queryParams = {};
         $scope.translate = function()
@@ -45,14 +46,14 @@ angular.module('myApp.HazReceiversTreatmentTab', ['restangular','ngSanitize','an
       	 */
       	
       	$scope.sort = {
-                  sortingOrder : 'fromFacilityName',
+                  sortingOrder : 'facilityName',
                   reverse : false
               };
       
       
       	$scope.searchResults = false;
       $scope.items = [];
-      $scope.itemsPerPage = 10;
+      $scope.itemsPerPage = 6;
       $scope.pagedItems = [];
       $scope.currentPage = 1;
       $scope.totalItemCount = 0;
@@ -94,7 +95,7 @@ angular.module('myApp.HazReceiversTreatmentTab', ['restangular','ngSanitize','an
         		$scope.items = [];
         		//get data
                 $scope.currentPage = 1;
-                $scope.sort.sortingOrder = 'fromFacilityName';
+                $scope.sort.sortingOrder = 'facilityName';
                 $scope.sort.reverse = false;
         		$scope.startSpin();
         		$scope.getData();
@@ -146,12 +147,14 @@ angular.module('myApp.HazReceiversTreatmentTab', ['restangular','ngSanitize','an
         	$scope.facilityCountHWIC = $scope.cf.getSubSum($scope.activities,"facilityCountHWIC",false);
         	$scope.facilityCountHWOC = $scope.cf.getSubSum($scope.activities,"facilityCountHWOC",false);
         	$scope.facilityCountHW = $scope.cf.getSubSum($scope.activities,"facilityCountHW",false);
-        	$scope.facilityCountNONHW = $scope.cf.getSubSum($scope.activities,"facilityCountNONHW",false);
+        	$scope.facilityCountNONHW = $scope.cf.getSubSum($scope.activities,"facilityCountNONHW",false);*/
         	$scope.showTable = true;
-        	$scope.stopSpin();*/
+        	$scope.stopSpin();
         };
 
-        
+        $scope.hasItems = function() {
+        	return $scope.items.length < $scope.totalItemCount;
+        };
    }])
 
    .directive('hazReceiversTreatmentTab', function() {
