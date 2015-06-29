@@ -140,8 +140,8 @@ angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpi
             chart1.data = {};
             chart1.data.cols = [
 				       {id: "n", label: 'ID', type: "string"},
-				       {id: "fr", label: $scope.tr_cl["FROM_COUNTRY"], type: "number"},
 				       {id: "to", label: $scope.tr_cl["TO_COUNTRY"], type: "number"},
+				       {id: "fr", label: $scope.tr_cl["FROM_COUNTRY"], type: "number"},
 				       {id: "col", label: "", type: "string"},
 				       {id: "zs", label: $scope.tr_cl["QUANTITY"], type: "number"}
 				   ];
@@ -237,8 +237,6 @@ angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpi
         $scope.handler2 = function(e){
             $('#custom_tooltip').fadeOut('fast');
         }
-
-      
    }])
 .value('googleChartApiConfig', {
         version: '1.1',
