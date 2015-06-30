@@ -37,24 +37,9 @@
 	  <div class="col-md-12 top-buffer10" ng-if="beforesearch">
 			<div class="alert alert-success"><strong>{{tr_c.SearchText}}</strong></div>
       </div>
-      <div ng-show="searchResults">
+      
+      <div class="row"> 
 
-<div class="row"> 
-<div class="col-md-4"> 
-          <table>
-			  <tr >
-			    <td class="fdTitles">{{tr_c.Year }}:</td>
-			    <td>{{ queryParams.ReportingYear }}</td>
-			  </tr>
-			  <tr >
-			    <td class="fdTitles">{{ tr_c.Area }}:</td>
-			    <td>{{ currentSearchFilter.selectedReportingCountry.name }}</td>
-			  </tr>
-			  <tr >
-			    <td class="fdTitles">{{ tr_ina.Headline }}:</td>
-			    <td>{{ sectorIA }}</td>
-			  </tr>
-			</table></div>
     <span us-spinner="{radius:16, width:6, length: 12}" spinner-key="spinner-1"></span>
    <div  class="col-md-8" ng-hide="(hasConfidentionalData? false: true)">
       <blockquote>
@@ -62,18 +47,37 @@
       </blockquote>
    </div>
    </div>
-</div>
+      
+      
 <div class="row"> 
   <tabset>
             <tab heading="Pollutant Releases" active="active.pollutantrelease" ng-click="activateTab('pollutantrelease')">
-	<div ng-show="searchResults">
-          <table class="top-buffer10">
+	<div id="industrial_activity_pollutant_releases" ng-show="searchResults">
+	<div class="row top-buffer10">
+		<div class="col-md-6">
+          <table>
+			  <tr >
+			    <td class="fdTitles">{{tr_c.Year }}:</td>
+			    <td>{{ queryParams.ReportingYear }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{ tr_c.Country }}:</td>
+			    <td>{{ currentSearchFilter.selectedReportingCountry.name }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{ tr_ina.Headline }}:</td>
+			    <td>{{ sectorIA }}</td>
+			  </tr>
 			  <tr >
 			    <td class="fdTitles">{{tr_c.Facilities }}:</td>
 			    <td>{{polreleasecount}}&nbsp;({{tr_c.TotalInSearch}}:&nbsp;{{quantityTotalSearchResult}})</td>
 			  </tr>
 			  </table>
-
+		</div>
+		<div class="col-md-6">
+			  <button class="print-button btn pull-right" ng-print print-element-id="industrial_activity_pollutant_releases"><i class="fa fa-print"></i></button>
+		</div>
+	</div>
 	<div class="col-md-12 table-responsive top-buffer10" >
 				<table class="table table-striped table-condensed table-hover">
                     <thead>
@@ -135,15 +139,32 @@
                 </div>
            	</tab>
            		<tab heading="Pollutant Transfer"  active="active.pollutanttransfer" ng-click="activateTab('pollutanttransfer')">
-           			<div ng-show="searchResults">
-           		
-         <table  class="top-buffer10">
+           			<div id='industrial_activity_pollutant_transfer' ng-show="searchResults">
+           		<div class="col-md-6 top-buffer10">
+         <table>
+         	<tr >
+			    <td class="fdTitles">{{tr_c.Year }}:</td>
+			    <td>{{ queryParams.ReportingYear }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{ tr_c.Country }}:</td>
+			    <td>{{ currentSearchFilter.selectedReportingCountry.name }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{ tr_ina.Headline }}:</td>
+			    <td>{{ sectorIA }}</td>
+			  </tr>
 			  <tr >
 			    <td class="fdTitles">{{tr_c.Facilities }}:</td>
 			    <td>{{poltransfercount}}&nbsp;({{tr_c.TotalInSearch}}:&nbsp;{{quantityTotalSearchResult}})</td>
 			  </tr>
 			  </table>
+			  </div>
+			  <div class="col-md-6 top-buffer10">
+			  
+			  <button class="print-button btn pull-right" ng-print print-element-id="industrial_activity_pollutant_transfer"><i class="fa fa-print"></i></button>
 
+				</div>
 	<div class="col-md-12 table-responsive top-buffer10" >
 				<table class="table table-striped table-condensed table-hover">
                     <thead>
@@ -177,17 +198,35 @@
            	</tab>
            	
            	<tab heading="Waste Transfer"  active="active.wastetransfer" ng-click="activateTab('wastetransfer')">
-	<div ng-show="searchResults">
-           	        <div class="col-md-4 top-buffer10">  <table>
+	<div id="industrial_activity_waste_transfer" ng-show="searchResults">
+				<div class="row top-buffer10">
+           	        <div class="col-md-4">  <table>
+           	        <tr >
+			    <td class="fdTitles">{{tr_c.Year }}:</td>
+			    <td>{{ queryParams.ReportingYear }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{ tr_c.Country }}:</td>
+			    <td>{{ currentSearchFilter.selectedReportingCountry.name }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{ tr_ina.Headline }}:</td>
+			    <td>{{ sectorIA }}</td>
+			  </tr>
 			  <tr >
 			    <td class="fdTitles">{{tr_c.Facilities }}:</td>
 			    <td>{{wastetransfercount}}&nbsp;({{tr_c.TotalInSearch}}:&nbsp;{{quantityTotalSearchResult}})</td>
 			  </tr>
-			  </table></div>
+			  </table>
+			  </div>
 			  <div class="col-md-4"> 
       <blockquote>
 			<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
       </blockquote></div>
+      		<div class="col-md-4">
+      			<button class="print-button btn pull-right" ng-print print-element-id="industrial_activity_waste_transfer"><i class="fa fa-print"></i></button>
+      		</div>
+      </div>
 			<div class="row top-buffer10">
 			<div class="col-md-6">
 				<div google-chart chart="summaryChart2"></div>
