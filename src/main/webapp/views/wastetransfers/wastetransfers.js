@@ -13,7 +13,9 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
     .controller('WasteTransfersCtrl', ['$scope', '$filter', '$modal', 'searchFilter', 'Restangular',
                                        'translationService','formatStrFactory','countFactory', function($scope, $filter, $modal, 
                                     		   searchFilter, Restangular,translationService,formatStrFactory,countFactory) {
-        $scope.wastePanel = true;
+
+    	$scope.beforesearch = true;
+    	$scope.wastePanel = true;
         $scope.searchFilter = searchFilter;
         $scope.ff = formatStrFactory;
         $scope.cf = countFactory;
@@ -102,14 +104,25 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
     	}
     });
 
+    $scope.wtfcsel = function(wastetype){
+    	$scope.wtfilter.wtsel = wastetype;
+    	$scope.currentPage = 1;
+    	$scope.performSearch();
+    	/*$scope.startSpin();
+		$scope.getData();*/
+
+    }
+    
     $scope.$watch('wtfilter.wtsel', function(value) {
     	if ($scope.currentSearchFilter !== undefined && $scope.wtfilter.wtsel != undefined) {
     		//$scope.queryParams.WasteTypeCode = [$scope.wtfilter.wtsel];
 /*        	$scope.SearchType = "FACILITIES";
-        	$scope.queryParams.SearchType="FACILITIES";*/
+        	$scope.queryParams.SearchType="FACILITIES";
         	var qp = angular.copy($scope.queryParams);
        		qp.WasteTypeCode = [value.replace('-','')];
         	$scope.getData(qp);
+        	$scope.currentPage = 1;
+        	$scope.performSearch();*/
     	}
     });
 
@@ -134,6 +147,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.resetSearch();
         
         $scope.search = function() {
+        	$scope.beforesearch = false;
             $scope.currentSearchFilter = $scope.searchFilter;
             $scope.searchResults = true;
             $scope.currentPage = 1;

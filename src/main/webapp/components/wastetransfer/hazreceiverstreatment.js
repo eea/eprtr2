@@ -55,26 +55,27 @@ angular.module('myApp.HazReceiversTreatmentTab', ['restangular','ngSanitize','an
       $scope.items = [];
       $scope.itemsPerPage = 6;
       $scope.pagedItems = [];
-      $scope.currentPage = 1;
+      $scope.pager = {};
+      /*$scope.pager.currentPage = 1;*/
       $scope.totalItemCount = 0;
 
-      $scope.$watch('currentPage', function(value) {
-      	if ($scope.currentSearchFilter !== undefined) {
+      $scope.$watch('pager.currentPage', function(value) {
+      	if ($scope.pager != undefined && $scope.pager.currentPage != undefined && $scope.queryparams !== undefined) {
       		$scope.getData();
       	}
       });
       $scope.$watch('sort.sortingOrder', function(value) {
-      	var prevPage = $scope.currentPage;
-      	$scope.currentPage = 1;
-      	if ($scope.currentSearchFilter !== undefined && prevPage == 1) {
+      	var prevPage = $scope.pager.currentPage;
+      	$scope.pager.currentPage = 1;
+      	if ($scope.queryparams !== undefined && prevPage == 1) {
       		$scope.getData();
       	}
       });
       
       $scope.$watch('sort.reverse', function(value) {
-      	var prevPage = $scope.currentPage;
-      	$scope.currentPage = 1;
-      	if ($scope.currentSearchFilter !== undefined && prevPage == 1) {
+      	var prevPage = $scope.pager.currentPage;
+      	$scope.pager.currentPage = 1;
+      	if ($scope.queryparams !== undefined && prevPage == 1) {
       		$scope.getData();
       	}
       });
@@ -94,7 +95,7 @@ angular.module('myApp.HazReceiversTreatmentTab', ['restangular','ngSanitize','an
         		//Clear collection
         		$scope.items = [];
         		//get data
-                $scope.currentPage = 1;
+                $scope.pager.currentPage = 1;
                 $scope.sort.sortingOrder = 'facilityName';
                 $scope.sort.reverse = false;
         		$scope.startSpin();
@@ -113,7 +114,7 @@ angular.module('myApp.HazReceiversTreatmentTab', ['restangular','ngSanitize','an
 		    }
 		    qp['whpCountryCode']  = $scope.whpcountrycode;  
 		    
-		    qp.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
+		    qp.offset = ($scope.pager.currentPage - 1) * $scope.itemsPerPage;
 		    qp.limit = $scope.itemsPerPage;
 		    qp.order = $scope.sort.sortingOrder;
 		    qp.desc = $scope.sort.reverse;

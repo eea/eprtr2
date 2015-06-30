@@ -13,7 +13,7 @@ myApp.directive('prSelector', ['$compile','$http', '$filter', 'Restangular', 'tr
         	medium: '=',
         },
         replace: true,
-        transclude: true,
+        //transclude: true,
         link: function(scope, element, attrs) {
 
     		translationService.get().then(function (data) {

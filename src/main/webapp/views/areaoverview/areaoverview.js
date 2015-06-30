@@ -17,6 +17,7 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
                                  function($scope, $filter, $http, searchFilter, Restangular, translationService,
                                 		 lovCountryType, lovAreaGroupType, lovNutsRegionType, riverBasinDistrictsType) {
 	
+	$scope.beforesearch = true;
     $scope.searchFilter = searchFilter;
     $scope.queryParams = {};
     $scope.queryParams.ReportingYear = -1;
@@ -130,6 +131,7 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
     	}
   
 	$scope.search = function() {
+		$scope.beforesearch = false;
         $scope.performSearch();
     }
 	

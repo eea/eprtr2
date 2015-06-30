@@ -12,7 +12,8 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
     .controller('PollutantReleasesCtrl', ['$scope', '$filter', '$modal', 'searchFilter', 'Restangular',
                                           'translationService','formatStrFactory', 'countFactory','usSpinnerService', function($scope, $filter, $modal, 
                                         		  searchFilter, Restangular,translationService,formatStrFactory, countFactory, usSpinnerService) {
-        $scope.ff = formatStrFactory;
+        $scope.beforesearch = true;
+    	$scope.ff = formatStrFactory;
 	    $scope.cf = countFactory;
     	$scope.pollutantPanel = true;
         $scope.showReleasesToInputField = true;
@@ -112,6 +113,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         });
 
         $scope.search = function() {
+            $scope.beforesearch = false;
         	$scope.reqStatus = {'sum':0,'act':0,'are':0,'aco':0,'fac':0,'con':0 };
             $scope.currentSearchFilter = $scope.searchFilter;
             $scope.searchResults = true;

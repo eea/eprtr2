@@ -12,7 +12,8 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
     .controller('PollutantTransfersCtrl', ['$scope','$filter', '$modal', '$rootScope','searchFilter', 'Restangular','translationService',
                                            'formatStrFactory', function($scope, $filter, $modal, $rootScope, searchFilter, Restangular,
                                         		   translationService,formatStrFactory) {
-        $scope.pollutantPanel = true;
+        $scope.beforesearch = true;
+    	$scope.pollutantPanel = true;
         $scope.pollutantPanelTitle = 'Pollutant transfers';
         $scope.searchFilter = searchFilter;
         $scope.queryParams = {};
@@ -48,6 +49,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
     	};
         
         $scope.search = function() {
+            $scope.beforesearch = false;
             $scope.currentSearchFilter = $scope.searchFilter;
             $scope.searchResults = true;
             $scope.performSearch();

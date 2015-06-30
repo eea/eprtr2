@@ -5,7 +5,7 @@ angular.module('myApp.wasteAreaComparison', ['restangular','ngSanitize','angular
    .controller('WasteAreaComparisonCtrl', ['$scope', '$filter', 'Restangular', 'translationService','formatStrFactory','usSpinnerService', function($scope, $filter,  
                                     		   Restangular,  translationService, formatStrFactory, usSpinnerService) {
         $scope.ff = formatStrFactory;
-        $scope.wtfilter = {};
+        $scope.wtacfilter = {};
         $scope.nodata = true;
         //$scope.queryparams = {};
         $scope.translate = function()
@@ -59,8 +59,8 @@ angular.module('myApp.wasteAreaComparison', ['restangular','ngSanitize','angular
           	}
           });*/
           
-        $scope.$watchCollection('[tr_lovwt,queryparams,wtfilter.wtsel]', function(value){
-        	if($scope.queryparams != undefined && $scope.tr_lovwt != undefined && $scope.wtfilter.wtsel ){
+        $scope.$watchCollection('[tr_lovwt,queryparams]', function(value){
+        	if($scope.queryparams != undefined && $scope.tr_lovwt != undefined ){
         		$scope.startSpin();
     			$scope.getData();
         	}
@@ -74,8 +74,8 @@ angular.module('myApp.wasteAreaComparison', ['restangular','ngSanitize','angular
 		        	qp[key] = $scope.queryparams[key];
 		        }
 		    }
-		    if($scope.wtfilter.wtsel){
-		    	qp.WasteType = $scope.wtfilter.wtsel.replace('-','');
+		    if($scope.wtacfilter.wtsel){
+		    	qp.WasteType = $scope.wtacfilter.wtsel.replace('-','');
 		    }
 		    
         	$scope.searchService = $scope.restconfig.all('wastetransferAreaCompare');
@@ -86,6 +86,13 @@ angular.module('myApp.wasteAreaComparison', ['restangular','ngSanitize','angular
           		$scope.nodata = (response.data.length > 0)? true:false;
     		});
         };
+        
+        $scope.wtacsel = function(wastetype){
+        	$scope.wtacfilter.wtsel = wastetype;
+    		$scope.startSpin();
+			$scope.getData();
+
+        }
         
         $scope.updateAreaComparisonData = function() {
 

@@ -49,6 +49,10 @@
 			      		<a class="text-danger" ng-click="activateTab('confidentiality')" ><i class="fa fa-exclamation-triangle"></i>  {{tr_f.ConfidentialityAlertLink}}</a>
       				</div>
 			   </div>
+			         <div class="col-md-12 top-buffer10" ng-if="beforesearch">
+			<div class="alert alert-success"><strong>{{tr_c.SearchText}}</strong></div>
+      </div>
+			   
 		<!--div ng-show="searchResults"-->
         <tabset>
             <tab heading="{{tr_c.Facilities}}" active="active.facilities" >

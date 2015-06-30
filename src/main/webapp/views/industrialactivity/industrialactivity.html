@@ -34,7 +34,11 @@
         </div>
 
  <div class="col-md-6">
-<div ng-show="searchResults">
+	  <div class="col-md-12 top-buffer10" ng-if="beforesearch">
+			<div class="alert alert-success"><strong>{{tr_c.SearchText}}</strong></div>
+      </div>
+      <div ng-show="searchResults">
+
 <div class="row"> 
 <div class="col-md-4"> 
           <table>
@@ -239,8 +243,8 @@
            	<tab heading="Confidentiality" active="active.confidentiality" ng-click="activateTab('confidentiality')">
 	<div ng-show="searchResults">
 			
-                <div class="top-buffer10" ng-if="!hasConfidentionalData" ng-bind-html="tr_con.NoConfidentialityInformation">
-                </div>      	    
+                <div class="col-md-12 alert alert-warning top-buffer10" ng-if="!hasConfidentionalData"><strong>{{tr_con.NoConfidentialityInformation}}</strong></div>
+                
                 <div  class="top-buffer10" ng-if="hasConfidentionalData">
 	            	<div class="col-md-12 top-buffer10" >
                 	<label class="radio-inline"><input type="radio" name="showConfidentialOptionsRadios" id="showConfidentialOptionsRadios_0" value="polRelease" ng-model="showConfidential" ng-click="showresult('polRelease')">{{tr_c.ContentPollutantReleases}}</label>

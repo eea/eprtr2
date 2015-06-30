@@ -29,6 +29,9 @@
       	<small><a class="text-danger" ng-click="activateTab('confidentiality')" ><i class="fa fa-exclamation-triangle"></i>  {{tr_f.ConfidentialityAlertLink}}</a></small>
       </blockquote>
    </div>
+		      <div class="col-md-12 top-buffer10" ng-if="beforesearch">
+			<div class="alert alert-success"><strong>{{tr_c.SearchText}}</strong></div>
+      </div>
 		
 		  <tabset>
 			    <tab heading="Pollutant Releases" active="active.pollutantrelease" ng-click="activateTab('pollutantrelease')">
@@ -105,11 +108,8 @@
 			    </tab>
 
 <tab heading="Confidentiality" active="active.confidentiality" ng-click="activateTab('confidentiality')">
-                <div class="col-md-12 top-buffer10" ng-if="!hasConfidentionalData" ng-bind-html="tr_con.NoConfidentialityInformation">
-                </div>
-                <br />
-                <br />     
-                <div ng-if="hasConfidentionalData">
+                <div class="col-md-12 alert alert-warning top-buffer10" ng-if="!hasConfidentionalData" ><strong>{{tr_lcon.NoConfidentialityInformation}}</strong></div>
+                <div class="top-buffer10" ng-if="hasConfidentionalData">
 	                <div ng-bind-html="tr_ao.ConfidentialityExplanation"></div>
 				</div>
 			</tab>

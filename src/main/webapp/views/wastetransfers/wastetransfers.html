@@ -39,6 +39,9 @@
       </blockquote>
    </div>
 </div>
+      <div class="col-md-12 top-buffer10" ng-if="beforesearch">
+			<div class="alert alert-success"><strong>{{tr_c.SearchText}}</strong></div>
+      </div>
         <tabset>
             <tab heading="Summary" ng-click="getTabData('SUMMARY');activateTab('summary')" active="active.summary">
             <div ng-show="searchResults">
@@ -69,13 +72,9 @@
 
 			<div class="col-md-6">
 			<div google-chart chart="summaryChart2"  style="width:100%"></div>
-				<!--div google-chart="summaryChart2" style="height:400px; width:100%;">
-	            </div --> 
             </div>
 	         <div class="col-md-6">
 	         <div google-chart chart="summaryChart1"  style="width:100%"></div>
-	            <!--div google-chart="summaryChart1" style="height:400px; width:100%;">
-	            </div -->
 	         </div>
             </div>
 
@@ -540,7 +539,7 @@
            	  <tab heading="Facilities" ng-click="getTabData('FACILITIES');activateTab('facilities')" active="active.facilities">
            	  <div ng-show="searchResults">
 				<div class="row top-buffer10">
-					<div class="col-md-12" wt-selector queryparams="queryParams" wtsel="wtfilter.wtsel"></div>
+					<div class="col-md-12" wt-selector queryparams="queryParams" wtsel="wtfcsel(wastetype)"></div>
            	    </div>
            	    <div class="col-md-12 table-responsive top-buffer10" >
                 <table class="table table-striped table-condensed table-hover">

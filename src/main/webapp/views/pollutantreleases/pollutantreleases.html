@@ -31,6 +31,9 @@
 
 
     <div class="col-md-6" >
+	  <div class="col-md-12 top-buffer10" ng-if="beforesearch">
+			<div class="alert alert-success"><strong>{{tr_c.SearchText}}</strong></div>
+      </div>
 <div ng-show="searchResults">
 
 <div class="row">
@@ -311,8 +314,8 @@
             <tab heading="Confidentiality" active="active.confidentiality" ng-click="activateTab('confidentiality')">
             <div class="top-buffer10" ng-show="searchResults">
             
+			   <div class="col-md-12 alert alert-warning top-buffer10" ng-if="!hasConfidentionalData"><strong>{{tr_con.NoConfidentialityInformation}}</strong></div>
 			
-                <div ng-if="!hasConfidentionalData" ng-bind-html="tr_con.NoConfidentialityInformation">
                 </div>
                 <div class="top-buffer10"  ng-if="hasConfidentionalData">
 	                <div ng-bind-html="tr_c.ConfidentialityExplanationPR1">

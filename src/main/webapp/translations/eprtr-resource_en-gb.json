@@ -229,6 +229,7 @@
 		"RiverBasinDistrictName": "River Basin District Name",
 		"SearchButton": "Search",
 		"SearchHelpTooltip": "Search Help",
+		"SearchText":"You need to select search parameters and click search for results to show!",
 		"Sector": "Sector",
 		"SectorCode": "Sector Code",
 		"SelectLanguage": "Select language",

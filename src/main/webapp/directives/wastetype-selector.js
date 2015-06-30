@@ -3,16 +3,17 @@
 // a directive to auto-collapse long text
 // in elements with the "dd-text-collapse" attribute
 //angular.module('myApp.textcollapse', [])
-myApp.directive('wtSelector', ['$compile','$http', '$filter', 'Restangular', 'translationService', function($compile,$http, $filter, Restangular, translationService) {
+myApp.directive('wtSelector', ['$compile','$http', '$filter', 'Restangular', 'translationService', 
+                               function($compile,$http, $filter, Restangular, translationService) {
 
     return {
         restrict: 'A',
         scope: {
-        	queryparams: '=',
-        	wtsel: '=',
+        	qparams: '=queryparams',
+        	wtsel: '&wtsel',
         },
-        replace: true,
-        transclude: true,
+        /*replace: true,
+        transclude: true,*/
         link: function(scope, element, attrs) {
 
     		translationService.get().then(function (data) {
@@ -22,17 +23,17 @@ myApp.directive('wtSelector', ['$compile','$http', '$filter', 'Restangular', 'tr
     		scope.filter = {};
             scope.$watch('filter.wtsel', function(value){
             	if(scope.filter.wtsel != undefined){
-            		scope.wtsel = scope.filter.wtsel;
+            		scope.wtsel({wastetype: scope.filter.wtsel});
             	}
             });
             
-            scope.$watch('queryparams', function(value){
-        		if (scope.queryparams != undefined){
+            scope.$watch('qparams', function(value){
+        		if (scope.qparams != undefined){
         			//We don't want WasteTypeCode in query
         			var qp = {};
-        		    for(var key in scope.queryparams) {
+        		    for(var key in scope.qparams) {
         		        if(key != 'WasteTypeCode') {
-        		        	qp[key] = scope.queryparams[key];
+        		        	qp[key] = scope.qparams[key];
         		        }
         		    }
 
@@ -64,7 +65,7 @@ myApp.directive('wtSelector', ['$compile','$http', '$filter', 'Restangular', 'tr
                     // create some new html elements to hold the separate info
                     var title = $compile('<label class="control-label"><strong>'+scope.tr_w.ShowFacilitiesWithTransferOfWasteType+':</strong></label></br>')(scope); 
                     
-                    var body = '<label class="radio-inline tab" for="NONHW"><input type="radio" id="NONHW" name="wtsel" ng-model="filter.wtsel" value="NONHW" /> ';
+                    var body = '<label class="radio-inline" for="NONHW"><input type="radio" id="NONHW" name="wtsel" ng-model="filter.wtsel" value="NONHW" /> ';
                     body += scope.tr_c.NoHazardouswaste + ' <span class="label label-success label-as-badge" title="'+ $filter('number')(scope.quantityNONHW);
                     body += ' ' + scope.tr_c.Facilities+'">' + $filter('number')(scope.quantityNONHW) + '</span></label>';
                     //var hNONHW = $compile(sNONHW)(scope);

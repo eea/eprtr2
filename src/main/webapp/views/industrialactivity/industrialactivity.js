@@ -13,7 +13,8 @@ angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'r
                                            ,'formatStrFactory', 'countFactory','usSpinnerService', 
                                            function($scope, $filter, $modal, searchFilter, Restangular,translationService,
                                         		   formatStrFactory,countFactory,usSpinnerService) {
-        $scope.activityPanel = true;
+        $scope.beforesearch = true;
+    	$scope.activityPanel = true;
         $scope.searchFilter = searchFilter;
         $scope.queryParams = {};
         $scope.queryParams.ReportingYear = -1;
@@ -111,6 +112,7 @@ angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'r
         };
         
         $scope.search = function() {
+            $scope.beforesearch = false;
         	$scope.reqStatus = {'pr':0,'pt':0,'wt':0,'co':0 };
     		$scope.startSpin();
             $scope.currentSearchFilter = $scope.searchFilter;

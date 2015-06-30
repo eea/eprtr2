@@ -19,7 +19,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.pollutantPanelTitle = 'Pollutant releases and transfers';
         $scope.usePollutantSelectorHeaders = true;
 
-
+    $scope.beforesearch = true;
 	$scope.searchFilter = searchFilter;
 	$scope.queryParams = {};
 	$scope.queryParams.ReportingYear = -1;
@@ -112,6 +112,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
      * Search
      */
 	$scope.search = function() {
+		$scope.beforesearch = false;
 		$scope.currentSearchFilter = $scope.searchFilter;
 	    $scope.searchResults = true;
         $scope.currentPage = 1;
