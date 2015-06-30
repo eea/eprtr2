@@ -48,8 +48,8 @@ myApp.directive('wtSelector', ['$compile','$http', '$filter', 'Restangular', 'tr
         	            scope.quantityNONHW = response.data.quantityNONHW;
         	            scope.quantityHWIC = response.data.quantityHWIC;
         	            scope.quantityHWOC = response.data.quantityHWOC;
-        	            if(scope.queryparams.WasteTypeCode != undefined){
-            	            scope.filter.wtsel = scope.queryparams.WasteTypeCode[0];//'NONHW';
+        	            if(scope.qparams.WasteTypeCode != undefined){
+            	            scope.filter.wtsel = scope.qparams.WasteTypeCode[0];//'NONHW';
         	            }
         	            else{
         	            	scope.filter.wtsel = 'NONHW';

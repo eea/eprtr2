@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-filter', 'restangular',
-                                        'ngSanitize','myApp.wastetransferconfidential'])
+angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize',
+                                        'myApp.wastetransferconfidential','myApp.wasteAreaComparison','myApp.hazTransboundary','myApp.HazReceiversWasteTab'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/wastetransfers', {
@@ -14,6 +14,11 @@ angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-f
                                        'translationService','formatStrFactory','countFactory', function($scope, $filter, $modal, 
                                     		   searchFilter, Restangular,translationService,formatStrFactory,countFactory) {
 
+    	$scope.bigmap = false;
+    	$scope.mapclss = "col-md-4 col-md-push-8";
+    	$scope.resclss = "col-md-8 col-md-pull-4";
+/*    	$scope.mapclss = "col-md-3 col-md-push-6";
+    	$scope.resclss = "col-md-6 col-md-pull-3";*/
     	$scope.beforesearch = true;
     	$scope.wastePanel = true;
         $scope.searchFilter = searchFilter;
@@ -50,6 +55,22 @@ angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-f
         	  });
         };
         $scope.translate();
+        
+        /**
+         * MAp handling*/
+        $scope.togglemapview = function(){
+        	if($scope.bigmap){
+            	$scope.bigmap = false;
+            	$scope.mapclss = "col-md-4 col-md-push-8";
+            	$scope.resclss = "col-md-8 col-md-pull-4";
+        	}
+        	else{
+            	$scope.bigmap = true;
+            	$scope.mapclss = "col-md-12";
+            	$scope.resclss = "col-md-12";
+        	}
+        }
+        
         
         /**
          * Tab handling
@@ -107,24 +128,26 @@ angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-f
     $scope.wtfcsel = function(wastetype){
     	$scope.wtfilter.wtsel = wastetype;
     	$scope.currentPage = 1;
-    	$scope.performSearch();
+    	if ($scope.currentSearchFilter !== undefined) {
+    		$scope.performSearch();
+    	}
     	/*$scope.startSpin();
 		$scope.getData();*/
 
     }
     
-    $scope.$watch('wtfilter.wtsel', function(value) {
+    /*    $scope.$watch('wtfilter.wtsel', function(value) {
     	if ($scope.currentSearchFilter !== undefined && $scope.wtfilter.wtsel != undefined) {
     		//$scope.queryParams.WasteTypeCode = [$scope.wtfilter.wtsel];
-/*        	$scope.SearchType = "FACILITIES";
+        	$scope.SearchType = "FACILITIES";
         	$scope.queryParams.SearchType="FACILITIES";
         	var qp = angular.copy($scope.queryParams);
        		qp.WasteTypeCode = [value.replace('-','')];
         	$scope.getData(qp);
         	$scope.currentPage = 1;
-        	$scope.performSearch();*/
+        	$scope.performSearch();
     	}
-    });
+    });*/
 
     $scope.hasItems = function() {
     	return $scope.items.length > 0;

@@ -1,10 +1,14 @@
 <div>
+    <div class="row">
 
-    <div>
+    <div class="col-md-9">
     	<h3>{{tr_wt.WasteTransfers}}</h3>
         <p>{{tr_wt.WasteTransferSubHeadline}}</p>
     </div>
-
+    <div class="col-md-3 text-right top-buffer10">
+    	<button type="button" ng-click="togglemapview()" class="btn btn-default">Toggle mapsize</button>
+	</div>
+	</div>
     <div class="row row-map">
 
         <div class="search_form col-md-3">
@@ -30,8 +34,13 @@
             </div>
 
         </div>
+		<div class="col-md-9"> 
+       <div class="{{mapclss}}" style="height:600px;">
+            <esri-leaf-map contenttype="'wastetransfer'" queryparams="queryParams" />
+        </div>
 
-	<div class="search_form col-md-6">
+
+	<div class="search_form {{resclss}}">
             <div ng-show="searchResults">
    <div  ng-hide="(hasConfidentionalData? false: true)">
       <blockquote>
@@ -624,9 +633,6 @@
         </tabset>
      </div>
 
-        <div class="col-md-3" style="height:600px;">
-            <esri-leaf-map contenttype="'wastetransfer'" queryparams="queryParams" />
-        </div>
-
+ </div>
     </div>
 </div>
