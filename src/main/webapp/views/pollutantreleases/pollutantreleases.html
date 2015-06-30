@@ -34,56 +34,116 @@
 	  <div class="col-md-12 top-buffer10" ng-if="beforesearch">
 			<div class="alert alert-success"><strong>{{tr_c.SearchText}}</strong></div>
       </div>
-<div ng-show="searchResults">
-
-<div class="row">
-
-	<div class="col-md-5"> 
-          <table>
-			  <tr >
-			    <td class="fdTitles">{{ tr_c.Pollutant }}:</td>
-			    <td>{{ currentSearchFilter.pollutantSearchFilter.selectedPollutant.name }}</td>
-			  </tr>
-			  <tr >
-			    <td class="fdTitles">{{tr_c.Year }}:</td>
-			    <td>{{ queryParams.ReportingYear }}</td>
-			  </tr>
-			  <tr >
-			    <td class="fdTitles">{{ tr_c.Area }}:</td>
-			    <td>{{ currentSearchFilter.selectedReportingCountry.name }}</td>
-			  </tr>
-			  <tr >
-			    <td class="fdTitles">{{ tr_c.Facilities }}:</td>
-			    <td>{{ items.length }}</td>
-			  </tr>
-			</table>
-		</div>
-	<div class="col-md-7"> 
-      <blockquote>
-			<div class="text-info"><small>{{tr_p.AllValuesAreYearlyTransfers}}</small></div>
-      </blockquote>
-   <div ng-hide="(hasConfidentionalData? false: true)">
-      <blockquote>
-      	<small><a class="text-danger" ng-click="activateTab('confidentiality')" ><i class="fa fa-exclamation-triangle"></i>  {{tr_f.ConfidentialityAlertLink}}</a></small>
-      </blockquote>
-   </div>
-   </div>
- </div>
- </div>
 <span us-spinner="{radius:16, width:6, length: 12}" spinner-key="spinner-1"></span>
 <div class="row top-buffer10">
         <tabset>
             <tab heading="Summary" active="active.summary" ng-click="activateTab('summary')">
-            <div class="top-buffer10" ng-show="searchResults">
-   	                <div id="prSumMediumSelector" pr-selector medium="mediumFilter.prSumMedium" queryparams="queryParams" ></div>
-   	                	<div google-chart chart="summaryChart"></div>
-   	                
-                    <!--div class="top-buffer10" google-chart="summaryChartObject" style="height:400px; width:100%;"></div-->
-                </div>
-            </tab>
+				<div id="pollutant_releases_summary" class="top-buffer10" ng-show="searchResults">
+						<div class="row">
+
+							<div class="col-md-5">
+								<table>
+									<tr>
+										<td class="fdTitles">{{ tr_c.Pollutant }}:</td>
+										<td>{{
+											currentSearchFilter.pollutantSearchFilter.selectedPollutant.name
+											}}</td>
+									</tr>
+									<tr>
+										<td class="fdTitles">{{tr_c.Year }}:</td>
+										<td>{{ queryParams.ReportingYear }}</td>
+									</tr>
+									<tr>
+										<td class="fdTitles">{{ tr_c.Area }}:</td>
+										<td>{{ currentSearchFilter.selectedReportingCountry.name
+											}}</td>
+									</tr>
+									<tr>
+										<td class="fdTitles">{{ tr_c.Facilities }}:</td>
+										<td>{{ items.length }}</td>
+									</tr>
+								</table>
+							</div>
+							<div class="col-md-5">
+								<blockquote>
+									<div class="text-info">
+										<small>{{tr_p.AllValuesAreYearlyTransfers}}</small>
+									</div>
+								</blockquote>
+								<div ng-hide="(hasConfidentionalData? false: true)">
+									<blockquote>
+										<small><a class="text-danger"
+											ng-click="activateTab('confidentiality')"><i
+												class="fa fa-exclamation-triangle"></i>
+												{{tr_f.ConfidentialityAlertLink}}</a></small>
+									</blockquote>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<button class="print-button btn pull-right" ng-print
+									print-element-id="pollutant_releases_summary">
+									<i class="fa fa-print"></i>
+								</button>
+							</div>
+						</div>
+
+					<div id="prSumMediumSelector" pr-selector
+						medium="mediumFilter.prSumMedium" queryparams="queryParams"></div>
+					<div google-chart chart="summaryChart"></div>
+
+					<!--div class="top-buffer10" google-chart="summaryChartObject" style="height:400px; width:100%;"></div-->
+				</div>
+				</tab>
             
             <tab heading="Activities"  active="active.activities" ng-click="activateTab('activities')">
-                        <div class="top-buffer10" ng-show="searchResults">
+                        <div id="pollutant_releases_activities" class="top-buffer10" ng-show="searchResults">
+                        	<div class="row">
+
+							<div class="col-md-5">
+								<table>
+									<tr>
+										<td class="fdTitles">{{ tr_c.Pollutant }}:</td>
+										<td>{{
+											currentSearchFilter.pollutantSearchFilter.selectedPollutant.name
+											}}</td>
+									</tr>
+									<tr>
+										<td class="fdTitles">{{tr_c.Year }}:</td>
+										<td>{{ queryParams.ReportingYear }}</td>
+									</tr>
+									<tr>
+										<td class="fdTitles">{{ tr_c.Area }}:</td>
+										<td>{{ currentSearchFilter.selectedReportingCountry.name
+											}}</td>
+									</tr>
+									<tr>
+										<td class="fdTitles">{{ tr_c.Facilities }}:</td>
+										<td>{{ items.length }}</td>
+									</tr>
+								</table>
+							</div>
+							<div class="col-md-5">
+								<blockquote>
+									<div class="text-info">
+										<small>{{tr_p.AllValuesAreYearlyTransfers}}</small>
+									</div>
+								</blockquote>
+								<div ng-hide="(hasConfidentionalData? false: true)">
+									<blockquote>
+										<small><a class="text-danger"
+											ng-click="activateTab('confidentiality')"><i
+												class="fa fa-exclamation-triangle"></i>
+												{{tr_f.ConfidentialityAlertLink}}</a></small>
+									</blockquote>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<button class="print-button btn pull-right" ng-print
+									print-element-id="pollutant_releases_activities">
+									<i class="fa fa-print"></i>
+								</button>
+							</div>
+						</div>
 			<!-- message -->
 			<table class="table table-striped table-condensed table-hover">
                     <thead>
@@ -185,7 +245,54 @@
             </tab>
             
             <tab heading="Areas" active="active.areas" ng-click="activateTab('areas')">
-             <div class="top-buffer10" ng-show="searchResults">
+             <div id="pollutant_releases_areas" class="top-buffer10" ng-show="searchResults">
+             	<div class="row">
+
+							<div class="col-md-5">
+								<table>
+									<tr>
+										<td class="fdTitles">{{ tr_c.Pollutant }}:</td>
+										<td>{{
+											currentSearchFilter.pollutantSearchFilter.selectedPollutant.name
+											}}</td>
+									</tr>
+									<tr>
+										<td class="fdTitles">{{tr_c.Year }}:</td>
+										<td>{{ queryParams.ReportingYear }}</td>
+									</tr>
+									<tr>
+										<td class="fdTitles">{{ tr_c.Area }}:</td>
+										<td>{{ currentSearchFilter.selectedReportingCountry.name
+											}}</td>
+									</tr>
+									<tr>
+										<td class="fdTitles">{{ tr_c.Facilities }}:</td>
+										<td>{{ items.length }}</td>
+									</tr>
+								</table>
+							</div>
+							<div class="col-md-5">
+								<blockquote>
+									<div class="text-info">
+										<small>{{tr_p.AllValuesAreYearlyTransfers}}</small>
+									</div>
+								</blockquote>
+								<div ng-hide="(hasConfidentionalData? false: true)">
+									<blockquote>
+										<small><a class="text-danger"
+											ng-click="activateTab('confidentiality')"><i
+												class="fa fa-exclamation-triangle"></i>
+												{{tr_f.ConfidentialityAlertLink}}</a></small>
+									</blockquote>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<button class="print-button btn pull-right" ng-print
+									print-element-id="pollutant_releases_areas">
+									<i class="fa fa-print"></i>
+								</button>
+							</div>
+						</div>
             
 
 			 <table class="table table-striped table-condensed table-hover">
@@ -271,7 +378,54 @@
             </tab>
             
             <tab heading="Area Comparison" active="active.areacomparison" ng-click="activateTab('areacomparison')">
-                        <div class="top-buffer10" ng-show="searchResults">
+                        <div id="pollutant_releases_areas_comparison" class="top-buffer10" ng-show="searchResults">
+                        <div class="row">
+
+							<div class="col-md-5">
+								<table>
+									<tr>
+										<td class="fdTitles">{{ tr_c.Pollutant }}:</td>
+										<td>{{
+											currentSearchFilter.pollutantSearchFilter.selectedPollutant.name
+											}}</td>
+									</tr>
+									<tr>
+										<td class="fdTitles">{{tr_c.Year }}:</td>
+										<td>{{ queryParams.ReportingYear }}</td>
+									</tr>
+									<tr>
+										<td class="fdTitles">{{ tr_c.Area }}:</td>
+										<td>{{ currentSearchFilter.selectedReportingCountry.name
+											}}</td>
+									</tr>
+									<tr>
+										<td class="fdTitles">{{ tr_c.Facilities }}:</td>
+										<td>{{ items.length }}</td>
+									</tr>
+								</table>
+							</div>
+							<div class="col-md-5">
+								<blockquote>
+									<div class="text-info">
+										<small>{{tr_p.AllValuesAreYearlyTransfers}}</small>
+									</div>
+								</blockquote>
+								<div ng-hide="(hasConfidentionalData? false: true)">
+									<blockquote>
+										<small><a class="text-danger"
+											ng-click="activateTab('confidentiality')"><i
+												class="fa fa-exclamation-triangle"></i>
+												{{tr_f.ConfidentialityAlertLink}}</a></small>
+									</blockquote>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<button class="print-button btn pull-right" ng-print
+									print-element-id="pollutant_releases_areas_comparison">
+									<i class="fa fa-print"></i>
+								</button>
+							</div>
+						</div>
                 
              	{{tr_p.AllValuesArePercentOfEuroTotal}}
                  <div class="top-buffer10" id="prAreaMediumSelector" pr-selector medium="mediumFilter.prAreaMedium" queryparams="queryParams" ></div>
@@ -281,7 +435,54 @@
             </tab>
             
             <tab heading="Facilities" active="active.facilities" ng-click="activateTab('facilities')">
-            <div ng-show="searchResults">
+            <div id="pollutant_releases_facilities" class="top-buffer10" ng-show="searchResults">
+            	<div class="row">
+
+							<div class="col-md-5">
+								<table>
+									<tr>
+										<td class="fdTitles">{{ tr_c.Pollutant }}:</td>
+										<td>{{
+											currentSearchFilter.pollutantSearchFilter.selectedPollutant.name
+											}}</td>
+									</tr>
+									<tr>
+										<td class="fdTitles">{{tr_c.Year }}:</td>
+										<td>{{ queryParams.ReportingYear }}</td>
+									</tr>
+									<tr>
+										<td class="fdTitles">{{ tr_c.Area }}:</td>
+										<td>{{ currentSearchFilter.selectedReportingCountry.name
+											}}</td>
+									</tr>
+									<tr>
+										<td class="fdTitles">{{ tr_c.Facilities }}:</td>
+										<td>{{ items.length }}</td>
+									</tr>
+								</table>
+							</div>
+							<div class="col-md-5">
+								<blockquote>
+									<div class="text-info">
+										<small>{{tr_p.AllValuesAreYearlyTransfers}}</small>
+									</div>
+								</blockquote>
+								<div ng-hide="(hasConfidentionalData? false: true)">
+									<blockquote>
+										<small><a class="text-danger"
+											ng-click="activateTab('confidentiality')"><i
+												class="fa fa-exclamation-triangle"></i>
+												{{tr_f.ConfidentialityAlertLink}}</a></small>
+									</blockquote>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<button class="print-button btn pull-right" ng-print
+									print-element-id="pollutant_releases_facilities">
+									<i class="fa fa-print"></i>
+								</button>
+							</div>
+						</div>
                  <div class="top-buffer10" id="prFacMediumSelector" pr-selector medium="mediumFilter.prFacMedium" queryparams="queryParams"></div>
                  <div class="col-md-12 table-responsive top-buffer10" >
                 <table class="table table-striped table-condensed table-hover">
