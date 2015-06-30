@@ -25,6 +25,7 @@ angular.module('myApp.pollutantSearchFilter', ['restangular', 'myApp.search-filt
                 var allPollutants = {name: 'All pollutants'};
                 $scope.pollutants = [allPollutants];
                 $scope.pollutantSearchFilter.selectedPollutant = allPollutants;
+                //$scope.filter = $scope.pollutantSearchFilter
             }
             if (pollutantSearchFilter.selectedPollutantGroup && pollutantSearchFilter.selectedPollutantGroup.lov_PollutantID) {
                 pollutantService.getList({ParentID: pollutantSearchFilter.selectedPollutantGroup.lov_PollutantID}).then(function (data) {
