@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize',
-                                        'myApp.wastetransferconfidential','myApp.wasteAreaComparison','myApp.hazTransboundary','myApp.HazReceiversWasteTab'])
+angular.module('myApp.wastetransfers', ['ngRoute','googlechart', 'myApp.search-filter', 'restangular',
+                                        'ngSanitize','myApp.wastetransferconfidential'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/wastetransfers', {

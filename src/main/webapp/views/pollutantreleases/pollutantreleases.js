@@ -89,7 +89,6 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
     		$scope.active[tab] = true;
     	};
 
-    	
     	/**
     	 * Listeners
     	 */
