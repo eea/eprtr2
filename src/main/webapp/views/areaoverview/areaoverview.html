@@ -35,7 +35,7 @@
 		
 		  <tabset>
 			    <tab heading="Pollutant Releases" active="active.pollutantrelease" ng-click="activateTab('pollutantrelease')">
-					<div ng-show="searchResults">
+					<div id="area_overview_pollutant_releases" ng-show="searchResults">
 					
 					<div class="col-md-2 top-buffer10" >
 	              <table >
@@ -45,7 +45,7 @@
 					  </tr>
 	  			  </table>
 			      </div>
-				<div class="col-md-4 top-buffer10" >
+				<div class="col-md-3 top-buffer10" >
 			      <blockquote>
 						<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
 			      </blockquote>
@@ -53,6 +53,9 @@
 				  <div class="col-md-6 top-buffer10" >
 				      <div class="top-buffer10" id="prPollutantGroup" sf-pollutant queryparams="queryParams" pgselect="prfilter.pgselect" pselect="prfilter.pselect" grponly="true" ></div>
 				      <div class="top-buffer10" id="prMediumSelector" pr-selector queryparams="queryParams" medium="prMedium" ></div>
+				  </div>
+				  <div class="col-md-1 top-buffer10 ">
+				  	<button class="print-button btn btn-default pull-right" ng-print print-element-id="area_overview_pollutant_releases"><i class="fa fa-print"></i></button>
 				  </div>			      
 			      <div class="col-md-12 top-buffer10" ng-if="!prfilter.pgselect.code">
 						<div class="alert alert-success"><strong>You need to select a Pollutant Group</strong></div>
@@ -65,7 +68,7 @@
   				</div>
 			</tab>
 			    <tab heading="Pollutant Transfer"  active="active.pollutanttransfer" ng-click="activateTab('pollutanttransfer')">
-					<!--div ng-show="searchResults"-->
+					<div class="area_overview_pollutant_transfer" ng-show="searchResults">
 					<div class="col-md-2 top-buffer10" ng-show="searchResults">
 	              <table >
 					  <tr ng-repeat="x in headitms | orderBy : 'order'" >
@@ -80,16 +83,22 @@
 			      </blockquote>
 			      </div>
 			      <div class="col-md-4 top-buffer10"  id="ptPollutantGroup" sf-pollutant queryparams="queryParams" pgselect="ptfilter.pgselect" grponly="true" ></div>
+			      <div class="col-md-2 top-buffer10 ">
+				  	<button class="print-button btn btn-default pull-right" ng-print print-element-id="area_overview_pollutant_transfer"><i class="fa fa-print"></i></button>
+				  </div>
+			      
 			      <div class="col-md-12 top-buffer10" ng-if="!prfilter.pgselect.code">
 						<div class="alert alert-success"><strong>You need to select a Pollutant Group</strong></div>
-			      </div>
+			      </div>			      
 			      <div class="col-md-12">
 				  <area-overview-pt-tab queryparams="queryParams" visible="true" pollutant="ptfilter.pgselect" />
 			    	<!-- active.pollutanttransfer != undefined  /div -->
 			    	</div>
+			    	</div>
 			    </tab>
 			    <tab  heading="Waste Transfer"  active="active.wastetransfer" ng-click="activateTab('wastetransfer')">
-	              <div class="col-md-2 top-buffer10" ng-show="searchResults">
+	              <div id="area_overview_waste_transfer" ng-show="searchResults">
+	              <div class="col-md-2 top-buffer10">
 	              <table class="top-buffer10">
 					  <tr ng-repeat="x in headitms | orderBy : 'order'" >
 					    <td class="{{x.clss}}">{{ x.title }}:</td>
@@ -102,8 +111,13 @@
 						<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
 			      </blockquote>
 			      </div>
+			      <div class="col-md-6 top-buffer10 ">
+				  	<button class="print-button btn btn-default pull-right" ng-print print-element-id="area_overview_waste_transfer"><i class="fa fa-print"></i></button>
+				  </div>
+			      
 			      <div class="col-md-12">
 				  <area-overview-waste-tab queryparams="queryParams" visible="active.wastetransfer != undefined" />
+				  </div>
 				  </div>
 			    </tab>
 
