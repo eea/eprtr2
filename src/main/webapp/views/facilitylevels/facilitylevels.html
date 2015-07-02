@@ -67,13 +67,14 @@
 								<td>{{ queryParams.ReportingYear }}</td>
 							</tr>
 							<tr>
-								<td class="fdTitles">{{ tr_c.Country }}:</td>
+								<td class="fdTitles">{{ tr_c.Area }}:</td>
 								<td>{{ currentSearchFilter.selectedReportingCountry.name }}</td>
 							</tr>
 						</table>
 					</div>
 					<div class="col-md-6">
-						<button class="print-button btn btn-default pull-right" ng-print print-element-id="facility"><i class="fa fa-print"></i></button>	
+						<button class="print-button btn btn-default pull-right" ng-print print-element-id="facility"><i class="fa fa-print"></i></button>
+						<button class="btn btn-default pull-right" ng-csv="facilitiesDownload" filename="EPRTR_Facilities_List.csv"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>	
 					</div>
 				</div>
 				

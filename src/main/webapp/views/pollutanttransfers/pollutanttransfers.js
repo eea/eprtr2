@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize'])
+angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize', 'ngCsv'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/pollutanttransfers', {
@@ -186,7 +186,46 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
         
         $scope.updateFacilitiesData = function() {
             $scope.facilitiesItems = angular.copy($scope.items);
+            $scope.updateFacilityDownloadData();
         };
+        
+        $scope.updateFacilityDownloadData = function() {
+        	$scope.facilitiesDownload= new Array();
+            var top_fields = 5;
+            
+            $scope.topInfoDownload($scope.facilitiesDownload);
+            
+            $scope.facilitiesDownload[top_fields]= new Array();
+            $scope.facilitiesDownload[top_fields][0] = $scope.tr_c.Facility;
+        	$scope.facilitiesDownload[top_fields][1] = $scope.tr_c.Quantity;
+        	$scope.facilitiesDownload[top_fields][2] = $scope.tr_c.Activity;
+        	$scope.facilitiesDownload[top_fields][3] = $scope.tr_c.Country;
+
+        	top_fields += 1;
+        	
+            for(var i =0; i<$scope.facilitiesItems.length;i++){
+            	var facility = $scope.facilitiesItems[i];
+            	$scope.facilitiesDownload[i+top_fields]= new Array();
+            	$scope.facilitiesDownload[i+top_fields][0] = facility.facilityName;
+            	$scope.facilitiesDownload[i+top_fields][1] = $scope.quantity(facility);
+            	$scope.facilitiesDownload[i+top_fields][2] = $scope.tr_laa[facility.iaactivityCode];
+            	$scope.facilitiesDownload[i+top_fields][3] = $scope.tr_lco[facility.countryCode];
+            }
+        }
+        
+        $scope.topInfoDownload = function(array){
+        	array[1]= new Array();
+            array[1][0] = $scope.tr_c.Pollutant;
+        	array[1][1] = $scope.currentSearchFilter.pollutantSearchFilter.selectedPollutant.name;
+        	
+        	array[2]= new Array();
+            array[2][0] = $scope.tr_c.Year;
+        	array[2][1] = $scope.queryParams.ReportingYear;
+        	
+        	array[3]= new Array();
+            array[3][0] = $scope.tr_c.Area;
+        	array[3][1] = $scope.currentSearchFilter.selectedReportingCountry.name;
+        }
         
         $scope.updateAreaComparisonData = function() {
         	 $scope.areaComparisonItems = angular.copy($scope.items);
@@ -277,13 +316,133 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
         {
         	$scope.activities = [];
         	$scope.groupbyActivitet('iasectorCode','iaactivityCode','iasubActivityCode',$scope.activities);
+        	$scope.updateActivitiesDownloadData();
         };
+        
+        $scope.updateActivitiesDownloadData = function() {
+        	$scope.activitiesDownload= new Array();
+            var add_fields = 5;
+            
+            $scope.topInfoDownload($scope.activitiesDownload);
+            
+            $scope.activitiesDownload[add_fields]= new Array();
+            $scope.activitiesDownload[add_fields][0] = $scope.tr_p.TransferPerIndustrialActivities;
+        	$scope.activitiesDownload[add_fields][1] = $scope.tr_p.Facilities;
+        	$scope.activitiesDownload[add_fields][2] = $scope.tr_p.Quantity;
+
+        	add_fields += 1;
+        	
+        	var activities = $scope.activities.sort(function(a, b) {
+        	    return a.key - b.key;
+        	});
+        	
+            for(var i =0; i<$scope.activities.length;i++){
+            	var subActivities = 0;
+            	var activity = activities[i];
+            	$scope.activitiesDownload[i+add_fields]= new Array();
+            	$scope.activitiesDownload[i+add_fields][0] = $scope.tr_laa[activity.key];
+            	$scope.activitiesDownload[i+add_fields][1] = $scope.getTypeCount(activity.data,"facility");
+            	$scope.activitiesDownload[i+add_fields][2] = $scope.getSum(activity.data,"quantity");
+            	
+            	activity.data = activity['data'].sort(function(a, b) {
+            	    return a.iaactivityCode - b.iaactivityCode;
+            	});
+            	
+            	for(var j =0; j<activity.data.length;j++){
+            		var subActivity = activity.data[j];
+            		$scope.activitiesDownload[i+add_fields+(++subActivities)]= new Array();
+                	$scope.activitiesDownload[i+add_fields+subActivities][0] = $scope.tr_laa[subActivity.iaactivityCode];
+                	$scope.activitiesDownload[i+add_fields+subActivities][1] = $scope.getTypeCount(subActivity,"facility");
+                	$scope.activitiesDownload[i+add_fields+subActivities][2] = $scope.getSum(subActivity,"quantity");
+                	
+                	if(subActivity.hasOwnProperty('sublevel') && subActivity.sublevel instanceof Array && subActivity.sublevel.length >=0){
+                		subActivity.sublevel= subActivity.sublevel.sort(function(a, b) {
+                    	    return a.iasubActivityCode - b.iasubActivityCode;
+                    	});
+                		
+                		for(var k =0; k< subActivity.sublevel.length ;k++){
+                    		var subSubActivity = subActivity.sublevel[k];
+                    		$scope.activitiesDownload[i+add_fields+(++subActivities)]= new Array();
+                        	$scope.activitiesDownload[i+add_fields+subActivities][0] = $scope.tr_laa[subSubActivity.iasubActivityCode];
+                        	$scope.activitiesDownload[i+add_fields+subActivities][1] = $scope.getTypeCount(subSubActivity,"facility");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][2] = $scope.getSum(subSubActivity,"quantity");
+                    	}
+                	}
+                	
+            	}
+            	
+            	add_fields += subActivities +1;
+            }
+            
+            $scope.activitiesDownload[i+add_fields]= new Array();
+        	$scope.activitiesDownload[i+add_fields][0] = $scope.tr_c.Total;
+        	$scope.activitiesDownload[i+add_fields][1] = $scope.totalactivitiesfac;
+        	$scope.activitiesDownload[i+add_fields][2] = $scope.totalactivitiesq;
+        }
         
         $scope.updateAreasData = function()
         {
         	$scope.areas = [];
         	$scope.groupbyAreas('countryCode',$scope.areas);
+        	$scope.updateAreasDownloadData();
         };
+        
+        $scope.updateAreasDownloadData = function() {
+        	$scope.areasDownload= new Array();
+            var add_fields = 5;
+            
+            $scope.topInfoDownload($scope.areasDownload);
+            
+            $scope.areasDownload[add_fields]= new Array();
+            $scope.areasDownload[add_fields][0] = $scope.tr_p.TransferPerCountry;
+        	$scope.areasDownload[add_fields][1] = $scope.tr_p.Facilities;
+        	$scope.areasDownload[add_fields][2] = $scope.tr_p.Quantity;
+
+        	add_fields += 1;
+        	
+        	var areas = $scope.areas.sort(function(a, b) {
+        	    return a.key - b.key;
+        	});
+        	
+            for(var i =0; i<areas.length;i++){
+            	var subAreas = 0;
+            	var area = areas[i];
+            	$scope.areasDownload[i+add_fields]= new Array();
+            	$scope.areasDownload[i+add_fields][0] = $scope.tr_lco[area.key];
+            	$scope.areasDownload[i+add_fields][1] = $scope.getTypeCount(area.data,"facility");
+            	$scope.areasDownload[i+add_fields][2] = $scope.getSum(area.data,"quantity");
+            	
+            	area.data.sort(function(a, b) {
+            		if($scope.regionSearch){
+            			return $scope.tr_lnr[a.nutslevel2RegionCode].localeCompare($scope.tr_lnr[b.nutslevel2RegionCode]);
+            		}else{
+            			return $scope.tr_lnr[a.riverBasinDistrictCode].localeCompare($scope.tr_lnr[b.riverBasinDistrictCode]);
+            		}
+            	});
+            	
+            	if(area.hasOwnProperty('data')){
+                	for(var j =0; j<area.data.length;j++){
+                		var subArea = area.data[j];
+                		
+                		var areaName ="";
+                    	if($scope.regionSearch){
+                    		areaName = $scope.tr_lnr[subArea.nutslevel2RegionCode];
+                    	}else
+                    		areaName = $scope.tr_lnr[subArea.riverBasinDistrictCode];
+                		
+                		$scope.areasDownload[i+add_fields+(++subAreas)]= new Array();
+                    	$scope.areasDownload[i+add_fields+subAreas][0] = areaName;
+                    	$scope.areasDownload[i+add_fields+subAreas][1] = $scope.getTypeCount(subArea,"facility");
+                    	$scope.areasDownload[i+add_fields+subAreas][2] = $scope.getSum(subArea,"quantity");
+                	}
+            	}
+            	add_fields += subAreas+1;
+            }
+            $scope.activitiesDownload[i+add_fields]= new Array();
+        	$scope.activitiesDownload[i+add_fields][0] = $scope.tr_c.Total;
+        	$scope.activitiesDownload[i+add_fields][1] = $scope.totalareasfac;
+        	$scope.activitiesDownload[i+add_fields][2] = $scope.totalareasq;
+        }
         
         $scope.updateConfidentialityData = function()
         {
