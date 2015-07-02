@@ -79,6 +79,7 @@ angular.module('myApp.emissionmapair', ['ngRoute','leaflet-directive'])
 		    opacity: 0.5,
 		    useCors: false,
 		    layers:[0],
+			f: 'image'
 		  });//.addTo(map);
 
 		if($scope.layerid != undefined){

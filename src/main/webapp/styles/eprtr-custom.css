@@ -300,7 +300,7 @@ em.white, a.white {
 	color:#fff!important;
 }
 
-em.white-big, a.white-big {
+em.white-big, a.white-big, span.white-big {
 	padding-top: 8px;
 	font-size: 1.875em;
 	color:#fff!important;
