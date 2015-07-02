@@ -650,7 +650,7 @@ label.simple{
         top:0;
     }
     
-    .pagination, .print-button, #container, .footer,  .navbar, .search_form , .map { height:1px; display:none;}
+    .pagination, .btn, #container, .footer,  .navbar, .search_form , .map { height:1px; display:none;}
     
 }
 

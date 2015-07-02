@@ -70,7 +70,8 @@
   				
 			</tab>
 			    <tab heading="Pollutant Transfer"  active="active.pollutanttransfer" ng-click="activateTab('pollutanttransfer')">
-					<div id="area_overview_pollutant_transfer" ng-show="searchResults">
+					<div id="area_overview_pollutant_transfer">
+						<div ng-show="searchResults">
 					<div class="col-md-2 top-buffer10" ng-show="searchResults">
 	              <table >
 					  <tr ng-repeat="x in headitms | orderBy : 'order'" >
@@ -88,7 +89,7 @@
 			      <div class="col-md-2 top-buffer10 ">
 				  	<button class="print-button btn btn-default pull-right" ng-print print-element-id="area_overview_pollutant_transfer"><i class="fa fa-print"></i></button>
 				  </div>
-				  
+				  </div>
 			      
 			      <div class="col-md-12 top-buffer10" ng-if="!prfilter.pgselect.code">
 						<div class="alert alert-success"><strong>You need to select a Pollutant Group</strong></div>
@@ -100,7 +101,8 @@
 			    	</div>
 			    </tab>
 			    <tab  heading="Waste Transfer"  active="active.wastetransfer" ng-click="activateTab('wastetransfer')">
-	              <div id="area_overview_waste_transfer" ng-show="searchResults">
+	              <div id="area_overview_waste_transfer">
+	              <div  ng-show="searchResults">
 	              <div class="col-md-2 top-buffer10">
 	              <table class="top-buffer10">
 					  <tr ng-repeat="x in headitms | orderBy : 'order'" >
@@ -117,7 +119,7 @@
 			      <div class="col-md-6 top-buffer10 ">
 				  	<button class="print-button btn btn-default pull-right" ng-print print-element-id="area_overview_waste_transfer"><i class="fa fa-print"></i></button>
 				  </div>
-				  
+				  </div>
 			      
 			      <div class="col-md-12">
 				  <area-overview-waste-tab queryparams="queryParams" visible="active.wastetransfer != undefined" />
