@@ -44,6 +44,7 @@ module.exports = function(config){
       'src/main/webapp/bower_components/spin.js/spin.js',
       'src/main/webapp/bower_components/angular-spinner/angular-spinner.js',
       'src/main/webapp/bower_components/spin/javascripts/jquery.spin.js',
+      'src/main/webapp/bower_components/ng-csv/build/ng-csv.min.js',
       // endbower
       'src/main/webapp/components/**/*.js',
       'src/main/webapp/view*/**/*.js'
