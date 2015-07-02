@@ -414,9 +414,9 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
             	
             	area.data.sort(function(a, b) {
             		if($scope.regionSearch){
-            			return $scope.tr_lnr[a.nutslevel2RegionCode].localeCompare($scope.tr_lnr[b.nutslevel2RegionCode]);
+            			return $scope.tr_lnr[a.nutslevel2RegionCode].valueOf() - $scope.tr_lnr[b.nutslevel2RegionCode].valueOf();
             		}else{
-            			return $scope.tr_lnr[a.riverBasinDistrictCode].localeCompare($scope.tr_lnr[b.riverBasinDistrictCode]);
+            			return $scope.tr_lrbd[a.riverBasinDistrictCode].valueOf() - $scope.tr_lrbd[b.riverBasinDistrictCode].valueOf();
             		}
             	});
             	
@@ -428,7 +428,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
                     	if($scope.regionSearch){
                     		areaName = $scope.tr_lnr[subArea.nutslevel2RegionCode];
                     	}else
-                    		areaName = $scope.tr_lnr[subArea.riverBasinDistrictCode];
+                    		areaName = $scope.tr_lrbd[subArea.riverBasinDistrictCode];
                 		
                 		$scope.areasDownload[i+add_fields+(++subAreas)]= new Array();
                     	$scope.areasDownload[i+add_fields+subAreas][0] = areaName;
