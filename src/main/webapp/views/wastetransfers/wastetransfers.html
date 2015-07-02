@@ -53,7 +53,7 @@
       </div>
         <tabset>
             <tab heading="Summary" ng-click="getTabData('SUMMARY');activateTab('summary')" active="active.summary">
-            <div ng-show="searchResults">
+            <div id="waste_transfers_summary" ng-show="searchResults">
 			<div class="row top-buffer10">
 			<div class="col-md-5"> 
           <table>
@@ -71,10 +71,13 @@
 			  </tr>
 			</table>
 			</div>
-<div class="col-md-7"> 
+<div class="col-md-5"> 
       <blockquote>
 			<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
       </blockquote>
+      </div>
+      <div class="col-md-2">
+      		<button class="print-button btn btn-default pull-right" ng-print print-element-id="waste_transfers_summary"><i class="fa fa-print"></i></button>
       </div>
 			</div>
 			<div class="row top-buffer10">
@@ -130,7 +133,7 @@
            	</tab>
            	
            	 <tab heading="Activities" ng-click="getTabData('Activities');activateTab('activities')" active="active.activities">
-           	 <div ng-show="searchResults">
+           	 <div id="waste_transfers_activities" ng-show="searchResults">
 			<div class="row top-buffer10">
 			
 			<div class="col-md-5">
@@ -151,11 +154,14 @@
 			  </tr>
 			</table>
 			</div>
-			<div class="col-md-7">
+			<div class="col-md-5">
 		      <blockquote>
 					<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
 		      </blockquote>
 			</div>      
+			<div class="col-md-2">
+      			<button class="print-button btn btn-default pull-right" ng-print print-element-id="waste_transfers_activities"><i class="fa fa-print"></i></button>
+      		</div>
 
 			<div class="col-md-12 table-responsive top-buffer10" >
 
@@ -351,7 +357,7 @@
            	</tab>
            	  	
            	<tab heading="Areas" ng-click="getTabData('areas');activateTab('areas')" active="active.areas">
-           	<div ng-show="searchResults">
+           	<div id="waste_transfers_areas" ng-show="searchResults">
 			<div class="row top-buffer10">
 			
 			<div class="col-md-5">
@@ -367,14 +373,17 @@
 			  </tr>
 			  <tr >
 			    <td class="fdTitles">{{tr_c.Facilities}}:</td>
-			    <td>{{cf.getSubSum(areas,"facilityCount",false)}}</td>
+			    <td>{{cf.getTypeCount(summaryItems)}}</td>
 			  </tr>
 			</table>
 			</div>
-			<div class="col-md-7">
+			<div class="col-md-5">
       <blockquote>
 			<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
       </blockquote>
+      </div>
+      <div class="col-md-2">
+      		<button class="print-button btn btn-default pull-right" ng-print print-element-id="waste_transfers_areas"><i class="fa fa-print"></i></button>
       </div>
 
 <div class="col-md-12 table-responsive top-buffer10" >
@@ -539,14 +548,66 @@
            	</tab>
            	       	
            	<tab heading="Area Comparison" ng-click="getTabData('AREACOMPARISON');activateTab('areacomparison')" active="active.areacomparison">
-           	<!--div class="row top-buffer10" ng-show="searchResults" -->
+           	<div id="waste_transfers_area_comparison" ng-show="searchResults">
+           	<div class="row top-buffer10" >
+			<div class="col-md-5"> 
+          <table>
+			  <tr >
+			    <td class="fdTitles">{{tr_c.Year }}:</td>
+			    <td>{{ queryParams.ReportingYear }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{ tr_c.Area }}:</td>
+			    <td>{{ currentSearchFilter.selectedReportingCountry.name }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{tr_c.Facilities}}:</td>
+			    <td>{{cf.getTypeCount(summaryItems)}}</td>
+			  </tr>
+			</table>
+			</div>
+			<div class="col-md-5"> 
+      			<blockquote>
+					<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
+      			</blockquote>
+      		</div>
+      		<div class="col-md-2">
+      			<button class="print-button btn btn-default pull-right" ng-print print-element-id="waste_transfers_area_comparison"><i class="fa fa-print"></i></button>
+      		</div>
+			</div>
            	
            	<waste-area-comparison queryparams="queryParams" />
+           	</div>
            	
-           	<!--/div-->
            	</tab>
            	  <tab heading="Facilities" ng-click="getTabData('FACILITIES');activateTab('facilities')" active="active.facilities">
-           	  <div ng-show="searchResults">
+           	  <div id="waste_transfers_facilities" ng-show="searchResults">
+           	  	<div class="row top-buffer10">
+			<div class="col-md-5"> 
+          <table>
+			  <tr >
+			    <td class="fdTitles">{{tr_c.Year }}:</td>
+			    <td>{{ queryParams.ReportingYear }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{ tr_c.Area }}:</td>
+			    <td>{{ currentSearchFilter.selectedReportingCountry.name }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{tr_c.Facilities}}:</td>
+			    <td>{{cf.getTypeCount(summaryItems)}}</td>
+			  </tr>
+			</table>
+			</div>
+<div class="col-md-5"> 
+      <blockquote>
+			<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
+      </blockquote>
+      </div>
+      <div class="col-md-2">
+      		<button class="print-button btn btn-default pull-right" ng-print print-element-id="waste_transfers_facilities"><i class="fa fa-print"></i></button>
+      </div>
+			</div>
 				<div class="row top-buffer10">
 					<div class="col-md-12" wt-selector queryparams="queryParams" wtsel="wtfcsel(wastetype)"></div>
            	    </div>
@@ -588,7 +649,7 @@
            	  </div>
            	</tab>
            	  <tab heading="Haz. transboundary" ng-click="getTabData('HAZTRANSBOUNDARY');activateTab('haztransboundary')" active="active.haztransboundary">
-           	  <div ng-show="searchResults">
+           	  <div id="waste_transfers_haz_transboundary" ng-show="searchResults">
            	  <div class="row top-buffer10">
            	  			<div class="col-md-5">
 			
@@ -604,22 +665,54 @@
           
 			  <tr >
 			    <td class="fdTitles">{{tr_c.Facilities}}:</td>
-			    <td>{{cf.getSubSum(activities,"facilityCount",false)}}</td>
+			    <td>{{cf.getTypeCount(summaryItems)}}</td>
 			  </tr>
 			</table>
 			</div>
-			<div class="col-md-7">
+			<div class="col-md-5">
 		      <blockquote>
 					<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
 		      </blockquote>
-			</div>   
+			</div> 
+			<div class="col-md-2">
+      			<button class="print-button btn btn-default pull-right" ng-print print-element-id="waste_transfers_haz_transboundary"><i class="fa fa-print"></i></button>
+      		</div>  
 			</div>   
 			
            	     <haz-transboundary queryparams="queryParams" />
            	  </div>
            	</tab>
            	 <tab heading="Haz. receivers" ng-click="getTabData('HAZRECEIVERS');activateTab('hazreceivers')" active="active.hazreceivers">
-           	 <div ng-show="searchResults">
+           	 <div id="waste_transfers_haz_receivers" ng-show="searchResults">
+           	 <div class="row top-buffer10">
+           	  			<div class="col-md-5">
+			
+          <table>
+          			  <tr >
+			    <td class="fdTitles">{{tr_c.Year }}:</td>
+			    <td>{{ queryParams.ReportingYear }}</td>
+			  </tr>
+			  <tr >
+			    <td class="fdTitles">{{ tr_c.Area }}:</td>
+			    <td>{{ currentSearchFilter.selectedReportingCountry.name }}</td>
+			  </tr>
+          
+			  <tr >
+			    <td class="fdTitles">{{tr_c.Facilities}}:</td>
+			    <td>{{cf.getTypeCount(summaryItems)}}</td>
+			  </tr>
+			</table>
+			</div>
+			<div class="col-md-5">
+		      <blockquote>
+					<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
+		      </blockquote>
+			</div> 
+			<div class="col-md-2">
+      			<button class="print-button btn btn-default pull-right" ng-print print-element-id="waste_transfers_haz_receivers"><i class="fa fa-print"></i></button>
+      		</div>  
+			</div> 
+			
            	 	<haz-receivers-waste-tab queryparams="queryParams" visible="showhazreceivers" />
            	 </div>
            	</tab>

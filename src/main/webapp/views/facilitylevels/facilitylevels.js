@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'restangular', 'myApp.activitySearchFilter', 'myApp.pollutantSearchFilter', 'myApp.wasteSearchFilter','angularSpinner'])
+angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'restangular', 'myApp.activitySearchFilter', 'myApp.pollutantSearchFilter', 'myApp.wasteSearchFilter','angularSpinner','ngCsv'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/facilitylevels', {
@@ -167,28 +167,64 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
             $scope.items = response.data;
 	        $scope.totalItemCount = response.headers('X-Count');
 	        $scope.confidentialFacilities = response.headers('X-Confidentiality');
+	        $scope.updateFacilitiesDownload(response.data);
 	        $scope.stopSpin();
 	    });
 	};
 
-    $scope.hasItems = function() {
-    	return $scope.items.length > 0;
-    };
+	$scope.hasItems = function() {
+		return $scope.items.length > 0;
+	};
 
-        $scope.formatText = function(txt, confidential) {
-            if (txt)
-            {
-                return txt;
-            }
-            else if (confidential)
-            {
-                return "CONFIDENTIAL";
-            }
-            else
-            {
-                return "-";
-            }
-        };
+	$scope.formatText = function(txt, confidential) {
+		if (txt)
+		{
+			return txt;
+		}
+		else if (confidential)
+		{
+			return "CONFIDENTIAL";
+		}
+		else
+		{
+			return "-";
+		}
+	};
+	
+	$scope.updateFacilitiesDownload = function(items){
+		$scope.facilitiesDownload= new Array();
+		
+		$scope.facilitiesDownload[1]= new Array();
+		$scope.facilitiesDownload[1][0] = $scope.tr_c.Year;
+		$scope.facilitiesDownload[1][1] = $scope.queryParams.ReportingYear;
+    	
+		$scope.facilitiesDownload[2]= new Array();
+    	$scope.facilitiesDownload[2][0] = $scope.tr_c.Area;
+    	$scope.facilitiesDownload[2][1] = $scope.currentSearchFilter.selectedReportingCountry.name;
+		
+        var top_fields = 4;
+        
+        $scope.facilitiesDownload[top_fields]= new Array();
+        $scope.facilitiesDownload[top_fields][0] = $scope.tr_f.FacilityName;
+    	$scope.facilitiesDownload[top_fields][1] = $scope.tr_f.PostalCode;
+    	$scope.facilitiesDownload[top_fields][2] = $scope.tr_f.Address;
+    	$scope.facilitiesDownload[top_fields][3] = $scope.tr_f.TownVillage;
+    	$scope.facilitiesDownload[top_fields][4] = $scope.tr_f.Activity;
+    	$scope.facilitiesDownload[top_fields][5] = $scope.tr_f.Country;
+
+    	top_fields += 1;
+    	
+        for(var i =0; i<items.length;i++){
+        	var facility = items[i];
+        	$scope.facilitiesDownload[i+top_fields]= new Array();
+        	$scope.facilitiesDownload[i+top_fields][0] = $scope.formatText(facility.facilityName, facility.confidentialIndicator);
+        	$scope.facilitiesDownload[i+top_fields][1] = $scope.formatText(facility.postalCode, facility.confidentialIndicator);
+        	$scope.facilitiesDownload[i+top_fields][2] = $scope.formatText(facility.address, facility.confidentialIndicator)
+        	$scope.facilitiesDownload[i+top_fields][3] = $scope.formatText(facility.city, facility.confidentialIndicator);
+        	$scope.facilitiesDownload[i+top_fields][4] = facility.iaactivityCode;
+        	$scope.facilitiesDownload[i+top_fields][5] = facility.countryCode;
+        }
+	}
 }])
 
 .directive("customSort", function() {

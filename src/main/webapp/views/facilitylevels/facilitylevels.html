@@ -49,46 +49,77 @@
 			      		<a class="text-danger" ng-click="activateTab('confidentiality')" ><i class="fa fa-exclamation-triangle"></i>  {{tr_f.ConfidentialityAlertLink}}</a>
       				</div>
 			   </div>
-			         <div class="col-md-12 top-buffer10" ng-if="beforesearch">
+		<div class="col-md-12 top-buffer10" ng-if="beforesearch">
 			<div class="alert alert-success"><strong>{{tr_c.SearchText}}</strong></div>
-      </div>
+      	</div>
 			   
 		<!--div ng-show="searchResults"-->
+		<div class="col-md-12">
         <tabset>
             <tab heading="{{tr_c.Facilities}}" active="active.facilities" >
             	<span us-spinner="{radius:16, width:6, length: 12}" spinner-key="spinner-1"></span>
-				<div class="col-md-12 table-responsive top-buffer10" >
-                <table class="table table-striped table-condensed table-hover">
-                    <thead>
-                        <tr>
-                            <th class="facilityName" custom-sort order="'facilityName'" sort="sort">{{tr_f.FacilityName}}</th>
-                            <th class="postalCode" custom-sort order="'postalCode'" sort="sort">{{tr_f.PostalCode}}</th>
-                            <th class="address" custom-sort order="'address'" sort="sort">{{tr_f.Address}}</th>
-                            <th class="city" custom-sort order="'city'" sort="sort">{{tr_f.TownVillage}}</th>
-                            <th class="iaactivityCode" custom-sort order="'IAActivityCode'" sort="sort">{{tr_f.Activity}}</th>
-                            <th class="countryCode" custom-sort order="'countryCode'" sort="sort">{{tr_f.Country}}</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <td colspan="6">
-                            <div ng-show="hasItems()">
-                                <pagination boundary-links="true" ng-model="$parent.currentPage" total-items="totalItemCount" items-per-page="itemsPerPage" max-size="gap" class="pagination pull-right" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
-                            </div>
-                        </td>
-                    </tfoot>
-                    <tbody>
-                        <tr ng-repeat="item in items">
-                            <td><a href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">{{formatText(item.facilityName, item.confidentialIndicator)}}</a></td>
-                            <td>{{formatText(item.postalCode, item.confidentialIndicator)}}</td>
-                            <td>{{formatText(item.address, item.confidentialIndicator)}}</td>
-                            <td>{{formatText(item.city, item.confidentialIndicator)}}</td>
-                            <td>{{item.iaactivityCode}}</td>
-                            <td>{{item.countryCode}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                </div>
-            </tab>
+				<div id="facility" class=" col-md-12 table-responsive top-buffer10">
+				<div class="row top-buffer10" ng-show="searchResults">
+					<div class="col-md-6">
+						<table>
+							<tr>
+								<td class="fdTitles">{{tr_c.Year }}:</td>
+								<td>{{ queryParams.ReportingYear }}</td>
+							</tr>
+							<tr>
+								<td class="fdTitles">{{ tr_c.Area }}:</td>
+								<td>{{ currentSearchFilter.selectedReportingCountry.name }}</td>
+							</tr>
+						</table>
+					</div>
+					<div class="col-md-6">
+						<button class="print-button btn btn-default pull-right" ng-print print-element-id="facility"><i class="fa fa-print"></i></button>
+						<button class="btn btn-default pull-right" ng-csv="facilitiesDownload" filename="EPRTR_Facilities_List.csv"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>	
+					</div>
+				</div>
+				
+					<table class="table table-striped table-condensed table-hover top-buffer10">
+						<thead>
+							<tr>
+								<th class="facilityName" custom-sort order="'facilityName'"
+									sort="sort">{{tr_f.FacilityName}}</th>
+								<th class="postalCode" custom-sort order="'postalCode'"
+									sort="sort">{{tr_f.PostalCode}}</th>
+								<th class="address" custom-sort order="'address'" sort="sort">{{tr_f.Address}}</th>	
+								<th class="city" custom-sort order="'city'" sort="sort">{{tr_f.TownVillage}}</th>
+								<th class="iaactivityCode" custom-sort order="'IAActivityCode'"
+									sort="sort">{{tr_f.Activity}}</th>
+								<th class="countryCode" custom-sort order="'countryCode'"
+									sort="sort">{{tr_f.Country}}</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<td colspan="6">
+								<div class='pagination' ng-show="hasItems()">
+									<pagination boundary-links="true" ng-model="$parent.currentPage"
+										total-items="totalItemCount" items-per-page="itemsPerPage"
+										max-size="gap" class="pagination pull-right"
+										previous-text="&lsaquo;" next-text="&rsaquo;"
+										first-text="&laquo;" last-text="&raquo;"></pagination>
+								</div>
+							</td>
+						</tfoot>
+						<tbody>
+						<tr ng-repeat="item in items">
+							<td><a
+								href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">{{formatText(item.facilityName,
+									item.confidentialIndicator)}}</a></td>
+							<td>{{formatText(item.postalCode,
+								item.confidentialIndicator)}}</td>
+							<td>{{formatText(item.address, item.confidentialIndicator)}}</td>
+							<td>{{formatText(item.city, item.confidentialIndicator)}}</td>
+							<td>{{item.iaactivityCode}}</td>
+							<td>{{item.countryCode}}</td>
+						</tr>
+					</tbody>
+				</table>
+		</div>
+		</tab>
             <tab heading="{{tr_c.ContentConfidientiality}}"  active="active.confidentiality" >
                 <br/>
                 <div ng-show="confidentialFacilities">
@@ -101,10 +132,11 @@
                 <p ng-bind-html="tr_c.ConfidentialityExplanationFacilityList"></p>
             </tab>
         </tabset>
+    </div>
 	<!-- /div-->
 </div>
 		
-		<div class="col-md-3" style="height:600px;">
+		<div class="map col-md-3" style="height:600px;">
              <esri-leaf-map contenttype="'facilitylevel'" queryparams="queryParams" />
         </div>
 

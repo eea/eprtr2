@@ -26,7 +26,8 @@
     "Leaflet.awesome-markers": "2.0.2",
     "underscore": "*",
     "angular-spinner":"*",
-    "spin":"*"
+    "spin":"*",
+    "ng-csv":"*"
   },
   "appPath": "src/main/webapp"
 }
