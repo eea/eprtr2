@@ -62,10 +62,10 @@ public class FacilitySearchController {
     		@RequestParam(value = "whpCountryCode", required = false) String whpCountryCode,
     		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
     		
-    		@RequestParam(value = "offset") Integer offset,
-    		@RequestParam(value = "limit") Integer limit,
-    		@RequestParam(value = "order") String order,
-    		@RequestParam(value = "desc") Boolean desc,
+    		@RequestParam(value = "offset", required = false) Integer offset,
+    		@RequestParam(value = "limit", required = false) Integer limit,
+    		@RequestParam(value = "order", required = false) String order,
+    		@RequestParam(value = "desc", required = false) Boolean desc,
     		
     		HttpServletResponse response) {
 
@@ -84,10 +84,16 @@ public class FacilitySearchController {
 		
 		if (facilitiesCount > 0)
 		{
-			OrderBy orderBy = new OrderBy(order, desc.booleanValue());
-			QueryPager pager = new QueryPager(offset.intValue(), limit.intValue());
-			List<FacilitySearchMainActivity> facilities = facilitySearchRepository.getFacilities(filter, orderBy, pager);
-			return facilities.toArray(new FacilitySearchMainActivity[0]);
+			if (offset != null){
+				OrderBy orderBy = new OrderBy(order, desc.booleanValue());
+				QueryPager pager = new QueryPager(offset.intValue(), limit.intValue());
+				List<FacilitySearchMainActivity> facilities = facilitySearchRepository.getFacilities(filter, orderBy, pager);
+				return facilities.toArray(new FacilitySearchMainActivity[0]);
+			}
+			else{
+				List<FacilitySearchMainActivity> facilities = facilitySearchRepository.getFacilities(filter,null,null);
+				return facilities.toArray(new FacilitySearchMainActivity[0]);
+			}
 		}
 		
 		return new FacilitySearchMainActivity[0];

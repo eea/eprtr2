@@ -76,11 +76,13 @@ public class FacilitySearchRepository {
 		sq.where(filter.buildWhereClause(cb, sqr));
 		
 		cq.where(qr.get(FacilitySearchMainActivity_.facilityReportID).in(sq));
-		orderBy.apply(cb, cq, qr);
-		
+		if (orderBy != null){
+			orderBy.apply(cb, cq, qr);
+		}
 		TypedQuery<FacilitySearchMainActivity> q = em.createQuery(cq);
-		pager.apply(q);
-		
+		if (pager != null){
+			pager.apply(q);
+		}		
 		List<FacilitySearchMainActivity> results = q.getResultList();
 		return results;
 	}
