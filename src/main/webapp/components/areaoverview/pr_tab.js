@@ -85,9 +85,9 @@ angular.module('myApp.areaOverviewPrTab', ['restangular','ngSanitize','angularSp
         	$scope.searchService = $scope.restconfig.all('pollutantreleaseAreaoverview');
     		$scope.searchService.getList($scope.prqueryparams).then(function(response) {
         		$scope.items = response.data;
+        		$scope.resultlist = response.data;
 //          		$scope.totalSearchResult += parseInt($scope.wastetransfercount);
           		$scope.updateData();
-
     		});
         }
         
@@ -182,7 +182,8 @@ angular.module('myApp.areaOverviewPrTab', ['restangular','ngSanitize','angularSp
   			queryparams: '=',
   			visible: '=',
   			pollutant: '=',
-  			medium: '='
+  			medium: '=',
+  			resultlist:'='
   		},
   		templateUrl: 'components/areaoverview/pr_tab.html',
   		link: function(scope, element, attrs){
