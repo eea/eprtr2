@@ -211,7 +211,7 @@ angular.module('myApp.home', ['ngRoute'])
 
 .factory('countFactory', ['$filter', 'formatStrFactory', function($filter,formatStrFactory){
 	return {
-		getTypeCount : function(elements){  
+		getTypeCount :function(elements){  
 		  	if(!elements.length)
 		  	{
 		  		elements = jQuery.makeArray(elements);

@@ -11,16 +11,10 @@
         <select class="form-control" ng-model="pollutantSearchFilter.selectedPollutant" ng-options="c.name for c in pollutants" id="inputPollutant"></select>
     </div>
     <div  class="form-group" ng-show="showReleasesToInputField">
-        <label class="control-label">Releases to</label>
-        <div class="checkbox">
-            <label><input type="checkbox" name="releasesToAirCheck" id="releasesToAirCheck_0" value="0" ng-model="pollutantSearchFilter.releasesToAir"> Air</label>
-        </div>
-        <div class="checkbox">
-            <label><input type="checkbox" name="releasesToWaterCheck" id="releasesToWaterCheck_0" value="1" ng-model="pollutantSearchFilter.releasesToWater"> Water</label>
-        </div>
-        <div class="checkbox">
-            <label><input type="checkbox" name="releasesToSoilCheck" id="releasesToSoilCheck_0" value="2" ng-model="pollutantSearchFilter.releasesToSoil"> Soil</label>
-        </div>
+    	<p class="control-label"><strong>Releases to</strong></p>
+            <label class="checkbox-inline" ><input type="checkbox" name="releasesToAirCheck" id="releasesToAirCheck_0" value="0" ng-model="pollutantSearchFilter.releasesToAir"> Air</label>
+            <label class="checkbox-inline"><input type="checkbox" name="releasesToWaterCheck" id="releasesToWaterCheck_0" value="1" ng-model="pollutantSearchFilter.releasesToWater"> Water</label>
+            <label class="checkbox-inline"><input type="checkbox" name="releasesToSoilCheck" id="releasesToSoilCheck_0" value="2" ng-model="pollutantSearchFilter.releasesToSoil"> Soil</label>
     </div>
     <div  class="form-group" ng-show="showTransfersToInputField">
         <label class="control-label">Transfers to</label>

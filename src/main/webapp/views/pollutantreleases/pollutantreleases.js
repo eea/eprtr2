@@ -536,10 +536,10 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         					group.data[j].quantityAccidentalWater += record.quantityAccidentalWater;
         					accidentalfound = true;
         				}
-        				group.data[j].fcount+=1;
+        				group.data[j].facilityCount+=1;
         				if(accidentalfound)
         				{
-        					group.data[j].facount+=1;
+        					group.data[j].facilityAccidentalCount+=1;
         				}
         				exist = true;
         				break;
@@ -562,13 +562,13 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
     			}
         		if(!exist)
         		{
-        			record.fcount = 1;
+        			record.facilityCount = 1;
         			if(record.quantityAccidentalAir || record.quantityAccidentalSoil || record.quantityAccidentalWater)
         			{
-        				record.facount = 1;
+        				record.facilityAccidentalCount = 1;
         			}else
         			{
-        				record.facount = 0;
+        				record.facilityAccidentalCount = 0;
         			}
         			group.data.push(record);
         		}        		
@@ -624,10 +624,10 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         		        					sublevel[m].quantityAccidentalWater += subCollection[i].quantityAccidentalWater;
         		        					accidentalfound = true;
         		        				}
-        		        				sublevel[m].fcount+=1;
+        		        				sublevel[m].facilityCount+=1;
         		        				if(accidentalfound)
         		        				{
-        		        					sublevel[m].facount+=1;
+        		        					sublevel[m].facilityAccidentalCount+=1;
         		        				}
         		        				existSublevel = true;
         		        				break;
@@ -636,13 +636,13 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         		        		
         		        		if(!existSublevel)
         		        		{	
-        		        			subCollection[i].fcount = 1;
+        		        			subCollection[i].facilityCount = 1;
         		        			if(subCollection[i].quantityAccidentalAir || subCollection[i].quantityAccidentalSoil || subCollection[i].quantityAccidentalWater)
         		        			{
-        		        				subCollection[i].facount = 1;
+        		        				subCollection[i].facilityAccidentalCount = 1;
         		        			}else
         		        			{
-        		        				subCollection[i].facount = 0;
+        		        				subCollection[i].facilityAccidentalCount = 0;
         		        			}
         		        			sublevel.push(subCollection[i]);
         		        		}        		
@@ -652,8 +652,8 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         		} // End collection
         	}
         	//$scope.cf.getSubSum($scope.activities,"facilityCount",true);
-        	$scope.totalactivitiesfac = $scope.cf.getSubSum($scope.activities,"fcount",false);
-        	$scope.totalactivitiesacc = $scope.cf.getSubSum($scope.activities,"facount",false);
+        	$scope.totalactivitiesfac = $scope.cf.getSubSum($scope.activities,"facilityCount",false);
+        	$scope.totalactivitiesacc = $scope.cf.getSubSum($scope.activities,"facilityAccidentalCount",false);
         	$scope.totalactivitiessumair = $scope.cf.getSubSum($scope.activities,"quantityAir",true);
         	$scope.totalactivitiessumaair = $scope.cf.getSubSum($scope.activities,"quantityAccidentalAir",true);
         	$scope.totalactivitiessumwater = $scope.cf.getSubSum($scope.activities,"quantityWater",true);
@@ -711,10 +711,10 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         					group.data[j].quantityAccidentalWater += record.quantityAccidentalWater;
         					accidentalfound = true;
         				}
-        				group.data[j].fcount+=1;
+        				group.data[j].facilityCount+=1;
         				if(accidentalfound)
         				{
-        					group.data[j].facount+=1;
+        					group.data[j].facilityAccidentalCount+=1;
         				}
         				exist = true;
         				break;
@@ -722,13 +722,13 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         		}
         		if(!exist)
         		{
-        			record.fcount = 1;
+        			record.facilityCount = 1;
         			if(record.quantityAccidentalAir || record.quantityAccidentalSoil || record.quantityAccidentalWater)
         			{
-        				record.facount = 1;
+        				record.facilityAccidentalCount = 1;
         			}else
         			{
-        				record.facount = 0;
+        				record.facilityAccidentalCount = 0;
         			}
     				if($scope.regionSearch){
     					if (record.lov_NUTSRegionID == undefined){
@@ -778,8 +778,8 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         			group.data.push(record);
         		}        		
         	}
-        	$scope.totalareasfac = $scope.cf.getSubSum($scope.areas,"fcount",false);
-        	$scope.totalareasacc = $scope.cf.getSubSum($scope.areas,"facount",false);
+        	$scope.totalareasfac = $scope.cf.getSubSum($scope.areas,"facilityCount",false);
+        	$scope.totalareasacc = $scope.cf.getSubSum($scope.areas,"facilityAccidentalCount",false);
         	$scope.totalareassumair = $scope.cf.getSubSum($scope.areas,"quantityAir",true);
         	$scope.totalareassumaair = $scope.cf.getSubSum($scope.areas,"quantityAccidentalAir",true);
         	$scope.totalareassumwater = $scope.cf.getSubSum($scope.areas,"quantityWater",true);

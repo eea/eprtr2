@@ -32,7 +32,7 @@ angular.module('myApp.diffemissionsair', ['ngRoute','ngSanitize', 'myApp.emissio
     });
 	
     $scope.$watch('searchFilter.selectedLayer', function(value) {
-    	if(value != undefined){
+    	if(value != undefined && $scope.de){
 	    	$scope.title = $scope.de[$scope.searchFilter.selectedLayer+'.TitleFull'];
 	    	$scope.generalinfo = $scope.de[$scope.searchFilter.selectedLayer+'.GeneralInformation'];
 	    	$scope.methodology = $scope.de[$scope.searchFilter.selectedLayer+'.Methodology'];

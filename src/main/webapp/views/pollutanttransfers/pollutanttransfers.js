@@ -10,8 +10,10 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
     }])
 
     .controller('PollutantTransfersCtrl', ['$scope','$filter', '$modal', '$rootScope','searchFilter', 'Restangular','translationService',
-                                           'formatStrFactory', function($scope, $filter, $modal, $rootScope, searchFilter, Restangular,
-                                        		   translationService,formatStrFactory) {
+                                           'formatStrFactory','countFactory',  function($scope, $filter, $modal, $rootScope, searchFilter, Restangular,
+                                        		   translationService,formatStrFactory, countFactory) {
+    	$scope.ff = formatStrFactory;
+	    $scope.cf = countFactory;
         $scope.beforesearch = true;
     	$scope.pollutantPanel = true;
         $scope.pollutantPanelTitle = 'Pollutant transfers';
@@ -341,7 +343,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
             	var activity = activities[i];
             	$scope.activitiesDownload[i+add_fields]= new Array();
             	$scope.activitiesDownload[i+add_fields][0] = $scope.tr_laa[activity.key];
-            	$scope.activitiesDownload[i+add_fields][1] = $scope.getTypeCount(activity.data,"facility");
+            	$scope.activitiesDownload[i+add_fields][1] = $scope.cf.getTypeCount(activity.data);
             	$scope.activitiesDownload[i+add_fields][2] = $scope.getSum(activity.data,"quantity");
             	
             	activity.data = activity['data'].sort(function(a, b) {
@@ -352,7 +354,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
             		var subActivity = activity.data[j];
             		$scope.activitiesDownload[i+add_fields+(++subActivities)]= new Array();
                 	$scope.activitiesDownload[i+add_fields+subActivities][0] = $scope.tr_laa[subActivity.iaactivityCode];
-                	$scope.activitiesDownload[i+add_fields+subActivities][1] = $scope.getTypeCount(subActivity,"facility");
+                	$scope.activitiesDownload[i+add_fields+subActivities][1] = $scope.cf.getTypeCount(subActivity);
                 	$scope.activitiesDownload[i+add_fields+subActivities][2] = $scope.getSum(subActivity,"quantity");
                 	
                 	if(subActivity.hasOwnProperty('sublevel') && subActivity.sublevel instanceof Array && subActivity.sublevel.length >=0){
@@ -364,7 +366,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
                     		var subSubActivity = subActivity.sublevel[k];
                     		$scope.activitiesDownload[i+add_fields+(++subActivities)]= new Array();
                         	$scope.activitiesDownload[i+add_fields+subActivities][0] = $scope.tr_laa[subSubActivity.iasubActivityCode];
-                        	$scope.activitiesDownload[i+add_fields+subActivities][1] = $scope.getTypeCount(subSubActivity,"facility");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][1] = $scope.cf.getTypeCount(subSubActivity);
                         	$scope.activitiesDownload[i+add_fields+subActivities][2] = $scope.getSum(subSubActivity,"quantity");
                     	}
                 	}
@@ -409,7 +411,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
             	var area = areas[i];
             	$scope.areasDownload[i+add_fields]= new Array();
             	$scope.areasDownload[i+add_fields][0] = $scope.tr_lco[area.key];
-            	$scope.areasDownload[i+add_fields][1] = $scope.getTypeCount(area.data,"facility");
+            	$scope.areasDownload[i+add_fields][1] = $scope.cf.getTypeCount(area.data);
             	$scope.areasDownload[i+add_fields][2] = $scope.getSum(area.data,"quantity");
             	
             	area.data.sort(function(a, b) {
@@ -432,7 +434,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
                 		
                 		$scope.areasDownload[i+add_fields+(++subAreas)]= new Array();
                     	$scope.areasDownload[i+add_fields+subAreas][0] = areaName;
-                    	$scope.areasDownload[i+add_fields+subAreas][1] = $scope.getTypeCount(subArea,"facility");
+                    	$scope.areasDownload[i+add_fields+subAreas][1] = $scope.cf.getTypeCount(subArea);
                     	$scope.areasDownload[i+add_fields+subAreas][2] = $scope.getSum(subArea,"quantity");
                 	}
             	}
@@ -542,7 +544,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
     			return "-";
     		}
     	
-    		return formatStrFactory.getStrFormat(sum);
+    		return $scope.ff.getStrFormat(sum);
         };
         
         $scope.getSumTotal = function(type,property1)
@@ -578,7 +580,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
         		default:
         			break;
         	}
-        	return formatStrFactory.getStrFormat(sumtotal);
+        	return $scope.ff.getStrFormat(sumtotal);
         };
         
         $scope.getTotalCount = function(type,property)
@@ -616,7 +618,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
         	return count;
         };
         
-        $scope.getTypeCount = function(elements, type){  
+        /*$scope.getTypeCount = function(elements, type){  
             
         	if(!elements.length)
         	{
@@ -627,14 +629,14 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
             for(var i = 0; i < elements.length; i++){
                 if(type==="facility")
                 {
-                	total += elements[i].fcount;
+                	total += elements[i].facilityCount;
                 }else
                 {
-                	total += elements[i].facount;
+                	total += elements[i].facilityAccidentalCount;
                 }
             }
             return total;
-        };
+        };*/
         
         $scope.findGroup = function(collection,key)
         {
@@ -670,7 +672,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
         				{
         					group.data[j].quantity += record.quantity;
         				}
-        				group.data[j].fcount+=1;
+        				group.data[j].facilityCount+=1;
         				exist = true;
         				break;
         			}
@@ -692,8 +694,8 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
     			}
         		if(!exist)
         		{
-        			record.fcount = 1;
-        			record.facount = 0;
+        			record.facilityCount = 1;
+        			record.facilityAccidentalCount = 0;
         			group.data.push(record);
         		}        		
         	}
@@ -724,7 +726,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
         		        				{
         		        					sublevel[m].quantity += subCollection[i].quantity;
         		        				}
-        		        				sublevel[m].fcount+=1;
+        		        				sublevel[m].facilityCount+=1;
         		        				existSublevel = true;
         		        				break;
         		        			}
@@ -732,8 +734,8 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
         		        		
         		        		if(!existSublevel)
         		        		{	
-        		        			subCollection[i].fcount = 1;
-        		        			subCollection[i].facount = 0;
+        		        			subCollection[i].facilityCount = 1;
+        		        			subCollection[i].facilityAccidentalCount = 0;
         		        			sublevel.push(subCollection[i]);
         		        		}        		
         					}
@@ -742,7 +744,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
         		} // End collection
         	}
         	
-        	$scope.totalactivitiesfac = $scope.getTotalCount("activities","fcount");
+        	$scope.totalactivitiesfac = $scope.getTotalCount("activities","facilityCount");
         	$scope.totalactivitiesq = $scope.getSumTotal("activities","quantity");	
         };
         
@@ -770,15 +772,15 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
         				{
         					group.data[j].quantity += record.quantity;
         				}
-        				group.data[j].fcount+=1;
+        				group.data[j].facilityCount+=1;
         				exist = true;
         				break;
         			}
         		}
         		if(!exist)
         		{
-        			record.fcount = 1;
-        			record.facount = 0;
+        			record.facilityCount = 1;
+        			record.facilityAccidentalCount = 0;
         			
     				if($scope.regionSearch){
     					if (record.lov_NUTSRegionID == undefined){
@@ -829,7 +831,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
         			group.data.push(record);
         		}        		
         	}
-        	$scope.totalareasfac = $scope.getTotalCount("areas","fcount");
+        	$scope.totalareasfac = $scope.getTotalCount("areas","facilityCount");
         	$scope.totalareasq = $scope.getSumTotal("areas","quantity");
         };
         

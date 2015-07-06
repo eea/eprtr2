@@ -170,11 +170,10 @@
                         {{tr_p.ReleasesAccidentialTotal}}<br/>
                         {{tr_p.ReleasesAccidentalValue}}
                         </td>
-                        <td class="text-right">{{cf.getTypeCount(item.data,"facility")}}
-                        <br />{{cf.getTypeCount(item.data,"accidental")}}</td>
+                        <td class="text-right">{{cf.getTypeCount(item.data)}}<br/>{{cf.getTypeCountAccidential(item.data)}}</td>
                         <td class="text-right">{{cf.getSum(item.data,"quantityAir")}}<br/>{{cf.getSum(item.data,"quantityAccidentalAir")}}</td>
-                        <td class="text-right">{{cf.getSum(item.data,"quantityWater")}}<br />{{cf.getSum(item.data,"quantityAccidentalWater")}}</td>
-                        <td class="text-right">{{cf.getSum(item.data,"quantitySoil")}}<br />{{cf.getSum(item.data,"quantityAccidentalSoil")}}</td>
+                        <td class="text-right">{{cf.getSum(item.data,"quantityWater")}}<br/>{{cf.getSum(item.data,"quantityAccidentalWater")}}</td>
+                        <td class="text-right">{{cf.getSum(item.data,"quantitySoil")}}<br/>{{cf.getSum(item.data,"quantityAccidentalSoil")}}</td>
                     </tr>
                     <!-- Level2 -->
                     <tr ng-show="showing" ng-repeat-start="level2 in item.data | orderBy: 'iaactivityCode'">
@@ -193,11 +192,10 @@
                     	   	{{tr_p.ReleasesAccidentialTotal}}<br/>
                         	{{tr_p.ReleasesAccidentalValue}}
                     	</td>
-                   		<td class="text-right">{{cf.getTypeCount(level2,"facility")}}
-                   		<br />{{cf.getTypeCount(level2,"accidental")}}</td>
+                   		<td class="text-right">{{cf.getTypeCount(level2)}}<br/>{{cf.getTypeCountAccidential(level2)}}</td>
                        	<td class="text-right">{{cf.getSum(level2,"quantityAir")}}<br/>{{cf.getSum(level2,"quantityAccidentalAir")}}</td>
-                       	<td class="text-right">{{cf.getSum(level2,"quantityWater")}}<br />{{cf.getSum(level2,"quantityAccidentalWater")}}</td>
-                       	<td class="text-right">{{cf.getSum(level2,"quantitySoil")}}<br />{{cf.getSum(level2,"quantityAccidentalSoil")}}</td>
+                       	<td class="text-right">{{cf.getSum(level2,"quantityWater")}}<br/>{{cf.getSum(level2,"quantityAccidentalWater")}}</td>
+                       	<td class="text-right">{{cf.getSum(level2,"quantitySoil")}}<br/>{{cf.getSum(level2,"quantityAccidentalSoil")}}</td>
                     </tr>
                     <!-- Level3 -->
                     <tr  ng-show="showing2 && showing" ng-repeat-start="level3 in level2.sublevel | orderBy: 'iasubActivityCode'">
@@ -213,12 +211,10 @@
                     	   	{{tr_p.ReleasesAccidentialTotal}}<br/>
                         	{{tr_p.ReleasesAccidentalValue}}
                     	</td>
-                   		<td class="text-right">{{cf.getTypeCount(level3,"facility")}}
-      
-                   		<br />{{cf.getTypeCount(level3,"accidental")}}</td>
+                   		<td class="text-right">{{cf.getTypeCount(level3)}}<br/>{{cf.getTypeCountAccidential(level3)}}</td>
                        	<td class="text-right">{{cf.getSum(level3,"quantityAir")}}<br/>{{cf.getSum(level3,"quantityAccidentalAir")}}</td>
-                       	<td class="text-right">{{cf.getSum(level3,"quantityWater")}}<br />{{cf.getSum(level3,"quantityAccidentalWater")}}</td>
-                       	<td class="text-right">{{cf.getSum(level3,"quantitySoil")}}<br />{{cf.getSum(level3,"quantityAccidentalSoil")}}</td>
+                       	<td class="text-right">{{cf.getSum(level3,"quantityWater")}}<br/>{{cf.getSum(level3,"quantityAccidentalWater")}}</td>
+                       	<td class="text-right">{{cf.getSum(level3,"quantitySoil")}}<br/>{{cf.getSum(level3,"quantityAccidentalSoil")}}</td>
                     </tr>
                     <tr ng-repeat-end></tr>
                     <tr ng-repeat-end ng-hide="true"></tr>       
@@ -321,9 +317,7 @@
                         <br/>
                         {{tr_p.ReleasesAccidentalValue}}
                         </td>
-                        <td class="text-right">{{cf.getTypeCount(item.data,"facility")}}
-             
-                        <br />{{cf.getTypeCount(item.data,"accidental")}}</td>
+                        <td class="text-right">{{cf.getTypeCount(item.data)}}<br />{{cf.getTypeCountAccidential(item.data)}}</td>
                         <td class="text-right">{{cf.getSum(item.data,"quantityAir")}}<br/>{{cf.getSum(item.data,"quantityAccidentalAir")}}</td>
                         <td class="text-right">{{cf.getSum(item.data,"quantityWater")}}<br />{{cf.getSum(item.data,"quantityAccidentalWater")}}</td>
                         <td class="text-right">{{cf.getSum(item.data,"quantitySoil")}}<br />{{cf.getSum(item.data,"quantityAccidentalSoil")}}</td>
@@ -347,9 +341,7 @@
                         	<br/>
                         	{{tr_p.ReleasesAccidentalValue}}
                         	</td>
-                        	<td class="text-right">{{cf.getTypeCount(item2,"facility")}}
-                   
-                        	<br />{{cf.getTypeCount(item2,"accidental")}}</td>
+                        	<td class="text-right">{{cf.getTypeCount(item2)}}<br />{{cf.getTypeCountAccidential(item2)}}</td>
                          	<td class="text-right">{{cf.getSum(item2,"quantityAir")}}<br/>{{cf.getSum(item2,"quantityAccidentalAir")}}</td>
                         	<td class="text-right">{{cf.getSum(item2,"quantityWater")}}<br />{{cf.getSum(item2,"quantityAccidentalWater")}}</td>
                         	<td class="text-right">{{cf.getSum(item2,"quantitySoil")}}<br />{{cf.getSum(item2,"quantityAccidentalSoil")}}</td>
@@ -363,8 +355,7 @@
                     		{{tr_c.Total}}
                     	</td>
                     	<td>
-                   	   		{{tr_p.ReleasesAccidentialTotal}}<br/>
-                     		{{tr_p.ReleasesAccidentalValue}}
+                   	   		{{tr_p.ReleasesAccidentialTotal}}<br/>{{tr_p.ReleasesAccidentalValue}}
                    		</td>
                    		<td class="text-right">{{totalareasfac}}<br />{{totalareasacc}}</td>
                     	<td class="text-right">{{totalareassumair}}<br/>{{totalareassumaair}}</td>
@@ -515,7 +506,8 @@
             <tab heading="Confidentiality" active="active.confidentiality" ng-click="activateTab('confidentiality')">
             <div class="top-buffer10" ng-show="searchResults">
             
-			   <div class="col-md-12 alert alert-warning top-buffer10" ng-if="!hasConfidentionalData"><strong>{{tr_con.NoConfidentialityInformation}}</strong></div>
+			   <div class="col-md-12 alert alert-warning top-buffer10" ng-if="!hasConfidentionalData">
+			   		<strong>{{tr_con.NoConfidentialityInformation}}</strong></div>
 			
                 </div>
                 <div class="top-buffer10"  ng-if="hasConfidentionalData">
@@ -564,7 +556,7 @@
                		  </div>
           		    <div  class="top-buffer10" ng-bind-html="tr_c.ConfidentialityExplanationPR2"></div>
                 </div>
-                </div>
+                
             </tab>
         </tabset>
  </div>   </div>

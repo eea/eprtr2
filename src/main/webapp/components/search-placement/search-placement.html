@@ -5,10 +5,10 @@
 
 
 <div  class="form-group">
-	<label class="control-label">{{tr_c.Region}}:</label></br>
+	<p class="control-label"><strong>{{tr_c.Region}}:</strong></p>
 	<label class="radio-inline" for="rblRegionType_0"> <input type="radio" name="regionTypeOptionsRadios" id="rblRegionType_0" value="0" ng-model="searchFilter.regionType">{{tr_c.Region}}</label>
-	<label class="radio-inline" for="rblRegionType_1"> <input type="radio" name="regionTypeOptionsRadios" id="rblRegionType_1" value="1" ng-model="searchFilter.regionType">{{tr_c.RiverBasinDistrict}}</label></br>
-	<select class="form-control" ng-disabled="disableRegionSelect" ng-model="searchFilter.selectedRegion" ng-options="r.name for r in regions"></select>
+	<label class="radio-inline" for="rblRegionType_1"> <input type="radio" name="regionTypeOptionsRadios" id="rblRegionType_1" value="1" ng-model="searchFilter.regionType">{{tr_c.RiverBasinDistrict}}</label>
+	<select class="form-control top-buffer10" ng-disabled="disableRegionSelect" ng-model="searchFilter.selectedRegion" ng-options="r.name for r in regions"></select>
 </div>
 
 <div class="form-group">

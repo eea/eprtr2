@@ -171,7 +171,7 @@
                         <td>
         
                         </td>
-                        <td class="text-right">{{getTypeCount(item.data,"facility")}}
+                        <td class="text-right">{{cf.getTypeCount(item.data)}}
                        
                         </td>
                         <td class="text-right">{{getSum(item.data,"quantity")}}</td>
@@ -191,7 +191,7 @@
                     	<td>
                    
                     	</td>
-                   		<td class="text-right">{{getTypeCount(level2,"facility")}}
+                   		<td class="text-right">{{cf.getTypeCount(level2)}}
                    
            				</td>
                        	<td class="text-right">{{getSum(level2,"quantity")}}</td>
@@ -208,7 +208,7 @@
                     	</td>
                     	<td>
                     	</td>
-                   		<td class="text-right">{{getTypeCount(level3,"facility")}}
+                   		<td class="text-right">{{cf.getTypeCount(level3)}}
                    	
                   		</td>
                        	<td class="text-right">{{getSum(level3,"quantity")}}</td>
@@ -305,7 +305,7 @@
                         <a ng-click="showing=!showing">{{tr_lco[item.key]}}</a></td>            
                         <td>
                         </td>
-                        <td class="text-right">{{getTypeCount(item.data,"facility")}}
+                        <td class="text-right">{{cf.getTypeCount(item.data)}}
                  
                         </td>
                         <td class="text-right">{{getSum(item.data,"quantity")}}</td>
@@ -326,7 +326,7 @@
                         	</td>        
                         	<td>
                         	</td>
-                        	<td class="text-right">{{getTypeCount(item2,"facility")}}
+                        	<td class="text-right">{{cf.getTypeCount(item2)}}
                     
                         	</td>
                          	<td class="text-right">{{getSum(item2,"quantity")}}</td>

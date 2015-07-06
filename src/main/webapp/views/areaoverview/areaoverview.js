@@ -23,7 +23,7 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
     $scope.queryParams.ReportingYear = -1;
 	$scope.headitms = [];
 	$scope.prMedium = {};
-	$scope.pritems = [];
+	//$scope.pritems = [];
 /*	$scope.prfilter = {};// .polsearch
     $scope.prfilter.pgselect = {};
 	$scope.ptfilter = {};// .polsearch
@@ -78,6 +78,11 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
     	}
     });
     
+    $scope.$watch('pritems', function(value){
+    	if($scope.pritems){
+    		//console.log
+    	}
+    });
     
     $scope.active = {
     		fddetails: true

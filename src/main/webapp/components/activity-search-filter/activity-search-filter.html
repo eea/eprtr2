@@ -3,13 +3,9 @@
 		Activity <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': activityPanel, 'glyphicon-chevron-right': !activityPanel}"></i>
 	</accordion-heading>
 	<div class="form-group">
-		<label class="control-label">Type</label>
-		<div class="radio">
-			<label> <input type="radio" name="activityTypeOptionsRadios" id="rblActivityType_0" ng-value="activitySearchFilter.annexIActivityType" ng-model="activitySearchFilter.activityType"> Industrial activity</label>
-		</div>
-		<div class="radio">
-			<label> <input type="radio" name="activityTypeOptionsRadios" id="rblActivityType_1" ng-value="activitySearchFilter.naceActivityType" ng-model="activitySearchFilter.activityType"> Economic sector (NACE)</label>
-		</div>
+		<p class="control-label"><strong>Type</strong></p>
+			<label class="radio-inline"> <input type="radio" name="activityTypeOptionsRadios" id="rblActivityType_0" ng-value="activitySearchFilter.annexIActivityType" ng-model="activitySearchFilter.activityType"> Industrial activity</label>
+			<label class="radio-inline"> <input type="radio" name="activityTypeOptionsRadios" id="rblActivityType_1" ng-value="activitySearchFilter.naceActivityType" ng-model="activitySearchFilter.activityType"> Economic sector (NACE)</label>
 	</div>
 	<div class="form-group">
 		<label class="control-label" for="inputSector">Sector</label>
