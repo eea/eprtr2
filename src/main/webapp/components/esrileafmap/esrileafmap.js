@@ -379,6 +379,11 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
         	  });
 	});
 	
+	$scope.redraw = function(){
+		if(elm_ctrl.elm_map){
+			window.setTimeout(function(){elm_ctrl.elm_map.invalidateSize();}, 600)
+		}
+	};
 	
 }])
 
@@ -399,7 +404,8 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 			frid: '@facilityReportId',
 			wherestr: '=',
 			queryparams: '=',
-			contenttype: '='
+			contenttype: '=', 
+			control: '='
 
 		},
 		templateUrl: 'components/esrileafmap/esrileafmap.html',
@@ -422,6 +428,12 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 					scope.setwhere(scope.wherestr);
 				}
 		    },true);
+			 scope.internalControl = scope.control || {};
+			 scope.internalControl.redraw = function() {
+				if (scope.queryparams !== undefined){
+					scope.redraw();
+				}
+		    };
 		}
 	};
 });

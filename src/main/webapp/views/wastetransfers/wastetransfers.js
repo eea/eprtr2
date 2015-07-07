@@ -15,6 +15,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
                                     		   searchFilter, Restangular,translationService,formatStrFactory,countFactory) {
 
     	$scope.bigmap = false;
+    	$scope.mapctrl = {};
     	$scope.mapclss = "col-md-4 col-md-push-8";
     	$scope.resclss = "col-md-8 col-md-pull-4";
 /*    	$scope.mapclss = "col-md-3 col-md-push-6";
@@ -70,6 +71,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
             	$scope.mapclss = "col-md-12";
             	$scope.resclss = "col-md-12";
         	}
+        	$scope.mapctrl.redraw();
         }
         
         
