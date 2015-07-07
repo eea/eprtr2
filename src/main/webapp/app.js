@@ -27,6 +27,7 @@ var myApp = angular.module('myApp', [
         'myApp.diffemissionsair',
         'myApp.diffemissionswater',
         'myApp.emissionmapair',
+        'myApp.emissionmapwater',
         'myApp.pollutantinfo',
         'myApp.pd-main'
     ])

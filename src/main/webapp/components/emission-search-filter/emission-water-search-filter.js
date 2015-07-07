@@ -4,7 +4,7 @@ angular.module('myApp.emission-water-search-filter', ['myApp.home', 'myApp.searc
 
 .constant('deconf_water',{
 	sectors:[
-	        {'code':'-','name':'Select Sector'},
+	        {'code':'-','name':'SelectSector'},
 			{'code':'SECTOR_CODE_ATMOSPHERIC_DEPOSITION','name':'AtmosphericDeposition'}, 			
 			{'code':'SECTOR_CODE_AGRICULTURE','name':'Agriculture'}, 			
 			{'code':'SECTOR_CODE_TRANSPORT','name':'Transport'}, 			
