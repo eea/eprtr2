@@ -204,7 +204,19 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
             
         };
 
-       
+        $scope.topInfoDownload = function(array){
+        	array[1]= new Array();
+            array[1][0] = $scope.tr_c.Pollutant;
+        	array[1][1] = $scope.currentSearchFilter.pollutantSearchFilter.selectedPollutant.name;
+        	
+        	array[2]= new Array();
+            array[2][0] = $scope.tr_c.Year;
+        	array[2][1] = $scope.queryParams.ReportingYear;
+        	
+        	array[3]= new Array();
+            array[3][0] = $scope.tr_c.Area;
+        	array[3][1] = $scope.currentSearchFilter.selectedReportingCountry.name;
+        }
         
         $scope.updateSummaryData = function() {
         	//This filter filters summaryitems?
@@ -263,7 +275,37 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
                 return false;
             });
             $scope.stopSpinPart('fac');
+            $scope.updateFacilityDownloadData();
         };
+        
+        $scope.updateFacilityDownloadData = function() {
+        	$scope.facilitiesDownload= new Array();
+            var top_fields = 5;
+            
+            $scope.topInfoDownload($scope.facilitiesDownload);
+            
+            $scope.facilitiesDownload[top_fields]= new Array();
+            $scope.facilitiesDownload[top_fields][0] = $scope.tr_c.Facility;
+        	$scope.facilitiesDownload[top_fields][1] = $scope.tr_c.Quantity;
+        	$scope.facilitiesDownload[top_fields][2] = $scope.tr_c.Accidental;
+        	$scope.facilitiesDownload[top_fields][3] = $scope.tr_c.Accidental + ' %';
+        	$scope.facilitiesDownload[top_fields][4] = $scope.tr_c.Activity;
+        	$scope.facilitiesDownload[top_fields][5] = $scope.tr_c.Country;
+
+        	top_fields += 1;
+        	
+            for(var i =0; i<$scope.facilitiesItems.length;i++){
+            	var facility = $scope.facilitiesItems[i];
+            	$scope.facilitiesDownload[i+top_fields]= new Array();
+            	$scope.facilitiesDownload[i+top_fields][0] = facility.facilityName;
+            	$scope.facilitiesDownload[i+top_fields][1] = $scope.quantity(facility);
+            	$scope.facilitiesDownload[i+top_fields][2] = $scope.quantityAccidental(facility);
+            	$scope.facilitiesDownload[i+top_fields][3] = $scope.percentageAccidental(facility);
+            	$scope.facilitiesDownload[i+top_fields][4] = $scope.tr_laa[facility.iaactivityCode];
+            	$scope.facilitiesDownload[i+top_fields][5] = $scope.tr_lco[facility.countryCode];
+            }
+        }
+        
 
         $scope.updateAreaComparisonData = function() {
         	var qmstr = $scope.getQuantityStr($scope.mediumFilter.prAreaMedium);//'quantity' + $scope.prAreaMedium;
@@ -358,16 +400,196 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         {
         	$scope.activities = [];
         	$scope.groupbyActivitet('iasectorCode','iaactivityCode','iasubActivityCode',$scope.activities);
+        	$scope.updateActivitiesDownloadData();
         	$scope.stopSpinPart('act');
         };
+        
+        $scope.updateActivitiesDownloadData = function() {
+        	$scope.activitiesDownload= new Array();
+            var add_fields = 5;
+            
+            $scope.topInfoDownload($scope.activitiesDownload);
+            
+            $scope.activitiesDownload[add_fields]= new Array();
+            $scope.activitiesDownload[add_fields][0] = $scope.tr_p.TransferPerIndustrialActivities;
+            $scope.activitiesDownload[add_fields][1] = $scope.tr_p.Facilities;
+            $scope.activitiesDownload[add_fields][2] = $scope.tr_p.Facilities + '('+$scope.tr_p.ReleasesAccidentalValue+')';
+        	$scope.activitiesDownload[add_fields][3] = $scope.tr_p.Air;
+        	$scope.activitiesDownload[add_fields][4] = $scope.tr_p.Air + '('+$scope.tr_p.ReleasesAccidentalValue+')';
+        	$scope.activitiesDownload[add_fields][5] = $scope.tr_p.Water;
+        	$scope.activitiesDownload[add_fields][6] = $scope.tr_p.Water + '('+$scope.tr_p.ReleasesAccidentalValue+')';
+        	$scope.activitiesDownload[add_fields][7] = $scope.tr_p.Soil;
+        	$scope.activitiesDownload[add_fields][8] = $scope.tr_p.Soil + '('+$scope.tr_p.ReleasesAccidentalValue+')';
+
+        	add_fields += 1;
+        	
+        	var activities = $scope.activities.sort(function(a, b) {
+        	    return a.key - b.key;
+        	});
+        	
+            for(var i =0; i<$scope.activities.length;i++){
+            	var subActivities = 0;
+            	var activity = activities[i];
+            	$scope.activitiesDownload[i+add_fields]= new Array();
+            	$scope.activitiesDownload[i+add_fields][0] = $scope.tr_laa[activity.key];
+            	$scope.activitiesDownload[i+add_fields][1] = $scope.cf.getTypeCount(activity.data,"facility");
+            	$scope.activitiesDownload[i+add_fields][2] = $scope.cf.getTypeCount(activity.data,"accidental");
+            	$scope.activitiesDownload[i+add_fields][3] = $scope.cf.getSum(activity.data,"quantityAir");
+            	$scope.activitiesDownload[i+add_fields][4] = $scope.cf.getSum(activity.data,"quantityAccidentalAir");
+            	$scope.activitiesDownload[i+add_fields][5] = $scope.cf.getSum(activity.data,"quantityWater");
+            	$scope.activitiesDownload[i+add_fields][6] = $scope.cf.getSum(activity.data,"quantityAccidentalWater");
+            	$scope.activitiesDownload[i+add_fields][7] = $scope.cf.getSum(activity.data,"quantitySoil");
+            	$scope.activitiesDownload[i+add_fields][8] = $scope.cf.getSum(activity.data,"quantityAccidentalSoil");
+            	
+            	activity.data = activity['data'].sort(function(a, b) {
+            	    return a.iaactivityCode - b.iaactivityCode;
+            	});
+            	
+            	for(var j =0; j<activity.data.length;j++){
+            		var subActivity = activity.data[j];
+            		$scope.activitiesDownload[i+add_fields+(++subActivities)]= new Array();
+                	$scope.activitiesDownload[i+add_fields+subActivities][0] = $scope.tr_laa[subActivity.iaactivityCode];
+                	$scope.activitiesDownload[i+add_fields+subActivities][1] = $scope.cf.getTypeCount(subActivity,"facility");
+                	$scope.activitiesDownload[i+add_fields+subActivities][2] = $scope.cf.getTypeCount(subActivity,"accidental");
+                	$scope.activitiesDownload[i+add_fields+subActivities][3] = $scope.cf.getSum(subActivity,"quantityAir");
+                	$scope.activitiesDownload[i+add_fields+subActivities][4] = $scope.cf.getSum(subActivity,"quantityAccidentalAir");
+                	$scope.activitiesDownload[i+add_fields+subActivities][5] = $scope.cf.getSum(subActivity,"quantityWater");
+                	$scope.activitiesDownload[i+add_fields+subActivities][6] = $scope.cf.getSum(subActivity,"quantityAccidentalWater");
+                	$scope.activitiesDownload[i+add_fields+subActivities][7] = $scope.cf.getSum(subActivity,"quantitySoil");
+                	$scope.activitiesDownload[i+add_fields+subActivities][8] = $scope.cf.getSum(subActivity,"quantityAccidentalSoil");
+                	
+                	if(subActivity.hasOwnProperty('sublevel') && subActivity.sublevel instanceof Array && subActivity.sublevel.length >=0){
+                		subActivity.sublevel= subActivity.sublevel.sort(function(a, b) {
+                    	    return a.iasubActivityCode - b.iasubActivityCode;
+                    	});
+                		
+                		for(var k =0; k< subActivity.sublevel.length ;k++){
+                    		var subSubActivity = subActivity.sublevel[k];
+                    		$scope.activitiesDownload[i+add_fields+(++subActivities)]= new Array();
+                    		$scope.activitiesDownload[i+add_fields+subActivities][0] = $scope.tr_laa[subSubActivity.iaactivityCode];
+                        	$scope.activitiesDownload[i+add_fields+subActivities][1] = $scope.cf.getTypeCount(subSubActivity,"facility");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][2] = $scope.cf.getTypeCount(subSubActivity,"accidental");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][3] = $scope.cf.getSum(subSubActivity,"quantityAir");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][4] = $scope.cf.getSum(subSubActivity,"quantityAccidentalAir");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][5] = $scope.cf.getSum(subSubActivity,"quantityWater");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][6] = $scope.cf.getSum(subSubActivity,"quantityAccidentalWater");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][7] = $scope.cf.getSum(subSubActivity,"quantitySoil");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][8] = $scope.cf.getSum(subSubActivity,"quantityAccidentalSoil");
+                    	}
+                	}
+                	
+            	}
+            	
+            	add_fields += subActivities +1;
+            }
+            
+            $scope.activitiesDownload[i+add_fields]= new Array();
+        	$scope.activitiesDownload[i+add_fields][0] = $scope.tr_c.Total;
+        	$scope.activitiesDownload[i+add_fields][1] = $scope.totalactivitiesfac;
+        	$scope.activitiesDownload[i+add_fields][2] = $scope.totalactivitiesacc;
+        	$scope.activitiesDownload[i+add_fields][3] = $scope.totalactivitiessumair;
+        	$scope.activitiesDownload[i+add_fields][4] = $scope.totalactivitiessumaair;
+        	$scope.activitiesDownload[i+add_fields][5] = $scope.totalactivitiessumwater;
+        	$scope.activitiesDownload[i+add_fields][6] = $scope.totalactivitiessumawater;
+        	$scope.activitiesDownload[i+add_fields][7] = $scope.totalactivitiessumsoil;
+        	$scope.activitiesDownload[i+add_fields][8] = $scope.totalactivitiessumasoil;
+        }
         
  
         $scope.updateAreasData = function()
         {
         	$scope.areas = [];
         	$scope.groupbyAreas('countryCode',$scope.areas);
+        	$scope.updateAreasDownloadData();
         	$scope.stopSpinPart('are');
         };
+        
+        $scope.updateAreasDownloadData = function() {
+        	$scope.areasDownload= new Array();
+            var add_fields = 5;
+            
+            $scope.topInfoDownload($scope.areasDownload);
+            
+            $scope.areasDownload[add_fields]= new Array();
+            $scope.areasDownload[add_fields][0] = $scope.tr_p.TransferPerCountry;
+        	$scope.areasDownload[add_fields][1] = $scope.tr_p.Facilities;
+        	$scope.areasDownload[add_fields][2] = $scope.tr_p.Facilities + '('+$scope.tr_p.ReleasesAccidentalValue+')';
+        	$scope.areasDownload[add_fields][3] = $scope.tr_p.Air;
+        	$scope.areasDownload[add_fields][4] = $scope.tr_p.Air + '('+$scope.tr_p.ReleasesAccidentalValue+')';
+        	$scope.areasDownload[add_fields][5] = $scope.tr_p.Water;
+        	$scope.areasDownload[add_fields][6] = $scope.tr_p.Water + '('+$scope.tr_p.ReleasesAccidentalValue+')';
+        	$scope.areasDownload[add_fields][7] = $scope.tr_p.Soil;
+        	$scope.areasDownload[add_fields][8] = $scope.tr_p.Soil + '('+$scope.tr_p.ReleasesAccidentalValue+')';
+
+        	add_fields += 1;
+        	
+        	var areas = $scope.areas.sort(function(a, b) {
+        	    return a.key - b.key;
+        	});
+        	
+            for(var i =0; i<areas.length;i++){
+            	var subAreas = 0;
+            	var area = areas[i];
+            	$scope.areasDownload[i+add_fields]= new Array();
+            	$scope.areasDownload[i+add_fields][0] = $scope.tr_lco[area.key];
+            	$scope.areasDownload[i+add_fields][1] = $scope.cf.getTypeCount(area.data,"facility");
+            	$scope.areasDownload[i+add_fields][2] = $scope.cf.getTypeCount(area.data,"accidental");
+            	$scope.areasDownload[i+add_fields][3] = $scope.cf.getSum(area.data,"quantityAir");
+            	$scope.areasDownload[i+add_fields][4] = $scope.cf.getSum(area.data,"quantityAccidentalAir");
+            	$scope.areasDownload[i+add_fields][5] = $scope.cf.getSum(area.data,"quantityWater");
+            	$scope.areasDownload[i+add_fields][6] = $scope.cf.getSum(area.data,"quantityAccidentalWater");
+            	$scope.areasDownload[i+add_fields][7] = $scope.cf.getSum(area.data,"quantitySoil");
+            	$scope.areasDownload[i+add_fields][8] = $scope.cf.getSum(area.data,"quantityAccidentalSoil");
+            	
+            	area.data.sort(function(a, b) {
+            		if($scope.regionSearch){
+            			if($scope.tr_lnr[a.nutslevel2RegionCode] != undefined && $scope.tr_lnr[b.nutslevel2RegionCode] != undefined){
+            				return $scope.tr_lnr[a.nutslevel2RegionCode].valueOf() - $scope.tr_lnr[b.nutslevel2RegionCode].valueOf();
+            			}
+            		}else{
+            			if($scope.tr_lrbd[a.riverBasinDistrictCode] != undefined && $scope.tr_lrbd[a.riverBasinDistrictCode] != undefined){
+            				return $scope.tr_lrbd[a.riverBasinDistrictCode].valueOf() - $scope.tr_lrbd[b.riverBasinDistrictCode].valueOf();
+            			}
+            		}
+            	});
+            	
+            	if(area.hasOwnProperty('data')){
+                	for(var j =0; j<area.data.length;j++){
+                		var subArea = area.data[j];
+                		
+                		var areaName ="";
+                    	if($scope.regionSearch){
+                    		areaName = $scope.tr_lnr[subArea.nutslevel2RegionCode];
+                    	}else
+                    		areaName = $scope.tr_lrbd[subArea.riverBasinDistrictCode];
+                		
+                		$scope.areasDownload[i+add_fields+(++subAreas)]= new Array();
+                    	$scope.areasDownload[i+add_fields+subAreas][0] = areaName;
+                    	$scope.areasDownload[i+add_fields+subAreas][1] = $scope.cf.getTypeCount(subArea,"facility");
+                    	$scope.areasDownload[i+add_fields+subAreas][2] = $scope.cf.getTypeCount(subArea,"accidental");
+                    	$scope.areasDownload[i+add_fields+subAreas][3] = $scope.cf.getSum(subArea,"quantityAir");
+                    	$scope.areasDownload[i+add_fields+subAreas][4] = $scope.cf.getSum(subArea,"quantityAccidentalAir");
+                    	$scope.areasDownload[i+add_fields+subAreas][5] = $scope.cf.getSum(subArea,"quantityWater");
+                    	$scope.areasDownload[i+add_fields+subAreas][6] = $scope.cf.getSum(subArea,"quantityAccidentalWater");
+                    	$scope.areasDownload[i+add_fields+subAreas][7] = $scope.cf.getSum(subArea,"quantitySoil");
+                    	$scope.areasDownload[i+add_fields+subAreas][8] = $scope.cf.getSum(subArea,"quantityAccidentalSoil");
+                	}
+            	}
+            	add_fields += subAreas+1;
+            }
+            
+            add_fields = $scope.areasDownload.length + 1;
+            $scope.areasDownload[add_fields]= new Array();
+        	$scope.areasDownload[add_fields][0] = $scope.tr_c.Total;
+        	$scope.areasDownload[add_fields][1] = $scope.totalareasfac;
+        	$scope.areasDownload[add_fields][2] = $scope.totalareasacc;
+        	$scope.areasDownload[add_fields][3] = $scope.totalareassumair;
+        	$scope.areasDownload[add_fields][4] = $scope.totalareassumaair;
+        	$scope.areasDownload[add_fields][5] = $scope.totalareassumwater;
+        	$scope.areasDownload[add_fields][6] = $scope.totalareassumawater;
+        	$scope.areasDownload[add_fields][7] = $scope.totalareassumsoil;
+        	$scope.areasDownload[add_fields][8] = $scope.totalareassumasoil;
+        }
         
         $scope.updateConfidentialityData = function()
         {

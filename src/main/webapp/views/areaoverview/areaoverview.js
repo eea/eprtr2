@@ -13,9 +13,9 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 
 
 .controller('AreaOverviewCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular', 'translationService', 
-                                 'lovCountryType', 'lovAreaGroupType', 'lovNutsRegionType', 'riverBasinDistrictsType',
+                                 'lovCountryType', 'lovAreaGroupType', 'lovNutsRegionType', 'riverBasinDistrictsType', 'countFactory',
                                  function($scope, $filter, $http, searchFilter, Restangular, translationService,
-                                		 lovCountryType, lovAreaGroupType, lovNutsRegionType, riverBasinDistrictsType) {
+                                		 lovCountryType, lovAreaGroupType, lovNutsRegionType, riverBasinDistrictsType, countFactory) {
 	
 	$scope.beforesearch = true;
     $scope.searchFilter = searchFilter;
@@ -24,11 +24,13 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 	$scope.headitms = [];
 	$scope.prMedium = {};
 	//$scope.pritems = [];
+	$scope.wasteTransferItems = [];
 /*	$scope.prfilter = {};// .polsearch
     $scope.prfilter.pgselect = {};
 	$scope.ptfilter = {};// .polsearch
     $scope.ptfilter.pgselect = {};*/
     $scope.searchResults = false;
+    $scope.cf = countFactory;
     
 /*    $scope.regionSearch = false;
     //$scope.summaryItems = [];
@@ -54,6 +56,7 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 			$scope.tr_lag = data.LOV_AREAGROUP;
 			$scope.tr_con =data.Confidentiality;
     		$scope.tr_wt = data.WasteTransfers;
+    		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
 	    });
     };
     $scope.translate();
@@ -86,55 +89,55 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
     
     $scope.active = {
     		fddetails: true
-    	};
-        $scope.activateTab = function(tab) {
-        	$scope.active = {}; //reset
-        	$scope.active[tab] = true;
-    	};
-    	$scope.setActiveTab = function(tab) {
-    		$scope.active[tab] = true;
-    	};
-    	$scope.active.pollutantrelease = true;
-    	
-    	$scope.createheader = function(){
-    		$scope.headitms = [];
-    		/* HEADER PART FOR ReleaseYear*/
-    		$scope.headitms.push({'order':0, 'clss':'fdTitles', 'title':$scope.tr_c.Year, 'val':$scope.queryParams.ReportingYear});
+    };
+    $scope.activateTab = function(tab) {
+    	$scope.active = {}; //reset
+    	$scope.active[tab] = true;
+    };
+    $scope.setActiveTab = function(tab) {
+    	$scope.active[tab] = true;
+    };
+    $scope.active.pollutantrelease = true;
 
-    		/* HEADER PART FOR AREA*/
-    		var area = {'order':1,	'clss':'fdTitles', 'title':$scope.tr_c.Area};
-    		if($scope.queryParams.LOV_AreaGroupID != undefined){
-    			// Get list of Countries using AreaGroup ID
-    			lovAreaGroupType.getByID($scope.queryParams.LOV_AreaGroupID).get().then(function(data) {
-    				area.val = $scope.tr_lag[data.code];
+    $scope.createheader = function(){
+    	$scope.headitms = [];
+    	/* HEADER PART FOR ReleaseYear*/
+    	$scope.headitms.push({'order':0, 'clss':'fdTitles', 'title':$scope.tr_c.Year, 'val':$scope.queryParams.ReportingYear});
+
+    	/* HEADER PART FOR AREA*/
+    	var area = {'order':1,	'clss':'fdTitles', 'title':$scope.tr_c.Area};
+    	if($scope.queryParams.LOV_AreaGroupID != undefined){
+    		// Get list of Countries using AreaGroup ID
+    		lovAreaGroupType.getByID($scope.queryParams.LOV_AreaGroupID).get().then(function(data) {
+    			area.val = $scope.tr_lag[data.code];
+    			$scope.headitms.push(area);
+    		});
+    	}
+    	else if($scope.queryParams.LOV_CountryID != undefined){
+    		//We use LOV_NUTSRegionID for title
+    		//"lov_NUTSRLevel1ID":704,"lov_NUTSRLevel2ID":709,"lov_NUTSRLevel3ID":null
+    		if($scope.queryParams.LOV_NUTSRegionID != undefined){
+    			lovNutsRegionType.getByID($scope.queryParams.LOV_NUTSRegionID).get().then(function(data) {
+    				area.val = $scope.tr_lnr[data.code];
     				$scope.headitms.push(area);
     			});
     		}
-    		else if($scope.queryParams.LOV_CountryID != undefined){
-    			//We use LOV_NUTSRegionID for title
-    			//"lov_NUTSRLevel1ID":704,"lov_NUTSRLevel2ID":709,"lov_NUTSRLevel3ID":null
-    			if($scope.queryParams.LOV_NUTSRegionID != undefined){
-    				lovNutsRegionType.getByID($scope.queryParams.LOV_NUTSRegionID).get().then(function(data) {
-    					area.val = $scope.tr_lnr[data.code];
-    					$scope.headitms.push(area);
-    				});
-    			}
-    			//We use LOV_RiverBasinDistrictID for title
-    			else if($scope.queryParams.LOV_RiverBasinDistrictID != undefined){
-    				riverBasinDistrictsType.getByID($scope.queryParams.LOV_RiverBasinDistrictID).get().then(function(data) {
-    					area.val = $scope.tr_lrbd[data.code];
-    					$scope.headitms.push(area);
-    				});
-    			}
-    			//We use LOV_CountryID for title
-    			else{
-    				lovCountryType.getByID($scope.queryParams.LOV_CountryID).get().then(function(data) {
-    					area.val = $scope.tr_lco[data.countryCode];
-    					$scope.headitms.push(area);
-    				});
-    			}
+    		//We use LOV_RiverBasinDistrictID for title
+    		else if($scope.queryParams.LOV_RiverBasinDistrictID != undefined){
+    			riverBasinDistrictsType.getByID($scope.queryParams.LOV_RiverBasinDistrictID).get().then(function(data) {
+    				area.val = $scope.tr_lrbd[data.code];
+    				$scope.headitms.push(area);
+    			});
+    		}
+    		//We use LOV_CountryID for title
+    		else{
+    			lovCountryType.getByID($scope.queryParams.LOV_CountryID).get().then(function(data) {
+    				area.val = $scope.tr_lco[data.countryCode];
+    				$scope.headitms.push(area);
+    			});
     		}
     	}
+    }
   
 	$scope.search = function() {
 		$scope.beforesearch = false;
@@ -202,6 +205,107 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 		
 	}
 	
+	$scope.wasteTransferDownloadData = function(){
+		$scope.wasteTransferDownload= new Array();
+        var add_fields = 4;
+        
+        $scope.topInfoDownload($scope.wasteTransferDownload);
+        
+        $scope.wasteTransferDownload[add_fields]= new Array();
+        $scope.wasteTransferDownload[add_fields][0] = $scope.tr_wt.TransferPerIndustrialActivity;
+    	$scope.wasteTransferDownload[add_fields][1] = $scope.tr_c.HazardousDomestic + ' - ' + $scope.tr_c.Quantity;
+    	$scope.wasteTransferDownload[add_fields][2] = $scope.tr_c.HazardousDomestic  + ' - ' + $scope.tr_c.Facilities;
+    	$scope.wasteTransferDownload[add_fields][3] = $scope.tr_c.HazardousTransboundary + ' - ' + $scope.tr_c.Quantity;
+    	$scope.wasteTransferDownload[add_fields][4] = $scope.tr_c.HazardousTransboundary   + ' - ' + $scope.tr_c.Facilities;
+    	$scope.wasteTransferDownload[add_fields][5] = $scope.tr_c.HazardousTotal + ' - ' + $scope.tr_c.Quantity;
+    	$scope.wasteTransferDownload[add_fields][6] = $scope.tr_c.HazardousTotal   + ' - ' + $scope.tr_c.Facilities;
+    	$scope.wasteTransferDownload[add_fields][7] = $scope.tr_c.NonHazardousTotal + ' - ' + $scope.tr_c.Quantity;
+    	$scope.wasteTransferDownload[add_fields][8] = $scope.tr_c.NonHazardousTotal   + ' - ' + $scope.tr_c.Facilities;
+
+    	add_fields += 1;
+    	
+    	var wasteTransfer = this.wasteTransferItems.sort(function(a, b) {
+    	    return a.key - b.key;
+    	});
+    	
+        for(var i =0; i<wasteTransfer.length;i++){
+        	var subItems = 0;
+        	var item = wasteTransfer[i];
+        	$scope.wasteTransferDownload[i+add_fields]= new Array();
+        	$scope.wasteTransferDownload[i+add_fields][0] = $scope.tr_laa[item.key];
+        	$scope.wasteTransferDownload[i+add_fields][1] = $scope.cf.getSum(item.data,"quantityTotalHWIC",false);
+        	$scope.wasteTransferDownload[i+add_fields][2] = $scope.cf.getSum(item.data,"facilityCountHWIC",false);
+        	$scope.wasteTransferDownload[i+add_fields][3] = $scope.cf.getSum(item.data,"quantityTotalHWOC",true);
+        	$scope.wasteTransferDownload[i+add_fields][4] = $scope.cf.getSum(item.data,"facilityCountHWOC",false);
+        	$scope.wasteTransferDownload[i+add_fields][5] = $scope.cf.getSum(item.data,"quantityTotalHW",true);
+        	$scope.wasteTransferDownload[i+add_fields][6] = $scope.cf.getSum(item.data,"facilityCountHW",false);
+        	$scope.wasteTransferDownload[i+add_fields][7] = $scope.cf.getSum(item.data,"quantityTotalNONHW",true);
+        	$scope.wasteTransferDownload[i+add_fields][8] = $scope.cf.getSum(item.data,"facilityCountNONHW",false);
+        	
+        	item.data.sort(function(a, b) {
+        		return a.iaActivityCode - b.iaActivityCode;
+        	});
+        	
+        	if(item.hasOwnProperty('data')){
+            	for(var j =0; j<item.data.length;j++){
+            		var subItem = item.data[j];
+            		
+            		$scope.wasteTransferDownload[i+add_fields+(++subItems)]= new Array();
+                	$scope.wasteTransferDownload[i+add_fields+subItems][0] = $scope.tr_laa[subItem.iaActivityCode];
+                	$scope.wasteTransferDownload[i+add_fields+subItems][1] = $scope.cf.getSum(subItem,"quantityTotalHWIC",false);
+                	$scope.wasteTransferDownload[i+add_fields+subItems][2] = $scope.cf.getSum(subItem,"facilityCountHWIC",false);
+                	$scope.wasteTransferDownload[i+add_fields+subItems][3] = $scope.cf.getSum(subItem,"quantityTotalHWOC",true);
+                	$scope.wasteTransferDownload[i+add_fields+subItems][4] = $scope.cf.getSum(subItem,"facilityCountHWOC",false);
+                	$scope.wasteTransferDownload[i+add_fields+subItems][5] = $scope.cf.getSum(subItem,"quantityTotalHW",true);
+                	$scope.wasteTransferDownload[i+add_fields+subItems][6] = $scope.cf.getSum(subItem,"facilityCountHW",false);
+                	$scope.wasteTransferDownload[i+add_fields+subItems][7] = $scope.cf.getSum(subItem,"quantityTotalNONHW",true);
+                	$scope.wasteTransferDownload[i+add_fields+subItems][8] = $scope.cf.getSum(subItem,"facilityCountNONHW",false);
+                	
+                	if(subItem.hasOwnProperty('sublevel') && subItem.sublevel instanceof Array){
+                		subItem.sublevel.sort(function(a, b) {
+                    	    return a.iasubActivityCode - b.iasubActivityCode;
+                    	});
+                		
+                		for(var k =0; k< subItem.sublevel.length ;k++){
+                    		var subSubItem = subItem.sublevel[k];
+                    		$scope.wasteTransferDownload[i+add_fields+(++subItems)]= new Array();
+                        	$scope.wasteTransferDownload[i+add_fields+subItems][0] = $scope.tr_laa[subSubItem.iaSubActivityCode];
+                        	$scope.wasteTransferDownload[i+add_fields+subItems][1] = $scope.cf.getSum(subSubItem,"quantityTotalHWIC",false);
+                        	$scope.wasteTransferDownload[i+add_fields+subItems][2] = $scope.cf.getSum(subSubItem,"facilityCountHWIC",false);
+                        	$scope.wasteTransferDownload[i+add_fields+subItems][3] = $scope.cf.getSum(subSubItem,"quantityTotalHWOC",true);
+                        	$scope.wasteTransferDownload[i+add_fields+subItems][4] = $scope.cf.getSum(subSubItem,"facilityCountHWOC",false);
+                        	$scope.wasteTransferDownload[i+add_fields+subItems][5] = $scope.cf.getSum(subSubItem,"quantityTotalHW",true);
+                        	$scope.wasteTransferDownload[i+add_fields+subItems][6] = $scope.cf.getSum(subSubItem,"facilityCountHW",false);
+                        	$scope.wasteTransferDownload[i+add_fields+subItems][7] = $scope.cf.getSum(subSubItem,"quantityTotalNONHW",true);
+                        	$scope.wasteTransferDownload[i+add_fields+subItems][8] = $scope.cf.getSum(subSubItem,"facilityCountNONHW",false);
+                		}
+                	}
+            	}
+        	}
+        	add_fields += subItems+1;
+        }
+        
+        add_fields = $scope.wasteTransferDownload.length+1;
+
+        $scope.wasteTransferDownload[add_fields]= new Array();
+        $scope.wasteTransferDownload[add_fields][0] = $scope.tr_c.Total;
+        $scope.wasteTransferDownload[add_fields][1] = wasteTransfer.totalHWIC;
+        $scope.wasteTransferDownload[add_fields][2] = wasteTransfer.facilityCountHWIC;
+        $scope.wasteTransferDownload[add_fields][3] = wasteTransfer.totalHWOC;
+        $scope.wasteTransferDownload[add_fields][4] = wasteTransfer.facilityCountHWOC;
+        $scope.wasteTransferDownload[add_fields][5] = wasteTransfer.totalHW;
+        $scope.wasteTransferDownload[add_fields][6] = wasteTransfer.facilityCountHW;
+        $scope.wasteTransferDownload[add_fields][7] = wasteTransfer.totalNONHW;
+        $scope.wasteTransferDownload[add_fields][8] = wasteTransfer.facilityCountNONHW;
+	}
+
+	$scope.topInfoDownload = function(array){
+		for(var i=0;i<$scope.headitms.length;i++){
+			array[i]= new Array();
+			array[i][0] = $scope.headitms[i].title;
+			array[i][1] = $scope.headitms[i].val;
+		}
+	}
 }])
 
 ;

@@ -440,10 +440,10 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
             	}
             	add_fields += subAreas+1;
             }
-            $scope.activitiesDownload[i+add_fields]= new Array();
-        	$scope.activitiesDownload[i+add_fields][0] = $scope.tr_c.Total;
-        	$scope.activitiesDownload[i+add_fields][1] = $scope.totalareasfac;
-        	$scope.activitiesDownload[i+add_fields][2] = $scope.totalareasq;
+            $scope.areasDownload[i+add_fields]= new Array();
+        	$scope.areasDownload[i+add_fields][0] = $scope.tr_c.Total;
+        	$scope.areasDownload[i+add_fields][1] = $scope.totalareasfac;
+        	$scope.areasDownload[i+add_fields][2] = $scope.totalareasq;
         }
         
         $scope.updateConfidentialityData = function()

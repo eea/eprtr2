@@ -8,6 +8,7 @@ angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpi
         $scope.wtfilter = {};
         $scope.nodata = true;
         //$scope.queryparams = {};
+        $scope.haztransboundaryitems = [];
         $scope.translate = function()
         {
         	translationService.get().then(function (data) {
@@ -81,6 +82,7 @@ angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpi
 //          		$scope.totalSearchResult += parseInt($scope.wastetransfercount);
           		$scope.updateHZData();
           		$scope.nodata = (response.data.length > 0)? true:false;
+          		$scope.haztransboundaryitems = $scope.items;
     		});
         };
         
@@ -250,7 +252,8 @@ angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpi
 		controller: 'HazTransboundaryCtrl',
         transclude: true,
 		scope: {
-			queryparams: '=' 
+			queryparams: '=',
+			haztransboundaryitems:'='
 		},
 		templateUrl: 'components/wastetransfer/haztransboundary.html',
 		link: function(scope, element, attrs){

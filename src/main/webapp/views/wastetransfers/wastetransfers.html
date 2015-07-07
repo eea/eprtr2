@@ -161,6 +161,7 @@
 			</div>      
 			<div class="col-md-2">
       			<button class="print-button btn btn-default pull-right" ng-print print-element-id="waste_transfers_activities"><i class="fa fa-print"></i></button>
+      			      		<button class="btn btn-default pull-right" ng-csv="activitiesDownload" filename="EPRTR_Waste_Transfer_Activities.csv"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
       		</div>
 
 			<div class="col-md-12 table-responsive top-buffer10" >
@@ -384,6 +385,7 @@
       </div>
       <div class="col-md-2">
       		<button class="print-button btn btn-default pull-right" ng-print print-element-id="waste_transfers_areas"><i class="fa fa-print"></i></button>
+      		<button class="btn btn-default pull-right" ng-csv="areasDownload" filename="EPRTR_Waste_Transfer_Areas.csv"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
       </div>
 
 <div class="col-md-12 table-responsive top-buffer10" >
@@ -606,6 +608,7 @@
       </div>
       <div class="col-md-2">
       		<button class="print-button btn btn-default pull-right" ng-print print-element-id="waste_transfers_facilities"><i class="fa fa-print"></i></button>
+      		<button class="btn btn-default pull-right" ng-csv="facilitiesDownload" filename="EPRTR_Waste_Transfer_Facilities.csv"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
       </div>
 			</div>
 				<div class="row top-buffer10">
@@ -679,7 +682,7 @@
       		</div>  
 			</div>   
 			
-           	     <haz-transboundary queryparams="queryParams" />
+           	     <haz-transboundary queryparams="queryParams" haztransboundaryitems="hazTransboundaryData"/>
            	  </div>
            	</tab>
            	 <tab heading="Haz. receivers" ng-click="getTabData('HAZRECEIVERS');activateTab('hazreceivers')" active="active.hazreceivers">
