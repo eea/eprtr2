@@ -1,8 +1,12 @@
-			<div class="row" >
+			<div class="row" ng-if="visible" >
 
 <!-- Insert table here -->
 	<div class="col-md-12 table-responsive top-buffer10" style="max-height:500px">
 	        <span us-spinner="{radius:16, width:6, length: 12}" spinner-key="spinner-1"></span>
+	      <div class="col-md-12 top-buffer10" ng-if="!prqueryparams.LOV_PollutantGroupID">
+				<div class="alert alert-success"><strong>You need to select a Pollutant Group</strong></div>
+	      </div>
+       
 	
 			<table class="table table-striped table-condensed table-hover" >
                     <thead>
@@ -81,6 +85,6 @@
                     </tbody>
                 </table>
                 
-                <p class="text-warning" ng-if="items.length < 1">{{tr_c.NoResultsFound}}</p>
+                <div class="alert alert-warning" ng-if="items.length < 1 && !beforesearch"><strong>{{tr_c.NoResultsFound}}</strong></div>
            </div>
       </div>

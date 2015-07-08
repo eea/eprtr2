@@ -5,7 +5,7 @@ angular.module('myApp.areaOverviewWasteTab', ['restangular','ngSanitize','angula
    .controller('AreaOverviewWasteTabCtrl', ['$scope', '$filter', 'Restangular',
                                        'translationService','formatStrFactory', 'countFactory','usSpinnerService', function($scope, $filter,  
                                     		   Restangular,translationService,formatStrFactory,countFactory, usSpinnerService) {
-        //$scope.ff = formatStrFactory;
+	    $scope.beforesearch = true;
 	    $scope.cf = countFactory;
         //$scope.queryParams = {};
         $scope.translate = function()
@@ -55,7 +55,7 @@ angular.module('myApp.areaOverviewWasteTab', ['restangular','ngSanitize','angula
         });
 
         $scope.getData = function(){
-
+            $scope.beforesearch = false;
         	$scope.searchService = $scope.restconfig.all('wastetransferSearch');
     		var params = angular.copy($scope.queryparams);
     		params.SearchType = "ACTIVITIES";

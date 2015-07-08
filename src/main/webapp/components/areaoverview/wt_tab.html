@@ -130,6 +130,6 @@
                     </tbody>
                 </table>
                 
-                   <p class="text-warning" ng-if="activities.length < 1">{{tr_c.NoResultsFound}}</p>
+                   <div class="alert alert-warning" ng-if="activities.length < 1 && !beforesearch"><strong>{{tr_c.NoResultsFound}}</strong></div>
                 </div>
                 </div>
