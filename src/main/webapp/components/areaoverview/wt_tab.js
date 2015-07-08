@@ -64,7 +64,6 @@ angular.module('myApp.areaOverviewWasteTab', ['restangular','ngSanitize','angula
         		$scope.items = response.data;
 //          		$scope.totalSearchResult += parseInt($scope.wastetransfercount);
           		$scope.updateData();
-
     		});
         }
         
@@ -75,6 +74,8 @@ angular.module('myApp.areaOverviewWasteTab', ['restangular','ngSanitize','angula
         $scope.updateData = function()
         {
         	$scope.activities = angular.copy($scope.items);
+        	$scope.resultlist = {};
+        	$scope.resultlist = $scope.activities;
           	$scope.totalactivitiesfac = $scope.cf.getSubSum($scope.activities,"facilityCount",true);
         	$scope.totalHWIC = $scope.cf.getSubSum($scope.activities,"quantityTotalHWIC",true);
         	$scope.totalHWOC = $scope.cf.getSubSum($scope.activities,"quantityTotalHWOC",true);
@@ -85,11 +86,21 @@ angular.module('myApp.areaOverviewWasteTab', ['restangular','ngSanitize','angula
         	$scope.facilityCountHWOC = $scope.cf.getSubSum($scope.activities,"facilityCountHWOC",false);
         	$scope.facilityCountHW = $scope.cf.getSubSum($scope.activities,"facilityCountHW",false);
         	$scope.facilityCountNONHW = $scope.cf.getSubSum($scope.activities,"facilityCountNONHW",false);
+        	
+        	$scope.resultlist.totalactivitiesfac = $scope.totalactivitiesfac;
+        	$scope.resultlist.totalHWIC = $scope.totalHWIC;
+        	$scope.resultlist.totalHWOC = $scope.totalHWOC;
+        	$scope.resultlist.totalHW = $scope.totalHW;
+        	$scope.resultlist.totalNONHW = $scope.totalNONHW;
+
+        	$scope.resultlist.facilityCountHWIC = $scope.facilityCountHWIC;
+        	$scope.resultlist.facilityCountHWOC = $scope.facilityCountHWOC;
+        	$scope.resultlist.facilityCountHW = $scope.facilityCountHW;
+        	$scope.resultlist.facilityCountNONHW = $scope.facilityCountNONHW;
+        	
         	$scope.showTable = true;
         	$scope.stopSpin();
         };
-
-        
    }])
 
    .directive('areaOverviewWasteTab', function() {
@@ -99,8 +110,8 @@ angular.module('myApp.areaOverviewWasteTab', ['restangular','ngSanitize','angula
           transclude: true,
   		scope: {
   			queryparams: '=',
-  			visible: '='
-  			
+  			visible: '=',
+  			resultlist:'='
   		},
   		templateUrl: 'components/areaoverview/wt_tab.html',
   		link: function(scope, element, attrs){

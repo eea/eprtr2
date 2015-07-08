@@ -112,11 +112,12 @@
 			      </div>
 			      <div class="col-md-6 top-buffer10 ">
 				  	<button class="print-button btn btn-default pull-right" ng-print print-element-id="area_overview_waste_transfer"><i class="fa fa-print"></i></button>
+				  	<button class="btn btn-default pull-right"ng-click="downloadClick('wasteTransfer')"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
 				  </div>
 				  </div>
 			      
 			      <div class="col-md-12">
-				  <area-overview-waste-tab queryparams="queryParams" visible="!beforesearch" />
+				  <area-overview-waste-tab queryparams="queryParams" visible="!beforesearch" resultlist="wasteTransferItems.data"/>
 				  </div>
 				  </div>
 			    </tab>

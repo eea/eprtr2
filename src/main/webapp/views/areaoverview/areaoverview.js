@@ -24,7 +24,7 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 	$scope.headitms = [];
 	$scope.prMedium = {};
 	//$scope.pritems = [];
-	$scope.wasteTransferItems = [];
+	$scope.wasteTransferItems = {};
 /*	$scope.prfilter = {};// .polsearch
     $scope.prfilter.pgselect = {};
 	$scope.ptfilter = {};// .polsearch
@@ -60,6 +60,10 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 	    });
     };
     $scope.translate();
+    
+    $scope.$watch('wasteTransferItems.data', function(value) {
+    	console.log("HTD is there.");
+    });
 	
     $scope.$watch('prMedium', function(value){
     	if($scope.prfilter && $scope.prfilter.prsel){
@@ -205,7 +209,43 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 		
 	}
 	
-	$scope.wasteTransferDownloadData = function(){
+	$scope.downloadClick = function(tab){
+
+    	var contentArray = new Array();
+    	var fileName = '';
+    	if(tab === 'wasteTransfer'){
+    		$scope.updateWasteTransferDownloadData();
+    		contentArray = $scope.wasteTransferDownload;
+    		fileName = 'EPRTR_Area_Overview_Waste_Transfer_.csv';
+    	}else if(tab ==='areas'){
+    		$scope.updateAreasDownloadData();
+    		contentArray = $scope.areasDownload;
+    		fileName = 'EPRTR_Pollutant_Transfer_Areas.csv';
+    	}else if(tab === 'facilities'){
+    		$scope.updateFacilitiesDownloadData();
+    		contentArray = $scope.facilitiesDownload;
+    		fileName = 'EPRTR_Pollutant_Transfer_Facilities.csv';
+    	}
+
+    	var csvContent = 'data:text/csv;charset=utf-8,';
+    	contentArray.forEach(function(infoArray, index){
+
+    		var dataString = infoArray.join(';').split();
+    		csvContent += dataString + "\n";
+//    		csvContent.replace(';',',');
+    	});
+    	
+    	var encodedUri = encodeURI(csvContent);
+//    	encodedUri.replace(';',',');
+		var link = document.createElement("a");
+		link.setAttribute("href", encodedUri);
+		link.setAttribute("download", fileName);
+
+		link.click(); // This will download the data file named "my_data.csv".
+
+    }
+	
+	$scope.updateWasteTransferDownloadData = function(){
 		$scope.wasteTransferDownload= new Array();
         var add_fields = 4;
         
@@ -224,7 +264,7 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 
     	add_fields += 1;
     	
-    	var wasteTransfer = this.wasteTransferItems.sort(function(a, b) {
+    	var wasteTransfer = $scope.wasteTransferItems.data.sort(function(a, b) {
     	    return a.key - b.key;
     	});
     	
@@ -243,7 +283,7 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
         	$scope.wasteTransferDownload[i+add_fields][8] = $scope.cf.getSum(item.data,"facilityCountNONHW",false);
         	
         	item.data.sort(function(a, b) {
-        		return a.iaActivityCode - b.iaActivityCode;
+        		return a.iaActivityCode.localeCompare(b.iaActivityCode);
         	});
         	
         	if(item.hasOwnProperty('data')){
@@ -261,10 +301,12 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
                 	$scope.wasteTransferDownload[i+add_fields+subItems][7] = $scope.cf.getSum(subItem,"quantityTotalNONHW",true);
                 	$scope.wasteTransferDownload[i+add_fields+subItems][8] = $scope.cf.getSum(subItem,"facilityCountNONHW",false);
                 	
-                	if(subItem.hasOwnProperty('sublevel') && subItem.sublevel instanceof Array){
-                		subItem.sublevel.sort(function(a, b) {
-                    	    return a.iasubActivityCode - b.iasubActivityCode;
-                    	});
+                	if(subItem.hasOwnProperty('sublevel') && subItem.sublevel != null){
+                		if(subItem.sublevel.hasOwnProperty('iasubActivityCode') && subItem.sublevel.iasubActivityCode != null){
+                			subItem.sublevel.sort(function(a, b) {
+                				 return a.iasubActivityCode - b.iasubActivityCode;
+                        	});
+                		}
                 		
                 		for(var k =0; k< subItem.sublevel.length ;k++){
                     		var subSubItem = subItem.sublevel[k];
@@ -282,6 +324,9 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
                 	}
             	}
         	}
+        	$scope.wasteTransferDownload[i+add_fields+(++subItems)]= new Array();
+        	$scope.wasteTransferDownload[i+add_fields+subItems][0] = ' ';
+        	
         	add_fields += subItems+1;
         }
         
@@ -300,11 +345,14 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 	}
 
 	$scope.topInfoDownload = function(array){
-		for(var i=0;i<$scope.headitms.length;i++){
+		var i;
+		for(i=0;i<$scope.headitms.length;i++){
 			array[i]= new Array();
 			array[i][0] = $scope.headitms[i].title;
 			array[i][1] = $scope.headitms[i].val;
 		}
+		array[i]= new Array();
+		array[i][0] = ' ';
 	}
 }])
 
