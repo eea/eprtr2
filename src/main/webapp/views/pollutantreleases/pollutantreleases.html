@@ -141,7 +141,7 @@
 								<button class="print-button btn btn-default pull-right" ng-print
 									print-element-id="pollutant_releases_activities">
 									<i class="fa fa-print"></i>
-									<button class="btn btn-default pull-right" ng-csv="activitiesDownload" filename="EPRTR_Pollutant_Releases_Activities.csv"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
+									<button class="btn btn-default pull-right" ng-click="downloadClick('activities')"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
 								</button>
 							</div>
 						</div>
@@ -288,7 +288,7 @@
 									print-element-id="pollutant_releases_areas">
 									<i class="fa fa-print"></i>
 								</button>
-								<button class="btn btn-default pull-right" ng-csv="areasDownload" filename="EPRTR_Pollutant_Releases_Areas.csv"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
+								<button class="btn btn-default pull-right" ng-click="downloadClick('areas')"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
 							</div>
 						</div>
             
@@ -474,7 +474,7 @@
 									print-element-id="pollutant_releases_facilities">
 									<i class="fa fa-print"></i>
 								</button>
-								<button class="btn btn-default pull-right" ng-csv="facilitiesDownload" filename="EPRTR_Pollutant_Releases_Facilities.csv"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
+								<button class="btn btn-default pull-right" ng-click="downloadClick('facilities')"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
 							</div>
 						</div>
                  <div class="top-buffer10" id="prFacMediumSelector" pr-selector medium="mediumFilter.prFacMedium" queryparams="queryParams"></div>

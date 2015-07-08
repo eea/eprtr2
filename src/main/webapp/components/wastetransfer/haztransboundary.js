@@ -8,7 +8,6 @@ angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpi
         $scope.wtfilter = {};
         $scope.nodata = true;
         //$scope.queryparams = {};
-        $scope.haztransboundaryitems = [];
         $scope.translate = function()
         {
         	translationService.get().then(function (data) {

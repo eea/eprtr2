@@ -32,7 +32,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.wtconfreasoncoll = [];
         $scope.queryParams.ReportingYear = -1;
         $scope.SearchType="SUMMARY";
-        $scope.hazTransboundaryData = [];
+        $scope.hazTransboundaryData = {};
 
         $scope.showhazreceivers = false;
 
@@ -45,6 +45,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
         		$scope.tr_f = data.Facility;
         		$scope.tr_c = data.Common;
+        		$scope.tr_cl = data.ChartLabels;
         		$scope.tr_p = data.Pollutant;
         		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
         		$scope.tr_lcon =data.LOV_CONFIDENTIALITY;
@@ -112,11 +113,12 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
     		$scope.performSearch();
     	}
     });
+    
     $scope.$watch('sort.sortingOrder', function(value) {
     	var prevPage = $scope.currentPage;
     	$scope.currentPage = 1;
     	if ($scope.currentSearchFilter !== undefined && prevPage == 1) {
-    		$scope.performSearch();
+    		$scope.performSearch(true);
     	}
     });
     
@@ -230,9 +232,9 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
             	if ($scope.wtfilter.wtsel != undefined) {
             		queryParams.WasteTypeCode = [$scope.wtfilter.wtsel.replace('-','')];
             	}
-        		queryParams.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
-        		queryParams.limit = $scope.itemsPerPage;
-        		queryParams.order = $scope.sort.sortingOrder;
+            	queryParams.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
+            	queryParams.limit = $scope.itemsPerPage;
+            	queryParams.order = $scope.sort.sortingOrder;
         		queryParams.desc = $scope.sort.reverse;
         	}
 
@@ -320,7 +322,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
                 	qp.desc = $scope.sort.reverse;
             	}
         	}
-        
+        	$scope.queryParamsFacilities = jQuery.extend(true,qp);
         	$scope.getData(qp);
         };
         
@@ -344,7 +346,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
                   	   $scope.updateFacilitiesData();
                   		break;
                   	case "HAZ. TRANSBOUNDARY":
-                  		 $scope.updateHazboundData();
+                  		 $scope.updateHaztransboundaryData();
                   		break;
                   	case "TODO1":
                   		 $scope.updateRecData();
@@ -456,6 +458,45 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
           $scope.summaryChart1.type = 'PieChart';
         };
         
+        $scope.downloadClick = function(tab){
+
+        	var contentArray = new Array();
+        	var fileName = '';
+        	if(tab === 'activities'){
+        		$scope.updateActivitiesDownloadData();
+        		contentArray = $scope.activitiesDownload;
+        		fileName = 'EPRTR_Waste_Transfer_Activities.csv';
+        	}else if(tab ==='areas'){
+        		$scope.updateAreasDownloadData();
+        		contentArray = $scope.areasDownload;
+        		fileName = 'EPRTR_Waste_Transfer_Areas.csv';
+        	}else if(tab === 'facilities'){
+            	$scope.updateFacilitiesDownloadData();
+            	contentArray = $scope.facilitiesDownload;
+            	fileName = 'EPRTR_Waste_Transfer_Facilities.csv';	
+        	}else if(tab === 'transboundary'){
+        		$scope.updateTransboundaryDownloadData();
+        		contentArray = $scope.transboundaryDownload;
+        		fileName = 'EPRTR_Waste_Transfer_Haz_Transboundary.csv';
+        	}
+
+        	var csvContent = 'data:text/csv;charset=utf-8,';
+        	contentArray.forEach(function(infoArray, index){
+
+        		var dataString = infoArray.join(';').split();
+        		csvContent += dataString + "\n";
+//        		csvContent.replace(';',',');
+        	});
+        	
+        	var encodedUri = encodeURI(csvContent);
+//        	encodedUri.replace(';',',');
+    		var link = document.createElement("a");
+    		link.setAttribute("href", encodedUri);
+    		link.setAttribute("download", fileName);
+
+    		link.click(); // This will download the data file named "my_data.csv".
+        }
+        
         $scope.topInfoDownload = function(array){
         	
         	array[1]= new Array();
@@ -469,6 +510,9 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         	array[3]= new Array();
             array[3][0] = $scope.tr_c.Facilities;
         	array[3][1] = $scope.cf.getTypeCount($scope.summaryItems);
+
+        	array[4]= new Array();
+            array[4][0] = ' ';
         }
         
         /**
@@ -498,7 +542,6 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         	$scope.totaldNONHW = $scope.cf.getSubSum($scope.activities,"quantityDisposalNONHW",true);
         	$scope.totaluNONHW = $scope.cf.getSubSum($scope.activities,"quantityUnspecNONHW",true);
         	
-        	$scope.updateActivitiesDownloadData();
         };
         
         $scope.updateActivitiesDownloadData = function() {
@@ -612,6 +655,9 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
                 	}
                 	
             	}
+            	$scope.activitiesDownload[i+add_fields+(++subActivities)]= new Array();
+            	$scope.activitiesDownload[i+add_fields+subActivities][0] = ' ';
+            	
             	
             	add_fields += subActivities +1;
             }
@@ -661,8 +707,6 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         	$scope.totalareasdNONHW = $scope.cf.getSubSum($scope.areas,"quantityDisposalNONHW",true);
         	$scope.totalareasuNONHW = $scope.cf.getSubSum($scope.areas,"quantityUnspecNONHW",true);
         	$scope.setAreaRegion();
-        	
-        	$scope.updateAreasDownloadData();
         };
         
         $scope.updateAreasDownloadData = function() {
@@ -759,6 +803,9 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
                     	$scope.areasDownload[i+add_fields+subAreas][17] = $scope.cf.getSum(subArea,"quantityUnspecNONHW",true);
                 	}
             	}
+            	$scope.areasDownload[i+add_fields+(++subAreas)]= new Array();
+            	$scope.areasDownload[i+add_fields+subAreas][0] = ' ';
+            	
             	add_fields += subAreas+1;
             }
             add_fields = $scope.areasDownload.length + 1;
@@ -791,10 +838,9 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.updateFacilitiesData = function()
         {
         	$scope.facilitiesItems  = angular.copy($scope.items);
-        	$scope.updateFacilityDownloadData();
         };
         
-        $scope.updateFacilityDownloadData = function() {
+        $scope.updateFacilitiesDownloadData = function() {
         	$scope.facilitiesDownload= new Array();
             var top_fields = 5;
             
@@ -824,9 +870,9 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
             }
         }
         
-        $scope.updateHazboundData = function()
+        $scope.updateHaztransboundaryData = function()
         {
-        	 $scope.updateTransboundaryDownloadData();
+        	
         };
         
         $scope.updateTransboundaryDownloadData = function() {
@@ -836,26 +882,32 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
             $scope.topInfoDownload($scope.transboundaryDownload);
             
             $scope.transboundaryDownload[top_fields]= new Array();
-            $scope.transboundaryDownload[top_fields][0] = $scope.tr_cl["TO_COUNTRY"];
-        	$scope.transboundaryDownload[top_fields][1] = $scope.tr_cl["FROM_COUNTRY"];
-        	$scope.transboundaryDownload[top_fields][2] = $scope.tr_cl["QUANTITY"];
-//        	$scope.transboundaryDownload[top_fields][3] = $scope.tr_c.Disposal;
-//        	$scope.transboundaryDownload[top_fields][4] = $scope.tr_c.Unspec;
-//        	$scope.transboundaryDownload[top_fields][5] = $scope.tr_c.Activity;
-//        	$scope.transboundaryDownload[top_fields][6] = $scope.tr_c.Country;
+            $scope.transboundaryDownload[top_fields][0] = $scope.tr_cl["FROM_COUNTRY"];
+            $scope.transboundaryDownload[top_fields][1] = $scope.tr_cl["TO_COUNTRY"];
+        	$scope.transboundaryDownload[top_fields][2] = $scope.tr_cl["QUANTITY"]+ " " + $scope.tr_cl["DISPOSAL"];
+        	$scope.transboundaryDownload[top_fields][3] = $scope.tr_cl["QUANTITY"]+ " " + $scope.tr_cl["RECOVERY"];
+        	$scope.transboundaryDownload[top_fields][4] = $scope.tr_cl["QUANTITY"];
+        	$scope.transboundaryDownload[top_fields][5] = $scope.tr_c.Facilities;
 
         	top_fields += 1;
         	
-            for(var i =0; i<$scope.facilitiesItems.length;i++){
-            	var facility = this.items[i];
+        	var htd = $scope.hazTransboundaryData.data.sort(function(a, b) {
+        		if(a.transferFrom.localeCompare(b.transferFrom) === 0){
+        			return a.transferTo.localeCompare(b.transferTo);
+        		}else{
+        			return a.transferFrom.localeCompare(b.transferFrom);
+        		}
+        	});
+        	
+            for(var i =0; i<htd.length;i++){
+            	var transboundary = htd[i];
             	$scope.transboundaryDownload[i+top_fields]= new Array();
-            	$scope.transboundaryDownload[i+top_fields][0] = facility.facilityName;
-            	$scope.transboundaryDownload[i+top_fields][1] = $scope.ff.formatMethod(facility.quantityTotal,facility.confidentialIndicator);
-            	$scope.transboundaryDownload[i+top_fields][2] = $scope.ff.formatMethod(facility.quantityRecovery,facility.confidentialIndicator);
-            	$scope.transboundaryDownload[i+top_fields][3] = $scope.ff.formatMethod(facility.quantityDisposal,facility.confidentialIndicator);
-            	$scope.transboundaryDownload[i+top_fields][4] = $scope.ff.formatMethod(facility.quantityUnspec,facility.confidentialIndicator);
-            	$scope.transboundaryDownload[i+top_fields][5] = facility.Activity;
-            	$scope.transboundaryDownload[i+top_fields][6] = $scope.tr_lco[facility.countryCode];
+            	$scope.transboundaryDownload[i+top_fields][0] = $scope.tr_lco[transboundary.transferFrom];
+            	$scope.transboundaryDownload[i+top_fields][1] = $scope.tr_lco[transboundary.transferTo];
+            	$scope.transboundaryDownload[i+top_fields][2] = transboundary.quantityDisposal=== null? 0: transboundary.quantityDisposal;
+            	$scope.transboundaryDownload[i+top_fields][3] = transboundary.quantityRecovery=== null? 0: transboundary.quantityRecovery;
+            	$scope.transboundaryDownload[i+top_fields][4] = transboundary.quantityTotal;
+            	$scope.transboundaryDownload[i+top_fields][5] = transboundary.facilities;
             }
         }
         

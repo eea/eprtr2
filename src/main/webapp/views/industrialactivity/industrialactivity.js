@@ -441,17 +441,186 @@ angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'r
         	$scope.stopSpinPart('co');
         };
         
+        $scope.downloadClick = function(tab){
+        	$scope.startSpin();
+
+        	var contentArray = new Array();
+        	var fileName = '';
+        	if(tab === 'pollutantRelease'){
+        		$scope.updatePollutantReleaseDownloadData();
+        		contentArray = $scope.pollutantReleaseDownload;
+        		fileName = 'EPRTR_Industrial_Activity_Pollutant_Release.csv';
+        	}else if(tab ==='pollutantTransfer'){
+        		$scope.updatePollutantTransferDownloadData();
+        		contentArray = $scope.pollutantTransferDownload;
+        		fileName = 'EPRTR_Industrial_Activity_Pollutant_Transfer.csv';
+        	}else if(tab === 'wasteTransfer'){
+        		$scope.updateWasteTransferDownloadData();
+        		contentArray = $scope.wasteTransferDownload;
+        		fileName = 'EPRTR_Industrial_Activity_Waste_Transfer.csv';
+        	}
+
+        	var csvContent = 'data:text/csv;charset=utf-8,';
+        	contentArray.forEach(function(infoArray, index){
+
+        		var dataString = infoArray.join(';').split();
+        		csvContent += dataString + "\n";
+//        		csvContent.replace(';',',');
+        	});
+        	
+        	var encodedUri = encodeURI(csvContent);
+//        	encodedUri.replace(';',',');
+    		var link = document.createElement("a");
+    		link.setAttribute("href", encodedUri);
+    		link.setAttribute("download", fileName);
+
+    		link.click(); // This will download the data file named "my_data.csv".
+
+    		$scope.stopSpin();
+        }
+        
+        $scope.topInfoDownload = function(array){
+        	array[1]= new Array();
+            array[1][0] = $scope.tr_c.Year;
+        	array[1][1] = $scope.queryParams.ReportingYear;
+        	
+        	array[2]= new Array();
+            array[2][0] = $scope.tr_c.Area;
+        	array[2][1] = $scope.currentSearchFilter.selectedReportingCountry.name;
+        	
+        	array[3]= new Array();
+            array[3][0] = $scope.tr_ina.Headline;
+        	array[3][1] = $scope.sectorIA;
+        	
+        	array[5]= new Array();
+            array[5][0] = $scope.tr_c.TotalInSearch;
+        	array[5][1] = $scope.quantityTotalSearchResult;
+        	
+        	array[6]= new Array();
+            array[6][0] = ' ';
+        }
+        
         $scope.updatePollutantReleaseData = function()
         {
         	//$scope.pollutantreleaseItems = angular.copy($scope.items);
         	$scope.stopSpinPart('pr');
         };
         
+        $scope.updatePollutantReleaseDownloadData = function() {
+        	$scope.pollutantReleaseDownload= new Array();
+            var add_fields = 7;
+            
+            $scope.topInfoDownload($scope.pollutantReleaseDownload);
+            
+            $scope.pollutantReleaseDownload[4]= new Array();
+            $scope.pollutantReleaseDownload[4][0] = $scope.tr_c.Facilities;
+            $scope.pollutantReleaseDownload[4][1] = $scope.polreleasecount;
+            
+            $scope.pollutantReleaseDownload[add_fields]= new Array();
+            $scope.pollutantReleaseDownload[add_fields][0] = $scope.tr_p.ReleasesPerCountry;
+        	$scope.pollutantReleaseDownload[add_fields][1] = $scope.tr_c.Facilities;
+        	$scope.pollutantReleaseDownload[add_fields][2] = $scope.tr_c.Facilities + '('+$scope.tr_p.ReleasesAccidentalValue+')';
+        	$scope.pollutantReleaseDownload[add_fields][3] = $scope.tr_c.Air;
+        	$scope.pollutantReleaseDownload[add_fields][4] = $scope.tr_c.Air + '('+$scope.tr_p.ReleasesAccidentalValue+')';
+        	$scope.pollutantReleaseDownload[add_fields][5] = $scope.tr_c.Water;
+        	$scope.pollutantReleaseDownload[add_fields][6] = $scope.tr_c.Water + '('+$scope.tr_p.ReleasesAccidentalValue+')';
+        	$scope.pollutantReleaseDownload[add_fields][7] = $scope.tr_c.Soil;
+        	$scope.pollutantReleaseDownload[add_fields][8] = $scope.tr_c.Soil + '('+$scope.tr_p.ReleasesAccidentalValue+')';
+
+        	add_fields += 1;
+        	
+        	var prs = $scope.pollutantreleaseItems.sort(function(a, b) {
+        	    return $scope.tr_lpo[a.key].localeCompare($scope.tr_lpo[b.key]);
+        	});
+        	
+            for(var i =0; i<prs.length;i++){
+            	var subPrs = 0;
+            	var pr = prs[i];
+            	$scope.pollutantReleaseDownload[i+add_fields]= new Array();
+            	$scope.pollutantReleaseDownload[i+add_fields][0] = $scope.tr_lpo[pr.key];
+            	$scope.pollutantReleaseDownload[i+add_fields][1] = $scope.cf.getFacilityCount(pr.sublevel);
+            	
+            	pr.sublevel.sort(function(a, b) {
+            		return a.pollutantCode.localeCompare(b.pollutantCode);
+            	});
+            	
+            	if(pr.hasOwnProperty('sublevel')){
+                	for(var j =0; j<pr.sublevel.length;j++){
+                		var subPr = pr.sublevel[j];
+                		
+                		$scope.pollutantReleaseDownload[i+add_fields+(++subPrs)]= new Array();
+                    	$scope.pollutantReleaseDownload[i+add_fields+subPrs][0] = subPr.pollutantCode;
+                    	$scope.pollutantReleaseDownload[i+add_fields+subPrs][1] = $scope.cf.getTypeCount(subPr);
+                    	$scope.pollutantReleaseDownload[i+add_fields+subPrs][2] = $scope.cf.getTypeCountAccidential(subPr);
+                    	$scope.pollutantReleaseDownload[i+add_fields+subPrs][3] = $scope.cf.getformat(subPr.quantityAir);
+                    	$scope.pollutantReleaseDownload[i+add_fields+subPrs][4] = $scope.cf.getformat(subPr.quantityAccidentalAir);
+                    	$scope.pollutantReleaseDownload[i+add_fields+subPrs][5] = $scope.cf.getformat(subPr.quantityWater);
+                    	$scope.pollutantReleaseDownload[i+add_fields+subPrs][6] = $scope.cf.getformat(subPr.quantityAccidentalWater);
+                    	$scope.pollutantReleaseDownload[i+add_fields+subPrs][7] = $scope.cf.getformat(subPr.quantitySoil);
+                    	$scope.pollutantReleaseDownload[i+add_fields+subPrs][8] = $scope.cf.getformat(subPr.quantityAccidentalSoil);
+                	}
+            	}
+            	
+            	$scope.pollutantReleaseDownload[i+add_fields+(++subPrs)]= new Array();
+            	$scope.pollutantReleaseDownload[i+add_fields+subPrs][0] = ' ';
+            	add_fields += ++subPrs;
+            }
+        }
+        
         $scope.updatePollutantTransferData = function()
         {
         	//$scope.pollutanttransferItems = angular.copy($scope.items);
         	$scope.stopSpinPart('pt');
         };
+        
+        $scope.updatePollutantTransferDownloadData = function() {
+        	$scope.pollutantTransferDownload= new Array();
+            var add_fields = 7;
+            
+            $scope.topInfoDownload($scope.pollutantTransferDownload);
+            
+            $scope.pollutantTransferDownload[4]= new Array();
+            $scope.pollutantTransferDownload[4][0] = $scope.tr_c.Facilities;
+            $scope.pollutantTransferDownload[4][1] = $scope.poltransfercount;
+            
+            $scope.pollutantTransferDownload[add_fields]= new Array();
+            $scope.pollutantTransferDownload[add_fields][0] = $scope.tr_p.TransferPerCountry;
+        	$scope.pollutantTransferDownload[add_fields][1] = $scope.tr_c.Facilities;
+        	$scope.pollutantTransferDownload[add_fields][2] = $scope.tr_c.Quantity;
+
+        	add_fields += 1;
+        	
+        	var pts = $scope.pollutanttransferItems.sort(function(a, b) {
+        	    return $scope.tr_lpo[a.key].localeCompare($scope.tr_lpo[b.key]);
+        	});
+        	
+            for(var i =0; i<pts.length;i++){
+            	var subpts = 0;
+            	var pt = pts[i];
+            	$scope.pollutantTransferDownload[i+add_fields]= new Array();
+            	$scope.pollutantTransferDownload[i+add_fields][0] = $scope.tr_lpo[pt.key];
+            	$scope.pollutantTransferDownload[i+add_fields][1] = $scope.cf.getFacilityCount(pt.sublevel);
+            	
+            	pt.sublevel.sort(function(a, b) {
+            		return a.pollutantCode.localeCompare(b.pollutantCode);
+            	});
+            	
+            	if(pt.hasOwnProperty('sublevel')){
+                	for(var j =0; j<pt.sublevel.length;j++){
+                		var subPt = pt.sublevel[j];
+                		
+                		$scope.pollutantTransferDownload[i+add_fields+(++subpts)]= new Array();
+                    	$scope.pollutantTransferDownload[i+add_fields+subpts][0] = subPt.pollutantCode;
+                    	$scope.pollutantTransferDownload[i+add_fields+subpts][1] = $scope.cf.getTypeCount(subPt);
+                    	$scope.pollutantTransferDownload[i+add_fields+subpts][2] = $scope.cf.getformat(subPt.totalQuantity);
+                	}
+            	}
+            	$scope.pollutantTransferDownload[i+add_fields+(++subpts)]= new Array();
+            	$scope.pollutantTransferDownload[i+add_fields+subpts][0] = ' ';
+            	
+            	add_fields += subpts+1;
+            }
+        }
         
         $scope.updateSummaryData = function() {
          	// $scope.summaryItems = angular.copy($scope.items);
@@ -553,8 +722,49 @@ angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'r
             $scope.summaryChart1.type = 'PieChart';
             
         	$scope.stopSpinPart('wt');
-
           };
+          
+          $scope.updateWasteTransferDownloadData = function() {
+          	$scope.wasteTransferDownload= new Array();
+              var add_fields = 7;
+              
+              $scope.topInfoDownload($scope.wasteTransferDownload);
+              
+              $scope.wasteTransferDownload[4]= new Array();
+              $scope.wasteTransferDownload[4][0] = $scope.tr_c.Facilities;
+              $scope.wasteTransferDownload[4][1] = $scope.wastetransfercount;
+              
+              $scope.wasteTransferDownload[add_fields]= new Array();
+              $scope.wasteTransferDownload[add_fields][0] = $scope.tr_wt.WasteTransfers;
+          	$scope.wasteTransferDownload[add_fields][1] = $scope.tr_c.Facilities;
+          	$scope.wasteTransferDownload[add_fields][2] = $scope.tr_wt.Recovery;
+          	$scope.wasteTransferDownload[add_fields][3] = $scope.tr_wt.Recovery + '(%)';
+          	$scope.wasteTransferDownload[add_fields][4] = $scope.tr_wt.Disposal;
+          	$scope.wasteTransferDownload[add_fields][5] = $scope.tr_wt.Disposal + '(%)';
+          	$scope.wasteTransferDownload[add_fields][6] = $scope.tr_wt.Unspecified;
+          	$scope.wasteTransferDownload[add_fields][7] = $scope.tr_wt.Unspecified + '(%)';
+          	$scope.wasteTransferDownload[add_fields][8] = $scope.tr_c.TotalQuantity;
+          	
+          	var wts = $scope.summaryItems.sort(function(a, b) {
+          	    return a.wastetype.localeCompare(b.wastetype);
+          	});
+          	
+              for(var i =0; i<wts.length;i++){
+              	var subWts = 0;
+              	var wt = wts[i];
+              	$scope.wasteTransferDownload[i+(++add_fields)]= new Array();
+              	$scope.wasteTransferDownload[i+add_fields][0] = wt.wastetype;
+              	$scope.wasteTransferDownload[i+add_fields][1] = wt.facilityCount;
+              	$scope.wasteTransferDownload[i+add_fields][2] = $scope.cf.getformat(wt.quantityRecovery);
+              	$scope.wasteTransferDownload[i+add_fields][3] = $scope.cf.getpctformat(wt.rpct);
+              	$scope.wasteTransferDownload[i+add_fields][4] = $scope.cf.getformat(wt.quantityDisposal);
+              	$scope.wasteTransferDownload[i+add_fields][5] = $scope.cf.getpctformat(wt.dpct);
+              	$scope.wasteTransferDownload[i+add_fields][6] = $scope.cf.getformat(wt.quantityUnspec);
+              	$scope.wasteTransferDownload[i+add_fields][7] = $scope.cf.getpctformat(wt.upct);
+              	$scope.wasteTransferDownload[i+add_fields][8] = $scope.cf.getformat(wt.quantityTotal);
+              	
+              }
+          }
           
           /*
            * See count factory

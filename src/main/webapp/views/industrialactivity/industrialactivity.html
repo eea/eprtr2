@@ -61,7 +61,7 @@
 			    <td>{{ queryParams.ReportingYear }}</td>
 			  </tr>
 			  <tr >
-			    <td class="fdTitles">{{ tr_c.Country }}:</td>
+			    <td class="fdTitles">{{ tr_c.Area }}:</td>
 			    <td>{{ currentSearchFilter.selectedReportingCountry.name }}</td>
 			  </tr>
 			  <tr >
@@ -76,6 +76,7 @@
 		</div>
 		<div class="col-md-6">
 			  <button class="print-button btn btn-default btn-default pull-right" ng-print print-element-id="industrial_activity_pollutant_releases"><i class="fa fa-print"></i></button>
+			  <button class="btn btn-default pull-right" ng-click="downloadClick('pollutantRelease')"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
 		</div>
 	</div>
 	<div class="col-md-12 table-responsive top-buffer10" >
@@ -147,7 +148,7 @@
 			    <td>{{ queryParams.ReportingYear }}</td>
 			  </tr>
 			  <tr >
-			    <td class="fdTitles">{{ tr_c.Country }}:</td>
+			    <td class="fdTitles">{{ tr_c.Area }}:</td>
 			    <td>{{ currentSearchFilter.selectedReportingCountry.name }}</td>
 			  </tr>
 			  <tr >
@@ -163,6 +164,7 @@
 			  <div class="col-md-6 top-buffer10">
 			  
 			  <button class="print-button btn btn-default pull-right" ng-print print-element-id="industrial_activity_pollutant_transfer"><i class="fa fa-print"></i></button>
+			  <button class="btn btn-default pull-right" ng-click="downloadClick('pollutantTransfer')"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
 
 				</div>
 	<div class="col-md-12 table-responsive top-buffer10" >
@@ -225,6 +227,7 @@
       </blockquote></div>
       		<div class="col-md-4">
       			<button class="print-button btn btn-default pull-right" ng-print print-element-id="industrial_activity_waste_transfer"><i class="fa fa-print"></i></button>
+      			<button class="btn btn-default pull-right" ng-click="downloadClick('wasteTransfer')"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
       		</div>
       </div>
 			<div class="row top-buffer10">

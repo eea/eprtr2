@@ -203,6 +203,44 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
             //$scope.setMapQuery();
             
         };
+        
+        $scope.downloadClick = function(tab){
+        	$scope.startSpin();
+
+        	var contentArray = new Array();
+        	var fileName = '';
+        	if(tab === 'activities'){
+        		$scope.updateActivitiesDownloadData();
+        		contentArray = $scope.activitiesDownload;
+        		fileName = 'EPRTR_Pollutant_Releases_Activities.csv';
+        	}else if(tab ==='areas'){
+        		$scope.updateAreasDownloadData();
+        		contentArray = $scope.areasDownload;
+        		fileName = 'EPRTR_Pollutant_Releases_Areas.csv';
+        	}else if(tab === 'facilities'){
+        		$scope.updateFacilitiesDownloadData();
+        		contentArray = $scope.facilitiesDownload;
+        		fileName = 'EPRTR_Pollutant_Releases_Facilities.csv';
+        	}
+
+        	var csvContent = 'data:text/csv;charset=utf-8,';
+        	contentArray.forEach(function(infoArray, index){
+
+        		var dataString = infoArray.join(';').split();
+        		csvContent += dataString + "\n";
+//        		csvContent.replace(';',',');
+        	});
+        	
+        	var encodedUri = encodeURI(csvContent);
+//        	encodedUri.replace(';',',');
+    		var link = document.createElement("a");
+    		link.setAttribute("href", encodedUri);
+    		link.setAttribute("download", fileName);
+
+    		link.click(); // This will download the data file named "my_data.csv".
+
+    		$scope.stopSpin();
+        }
 
         $scope.topInfoDownload = function(array){
         	array[1]= new Array();
@@ -216,6 +254,9 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         	array[3]= new Array();
             array[3][0] = $scope.tr_c.Area;
         	array[3][1] = $scope.currentSearchFilter.selectedReportingCountry.name;
+        	
+        	array[4]= new Array();
+            array[4][0] = ' ';
         }
         
         $scope.updateSummaryData = function() {
@@ -275,7 +316,6 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
                 return false;
             });
             $scope.stopSpinPart('fac');
-            $scope.updateFacilityDownloadData();
         };
         
         $scope.updateFacilityDownloadData = function() {
@@ -400,7 +440,6 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         {
         	$scope.activities = [];
         	$scope.groupbyActivitet('iasectorCode','iaactivityCode','iasubActivityCode',$scope.activities);
-        	$scope.updateActivitiesDownloadData();
         	$scope.stopSpinPart('act');
         };
         
@@ -480,6 +519,9 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
                 	
             	}
             	
+            	$scope.activitiesDownload[i+add_fields+(++subActivities)]= new Array();
+        		$scope.activitiesDownload[i+add_fields+subActivities][0] = ' ';
+            	
             	add_fields += subActivities +1;
             }
             
@@ -500,7 +542,6 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         {
         	$scope.areas = [];
         	$scope.groupbyAreas('countryCode',$scope.areas);
-        	$scope.updateAreasDownloadData();
         	$scope.stopSpinPart('are');
         };
         
@@ -575,6 +616,9 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
                     	$scope.areasDownload[i+add_fields+subAreas][8] = $scope.cf.getSum(subArea,"quantityAccidentalSoil");
                 	}
             	}
+            	$scope.areasDownload[i+add_fields+(++subAreas)]= new Array();
+            	$scope.areasDownload[i+add_fields+subAreas][0] = ' ';
+            	
             	add_fields += subAreas+1;
             }
             

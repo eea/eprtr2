@@ -167,7 +167,6 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
             $scope.items = response.data;
 	        $scope.totalItemCount = response.headers('X-Count');
 	        $scope.confidentialFacilities = response.headers('X-Confidentiality');
-	        $scope.updateFacilitiesDownload(response.data);
 	        $scope.stopSpin();
 	    });
 	};
@@ -191,6 +190,39 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 		}
 	};
 	
+	$scope.downloadClick = function(){
+		$scope.startSpin();
+		
+		var rest = Restangular.withConfig(function(RestangularConfigurer) {
+		    RestangularConfigurer.setFullResponse(true);
+		});
+		
+		var facilitySearch = rest.all('facilitySearch');
+		var qp = jQuery.extend(true, {}, $scope.queryParams);
+		qp.limit = 0;
+	    
+	    facilitySearch.getList(qp).then(function(response) {
+	        $scope.updateFacilitiesDownload(response.data);
+	        
+	        var csvContent = "data:text/csv;charset=utf-8,";
+		    $scope.facilitiesDownload.forEach(function(infoArray, index){
+
+		       var dataString = infoArray.join(';').split();
+		       csvContent += dataString + "\n";
+
+		    }); 
+		    
+		    var encodedUri = encodeURI(csvContent);
+		    var link = document.createElement("a");
+		    link.setAttribute("href", encodedUri);
+		    link.setAttribute("download", "EPRTR_Facility_Level_Facilities.csv");
+
+		    link.click(); // This will download the data file named "my_data.csv".
+		    
+	        $scope.stopSpin();
+	    });
+	}
+	
 	$scope.updateFacilitiesDownload = function(items){
 		$scope.facilitiesDownload= new Array();
 		
@@ -201,6 +233,9 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 		$scope.facilitiesDownload[2]= new Array();
     	$scope.facilitiesDownload[2][0] = $scope.tr_c.Area;
     	$scope.facilitiesDownload[2][1] = $scope.currentSearchFilter.selectedReportingCountry.name;
+    	
+    	$scope.facilitiesDownload[3]= new Array();
+    	$scope.facilitiesDownload[3][0] = ' ';
 		
         var top_fields = 4;
         
