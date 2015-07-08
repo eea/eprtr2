@@ -5,6 +5,7 @@ angular.module('myApp.areaOverviewPtTab', ['restangular','ngSanitize','angularSp
    .controller('AreaOverviewPtTabCtrl', ['$scope', '$filter', 'Restangular',
                                        'translationService','formatStrFactory', 'countFactory','usSpinnerService', function($scope, $filter,  
                                     		   Restangular,translationService,formatStrFactory,countFactory, usSpinnerService) {
+	    $scope.beforesearch = true;
         $scope.ff = formatStrFactory;
 	    $scope.cf = countFactory;
 /*	    $scope.prfilter = {};// .polsearch
@@ -62,6 +63,7 @@ angular.module('myApp.areaOverviewPtTab', ['restangular','ngSanitize','angularSp
         });
 
         $scope.getData = function(){
+            $scope.beforesearch = false;
         	$scope.searchService = $scope.restconfig.all('pollutanttransferAreaoverview');
     		$scope.searchService.getList($scope.queryparams).then(function(response) {
         		$scope.items = response.data;
