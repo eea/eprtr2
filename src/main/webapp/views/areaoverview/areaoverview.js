@@ -13,9 +13,9 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 
 
 .controller('AreaOverviewCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular', 'translationService', 
-                                 'lovCountryType', 'lovAreaGroupType', 'lovNutsRegionType', 'riverBasinDistrictsType', 'countFactory',
+                                 'lovCountryType', 'lovAreaGroupType', 'lovNutsRegionType', 'riverBasinDistrictsType', 'countFactory', 'formatStrFactory',
                                  function($scope, $filter, $http, searchFilter, Restangular, translationService,
-                                		 lovCountryType, lovAreaGroupType, lovNutsRegionType, riverBasinDistrictsType, countFactory) {
+                                		 lovCountryType, lovAreaGroupType, lovNutsRegionType, riverBasinDistrictsType, countFactory, formatStrFactory) {
 	
 	$scope.beforesearch = true;
     $scope.searchFilter = searchFilter;
@@ -23,7 +23,10 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
     $scope.queryParams.ReportingYear = -1;
 	$scope.headitms = [];
 	$scope.prMedium = {};
-	//$scope.pritems = [];
+	$scope.pritems = {};
+	$scope.prHeaderItems= {};
+	$scope.ptitems = {};
+	$scope.ptHeaderItems= {};
 	$scope.wasteTransferItems = {};
 /*	$scope.prfilter = {};// .polsearch
     $scope.prfilter.pgselect = {};
@@ -31,6 +34,8 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
     $scope.ptfilter.pgselect = {};*/
     $scope.searchResults = false;
     $scope.cf = countFactory;
+    $scope.ff = formatStrFactory;
+    $scope.med = 'quantityAir';
     
 /*    $scope.regionSearch = false;
     //$scope.summaryItems = [];
@@ -61,8 +66,8 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
     };
     $scope.translate();
     
-    $scope.$watch('wasteTransferItems.data', function(value) {
-    	console.log("HTD is there.");
+    $scope.$watchCollection('[pritems.data, prHeaderItems.data ,ptitems.data, ptHeaderItems.data, wasteTransferItems.data]', function(value) {
+//    	console.log("HTD is there.");
     });
 	
     $scope.$watch('prMedium', function(value){
@@ -212,19 +217,26 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 	$scope.downloadClick = function(tab){
 
     	var contentArray = new Array();
+    	var contentAvailable = true;
     	var fileName = '';
+    	var date = new Date();
+    	var dateString = '_'+ date.getFullYear() +'_'+date.getMonth()+'_'+date.getDate();
     	if(tab === 'wasteTransfer'){
     		$scope.updateWasteTransferDownloadData();
     		contentArray = $scope.wasteTransferDownload;
-    		fileName = 'EPRTR_Area_Overview_Waste_Transfer_.csv';
-    	}else if(tab ==='areas'){
-    		$scope.updateAreasDownloadData();
-    		contentArray = $scope.areasDownload;
-    		fileName = 'EPRTR_Pollutant_Transfer_Areas.csv';
-    	}else if(tab === 'facilities'){
-    		$scope.updateFacilitiesDownloadData();
-    		contentArray = $scope.facilitiesDownload;
-    		fileName = 'EPRTR_Pollutant_Transfer_Facilities.csv';
+    		fileName = 'EPRTR_Area_Overview_Waste_Transfer'+dateString+'.csv';
+    	}else if(tab ==='pollutantRelease' && $scope.pritems.data != undefined){
+    		$scope.pollutantReleaseDownload= new Array();
+    		$scope.updatePollutantDownloadData($scope.pritems,$scope.pollutantReleaseDownload, $scope.prHeaderItems );
+    		contentArray = $scope.pollutantReleaseDownload;
+    		fileName = 'EPRTR_Area_Overview_Pollutant_Release'+dateString+'.csv';
+    	}else if(tab === 'pollutantTransfer' && $scope.ptitems.data != undefined){
+    		$scope.pollutantTransferDownload= new Array();
+    		$scope.updatePollutantDownloadData($scope.ptitems,$scope.pollutantTransferDownload, $scope.ptHeaderItems );
+    		contentArray = $scope.pollutantTransferDownload;
+    		fileName = 'EPRTR_Area_Overview_Pollutant_Transfer'+dateString+'.csv';
+    	}else{
+    		contentAvailable = false;
     	}
 
     	var csvContent = 'data:text/csv;charset=utf-8,';
@@ -232,16 +244,15 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 
     		var dataString = infoArray.join(';').split();
     		csvContent += dataString + "\n";
-//    		csvContent.replace(';',',');
     	});
     	
     	var encodedUri = encodeURI(csvContent);
-//    	encodedUri.replace(';',',');
 		var link = document.createElement("a");
 		link.setAttribute("href", encodedUri);
 		link.setAttribute("download", fileName);
-
-		link.click(); // This will download the data file named "my_data.csv".
+		if(contentAvailable){
+			link.click(); // This will download the data file named "my_data.csv".
+		}
 
     }
 	
@@ -302,12 +313,10 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
                 	$scope.wasteTransferDownload[i+add_fields+subItems][8] = $scope.cf.getSum(subItem,"facilityCountNONHW",false);
                 	
                 	if(subItem.hasOwnProperty('sublevel') && subItem.sublevel != null){
-                		if(subItem.sublevel.hasOwnProperty('iasubActivityCode') && subItem.sublevel.iasubActivityCode != null){
-                			subItem.sublevel.sort(function(a, b) {
-                				 return a.iasubActivityCode - b.iasubActivityCode;
-                        	});
-                		}
-                		
+                		subItem.sublevel.sort(function(a, b) {
+                			return $scope.roman(a.iaSubActivityCode.substring(7, a.iaSubActivityCode.length-1))- $scope.roman(b.iaSubActivityCode.substring(7, b.iaSubActivityCode.length-1));
+                		});
+
                 		for(var k =0; k< subItem.sublevel.length ;k++){
                     		var subSubItem = subItem.sublevel[k];
                     		$scope.wasteTransferDownload[i+add_fields+(++subItems)]= new Array();
@@ -342,6 +351,130 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
         $scope.wasteTransferDownload[add_fields][6] = wasteTransfer.facilityCountHW;
         $scope.wasteTransferDownload[add_fields][7] = wasteTransfer.totalNONHW;
         $scope.wasteTransferDownload[add_fields][8] = wasteTransfer.facilityCountNONHW;
+	}	
+	
+	$scope.roman = function deromanize (str) {
+		var	str = str.toUpperCase(),
+			validator = /^M*(?:D?C{0,3}|C[MD])(?:L?X{0,3}|X[CL])(?:V?I{0,3}|I[XV])$/,
+			token = /[MDLV]|C[MD]?|X[CL]?|I[XV]?/g,
+			key = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1},
+			num = 0, m;
+		if (!(str && validator.test(str)))
+			return false;
+		while (m = token.exec(str))
+			num += key[m[0]];
+		return num;
+	}
+	
+	$scope.updatePollutantDownloadData = function(itemsArray, storageArray, headerArray){
+        var add_fields = 4;
+        
+        $scope.topInfoDownload(storageArray);
+        
+        storageArray[add_fields]= new Array();
+        storageArray[add_fields][0] = headerArray.data[0].txt;
+        var h_add_fields = 0;
+        for(var i = 2; i < headerArray.data.length; i++){
+        	var hItemTxt = headerArray.data[i].txt;
+        	hItemTxt=hItemTxt.replace(/<\/?[^>]+(>|$)/g, "");
+        	storageArray[add_fields][i-1+ h_add_fields] = hItemTxt  + '('+$scope.tr_c.Quantity+')';
+        	storageArray[add_fields][i-1+ (++h_add_fields)] = hItemTxt + '('+$scope.tr_c.Facilities+')';
+        }
+    	add_fields += 1;
+    	
+    	var pritems = itemsArray.data.sort(function(a, b) {
+    	    return a.key - b.key;
+    	});
+    	
+        for(var i =0; i<pritems.length;i++){
+        	var subItems = 0;
+        	var item = pritems[i];
+        	
+        	var polqs = item.pollutantquantitys.sort(function(a, b) {
+        	    return a.pollutantCode.localeCompare(b.pollutantCode);
+        	});
+        	
+        	storageArray[i+add_fields]= new Array();
+        	storageArray[i+add_fields][0] = $scope.tr_laa[item.key];
+        	h_add_fields=1;
+        	for(var ih =0; ih<polqs.length;ih++){
+        		var polq = polqs[ih]
+        		
+        		storageArray[i+add_fields][ih+(h_add_fields)] = $scope.ff.formatMethod(polq[$scope.med]);
+            	storageArray[i+add_fields][ih+(++h_add_fields)] = (polq[$scope.med]>0)?polq.facilities:0 ;
+        	}
+        	
+        	item.data.sort(function(a, b) {
+        		return a.iaActivityCode.localeCompare(b.iaActivityCode);
+        	});
+        	
+        	if(item.hasOwnProperty('data')){
+            	for(var j =0; j<item.data.length;j++){
+            		var subItem = item.data[j];
+            		
+            		storageArray[i+add_fields+(++subItems)]= new Array();
+                	storageArray[i+add_fields+subItems][0] = $scope.tr_laa[subItem.iaActivityCode];
+                	
+                	var polqs2 = subItem.pollutantquantitys.sort(function(a, b) {
+                	    return a.pollutantCode.localeCompare(b.pollutantCode);
+                	});
+                	
+                	h_add_fields=1;
+                	for(var ih =0; ih<polqs2.length;ih++){
+                		var polq2 = polqs2[ih]
+                		
+                		storageArray[i+add_fields+subItems][ih+(h_add_fields)] = $scope.ff.formatMethod(polq2[$scope.med]);
+                    	storageArray[i+add_fields+subItems][ih+(++h_add_fields)] = (polq2[$scope.med]>0)?polq2.facilities:0 ;
+                	}
+                	
+                	if(subItem.hasOwnProperty('data') && subItem.data != null){
+                		subItem.data.sort(function(a, b) {
+                			return $scope.roman(a.iaSubActivityCode.substring(7, a.iaSubActivityCode.length-1))- $scope.roman(b.iaSubActivityCode.substring(7, b.iaSubActivityCode.length-1));
+                		});
+
+                		for(var k =0; k< subItem.data.length ;k++){
+                			var subSubItem = subItem.data[k];
+
+                			storageArray[i+add_fields+(++subItems)]= new Array();
+                			storageArray[i+add_fields+subItems][0] = $scope.tr_laa[subSubItem.iaSubActivityCode];
+
+                			var polqs3 = subSubItem.pollutantquantitys.sort(function(a, b) {
+                				return a.pollutantCode.localeCompare(b.pollutantCode);
+                			});
+
+                			h_add_fields=1;
+                			for(var ih =0; ih<polqs3.length;ih++){
+                				var polq3 = polqs3[ih]
+
+                				storageArray[i+add_fields+subItems][ih+(h_add_fields)] = $scope.ff.formatMethod(polq3[$scope.med]);
+                				storageArray[i+add_fields+subItems][ih+(++h_add_fields)] = (polq3[$scope.med]>0)?polq3.facilities:0 ;
+                			}
+                		}
+                	}
+            	}
+        	}
+        	storageArray[i+add_fields+(++subItems)]= new Array();
+        	storageArray[i+add_fields+subItems][0] = ' ';
+        	
+        	add_fields +=subItems+1;
+        }
+        
+        add_fields += 1 + itemsArray.data.length;
+
+        storageArray[add_fields]= new Array();
+        storageArray[add_fields][0] = $scope.tr_c.Total;
+        
+        var polqts = itemsArray.pttotal.sort(function(a, b) {
+    	    return a.pollutantCode.localeCompare(b.pollutantCode);
+    	});
+    	
+    	h_add_fields=1;
+    	for(var ih =0; ih<polqts.length;ih++){
+    		var polqt = polqts[ih]
+    		
+    		storageArray[add_fields][ih+(h_add_fields)] = $scope.ff.formatMethod(polqt.quantity);
+        	storageArray[add_fields][ih+(++h_add_fields)] =polqt.facilities;
+    	}
 	}
 
 	$scope.topInfoDownload = function(array){

@@ -67,6 +67,7 @@ angular.module('myApp.areaOverviewPtTab', ['restangular','ngSanitize','angularSp
         	$scope.searchService = $scope.restconfig.all('pollutanttransferAreaoverview');
     		$scope.searchService.getList($scope.queryparams).then(function(response) {
         		$scope.items = response.data;
+        		$scope.resultlist = response.data;
 //          		$scope.totalSearchResult += parseInt($scope.wastetransfercount);
         		$scope.startSpin();
           		$scope.updateData();
@@ -143,7 +144,10 @@ angular.module('myApp.areaOverviewPtTab', ['restangular','ngSanitize','angularSp
   		scope: {
   			queryparams: '=',
   			visible: '=',
-  			pollutant: '='
+  			pollutant: '=',
+  			resultlist: '=',
+  			headeritems: '=',
+  			pttotal: '='
   		},
   		templateUrl: 'components/areaoverview/pt_tab.html',
   		link: function(scope, element, attrs){

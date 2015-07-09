@@ -185,7 +185,9 @@ angular.module('myApp.areaOverviewPrTab', ['restangular','ngSanitize','angularSp
   			visible: '=',
   			pollutant: '=',
   			medium: '=',
-  			resultlist:'='
+  			resultlist:'=',
+  			headeritems: '=',
+  			pttotal: '='
   		},
   		templateUrl: 'components/areaoverview/pr_tab.html',
   		link: function(scope, element, attrs){

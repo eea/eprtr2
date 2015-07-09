@@ -443,21 +443,24 @@ angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'r
         
         $scope.downloadClick = function(tab){
         	$scope.startSpin();
+        	
+        	var date = new Date();
+        	var dateString = '_'+ date.getFullYear() +'_'+date.getMonth()+'_'+date.getDate();
 
         	var contentArray = new Array();
         	var fileName = '';
         	if(tab === 'pollutantRelease'){
         		$scope.updatePollutantReleaseDownloadData();
         		contentArray = $scope.pollutantReleaseDownload;
-        		fileName = 'EPRTR_Industrial_Activity_Pollutant_Release.csv';
+        		fileName = 'EPRTR_Industrial_Activity_Pollutant_Release'+dateString+'.csv';
         	}else if(tab ==='pollutantTransfer'){
         		$scope.updatePollutantTransferDownloadData();
         		contentArray = $scope.pollutantTransferDownload;
-        		fileName = 'EPRTR_Industrial_Activity_Pollutant_Transfer.csv';
+        		fileName = 'EPRTR_Industrial_Activity_Pollutant_Transfer'+dateString+'.csv';
         	}else if(tab === 'wasteTransfer'){
         		$scope.updateWasteTransferDownloadData();
         		contentArray = $scope.wasteTransferDownload;
-        		fileName = 'EPRTR_Industrial_Activity_Waste_Transfer.csv';
+        		fileName = 'EPRTR_Industrial_Activity_Waste_Transfer'+dateString+'.csv';
         	}
 
         	var csvContent = 'data:text/csv;charset=utf-8,';

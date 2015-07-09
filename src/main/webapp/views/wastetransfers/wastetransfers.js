@@ -458,26 +458,121 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
           $scope.summaryChart1.type = 'PieChart';
         };
         
+        $scope.performSearchWithoutLimit = function() {
+        	var rest = Restangular.withConfig(function(RestangularConfigurer) {
+                RestangularConfigurer.setFullResponse(true);
+            });
+            $scope.regionSearch = false;
+            
+            $scope.facilitySearchWithoutLimit = rest.all('wastetransferSearch');
+            var queryParams = {ReportingYear: $scope.currentSearchFilter.selectedReportingYear.year};
+            if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.countryId) {
+            	queryParams.LOV_CountryID = $scope.currentSearchFilter.selectedReportingCountry.countryId;
+                if ($scope.currentSearchFilter.selectedRegion.lov_NUTSRegionID) {
+                queryParams.LOV_NUTSRegionID = $scope.currentSearchFilter.selectedRegion.lov_NUTSRegionID;
+                }
+                else if ($scope.currentSearchFilter.selectedRegion.lov_RiverBasinDistrictID) {
+                	queryParams.LOV_RiverBasinDistrictID = $scope.currentSearchFilter.selectedRegion.lov_RiverBasinDistrictID;
+                }
+            }
+            if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.groupId) {
+            	queryParams.LOV_AreaGroupID = $scope.currentSearchFilter.selectedReportingCountry.groupId;
+            }
+            if ($scope.currentSearchFilter.activitySearchFilter) {
+                $scope.currentSearchFilter.activitySearchFilter.filter(queryParams);
+            }
+            if ($scope.currentSearchFilter.wasteSearchFilter) {
+                $scope.currentSearchFilter.wasteSearchFilter.filter(queryParams);
+            }
+            
+            if(searchFilter.regionType == 0)
+            {
+            	$scope.regionSearch = true;
+            }else
+            {
+            	$scope.regionSearch = false;
+            }
+            
+            queryParams.RegionSearch = $scope.regionSearch;
+            
+            // SearchType
+            queryParams.SearchType= $scope.SearchType;
+
+            $scope.queryParams = queryParams;
+            
+        	if(queryParams.SearchType === "FACILITIES")
+        	{
+            	if ($scope.wtfilter.wtsel != undefined) {
+            		queryParams.WasteTypeCode = [$scope.wtfilter.wtsel.replace('-','')];
+            	}
+            	queryParams.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
+            	queryParams.order = $scope.sort.sortingOrder;
+        		queryParams.desc = $scope.sort.reverse;
+        	}
+
+
+        	// Create confidential search
+            $scope.confidentialParams = angular.copy(queryParams);
+            $scope.confidentialParams.ConfidentialIndicator = 1;
+            
+            $scope.getIsConfidential();
+            $scope.queryParamsWithoutLimit = queryParams;
+                 
+            /*facilitySearch.getList($scope.confidentialParams).then(function(response) {
+                $scope.itemsConfidentiality = response.data;
+                $scope.updateConfidentialityData();
+            });*/
+            
+            $scope.facilitySearchWithoutLimit.getList($scope.queryParamsWithoutLimit).then(function(response) {
+    			$scope.facilitiesCompleteItems = response.data;
+    			$scope.updateFacilitiesDownloadData();
+    			
+    			var date = new Date();
+            	var contentDate = '_'+date.getFullYear()+'_'+date.getMonth()+'_'+date.getDate();
+    			var contentArray = $scope.facilitiesDownload;
+            	var fileName = 'EPRTR_Waste_Transfer_Facilities'+contentDate+'.csv';
+            	
+            	var csvContent = 'data:text/csv;charset=utf-8,';
+            	contentArray.forEach(function(infoArray, index){
+
+            		var dataString = infoArray.join(';').split();
+            		csvContent += dataString + "\n";
+//            		csvContent.replace(';',',');
+            	});
+            	
+            	var encodedUri = encodeURI(csvContent);
+//            	encodedUri.replace(';',',');
+        		var link = document.createElement("a");
+        		link.setAttribute("href", encodedUri);
+        		link.setAttribute("download", fileName);
+
+        		link.click(); // This will download the data file named "my_data.csv".
+    		});
+                      
+        };
+        
         $scope.downloadClick = function(tab){
 
         	var contentArray = new Array();
+        	var date = new Date();
+        	var contentDate = '_'+date.getFullYear()+'_'+date.getMonth()+'_'+date.getDate();
         	var fileName = '';
         	if(tab === 'activities'){
         		$scope.updateActivitiesDownloadData();
         		contentArray = $scope.activitiesDownload;
-        		fileName = 'EPRTR_Waste_Transfer_Activities.csv';
+        		fileName = 'EPRTR_Waste_Transfer_Activities'+contentDate+'.csv';
         	}else if(tab ==='areas'){
         		$scope.updateAreasDownloadData();
         		contentArray = $scope.areasDownload;
-        		fileName = 'EPRTR_Waste_Transfer_Areas.csv';
+        		fileName = 'EPRTR_Waste_Transfer_Areas'+contentDate+'.csv';
         	}else if(tab === 'facilities'){
-            	$scope.updateFacilitiesDownloadData();
-            	contentArray = $scope.facilitiesDownload;
-            	fileName = 'EPRTR_Waste_Transfer_Facilities.csv';	
+        		$scope.performSearchWithoutLimit();
+        		return;
+            		
         	}else if(tab === 'transboundary'){
         		$scope.updateTransboundaryDownloadData();
         		contentArray = $scope.transboundaryDownload;
-        		fileName = 'EPRTR_Waste_Transfer_Haz_Transboundary.csv';
+        		fileName = 'EPRTR_Waste_Transfer_Haz_Transboundary'+contentDate+'.csv';
         	}
 
         	var csvContent = 'data:text/csv;charset=utf-8,';
@@ -543,6 +638,19 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         	$scope.totaluNONHW = $scope.cf.getSubSum($scope.activities,"quantityUnspecNONHW",true);
         	
         };
+        
+        $scope.roman = function deromanize (str) {
+    		var	str = str.toUpperCase(),
+    			validator = /^M*(?:D?C{0,3}|C[MD])(?:L?X{0,3}|X[CL])(?:V?I{0,3}|I[XV])$/,
+    			token = /[MDLV]|C[MD]?|X[CL]?|I[XV]?/g,
+    			key = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1},
+    			num = 0, m;
+    		if (!(str && validator.test(str)))
+    			return false;
+    		while (m = token.exec(str))
+    			num += key[m[0]];
+    		return num;
+    	}
         
         $scope.updateActivitiesDownloadData = function() {
         	$scope.activitiesDownload= new Array();
@@ -627,7 +735,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
                 	
                 	if(subActivity.hasOwnProperty('sublevel') && subActivity.sublevel instanceof Array && subActivity.sublevel.length >=0){
                 		subActivity.sublevel= subActivity.sublevel.sort(function(a, b) {
-                    	    return a.iasubActivityCode - b.iasubActivityCode;
+                			return $scope.roman(a.iaSubActivityCode.substring(7, a.iaSubActivityCode.length-1))- $scope.roman(b.iaSubActivityCode.substring(7, b.iaSubActivityCode.length-1));
                     	});
                 		
                 		for(var k =0; k< subActivity.sublevel.length ;k++){
@@ -857,8 +965,8 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
 
         	top_fields += 1;
         	
-            for(var i =0; i<$scope.facilitiesItems.length;i++){
-            	var facility = $scope.facilitiesItems[i];
+            for(var i =0; i<$scope.facilitiesCompleteItems.length;i++){
+            	var facility = $scope.facilitiesCompleteItems[i];
             	$scope.facilitiesDownload[i+top_fields]= new Array();
             	$scope.facilitiesDownload[i+top_fields][0] = facility.facilityName;
             	$scope.facilitiesDownload[i+top_fields][1] = $scope.ff.formatMethod(facility.quantityTotal,facility.confidentialIndicator);

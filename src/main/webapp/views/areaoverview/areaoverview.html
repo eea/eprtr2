@@ -50,17 +50,18 @@
 						<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
 			      </blockquote>
 			      </div>
-				  <div class="col-md-6 top-buffer10" >
+				  <div class="col-md-5 top-buffer10" >
 				      <div class="top-buffer10" id="prPollutantGroup" sf-pollutant queryparams="queryParams" pgselect="prfilter.pgselect" pselect="prfilter.pselect" grponly="true" ></div>
 				      <div class="top-buffer10" id="prMediumSelector" pr-selector queryparams="queryParams" medium="prMedium" ></div>
 				  </div>
-				  <div class="col-md-1 top-buffer10 ">
+				  <div class="col-md-2 top-buffer10 ">
 				  	<button class="print-button btn btn-default pull-right" ng-print print-element-id="area_overview_pollutant_releases"><i class="fa fa-print"></i></button>
+				  	<button class="btn btn-default pull-right"ng-click="downloadClick('pollutantRelease')"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
 				  </div>
 				  
 				  </div>	      
 			      <div class="col-md-12">
-				  <area-overview-pr-tab queryparams="queryParams" visible="!beforesearch" pollutant="prfilter.pgselect" medium="prMedium" resultlist="pritems" />
+				  <area-overview-pr-tab queryparams="queryParams" visible="!beforesearch" pollutant="prfilter.pgselect" medium="prMedium" resultlist="pritems.data" pttotal="pritems.pttotal" headeritems="prHeaderItems.data" />
 			    	<!-- active.pollutanttransfer != undefined  /div -->
 			    	 
 			    	</div>
@@ -85,11 +86,12 @@
 			      <div class="col-md-4 top-buffer10"  id="ptPollutantGroup" sf-pollutant queryparams="queryParams" pgselect="ptfilter.pgselect" grponly="true" ></div>
 			      <div class="col-md-2 top-buffer10 ">
 				  	<button class="print-button btn btn-default pull-right" ng-print print-element-id="area_overview_pollutant_transfer"><i class="fa fa-print"></i></button>
+				  	<button class="btn btn-default pull-right"ng-click="downloadClick('pollutantTransfer')"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
 				  </div>
 				  </div>
 			      
 			      <div class="col-md-12">
-				  <area-overview-pt-tab queryparams="queryParams" visible="!beforesearch" pollutant="ptfilter.pgselect" />
+				  <area-overview-pt-tab queryparams="queryParams" visible="!beforesearch" pollutant="ptfilter.pgselect" resultlist="ptitems.data" headeritems="ptHeaderItems.data" pttotal="ptitems.pttotal" />
 			    	<!-- active.pollutanttransfer != undefined  /div -->
 			    	</div>
 			    	</div>

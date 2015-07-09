@@ -193,6 +193,9 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 	$scope.downloadClick = function(){
 		$scope.startSpin();
 		
+		var date = new Date();
+    	var dateString = '_'+ date.getFullYear() +'_'+date.getMonth()+'_'+date.getDate();
+		
 		var rest = Restangular.withConfig(function(RestangularConfigurer) {
 		    RestangularConfigurer.setFullResponse(true);
 		});
@@ -215,7 +218,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 		    var encodedUri = encodeURI(csvContent);
 		    var link = document.createElement("a");
 		    link.setAttribute("href", encodedUri);
-		    link.setAttribute("download", "EPRTR_Facility_Level_Facilities.csv");
+		    link.setAttribute("download", "EPRTR_Facility_Level_Facilities"+dateString+".csv");
 
 		    link.click(); // This will download the data file named "my_data.csv".
 		    

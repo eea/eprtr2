@@ -193,18 +193,20 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
 
         	var contentArray = new Array();
         	var fileName = '';
+        	var date = new Date();
+        	var dateString = '_'+ date.getFullYear() +'_'+date.getMonth()+'_'+date.getDate();
         	if(tab === 'activities'){
         		$scope.updateActivitiesDownloadData();
         		contentArray = $scope.activitiesDownload;
-        		fileName = 'EPRTR_Pollutant_Transfer_Activities.csv';
+        		fileName = 'EPRTR_Pollutant_Transfer_Activities'+dateString+'.csv';
         	}else if(tab ==='areas'){
         		$scope.updateAreasDownloadData();
         		contentArray = $scope.areasDownload;
-        		fileName = 'EPRTR_Pollutant_Transfer_Areas.csv';
+        		fileName = 'EPRTR_Pollutant_Transfer_Areas'+dateString+'.csv';
         	}else if(tab === 'facilities'){
         		$scope.updateFacilitiesDownloadData();
         		contentArray = $scope.facilitiesDownload;
-        		fileName = 'EPRTR_Pollutant_Transfer_Facilities.csv';
+        		fileName = 'EPRTR_Pollutant_Transfer_Facilities'+dateString+'.csv';
         	}
 
         	var csvContent = 'data:text/csv;charset=utf-8,';
@@ -224,6 +226,19 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
     		link.click(); // This will download the data file named "my_data.csv".
 
         }
+        
+        $scope.roman = function deromanize (str) {
+    		var	str = str.toUpperCase(),
+    			validator = /^M*(?:D?C{0,3}|C[MD])(?:L?X{0,3}|X[CL])(?:V?I{0,3}|I[XV])$/,
+    			token = /[MDLV]|C[MD]?|X[CL]?|I[XV]?/g,
+    			key = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1},
+    			num = 0, m;
+    		if (!(str && validator.test(str)))
+    			return false;
+    		while (m = token.exec(str))
+    			num += key[m[0]];
+    		return num;
+    	}
         
         $scope.updateFacilitiesDownloadData = function() {
         	$scope.facilitiesDownload= new Array();
@@ -396,7 +411,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
                 	
                 	if(subActivity.hasOwnProperty('sublevel') && subActivity.sublevel instanceof Array && subActivity.sublevel.length >=0){
                 		subActivity.sublevel= subActivity.sublevel.sort(function(a, b) {
-                    	    return a.iasubActivityCode - b.iasubActivityCode;
+                			return $scope.roman(a.iasubActivityCode.substring(7, a.iasubActivityCode.length-1))- $scope.roman(b.iasubActivityCode.substring(7, b.iasubActivityCode.length-1));
                     	});
                 		
                 		for(var k =0; k< subActivity.sublevel.length ;k++){
