@@ -28,6 +28,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.isConfidential = false;
         $scope.queryParams = {};
         $scope.wtfilter = {};
+        $scope.wtfcsel = {};
         $scope.wtconfcoll = [];
         $scope.wtconfreasoncoll = [];
         $scope.queryParams.ReportingYear = -1;
@@ -130,16 +131,16 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
     	}
     });
 
-    $scope.wtfcsel = function(wastetype){
-    	$scope.wtfilter.wtsel = wastetype;
-    	$scope.currentPage = 1;
-    	if ($scope.currentSearchFilter !== undefined) {
-    		$scope.performSearch();
+    $scope.$watch('wtfcsel.wtsel', function(value) {
+//    $scope.wtfcsel = function(wastetype){
+    	if($scope.wtfcsel && $scope.wtfcsel.wtsel){
+	    	$scope.wtfilter.wtsel =  $scope.wtfcsel.wtsel;
+	    	$scope.currentPage = 1;
+	    	if ($scope.currentSearchFilter !== undefined) {
+	    		$scope.performSearch();
+	    	}
     	}
-    	/*$scope.startSpin();
-		$scope.getData();*/
-
-    }
+    });
     
     /*    $scope.$watch('wtfilter.wtsel', function(value) {
     	if ($scope.currentSearchFilter !== undefined && $scope.wtfilter.wtsel != undefined) {
@@ -271,6 +272,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.getTabData = function(type)
         {
             $scope.showhazreceivers = false;
+    		$scope.showareacomparison = false;
         
         	if(!$scope.queryParams.SearchType)
         	{
@@ -297,7 +299,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
 
         	if(type.toUpperCase() === "AREACOMPARISON" )
         	{
-        		//$scope.areacomparisonrefresh = true;
+        		$scope.showareacomparison = true;
         	}
         	if(type.toUpperCase() === "HAZRECEIVERS" )
         	{

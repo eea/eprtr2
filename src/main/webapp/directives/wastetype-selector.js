@@ -10,22 +10,22 @@ myApp.directive('wtSelector', ['$compile','$http', '$filter', 'Restangular', 'tr
         restrict: 'A',
         scope: {
         	qparams: '=queryparams',
-        	wtsel: '&wtsel',
+        	wtsel: '=',
         },
-        /*replace: true,
-        transclude: true,*/
+        replace: true,
+        /*transclude: true,*/
         link: function(scope, element, attrs) {
 
     		translationService.get().then(function (data) {
     			scope.tr_c = data.Common;
     			scope.tr_w = data.WasteTransfers;
     	    });
-    		scope.filter = {};
+    		/*scope.filter = {};
             scope.$watch('filter.wtsel', function(value){
             	if(scope.filter.wtsel != undefined){
-            		scope.wtsel({wastetype: scope.filter.wtsel});
+            		scope.wtsel = scope.filter.wtsel;
             	}
-            });
+            });*/
             
             scope.$watch('qparams', function(value){
         		if (scope.qparams != undefined){
@@ -49,10 +49,10 @@ myApp.directive('wtSelector', ['$compile','$http', '$filter', 'Restangular', 'tr
         	            scope.quantityHWIC = response.data.quantityHWIC;
         	            scope.quantityHWOC = response.data.quantityHWOC;
         	            if(scope.qparams.WasteTypeCode != undefined){
-            	            scope.filter.wtsel = scope.qparams.WasteTypeCode[0];//'NONHW';
+            	            scope.wtsel = scope.qparams.WasteTypeCode[0];//'NONHW';
         	            }
         	            else{
-        	            	scope.filter.wtsel = 'NONHW';
+        	            	scope.wtsel = 'NONHW';
         	            }
         	        });
         		}
@@ -65,18 +65,18 @@ myApp.directive('wtSelector', ['$compile','$http', '$filter', 'Restangular', 'tr
                     // create some new html elements to hold the separate info
                     var title = $compile('<label class="control-label"><strong>'+scope.tr_w.ShowFacilitiesWithTransferOfWasteType+':</strong></label></br>')(scope); 
                     
-                    var body = '<label class="radio-inline" for="NONHW"><input type="radio" id="NONHW" name="wtsel" ng-model="filter.wtsel" value="NONHW" /> ';
+                    var body = '<label class="radio-inline" for="NONHW"><input type="radio" id="NONHW"  ng-model="wtsel" value="NONHW" /> ';
                     body += scope.tr_c.NoHazardouswaste + ' <span class="label label-success label-as-badge" title="'+ $filter('number')(scope.quantityNONHW);
                     body += ' ' + scope.tr_c.Facilities+'">' + $filter('number')(scope.quantityNONHW) + '</span></label>';
                     //var hNONHW = $compile(sNONHW)(scope);
                     
-                    body += '<label class="radio-inline" for="HWIC"><input type="radio" id="HWIC" name="wtsel" ng-model="filter.wtsel" value="HWIC" /> ';
+                    body += '<label class="radio-inline" for="HWIC"><input type="radio" id="HWIC" ng-model="wtsel" value="HWIC" /> ';
                     body += scope.tr_c.HazardouswasteWithinCountry + ' <span class="label label-success label-as-badge" title="'+ $filter('number')(scope.quantityHWIC); 
                     body += ' ' + scope.tr_c.Facilities+'">' + $filter('number')(scope.quantityHWIC) +  '</span></label>';
  //                   sHWIC += scope.tr_c.HazardouswasteWithinCountry + '</BR> (' + $filter('number')(scope.quantityHWIC) + ' ' + scope.tr_c.Facilities + ') </label>';
                     //var hHWIC = $compile(sHWIC)(scope);
 
-                    body += '<label class="radio-inline"  for="HWOC"><input type="radio" id="HWOC" name="wtsel" ng-model="filter.wtsel" value="HWOC" /> ';
+                    body += '<label class="radio-inline"  for="HWOC"><input type="radio" id="HWOC" ng-model="wtsel" value="HWOC" /> ';
                     body += scope.tr_c.HazardouswasteTransboundary + ' <span class="label label-success label-as-badge" title="'+ $filter('number')(scope.quantityHWOC);
                     body += ' ' + scope.tr_c.Facilities+'">' + $filter('number')(scope.quantityHWOC) +  '</span></label>';
                     var hbody = $compile(body)(scope);

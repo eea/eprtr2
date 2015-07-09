@@ -7,6 +7,7 @@ angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpi
         $scope.ff = formatStrFactory;
         $scope.wtfilter = {};
         $scope.nodata = true;
+        $scope.coords = {};
         //$scope.queryparams = {};
         $scope.translate = function()
         {
@@ -29,7 +30,7 @@ angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpi
     	$scope.restconfig = Restangular.withConfig(function(RestangularConfigurer) {
             RestangularConfigurer.setFullResponse(true);
         });
-
+    	
     	
     	/**
     	 * Spinner
@@ -49,7 +50,42 @@ angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpi
           };
           $scope.spinneractive = false;
 
-        /*  $scope.$watch('wtfilter.wtsel', function(value) {
+  		/*
+           * These functions handle the custom tooltip display
+           */
+          $(document).mousemove(function(e) {
+        	  $scope.coords = $scope.getCrossBrowserElementCoords(e);
+        	  /*mouseX = e.pageX;
+        	    mouseY = e.pageY;*/
+          });
+        	    
+        	    
+          $scope.onThisMouseMove = function ($event) {
+        	  //ng-mousemove="onThisMouseMove($event)"
+        	  $scope.coords = $scope.getCrossBrowserElementCoords($event);
+          };
+
+          $scope.myhandler1 = function(value){
+        	  var item = $scope.items[value];
+              var myhtml = '<div class="panel panel-default"><div class="panel-body" style="padding:5px 5px 5px 5px;"><table ><tr><td class="fdTitles">';
+              myhtml += $scope.tr_c['Year'] + '</td><td class="text-right" style="min-width:100px;">' + item.reportingYear + '</td></tr><tr><td class="fdTitles">';
+              myhtml += $scope.tr_cl['FROM'] + '</td><td class="text-right">' + $scope.tr_lco[item.transferFrom] + '</td></tr><tr><td class="fdTitles">';
+              myhtml += $scope.tr_cl['TO'] + '</td><td class="text-right">' + $scope.tr_lco[item.transferTo] + '</td></tr><tr><td class="fdTitles">';
+              myhtml += $scope.tr_cl['FACILITIES'] + '</td><td class="text-right">' + item.facilities + '</td></tr><tr><td class="fdTitles">';
+              myhtml += $scope.tr_c['Total'] + '</td><td class="text-right">' + $scope.ff.formatMethod(item.quantityTotal,false) + '</td></tr><tr><td class="fdTitles">';
+              myhtml += $scope.tr_c['Recovery'] + '</td><td class="text-right">' + $scope.ff.formatMethod(item.quantityRecovery,false) + '</td></tr><tr><td class="fdTitles">';
+              myhtml += $scope.tr_c['Disposal'] + '</td><td class="text-right">' + $scope.ff.formatMethod(item.quantityDisposal,false) + '</td></tr><tr><td class="fdTitles">';
+              myhtml += $scope.tr_c['Unspecified'] + '</td><td class="text-right">' + $scope.ff.formatMethod(item.quantityUnspec,false) + '</td></tr></table>';
+              //myhtml += '<p>x: '+$scope.coords.x+' y:'+$scope.coords.y+' ox: '+$scope.coords.ox+' oy:'+$scope.coords.oy+'</p>';
+              myhtml += '</div></div>';
+              
+              $('#custom_tooltip').html(myhtml).css({'top':$scope.coords.y-50,'left':$scope.coords.x}).fadeIn('slow');
+          };
+          $scope.myhandler2 = function(value){
+              $('#custom_tooltip').fadeOut('fast');
+          };
+
+          /*  $scope.$watch('wtfilter.wtsel', function(value) {
           	if ($scope.wtfilter.wtsel) {
         		$scope.startSpin();
               	var qp = angular.copy($scope.queryparams);
@@ -146,17 +182,8 @@ angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpi
 				       {id: "col", label: "", type: "string"},
 				       {id: "zs", label: $scope.tr_cl["QUANTITY"], type: "number"}
 				   ];
-
             
-            
-  	        /*var options1 = {
-  	        	  title: 'Transboundary hazardous waste',
-  	              hAxis: {title: $scope.tr_cl["FROM_COUNTRY"]},
-  	              vAxis: {title: $scope.tr_cl["TO_COUNTRY"]}	
-  	        };
-  	        */
-  	        
-            var heigh = vticks1.length * 40;
+            var heigh = vticks1.length * 30;
             heigh = (heigh<200)?200:heigh;
 
   			//var _vticks1 = [0, 1, 2, 3];
@@ -165,11 +192,14 @@ angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpi
   			var hrange1 = { min: 0, max: (hticks1.length-1) };
   	  	        var options1 = {
   	  	        	  title: 'Transboundary hazardous waste',
-  	  	              hAxis: {title: $scope.tr_cl["TO_COUNTRY"], viewWindow: hrange1, ticks: hticks1},
+  	  	              hAxis: {title: $scope.tr_cl["TO_COUNTRY"], viewWindow: hrange1, ticks: hticks1, textStyle:{fontSize: 12}},
   	  	              vAxis: {title: $scope.tr_cl["FROM_COUNTRY"], viewWindow: vrange1, ticks: vticks1},
   					 legend: {position: 'none'},
   					 bubble: {textStyle: {color: 'none'}},
-  					 height: heigh
+  					 height: heigh, 
+  					 width: '100%',
+					 tooltip: {trigger:'none'},
+					 chartArea: {top: 10, height: '75%',left: 70, width: '80%'}
   					 //tooltip: {trigger:'none'}
   	  	        };
 
@@ -177,30 +207,10 @@ angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpi
   			chart1.options = options1;
   	        $scope.myChart = chart1;
   	        
-    	 //Custom Tooltip
-	    	//$scope.mouseX;
-	    	//$scope.mouseY;
-	        $(document).mousemove( function(e) {
-	        	$scope.mouseX = e.pageX; 
-	        	$scope.mouseY = e.pageY;
-	        });
-	        
-
-	        /*
-	         *  Attach the functions that handle the tool-tip pop-up
-	         *  handler1 is called when the mouse moves into the bubble, and handler 2 is called when mouse moves out of bubble
-	         */
-	        /*google.visualization.events.addListener(chart, 'onmouseover', handler1);
-	        google.visualization.events.addListener(chart, 'onmouseout', handler2);
-	        */
-	        
-  	        
   	        $scope.stopSpin();
-/*  			$scope.aooptions = options1;
-            	$scope.aodata = graphData;*/
-        } 
+        }; 
         
-        $scope.fixtext = function(){
+        $scope.fixtext = function(value){
         	for ( var i = 0; i < $scope.vcountries.length ; i ++ ){
 		        $('#bubblechart_wt svg text[text-anchor="end"]:contains("'+i+'")').text(function(j,t){
 		            if (t == i){
@@ -223,21 +233,67 @@ angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpi
     			});
 		    }	
   	    	  
-        }
+        };
         
-		/*
-         * These functions handle the custom tooltip display
-         */
-        $scope.handler1 = function(e){
-            var x = $scope.mouseX;
-            var y = $scope.mouseY - 130;
-            var a = 1;
-            var b = 2;
-            $('#custom_tooltip').html('<div>Value of A is'+a+' and value of B is'+b+'</div>').css({'top':y,'left':x}).fadeIn('slow');
-        }
-        $scope.handler2 = function(e){
-            $('#custom_tooltip').fadeOut('fast');
-        }
+        $scope.getCrossBrowserElementCoords = function (mouseEvent)
+        {
+          var result = {
+            x: 0,
+            y: 0,
+            ox: 0,
+            oy: 0
+          };
+
+          if (!mouseEvent)
+          {
+            mouseEvent = window.event;
+          }
+
+          if (mouseEvent.pageX || mouseEvent.pageY)
+          {
+            result.x = mouseEvent.pageX;
+            result.y = mouseEvent.pageY;
+          }
+          else if (mouseEvent.clientX || mouseEvent.clientY)
+          {
+            result.x = mouseEvent.clientX + document.body.scrollLeft +
+              document.documentElement.scrollLeft;
+            result.y = mouseEvent.clientY + document.body.scrollTop +
+              document.documentElement.scrollTop;
+          }
+
+          if (mouseEvent.target)
+          {
+            var offEl = mouseEvent.target;
+            var offX = 0;
+            var offY = 0;
+
+            if (typeof(offEl.offsetParent) != "undefined")
+            {
+              while (offEl)
+              {
+                offX += offEl.offsetLeft;
+                offY += offEl.offsetTop;
+
+                offEl = offEl.offsetParent;
+              }
+            }
+            else
+            {
+              offX = offEl.x;
+              offY = offEl.y;
+            }
+
+            result.ox = offX;
+            result.oy = offY;
+            result.x -= offX;
+            result.y -= offY;
+          }
+
+          return result;
+        };
+
+        
    }])
 .value('googleChartApiConfig', {
         version: '1.1',

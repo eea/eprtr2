@@ -1,5 +1,6 @@
 
-<div class="row top-buffer10">
-	<div id="bubblechart_wt" google-chart chart="myChart" on-mouseover="handler1" on-mouseout="handler2" on-ready="fixtext" ng-if="items.length > 0" style="width:100%"></div>
+<div class="row top-buffer10" >
+	<div id="bubblechart_wt" google-chart chart="myChart" on-mouseover="myhandler1(row)"  on-mouseout="myhandler2(row)" on-ready="fixtext(elem)" ng-if="items.length > 0" style="width:100%"></div>
 	<div id="custom_tooltip"  style="position: absolute;"></div>
+	<!--div id="coords">x:{{coords.x}} y:{{coords.y}} ox:{{coords.ox}} oy:{{coords.oy}}</div-->
 </div>

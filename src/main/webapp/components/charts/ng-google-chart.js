@@ -83,9 +83,9 @@ angular.module('myApp.eprtrgooglechart', [])
                 chart: '=chart',
                 onReady: '&',
                 onSelect: '&',
-                select: '&'/*,
+                select: '&',
                 onMouseover: '&',
-                onMouseout: '&'*/
+                onMouseout: '&'
             },
             link: function ($scope, $elm, $attrs) {
                 /* Watches, to refresh the chart when its data, formatters, options, view,
@@ -189,6 +189,16 @@ angular.module('myApp.eprtrgooglechart', [])
                                 $scope.chartWrapper = new google.visualization.ChartWrapper(chartWrapperArgs);
                                 google.visualization.events.addListener($scope.chartWrapper, 'ready', function () {
                                     $scope.chart.displayed = true;
+	                            	google.visualization.events.addListener($scope.chartWrapper.getChart(), 'onmouseover', function (e) {
+	                                    $scope.$apply(function (scope) {
+	                                        scope.onMouseover({ chartWrapper: scope.chartWrapper, row: e.row });
+	                                    });
+	                                });
+	                    	        google.visualization.events.addListener($scope.chartWrapper.getChart(), 'onmouseout', function (e) {
+	                                    $scope.$apply(function (scope) {
+	                                        scope.onMouseout({ chartWrapper: scope.chartWrapper, row: e.row });
+	                                    });
+	                                });
                                     $scope.$apply(function (scope) {
                                         scope.onReady({ chartWrapper: scope.chartWrapper });
                                     });
@@ -254,7 +264,8 @@ angular.module('myApp.eprtrgooglechart', [])
 
                             $timeout(function () {
                                 $scope.beforeDraw({ chartWrapper: $scope.chartWrapper });
-                                $scope.chartWrapper.draw();
+                                window.setTimeout(function(){$scope.chartWrapper.draw();}, 600)
+                                //$scope.chartWrapper.draw();
                                 draw.triggered = false;
                             });
                         }, 0, true);
