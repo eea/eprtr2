@@ -15,6 +15,7 @@ angular.module('myApp.faqview', ['ngRoute','restangular','ngSanitize'])
 		$scope.getData = function(){
 			$http.get('translations/eprtr-resource-static_en-gb.json').success(function(data, status) {
 				$scope.content = data.Static.FAQPageContent;
+				$scope.pageTitle = data.Static.FAQPageTitle;
 				$scope.pageHeader = data.Static.FAQPageHeader;
 				for(var i = 0; i<$scope.content.length; i++){
 					$scope.content[i].show= false;
