@@ -29,7 +29,8 @@ var myApp = angular.module('myApp', [
         'myApp.emissionmapair',
         'myApp.emissionmapwater',
         'myApp.pollutantinfo',
-        'myApp.pd-main'
+        'myApp.pd-main',
+        'myApp.faqview'
     ])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/home'});
