@@ -36,8 +36,8 @@
 		  <tabset>
 			    <tab heading="Pollutant Releases" active="active.pollutantrelease" ng-click="activateTab('pollutantrelease')">
 					<div id="area_overview_pollutant_releases" ng-show="searchResults">
-					
-					<div class="col-md-2 top-buffer10" >
+					<div class="row">
+					<div class="col-md-4 top-buffer10" >
 	              <table >
 					  <tr ng-repeat="x in headitms | orderBy : 'order'" >
 					    <td class="{{x.clss}}">{{ x.title }}:</td>
@@ -45,18 +45,23 @@
 					  </tr>
 	  			  </table>
 			      </div>
-				<div class="col-md-3 top-buffer10" >
+				<div class="col-md-4 top-buffer10" >
 			      <blockquote>
 						<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
 			      </blockquote>
 			      </div>
-				  <div class="col-md-5 top-buffer10" >
-				      <div class="top-buffer10" id="prPollutantGroup" sf-pollutant queryparams="queryParams" pgselect="prfilter.pgselect" pselect="prfilter.pselect" grponly="true" ></div>
-				      <div class="top-buffer10" id="prMediumSelector" pr-selector queryparams="queryParams" medium="prMedium" ></div>
-				  </div>
-				  <div class="col-md-2 top-buffer10 ">
+				  
+				  <div class="col-md-4 top-buffer10 pull-right">
 				  	<button class="print-button btn btn-default pull-right" ng-print print-element-id="area_overview_pollutant_releases"><i class="fa fa-print"></i></button>
 				  	<button class="btn btn-default pull-right"ng-click="downloadClick('pollutantRelease')"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
+				  </div>
+				  </div>
+				  
+				  <div class="col-md-6 top-buffer10" >
+				      <div class="top-buffer10" id="prPollutantGroup" sf-pollutant queryparams="queryParams" pgselect="prfilter.pgselect" pselect="prfilter.pselect" grponly="true" ></div>
+				  </div>
+				  <div class="col-md-6 top-buffer10 pull-right">
+				 	<div class="top-buffer10" id="prMediumSelector" pr-selector queryparams="queryParams" medium="prMedium" ></div>
 				  </div>
 				  
 				  </div>	      
@@ -69,28 +74,43 @@
 			</tab>
 			    <tab heading="Pollutant Transfer"  active="active.pollutanttransfer" ng-click="activateTab('pollutanttransfer')">
 					<div id="area_overview_pollutant_transfer">
-						<div ng-show="searchResults">
-					<div class="col-md-2 top-buffer10" ng-show="searchResults">
-	              <table >
-					  <tr ng-repeat="x in headitms | orderBy : 'order'" >
-					    <td class="{{x.clss}}">{{ x.title }}:</td>
-					    <td>{{ x.val }}</td>
-					  </tr>
-	  			  </table>
-			      </div>
-					<div class="col-md-4 top-buffer10" ng-show="searchResults">
-			      <blockquote >
-						<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
-			      </blockquote>
-			      </div>
-			      <div class="col-md-4 top-buffer10"  id="ptPollutantGroup" sf-pollutant queryparams="queryParams" pgselect="ptfilter.pgselect" grponly="true" ></div>
-			      <div class="col-md-2 top-buffer10 ">
-				  	<button class="print-button btn btn-default pull-right" ng-print print-element-id="area_overview_pollutant_transfer"><i class="fa fa-print"></i></button>
-				  	<button class="btn btn-default pull-right"ng-click="downloadClick('pollutantTransfer')"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
-				  </div>
-				  </div>
-			      
-			      <div class="col-md-12">
+				<div ng-show="searchResults">
+
+					<div class="row">
+						<div class="col-md-4 top-buffer10" ng-show="searchResults">
+							<table>
+								<tr ng-repeat="x in headitms | orderBy : 'order'">
+									<td class="{{x.clss}}">{{ x.title }}:</td>
+									<td>{{ x.val }}</td>
+								</tr>
+							</table>
+						</div>
+						<div class="col-md-4 top-buffer10" ng-show="searchResults">
+							<blockquote>
+								<div class="text-info">
+									<small>{{tr_wt.AllValuesAreYearlyTransfers}}</small>
+								</div>
+							</blockquote>
+						</div>
+						<div class="col-md-4 top-buffer10 ">
+							<button class="print-button btn btn-default pull-right" ng-print
+								print-element-id="area_overview_pollutant_transfer">
+								<i class="fa fa-print"></i>
+							</button>
+							<button class="btn btn-default pull-right"
+								ng-click="downloadClick('pollutantTransfer')">
+								<span class="glyphicon glyphicon-download-alt"
+									aria-hidden="true"></span>
+							</button>
+						</div>
+					</div>
+					<div class="col-md-6 top-buffer10" id="ptPollutantGroup"
+							sf-pollutant queryparams="queryParams"
+							pgselect="ptfilter.pgselect" grponly="true">
+					</div>
+				</div>
+
+				<div class="col-md-12">
 				  <area-overview-pt-tab queryparams="queryParams" visible="!beforesearch" pollutant="ptfilter.pgselect" resultlist="ptitems.data" headeritems="ptHeaderItems.data" pttotal="ptitems.pttotal" />
 			    	<!-- active.pollutanttransfer != undefined  /div -->
 			    	</div>
@@ -99,7 +119,7 @@
 			    <tab  heading="Waste Transfer"  active="active.wastetransfer" ng-click="activateTab('wastetransfer')">
 	              <div id="area_overview_waste_transfer">
 	              <div  ng-show="searchResults">
-	              <div class="col-md-2 top-buffer10">
+	              <div class="col-md-4 top-buffer10">
 	              <table class="top-buffer10">
 					  <tr ng-repeat="x in headitms | orderBy : 'order'" >
 					    <td class="{{x.clss}}">{{ x.title }}:</td>
@@ -112,7 +132,7 @@
 						<div class="text-info"><small>{{tr_wt.AllValuesAreYearlyTransfers}}</small></div>
 			      </blockquote>
 			      </div>
-			      <div class="col-md-6 top-buffer10 ">
+			      <div class="col-md-4 top-buffer10 pull-right">
 				  	<button class="print-button btn btn-default pull-right" ng-print print-element-id="area_overview_waste_transfer"><i class="fa fa-print"></i></button>
 				  	<button class="btn btn-default pull-right"ng-click="downloadClick('wasteTransfer')"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
 				  </div>

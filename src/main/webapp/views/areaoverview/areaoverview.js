@@ -150,7 +150,6 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
   
 	$scope.search = function() {
 		$scope.beforesearch = false;
-		$scope.$apply();
         $scope.performSearch();
     }
 	
