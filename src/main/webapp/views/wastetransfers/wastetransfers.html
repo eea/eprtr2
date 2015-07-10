@@ -716,8 +716,9 @@
       			<button class="print-button btn btn-default pull-right" ng-print print-element-id="waste_transfers_haz_receivers"><i class="fa fa-print"></i></button>
       		</div>  
 			</div> 
-			
-           	 	<haz-receivers-waste-tab queryparams="queryParams" visible="showhazreceivers" />
+				<div ng-show="showhazreceivers">
+					<haz-receivers-waste-tab queryparams="queryParams" visible="showhazreceivers" />
+				</div>
            	 </div>
            	</tab>
            	<tab heading="Confidentiality" ng-click="getTabData('CONFIDENTIALITY');activateTab('confidentiality')" active="active.confidentiality">

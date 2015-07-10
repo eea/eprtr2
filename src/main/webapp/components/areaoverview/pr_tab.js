@@ -182,7 +182,6 @@ angular.module('myApp.areaOverviewPrTab', ['restangular','ngSanitize','angularSp
           transclude: true,
   		scope: {
   			queryparams: '=',
-  			visible: '=',
   			pollutant: '=',
   			medium: '=',
   			resultlist:'=',

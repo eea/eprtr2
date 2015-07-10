@@ -65,7 +65,7 @@
 				  </div>
 				  
 				  </div>	      
-			      <div class="col-md-12">
+			      <div class="col-md-12" ng-show="!beforesearch">
 				  <area-overview-pr-tab queryparams="queryParams" visible="!beforesearch" pollutant="prfilter.pgselect" medium="prMedium" resultlist="pritems.data" pttotal="pritems.pttotal" headeritems="prHeaderItems.data" />
 			    	<!-- active.pollutanttransfer != undefined  /div -->
 			    	 
@@ -110,7 +110,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-12">
+				<div class="col-md-12" ng-show="!beforesearch">
 				  <area-overview-pt-tab queryparams="queryParams" visible="!beforesearch" pollutant="ptfilter.pgselect" resultlist="ptitems.data" headeritems="ptHeaderItems.data" pttotal="ptitems.pttotal" />
 			    	<!-- active.pollutanttransfer != undefined  /div -->
 			    	</div>
@@ -138,7 +138,7 @@
 				  </div>
 				  </div>
 			      
-			      <div class="col-md-12">
+			      <div class="col-md-12" ng-show="!beforesearch">
 				  <area-overview-waste-tab queryparams="queryParams" visible="!beforesearch" resultlist="wasteTransferItems.data"/>
 				  </div>
 				  </div>
