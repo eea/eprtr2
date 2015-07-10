@@ -150,9 +150,12 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 					if ($scope.queryParams.MediumCode == undefined){
 						$scope.queryParams.MediumCode = ['AIR','SOIL','WATER'];
 					}
-					$scope.filter.prsel = $scope.queryParams.MediumCode[0];
-					if ($scope.queryParams.MediumCode.length > 1){
+					if ($scope.queryParams.MediumCode.constructor === Array){
+						$scope.filter.prsel = $scope.queryParams.MediumCode[0];
 						$scope.reqPollutantReleaseRBHeader();
+					}
+					else{
+						$scope.filter.prsel = $scope.queryParams.MediumCode;	
 					}
 					//Request Pollutant Release Timeseries data
 					$scope.reqPollutantReleaseSeriesData();

@@ -127,21 +127,21 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 					var arrmed = [];
 					if (queryparams['MediumCode'] ){
 						for (var med in queryparams['MediumCode']){
-							arrmed.push("(MediumCode = '" + med + "')");
+							arrmed.push("(MediumCode = '" + queryparams['MediumCode'][med] + "')");
 						}
 						arrfQue.push('('+arrmed.join(" OR ")+')');
 					}
 					var arrwt = [];
 					if (queryparams['WasteTypeCode'] ){
 						for (var wt in queryparams['WasteTypeCode']){
-							arrwt.push("(WasteTypeCode = '" + wt + "')");
+							arrwt.push("(WasteTypeCode = '" + queryparams['WasteTypeCode'][wt] + "')");
 						}
 						arrfQue.push('('+arrwt.join(" OR ")+')');
 					}
 					var arrwtr = [];
 					if (queryparams['WasteTreatmentCode'] ){
 						for (var wtr in queryparams['WasteTreatmentCode']){
-							arrwtr.push("(WasteTreatmentCode = '" + wtr + "')");
+							arrwtr.push("(WasteTreatmentCode = '" + queryparams['WasteTreatmentCode'][wtr] + "')");
 						}
 						arrfQue.push('('+arrwtr.join(" OR ")+')');
 					}
