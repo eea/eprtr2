@@ -34,16 +34,17 @@ angular.module('myApp.staticview', ['ngRoute','restangular','ngSanitize'])
 })
 
 .controller('StaticViewController', 
-		['$scope', '$routeParams', 'translationService', 'statconf', function($scope, $routeParams, translationService, statconf ) {
+		['$scope', '$routeParams', 'translationService', 'statconf', '$http', function($scope, $routeParams, translationService, statconf, $http ) {
 
 		$scope.id = $routeParams.cont !== undefined ? $routeParams.cont: null;// 10;
 
 		if($scope.id !== null && statconf.items[$scope.id] !== undefined){
 //		Requesting text and title resources 
 			var item = statconf.items[$scope.id];
-			translationService.get(item.t).then(function (data) {
-				$scope.content = data[item.c];
-				$scope.head = data[item.h];
+//			translationService.get(item.t).then(function (data) {
+			$http.get('translations/eprtr-resource-static_en-gb.json').success(function(data, status) {
+				$scope.content = data[item.t][item.c];
+				$scope.head = data[item.t][item.h];
 		    });
 		}
 }]);
