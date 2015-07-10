@@ -4,8 +4,8 @@
 		<p><span ng-bind-html="pageHeader"></span>
 	</div>
 	<div class="row">
-	  <div class="col-md-12" ng-repeat="item in content">
-	  	<a><h4><span class="trigger" ng-click="item.show = !item.show">{{item.Order}}. {{item.Title}}</span></h4></a>
+	  <div class="col-md-12" ng-repeat="item in content | orderBy: 'Order'">
+	  	<a><h5><span class="trigger" ng-click="item.show = !item.show">{{item.Order}}. {{item.Title}}</span></h5></a>
 	  	<div ng-show="item.show"><span ng-bind-html="item.Content"></span></div>
 	  </div>
 </div>

@@ -4,7 +4,7 @@ angular.module('myApp.faqview', ['ngRoute','restangular','ngSanitize'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/faq', {
-    templateUrl: 'views/faq/faq.html',
+    templateUrl: 'views/static/faq.html',
     controller: 'FaqController'
   });
 }])

@@ -30,7 +30,8 @@ var myApp = angular.module('myApp', [
         'myApp.emissionmapwater',
         'myApp.pollutantinfo',
         'myApp.pd-main',
-        'myApp.faqview'
+        'myApp.faqview',
+        'myApp.glossaryview'
     ])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/home'});

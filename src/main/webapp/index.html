@@ -58,7 +58,7 @@
               </ul>
             </li>
             <li ng-class="{ active: isActive('/about')}"><a href="#static?cont=about" ng-click="subtitle = 'About E-PRTR'">About E-PRTR</a></li>
-            <li><a href="#static?cont=faq" ng-click="subtitle = 'faq'">FAQ</a></li>
+            <li><a href="#faq" ng-click="subtitle = 'faq'">FAQ</a></li>
             <li><a href="#static?cont=feedback" ng-click="subtitle = 'faq'">Feedback</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
@@ -80,7 +80,7 @@
             <li class="dropdown" dropdown>
               <a href="#" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Library<span class="caret"></span></a>
               <ul class="dropdown-menu" dropdown-menu role="menu">
-                <li><a href="#static?cont=glossary" ng-click="subtitle = 'Glossary'">Glossary</a></li>
+                <li><a href="#glossary" ng-click="subtitle = 'Glossary'">Glossary</a></li>
                 <li><a href="#static?cont=activity" ng-click="subtitle = 'Activities'">Activities</a></li>
                 <li><a href="#static?cont=pollutant" ng-click="subtitle = 'Pollutants'">Pollutants</a></li>
                 <li><a href="#static?cont=waste" ng-click="subtitle = 'Waste'">Waste</a></li>
@@ -231,9 +231,10 @@
   <script src="views/emissions/diffemissionswater.js"></script>
   <script src="views/pollutantinfo/pollutantinfo.js"></script>
   <script src="views/static/static.js"></script>
+  <script src="views/static/faq.js"></script>
+  <script src="views/static/glossary.js"></script>
   <script src="views/home/navsearch.js"></script>
   <script src="views/home/navlibrary.js"></script>
-  <script src="views/faq/faq.js"></script>
   
   <script src="components/search-filter/search-filter.js"></script>
   <script src="components/facilitydetails/fd-main.js"></script>
