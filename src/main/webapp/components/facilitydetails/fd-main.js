@@ -18,37 +18,6 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 	$scope.showalert = false;
 	var degrees = "°";
 
-/*
- * Handling Modal popup
- * */
-    
-    $scope.openActivity = function (size) {
-
-        var modalInstance = $modal.open({
-          templateUrl: 'myActivityContent.html',
-          controller: 'ModalActivityInstanceCtrl',
-          size: size,
-          resolve: {
-            input: function () {
-              return $scope.tr_lib;
-            }
-          }
-        });
-    };
-
-    $scope.openPollutant = function (size) {
-
-        var modalInstance = $modal.open({
-          templateUrl: 'myPollutantContent.html',
-          controller: 'ModalPollutantInstanceCtrl',
-          size: size,
-          resolve: {
-            items: function () {
-              //return $scope.items;
-            }
-          }
-        });
-    };
 
 /*
  * Load translation resources 
@@ -499,163 +468,79 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 		}
     });
  	
+ 	/*
+ 	 * Handling Modal popup
+ 	 * */
+ 	    
+ 	    $scope.openActivity = function (size) {
 
- /*
- * Functions for formatting table row elements
- * Used by Facilitydetailspollutantrelease, Facilitydetailspollutanttransfer and FacilitydetailsWastetransfer data
- * */ 	
-	
-/*	$scope.formatQuantity = function(quantity, unit, conf){
-        if (quantity == null)
-        {
-            return $scope.ConfidentialFormat(null, conf);
-        }
-        else
-        {
-            if (unit.toLowerCase() == 'unknown')
-            {
-                return formatStrFactory.ConfidentialFormat($filter('number')(quantity), conf);
-            }
-            else if (unit.toLowerCase() == 'tne' || unit.toLowerCase() == 't')
-            {
-                return formatStrFactory.formatMethod(quantity * 1000, conf);
-            }
-            else
-            {
-                return formatStrFactory.formatMethod(quantity, conf);
-            }
-        }
-	};
-	
-    $scope.formatMethod = function(amount, conf)    {
-        var result = '';
-        if (amount == null)
-        {
-            result = $scope.ConfidentialFormat.Format(result, conf);
-        }
-        else
-        {
-            if (amount < 0)
-            {
-                alert("Negative Amount provided" +amount.toString());
-            }
-            else if (amount >= 100000)
-            {
-                result = $filter('number')((amount / 1000), 0) + " " + $scope.tr_lu.TNE;
-            }
-            else if (amount >= 10000 && amount < 100000)
-            {
-                result = $filter('number')((amount / 1000), 1) + " " + $scope.tr_lu.TNE;
-            }
-            else if (amount >= 1000 && amount < 10000)
-            {
-                result = $filter('number')((amount / 1000), 2) + " " + $scope.tr_lu.TNE;
-            }
-            else if (amount >= 100 && amount < 1000)
-            {
-                result = $filter('number')(amount, 0) + " " + $scope.tr_lu.KGM;
-            }
-            else if (amount >= 10 && amount < 100)
-            {
-                result = $filter('number')(amount, 1) + " " + $scope.tr_lu.KGM;
-            }
-            else if (amount >= 1 && amount < 10)
-            {
-                result = $filter('number')(amount, 2) + " " + $scope.tr_lu.KGM;
-            }
-            else if (amount == 0.00)
-            {
-                result = "0";
-            }
-            else if (amount * 10 >= 1 && amount * 10 < 10)
-            {
-                result = $filter('number')((amount * 1000), 0) + " " + $scope.tr_lu.GRM;
-            }
-            else if (amount * 100 >= 1 && amount * 100 < 10)
-            {
-                result = $filter('number')((amount * 1000), 1) + " " + $scope.tr_lu.GRM;
-            }
-            else if (amount * 1000 < 10 && amount > 0)
-            {
-                result = $filter('number')((amount * 1000), 3) + " " + $scope.tr_lu.GRM;
-            }
-        }
-        return result;
+ 	        var modalInstance = $modal.open({
+ 	          templateUrl: 'myActivityContent.html',
+ 	          controller: 'ModalActivityInstanceCtrl',
+ 	          size: size,
+ 	          resolve: {
+ 	            input: function () {
+ 	              return $scope.tr_lib;
+ 	            }
+ 	          }
+ 	        });
+ 	    };
+
+ 	    $scope.openPollutant = function (size) {
+
+ 	        var modalInstance = $modal.open({
+ 	          templateUrl: 'myPollutantContent.html',
+ 	          controller: 'ModalPollutantInstanceCtrl',
+ 	          size: size,
+ 	          resolve: {
+ 	            items: function () {
+ 	              //return $scope.items;
+ 	            }
+ 	          }
+ 	        });
+ 	    };
+
+    /**
+     * TimeSeries Modal popup
+     */
+    $scope.openTSmodal = function (contentype, pollutantId, medium, wastetype) {
+    	/*Convert item into Query params*/
+    	var qp = {};
+	    for(var key in $scope.queryParams) {
+	        if(key != 'lov_PollutantID' && key != 'MediumCode' && key != 'wastetype') {
+	        	qp[key] = $scope.queryParams[key];
+	        }
+	    }
+    	
+	    //'FacilityID': $scope.fid, 'ReportingYear': $scope.year
+	    qp.FacilityID = $scope.fid;
+	    qp.ReportingYear = $scope.year;
+	    qp.FacilityReportID = $scope.frid;
+    	if(pollutantId !== null){
+    		qp.LOV_PollutantID = pollutantId;
+    	}
+    	if(medium !== null){
+    		qp.MediumCode = medium;
+    	}
+      	if(wastetype !== null){
+      		qp.WasteTypeCode = wastetype;
+      	}
+      	
+    	var modalInstance = $modal.open({
+          templateUrl: 'components/timeseries/tsmodal.html',
+          controller: 'ModalTimeSeriesCtrl',
+//          size: size,
+          resolve: {
+        	  isoContType: function () {
+        		  return contentype;
+        	  },
+           	  isoQP: function () {
+        		  return qp;
+        	  }
+     
+          }
+        });
     };
-    
-    $scope.DeterminePercent = function(total, accidental)
-    {
-        if (accidental != null && accidental > 0 && total != null)
-        {
-            return $filter('number')(((parseFloat(accidental) / parseFloat(totalConverted)) * 100), 2) + " %";
-        }
-        return "0 %";
-    };
-    
-    $scope.MethodUsedFormat = function(typeCodes, designations, confidential)
-    {
-    	var delim = '<br />'
-        var result = '';
-        var designationSplit = [];
-        var typecodeSplit = [];
-
-        //designations wll never be given without type codes.
-        if (typeCodes == null || typeCodes == '')
-        {
-            return $scope.ConfidentialFormat(null, confidential);
-        }
-        else
-        {
-            typecodeSplit = typeCodes.split(delim);
-
-            if (designations != null && designations != '')
-            {
-                designationSplit = designations.split(delim);
-            }
-
-            for (var i = 0; i < typecodeSplit.length; i++)
-            {
-                var typeCode = typecodeSplit[i];
-                var designation = designationSplit != null ? designationSplit[i] : null;
-
-                if (typeCodes != null && typeCodes != '')
-                {
-                    //CEN/ISO is removed as this is also part of the designation
-                    if (typeCode.toUpperCase() != "CEN/ISO")
-                    {
-                        result += "<abbr title=\"" + $scope.tr_lmtn[typeCode] + "\"> " + typeCode + " </abbr>";
-                    }
-
-                    if (designation != null && designation != '')
-                    {
-                        result += " " + "<span title=\""+designation+"\">"+designation+"</span>";
-                    }
-                    result += delim;
-                }
-            }
-        }
-        return result;
-
-    }
-
-    $scope.ConfidentialFormat = function(txt, confidential)
-        {
-            var result = '';
-            if (txt!= null && txt != '')
-            {
-                result = txt;
-            }
-            else if (confidential)
-            {
-                result = $scope.tr_c.CONFIDENTIAL;
-            }
-            else
-            {
-                result = "-"; 
-            }
-            return result;
-        };
-*/
 
 }])
 
