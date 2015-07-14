@@ -34,6 +34,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.queryParams.ReportingYear = -1;
         $scope.SearchType="SUMMARY";
         $scope.hazTransboundaryData = {};
+        $scope.resize_icon = "glyphicon glyphicon-resize-full";
 
         $scope.showhazreceivers = false;
 
@@ -65,11 +66,13 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.togglemapview = function(){
         	if($scope.bigmap){
             	$scope.bigmap = false;
+            	$scope.resize_icon = "glyphicon glyphicon-resize-full"
             	$scope.mapclss = "col-md-4 col-md-push-8";
             	$scope.resclss = "col-md-8 col-md-pull-4";
         	}
         	else{
             	$scope.bigmap = true;
+            	$scope.resize_icon = "glyphicon glyphicon-resize-small"
             	$scope.mapclss = "col-md-12";
             	$scope.resclss = "col-md-12";
         	}
