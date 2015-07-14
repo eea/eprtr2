@@ -46,8 +46,8 @@ angular.module('myApp.HazReceiversWasteTab', ['restangular','ngSanitize','angula
             RestangularConfigurer.setFullResponse(true);
         });
 
-        $scope.$watchCollection('[tr_c,queryparams,visible]', function(value){
-        	if($scope.queryparams != undefined && $scope.tr_wt != undefined && $scope.visible ){
+        $scope.$watchCollection('[tr_c,queryparams]', function(value){
+        	if($scope.queryparams != undefined && $scope.tr_wt != undefined){
                 
         		//Clear collection
         		$scope.items = [];
@@ -104,9 +104,7 @@ angular.module('myApp.HazReceiversWasteTab', ['restangular','ngSanitize','angula
   		controller: 'HazReceiversWasteTabCtrl',
           transclude: true,
   		scope: {
-  			queryparams: '=',
-  			visible: '='
-  			
+  			queryparams: '='
   		},
   		templateUrl: 'components/wastetransfer/hazreceivers.html',
   		link: function(scope, element, attrs){

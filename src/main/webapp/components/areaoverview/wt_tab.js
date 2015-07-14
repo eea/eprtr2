@@ -43,8 +43,8 @@ angular.module('myApp.areaOverviewWasteTab', ['restangular','ngSanitize','angula
             RestangularConfigurer.setFullResponse(true);
         });
 
-        $scope.$watchCollection('[tr_c,queryparams,visible]', function(value){
-        	if($scope.queryparams != undefined && $scope.tr_wt != undefined && $scope.visible ){
+        $scope.$watchCollection('[tr_c,queryparams]', function(value){
+        	if($scope.queryparams != undefined && $scope.tr_wt != undefined){
                 
         		//Clear collection
         		$scope.items = [];
@@ -110,7 +110,6 @@ angular.module('myApp.areaOverviewWasteTab', ['restangular','ngSanitize','angula
           transclude: true,
   		scope: {
   			queryparams: '=',
-  			visible: '=',
   			resultlist:'='
   		},
   		templateUrl: 'components/areaoverview/wt_tab.html',
