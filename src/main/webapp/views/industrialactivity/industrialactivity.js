@@ -29,6 +29,12 @@ angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'r
         $scope.sectorIA ="";
         $scope.quantityTotalSearchResult = 0;
         $scope.cf = countFactory;
+        $scope.resize_icon = "glyphicon glyphicon-resize-full"
+        $scope.bigmap = false;
+        $scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
+       	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
+       	$scope.mapctrl = {};
+
         
     	$scope.restconfig = Restangular.withConfig(function(RestangularConfigurer) {
             RestangularConfigurer.setFullResponse(true);
@@ -85,6 +91,25 @@ angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'r
             if(done < 1){
             	$scope.stopSpin();
             }
+          }
+          
+          /**
+           * MAp handling
+           */
+          $scope.togglemapview = function(){
+          	if($scope.bigmap){
+              	$scope.bigmap = false;
+              	$scope.resize_icon = "glyphicon glyphicon-resize-full"
+              	$scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
+              	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
+          	}
+          	else{
+              	$scope.bigmap = true;
+              	$scope.resize_icon = "glyphicon glyphicon-resize-small"
+              	$scope.mapclss = "col-md-12 minor-padding";
+              	$scope.resclss = "col-md-12 minor-padding";
+          	}
+          	$scope.mapctrl.redraw();
           }
           
           /**

@@ -12,7 +12,10 @@ body {margin-top:120px;}
 }
 
 .top-buffer10 { margin-top:10px; }
-.resize_button { margin-right: 15px;}
+.minor-padding { padding-left: 0px; padding-right: 5px;}
+.average-padding { padding-left: 8px; padding-right: 8px;}
+.extra-padding { padding-left: 10px; padding-right: 15px;}
+
 
 .col-Min75 { min-width:75px; }
 .col-Min100 { min-width:100px; }

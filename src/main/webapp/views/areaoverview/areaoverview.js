@@ -36,6 +36,11 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
     $scope.cf = countFactory;
     $scope.ff = formatStrFactory;
     $scope.med = 'quantityAir';
+    $scope.resize_icon = "glyphicon glyphicon-resize-full"
+    $scope.bigmap = false;
+    $scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
+    $scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
+    $scope.mapctrl = {};
     
 /*    $scope.regionSearch = false;
     //$scope.summaryItems = [];
@@ -95,6 +100,24 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
     		//console.log
     	}
     });
+    
+    /**
+     * MAp handling*/
+    $scope.togglemapview = function(){
+    	if($scope.bigmap){
+        	$scope.bigmap = false;
+        	$scope.resize_icon = "glyphicon glyphicon-resize-full"
+        	$scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
+        	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
+    	}
+    	else{
+        	$scope.bigmap = true;
+        	$scope.resize_icon = "glyphicon glyphicon-resize-small"
+        	$scope.mapclss = "col-md-12 minor-padding";
+        	$scope.resclss = "col-md-12 minor-padding";
+    	}
+    	$scope.mapctrl.redraw();
+    }
     
     $scope.active = {
     		fddetails: true

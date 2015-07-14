@@ -18,6 +18,11 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.showAccidentalOnlyInputField = true;
         $scope.pollutantPanelTitle = 'Pollutant releases and transfers';
         $scope.usePollutantSelectorHeaders = true;
+        $scope.resize_icon = "glyphicon glyphicon-resize-full"
+        $scope.bigmap = false;
+        $scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
+    	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
+    	$scope.mapctrl = {};
 
     $scope.beforesearch = true;
 	$scope.searchFilter = searchFilter;
@@ -69,6 +74,24 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
           };
           $scope.spinneractive = false;
 
+          
+          /**
+           * MAp handling*/
+          $scope.togglemapview = function(){
+          	if($scope.bigmap){
+              	$scope.bigmap = false;
+              	$scope.resize_icon = "glyphicon glyphicon-resize-full"
+              	$scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
+              	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
+          	}
+          	else{
+              	$scope.bigmap = true;
+              	$scope.resize_icon = "glyphicon glyphicon-resize-small"
+              	$scope.mapclss = "col-md-12 minor-padding";
+              	$scope.resclss = "col-md-12 minor-padding";
+          	}
+          	$scope.mapctrl.redraw();
+          }
 /**
  * Sorting
  */

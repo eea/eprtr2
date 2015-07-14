@@ -1,44 +1,60 @@
 <div>
-    <div class="row">
-	    <div class="col-md-12">
-	    	<h3>{{tr_p.PollutantReleasesHeadline}}</h3>
-	        <p>{{tr_p.PollutantReleasesSubHeadline}}</p>
-	    </div>
-    </div>
-    <div class="row row-map">
-        <div class="search_form col-md-3">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                	<span class="panel-title lead">Search</span>
-                </div>
-                <div class="panel-body">
-				<div id="searchbtn" style="height:35px;">
-                	<div class="btn-group pull-right">
-                        <input type="submit" value="Search >>" ng-click="search()" class="btn btn-success" />
-                    </div>
-                    </div>
-                    <div search-placement>
-                    </div>
-                    <accordion close-others="{{false}}">
-                        <div pollutant-search-filter-directive filter="searchFilter" >
-                        </div>
-                        <div activity-search-filter-directive>
-                        </div>
-                    </accordion>
-                </div>
-            </div>
-        </div>
+	<div>
+		<h3>{{tr_p.PollutantReleasesHeadline}}</h3>
+	</div>
+	<div class="row">
+		<div class="col-md-9">
+			<p>{{tr_p.PollutantReleasesSubHeadline}}</p>
+		</div>
+		<div class="col-md-3 text-right">
+			<button type="button" ng-click="togglemapview()"
+				class="btn btn-default">
+				<span class="{{resize_icon}}" aria-hidden="true"></span>
+			</button>
+		</div>
+	</div>
+	<div class="row row-map">
+		<div class="search_form col-md-3">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<span class="panel-title lead">Search</span>
+				</div>
+				<div class="panel-body">
+					<div id="searchbtn" style="height: 35px;">
+						<div class="btn-group pull-right">
+							<input type="submit" value="Search >>" ng-click="search()"
+								class="btn btn-success" />
+						</div>
+					</div>
+					<div search-placement></div>
+					<accordion close-others="{{false}}">
+					<div pollutant-search-filter-directive filter="searchFilter">
+					</div>
+					<div activity-search-filter-directive></div>
+					</accordion>
+				</div>
+			</div>
+		</div>
 
+		<div class="col-md-9 minor-padding">
 
-    <div class="col-md-6" >
-	  <div class="col-md-12 top-buffer10" ng-if="beforesearch">
-			<div class="alert alert-success"><strong>{{tr_c.SearchText}}</strong></div>
-      </div>
-<span us-spinner="{radius:16, width:6, length: 12}" spinner-key="spinner-1"></span>
-<div class="row top-buffer10">
-        <tabset>
-            <tab heading="Summary" active="active.summary" ng-click="activateTab('summary')">
-				<div id="pollutant_releases_summary" class="top-buffer10" ng-show="searchResults">
+			<div class="{{mapclss}} minor-padding" style="height: 600px;">
+				<esri-leaf-map contenttype="'pollutantrelease'"
+					queryparams="queryParams" control="mapctrl" />
+			</div>
+			<div class="{{resclss}} extra-padding">
+				<div class="col-md-12 top-buffer10" ng-if="beforesearch">
+					<div class="alert alert-success">
+						<strong>{{tr_c.SearchText}}</strong>
+					</div>
+				</div>
+				<span us-spinner="{radius:16, width:6, length: 12}"
+					spinner-key="spinner-1"></span>
+				<div class="row top-buffer10 extra-padding">
+					<tabset> <tab heading="Summary" active="active.summary"
+						ng-click="activateTab('summary')">
+					<div id="pollutant_releases_summary" class="top-buffer10"
+						ng-show="searchResults">
 						<div class="row">
 
 							<div class="col-md-5">
@@ -87,17 +103,17 @@
 							</div>
 						</div>
 
-					<div id="prSumMediumSelector" pr-selector
-						medium="mediumFilter.prSumMedium" queryparams="queryParams"></div>
-					<div google-chart chart="summaryChart"></div>
+						<div id="prSumMediumSelector" pr-selector
+							medium="mediumFilter.prSumMedium" queryparams="queryParams"></div>
+						<div google-chart chart="summaryChart"></div>
 
-					<!--div class="top-buffer10" google-chart="summaryChartObject" style="height:400px; width:100%;"></div-->
-				</div>
-				</tab>
-            
-            <tab heading="Activities"  active="active.activities" ng-click="activateTab('activities')">
-                        <div id="pollutant_releases_activities" class="top-buffer10" ng-show="searchResults">
-                        	<div class="row">
+						<!--div class="top-buffer10" google-chart="summaryChartObject" style="height:400px; width:100%;"></div-->
+					</div>
+					</tab> <tab heading="Activities" active="active.activities"
+						ng-click="activateTab('activities')">
+					<div id="pollutant_releases_activities" class="top-buffer10"
+						ng-show="searchResults">
+						<div class="row">
 
 							<div class="col-md-5">
 								<table>
@@ -141,109 +157,130 @@
 								<button class="print-button btn btn-default pull-right" ng-print
 									print-element-id="pollutant_releases_activities">
 									<i class="fa fa-print"></i>
-									<button class="btn btn-default pull-right" ng-click="downloadClick('activities')"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
+									<button class="btn btn-default pull-right"
+										ng-click="downloadClick('activities')">
+										<span class="glyphicon glyphicon-download-alt"
+											aria-hidden="true"></span>
+									</button>
 								</button>
 							</div>
 						</div>
-			<!-- message -->
-			<table class="table table-striped table-condensed table-hover">
-                    <thead>
-                    <tr>
-                    	<th>&nbsp;</th>
-                        <th>{{tr_p.ReleasesPerIndustrialActivity}}&nbsp;</th>
-                        <th>&nbsp;</th>
-                        <th class="text-right col-Min75">{{tr_p.Facilities}}&nbsp;</th>
-                        <th class="text-right col-Min75">{{tr_p.Air}}&nbsp;</th>
-                        <th class="text-right col-Min75">{{tr_p.Water}}&nbsp;</th>
-                        <th class="text-right col-Min75">{{tr_p.Soil}}&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- Level1 -->
-                    <tr ng-repeat-start="item in activities | orderBy: 'key'">
-                    <td><img src="images/timeseries.png" class="timesericesImage" ng-click="openActTSmodal(item.key,null,null)" alt="" /></td>
-                        <td>
-                        	<img class="handcursor" ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
-                        	<img class="handcursor" ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
-                        	<a ng-click="showing=!showing">{{tr_laa[item.key]}}</a>
-                        </td>
-                        <td>
-                        {{tr_p.ReleasesAccidentialTotal}}<br/>
-                        {{tr_p.ReleasesAccidentalValue}}
-                        </td>
-                        <td class="text-right">{{cf.getTypeCount(item.data)}}<br/>{{cf.getTypeCountAccidential(item.data)}}</td>
-                        <td class="text-right">{{cf.getSum(item.data,"quantityAir")}}<br/>{{cf.getSum(item.data,"quantityAccidentalAir")}}</td>
-                        <td class="text-right">{{cf.getSum(item.data,"quantityWater")}}<br/>{{cf.getSum(item.data,"quantityAccidentalWater")}}</td>
-                        <td class="text-right">{{cf.getSum(item.data,"quantitySoil")}}<br/>{{cf.getSum(item.data,"quantityAccidentalSoil")}}</td>
-                    </tr>
-                    <!-- Level2 -->
-                    <tr ng-show="showing" ng-repeat-start="level2 in item.data | orderBy: 'iaactivityCode'">
-                    	<td>
-                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="openActTSmodal(level2.lov_IASectorID,level2.lov_IAActivityID,null)" alt="" />
-                    	</td>
-                    	<td>
-                    		<div class="innerlevel2">
-                    		<img class="handcursor" ng-click="showing2=!showing2" ng-show="!showing2 && level2.sublevel" src="images/plus.gif" />
-                        	<img class="handcursor" ng-click="showing2=!showing2" ng-show="showing2" src="images/minus.gif" /> 
-                    		{{tr_laa[level2.iaactivityCode]}}
-              
-                    		</div>
-                    	</td>
-                    	<td>
-                    	   	{{tr_p.ReleasesAccidentialTotal}}<br/>
-                        	{{tr_p.ReleasesAccidentalValue}}
-                    	</td>
-                   		<td class="text-right">{{cf.getTypeCount(level2)}}<br/>{{cf.getTypeCountAccidential(level2)}}</td>
-                       	<td class="text-right">{{cf.getSum(level2,"quantityAir")}}<br/>{{cf.getSum(level2,"quantityAccidentalAir")}}</td>
-                       	<td class="text-right">{{cf.getSum(level2,"quantityWater")}}<br/>{{cf.getSum(level2,"quantityAccidentalWater")}}</td>
-                       	<td class="text-right">{{cf.getSum(level2,"quantitySoil")}}<br/>{{cf.getSum(level2,"quantityAccidentalSoil")}}</td>
-                    </tr>
-                    <!-- Level3 -->
-                    <tr  ng-show="showing2 && showing" ng-repeat-start="level3 in level2.sublevel | orderBy: 'iasubActivityCode'">
-                    	<td>
-                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="openActTSmodal(level3.lov_IASectorID,level3.lov_IAActivityID,level3.lov_IASubActivityID)" alt="" />
-                    	</td>
-                    	<td>
-                    		<div class="innerlevel3"> 
-                    		{{tr_laa[level3.iasubActivityCode]}}
-                    		</div>
-                    	</td>
-                    	<td>
-                    	   	{{tr_p.ReleasesAccidentialTotal}}<br/>
-                        	{{tr_p.ReleasesAccidentalValue}}
-                    	</td>
-                   		<td class="text-right">{{cf.getTypeCount(level3)}}<br/>{{cf.getTypeCountAccidential(level3)}}</td>
-                       	<td class="text-right">{{cf.getSum(level3,"quantityAir")}}<br/>{{cf.getSum(level3,"quantityAccidentalAir")}}</td>
-                       	<td class="text-right">{{cf.getSum(level3,"quantityWater")}}<br/>{{cf.getSum(level3,"quantityAccidentalWater")}}</td>
-                       	<td class="text-right">{{cf.getSum(level3,"quantitySoil")}}<br/>{{cf.getSum(level3,"quantityAccidentalSoil")}}</td>
-                    </tr>
-                    <tr ng-repeat-end></tr>
-                    <tr ng-repeat-end ng-hide="true"></tr>       
-                    <tr ng-if="$last">
-                    	<td>
-                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="openActTSmodal(null,null,null)" alt="" />
-                    	</td>
-                    	<td>
-                    		{{tr_c.Total}}
-                    	</td>
-                    	<td>
-                   	   		{{tr_p.ReleasesAccidentialTotal}}<br/>
-                     		{{tr_p.ReleasesAccidentalValue}}
-                   		</td>
-                   		<td class="text-right">{{totalactivitiesfac}}<br />{{totalactivitiesacc}}</td>
-                        <td class="text-right">{{totalactivitiessumair}}<br/>{{totalactivitiessumaair}}</td>
-                    	<td class="text-right">{{totalactivitiessumwater}}<br />{{totalactivitiessumawater}}</td>
-                    	<td class="text-right">{{totalactivitiessumsoil}}<br />{{totalactivitiessumasoil}}</td>
-                    </tr>
-                    <tr ng-repeat-end ng-hide="true"></tr>
-                    </tbody>
-                </table> 
-                </div>   
-            </tab>
-            
-            <tab heading="Areas" active="active.areas" ng-click="activateTab('areas')">
-             <div id="pollutant_releases_areas" class="top-buffer10" ng-show="searchResults">
-             	<div class="row">
+						<!-- message -->
+						<table class="table table-striped table-condensed table-hover">
+							<thead>
+								<tr>
+									<th>&nbsp;</th>
+									<th>{{tr_p.ReleasesPerIndustrialActivity}}&nbsp;</th>
+									<th>&nbsp;</th>
+									<th class="text-right col-Min75">{{tr_p.Facilities}}&nbsp;</th>
+									<th class="text-right col-Min75">{{tr_p.Air}}&nbsp;</th>
+									<th class="text-right col-Min75">{{tr_p.Water}}&nbsp;</th>
+									<th class="text-right col-Min75">{{tr_p.Soil}}&nbsp;</th>
+								</tr>
+							</thead>
+							<tbody>
+								<!-- Level1 -->
+								<tr ng-repeat-start="item in activities | orderBy: 'key'">
+									<td><img src="images/timeseries.png"
+										class="timesericesImage"
+										ng-click="openActTSmodal(item.key,null,null)" alt="" /></td>
+									<td><img class="handcursor" ng-click="showing=!showing"
+										ng-show="!showing" src="images/plus.gif" /> <img
+										class="handcursor" ng-click="showing=!showing"
+										ng-show="showing" src="images/minus.gif" /> <a
+										ng-click="showing=!showing">{{tr_laa[item.key]}}</a></td>
+									<td>{{tr_p.ReleasesAccidentialTotal}}<br />
+										{{tr_p.ReleasesAccidentalValue}}
+									</td>
+									<td class="text-right">{{cf.getTypeCount(item.data)}}<br />{{cf.getTypeCountAccidential(item.data)}}
+									</td>
+									<td class="text-right">{{cf.getSum(item.data,"quantityAir")}}<br />{{cf.getSum(item.data,"quantityAccidentalAir")}}
+									</td>
+									<td class="text-right">{{cf.getSum(item.data,"quantityWater")}}<br />{{cf.getSum(item.data,"quantityAccidentalWater")}}
+									</td>
+									<td class="text-right">{{cf.getSum(item.data,"quantitySoil")}}<br />{{cf.getSum(item.data,"quantityAccidentalSoil")}}
+									</td>
+								</tr>
+								<!-- Level2 -->
+								<tr ng-show="showing"
+									ng-repeat-start="level2 in item.data | orderBy: 'iaactivityCode'">
+									<td><img src="images/timeseries.png"
+										class="timesericesImage"
+										ng-click="openActTSmodal(level2.lov_IASectorID,level2.lov_IAActivityID,null)"
+										alt="" /></td>
+									<td>
+										<div class="innerlevel2">
+											<img class="handcursor" ng-click="showing2=!showing2"
+												ng-show="!showing2 && level2.sublevel" src="images/plus.gif" />
+											<img class="handcursor" ng-click="showing2=!showing2"
+												ng-show="showing2" src="images/minus.gif" />
+											{{tr_laa[level2.iaactivityCode]}}
+
+										</div>
+									</td>
+									<td>{{tr_p.ReleasesAccidentialTotal}}<br />
+										{{tr_p.ReleasesAccidentalValue}}
+									</td>
+									<td class="text-right">{{cf.getTypeCount(level2)}}<br />{{cf.getTypeCountAccidential(level2)}}
+									</td>
+									<td class="text-right">{{cf.getSum(level2,"quantityAir")}}<br />{{cf.getSum(level2,"quantityAccidentalAir")}}
+									</td>
+									<td class="text-right">{{cf.getSum(level2,"quantityWater")}}<br />{{cf.getSum(level2,"quantityAccidentalWater")}}
+									</td>
+									<td class="text-right">{{cf.getSum(level2,"quantitySoil")}}<br />{{cf.getSum(level2,"quantityAccidentalSoil")}}
+									</td>
+								</tr>
+								<!-- Level3 -->
+								<tr ng-show="showing2 && showing"
+									ng-repeat-start="level3 in level2.sublevel | orderBy: 'iasubActivityCode'">
+									<td><img src="images/timeseries.png"
+										class="timesericesImage"
+										ng-click="openActTSmodal(level3.lov_IASectorID,level3.lov_IAActivityID,level3.lov_IASubActivityID)"
+										alt="" /></td>
+									<td>
+										<div class="innerlevel3">
+											{{tr_laa[level3.iasubActivityCode]}}</div>
+									</td>
+									<td>{{tr_p.ReleasesAccidentialTotal}}<br />
+										{{tr_p.ReleasesAccidentalValue}}
+									</td>
+									<td class="text-right">{{cf.getTypeCount(level3)}}<br />{{cf.getTypeCountAccidential(level3)}}
+									</td>
+									<td class="text-right">{{cf.getSum(level3,"quantityAir")}}<br />{{cf.getSum(level3,"quantityAccidentalAir")}}
+									</td>
+									<td class="text-right">{{cf.getSum(level3,"quantityWater")}}<br />{{cf.getSum(level3,"quantityAccidentalWater")}}
+									</td>
+									<td class="text-right">{{cf.getSum(level3,"quantitySoil")}}<br />{{cf.getSum(level3,"quantityAccidentalSoil")}}
+									</td>
+								</tr>
+								<tr ng-repeat-end></tr>
+								<tr ng-repeat-end ng-hide="true"></tr>
+								<tr ng-if="$last">
+									<td><img src="images/timeseries.png"
+										class="timesericesImage"
+										ng-click="openActTSmodal(null,null,null)" alt="" /></td>
+									<td>{{tr_c.Total}}</td>
+									<td>{{tr_p.ReleasesAccidentialTotal}}<br />
+										{{tr_p.ReleasesAccidentalValue}}
+									</td>
+									<td class="text-right">{{totalactivitiesfac}}<br />{{totalactivitiesacc}}
+									</td>
+									<td class="text-right">{{totalactivitiessumair}}<br />{{totalactivitiessumaair}}
+									</td>
+									<td class="text-right">{{totalactivitiessumwater}}<br />{{totalactivitiessumawater}}
+									</td>
+									<td class="text-right">{{totalactivitiessumsoil}}<br />{{totalactivitiessumasoil}}
+									</td>
+								</tr>
+								<tr ng-repeat-end ng-hide="true"></tr>
+							</tbody>
+						</table>
+					</div>
+					</tab> <tab heading="Areas" active="active.areas"
+						ng-click="activateTab('areas')">
+					<div id="pollutant_releases_areas" class="top-buffer10"
+						ng-show="searchResults">
+						<div class="row">
 
 							<div class="col-md-5">
 								<table>
@@ -288,91 +325,105 @@
 									print-element-id="pollutant_releases_areas">
 									<i class="fa fa-print"></i>
 								</button>
-								<button class="btn btn-default pull-right" ng-click="downloadClick('areas')"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
+								<button class="btn btn-default pull-right"
+									ng-click="downloadClick('areas')">
+									<span class="glyphicon glyphicon-download-alt"
+										aria-hidden="true"></span>
+								</button>
 							</div>
 						</div>
-            
 
-			 <table class="table table-striped table-condensed table-hover">
-                    <thead>
-                    <tr>
-                    	<th>&nbsp;</th>
-                        <th>{{tr_p.ReleasesPerCountry}}&nbsp;</th>
-                        <th>&nbsp;</th>
-                        <th class="text-right col-Min75">{{tr_p.Facilities}}&nbsp;</th>
-                        <th class="text-right col-Min75">{{tr_p.Air}}&nbsp;</th>
-                        <th class="text-right col-Min75">{{tr_p.Water}}&nbsp;</th>
-                        <th class="text-right col-Min75">{{tr_p.Soil}}&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    
-                    <!-- First level -->
-                    <tr ng-repeat-start="item in areas" >
-                        <td><img src="images/timeseries.png" class="timesericesImage" ng-click="openAreaTSmodal(item.lov_CountryID, null, null)" alt="" /></td>
-                        <td>
-                        <img class="handcursor" ng-click="showing=!showing" ng-show="!showing" src="images/plus.gif" />
-                        <img class="handcursor" ng-click="showing=!showing" ng-show="showing" src="images/minus.gif" />
-                        <a ng-click="showing=!showing">{{tr_lco[item.key]}}</a></td>            
-                        <td>
-                        {{tr_p.ReleasesAccidentialTotal}}
-                        <br/>
-                        {{tr_p.ReleasesAccidentalValue}}
-                        </td>
-                        <td class="text-right">{{cf.getTypeCount(item.data)}}<br />{{cf.getTypeCountAccidential(item.data)}}</td>
-                        <td class="text-right">{{cf.getSum(item.data,"quantityAir")}}<br/>{{cf.getSum(item.data,"quantityAccidentalAir")}}</td>
-                        <td class="text-right">{{cf.getSum(item.data,"quantityWater")}}<br />{{cf.getSum(item.data,"quantityAccidentalWater")}}</td>
-                        <td class="text-right">{{cf.getSum(item.data,"quantitySoil")}}<br />{{cf.getSum(item.data,"quantityAccidentalSoil")}}</td>
-                    </tr>
-                    
-                    <!-- Second level -->
-                    <tr ng-show="showing" ng-repeat-start="item2 in item.data">
-                        	<td><img src="images/timeseries.png" class="timesericesImage" ng-click="openAreaTSmodal(item2.lov_CountryID, item2.lov_NUTSRegionID, item2.lov_RiverBasinDistrictID)" alt="" /></td>        	
-                        	<td ng-if="regionSearch">
-                        		<div class="innerlevel2">
-                        		{{tr_lnr[item2.nutslevel2RegionCode]}}
-                        		</div>
-                        	</td>
-                        	<td ng-if="!regionSearch">
-                        		<div class="innerlevel2">
-                        		{{tr_lrbd[item2.riverBasinDistrictCode]}}
-                        		</div>
-                        	</td>        
-                        	<td>
-                        	{{tr_p.ReleasesAccidentialTotal}}
-                        	<br/>
-                        	{{tr_p.ReleasesAccidentalValue}}
-                        	</td>
-                        	<td class="text-right">{{cf.getTypeCount(item2)}}<br />{{cf.getTypeCountAccidential(item2)}}</td>
-                         	<td class="text-right">{{cf.getSum(item2,"quantityAir")}}<br/>{{cf.getSum(item2,"quantityAccidentalAir")}}</td>
-                        	<td class="text-right">{{cf.getSum(item2,"quantityWater")}}<br />{{cf.getSum(item2,"quantityAccidentalWater")}}</td>
-                        	<td class="text-right">{{cf.getSum(item2,"quantitySoil")}}<br />{{cf.getSum(item2,"quantityAccidentalSoil")}}</td>
-                    </tr>                
-                    <tr ng-repeat-end></tr>
-                       <tr ng-if="$last">
-                    	<td>
-                    		<img src="images/timeseries.png" class="timesericesImage" ng-click="openAreaTSmodal(null, null, null)" alt="" />
-                    	</td>
-                    	<td>
-                    		{{tr_c.Total}}
-                    	</td>
-                    	<td>
-                   	   		{{tr_p.ReleasesAccidentialTotal}}<br/>{{tr_p.ReleasesAccidentalValue}}
-                   		</td>
-                   		<td class="text-right">{{totalareasfac}}<br />{{totalareasacc}}</td>
-                    	<td class="text-right">{{totalareassumair}}<br/>{{totalareassumaair}}</td>
-                    	<td class="text-right">{{totalareassumwater}}<br />{{totalareassumawater}}</td>
-                    	<td class="text-right">{{totalareassumsoil}}<br />{{totalareassumasoil}}</td>
-                    </tr>
-                    <tr ng-repeat-end ng-hide="true"></tr>
-                    </tbody>
-                </table>
-                </div>
-            </tab>
-            
-            <tab heading="Area Comparison" active="active.areacomparison" ng-click="activateTab('areacomparison')">
-                        <div id="pollutant_releases_areas_comparison" class="top-buffer10" ng-show="searchResults">
-                        <div class="row">
+
+						<table class="table table-striped table-condensed table-hover">
+							<thead>
+								<tr>
+									<th>&nbsp;</th>
+									<th>{{tr_p.ReleasesPerCountry}}&nbsp;</th>
+									<th>&nbsp;</th>
+									<th class="text-right col-Min75">{{tr_p.Facilities}}&nbsp;</th>
+									<th class="text-right col-Min75">{{tr_p.Air}}&nbsp;</th>
+									<th class="text-right col-Min75">{{tr_p.Water}}&nbsp;</th>
+									<th class="text-right col-Min75">{{tr_p.Soil}}&nbsp;</th>
+								</tr>
+							</thead>
+							<tbody>
+
+								<!-- First level -->
+								<tr ng-repeat-start="item in areas">
+									<td><img src="images/timeseries.png"
+										class="timesericesImage"
+										ng-click="openAreaTSmodal(item.lov_CountryID, null, null)"
+										alt="" /></td>
+									<td><img class="handcursor" ng-click="showing=!showing"
+										ng-show="!showing" src="images/plus.gif" /> <img
+										class="handcursor" ng-click="showing=!showing"
+										ng-show="showing" src="images/minus.gif" /> <a
+										ng-click="showing=!showing">{{tr_lco[item.key]}}</a></td>
+									<td>{{tr_p.ReleasesAccidentialTotal}} <br />
+										{{tr_p.ReleasesAccidentalValue}}
+									</td>
+									<td class="text-right">{{cf.getTypeCount(item.data)}}<br />{{cf.getTypeCountAccidential(item.data)}}
+									</td>
+									<td class="text-right">{{cf.getSum(item.data,"quantityAir")}}<br />{{cf.getSum(item.data,"quantityAccidentalAir")}}
+									</td>
+									<td class="text-right">{{cf.getSum(item.data,"quantityWater")}}<br />{{cf.getSum(item.data,"quantityAccidentalWater")}}
+									</td>
+									<td class="text-right">{{cf.getSum(item.data,"quantitySoil")}}<br />{{cf.getSum(item.data,"quantityAccidentalSoil")}}
+									</td>
+								</tr>
+
+								<!-- Second level -->
+								<tr ng-show="showing" ng-repeat-start="item2 in item.data">
+									<td><img src="images/timeseries.png"
+										class="timesericesImage"
+										ng-click="openAreaTSmodal(item2.lov_CountryID, item2.lov_NUTSRegionID, item2.lov_RiverBasinDistrictID)"
+										alt="" /></td>
+									<td ng-if="regionSearch">
+										<div class="innerlevel2">
+											{{tr_lnr[item2.nutslevel2RegionCode]}}</div>
+									</td>
+									<td ng-if="!regionSearch">
+										<div class="innerlevel2">
+											{{tr_lrbd[item2.riverBasinDistrictCode]}}</div>
+									</td>
+									<td>{{tr_p.ReleasesAccidentialTotal}} <br />
+										{{tr_p.ReleasesAccidentalValue}}
+									</td>
+									<td class="text-right">{{cf.getTypeCount(item2)}}<br />{{cf.getTypeCountAccidential(item2)}}
+									</td>
+									<td class="text-right">{{cf.getSum(item2,"quantityAir")}}<br />{{cf.getSum(item2,"quantityAccidentalAir")}}
+									</td>
+									<td class="text-right">{{cf.getSum(item2,"quantityWater")}}<br />{{cf.getSum(item2,"quantityAccidentalWater")}}
+									</td>
+									<td class="text-right">{{cf.getSum(item2,"quantitySoil")}}<br />{{cf.getSum(item2,"quantityAccidentalSoil")}}
+									</td>
+								</tr>
+								<tr ng-repeat-end></tr>
+								<tr ng-if="$last">
+									<td><img src="images/timeseries.png"
+										class="timesericesImage"
+										ng-click="openAreaTSmodal(null, null, null)" alt="" /></td>
+									<td>{{tr_c.Total}}</td>
+									<td>{{tr_p.ReleasesAccidentialTotal}}<br />{{tr_p.ReleasesAccidentalValue}}
+									</td>
+									<td class="text-right">{{totalareasfac}}<br />{{totalareasacc}}
+									</td>
+									<td class="text-right">{{totalareassumair}}<br />{{totalareassumaair}}
+									</td>
+									<td class="text-right">{{totalareassumwater}}<br />{{totalareassumawater}}
+									</td>
+									<td class="text-right">{{totalareassumsoil}}<br />{{totalareassumasoil}}
+									</td>
+								</tr>
+								<tr ng-repeat-end ng-hide="true"></tr>
+							</tbody>
+						</table>
+					</div>
+					</tab> <tab heading="Area Comparison" active="active.areacomparison"
+						ng-click="activateTab('areacomparison')">
+					<div id="pollutant_releases_areas_comparison" class="top-buffer10"
+						ng-show="searchResults">
+						<div class="row">
 
 							<div class="col-md-5">
 								<table>
@@ -419,17 +470,18 @@
 								</button>
 							</div>
 						</div>
-                
-             	{{tr_p.AllValuesArePercentOfEuroTotal}}
-                 <div class="top-buffer10" id="prAreaMediumSelector" pr-selector medium="mediumFilter.prAreaMedium" queryparams="queryParams" ></div>
-                <div google-chart chart="areaComparisonChart"></div>
-                <!--div class="top-buffer10" google-chart="areaComparisonChartObject" style="width:100%;"></div-->
-                </div>
-            </tab>
-            
-            <tab heading="Facilities" active="active.facilities" ng-click="activateTab('facilities')">
-            <div id="pollutant_releases_facilities" class="top-buffer10" ng-show="searchResults">
-            	<div class="row">
+
+						{{tr_p.AllValuesArePercentOfEuroTotal}}
+						<div class="top-buffer10" id="prAreaMediumSelector" pr-selector
+							medium="mediumFilter.prAreaMedium" queryparams="queryParams"></div>
+						<div google-chart chart="areaComparisonChart"></div>
+						<!--div class="top-buffer10" google-chart="areaComparisonChartObject" style="width:100%;"></div-->
+					</div>
+					</tab> <tab heading="Facilities" active="active.facilities"
+						ng-click="activateTab('facilities')">
+					<div id="pollutant_releases_facilities" class="top-buffer10"
+						ng-show="searchResults">
+						<div class="row">
 
 							<div class="col-md-5">
 								<table>
@@ -474,99 +526,108 @@
 									print-element-id="pollutant_releases_facilities">
 									<i class="fa fa-print"></i>
 								</button>
-								<button class="btn btn-default pull-right" ng-click="downloadClick('facilities')"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></button>
+								<button class="btn btn-default pull-right"
+									ng-click="downloadClick('facilities')">
+									<span class="glyphicon glyphicon-download-alt"
+										aria-hidden="true"></span>
+								</button>
 							</div>
 						</div>
-                 <div class="top-buffer10" id="prFacMediumSelector" pr-selector medium="mediumFilter.prFacMedium" queryparams="queryParams"></div>
-                 <div class="col-md-12 table-responsive top-buffer10" >
-                <table class="table table-striped table-condensed table-hover">
-                    <thead>
-                    <tr>
-                        <th>{{tr_c.Facility}}&nbsp;</th>
-                        <th class="text-right col-Min75">{{tr_c.Quantity}}&nbsp;</th>
-                        <th class="text-right col-Min75">{{tr_c.Accidental}}&nbsp;</th>
-                        <th class="text-right col-Min75">{{tr_c.Accidental}} %&nbsp;</th>
-                        <th class="col-Min100">{{tr_c.Activity}}&nbsp;</th>
-                        <th class="col-Min75">{{tr_c.Country}}&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="item in facilitiesItems">
-                        <td><a href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">
-                        	{{ff.ConfidentialFormat(item.facilityName, item.confidentialIndicatorFacility)}}</a></td>
-                        <td class="text-right">{{quantity(item)}}</td>
-                        <td class="text-right">{{quantityAccidental(item)}}</td>
-                        <td class="text-right">{{percentageAccidental(item)}}</td>
-                        <td>{{tr_laa[item.iaactivityCode]}}</td>
-                        <td>{{tr_lco[item.countryCode]}}</td>
-                    </tr>
-                    </tbody>
-                </table>
-                </div>
-                </div>
-            </tab>
-            
-            <tab heading="Confidentiality" active="active.confidentiality" ng-click="activateTab('confidentiality')">
-            <div class="top-buffer10" ng-show="searchResults">
-            
-			   <div class="col-md-12 alert alert-warning top-buffer10" ng-if="!hasConfidentionalData">
-			   		<strong>{{tr_con.NoConfidentialityInformation}}</strong></div>
-			
-                </div>
-                <div class="top-buffer10"  ng-if="hasConfidentionalData">
-	                <div ng-bind-html="tr_c.ConfidentialityExplanationPR1">
-	                </div>
-	                <div class="col-md-12 table-responsive top-buffer10" >
-	                 <table class="table table-striped table-condensed table-hover">
-                    	<thead>
-                    	<tr>
-                   		<th>{{tr_c.Pollutant}}</th>
-                  		<th class="text-right">{{tr_f.FacilitiesAir}}</th>
-                   		<th class="text-right">{{tr_f.FacilitiesWater}}</th>
-                   		<th class="text-right">{{tr_f.FacilitiesSoil}}</th>
-                    	</tr>
-                    	</thead>
-                    	<tbody>
-                    	<tr ng-repeat="item in itemCon">
-                    	<td>{{tr_lpo[item.pollutantCode]}}</td>
-                    	<td class="text-right">{{item.aircount}}</td>
-                    	<td class="text-right">{{item.watercount}}</td>
-                    	<td class="text-right">{{item.soilcount}}</td>
-                    	</tr>
-	                    </tbody>
-               		</table>
-               		</div>
-					<div class="top-buffer10" ng-bind-html="tr_p.ConfidentialityReason"></div>
-	                <div class="col-md-12 table-responsive top-buffer10" >
-	                  <table class="table table-striped table-condensed table-hover">
-                    	<thead>
-                    	<tr>
-                    		<th>{{tr_c.Reason}}</th>
-                    		<th class="text-right">{{tr_f.FacilitiesAir}}</th>
-                    		<th class="text-right">{{tr_f.FacilitiesWater}}</th>
-                    		<th class="text-right">{{tr_f.FacilitiesSoil}}</th>
-                    	</tr>
-                    	</thead>
-                    	<tbody>
-                    	<tr ng-repeat="item in itemConReason">
-                    		<td>{{tr_lcon[item.reason]}}</td>
-                    		<td class="text-right">{{item.aircount}}</td>
-                    		<td class="text-right">{{item.watercount}}</td>
-                    		<td class="text-right">{{item.soilcount}}</td>
-                    	</tr>
-	                    </tbody>
-               		  </table>
-               		  </div>
-          		    <div  class="top-buffer10" ng-bind-html="tr_c.ConfidentialityExplanationPR2"></div>
-                </div>
-                
-            </tab>
-        </tabset>
- </div>   </div>
+						<div class="top-buffer10" id="prFacMediumSelector" pr-selector
+							medium="mediumFilter.prFacMedium" queryparams="queryParams"></div>
+						<div class="col-md-12 table-responsive top-buffer10">
+							<table class="table table-striped table-condensed table-hover">
+								<thead>
+									<tr>
+										<th>{{tr_c.Facility}}&nbsp;</th>
+										<th class="text-right col-Min75">{{tr_c.Quantity}}&nbsp;</th>
+										<th class="text-right col-Min75">{{tr_c.Accidental}}&nbsp;</th>
+										<th class="text-right col-Min75">{{tr_c.Accidental}}
+											%&nbsp;</th>
+										<th class="col-Min100">{{tr_c.Activity}}&nbsp;</th>
+										<th class="col-Min75">{{tr_c.Country}}&nbsp;</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="item in facilitiesItems">
+										<td><a
+											href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">
+												{{ff.ConfidentialFormat(item.facilityName,
+												item.confidentialIndicatorFacility)}}</a></td>
+										<td class="text-right">{{quantity(item)}}</td>
+										<td class="text-right">{{quantityAccidental(item)}}</td>
+										<td class="text-right">{{percentageAccidental(item)}}</td>
+										<td>{{tr_laa[item.iaactivityCode]}}</td>
+										<td>{{tr_lco[item.countryCode]}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					</tab> <tab heading="Confidentiality" active="active.confidentiality"
+						ng-click="activateTab('confidentiality')">
+					<div class="top-buffer10" ng-show="searchResults">
 
-        <div class="col-md-3" style="height:600px;">
-            <esri-leaf-map contenttype="'pollutantrelease'" queryparams="queryParams" />
-        </div>
-    </div>
+						<div class="col-md-12 alert alert-warning top-buffer10"
+							ng-if="!hasConfidentionalData">
+							<strong>{{tr_con.NoConfidentialityInformation}}</strong>
+						</div>
+
+					</div>
+					<div class="top-buffer10" ng-if="hasConfidentionalData">
+						<div ng-bind-html="tr_c.ConfidentialityExplanationPR1"></div>
+						<div class="col-md-12 table-responsive top-buffer10">
+							<table class="table table-striped table-condensed table-hover">
+								<thead>
+									<tr>
+										<th>{{tr_c.Pollutant}}</th>
+										<th class="text-right">{{tr_f.FacilitiesAir}}</th>
+										<th class="text-right">{{tr_f.FacilitiesWater}}</th>
+										<th class="text-right">{{tr_f.FacilitiesSoil}}</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="item in itemCon">
+										<td>{{tr_lpo[item.pollutantCode]}}</td>
+										<td class="text-right">{{item.aircount}}</td>
+										<td class="text-right">{{item.watercount}}</td>
+										<td class="text-right">{{item.soilcount}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="top-buffer10"
+							ng-bind-html="tr_p.ConfidentialityReason"></div>
+						<div class="col-md-12 table-responsive top-buffer10">
+							<table class="table table-striped table-condensed table-hover">
+								<thead>
+									<tr>
+										<th>{{tr_c.Reason}}</th>
+										<th class="text-right">{{tr_f.FacilitiesAir}}</th>
+										<th class="text-right">{{tr_f.FacilitiesWater}}</th>
+										<th class="text-right">{{tr_f.FacilitiesSoil}}</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="item in itemConReason">
+										<td>{{tr_lcon[item.reason]}}</td>
+										<td class="text-right">{{item.aircount}}</td>
+										<td class="text-right">{{item.watercount}}</td>
+										<td class="text-right">{{item.soilcount}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="top-buffer10"
+							ng-bind-html="tr_c.ConfidentialityExplanationPR2"></div>
+					</div>
+
+					</tab> </tabset>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
 
 </div>

@@ -16,8 +16,8 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
 
     	$scope.bigmap = false;
     	$scope.mapctrl = {};
-    	$scope.mapclss = "col-md-4 col-md-push-8";
-    	$scope.resclss = "col-md-8 col-md-pull-4";
+    	$scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
+    	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
 /*    	$scope.mapclss = "col-md-3 col-md-push-6";
     	$scope.resclss = "col-md-6 col-md-pull-3";*/
     	$scope.beforesearch = true;
@@ -67,14 +67,14 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         	if($scope.bigmap){
             	$scope.bigmap = false;
             	$scope.resize_icon = "glyphicon glyphicon-resize-full"
-            	$scope.mapclss = "col-md-4 col-md-push-8";
-            	$scope.resclss = "col-md-8 col-md-pull-4";
+            	$scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
+            	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
         	}
         	else{
             	$scope.bigmap = true;
             	$scope.resize_icon = "glyphicon glyphicon-resize-small"
-            	$scope.mapclss = "col-md-12";
-            	$scope.resclss = "col-md-12";
+            	$scope.mapclss = "col-md-12 minor-padding";
+            	$scope.resclss = "col-md-12 minor-padding";
         	}
         	$scope.mapctrl.redraw();
         }

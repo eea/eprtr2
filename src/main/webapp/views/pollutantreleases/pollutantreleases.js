@@ -18,6 +18,12 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
     	$scope.pollutantPanel = true;
         $scope.showReleasesToInputField = true;
         $scope.pollutantPanelTitle = 'Pollutant releases';
+        $scope.resize_icon = "glyphicon glyphicon-resize-full"
+        $scope.bigmap = false;
+        $scope.mapclss = "col-md-4 col-md-push-8";
+        $scope.resclss = "col-md-8 col-md-pull-4";
+        $scope.mapctrl = {};
+        
         $scope.searchFilter = searchFilter;
         $scope.mediumFilter = {};
         $scope.queryParams = {};
@@ -88,6 +94,24 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
     	$scope.setActiveTab = function(tab) {
     		$scope.active[tab] = true;
     	};
+    	
+    	/**
+         * MAp handling*/
+        $scope.togglemapview = function(){
+        	if($scope.bigmap){
+            	$scope.bigmap = false;
+            	$scope.resize_icon = "glyphicon glyphicon-resize-full"
+            	$scope.mapclss = "col-md-4 col-md-push-8";
+            	$scope.resclss = "col-md-8 col-md-pull-4";
+        	}
+        	else{
+            	$scope.bigmap = true;
+            	$scope.resize_icon = "glyphicon glyphicon-resize-small"
+            	$scope.mapclss = "col-md-12 minor-padding";
+            	$scope.resclss = "col-md-12 minor-padding";
+        	}
+        	$scope.mapctrl.redraw();
+        }
 
     	/**
     	 * Listeners
