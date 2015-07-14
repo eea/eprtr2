@@ -123,7 +123,7 @@ POLLUTANT RELEASES
                     <tbody>
                         <tr ng-repeat="item in pollutantreleases | filter:{ pollutantTo: tr_lme.AIR } ">
  		                    <td><img src="images/timeseries.png" class="timesericesImage" ng-click="openTSmodal('pollutantrelease',item.lov_PollutantID,'AIR',null)" alt="" /></td>
-		                    <td>{{tr_lpo[item.pollutantCode]}} - {{item.pollutantCode}}</td>
+		                    <td>{{tr_lpo[item.pollutantCode]}}</td>
 		                    <td class="text-right">{{fFactory.formatQuantity(item.totalQuantity, item.totalQuantityUnitCode, item.confidentialIndicator)}}</td>
 		                    <td class="text-right">{{fFactory.formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
 		                    <td class="text-right">{{fFactory.DeterminePercent(item.totalQuantity, item.accidentalQuantity)}}</td>

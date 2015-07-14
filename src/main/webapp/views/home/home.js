@@ -9,7 +9,7 @@ angular.module('myApp.home', ['ngRoute'])
   });
 }])
 
-.controller('HomeCtrl', ['$scope','$filter', 'translationService', function($scope, $filter, translationService) {
+.controller('HomeCtrl', ['$scope','$filter', 'translationService', '$http', function($scope, $filter, translationService, $http) {
 	/**
 	 * DO NOT REMOVE - part of home.test
 	 */
@@ -17,8 +17,8 @@ angular.module('myApp.home', ['ngRoute'])
 		return inp;
 	}
 	
-	translationService.get('Static').then(function (data) {
-		$scope.welcome = data['HomeWelcomeText'];
+	$http.get('translations/eprtr-resource-static_en-gb.json').success(function(data, status) {
+		$scope.welcome = data['Static']['HomeWelcomeText'];
     });
 	//HomeWelcomeText
 	
