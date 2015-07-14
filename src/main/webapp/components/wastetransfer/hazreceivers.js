@@ -47,7 +47,7 @@ angular.module('myApp.HazReceiversWasteTab', ['restangular','ngSanitize','angula
         });
 
         $scope.$watchCollection('[tr_c,queryparams]', function(value){
-        	if($scope.queryparams != undefined && $scope.tr_wt != undefined){
+        	if($scope.queryparams != undefined && $scope.tr_wt != undefined && $scope.queryparams.ReportingYear !== -1){
                 
         		//Clear collection
         		$scope.items = [];
