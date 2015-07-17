@@ -11,12 +11,12 @@ angular.module('myApp.search-placement', ['myApp.home', 'myApp.search-filter'])
 		$scope.tr_c = data.Common;
 	});
 
-	$http.get('/reportingYears').then(function(data, status, headers, config) {
+	$http.get('/reportingYears').success(function(data, status, headers, config) {
         $scope.reportingYears = data;
         $scope.searchFilter.selectedReportingYear = $scope.reportingYears[$scope.reportingYears.length - 1];
     });
 
-    $http.get('/areagroupReportingCountries').then(function(data, status, headers, config) {
+    $http.get('/areagroupReportingCountries').success(function(data, status, headers, config) {
         $scope.reportingCountries = data;
         $scope.searchFilter.selectedReportingCountry = $scope.reportingCountries[0];
     });
