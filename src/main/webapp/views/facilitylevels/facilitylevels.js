@@ -18,7 +18,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.showAccidentalOnlyInputField = true;
         $scope.pollutantPanelTitle = 'Pollutant releases and transfers';
         $scope.usePollutantSelectorHeaders = true;
-        $scope.resize_icon = "glyphicon glyphicon-resize-full"
+        $scope.resize_icon = "fa fa-arrow-left"
         $scope.bigmap = false;
         $scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
     	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
@@ -43,6 +43,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
 		$scope.tr_lnr = data.LOV_NUTSREGION;
 		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
 		$scope.tr_chart = data.ChartLabels;
+		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
 	  });
 
 	/**
@@ -80,15 +81,18 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
           $scope.togglemapview = function(){
           	if($scope.bigmap){
               	$scope.bigmap = false;
-              	$scope.resize_icon = "glyphicon glyphicon-resize-full"
+              	$scope.resize_icon = "fa fa-arrow-left"
               	$scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
               	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
+        		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
           	}
           	else{
               	$scope.bigmap = true;
-              	$scope.resize_icon = "glyphicon glyphicon-resize-small"
+              	$scope.resize_icon = "fa fa-arrow-right"
               	$scope.mapclss = "col-md-12 minor-padding";
               	$scope.resclss = "col-md-12 minor-padding";
+        		$scope.maptooltip = $scope.tr_c['ShowReducedMap'];
+
           	}
           	$scope.mapctrl.redraw();
           }
@@ -108,6 +112,12 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
     $scope.pagedItems = [];
     $scope.currentPage = 1;
     $scope.totalItemCount = 0;
+
+    $scope.$watch('mapctrl', function(value) {
+        if($scope.mapctrl){
+        	$scope.mapctrl.redraw();
+        }
+    });
     
     $scope.$watch('currentPage', function(value) {
     	if ($scope.currentSearchFilter !== undefined) {

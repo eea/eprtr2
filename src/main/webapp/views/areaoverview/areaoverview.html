@@ -4,15 +4,10 @@
 		<h3>{{tr_ao.Headline}}</h3>
 	</div>
 	<div class="row">
-    <div class="col-md-9">
+    <div class="col-md-12">
 
         <p>{{tr_ao.Subheadline}}</p>
-    </div>
-	<div class="col-md-3 text-right">
-		<button type="button" ng-click="togglemapview()"
-			class="btn btn-default">
-			<span class="{{resize_icon}}" aria-hidden="true"></span>
-		</button>
+    
 	</div>
 
 	</div>
@@ -37,7 +32,10 @@
 		<div class="col-md-9 minor-padding">
 		
 		<div class="{{mapclss}}" style="height:600px;">
-            <esri-leaf-map contenttype="'pollutantrelease'" queryparams="queryParams" control="mapctrl"/>
+            <button type="button" ng-click="togglemapview()" title="{{maptooltip}}"
+				class="btn btn-default pull-right" style="position:absolute; right:5px; margin:5px;z-index:110;" >
+				<span class="{{resize_icon}}" aria-hidden="true"></span>
+			</button><esri-leaf-map contenttype="'pollutantrelease'" queryparams="queryParams" control="mapctrl"/>
         </div>
 		
 		<div class="{{resclss}}">

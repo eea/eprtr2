@@ -17,10 +17,12 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
         $scope.beforesearch = true;
     	$scope.pollutantPanel = true;
         $scope.pollutantPanelTitle = 'Pollutant transfers';
-        $scope.resize_icon = "glyphicon glyphicon-resize-full"
+        $scope.resize_icon = "fa fa-arrow-left"
         $scope.bigmap = false;
         $scope.mapclss = "col-md-4 col-md-push-8";
         $scope.resclss = "col-md-8 col-md-pull-4";
+    	//$scope.maptooltip = "Expand map area";
+
         $scope.mapctrl = {};
             
         $scope.searchFilter = searchFilter;
@@ -39,6 +41,9 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
     		$scope.tr_lpo = data.LOV_POLLUTANT;
     		$scope.tr_lnr = data.LOV_NUTSREGION;
     		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
+    		
+    		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
+
     	  });
         
         /*
@@ -61,15 +66,17 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
         $scope.togglemapview = function(){
         	if($scope.bigmap){
             	$scope.bigmap = false;
-            	$scope.resize_icon = "glyphicon glyphicon-resize-full"
+            	$scope.resize_icon = "fa fa-arrow-left"
             	$scope.mapclss = "col-md-4 col-md-push-8";
             	$scope.resclss = "col-md-8 col-md-pull-4";
+        		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
         	}
         	else{
             	$scope.bigmap = true;
-            	$scope.resize_icon = "glyphicon glyphicon-resize-small"
+            	$scope.resize_icon = "fa fa-arrow-right"
             	$scope.mapclss = "col-md-12 minor-padding";
             	$scope.resclss = "col-md-12 minor-padding";
+        		$scope.maptooltip = $scope.tr_c['ShowReducedMap'];
         	}
         	$scope.mapctrl.redraw();
         }
@@ -81,6 +88,12 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
             $scope.performSearch();
         };
         
+        $scope.$watch('mapctrl', function(value) {
+            if($scope.mapctrl){
+            	$scope.mapctrl.redraw();
+            }
+        });
+
         $scope.performSearch = function() {
             var rest = Restangular.withConfig(function(RestangularConfigurer) {
                 RestangularConfigurer.setFullResponse(true);

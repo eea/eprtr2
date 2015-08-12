@@ -140,7 +140,7 @@ public class PollutantreleaseSearchRepository {
 		
 		/*List of FacilityIDs from Start year*/
 		PollutantreleaseSearchFilter prsStart = new PollutantreleaseSearchFilter(filter.getReportingYearSearchFilter(),
-				filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), filter.getPollutantSearchFilter());
+				filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), filter.getPollutantSearchFilter(), filter.getFacilityItemSearchFilter());
 		ReportingYearSearchFilter rysf = new ReportingYearSearchFilter(reportingYearStart);
 		prsStart.setReportingYearSearchFilter(rysf);
 
@@ -157,7 +157,7 @@ public class PollutantreleaseSearchRepository {
 
 		/*List of FacilityIDs from End year*/
 		PollutantreleaseSearchFilter prsEnd = new PollutantreleaseSearchFilter(filter.getReportingYearSearchFilter(),
-				filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), filter.getPollutantSearchFilter());
+				filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), filter.getPollutantSearchFilter(), filter.getFacilityItemSearchFilter());
 //		PollutantreleaseSearchFilter prsEnd = (PollutantreleaseSearchFilter)filter.clone();
 		ReportingYearSearchFilter ryse = new ReportingYearSearchFilter(reportingYearEnd);
 		prsEnd.setReportingYearSearchFilter(ryse);
@@ -378,7 +378,7 @@ public class PollutantreleaseSearchRepository {
     			null,pfilterorg.getMediumCode(),pfilterorg.getAccidental(),1);
     	
     	PollutantreleaseSearchFilter prfilternew = new PollutantreleaseSearchFilter(filter.getReportingYearSearchFilter(), 
-    			filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), pfilternew); 
+    			filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), pfilternew, filter.getFacilityItemSearchFilter()); 
     	
     	List<PollutantreleasesSeries> result = getPollutantreleasesSeries(prfilternew);
 
@@ -407,7 +407,7 @@ public class PollutantreleaseSearchRepository {
     			null,pfilterorg.getMediumCode(),pfilterorg.getAccidental(),1);
     	
     	PollutantreleaseSearchFilter prfilternew = new PollutantreleaseSearchFilter(filter.getReportingYearSearchFilter(), 
-    			filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), pfilternew); 
+    			filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), pfilternew, filter.getFacilityItemSearchFilter()); 
     	
     	List<PollutantreleasesSeries> groupresult = getPollutantreleasesSeries(prfilternew);
 

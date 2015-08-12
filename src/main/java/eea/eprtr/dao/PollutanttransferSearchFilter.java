@@ -12,13 +12,16 @@ public class PollutanttransferSearchFilter {
 	private LocationSearchFilter locationFilter;
 	private ActivitySearchFilter activityFilter;
 	private PollutantSearchFilter pollutantFilter;
+	private FacilityItemSearchFilter facilityItemSearchFilter;
 	
 	public PollutanttransferSearchFilter(ReportingYearSearchFilter reportingYearFilter,
-			LocationSearchFilter locationFilter, ActivitySearchFilter activityFilter, PollutantSearchFilter pollutantFilter) {
+			LocationSearchFilter locationFilter, ActivitySearchFilter activityFilter, PollutantSearchFilter pollutantFilter, FacilityItemSearchFilter facilityItemSearchFilter
+) {
 			this.reportingYearFilter = reportingYearFilter;
 			this.locationFilter = locationFilter;
 			this.activityFilter = activityFilter;
 			this.pollutantFilter = pollutantFilter;
+			this.facilityItemSearchFilter = facilityItemSearchFilter;
 	}
 
 	
@@ -54,6 +57,14 @@ public class PollutanttransferSearchFilter {
 		this.pollutantFilter = pollutantFilter;
 	}
 
+	public FacilityItemSearchFilter getFacilityItemSearchFilter() {
+		return facilityItemSearchFilter;
+	}
+
+	public void setFacilityItemSearchFilter(FacilityItemSearchFilter facilityItemSearchFilter) {
+		this.facilityItemSearchFilter = facilityItemSearchFilter;
+	}
+
 	
 	public Predicate buildWhereClause(CriteriaBuilder cb, Root<Pollutanttransfer> qr) {
 		Predicate whereClause = cb.conjunction();
@@ -68,7 +79,12 @@ public class PollutanttransferSearchFilter {
 		if (locationSearchWhereClause.getExpressions().size() > 0) {
 			whereClause.getExpressions().add(locationSearchWhereClause);
 		}
-		
+
+		Predicate facilityItemSearchWhereClause = facilityItemSearchFilter.buildWhereClausePollutanttransfer(cb, qr);
+		if (facilityItemSearchWhereClause.getExpressions().size() > 0) {
+			whereClause.getExpressions().add(facilityItemSearchWhereClause);
+		}
+
 		Predicate activitySearchWhereClause = activityFilter.buildWhereClausePollutanttransfer(cb, qr);
 		if (activitySearchWhereClause.getExpressions().size() > 0) {
 			whereClause.getExpressions().add(activitySearchWhereClause);

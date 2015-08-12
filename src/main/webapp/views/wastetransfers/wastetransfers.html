@@ -10,10 +10,10 @@
 			<p>{{tr_wt.WasteTransferSubHeadline}}</p>
 		</div>
 		<div class="col-md-3 text-right">
-			<button type="button" ng-click="togglemapview()"
+			<!--button type="button" ng-click="togglemapview()" title="{{maptooltip}}"
 				class="btn btn-default">
 				<span class="{{resize_icon}}" aria-hidden="true"></span>
-			</button>
+			</button-->
 		</div>
 	</div>
 	<div class="row row-map">
@@ -41,15 +41,20 @@
 
 		</div>
 		<div class="col-md-9 minor-padding">
+		
 			<div class="{{mapclss}}" style="height: 600px;">
+			<button type="button" ng-click="togglemapview()" title="{{maptooltip}}"
+				class="btn btn-default pull-right" style="position:absolute; right:5px; margin:5px;z-index:110;" >
+				<span class="{{resize_icon}}" aria-hidden="true"></span>
+			</button>
 				<esri-leaf-map contenttype="'wastetransfer'"
-					queryparams="queryParams" control="mapctrl" />
+					queryparams="queryParams" control="mapctrl" ></esri-leaf-map>
 			</div>
 
 
 			<div class="search_form {{resclss}}">
 				<div ng-show="searchResults">
-					<div ng-hide="(hasConfidentionalData? false: true)">
+					<div ng-hide="(isConfidential? false: true)">
 						<blockquote>
 							<small><a class="text-danger"
 								ng-click="activateTab('confidentiality')"><i
@@ -64,7 +69,8 @@
 					</div>
 				</div>
 				<div class="col-md-12 extra-padding">
-					<tabset> <tab heading="Summary"
+					<tabset> 
+					<tab heading="Summary"
 						ng-click="getTabData('SUMMARY');activateTab('summary')"
 						active="active.summary">
 					<div id="waste_transfers_summary" ng-show="searchResults">
@@ -147,7 +153,8 @@
 							</table>
 						</div>
 					</div>
-					</tab> <tab heading="Activities"
+					</tab> 
+					<tab heading="Activities"
 						ng-click="getTabData('Activities');activateTab('activities')"
 						active="active.activities">
 					<div id="waste_transfers_activities" ng-show="searchResults">
@@ -362,7 +369,8 @@
 							</div>
 						</div>
 					</div>
-					</tab> <tab heading="Areas"
+					</tab> 
+					<tab heading="Areas"
 						ng-click="getTabData('areas');activateTab('areas')"
 						active="active.areas">
 					<div id="waste_transfers_areas" ng-show="searchResults">
@@ -543,7 +551,8 @@
 							</div>
 						</div>
 					</div>
-					</tab> <tab heading="Area Comparison"
+					</tab> 
+					<tab heading="Area Comparison"
 						ng-click="getTabData('AREACOMPARISON');activateTab('areacomparison')"
 						active="active.areacomparison">
 					<div id="waste_transfers_area_comparison" ng-show="searchResults">
@@ -580,8 +589,7 @@
 							</div>
 						</div>
 
-						<waste-area-comparison queryparams="queryParams"
-							visible="showareacomparison" />
+						<waste-area-comparison queryparams="queryParams" visible="showareacomparison" />
 					</div>
 
 					</tab> <tab heading="Facilities"

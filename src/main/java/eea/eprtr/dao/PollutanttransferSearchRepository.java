@@ -102,7 +102,7 @@ public class PollutanttransferSearchRepository {
 		
 		/*List of FacilityIDs from Start year*/
 		PollutanttransferSearchFilter ptsStart = new PollutanttransferSearchFilter(filter.getReportingYearSearchFilter(),
-				filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), filter.getPollutantSearchFilter());
+				filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), filter.getPollutantSearchFilter(), filter.getFacilityItemSearchFilter());
 		ReportingYearSearchFilter rysf = new ReportingYearSearchFilter(reportingYearStart);
 		ptsStart.setReportingYearSearchFilter(rysf);
 
@@ -119,7 +119,7 @@ public class PollutanttransferSearchRepository {
 
 		/*List of FacilityIDs from End year*/
 		PollutanttransferSearchFilter ptsEnd = new PollutanttransferSearchFilter(filter.getReportingYearSearchFilter(),
-				filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), filter.getPollutantSearchFilter());
+				filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), filter.getPollutantSearchFilter(), filter.getFacilityItemSearchFilter());
 //		PollutanttransferSearchFilter ptsEnd = (PollutanttransferSearchFilter)filter.clone();
 		ReportingYearSearchFilter ryse = new ReportingYearSearchFilter(reportingYearEnd);
 		ptsEnd.setReportingYearSearchFilter(ryse);
@@ -261,7 +261,7 @@ public class PollutanttransferSearchRepository {
     			null,pfilterorg.getMediumCode(),pfilterorg.getAccidental(),1);
     	
     	PollutanttransferSearchFilter ptfilternew = new PollutanttransferSearchFilter(filter.getReportingYearSearchFilter(), 
-    			filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), pfilternew); 
+    			filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), pfilternew, filter.getFacilityItemSearchFilter()); 
     	
     	List<PollutanttransferSeries> groupresult = getPollutanttransferSeries(ptfilternew);
 
@@ -341,7 +341,7 @@ public class PollutanttransferSearchRepository {
     			null,pfilterorg.getMediumCode(),pfilterorg.getAccidental(),1);//pfilterorg.getConfidentialIndicator()
     	
     	PollutanttransferSearchFilter ptfilternew = new PollutanttransferSearchFilter(filter.getReportingYearSearchFilter(), 
-    			filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), pfilternew); 
+    			filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), pfilternew, filter.getFacilityItemSearchFilter()); 
     	
     	List<PollutanttransferSeries> result = getPollutanttransferSeries(ptfilternew);
 

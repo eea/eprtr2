@@ -36,7 +36,7 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
     $scope.cf = countFactory;
     $scope.ff = formatStrFactory;
     $scope.med = 'quantityAir';
-    $scope.resize_icon = "glyphicon glyphicon-resize-full"
+    $scope.resize_icon = "fa fa-arrow-left"
     $scope.bigmap = false;
     $scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
     $scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
@@ -67,6 +67,8 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 			$scope.tr_con =data.Confidentiality;
     		$scope.tr_wt = data.WasteTransfers;
     		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
+    		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
+
 	    });
     };
     $scope.translate();
@@ -75,6 +77,12 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 //    	console.log("HTD is there.");
     });
 	
+    $scope.$watch('mapctrl', function(value) {
+        if($scope.mapctrl){
+        	$scope.mapctrl.redraw();
+        }
+    });
+
     $scope.$watch('prMedium', function(value){
     	if($scope.prfilter && $scope.prfilter.prsel){
     		$scope.medium = $scope.prMedium;
@@ -106,15 +114,17 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
     $scope.togglemapview = function(){
     	if($scope.bigmap){
         	$scope.bigmap = false;
-        	$scope.resize_icon = "glyphicon glyphicon-resize-full"
+        	$scope.resize_icon = "fa fa-arrow-left"
         	$scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
         	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
+    		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
     	}
     	else{
         	$scope.bigmap = true;
-        	$scope.resize_icon = "glyphicon glyphicon-resize-small"
+        	$scope.resize_icon = "fa fa-arrow-right"
         	$scope.mapclss = "col-md-12 minor-padding";
         	$scope.resclss = "col-md-12 minor-padding";
+    		$scope.maptooltip = $scope.tr_c['ShowReducedMap'];
     	}
     	$scope.mapctrl.redraw();
     }

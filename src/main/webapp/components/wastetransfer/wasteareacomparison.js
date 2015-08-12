@@ -8,6 +8,7 @@ angular.module('myApp.wasteAreaComparison', ['restangular','ngSanitize','angular
         $scope.wtacfilter = {};
         $scope.wtacsel = {};
         $scope.nodata = true;
+        $scope.init = true;
         $scope.translate = function()
         {
         	translationService.get().then(function (data) {
@@ -255,6 +256,18 @@ angular.module('myApp.wasteAreaComparison', ['restangular','ngSanitize','angular
             	$scope.aodata = graphData;*/
         } 
 
+        $scope.initfix = function(elem){
+        	if ($scope.init){
+          		var chart2 = {};
+          	    chart2.type = "google.charts.Bar";
+                chart2.displayed = false;
+                chart2.data = $scope.myChart.data;
+                chart2.options = $scope.myChart.options;
+                chart2.options.width = '100%';
+            	$scope.myChart = chart2;
+            	$scope.init = false;
+        	}
+        }
    
        /* var chart1 = {};
         chart1.type = "google.charts.Bar";

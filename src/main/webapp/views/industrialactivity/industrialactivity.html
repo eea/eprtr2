@@ -4,14 +4,9 @@
 		<h3>{{tr_ina.Headline}}</h3>
 	</div>
 	<div class="row">
-		<div class="col-md-9">
+		<div class="col-md-12">
 			<p>{{tr_ina.SubHeadline}}</p>
-		</div>
-		<div class="col-md-3 text-right minor-padding">
-			<button type="button" ng-click="togglemapview()"
-				class="btn btn-default resize_button">
-				<span class="{{resize_icon}}" aria-hidden="true"></span>
-			</button>
+		
 		</div>
 	</div>
 
@@ -47,7 +42,10 @@
 			<div class="row">
 
 				<div class="{{mapclss}}" style="height: 600px;">
-					<esri-leaf-map contenttype="'facilitylevel'"
+					<button type="button" ng-click="togglemapview()" title="{{maptooltip}}"
+				class="btn btn-default pull-right" style="position:absolute; right:5px; margin:5px;z-index:110;" >
+				<span class="{{resize_icon}}" aria-hidden="true"></span>
+			</button><esri-leaf-map contenttype="'facilitylevel'"
 						queryparams="queryParams" control="mapctrl" />
 				</div>
 
