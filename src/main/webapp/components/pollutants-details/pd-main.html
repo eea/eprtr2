@@ -1,16 +1,17 @@
 <div ng-controller="PdController" class="container-fluid" >
 
+	<table>
+		<tr>
+			<td class="fdTitles">{{tr_c.Pollutant }}:</td>
+			<td>{{ pollutant_details.pollutant_name }}</td>
+		</tr>
+		<tr>
+			<td class="fdTitles">{{ tr_c.PollutantGroup }}:</td>
+			<td>{{ pollutant_group_name}}</td>
+		</tr>
+	</table>
+	<div class="col-md-12 top-buffer10" >
 	<tabset>
-
-	<h4>Pollutant</h4>
-	<p>{{ pollutant_details.pollutant_name }}</p>
-
-	<h4>Pollutant Group</h4>
-	<p>{{ pollutant_group_name}}</p>
-
-	<br />
-
-	
 		<tab heading="General information">
 			<table class="table table-striped table-hover col-sm-4">
 				<tr>
@@ -208,5 +209,5 @@
 				</table>
 		</tab>
 	</tabset>
-
+	</div>
 </div>

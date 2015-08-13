@@ -78,7 +78,7 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
     });
 	
     $scope.$watch('mapctrl', function(value) {
-        if($scope.mapctrl){
+    	if(typeof $scope.mapctrl.redraw == 'function'){
         	$scope.mapctrl.redraw();
         }
     });

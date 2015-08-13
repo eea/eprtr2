@@ -114,7 +114,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'resta
     $scope.totalItemCount = 0;
 
     $scope.$watch('mapctrl', function(value) {
-        if($scope.mapctrl){
+    	if(typeof $scope.mapctrl.redraw == 'function'){
         	$scope.mapctrl.redraw();
         }
     });

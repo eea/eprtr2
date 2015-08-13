@@ -120,7 +120,7 @@ angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'r
           }
           
           $scope.$watch('mapctrl', function(value) {
-              if($scope.mapctrl){
+              if(typeof $scope.mapctrl.redraw == 'function'){
               	$scope.mapctrl.redraw();
               }
           });

@@ -444,28 +444,25 @@ CONFIDENTIALITY
 POLLUTANT MODAL
  -->
     <script type="text/ng-template" id="myPollutantContent.html">
-        <div class="modal-header">
-            <h3 class="modal-title">Pollutants Information</h3>
-        </div>
+		<div class="modal-header ">
+        <button type="button" class="close" ng-click="ok()" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Pollutants Information</h4>
+      </div>
         <div class="modal-body">
-            <h1>Here we show pollutant info!</h1>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+			<div class="top-buffer10 panel " >
+				<div id="prPollutantGroup" sf-pollutant queryparams="queryParams" pgselect="prfilter.pgselect" pselect="prfilter.pselect" grponly="false"  vertical="true"></div>
+			</div>
+            <pollutant-details pollutantid="prfilter.pselect.lov_PollutantID" class="top-buffer10" />
         </div>
     </script>
 
     <script type="text/ng-template" id="myActivityContent.html">
         <div class="modal-header">
-            <h3 class="modal-title">Industrial Activities</h3>
+	        <button type="button" class="close" ng-click="ok()" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    	    <h4 class="modal-title" id="myModalLabel">Industrial Activities</h4>
         </div>
         <div class="modal-body">
             <div ng-bind-html="input.ActivityPageContent" ></div>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
         </div>
     </script>
     

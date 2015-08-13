@@ -13,7 +13,8 @@ myApp.directive('sfPollutant', ['$compile','$http', '$filter', 'Restangular', 't
         	pgSelect: '=pgselect', //Selected Pollutant Group
         	pSelect: '=?pselect', //Selected Pollutant
         	grpOnly: '=?grponly', //Include only Pollutant Groupes selector
-        	useHeaders: '=?useheaders' //Include a default first item in list
+        	useHeaders: '=?useheaders', //Include a default first item in list
+        	vertical: '=?vertical'
         },
         replace: true,
         transclude: true,
@@ -38,7 +39,9 @@ myApp.directive('sfPollutant', ['$compile','$http', '$filter', 'Restangular', 't
     		if (scope.queryParams == undefined){
     			scope.queryParams = {};
     		}
-
+    		if (scope.vertical == undefined){
+    			scope.vertical = false;
+    		}
             scope.$watch('polfilter.selectedPollutantGroup', function(value){
             	if(scope.polfilter.selectedPollutantGroup != undefined 
             			&& scope.polfilter.selectedPollutantGroup != allPollutantGroups){
@@ -110,12 +113,16 @@ myApp.directive('sfPollutant', ['$compile','$http', '$filter', 'Restangular', 't
     		scope.$watchCollection('[pollutantGroups,tr_c]', function(value) {
     			
                 if (scope.pollutantGroups != undefined && scope.tr_c != undefined ) {
-                	var body = '<div class="form-group"><label class="control-label" for="inputPollutantGroup">Pollutant Group</label>';
-                	body += '<select class="form-control" ng-model="polfilter.selectedPollutantGroup" ng-options="c.name for c in pollutantGroups" id="inputPollutantGroup"></select></div>';
-                	body += '<div class="form-group" ng-if="!grpOnly"><label class="control-label" for="inputPollutant">Pollutant</label>';
-                	body += '<select class="form-control" ng-model="polfilter.selectedPollutant" ng-options="c.name for c in pollutants" id="inputPollutant"></select></div>';
-                    element.empty();
+            		var body = '<div class="form-group"><label class="control-label" for="inputPollutantGroup">Pollutant Group</label>  ';
+                	body += '<select class="form-control" ng-model="polfilter.selectedPollutantGroup" ng-options="c.name for c in pollutantGroups" id="inputPollutantGroup"></select></div>  ';
+                	body += '<div class="form-group" ng-if="!grpOnly"><label class="control-label" for="inputPollutant">Pollutant</label>  ';
+                	body += '<select class="form-control" ng-model="polfilter.selectedPollutant" ng-options="c.name for c in pollutants" id="inputPollutant"></select></div>  ';
+                	if(scope.vertical){
+                		body = '<div class="form-inline" >' + body + '</div>';
+                	}
+                	element.empty();
                     element.append($compile(body)(scope));
+
                 }
                 else {
                     element.empty();

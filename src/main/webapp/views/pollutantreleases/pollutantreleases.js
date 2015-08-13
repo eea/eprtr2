@@ -122,7 +122,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
     	 * Listeners
     	 */
         $scope.$watch('mapctrl', function(value) {
-            if($scope.mapctrl){
+        	if(typeof $scope.mapctrl.redraw == 'function'){
             	$scope.mapctrl.redraw();
             }
         });

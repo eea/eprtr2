@@ -2,10 +2,13 @@
 
 angular.module('myApp.pd-main', ['ngSanitize'])
 
-.controller('PdController', ['$scope', '$http', function($scope, $http) {
+.controller('PdController', ['$scope', '$http', 'translationService', function($scope, $http, translationService) {
 	var pollutant_group_details = null;
 
 	//$scope.pollutantid;
+	translationService.get().then(function (data) {
+		$scope.tr_c = data.Common;
+	});
 	
 	$scope.getPollutantData = function(){
 		$http.get('translations/pollutants_details_en-gb.json').success(function(data, status) {

@@ -79,10 +79,11 @@ public class PollutanttransferSearchFilter {
 		if (locationSearchWhereClause.getExpressions().size() > 0) {
 			whereClause.getExpressions().add(locationSearchWhereClause);
 		}
-
-		Predicate facilityItemSearchWhereClause = facilityItemSearchFilter.buildWhereClausePollutanttransfer(cb, qr);
-		if (facilityItemSearchWhereClause.getExpressions().size() > 0) {
-			whereClause.getExpressions().add(facilityItemSearchWhereClause);
+		if (facilityItemSearchFilter != null){
+			Predicate facilityItemSearchWhereClause = facilityItemSearchFilter.buildWhereClausePollutanttransfer(cb, qr);
+			if (facilityItemSearchWhereClause.getExpressions().size() > 0) {
+				whereClause.getExpressions().add(facilityItemSearchWhereClause);
+			}
 		}
 
 		Predicate activitySearchWhereClause = activityFilter.buildWhereClausePollutanttransfer(cb, qr);
