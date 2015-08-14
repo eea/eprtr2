@@ -592,7 +592,8 @@
 						<waste-area-comparison queryparams="queryParams" visible="showareacomparison" />
 					</div>
 
-					</tab> <tab heading="Facilities"
+					</tab> 
+					<tab heading="Facilities"
 						ng-click="getTabData('FACILITIES');activateTab('facilities')"
 						active="active.facilities">
 					<div id="waste_transfers_facilities" ng-show="searchResults">
@@ -678,7 +679,8 @@
 							</table>
 						</div>
 					</div>
-					</tab> <tab heading="Haz. transboundary"
+					</tab> 
+					<tab heading="Haz. transboundary"
 						ng-click="getTabData('HAZTRANSBOUNDARY');activateTab('haztransboundary')"
 						active="active.haztransboundary">
 					<div id="waste_transfers_haz_transboundary" ng-show="searchResults">
@@ -725,7 +727,8 @@
 						<haz-transboundary queryparams="queryParams"
 							haztransboundaryitems="hazTransboundaryData.data" />
 					</div>
-					</tab> <tab heading="Haz. receivers"
+					</tab> 
+					<tab heading="Haz. receivers"
 						ng-click="getTabData('HAZRECEIVERS');activateTab('hazreceivers')"
 						active="active.hazreceivers">
 					<div id="waste_transfers_haz_receivers" ng-show="searchResults">
@@ -767,8 +770,8 @@
 							<haz-receivers-waste-tab queryparams="queryParams" />
 						</div>
 					</div>
-					</tab> <tab heading="Confidentiality"
-						ng-click="getTabData('CONFIDENTIALITY');activateTab('confidentiality')"
+					</tab> 
+					<tab heading="Confidentiality" ng-click="getTabData('CONFIDENTIALITY');activateTab('confidentiality')"
 						active="active.confidentiality">
 					<div ng-show="isConfidential">
 

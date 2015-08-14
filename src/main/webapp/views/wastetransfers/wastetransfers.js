@@ -123,6 +123,40 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         }
     });
 
+$scope.$watch('currentPage', function(value) {
+    	if ($scope.currentSearchFilter !== undefined) {
+    		$scope.performSearch();
+    	}
+    });
+    
+    $scope.$watch('sort.sortingOrder', function(value) {
+    	var prevPage = $scope.currentPage;
+    	$scope.currentPage = 1;
+    	if ($scope.currentSearchFilter !== undefined && prevPage == 1) {
+    		$scope.performSearch(true);
+    	}
+    });
+    
+    $scope.$watch('sort.reverse', function(value) {
+    	var prevPage = $scope.currentPage;
+    	$scope.currentPage = 1;
+    	if ($scope.currentSearchFilter !== undefined && prevPage == 1) {
+    		$scope.performSearch();
+    	}
+    });
+
+    $scope.$watch('wtfcsel.wtsel', function(value) {
+//    $scope.wtfcsel = function(wastetype){
+    	if($scope.wtfcsel && $scope.wtfcsel.wtsel){
+	    	$scope.wtfilter.wtsel =  $scope.wtfcsel.wtsel;
+	    	$scope.currentPage = 1;
+	    	if ($scope.currentSearchFilter !== undefined) {
+	    		$scope.performSearch();
+	    	}
+    	}
+    });
+
+
     $scope.hasItems = function() {
     	return $scope.items.length > 0;
     };

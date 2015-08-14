@@ -1,16 +1,21 @@
-<div class="row  top-buffer10">
-<span us-spinner="{radius:16, width:6, length: 12}" spinner-key="spinner-2"></span>
-	<!--div class="col-md-12" wt-selector queryparams="queryparams" wtsel="wtacsel.wtsel" ></div-->
-<div class="col-md-12">	
-<label class="control-label"><strong>{{tr_w.ShowFacilitiesWithTransferOfWasteType}}:</strong></label></br> 
-   <label class="radio-inline" for="NONHW"><input type="radio" id="NONHW"  ng-model="wtacfilter.wtsel" value="NONHW" />
-	{{tr_c.NoHazardouswaste}}<span class="label label-success label-as-badge" title="quantityNONHW + ' ' + tr_c.Facilities">{{quantityNONHW}}</span></label>
-   <label class="radio-inline" for="HWIC"><input type="radio" id="HWIC" ng-model="wtacfilter.wtsel" value="HWIC" />
-    {{tr_c.HazardouswasteWithinCountry}}<span class="label label-success label-as-badge" title="quantityHWIC + ' ' + tr_c.Facilities">{{quantityHWIC}}</span></label>
-   <label class="radio-inline"  for="HWOC"><input type="radio" id="HWOC" ng-model="wtacfilter.wtsel" value="HWOC" /> 
-    {{tr_c.HazardouswasteTransboundary}}<span class="label label-success label-as-badge" title="scope.quantityHWOC + ' ' + tr_c.Facilities">{{quantityHWOC}}</span></label>	
-</div>	
-<div class="col-md-12 top-buffer10" ng-bind-html="tr_wt.DoubleCounting"></div>
+<div class="row top-buffer10">
+	<span us-spinner="{radius:16, width:6, length: 12}" spinner-key="spinner-2"></span>
+	<div class="col-md-12">	
+		<p><strong>{{tr_w.ShowFacilitiesWithTransferOfWasteType}}:</strong></p> 
+	   	<label class="radio-inline" for="NONHW">
+	   		<input type="radio" id="NONHW"  ng-model="wtacfilter.wtsel" value="NONHW" />{{tr_c.NoHazardouswaste}}
+	   		<span class="label label-success label-as-badge" title="quantityNONHW + ' ' + tr_c.Facilities">{{quantityNONHW}}</span>
+	   	</label>
+	   	<label class="radio-inline" for="HWIC">
+	   		<input type="radio" id="HWIC" ng-model="wtacfilter.wtsel" value="HWIC" />{{tr_c.HazardouswasteWithinCountry}}
+	   		<span class="label label-success label-as-badge" title="quantityHWIC + ' ' + tr_c.Facilities">{{quantityHWIC}}</span>
+	   	</label>
+	   	<label class="radio-inline"  for="HWOC">
+	   		<input type="radio" id="HWOC" ng-model="wtacfilter.wtsel" value="HWOC" />{{tr_c.HazardouswasteTransboundary}}
+	    	<span class="label label-success label-as-badge" title="quantityHWOC + ' ' + tr_c.Facilities">{{quantityHWOC}}</span>
+	    </label>	
+	</div>	
+	<div class="col-md-12 top-buffer10" ng-bind-html="tr_wt.DoubleCounting"></div>
 </div>
 
 <div class="row top-buffer10">
