@@ -1,5 +1,44 @@
 
 <div class="row top-buffer10" >
+						<div class="row top-buffer10">
+							<div class="col-md-5">
+
+								<table>
+									<tr>
+										<td class="fdTitles">{{tr_c.Year }}:</td>
+										<td>{{ queryparams.ReportingYear }}</td>
+									</tr>
+									<tr>
+										<td class="fdTitles">{{ tr_c.Area }}:</td>
+										<td>{{ header.area }}</td>
+									</tr>
+
+									<tr>
+										<td class="fdTitles">{{tr_c.Facilities}}:</td>
+										<td>{{cf.getSum(items,"facilities",false)}}</td>
+									</tr>
+								</table>
+							</div>
+							<div class="col-md-4">
+								<blockquote>
+									<div class="text-info">
+										<small>{{tr_wt.AllValuesAreYearlyTransfers}}</small>
+									</div>
+								</blockquote>
+							</div>
+							<div class="col-md-3">
+								<button class="print-button btn btn-default pull-right" ng-print
+									print-element-id="waste_transfers_haz_transboundary">
+									<i class="fa fa-print"></i>
+								</button>
+								<button class="btn btn-default pull-right"
+									ng-click="downloadClick('transboundary')">
+									<span class="glyphicon glyphicon-download-alt"
+										aria-hidden="true"></span>
+								</button>
+							</div>
+						</div>
+						
 	<div id="bubblechart_wt" google-chart chart="myChart" on-mouseover="myhandler1(row)"  on-mouseout="myhandler2(row)" on-ready="fixtext(elem)" ng-if="items.length > 0" style="width:100%"></div>
 	<div id="custom_tooltip"  style="position: absolute;"></div>
 	<!--div id="coords">x:{{coords.x}} y:{{coords.y}} ox:{{coords.ox}} oy:{{coords.oy}}</div-->

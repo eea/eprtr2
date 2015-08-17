@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize',
-                                        'myApp.wastetransferconfidential','myApp.wasteAreaComparison','myApp.hazTransboundary','myApp.HazReceiversWasteTab'])
+                                        'myApp.wastetransferconfidential','myApp.wasteAreaComparison',
+                                        'myApp.hazTransboundary','myApp.HazReceiversWasteTab'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/wastetransfers', {
@@ -35,6 +36,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.SearchType="SUMMARY";
         $scope.hazTransboundaryData = {};
         $scope.resize_icon = "fa fa-arrow-left";
+        $scope.header = {};
 
         $scope.showhazreceivers = false;
 
@@ -198,15 +200,19 @@ $scope.$watch('currentPage', function(value) {
             var queryParams = {ReportingYear: $scope.currentSearchFilter.selectedReportingYear.year};
             if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.countryId) {
             	queryParams.LOV_CountryID = $scope.currentSearchFilter.selectedReportingCountry.countryId;
+            	$scope.header.area = $scope.currentSearchFilter.selectedReportingCountry.name;
                 if ($scope.currentSearchFilter.selectedRegion.lov_NUTSRegionID) {
-                queryParams.LOV_NUTSRegionID = $scope.currentSearchFilter.selectedRegion.lov_NUTSRegionID;
+                	queryParams.LOV_NUTSRegionID = $scope.currentSearchFilter.selectedRegion.lov_NUTSRegionID;
+                	$scope.header.area = $scope.currentSearchFilter.selectedRegion.name;
                 }
                 else if ($scope.currentSearchFilter.selectedRegion.lov_RiverBasinDistrictID) {
                 	queryParams.LOV_RiverBasinDistrictID = $scope.currentSearchFilter.selectedRegion.lov_RiverBasinDistrictID;
+                	$scope.header.area = $scope.currentSearchFilter.selectedRegion.name;
                 }
             }
             if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.groupId) {
             	queryParams.LOV_AreaGroupID = $scope.currentSearchFilter.selectedReportingCountry.groupId;
+            	$scope.header.area = $scope.currentSearchFilter.selectedReportingCountry.name;
             }
             if ($scope.currentSearchFilter.activitySearchFilter) {
                 $scope.currentSearchFilter.activitySearchFilter.filter(queryParams);
@@ -574,11 +580,11 @@ $scope.$watch('currentPage', function(value) {
         		$scope.performSearchWithoutLimit();
         		return;
             		
-        	}else if(tab === 'transboundary'){
+        	}/*else if(tab === 'transboundary'){
         		$scope.updateTransboundaryDownloadData();
         		contentArray = $scope.transboundaryDownload;
         		fileName = 'EPRTR_Waste_Transfer_Haz_Transboundary'+contentDate+'.csv';
-        	}
+        	}*/
 
         	var csvContent = 'data:text/csv;charset=utf-8,';
         	contentArray.forEach(function(infoArray, index){

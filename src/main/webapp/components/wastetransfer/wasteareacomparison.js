@@ -331,7 +331,8 @@ angular.module('myApp.wasteAreaComparison', ['restangular','ngSanitize','angular
         transclude: true,
 		scope: {
 			queryparams: '=',
-			visible: '='
+			visible: '=',
+			header: '=' 
 		},
 		templateUrl: 'components/wastetransfer/wasteareacomparison.html',
 		link: function(scope, element, attrs){

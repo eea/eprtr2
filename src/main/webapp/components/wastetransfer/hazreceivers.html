@@ -1,3 +1,37 @@
+			<div class="row top-buffer10">
+							<div class="col-md-5">
+
+								<table>
+									<tr>
+										<td class="fdTitles">{{tr_c.Year }}:</td>
+										<td>{{ queryparams.ReportingYear }}</td>
+									</tr>
+									<tr>
+										<td class="fdTitles">{{ tr_c.Area }}:</td>
+										<td>{{ header.area }}</td>
+									</tr>
+
+									<tr>
+										<td class="fdTitles">{{tr_c.Facilities}}:</td>
+										<td>{{ items[items.length - 1].facilities }}</td>
+									</tr>
+								</table>
+							</div>
+							<div class="col-md-4">
+								<blockquote>
+									<div class="text-info">
+										<small>{{tr_wt.AllValuesAreYearlyTransfers}}</small>
+									</div>
+								</blockquote>
+							</div>
+							<div class="col-md-3">
+								<button class="print-button btn btn-default pull-right" ng-print
+									print-element-id="waste_transfers_haz_receivers">
+									<i class="fa fa-print"></i>
+								</button>
+							</div>
+						</div>
+			
 			<span class="col-md-12 ontop" us-spinner="{radius:16, width:6, length: 12}" spinner-key="spinner-1"></span>
 			<div class="row">
 			<div class="col-md-12 table-responsive top-buffer10" ng-if="showTable" >

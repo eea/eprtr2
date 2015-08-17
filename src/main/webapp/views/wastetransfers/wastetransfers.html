@@ -83,12 +83,12 @@
 									</tr>
 									<tr>
 										<td class="fdTitles">{{ tr_c.Area }}:</td>
-										<td>{{ currentSearchFilter.selectedReportingCountry.name
+										<td>{{ header.area
 											}}</td>
 									</tr>
 									<tr>
 										<td class="fdTitles">{{tr_c.Facilities}}:</td>
-										<td>{{cf.getTypeCount(summaryItems)}}</td>
+										<td>{{cf.getSubSum(activities,"facilityCount",false)}}</td>
 									</tr>
 								</table>
 							</div>
@@ -169,7 +169,7 @@
 									</tr>
 									<tr>
 										<td class="fdTitles">{{ tr_c.Area }}:</td>
-										<td>{{ currentSearchFilter.selectedReportingCountry.name
+										<td>{{ header.area
 											}}</td>
 									</tr>
 
@@ -385,12 +385,12 @@
 									</tr>
 									<tr>
 										<td class="fdTitles">{{ tr_c.Area }}:</td>
-										<td>{{ currentSearchFilter.selectedReportingCountry.name
+										<td>{{ header.area
 											}}</td>
 									</tr>
 									<tr>
 										<td class="fdTitles">{{tr_c.Facilities}}:</td>
-										<td>{{cf.getTypeCount(summaryItems)}}</td>
+										<td>{{cf.getSubSum(areas,"facilityCount",false)}}</td>
 									</tr>
 								</table>
 							</div>
@@ -565,12 +565,11 @@
 									</tr>
 									<tr>
 										<td class="fdTitles">{{ tr_c.Area }}:</td>
-										<td>{{ currentSearchFilter.selectedReportingCountry.name
-											}}</td>
+										<td>{{ header.area}}</td>
 									</tr>
 									<tr>
 										<td class="fdTitles">{{tr_c.Facilities}}:</td>
-										<td>{{cf.getTypeCount(summaryItems)}}</td>
+										<td>{{ cf.getSubSum(activities,"facilityCount",false) }}</td>
 									</tr>
 								</table>
 							</div>
@@ -589,7 +588,7 @@
 							</div>
 						</div>
 
-						<waste-area-comparison queryparams="queryParams" visible="showareacomparison" />
+						<waste-area-comparison queryparams="queryParams" visible="showareacomparison" header="header" />
 					</div>
 
 					</tab> 
@@ -606,12 +605,11 @@
 									</tr>
 									<tr>
 										<td class="fdTitles">{{ tr_c.Area }}:</td>
-										<td>{{ currentSearchFilter.selectedReportingCountry.name
-											}}</td>
+										<td>{{ header.area }}</td>
 									</tr>
 									<tr>
 										<td class="fdTitles">{{tr_c.Facilities}}:</td>
-										<td>{{cf.getTypeCount(summaryItems)}}</td>
+										<td>{{cf.getSubSum(activities,"facilityCount",false)}}</td>
 									</tr>
 								</table>
 							</div>
@@ -684,55 +682,15 @@
 						ng-click="getTabData('HAZTRANSBOUNDARY');activateTab('haztransboundary')"
 						active="active.haztransboundary">
 					<div id="waste_transfers_haz_transboundary" ng-show="searchResults">
-						<div class="row top-buffer10">
-							<div class="col-md-5">
-
-								<table>
-									<tr>
-										<td class="fdTitles">{{tr_c.Year }}:</td>
-										<td>{{ queryParams.ReportingYear }}</td>
-									</tr>
-									<tr>
-										<td class="fdTitles">{{ tr_c.Area }}:</td>
-										<td>{{ currentSearchFilter.selectedReportingCountry.name
-											}}</td>
-									</tr>
-
-									<tr>
-										<td class="fdTitles">{{tr_c.Facilities}}:</td>
-										<td>{{cf.getTypeCount(summaryItems)}}</td>
-									</tr>
-								</table>
-							</div>
-							<div class="col-md-4">
-								<blockquote>
-									<div class="text-info">
-										<small>{{tr_wt.AllValuesAreYearlyTransfers}}</small>
-									</div>
-								</blockquote>
-							</div>
-							<div class="col-md-3">
-								<button class="print-button btn btn-default pull-right" ng-print
-									print-element-id="waste_transfers_haz_transboundary">
-									<i class="fa fa-print"></i>
-								</button>
-								<button class="btn btn-default pull-right"
-									ng-click="downloadClick('transboundary')">
-									<span class="glyphicon glyphicon-download-alt"
-										aria-hidden="true"></span>
-								</button>
-							</div>
-						</div>
-
 						<haz-transboundary queryparams="queryParams"
-							haztransboundaryitems="hazTransboundaryData.data" />
+							haztransboundaryitems="hazTransboundaryData.data" header="header" />
 					</div>
 					</tab> 
 					<tab heading="Haz. receivers"
 						ng-click="getTabData('HAZRECEIVERS');activateTab('hazreceivers')"
 						active="active.hazreceivers">
 					<div id="waste_transfers_haz_receivers" ng-show="searchResults">
-						<div class="row top-buffer10">
+						<!--div class="row top-buffer10">
 							<div class="col-md-5">
 
 								<table>
@@ -742,13 +700,13 @@
 									</tr>
 									<tr>
 										<td class="fdTitles">{{ tr_c.Area }}:</td>
-										<td>{{ currentSearchFilter.selectedReportingCountry.name
+										<td>{{ header.area
 											}}</td>
 									</tr>
 
 									<tr>
 										<td class="fdTitles">{{tr_c.Facilities}}:</td>
-										<td>{{cf.getTypeCount(summaryItems)}}</td>
+										<td>{{cf.getSubSum(activities,"facilityCount",false)}}</td>
 									</tr>
 								</table>
 							</div>
@@ -765,9 +723,9 @@
 									<i class="fa fa-print"></i>
 								</button>
 							</div>
-						</div>
+						</div -->
 						<div ng-show="showhazreceivers">
-							<haz-receivers-waste-tab queryparams="queryParams" />
+							<haz-receivers-waste-tab queryparams="queryParams" header="header" />
 						</div>
 					</div>
 					</tab> 
