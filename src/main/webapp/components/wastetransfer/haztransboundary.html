@@ -13,7 +13,7 @@
 										<td>{{ header.area }}</td>
 									</tr>
 
-									<tr>
+									<tr ng-if="items.length > 0">
 										<td class="fdTitles">{{tr_c.Facilities}}:</td>
 										<td>{{cf.getSum(items,"facilities",false)}}</td>
 									</tr>

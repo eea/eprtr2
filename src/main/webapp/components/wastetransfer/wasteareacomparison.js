@@ -256,8 +256,8 @@ angular.module('myApp.wasteAreaComparison', ['restangular','ngSanitize','angular
             	$scope.aodata = graphData;*/
         } 
 
-        $scope.initfix = function(elem){
-        	if ($scope.init){
+        $scope.initfix = function(){
+        	if ($scope.init && $scope.myChart){
           		var chart2 = {};
           	    chart2.type = "google.charts.Bar";
                 chart2.displayed = false;
