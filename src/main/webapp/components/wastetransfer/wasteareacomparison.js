@@ -60,7 +60,7 @@ angular.module('myApp.wasteAreaComparison', ['restangular','ngSanitize','angular
           });
           
         $scope.$watchCollection('[tr_lovwt,queryparams,visible]', function(value){
-        	if($scope.queryparams != undefined && $scope.tr_lovwt != undefined && $scope.visible ){
+        	if($scope.queryparams != undefined && $scope.tr_lovwt != undefined){
         		$scope.loadWTselector();
         		/*$scope.startSpin();
     			$scope.getData();*/
@@ -77,6 +77,7 @@ angular.module('myApp.wasteAreaComparison', ['restangular','ngSanitize','angular
     		        }
     		    }
 
+    		    console.log('Ready to req wastetransferCounts!');
             	$scope.searchWTCService = $scope.restconfig.one('wastetransferCounts');
         		$scope.searchWTCService.get(qp).then(function(response) {
 //    	            $scope.headitems = response.data;
@@ -89,6 +90,7 @@ angular.module('myApp.wasteAreaComparison', ['restangular','ngSanitize','angular
     	            else{
     	            	$scope.wtacfilter.wtsel = 'NONHW';
     	            }
+        		    console.log('Received results from wastetransferCounts!');
             		$scope.getData();
     	        });
     		}
@@ -105,11 +107,12 @@ angular.module('myApp.wasteAreaComparison', ['restangular','ngSanitize','angular
 		    if($scope.wtacfilter.wtsel){
 		    	qp.WasteType = $scope.wtacfilter.wtsel.replace('-','');
 		    }
-		    
+		    console.log('Ready to req wastetransferAreaCompare:' + qp.WasteType);
         	$scope.searchService = $scope.restconfig.all('wastetransferAreaCompare');
     		$scope.searchService.getList(qp).then(function(response) {
         		$scope.items = response.data;
-//          		$scope.totalSearchResult += parseInt($scope.wastetransfercount);
+    		    console.log('Received results from wastetransferAreaCompare:' + qp.WasteType);
+        		//          		$scope.totalSearchResult += parseInt($scope.wastetransfercount);
           		$scope.updateAreaComparisonData();
           		$scope.nodata = (response.data.length > 0)? true:false;
     		});

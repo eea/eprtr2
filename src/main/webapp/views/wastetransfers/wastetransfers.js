@@ -39,6 +39,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.header = {};
 
         $scope.showhazreceivers = false;
+		$scope.showareacomparison = false;
 
         
         $scope.translate = function()
@@ -280,10 +281,12 @@ $scope.$watch('currentPage', function(value) {
         $scope.getTabData = function(type)
         {
             $scope.showhazreceivers = false;
+    		console.log('Set showareacomparison 2 false!');
     		$scope.showareacomparison = false;
         
         	if(type.toUpperCase() === "AREACOMPARISON" )
         	{
+        		console.log('Set showareacomparison 2 true!');
         		$scope.showareacomparison = true;
         	}
         	if(type.toUpperCase() === "HAZRECEIVERS" )
