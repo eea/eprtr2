@@ -52,7 +52,7 @@ angular.module('myApp.wasteAreaComparison', ['restangular','ngSanitize','angular
           $scope.spinneractive = false;
 
           $scope.$watch('wtacfilter.wtsel', function(value) {
-          	if ($scope.wtacfilter && $scope.wtacfilter.wtsel && $scope.visible ) {
+          	if ($scope.wtacfilter && $scope.wtacfilter.wtsel ) {
 //          		$scope.wtacfilter.wtsel = $scope.wtacsel.wtsel;
           		$scope.startSpin();
         		$scope.getData();
@@ -107,11 +107,11 @@ angular.module('myApp.wasteAreaComparison', ['restangular','ngSanitize','angular
 		    if($scope.wtacfilter.wtsel){
 		    	qp.WasteType = $scope.wtacfilter.wtsel.replace('-','');
 		    }
-		    console.log('Ready to req wastetransferAreaCompare:' + qp.WasteType);
+		    //console.log('Ready to req wastetransferAreaCompare:' + qp.WasteType);
         	$scope.searchService = $scope.restconfig.all('wastetransferAreaCompare');
     		$scope.searchService.getList(qp).then(function(response) {
         		$scope.items = response.data;
-    		    console.log('Received results from wastetransferAreaCompare:' + qp.WasteType);
+    		    //console.log('Received results from wastetransferAreaCompare:' + qp.WasteType);
         		//          		$scope.totalSearchResult += parseInt($scope.wastetransfercount);
           		$scope.updateAreaComparisonData();
           		$scope.nodata = (response.data.length > 0)? true:false;
