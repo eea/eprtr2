@@ -10,19 +10,19 @@ public class LocationList  implements Serializable,Cloneable{
 	private Integer id;
 	private String name;
 	
-	public LocationList(Integer countryId, Integer groupId, Integer id, String name){
+	public LocationList(Integer id, Integer groupId, Integer countryId, String name){
 		this.countryId = countryId;
 		this.groupId = groupId;
 		this.id = id;
 		this.name = name;
 	}
 
-	public Integer getCountryId() {
-		return countryId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void  setCountryId(Integer countryId) {
-		this.countryId = countryId;
+	public void  setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getGroupId() {
@@ -33,12 +33,12 @@ public class LocationList  implements Serializable,Cloneable{
 		this.groupId = groupId;
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getCountryId() {
+		return countryId;
 	}
 
-	public void  setId(Integer id) {
-		this.id = id;
+	public void  setCountryId(Integer countryId) {
+		this.countryId = countryId;
 	}
 
 	public String getName() {
