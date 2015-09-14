@@ -2101,7 +2101,7 @@
                             "pollutant_group": "7",
                             "pollutant_no": "93",
                             "pollutant_name": "",
-                            "IUPAC_Name": "",
+                            "IUPAC_Name": "Total nitrogen",
                             "synonyms": {
                                 "synonym": [
                                     "Inorganic forms of nitrogen commonly found are ammonia, ammonium, nitrate and nitrite",
@@ -2409,7 +2409,7 @@
                             "pollutant_group": "7",
                             "pollutant_no": "96",
                             "pollutant_name": "",
-                            "IUPAC_Name": "",
+                            "IUPAC_Name": "Asbestos",
                             "synonyms": {
                                 "synonym": [
                                     "White asbestos",
@@ -14734,7 +14734,7 @@
                             "pollutant_group": "6",
                             "pollutant_no": "85",
                             "pollutant_name": "",
-                            "IUPAC_Name": "",
+                            "IUPAC_Name": "Total organic carbon (TOC) (as total C or COD/3)",
                             "synonyms": {
                                 "synonym": [
                                     "Carbon",
