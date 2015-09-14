@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize',
-                                        'myApp.wastetransferconfidential','myApp.wasteAreaComparison','myApp.hazTransboundary','myApp.HazReceiversWasteTab'])
+                                        'myApp.wastetransferconfidential','myApp.wasteAreaComparison',
+                                        'myApp.hazTransboundary','myApp.HazReceiversWasteTab'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/wastetransfers', {
@@ -18,7 +19,9 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
     	$scope.mapctrl = {};
     	$scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
     	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
-/*    	$scope.mapclss = "col-md-3 col-md-push-6";
+    	$scope.mapheight = window.innerHeight > 820 ? 600 : window.innerHeight -230;
+
+    	/*    	$scope.mapclss = "col-md-3 col-md-push-6";
     	$scope.resclss = "col-md-6 col-md-pull-3";*/
     	$scope.beforesearch = true;
     	$scope.wastePanel = true;
@@ -34,9 +37,11 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.queryParams.ReportingYear = -1;
         $scope.SearchType="SUMMARY";
         $scope.hazTransboundaryData = {};
-        $scope.resize_icon = "glyphicon glyphicon-resize-full";
+        $scope.resize_icon = "fa fa-arrow-left";
+        $scope.header = {};
 
         $scope.showhazreceivers = false;
+		$scope.showareacomparison = false;
 
         
         $scope.translate = function()
@@ -57,6 +62,9 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
         		$scope.tr_wt = data.WasteTransfers;
         		$scope.tr_lovwt = data.LOV_WASTETYPE;
+        		
+        		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
+
         	  });
         };
         $scope.translate();
@@ -66,15 +74,17 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.togglemapview = function(){
         	if($scope.bigmap){
             	$scope.bigmap = false;
-            	$scope.resize_icon = "glyphicon glyphicon-resize-full"
+            	$scope.resize_icon = "fa fa-arrow-left";
             	$scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
             	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
+        		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
         	}
         	else{
             	$scope.bigmap = true;
-            	$scope.resize_icon = "glyphicon glyphicon-resize-small"
+            	$scope.resize_icon = "fa fa-arrow-right";
             	$scope.mapclss = "col-md-12 minor-padding";
             	$scope.resclss = "col-md-12 minor-padding";
+        		$scope.maptooltip = $scope.tr_c['ShowReducedMap'];
         	}
         	$scope.mapctrl.redraw();
         }
@@ -145,18 +155,33 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
     	}
     });
     
-    /*    $scope.$watch('wtfilter.wtsel', function(value) {
-    	if ($scope.currentSearchFilter !== undefined && $scope.wtfilter.wtsel != undefined) {
-    		//$scope.queryParams.WasteTypeCode = [$scope.wtfilter.wtsel];
-        	$scope.SearchType = "FACILITIES";
-        	$scope.queryParams.SearchType="FACILITIES";
-        	var qp = angular.copy($scope.queryParams);
-       		qp.WasteTypeCode = [value.replace('-','')];
-        	$scope.getData(qp);
-        	$scope.currentPage = 1;
-        	$scope.performSearch();
+    $scope.$watch('sort.sortingOrder', function(value) {
+    	var prevPage = $scope.currentPage;
+    	$scope.currentPage = 1;
+    	if ($scope.currentSearchFilter !== undefined && prevPage == 1) {
+    		$scope.performSearch(true);
     	}
-    });*/
+    });
+    
+    $scope.$watch('sort.reverse', function(value) {
+    	var prevPage = $scope.currentPage;
+    	$scope.currentPage = 1;
+    	if ($scope.currentSearchFilter !== undefined && prevPage == 1) {
+    		$scope.performSearch();
+    	}
+    });
+
+    $scope.$watch('wtfcsel.wtsel', function(value) {
+//    $scope.wtfcsel = function(wastetype){
+    	if($scope.wtfcsel && $scope.wtfcsel.wtsel){
+	    	$scope.wtfilter.wtsel =  $scope.wtfcsel.wtsel;
+	    	$scope.currentPage = 1;
+	    	if ($scope.currentSearchFilter !== undefined) {
+	    		$scope.performSearch();
+	    	}
+    	}
+    });
+
 
     $scope.hasItems = function() {
     	return $scope.items.length > 0;
@@ -199,15 +224,19 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
             var queryParams = {ReportingYear: $scope.currentSearchFilter.selectedReportingYear.year};
             if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.countryId) {
             	queryParams.LOV_CountryID = $scope.currentSearchFilter.selectedReportingCountry.countryId;
+            	$scope.header.area = $scope.currentSearchFilter.selectedReportingCountry.name;
                 if ($scope.currentSearchFilter.selectedRegion.lov_NUTSRegionID) {
-                queryParams.LOV_NUTSRegionID = $scope.currentSearchFilter.selectedRegion.lov_NUTSRegionID;
+                	queryParams.LOV_NUTSRegionID = $scope.currentSearchFilter.selectedRegion.lov_NUTSRegionID;
+                	$scope.header.area = $scope.currentSearchFilter.selectedRegion.name;
                 }
                 else if ($scope.currentSearchFilter.selectedRegion.lov_RiverBasinDistrictID) {
                 	queryParams.LOV_RiverBasinDistrictID = $scope.currentSearchFilter.selectedRegion.lov_RiverBasinDistrictID;
+                	$scope.header.area = $scope.currentSearchFilter.selectedRegion.name;
                 }
             }
             if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.groupId) {
             	queryParams.LOV_AreaGroupID = $scope.currentSearchFilter.selectedReportingCountry.groupId;
+            	$scope.header.area = $scope.currentSearchFilter.selectedReportingCountry.name;
             }
             if ($scope.currentSearchFilter.activitySearchFilter) {
                 $scope.currentSearchFilter.activitySearchFilter.filter(queryParams);
@@ -275,8 +304,20 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.getTabData = function(type)
         {
             $scope.showhazreceivers = false;
+    		console.log('Set showareacomparison 2 false!');
     		$scope.showareacomparison = false;
         
+        	if(type.toUpperCase() === "AREACOMPARISON" )
+        	{
+        		console.log('Set showareacomparison 2 true!');
+        		$scope.showareacomparison = true;
+        	}
+        	if(type.toUpperCase() === "HAZRECEIVERS" )
+        	{
+                $scope.showhazreceivers = true;
+                return;
+        	}
+
         	if(!$scope.queryParams.SearchType)
         	{
         		// No search done
@@ -300,15 +341,6 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
 
         	
 
-        	if(type.toUpperCase() === "AREACOMPARISON" )
-        	{
-        		$scope.showareacomparison = true;
-        	}
-        	if(type.toUpperCase() === "HAZRECEIVERS" )
-        	{
-                $scope.showhazreceivers = true;
-                return;
-        	}
         	if(type.toUpperCase() === "FACILITIES")
         	{
 
@@ -574,11 +606,11 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         		$scope.performSearchWithoutLimit();
         		return;
             		
-        	}else if(tab === 'transboundary'){
+        	}/*else if(tab === 'transboundary'){
         		$scope.updateTransboundaryDownloadData();
         		contentArray = $scope.transboundaryDownload;
         		fileName = 'EPRTR_Waste_Transfer_Haz_Transboundary'+contentDate+'.csv';
-        	}
+        	}*/
 
         	var csvContent = 'data:text/csv;charset=utf-8,';
         	contentArray.forEach(function(infoArray, index){

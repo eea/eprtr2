@@ -233,7 +233,7 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
 	$scope.$watchCollection('[tr_c,tr_f, details]', function(value) {
  		if ($scope.tr_c !== undefined && $scope.tr_f !== undefined && $scope.details !== undefined){
  			var adr = $scope.details.address != null?
- 					$scope.details.address + " ," +  $scope.details.postalCode + " ," +  $scope.details.city:
+ 					$scope.details.address + ", " +  $scope.details.postalCode + ", " +  $scope.details.city:
  						null;
 			$scope.headitms = [
 	                  			{'order':0,	'clss':'fdTitles',
