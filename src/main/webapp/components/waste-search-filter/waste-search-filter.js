@@ -39,7 +39,7 @@ angular.module('myApp.wasteSearchFilter', ['restangular', 'myApp.search-filter']
                 if (this.hazardousWasteCountryTransfer || this.hazardousWasteTransboundaryTransfer) {
                     type = type.concat('HW');
                 }
-                if (type.length > 0) {
+                if (type.length > 0 && type.length < 4) {
                     queryParams.WasteTypeCode = type;
                 }
 

@@ -14,7 +14,7 @@ import eea.eprtr.model.Receivingcountry;
 @RestController
 public class ReceivingcountryController {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 	
 	@RequestMapping("/receivingCountry")

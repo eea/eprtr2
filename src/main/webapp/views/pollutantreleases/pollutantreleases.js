@@ -23,6 +23,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         $scope.mapclss = "col-md-4 col-md-push-8";
         $scope.resclss = "col-md-8 col-md-pull-4";
         $scope.mapctrl = {};
+    	$scope.mapheight = window.innerHeight > 820 ? 600 : window.innerHeight -230;
         
         $scope.searchFilter = searchFilter;
         $scope.mediumFilter = {};

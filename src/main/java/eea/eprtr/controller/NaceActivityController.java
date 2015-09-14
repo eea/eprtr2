@@ -19,7 +19,7 @@ public class NaceActivityController {
 
 	private NaceActivityRepository repository;
 	
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
 	@Autowired

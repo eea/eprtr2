@@ -13,7 +13,7 @@ import eea.eprtr.model.FacilitydetailAuthority;
 @RestController
 public class FacilitydetailAuthorityController {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
 	@RequestMapping("/facilitydetailAuthority/{facilityReportID}")

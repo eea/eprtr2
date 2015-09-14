@@ -13,7 +13,7 @@ import eea.eprtr.model.LovCountry;
 @RestController
 public class LovCountryController {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
 	

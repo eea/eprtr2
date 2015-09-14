@@ -13,7 +13,7 @@ import eea.eprtr.model.FacilitydetailPollutanttransfer;
 @RestController
 public class FacilitydetailPollutanttransferController {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
 	@RequestMapping("/facilitydetailPollutanttransfer")

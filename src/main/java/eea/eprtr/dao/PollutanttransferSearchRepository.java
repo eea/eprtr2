@@ -26,7 +26,7 @@ import eea.eprtr.model.Pollutanttransfer;
 @Repository
 public class PollutanttransferSearchRepository {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 	
 	public List<Pollutanttransfer> getPollutanttransfer(PollutanttransferSearchFilter filter) {

@@ -19,7 +19,7 @@ import eea.eprtr.model.WastetransferReceivingcountry_;
 @Repository
 public class WastetransferReceivingcountryRepository {
 	
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 	
 	public List<HazardousWasteRecievingCountry> GetWastetransferReceivingcountry(WastetransferSearchFilter filter) {

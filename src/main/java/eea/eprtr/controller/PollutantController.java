@@ -17,7 +17,7 @@ import eea.eprtr.model.LovPollutant;
 @RestController
 public class PollutantController {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
 	@Autowired

@@ -13,7 +13,7 @@ import eea.eprtr.model.Region;
 @RestController
 public class RegionController {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 	
 	@RequestMapping("/regions")

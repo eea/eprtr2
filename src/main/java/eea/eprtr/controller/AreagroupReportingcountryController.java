@@ -15,7 +15,7 @@ import eea.eprtr.model.LocationList;
 @RestController
 public class AreagroupReportingcountryController {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 	
 	@Autowired

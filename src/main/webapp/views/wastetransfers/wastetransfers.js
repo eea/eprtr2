@@ -19,7 +19,9 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
     	$scope.mapctrl = {};
     	$scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
     	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
-/*    	$scope.mapclss = "col-md-3 col-md-push-6";
+    	$scope.mapheight = window.innerHeight > 820 ? 600 : window.innerHeight -230;
+
+    	/*    	$scope.mapclss = "col-md-3 col-md-push-6";
     	$scope.resclss = "col-md-6 col-md-pull-3";*/
     	$scope.beforesearch = true;
     	$scope.wastePanel = true;

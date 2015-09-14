@@ -13,7 +13,7 @@ import eea.eprtr.model.Reportingcountry;
 @RestController
 public class ReportingCountryController {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 	
 	@RequestMapping("/reportingCountries")

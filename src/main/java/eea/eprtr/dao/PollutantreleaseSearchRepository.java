@@ -33,7 +33,7 @@ public class PollutantreleaseSearchRepository {
 	@Autowired
 	private PollutantSearchRepository pollutantSearchRepository;
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
 	public PollutantreleaseCounts getPollutantreleaseCounts(PollutantreleaseSearchFilter filter) {

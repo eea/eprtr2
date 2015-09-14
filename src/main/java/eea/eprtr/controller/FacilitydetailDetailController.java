@@ -14,7 +14,7 @@ import eea.eprtr.model.FacilitydetailDetail;
 @RestController
 public class FacilitydetailDetailController {
 	
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
 	

@@ -22,7 +22,7 @@ import eea.eprtr.model.Reportingcountry_;
 public class AreaGroupReportingCountriesRepository {
 
 	
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
 	public List<LocationList> getAreaGroupReportingCountries() {

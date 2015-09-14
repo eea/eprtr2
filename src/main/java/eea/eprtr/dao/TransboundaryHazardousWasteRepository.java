@@ -28,7 +28,7 @@ import eea.eprtr.model.WastetransferReceivingcountry_;
 @Repository
 public class TransboundaryHazardousWasteRepository {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 	
 	public List<TransboundaryHazardousWasteData> GetTransboundaryHazardousWasteData(WastetransferSearchFilter filter, Boolean aggregateOthers) {

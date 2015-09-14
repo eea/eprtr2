@@ -18,7 +18,7 @@ import eea.eprtr.model.AnnexIActivity;
 @RestController
 public class AnnexIActivityController {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
 	private AnnexIActivityRepository repository;

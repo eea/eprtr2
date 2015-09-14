@@ -14,7 +14,7 @@ import eea.eprtr.model.RiverBasinDistrict;
 @RestController
 public class RiverBasinDistrictController {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 	
 	@RequestMapping("/riverBasinDistricts")

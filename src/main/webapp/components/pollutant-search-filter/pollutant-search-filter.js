@@ -61,7 +61,7 @@ angular.module('myApp.pollutantSearchFilter', ['restangular', 'myApp.search-filt
                 if (this.transfersToWasteWater) {
                     mediumCodes = mediumCodes.concat('WASTEWATER');
                 }
-                if (mediumCodes.length > 0) {
+                if (mediumCodes.length > 0 && mediumCodes.length < 4) {
                     queryParams.MediumCode = mediumCodes;
                 }
                 if (this.selectedPollutant.lov_PollutantID) {

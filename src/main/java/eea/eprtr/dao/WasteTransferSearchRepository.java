@@ -30,7 +30,7 @@ import eea.eprtr.model.WasteType;
 @Repository
 public class WasteTransferSearchRepository {
 	
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 	
 	public List<Wastetransfer> getWastetransfer(WastetransferSearchFilter filter) {
