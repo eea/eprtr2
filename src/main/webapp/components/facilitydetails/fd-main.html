@@ -188,7 +188,7 @@ POLLUTANT RELEASES
     <div class="row" >
 		<div class="col-md-12" >
 		<H3><small>{{tr_p.ReleasesToSoil}}</small></H3>
-		<table class="table table-striped table-condensed table-hover" ng-hide="(pollutantreleases | filter:{ pollutantTo: tr_lme.SOIL }).length > 0 ? false : true">
+		<table class="table table-striped table-condensed table-hover" ng-hide="(pollutantreleases | filter:{ pollutantTo: tr_lme.LAND }).length > 0 ? false : true">
                    <thead>
                         <tr class="generalListStyle_headerRow">
                           <th></th>
@@ -202,7 +202,7 @@ POLLUTANT RELEASES
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in pollutantreleases | filter:{ pollutantTo: tr_lme.SOIL } ">
+                        <tr ng-repeat="item in pollutantreleases | filter:{ pollutantTo: tr_lme.LAND } ">
 	                   <td><img src="images/timeseries.png" class="timesericesImage" ng-click="openTSmodal('pollutantrelease',item.lov_PollutantID,'SOIL',null)" alt="" /></td>
                     <td>{{tr_lpo[item.pollutantCode]}}</td>
                     <td class="text-right">{{fFactory.formatQuantity(item.totalQuantity, item.totalQuantityUnitCode, item.confidentialIndicator)}}</td>
@@ -222,7 +222,7 @@ POLLUTANT RELEASES
 
                     </tbody>
                 </table>
-        <p class="text-warning" ng-hide="(pollutantreleases | filter:{ pollutantTo: tr_lme.SOIL }).length > 0 ? true : false">{{tr_c.NoResultsFoundSoil}}</p>
+        <p class="text-warning" ng-hide="(pollutantreleases | filter:{ pollutantTo: tr_lme.LAND }).length > 0 ? true : false">{{tr_c.NoResultsFoundSoil}}</p>
 		</div>
 	</div>
     <div class="row" >
