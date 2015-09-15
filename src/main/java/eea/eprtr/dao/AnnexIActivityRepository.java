@@ -13,7 +13,7 @@ import eea.eprtr.model.AnnexIActivity;
 @Repository
 public class AnnexIActivityRepository {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
 	public List<AnnexIActivity> list(Integer parentID) {

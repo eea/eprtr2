@@ -489,11 +489,9 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
  	    $scope.openPollutant = function (size) {
 
  	        var modalInstance = $modal.open({
- 	          animation: $scope.animationsEnabled,
- 	          templateUrl: 'views/pollutantinfo/pollutantinfo.html',
- 	          controller: 'PollutantInfoCtrl',
- 	          size: size,
- 	         //windowClass: 'app-modal-window',
+ 	          templateUrl: 'myPollutantContent.html',
+ 	          controller: 'ModalPollutantInstanceCtrl',
+ 	          size: 'lg',
  	          resolve: {
  	            items: function () {
  	              //return $scope.items;

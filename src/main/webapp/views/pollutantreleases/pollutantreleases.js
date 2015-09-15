@@ -18,11 +18,12 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
     	$scope.pollutantPanel = true;
         $scope.showReleasesToInputField = true;
         $scope.pollutantPanelTitle = 'Pollutant releases';
-        $scope.resize_icon = "glyphicon glyphicon-resize-full"
+        $scope.resize_icon = "fa fa-arrow-left"
         $scope.bigmap = false;
         $scope.mapclss = "col-md-4 col-md-push-8";
         $scope.resclss = "col-md-8 col-md-pull-4";
         $scope.mapctrl = {};
+    	$scope.mapheight = window.innerHeight > 820 ? 600 : window.innerHeight -230;
         
         $scope.searchFilter = searchFilter;
         $scope.mediumFilter = {};
@@ -44,6 +45,9 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         		$scope.tr_lnr = data.LOV_NUTSREGION;
         		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
         		$scope.tr_chart = data.ChartLabels;
+        		
+        		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
+
         	  });
         };
         
@@ -100,15 +104,17 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         $scope.togglemapview = function(){
         	if($scope.bigmap){
             	$scope.bigmap = false;
-            	$scope.resize_icon = "glyphicon glyphicon-resize-full"
+            	$scope.resize_icon = "fa fa-arrow-left"
             	$scope.mapclss = "col-md-4 col-md-push-8";
             	$scope.resclss = "col-md-8 col-md-pull-4";
+        		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
         	}
         	else{
             	$scope.bigmap = true;
-            	$scope.resize_icon = "glyphicon glyphicon-resize-small"
+            	$scope.resize_icon = "fa fa-arrow-right"
             	$scope.mapclss = "col-md-12 minor-padding";
             	$scope.resclss = "col-md-12 minor-padding";
+        		$scope.maptooltip = $scope.tr_c['ShowReducedMap'];
         	}
         	$scope.mapctrl.redraw();
         }
@@ -116,7 +122,12 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
     	/**
     	 * Listeners
     	 */
-    	
+        $scope.$watch('mapctrl', function(value) {
+        	if(typeof $scope.mapctrl.redraw == 'function'){
+            	$scope.mapctrl.redraw();
+            }
+        });
+
         $scope.$watch('mediumFilter.prSumMedium', function(newvalue,oldvalue){
         	if($scope.mediumFilter.prSumMedium && $scope.items){
         		$scope.updateSummaryData();

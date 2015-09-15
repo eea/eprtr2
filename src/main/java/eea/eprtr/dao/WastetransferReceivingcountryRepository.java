@@ -19,7 +19,7 @@ import eea.eprtr.model.WastetransferReceivingcountry_;
 @Repository
 public class WastetransferReceivingcountryRepository {
 	
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 	
 	public List<HazardousWasteRecievingCountry> GetWastetransferReceivingcountry(WastetransferSearchFilter filter) {
@@ -70,11 +70,15 @@ public class WastetransferReceivingcountryRepository {
 		cq.where(filter.buildWhereClauseWastetransferReceivingcountry(cb, qr));
 		cq.groupBy(qr.get(WastetransferReceivingcountry_.reportingYear));
 		cq.orderBy(cb.desc(qr.get(WastetransferReceivingcountry_.reportingYear)));
-
+		
 		TypedQuery<HazardousWasteRecievingCountry> q2 = em.createQuery(cq);
-		HazardousWasteRecievingCountry total = q2.getSingleResult();
+		List<HazardousWasteRecievingCountry> totalList = q2.getResultList();
+		if(!totalList.isEmpty()){
+		    // ignores multiple results
+			HazardousWasteRecievingCountry total = totalList.get(0);
+			data.add(total);
+		}
 	
-		data.add(total);
 		return data;
 	}
 }

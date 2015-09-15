@@ -30,7 +30,7 @@ import eea.eprtr.model.WasteType;
 @Repository
 public class WasteTransferSearchRepository {
 	
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 	
 	public List<Wastetransfer> getWastetransfer(WastetransferSearchFilter filter) {
@@ -427,7 +427,7 @@ public class WasteTransferSearchRepository {
 		
 		/*List of FacilityIDs from Start year*/
 		WastetransferSearchFilter prsStart = new WastetransferSearchFilter(filter.getReportingYearSearchFilter(),
-				filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), filter.getWasteSearchFilter());
+				filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), filter.getWasteSearchFilter(), filter.getFacilityItemSearchFilter());
 		ReportingYearSearchFilter rysf = new ReportingYearSearchFilter(reportingYearStart);
 		prsStart.setReportingYearSearchFilter(rysf);
 
@@ -444,7 +444,7 @@ public class WasteTransferSearchRepository {
 
 		/*List of FacilityIDs from End year*/
 		WastetransferSearchFilter prsEnd = new WastetransferSearchFilter(filter.getReportingYearSearchFilter(),
-				filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), filter.getWasteSearchFilter());
+				filter.getLocationSearchFilter(), filter.getActivitySearchFilter(), filter.getWasteSearchFilter(), filter.getFacilityItemSearchFilter());
 //		WastetransferearchFilter prsEnd = (WastetransferearchFilter)filter.clone();
 		ReportingYearSearchFilter ryse = new ReportingYearSearchFilter(reportingYearEnd);
 		prsEnd.setReportingYearSearchFilter(ryse);

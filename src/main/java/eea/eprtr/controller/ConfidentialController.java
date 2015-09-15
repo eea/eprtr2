@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eea.eprtr.dao.ActivitySearchFilter;
 import eea.eprtr.dao.CountryAreaGroupRepository;
+import eea.eprtr.dao.FacilityItemSearchFilter;
 import eea.eprtr.dao.LocationSearchFilter;
 import eea.eprtr.dao.PollutantSearchFilter;
 import eea.eprtr.dao.PollutantreleaseSearchFilter;
@@ -50,6 +51,9 @@ public class ConfidentialController {
     public List<ConfidentialData> confindustrialactivitySearch(
     		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
     		
+    		@RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,
+    		@RequestParam(value = "FacilityID", required = false) Integer facilityID,
+
     		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
     		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
     		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
@@ -75,13 +79,14 @@ public class ConfidentialController {
 		if (reportingYear != null) {*/
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		//}
+		FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(facilityReportID,facilityID,reportingYear); 
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		
 		confidentialIndicator = 1;
 		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
 		
-		PollutantreleaseSearchFilter filter = new PollutantreleaseSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter);
+		PollutantreleaseSearchFilter filter = new PollutantreleaseSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter,facilityItemSearcFilter);
 		
 		List<Pollutantrelease> pollutantreleases = pollutantreleaseSearchRepository.getPollutantreleases(filter);
 		List<ConfidentialData> data = new ArrayList<ConfidentialController.ConfidentialData>();
@@ -96,7 +101,7 @@ public class ConfidentialController {
 			obj.conftype = "polRelease";
 			data.add(obj);
 		}
-		PollutanttransferSearchFilter filter2 = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter); 
+		PollutanttransferSearchFilter filter2 = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter,facilityItemSearcFilter); 
 		List<Pollutanttransfer> pollutanttransfer = pollutanttransferSearchRepository.getPollutanttransfer(filter2);
 		for(Pollutanttransfer po : pollutanttransfer)
 		{
@@ -108,7 +113,7 @@ public class ConfidentialController {
 			data.add(obj);
 		}
 		WasteSearchFilter wastefilter = new WasteSearchFilter(1,1,1,1,1,1);
-		WastetransferSearchFilter filter3 = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
+		WastetransferSearchFilter filter3 = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter,facilityItemSearcFilter);
 		List<Wastetransfer> wastetranfer = wastetransferSearchRepository.getWastetransfer(filter3);
 		WasteTransferConfidentialSearchFilter filter4  = new WasteTransferConfidentialSearchFilter(reportingYearFilter, null);
 		List<WastetransferConfidential> confidentialCodes = wastetransferSearchRepository.getWastetransferConfidentialCodes(filter4);

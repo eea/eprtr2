@@ -12,7 +12,7 @@ import eea.eprtr.model.ReportingYear;
 @RestController
 public class ReportingYearController {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 	
 	@RequestMapping("/reportingYears")

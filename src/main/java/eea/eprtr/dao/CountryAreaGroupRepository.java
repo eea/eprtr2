@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CountryAreaGroupRepository {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 	
 	public List<Integer> getCountryIDs(Integer areaGroupID) {

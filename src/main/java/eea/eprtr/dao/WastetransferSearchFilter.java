@@ -15,14 +15,17 @@ public class WastetransferSearchFilter {
 	private LocationSearchFilter locationFilter;
 	private ActivitySearchFilter activityFilter;
 	private WasteSearchFilter wasteFilter;
+	private FacilityItemSearchFilter facilityItemSearchFilter;
 	
 	public WastetransferSearchFilter(ReportingYearSearchFilter reportingYearFilter,
-			LocationSearchFilter locationFilter, ActivitySearchFilter activityFilter,WasteSearchFilter wasteFilter)
+			LocationSearchFilter locationFilter, ActivitySearchFilter activityFilter,
+			WasteSearchFilter wasteFilter,FacilityItemSearchFilter facilityItemSearchFilter)
 	{
 		this.reportingYearFilter = reportingYearFilter;
 		this.locationFilter = locationFilter;
 		this.activityFilter = activityFilter;
 		this.wasteFilter = wasteFilter;
+		this.facilityItemSearchFilter = facilityItemSearchFilter;
 	}
 
 	
@@ -58,6 +61,13 @@ public class WastetransferSearchFilter {
 		this.wasteFilter = wasteFilter;
 	}
 
+	public void setFacilityItemSearchFilter(FacilityItemSearchFilter facilityItemSearchFilter) {
+		this.facilityItemSearchFilter = facilityItemSearchFilter;
+	}
+
+	public FacilityItemSearchFilter getFacilityItemSearchFilter() {
+		return facilityItemSearchFilter;
+	}
 
 	
 	public Predicate buildWhereClause(CriteriaBuilder cb, Root<Wastetransfer> qr) {
@@ -71,6 +81,12 @@ public class WastetransferSearchFilter {
 		Predicate locationSearchWhereClause = locationFilter.buildWhereClauseWastetransfer(cb, qr);
 		if (locationSearchWhereClause.getExpressions().size() > 0) {
 			whereClause.getExpressions().add(locationSearchWhereClause);
+		}
+		if (facilityItemSearchFilter != null){
+			Predicate facilityItemSearchWhereClause = facilityItemSearchFilter.buildWhereClauseWastetransfer(cb, qr);
+			if (facilityItemSearchWhereClause.getExpressions().size() > 0) {
+				whereClause.getExpressions().add(facilityItemSearchWhereClause);
+			}
 		}
 		Predicate activitySearchWhereClause = activityFilter.buildWhereClauseWastetransfer(cb, qr);
 		if (activitySearchWhereClause.getExpressions().size() > 0) {
@@ -95,6 +111,12 @@ public class WastetransferSearchFilter {
 		if (locationSearchWhereClause.getExpressions().size() > 0) {
 			whereClause.getExpressions().add(locationSearchWhereClause);
 		}
+		if (facilityItemSearchFilter != null){
+			Predicate facilityItemSearchWhereClause = facilityItemSearchFilter.buildWhereClauseWastetransferConfidential(cb, qr);
+			if (facilityItemSearchWhereClause.getExpressions().size() > 0) {
+				whereClause.getExpressions().add(facilityItemSearchWhereClause);
+			}
+		}
 		Predicate activitySearchWhereClause = activityFilter.buildWhereClauseWastetransferConfidential(cb, qr);
 		if (activitySearchWhereClause.getExpressions().size() > 0) {
 			whereClause.getExpressions().add(activitySearchWhereClause);
@@ -117,6 +139,12 @@ public class WastetransferSearchFilter {
 		Predicate locationSearchWhereClause = locationFilter.buildWhereClauseWastetransferReceivingcountry(cb, qr);
 		if (locationSearchWhereClause.getExpressions().size() > 0) {
 			whereClause.getExpressions().add(locationSearchWhereClause);
+		}
+		if (facilityItemSearchFilter != null){
+			Predicate facilityItemSearchWhereClause = facilityItemSearchFilter.buildWhereClauseWastetransferReceivingcountry(cb, qr);
+			if (facilityItemSearchWhereClause.getExpressions().size() > 0) {
+				whereClause.getExpressions().add(facilityItemSearchWhereClause);
+			}
 		}
 		Predicate activitySearchWhereClause = activityFilter.buildWhereClauseWastetransferReceivingcountry(cb, qr);
 		if (activitySearchWhereClause.getExpressions().size() > 0) {
@@ -142,6 +170,12 @@ public class WastetransferSearchFilter {
 		Predicate locationSearchWhereClause = locationFilter.buildWhereClauseWastetransferHazardoustreater(cb, qr);
 		if (locationSearchWhereClause.getExpressions().size() > 0) {
 			whereClause.getExpressions().add(locationSearchWhereClause);
+		}
+		if (facilityItemSearchFilter != null){
+			Predicate facilityItemSearchWhereClause = facilityItemSearchFilter.buildWhereClauseWastetransferHazardoustreater(cb, qr);
+			if (facilityItemSearchWhereClause.getExpressions().size() > 0) {
+				whereClause.getExpressions().add(facilityItemSearchWhereClause);
+			}
 		}
 		Predicate activitySearchWhereClause = activityFilter.buildWhereClauseWastetransferHazardoustreater(cb, qr);
 		if (activitySearchWhereClause.getExpressions().size() > 0) {

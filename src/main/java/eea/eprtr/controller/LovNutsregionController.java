@@ -13,7 +13,7 @@ import eea.eprtr.model.LovNutsregion;
 @RestController
 public class LovNutsregionController {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 	
 	@RequestMapping("/nutsRegion/{id}")

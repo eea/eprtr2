@@ -2,9 +2,10 @@
 
 angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpinner','myApp.eprtrgooglechart'])
 
-   .controller('HazTransboundaryCtrl', ['$scope', '$filter', 'Restangular', 'translationService','formatStrFactory','usSpinnerService', function($scope, $filter,  
-                                    		   Restangular,  translationService, formatStrFactory, usSpinnerService) {
+   .controller('HazTransboundaryCtrl', ['$scope', '$filter', 'Restangular', 'translationService','formatStrFactory','countFactory', 'usSpinnerService', function($scope, $filter,  
+                                    		   Restangular,  translationService, formatStrFactory, countFactory, usSpinnerService) {
         $scope.ff = formatStrFactory;
+        $scope.cf = countFactory;
         $scope.wtfilter = {};
         $scope.nodata = true;
         $scope.coords = {};
@@ -294,6 +295,94 @@ angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpi
         };
 
         
+        /*Download*/
+        $scope.downloadClick = function(tab){
+
+        	var contentArray = new Array();
+        	var date = new Date();
+        	var contentDate = '_'+date.getFullYear()+'_'+date.getMonth()+'_'+date.getDate();
+        	var fileName = '';
+        	if(tab === 'transboundary'){
+        		$scope.updateTransboundaryDownloadData();
+        		contentArray = $scope.transboundaryDownload;
+        		$scope.topInfoDownload($scope.haztransboundaryitems);
+        		fileName = 'EPRTR_Waste_Transfer_Haz_Transboundary'+contentDate+'.csv';
+        	}
+
+        	var csvContent = 'data:text/csv;charset=utf-8,';
+        	$scope.transboundaryDownload.forEach(function(infoArray, index){
+
+        		var dataString = infoArray.join(';').split();
+        		csvContent += dataString + "\n";
+//        		csvContent.replace(';',',');
+        	});
+        	
+        	var encodedUri = encodeURI(csvContent);
+//        	encodedUri.replace(';',',');
+    		var link = document.createElement("a");
+    		link.setAttribute("href", encodedUri);
+    		link.setAttribute("download", fileName);
+
+    		link.click(); // This will download the data file named "my_data.csv".
+        }
+        
+        $scope.topInfoDownload = function(array){
+        	
+        	array[1]= new Array();
+            array[1][0] = $scope.tr_c.Year;
+        	array[1][1] = $scope.queryparams.ReportingYear;
+        	
+        	array[2]= new Array();
+            array[2][0] = $scope.tr_c.Area;
+        	array[2][1] = $scope.header.area;
+        	
+        	array[3]= new Array();
+            array[3][0] = $scope.tr_c.Facilities;
+        	array[3][1] = $scope.cf.getSum($scope.items,"facilities",false);
+
+        	array[4]= new Array();
+            array[4][0] = ' ';
+        }
+        
+        $scope.updateTransboundaryDownloadData = function() {
+        	$scope.transboundaryDownload= new Array();
+            var top_fields = 5;
+            
+            $scope.topInfoDownload($scope.transboundaryDownload);
+            
+            $scope.transboundaryDownload[top_fields]= new Array();
+            $scope.transboundaryDownload[top_fields][0] = $scope.tr_cl["FROM_COUNTRY"];
+            $scope.transboundaryDownload[top_fields][1] = $scope.tr_cl["TO_COUNTRY"];
+        	$scope.transboundaryDownload[top_fields][2] = $scope.tr_cl["QUANTITY"]+ " " + $scope.tr_cl["DISPOSAL"];
+        	$scope.transboundaryDownload[top_fields][3] = $scope.tr_cl["QUANTITY"]+ " " + $scope.tr_cl["RECOVERY"];
+        	$scope.transboundaryDownload[top_fields][4] = $scope.tr_cl["QUANTITY"];
+        	$scope.transboundaryDownload[top_fields][5] = $scope.tr_c.Facilities;
+
+        	top_fields += 1;
+        	
+        	var htd = $scope.haztransboundaryitems.sort(function(a, b) {
+        		if(a.transferFrom.localeCompare(b.transferFrom) === 0){
+        			return a.transferTo.localeCompare(b.transferTo);
+        		}else{
+        			return a.transferFrom.localeCompare(b.transferFrom);
+        		}
+        	});
+        	
+            for(var i =0; i<htd.length;i++){
+            	var transboundary = htd[i];
+            	$scope.transboundaryDownload[i+top_fields]= new Array();
+            	$scope.transboundaryDownload[i+top_fields][0] = $scope.tr_lco[transboundary.transferFrom];
+            	$scope.transboundaryDownload[i+top_fields][1] = $scope.tr_lco[transboundary.transferTo];
+            	$scope.transboundaryDownload[i+top_fields][2] = transboundary.quantityDisposal=== null? 0: transboundary.quantityDisposal;
+            	$scope.transboundaryDownload[i+top_fields][3] = transboundary.quantityRecovery=== null? 0: transboundary.quantityRecovery;
+            	$scope.transboundaryDownload[i+top_fields][4] = transboundary.quantityTotal;
+            	$scope.transboundaryDownload[i+top_fields][5] = transboundary.facilities;
+            }
+        }
+        
+        
+        
+        
    }])
 .value('googleChartApiConfig', {
         version: '1.1',
@@ -308,7 +397,8 @@ angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpi
         transclude: true,
 		scope: {
 			queryparams: '=',
-			haztransboundaryitems:'='
+			haztransboundaryitems:'=', 
+			header: '='
 		},
 		templateUrl: 'components/wastetransfer/haztransboundary.html',
 		link: function(scope, element, attrs){

@@ -13,7 +13,7 @@ import eea.eprtr.model.FacilitydetailActivity;
 @RestController
 public class FacilitydetailActivityController {
 	
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
 	

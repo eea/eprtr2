@@ -122,36 +122,15 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
     $scope.currentPage = 1;
     $scope.totalItemCount = 0;
     
-    $scope.$watch('currentPage', function(value) {
-    	if ($scope.currentSearchFilter !== undefined) {
-    		$scope.performSearch();
-    	}
-    });
-    
-    $scope.$watch('sort.sortingOrder', function(value) {
-    	var prevPage = $scope.currentPage;
-    	$scope.currentPage = 1;
-    	if ($scope.currentSearchFilter !== undefined && prevPage == 1) {
-    		$scope.performSearch();
-    	}
-    });
-    
-    $scope.$watch('sort.reverse', function(value) {
-    	var prevPage = $scope.currentPage;
-    	$scope.currentPage = 1;
-    	if ($scope.currentSearchFilter !== undefined && prevPage == 1) {
-    		$scope.performSearch();
-    	}
+    $scope.$watch('mapctrl', function(value) {
+    	if(typeof $scope.mapctrl.redraw == 'function'){
+        	$scope.mapctrl.redraw();
+        }
     });
 
-    $scope.$watch('wtfcsel.wtsel', function(value) {
-//    $scope.wtfcsel = function(wastetype){
-    	if($scope.wtfcsel && $scope.wtfcsel.wtsel){
-	    	$scope.wtfilter.wtsel =  $scope.wtfcsel.wtsel;
-	    	$scope.currentPage = 1;
-	    	if ($scope.currentSearchFilter !== undefined) {
-	    		$scope.performSearch();
-	    	}
+$scope.$watch('currentPage', function(value) {
+    	if ($scope.currentSearchFilter !== undefined) {
+    		$scope.performSearch();
     	}
     });
     

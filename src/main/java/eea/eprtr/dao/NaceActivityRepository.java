@@ -13,7 +13,7 @@ import eea.eprtr.model.NaceActivity;
 @Repository
 public class NaceActivityRepository {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
 	public List<NaceActivity> list(Integer parentID) {

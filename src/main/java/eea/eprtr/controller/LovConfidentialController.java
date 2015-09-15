@@ -13,7 +13,7 @@ import eea.eprtr.model.LovConfidentiality;
 @RestController
 public class LovConfidentialController {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
 	@RequestMapping("/lovConfidential/{confidentialCode}")

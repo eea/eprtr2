@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eea.eprtr.dao.ActivitySearchFilter;
 import eea.eprtr.dao.CountryAreaGroupRepository;
+import eea.eprtr.dao.FacilityItemSearchFilter;
 import eea.eprtr.dao.LocationSearchFilter;
 import eea.eprtr.dao.OrderBy;
 import eea.eprtr.dao.QueryPager;
@@ -54,6 +55,9 @@ public class WastetransferSearchController {
     public List<Wastetransfer> wastetransferSearch(
     		
     		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,	
+    		@RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,
+    		@RequestParam(value = "FacilityID", required = false) Integer facilityID,
+
     		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
     		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
     		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
@@ -94,10 +98,11 @@ public class WastetransferSearchController {
 			reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		}*/
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(facilityReportID,facilityID,reportingYear); 
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryCode, confidentialIndicator);
-		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
+		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter,facilityItemSearcFilter);
 
 		List<Wastetransfer> wastetranfer = null;
 		if(order != null && !order.equals("") && desc != null && offset != null && limit != null){
@@ -131,6 +136,9 @@ public class WastetransferSearchController {
     public WastetransferCounts wastetransferCounter(
     		
     		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,	
+    		@RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,
+    		@RequestParam(value = "FacilityID", required = false) Integer facilityID,
+
     		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
     		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
     		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
@@ -166,10 +174,11 @@ public class WastetransferSearchController {
 			reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		}*/
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(facilityReportID,facilityID,reportingYear); 
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryCode, confidentialIndicator);
-		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
+		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter,facilityItemSearcFilter);
 		
 		WastetransferCounts wastetranfercounts = wastetransferSearchrepository.getWastetransferCounts(filter);
 		
@@ -181,6 +190,9 @@ public class WastetransferSearchController {
     		
     		@RequestParam(value = "WasteType", required = true) WasteType wastetype,
     		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,	
+    		/*@RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,*/
+    		@RequestParam(value = "FacilityID", required = false) Integer facilityID,
+
     		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
     		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
     		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
@@ -216,10 +228,11 @@ public class WastetransferSearchController {
 			reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		}*/
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(null,facilityID,null); 
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryCode, confidentialIndicator);
-		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
+		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter,facilityItemSearcFilter);
 		
 		List<WastetransferSeries> wastetranferseries = wastetransferSearchrepository.getWastetransferSeries(filter, wastetype);
 		
@@ -231,8 +244,9 @@ public class WastetransferSearchController {
     		
     		@RequestParam(value = "ReportingYearStart", required = true) Integer reportingYearStart,
     		@RequestParam(value = "ReportingYearEnd", required = true) Integer reportingYearEnd,
+    		@RequestParam(value = "FacilityID", required = false) Integer facilityID,
+
     		@RequestParam(value = "WasteType", required = true) WasteType wastetype,
-    		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,	
     		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
     		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
     		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
@@ -268,10 +282,11 @@ public class WastetransferSearchController {
 			reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		}*/
 		ReportingYearSearchFilter reportingYearFilter = null;//new ReportingYearSearchFilter(reportingYear);
+		FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(null,facilityID,null); 
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryCode, confidentialIndicator);
-		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
+		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter,facilityItemSearcFilter);
 		
 		List<WastetransferCompare> wastetranfercompare = wastetransferSearchrepository.getWastetransferCompare(filter, reportingYearStart, reportingYearEnd, wastetype);
 		
@@ -283,6 +298,9 @@ public class WastetransferSearchController {
     		
     		@RequestParam(value = "WasteType", required = true) WasteType wastetype,
     		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,	
+    		/*@RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,*/
+    		@RequestParam(value = "FacilityID", required = false) Integer facilityID,
+
     		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
     		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
     		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
@@ -318,10 +336,11 @@ public class WastetransferSearchController {
 			reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		}*/
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(null,facilityID,reportingYear); 
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryCode, confidentialIndicator);
-		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
+		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter,facilityItemSearcFilter);
 		
 		List<WasteTransferConfidentialTS> wastetranferconfidentialts = wastetransferSearchrepository.getWasteTransferConfidentialTS(filter, wastetype);
 		
@@ -334,6 +353,9 @@ public class WastetransferSearchController {
     		
     		@RequestParam(value = "WasteType", required = false) WasteType wastetype,
     		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,	
+    		@RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,
+    		@RequestParam(value = "FacilityID", required = false) Integer facilityID,
+
     		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
     		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
     		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
@@ -369,10 +391,11 @@ public class WastetransferSearchController {
 			reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		}*/
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(facilityReportID,facilityID,reportingYear); 
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryCode, confidentialIndicator);
-		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
+		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter,facilityItemSearcFilter);
 		
 		Boolean isConfidential = wastetransferSearchrepository.isConfidential(filter, wastetype);
 		
@@ -417,7 +440,7 @@ public class WastetransferSearchController {
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryCode, confidentialIndicator);
-		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
+		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter,null);
 
 		return wastetransferSearchrepository.getWastetransferAreaOverview(filter, wastetype, regionsearch);
 	}
@@ -428,6 +451,9 @@ public class WastetransferSearchController {
     		
     		@RequestParam(value = "AggregateOthers", required = false) Boolean aggregateOthers,	
     		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,	
+    		@RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,
+    		@RequestParam(value = "FacilityID", required = false) Integer facilityID,
+
     		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
     		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
     		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
@@ -463,10 +489,11 @@ public class WastetransferSearchController {
 			reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		}*/
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(facilityReportID,facilityID,reportingYear); 
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryCode, confidentialIndicator);
-		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
+		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter,facilityItemSearcFilter);
 
 		List<TransboundaryHazardousWasteData> transboundaryHazardousWaste = transboundaryHazardousWasteRepository.GetTransboundaryHazardousWasteData(filter, aggregateOthers);
 		return transboundaryHazardousWaste;
@@ -478,6 +505,9 @@ public class WastetransferSearchController {
     		
     		@RequestParam(value = "AggregateOthers", required = false) Boolean aggregateOthers,	
     		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,	
+    		@RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,
+    		@RequestParam(value = "FacilityID", required = false) Integer facilityID,
+
     		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
     		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
     		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
@@ -513,10 +543,11 @@ public class WastetransferSearchController {
 			reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		}*/
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(facilityReportID,facilityID,reportingYear); 
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryCode, confidentialIndicator);
-		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
+		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter,facilityItemSearcFilter);
 
 		List<HazardousWasteRecievingCountry> wastetransferReceivingcountry = wastetransferReceivingcountryRepository.GetWastetransferReceivingcountry(filter);
 		return wastetransferReceivingcountry;
@@ -528,6 +559,9 @@ public class WastetransferSearchController {
     public List<HazardousWasteTreater> getHazardousWasteTreaterList(
     		
     		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,	
+    		@RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,
+    		@RequestParam(value = "FacilityID", required = false) Integer facilityID,
+
     		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
     		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
     		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
@@ -565,10 +599,11 @@ public class WastetransferSearchController {
 			reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		}*/
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+		FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(facilityReportID,facilityID,reportingYear); 
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		WasteSearchFilter wastefilter = new WasteSearchFilter(wasteTypeCode, wasteTreatmentCode, whpCountryCode, confidentialIndicator);
-		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter);
+		WastetransferSearchFilter filter = new WastetransferSearchFilter(reportingYearFilter, locationFilter, activityFilter,wastefilter,facilityItemSearcFilter);
 
 		Long totalcount = transboundaryHazardousWasteRepository.getHazardousWasteTreaterCount(filter);
 		response.setHeader("X-Count", String.valueOf(totalcount));

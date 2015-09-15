@@ -29,11 +29,12 @@ angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'r
         $scope.sectorIA ="";
         $scope.quantityTotalSearchResult = 0;
         $scope.cf = countFactory;
-        $scope.resize_icon = "glyphicon glyphicon-resize-full"
+        $scope.resize_icon = "fa fa-arrow-left"
         $scope.bigmap = false;
         $scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
        	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
        	$scope.mapctrl = {};
+    	$scope.mapheight = window.innerHeight > 820 ? 600 : window.innerHeight -230;
 
         
     	$scope.restconfig = Restangular.withConfig(function(RestangularConfigurer) {
@@ -58,6 +59,8 @@ angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'r
         		$scope.tr_wt = data.WasteTransfers;
         		$scope.tr_ina = data.IndustrialActivity;
         		$scope.tr_lovwt = data.LOV_WASTETYPE;
+
+        		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
         	  });
         };
         $scope.translate();
@@ -99,19 +102,30 @@ angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'r
           $scope.togglemapview = function(){
           	if($scope.bigmap){
               	$scope.bigmap = false;
-              	$scope.resize_icon = "glyphicon glyphicon-resize-full"
+              	$scope.resize_icon = "fa fa-arrow-left"
               	$scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
               	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
+              	$scope.maptooltip = "Expand map area"; 
+            	$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
+
           	}
           	else{
               	$scope.bigmap = true;
-              	$scope.resize_icon = "glyphicon glyphicon-resize-small"
+              	$scope.resize_icon = "fa fa-arrow-right"
               	$scope.mapclss = "col-md-12 minor-padding";
               	$scope.resclss = "col-md-12 minor-padding";
+              	$scope.maptooltip = "Reduce map area";
+            	$scope.maptooltip = $scope.tr_c['ShowReducedMap'];
           	}
           	$scope.mapctrl.redraw();
           }
           
+          $scope.$watch('mapctrl', function(value) {
+              if(typeof $scope.mapctrl.redraw == 'function'){
+              	$scope.mapctrl.redraw();
+              }
+          });
+
           /**
          * Tab handling
          * */

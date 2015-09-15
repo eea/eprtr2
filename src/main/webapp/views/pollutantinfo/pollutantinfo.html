@@ -3,34 +3,13 @@
 		<div class="col-md-12">
 			<h3>{{ label_pollutant_head }}</h3>
 		</div>
-	</div>
-	<div class="row">
-
-		<!-- Left panel master-->
-		<div class="row">
-			<div class="col-md-2 col-md-offset-1">
-				<div class="top-buffer10" id="prPollutantGroup" sf-pollutant
-					queryparams="queryParams" pgselect="prfilter.pgselect"
-					pselect="prfilter.pselect" grponly="false"></div>
-			</div>
-
-			<div class="col-md-8">
-				<!-- Left panel welcome-->
-				<div class="panel panel-default top-buffer10">
-					<div class="panel-body">
-						<p>{{ label_pollutant_headnotes}}</p>
-						<p>
-							{{label_pollutant_headnotes2}}<a
-								href="{{label_pollutant_headlink + label_pollutant_headlink2}}">{{label_pollutant_headlink_label}}</a>
-						</p>
-						<p>
-							<i><span ng-bind-html="label_pollutant_headnotes3"></span></i>
-						</p>
-					</div>
+			<div class="top-buffer10">
+				<div class="panel-body">
+					<p>{{ label_pollutant_headnotes}}</p>
+					<p>{{label_pollutant_headnotes2}}<a href="{{label_pollutant_headlink + label_pollutant_headlink2}}">{{label_pollutant_headlink_label}}</a></p>
+					<p><i><span ng-bind-html="label_pollutant_headnotes3"></span></i></p>
 				</div>
 			</div>
-		</div>
-
 	</div>
 
 	<div class="row top-buffer10">
@@ -52,10 +31,10 @@
 			
 		<div class="col-md-9">
 			<div class="row" ng-if=" showPollutantDetails ">
-				<div class="col-md-9 col-md-offset-2">
+				<div class="col-md-12">
 					<pollutant-details pollutantid="pollutants[1].lov_PollutantID" />
 				</div>
 			</div>
+			</div>
 		</div>
 	</div>
-</div>

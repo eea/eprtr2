@@ -13,7 +13,7 @@ import eea.eprtr.model.LovAreagroup;
 @RestController
 public class LovAreaGroupController {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
 	

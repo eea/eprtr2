@@ -20,7 +20,7 @@ import eea.eprtr.model.FacilitySearchMainActivity_;
 @Repository
 public class FacilitySearchRepository {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 	
 	public long getFacilityCount(FacilitySearchFilter filter) {

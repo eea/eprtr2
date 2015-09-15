@@ -24,9 +24,9 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 
 .controller('TimeseriesController', 
 		['$scope', '$http', '$filter', 'Restangular', 'tsconf', 'translationService', 'formatStrFactory', 'lovPollutantType','lovCountryType', 
-		 'lovAreaGroupType', 'lovNutsRegionType', 'riverBasinDistrictsType', 'annexIActivityType', 'naceActivityType', 'reportingYearsType',
+		 'lovAreaGroupType', 'lovNutsRegionType', 'riverBasinDistrictsType', 'annexIActivityType', 'naceActivityType', 'reportingYearsType', 'fdDetailsType',
           function($scope, $http, $filter, Restangular, tsconf, translationService, formatStrFactory, lovPollutantType, lovCountryType, 
-        		  lovAreaGroupType, lovNutsRegionType, riverBasinDistrictsType, annexIActivityType, naceActivityType, reportingYearsType ) {
+        		  lovAreaGroupType, lovNutsRegionType, riverBasinDistrictsType, annexIActivityType, naceActivityType, reportingYearsType,fdDetailsType ) {
 
 /**		
  * Basic parameters
@@ -129,12 +129,12 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 		
     });
 
-	
 		/**
 		 * events
 		 */
 	/*Initial load*/
 	$scope.$watchCollection('[content,queryParams,tr_c]', function(value) {
+
 		if($scope.tr_c != undefined){
 		    /*Header input*/
 			$scope.createheader();
@@ -194,7 +194,11 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 		}
 	});
 
-	
+    /*$scope.$watchCollection('[details,active]', function(value){
+    	if($scope.details){
+    		$scope.createheader();
+    	}
+    });*/
     /*Pollutant Release Timeseries*/
     $scope.$watchCollection('[tscoll,filter.prsel,active]', function(value){
     	if($scope.content == 'pollutantrelease' && $scope.tscoll != undefined && $scope.tscoll.length > 0 && $scope.active.timeseries != undefined ){
@@ -1020,6 +1024,29 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 	 * */
 	$scope.createheader = function(){
 		$scope.headitms = [];
+		
+		/* HEADER PART FOR FACILITYID*/
+		if($scope.queryParams && $scope.queryParams.FacilityReportID){
+			fdDetailsType.getByFdrID($scope.queryParams.FacilityReportID).get().then(function (fddata) {
+				//$scope.details = fddata;
+				$scope.usefid = true;
+				var adr = fddata.address != null?
+						fddata.address + ", " +  fddata.postalCode + ", " +  fddata.city:
+	 						null;
+				$scope.headitms.push({'order':0,	'clss':'fdTitles',
+					'title':$scope.tr_f.FacilityName,
+					'val': $scope.fFactory.ConfidentialFormat(fddata.facilityName, fddata.confidentialIndicator)
+				});
+				$scope.headitms.push({'order':1, 'clss':'fdTitles',
+					'title': $scope.tr_f.Address,
+					'val': $scope.fFactory.ConfidentialFormat(adr, fddata.confidentialIndicator)
+				});
+				$scope.headitms.push({'order':2,'clss':'fdTitles',
+					'title':$scope.tr_c.Country,
+					'val': $scope.tr_lco[fddata.countryCode]
+				});
+		    });
+		}
 		/* HEADER PART FOR AREA*/
 		var area = {'order':0,	'clss':'fdTitles', 'title':$scope.tr_c.Area};
 		if($scope.queryParams.LOV_AreaGroupID != undefined){
@@ -1095,11 +1122,10 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 				$scope.headitms.push(act);
 			});
         }
-
 		/* HEADER PART FOR */
 		/*Pollutant*/
 	    if ($scope.content == 'pollutantrelease' || $scope.content == 'pollutanttransfer'){
-			var pol = {'order':2, 'clss':'fdTitles'};
+			var pol = {'order':3, 'clss':'fdTitles'};
 			pol.title = $scope.tr_c["Pollutant"];
 			pol.val = $scope.tr_c["AllPollutants"];
 			if ($scope.queryParams.LOV_PollutantGroupID)
@@ -1129,23 +1155,28 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 				});
 	        }
 			//Releases to
-		    if ($scope.queryParams.MediumCode != undefined){
-				var rel = {'order':3, 'clss':'fdTitles'};
+		    if ($scope.queryParams.MediumCode != undefined && $scope.queryParams.MediumCode != ''){
+				var rel = {'order':4, 'clss':'fdTitles'};
 				rel.title = $scope.tr_c["ReleasesTo"];
 				rel.val = $scope.tr_c["AllPollutants"];
 				var med = [];
-				for (var i=0; i< $scope.queryParams.MediumCode.length; i++) {
-					var m = $scope.queryParams.MediumCode[i];
-		    		if (m != 'WASTEWATER'){
-		    			med.push($scope.tr_lm[m]);
-		    		}
-		    	}
+				if (typeof $scope.queryParams.MediumCode !== 'string'){
+					for (var i=0; i< $scope.queryParams.MediumCode.length; i++) {
+						var m = $scope.queryParams.MediumCode[i];
+			    		if (m != 'WASTEWATER'){
+			    			med.push($scope.tr_lm[m]);
+			    		}
+			    	}
+				}
+				else{
+					med.push($scope.tr_lm[$scope.queryParams.MediumCode]);
+				}
 		    	if (med.length > 0){
 			    	rel.val = med.join(", ");
 					$scope.headitms.push(rel);
 		    	}
 				if($scope.queryParams.MediumCode.indexOf('WASTEWATER') >-1){
-					rel = {'order':4, 'clss':'fdTitles'};
+					rel = {'order':5, 'clss':'fdTitles'};
 					rel.title = $scope.tr_c["TransfersTo"];
 					rel.val = $scope.tr_lm["WASTEWATER"];
 					$scope.headitms.push(rel);
@@ -1153,7 +1184,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 		    }
 		  //Accidental
 		    if ($scope.queryParams.Accidental != undefined && $scope.queryParams.Accidental == 1){
-				var acc = {'order':5, 'clss':'fdTitles'};
+				var acc = {'order':6, 'clss':'fdTitles'};
 				acc.title = $scope.tr_c["AccidentalOnly"];
 				acc.val = $scope.tr_c["Yes"];
 				$scope.headitms.push(acc);
@@ -1162,7 +1193,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 	    else if ($scope.content == 'wastetransfer'){
 			//Waste type
 		    if ($scope.queryParams.WasteTypeCode != undefined){
-				var wast = {'order':6, 'clss':'fdTitles'};
+				var wast = {'order':7, 'clss':'fdTitles'};
 				wast.title = $scope.tr_c["WasteTransfers"];
 				var wt = [];
 				if (typeof $scope.queryParams.WasteTypeCode !== 'string'){

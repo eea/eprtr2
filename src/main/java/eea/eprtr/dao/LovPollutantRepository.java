@@ -21,7 +21,7 @@ import eea.eprtr.model.LovPollutant_;
 public class LovPollutantRepository {
 
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
 	public List<LovPollutant> getPollutants(Integer parentID) throws CloneNotSupportedException {

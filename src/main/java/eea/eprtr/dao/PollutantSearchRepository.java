@@ -17,7 +17,7 @@ import eea.eprtr.model.LovPollutant;
 @Repository
 public class PollutantSearchRepository {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 	
 	public List<LovPollutant> getLovPollutants(PollutantSearchFilter filter) {

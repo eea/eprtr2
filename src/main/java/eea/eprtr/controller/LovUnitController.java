@@ -13,7 +13,7 @@ import eea.eprtr.model.LovUnit;
 @RestController
 public class LovUnitController {
 
-	@PersistenceContext
+	@PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
 	@RequestMapping("/lovUnit/{unitCode}")

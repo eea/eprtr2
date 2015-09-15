@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eea.eprtr.dao.ActivitySearchFilter;
 import eea.eprtr.dao.CountryAreaGroupRepository;
+import eea.eprtr.dao.FacilityItemSearchFilter;
 import eea.eprtr.dao.LocationSearchFilter;
 import eea.eprtr.dao.PollutantSearchFilter;
 import eea.eprtr.dao.PollutantreleaseSearchFilter;
@@ -32,7 +33,9 @@ public class PollutantreleaseSeriesController {
     public List<PollutantreleasesSeries> pollutantreleaseSearch(
     		
     		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
-    		
+    		/*@RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,*/
+    		@RequestParam(value = "FacilityID", required = false) Integer facilityID,
+
     		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
     		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
     		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
@@ -59,9 +62,10 @@ public class PollutantreleaseSeriesController {
 		}*/
 		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
 		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
+		FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(null,facilityID,null); 
 		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
 		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
-		PollutantreleaseSearchFilter filter = new PollutantreleaseSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter);
+		PollutantreleaseSearchFilter filter = new PollutantreleaseSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter,facilityItemSearcFilter);
 		
 		List<PollutantreleasesSeries> series = pollutantreleaseSearchRepository.getPollutantreleasesSeries(filter);
 		

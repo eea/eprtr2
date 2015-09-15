@@ -8,6 +8,7 @@ angular.module('myApp.HazReceiversWasteTab', ['restangular','ngSanitize','angula
         $scope.ff = formatStrFactory;
 	    $scope.cf = countFactory;
 	    $scope.items = [];
+	    //$scope.header = {};
 	    //$scope.queryParams = {};
         $scope.translate = function()
         {
@@ -104,7 +105,8 @@ angular.module('myApp.HazReceiversWasteTab', ['restangular','ngSanitize','angula
   		controller: 'HazReceiversWasteTabCtrl',
           transclude: true,
   		scope: {
-  			queryparams: '='
+  			queryparams: '=',
+  			header: '='
   		},
   		templateUrl: 'components/wastetransfer/hazreceivers.html',
   		link: function(scope, element, attrs){

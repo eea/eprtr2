@@ -12,14 +12,17 @@ public class PollutantreleaseSearchFilter {
 	private LocationSearchFilter locationFilter;
 	private ActivitySearchFilter activityFilter;
 	private PollutantSearchFilter pollutantFilter;
+	private FacilityItemSearchFilter facilityItemFilter;
 
 	public PollutantreleaseSearchFilter(
 			ReportingYearSearchFilter reportingYearFilter,
-			LocationSearchFilter locationFilter, ActivitySearchFilter activityFilter, PollutantSearchFilter pollutantFilter) {
+			LocationSearchFilter locationFilter, ActivitySearchFilter activityFilter, 
+			PollutantSearchFilter pollutantFilter, FacilityItemSearchFilter facilityItemSearchFilter) {
 		this.reportingYearFilter = reportingYearFilter;
 		this.locationFilter = locationFilter;
 		this.activityFilter = activityFilter;
 		this.pollutantFilter = pollutantFilter;
+		this.facilityItemFilter = facilityItemSearchFilter;
 	}
 	
 	public ReportingYearSearchFilter getReportingYearSearchFilter() {
@@ -54,6 +57,14 @@ public class PollutantreleaseSearchFilter {
 		this.pollutantFilter = pollutantFilter;
 	}
 
+	public void setFacilityItemSearchFilter(FacilityItemSearchFilter facilityItemFilter) {
+		this.facilityItemFilter = facilityItemFilter;
+	}
+
+	public FacilityItemSearchFilter getFacilityItemSearchFilter() {
+		return facilityItemFilter;
+	}
+
 
 	public Predicate buildWhereClause(CriteriaBuilder cb, Root<Pollutantrelease> qr) {
 		Predicate whereClause = cb.conjunction();
@@ -66,6 +77,12 @@ public class PollutantreleaseSearchFilter {
 		Predicate locationSearchWhereClause = locationFilter.buildWhereClausePollutantrelease(cb, qr);
 		if (locationSearchWhereClause.getExpressions().size() > 0) {
 			whereClause.getExpressions().add(locationSearchWhereClause);
+		}
+		if(facilityItemFilter != null){
+			Predicate facilityItemSearchWhereClause = facilityItemFilter.buildWhereClausePollutantrelease(cb, qr);
+			if (facilityItemSearchWhereClause.getExpressions().size() > 0) {
+				whereClause.getExpressions().add(facilityItemSearchWhereClause);
+			}
 		}
 		Predicate activitySearchWhereClause = activityFilter.buildWhereClausePollutantrelease(cb, qr);
 		if (activitySearchWhereClause.getExpressions().size() > 0) {
