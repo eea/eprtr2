@@ -89,7 +89,12 @@ angular.module('myApp.emissionmapair', ['ngRoute','leaflet-directive'])
 
 	});
 	
-	
+	$scope.redraw = function(){
+		if(elm_ctrl.elm_map){
+			window.setTimeout(function(){elm_ctrl.elm_map.invalidateSize();}, 600)
+		}
+	};
+
 }])
 
 /*
@@ -106,7 +111,8 @@ angular.module('myApp.emissionmapair', ['ngRoute','leaflet-directive'])
 		controller: 'emissionMapAirController',
         transclude: true,
 		scope: {
-			layerid: '='
+			layerid: '=', 
+			control: '='
 		},
 		templateUrl: 'components/esrileafmap/emissionmapair.html',
 		link: function(scope, element, attrs){
@@ -115,6 +121,10 @@ angular.module('myApp.emissionmapair', ['ngRoute','leaflet-directive'])
 					scope.setLayer(scope.layerid);
 				}
 		    },true);
+			 scope.internalControl = scope.control || {};
+			 scope.internalControl.redraw = function() {
+				scope.redraw();
+		    };
 		}
 	};
 });

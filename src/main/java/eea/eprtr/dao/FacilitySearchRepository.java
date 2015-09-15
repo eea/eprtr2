@@ -40,7 +40,8 @@ public class FacilitySearchRepository {
 		cq.select(cb.count(qr));
 		cq.where(filter.buildWhereClause(cb, qr));
 		
-		long count = em.createQuery(cq).getSingleResult().longValue();
+		TypedQuery<Long> q1 = em.createQuery(cq);
+		long count = q1.getSingleResult().longValue();
 		return count;
 	}
 	
@@ -58,7 +59,8 @@ public class FacilitySearchRepository {
 		
 		cq.where(qr.get(FacilitySearchMainActivity_.facilityReportID).in(sq));
 		
-		long count = em.createQuery(cq).getSingleResult().longValue();
+		TypedQuery<Long> q1 = em.createQuery(cq);
+		long count = q1.getSingleResult().longValue();
 		return count;
 	}
 	

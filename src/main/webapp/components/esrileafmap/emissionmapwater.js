@@ -114,7 +114,12 @@ angular.module('myApp.emissionmapwater', ['ngRoute','leaflet-directive'])
 		
 	});
 	
-	
+	$scope.redraw = function(){
+		if(elm_ctrl.elm_map){
+			window.setTimeout(function(){elm_ctrl.elm_map.invalidateSize();}, 600)
+		}
+	};
+
 }])
 
 /*
@@ -131,7 +136,8 @@ angular.module('myApp.emissionmapwater', ['ngRoute','leaflet-directive'])
 		controller: 'emissionMapWaterController',
         transclude: true,
 		scope: {
-			layerid: '='
+			layerid: '=', 
+			control: '='
 		},
 		templateUrl: 'components/esrileafmap/emissionmapwater.html',
 		link: function(scope, element, attrs){
@@ -140,6 +146,10 @@ angular.module('myApp.emissionmapwater', ['ngRoute','leaflet-directive'])
 					scope.setLayer(scope.layerid);
 				}
 		    },true);
-		}
+			 scope.internalControl = scope.control || {};
+			 scope.internalControl.redraw = function() {
+				scope.redraw();
+		    };
+		 }
 	};
 });

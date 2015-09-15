@@ -9,9 +9,41 @@ angular.module('myApp.diffemissionsair', ['ngRoute','ngSanitize', 'myApp.emissio
   });
 }])
 
-.controller('DiffEmissionsAirCtrl', ['$scope','$filter', 'searchFilter', 'emissionsService', function($scope, $filter, searchFilter, emissionsService) {
+.controller('DiffEmissionsAirCtrl', ['$scope','$filter', 'searchFilter', 'emissionsService', 'translationService', function($scope, $filter, searchFilter, emissionsService,translationService) {
 	
 	$scope.searchFilter = searchFilter;
+    $scope.resize_icon = "fa fa-arrow-left"
+    $scope.bigmap = false;
+    $scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
+    $scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
+    $scope.mapctrl = {};
+	$scope.mapheight = window.innerHeight > 820 ? 600 : window.innerHeight -350;
+
+    $scope.$watch('mapctrl', function(value) {
+    	if(typeof $scope.mapctrl.redraw == 'function'){
+        	$scope.mapctrl.redraw();
+        }
+    });
+    /**
+     * MAp handling*/
+    $scope.togglemapview = function(){
+    	if($scope.bigmap){
+        	$scope.bigmap = false;
+        	$scope.resize_icon = "fa fa-arrow-left"
+        	$scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
+        	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
+    		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
+    	}
+    	else{
+        	$scope.bigmap = true;
+        	$scope.resize_icon = "fa fa-arrow-right"
+        	$scope.mapclss = "col-md-12 minor-padding";
+        	$scope.resclss = "col-md-12 minor-padding";
+    		$scope.maptooltip = $scope.tr_c['ShowReducedMap'];
+    	}
+    	$scope.mapctrl.redraw();
+    }
+    
     /**
      * Tab handling
      * */
@@ -26,6 +58,10 @@ angular.module('myApp.diffemissionsair', ['ngRoute','ngSanitize', 'myApp.emissio
 	$scope.setActiveTab = function(tab) {
 		$scope.active[tab] = true;
 	};
+	translationService.get().then(function (data) {
+		$scope.tr_c = data.Common;
+		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
+    });
 
 	emissionsService.get().then(function (data) {
 		$scope.de = data.DiffuseSources;

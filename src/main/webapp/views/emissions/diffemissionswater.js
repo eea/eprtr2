@@ -9,7 +9,7 @@ angular.module('myApp.diffemissionswater', ['ngRoute','ngSanitize', 'myApp.emiss
   });
 }])
 
-.controller('DiffEmissionsWaterCtrl', ['$scope','$filter', 'searchFilter', 'emissionsService', function($scope, $filter, searchFilter, emissionsService) {
+.controller('DiffEmissionsWaterCtrl', ['$scope','$filter', 'searchFilter', 'emissionsService', 'translationService', function($scope, $filter, searchFilter, emissionsService,translationService) {
 	
 	/*$scope.aboutemissions = "Etiam porta sem malesuada magna mollis euismod. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia bibendum nulla sed consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id ligula porta felis euismod semper. Curabitur blandit tempus porttitor. " +
 			" Etiam porta sem malesuada magna mollis euismod. Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur. Curabitur blandit tempus porttitor. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.";
@@ -17,6 +17,37 @@ angular.module('myApp.diffemissionswater', ['ngRoute','ngSanitize', 'myApp.emiss
 		$scope.welcome = data['HomeWelcomeText'];
     });*/
 	
+    $scope.resize_icon = "fa fa-arrow-left"
+    $scope.bigmap = false;
+    $scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
+    $scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
+    $scope.mapctrl = {};
+	$scope.mapheight = window.innerHeight > 820 ? 600 : window.innerHeight -350;
+
+    $scope.$watch('mapctrl', function(value) {
+    	if(typeof $scope.mapctrl.redraw == 'function'){
+        	$scope.mapctrl.redraw();
+        }
+    });
+    /**
+     * MAp handling*/
+    $scope.togglemapview = function(){
+    	if($scope.bigmap){
+        	$scope.bigmap = false;
+        	$scope.resize_icon = "fa fa-arrow-left"
+        	$scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
+        	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
+    		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
+    	}
+    	else{
+        	$scope.bigmap = true;
+        	$scope.resize_icon = "fa fa-arrow-right"
+        	$scope.mapclss = "col-md-12 minor-padding";
+        	$scope.resclss = "col-md-12 minor-padding";
+    		$scope.maptooltip = $scope.tr_c['ShowReducedMap'];
+    	}
+    	$scope.mapctrl.redraw();
+    }
 	
 	$scope.searchFilter = searchFilter;
     /**
@@ -33,7 +64,10 @@ angular.module('myApp.diffemissionswater', ['ngRoute','ngSanitize', 'myApp.emiss
 	$scope.setActiveTab = function(tab) {
 		$scope.active[tab] = true;
 	};
-
+	translationService.get().then(function (data) {
+		$scope.tr_c = data.Common;
+		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
+    });
 	emissionsService.get().then(function (data) {
 		$scope.de = data.DiffuseSources;
     });

@@ -1,6 +1,7 @@
 package eea.eprtr.dao;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -39,15 +40,20 @@ public class FacilitySearchFilter {
 			whereClause.getExpressions().add(locationSearchWhereClause);
 		}
 		if (facilityName != null) {
+			
+			//whereClause.getExpressions().add(cb.like(qr.get(FacilitySearchAll_.facilitySearchName), "Dong%"));
+			//Expression<String> nameParameter = cb.parameter(String.class, facilityName.toString() +"%");
+			Predicate facilitySearchNameClause = cb.like(qr.get(FacilitySearchAll_.facilitySearchName), "%" + facilityName.toString() +"%");
+			Predicate parentCompanySearchNameClause = cb.like(qr.get(FacilitySearchAll_.facilitySearchName), "%" + facilityName.toString() +"%");
 			whereClause.getExpressions().add(
-					cb.or(
-							cb.equal(qr.get(FacilitySearchAll_.facilitySearchName), facilityName),
-							cb.equal(qr.get(FacilitySearchAll_.parentCompanySearchName), facilityName)
-					)
+				cb.or(facilitySearchNameClause,parentCompanySearchNameClause)
+					/*cb.like(qr.get(FacilitySearchAll_.facilitySearchName), "%" + facilityName.toString() +"%"),
+					cb.like(qr.get(FacilitySearchAll_.parentCompanySearchName), "%" + facilityName.toString() +"%")
+				)*/
 			);
 		}
 		if (cityName != null) {
-			whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.citySearchName), cityName));
+			whereClause.getExpressions().add(cb.like(qr.get(FacilitySearchAll_.citySearchName), "%" + cityName.toString()+ "%"));
 		}
 		Predicate activitySearchWhereClause = activityFilter.buildWhereClause(cb, qr);
 		if (activitySearchWhereClause.getExpressions().size() > 0) {
