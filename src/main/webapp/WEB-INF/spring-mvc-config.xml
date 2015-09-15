@@ -25,7 +25,7 @@
     </bean-->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     	<property name="persistenceUnitName" value="eprtr"/>
-        <property name="dataSource" ref="dataSourceEprtr" />
+        <property name="dataSource" ref="dataSource" />
         <property name="packagesToScan" value="eea.eprtr.*" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
@@ -43,8 +43,8 @@
             </bean>
         </property>
     </bean-->      
-    <bean id="dataSourceEprtr" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
-        <property name="jndiName" value="java:comp/env/jdbc/dataSource" />
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
+        <property name="jndiName" value="java:comp/env/jdbc/datasource" />
         <property name="resourceRef" value="true" />        
     </bean>
     <!--bean id="dataSourceEprtrCms" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
