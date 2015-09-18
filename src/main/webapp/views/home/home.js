@@ -16,12 +16,19 @@ angular.module('myApp.home', ['ngRoute'])
 	$scope.test = function(inp){
 		return inp;
 	}
+    $scope.mapctrl = {};
 	
 	$http.get('translations/eprtr-resource-static_en-gb.json').success(function(data, status) {
 		$scope.welcome = data['Static']['HomeWelcomeText'];
     });
 	$scope.mapheight = window.innerHeight > 820 ? 600 : window.innerHeight -190;
-
+	//$scope.mapctrl.redraw();
+	
+    $scope.$watch('mapctrl', function(value) {
+    	if(typeof $scope.mapctrl.redraw == 'function'){
+        	$scope.mapctrl.redraw();
+        }
+    });
 	//HomeWelcomeText
 	
 }])

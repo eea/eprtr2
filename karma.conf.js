@@ -38,6 +38,7 @@ module.exports = function(config){
       'src/main/webapp/bower_components/leaflet-plugins/layer/tile/Yandex.js',
       'src/main/webapp/bower_components/esri-leaflet/dist/esri-leaflet.js',
       'src/main/webapp/bower_components/esri-leaflet-clustered-feature-layer/dist/esri-leaflet-clustered-feature-layer.js',
+      'src/main/webapp/bower_components/Leaflet.EasyButton/src/easy-button.js',
       'src/main/webapp/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js',
       'src/main/webapp/bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js',
       'src/main/webapp/bower_components/underscore/underscore.js',

@@ -30,11 +30,20 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 
 	})
 
-.controller('esriLeafMapController', ['$scope',  'leafletData', 'elmconf', function($scope,  leafletData, elmconf) {
+.controller('esriLeafMapController', ['$scope',  'leafletData', 'elmconf', 'translationService', function($scope,  leafletData, elmconf, translationService) {
 	var elm_ctrl = this;
 	var points = [];
+	$scope.showlegend = false;
 	var where = '';
+	translationService.get('LOV_ANNEXIACTIVITY').then(function (data) {
+		$scope.lov = data;
+    });
 	
+	$scope.$watchCollection('[lov,elm_ctrl]', function(value){
+    	if($scope.lov && elm_ctrl.elm_map){
+    		$scope.createLegend();
+    	}
+    });
 	/*
 	 * We extend scope with a collection of icons and two functions
 	 * Icons uses the Leaflet.awsome-markers plugin
@@ -45,46 +54,57 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 		//icon: L.AwesomeMarkers.icon({icon: 'spinner', prefix: 'fa', markerColor: 'red', spin:true}) }).addTo(map);
 		eprtricons: {
 				/*IASectorCode*/
-				1: L.AwesomeMarkers.icon({
+				1: {
 					icon: 'home', 
 					prefix: 'fa', 
-					markerColor: 'darkgreen'}),
-				2: L.AwesomeMarkers.icon({
+					markerColor: 'darkgreen'},
+				2: {
 					icon: 'home', 
 					prefix: 'fa', 
-					markerColor: 'blue'}),
-				3: L.AwesomeMarkers.icon({
+					markerColor: 'blue'},
+				3: {
 					icon: 'home', 
 					prefix: 'fa', 
-					markerColor: 'orange'}),
-				4: L.AwesomeMarkers.icon({
+					markerColor: 'orange'},
+				4: {
 					icon: 'home', 
 					prefix: 'fa', 
-					markerColor: 'cadetblue'}),
-				5: L.AwesomeMarkers.icon({
+					markerColor: 'cadetblue'},
+				5: {
 					icon: 'home', 
 					prefix: 'fa', 
-					markerColor: 'green'}),
-				6: L.AwesomeMarkers.icon({
+					markerColor: 'green'},
+				6: {
 					icon: 'home', 
 					prefix: 'fa', 
-					markerColor: 'darkpuple'}),
-				7: L.AwesomeMarkers.icon({
+					markerColor: 'darkpuple'},
+				7: {
 					icon: 'home', 
 					prefix: 'fa', 
-					markerColor: 'darkred'}),
-				8: L.AwesomeMarkers.icon({
+					markerColor: 'darkred'},
+				8: {
 					icon: 'home', 
 					prefix: 'fa', 
-					markerColor: 'red'}),
-				9: L.AwesomeMarkers.icon({
+					markerColor: 'red'},
+				9: {
+					icon: 'star', 
+					prefix: 'fa', 
+					markerColor: 'purple'},
+				others: {
 					icon: 'home', 
 					prefix: 'fa', 
-					markerColor: 'purple'}),
-				others: L.AwesomeMarkers.icon({
-					icon: 'home', 
-					prefix: 'fa', 
-					markerColor: 'red'})
+					markerColor: 'red'}
+   	    },
+   	    eprtriconcolors:{
+   	    	'red':'#D63E2A', 
+   	    	'darkred':'#A23336', 
+   	    	'orange':'#F69730', 
+   	    	'green':'#72B026', 
+   	    	'darkgreen':'#728224', 
+   	    	'blue':'#38AADD', 
+   	    	'purple':'#D252B9', 
+   	    	'darkpuple':'#5B396B', 
+   	    	'cadetblue':'#436978'
    	    },
 		setwhere: function(where_str){
 			//console.log('setWhere: ' + where_str);
@@ -353,7 +373,7 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 			   //points.push(latlng)
 			   var sec = geojson.properties.IASectorCode.toLowerCase();
 			   return L.marker(latlng, {
-			        icon: $scope.eprtricons[(elmconf.sectors.indexOf(sec)>0)?sec:'others']
+			        icon: L.AwesomeMarkers.icon($scope.eprtricons[(elmconf.sectors.indexOf(sec)>0)?sec:'others'])
 			      });
 		    },
 		});
@@ -377,6 +397,28 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 				//console.log('pop: '+ feature.properties.X + ' ' + feature.properties.Y);
         	    return L.Util.template('<p><em>Facility</em>: {FacilityName }<br><em>Reporting Year</em>: {ReportingYear }<br><em>Country</em>: {CountryCode }<br><a href="#facilitydetails?FacilityID={FacilityID}&ReportingYear={ReportingYear}">details</a></p>', feature.properties);
         	  });
+
+		$scope.toggleLegend = L.easyButton({
+			  states: [{
+			    stateName: 'show-legend',
+			    icon: 'fa-bars',
+			    title: 'show legend',
+			    onClick: function(control) {
+			    	elm_ctrl.legend.addTo(elm_ctrl.elm_map);
+			      control.state('hide-legend');
+			    }
+			  }, {
+			    icon: 'fa-bars',
+			    stateName: 'hide-legend',
+			    onClick: function(control) {
+			      elm_ctrl.elm_map.removeControl(elm_ctrl.legend);
+			      control.state('show-legend');
+			    },
+			    title: 'hide legend'
+			  }]
+			});
+		$scope.toggleLegend.addTo(elm_ctrl.elm_map);
+		
 	});
 	
 	$scope.redraw = function(){
@@ -384,6 +426,45 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 			window.setTimeout(function(){elm_ctrl.elm_map.invalidateSize();}, 600)
 		}
 	};
+	
+	$scope.createLegend = function(){
+		elm_ctrl.legend = L.control({position: 'bottomright'});
+	
+		elm_ctrl.legend.onAdd = function (map) {
+	
+		    var div = L.DomUtil.create('div', 'leaflet-control-layers legend');
+		    var h4 = L.DomUtil.create('h4', '', div);
+		    h4.innerHTML += 'Industrial Activity Sectors';
+		    var tab = L.DomUtil.create('table', '', div);
+		    /*eprtricons: {
+				1: {icon: 'home', prefix: 'fa',	markerColor: 'darkgreen'},	*/	
+		    angular.forEach($scope.eprtricons, function(value, key) {
+	    	  var lab = ($scope.lov.hasOwnProperty(key))?$scope.lov[key]:'Others';
+	    	  var clss = value.prefix +" " + value.prefix +"-"+ value.icon;
+	    	  tab.innerHTML += '<tr><td><i class="circle ' + clss + 
+	    	  '" style="background:' + $scope.eprtriconcolors[value.markerColor] + 
+		      '"></i></td><td>' + lab + '</td></tr>';
+		    });
+		    return div;
+		    
+		    /*
+		    var div = L.DomUtil.create('div', 'leaflet-control-layers legend');
+		    var h4 = L.DomUtil.create('h4', '', div);
+		    h4.innerHTML += 'Industrial Activity Sectors';
+		    var ul = L.DomUtil.create('ul', 'fa-ul', div);
+		    angular.forEach($scope.eprtricons, function(value, key) {
+	    	  var lab = ($scope.lov.hasOwnProperty(key))?$scope.lov[key]:'Others';
+	    	  var clss = value.prefix +" " + value.prefix +"-"+ value.icon;
+	    	  ul.innerHTML += '<li><i class="fa-li circle ' + clss + '" style="background:' + $scope.eprtriconcolors[value.markerColor] + 
+		      '"></i> ' + lab + '</li>';
+		    });
+		    return div;
+		     * */
+		};
+	
+		//elm_ctrl.legend.addTo(elm_ctrl.elm_map);
+	}
+	
 	
 }])
 

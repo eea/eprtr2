@@ -47,22 +47,29 @@ angular.module('myApp.emissionmapair', ['ngRoute','leaflet-directive'])
 
 	})
 
-.controller('emissionMapAirController', ['$scope',  'leafletData', 'emaconf', function($scope,  leafletData, emaconf) {
+.controller('emissionMapAirController', ['$scope', '$http',  'leafletData', 'emaconf', function($scope, $http, leafletData, emaconf) {
 	var elm_ctrl = this;
 	
+	$scope.legenddef = {};
 	$scope.setLayer = function(id){
 		if(id != undefined){
-
+			elm_ctrl._layid = emaconf.dealayers[id]; 
 			if(elm_ctrl.dmlay){
-				elm_ctrl.dmlay.setLayers([emaconf.dealayers[id]]);	
+				elm_ctrl.dmlay.setLayers([elm_ctrl._layid]);	
 			}
 			else if(elm_ctrl.elm_map){
 				var dmlay = elm_ctrl.elm_map.getLayer(1); 
-				dmlay.setLayers([emaconf.dealayers[id]]);	
+				dmlay.setLayers([elm_ctrl._layid]);	
 			}
+			elm_ctrl.legend.update();
 		}
 	};
-
+	$scope.getLegenddef = function(){
+		$http.get(emaconf.EPRTRDiffuseEmissionsAirUrl+'/legend?f=pjson').success(function(data, status) {
+			$scope.legenddef = data;
+		});
+	}
+	$scope.getLegenddef();
 	//Here we initialize the map
 	leafletData.getMap().then(function(map) {
 		//Initial extent
@@ -85,7 +92,35 @@ angular.module('myApp.emissionmapair', ['ngRoute','leaflet-directive'])
 		if($scope.layerid != undefined){
 			elm_ctrl.dmlay.layers = [emaconf.dealayers[$scope.layerid]];	
 		}
-		elm_ctrl.dmlay.addTo(map); 
+		elm_ctrl.dmlay.addTo(map);
+		
+		$scope.createLegend();
+
+		$scope.toggleLegend = L.easyButton({
+			  states: [{
+			    stateName: 'show-legend',
+			    icon: 'fa-bars',
+			    title: 'show legend',
+			    onClick: function(control) {
+			    	if(elm_ctrl.legend != undefined){
+			    		elm_ctrl.legend.addTo(elm_ctrl.elm_map);
+			    		control.state('hide-legend');
+			    	}
+			    }
+			  }, {
+			    icon: 'fa-bars',
+			    stateName: 'hide-legend',
+			    onClick: function(control) {
+			    	if(elm_ctrl.legend != undefined){
+				      elm_ctrl.elm_map.removeControl(elm_ctrl.legend);
+				      control.state('show-legend');
+			    	}
+			    },
+			    title: 'hide legend'
+			  }]
+			});
+		$scope.toggleLegend.addTo(elm_ctrl.elm_map);
+	
 
 	});
 	
@@ -94,7 +129,38 @@ angular.module('myApp.emissionmapair', ['ngRoute','leaflet-directive'])
 			window.setTimeout(function(){elm_ctrl.elm_map.invalidateSize();}, 600)
 		}
 	};
+	
+	$scope.createLegend = function(){
 
+		elm_ctrl.legend = L.control({position: 'bottomright'});
+		
+		elm_ctrl.legend.onAdd = function (map) {
+			elm_ctrl.legend._div = L.DomUtil.create('div', 'leaflet-control-layers legend');
+			elm_ctrl.legend.update();
+		    return elm_ctrl.legend._div;
+
+		}
+
+		elm_ctrl.legend.update = function(){
+			var layerdef = [];
+			angular.forEach($scope.legenddef.layers, function(item) {
+				if (item.layerId.toString() == elm_ctrl._layid){
+					elm_ctrl.legend._div.innerHTML = '<h4>'+item.layerName+'</h4>';
+				    angular.forEach(item.legend, function(leg) {
+				    	var _url = emaconf.EPRTRDiffuseEmissionsAirUrl + '/0/images/' + leg.url;
+				    	//<img style="-webkit-user-select: none" src="http://test.discomap.eea.europa.eu/arcgis/rest/services/AIR/EPRTRDiffuseEmissionsWater/MapServer/0/images/7f34224c77c077f1d419c50fac65e787">
+				    	elm_ctrl.legend._div.innerHTML += '<img src="'+_url+'" style="width:'+leg.width+';height:'+leg.height+';" > ' + leg.label + '<br>';
+				    });
+				}
+			});
+		}
+		//Need to create first time
+		elm_ctrl.legend.addTo(elm_ctrl.elm_map);
+
+		//Hide again
+        elm_ctrl.elm_map.removeControl(elm_ctrl.legend);
+
+	}
 }])
 
 /*
