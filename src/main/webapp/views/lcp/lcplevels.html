@@ -1,0 +1,128 @@
+<div >
+
+	<div>        
+		<h3>{{tr_lcp.Headline}}</h3>
+	</div>
+    <!-- 
+	<div class="row">
+    <div class="col-md-12">
+
+        <p>{{tr_ao.Subheadline}}</p>
+    
+	</div>
+	</div>
+ 	-->
+
+	<div class="row row-map">
+
+		<div class="search_form col-md-3">
+
+			<div class="panel panel-info">
+				<div class="panel-heading">Search</div>
+				<div class="panel-body">
+					<div id="searchbtn" style="height:35px;">
+                	<div class="btn-group pull-right">
+                        <input type="submit" value="Search >>" ng-click="search()" class="btn btn-success" />
+                    </div>
+                    </div>
+					<div search-placement>	</div>		
+				</div>
+			</div>
+			
+		</div>
+		<div class="col-md-9 minor-padding">
+		
+		<div class="{{mapclss}}" style="height:{{mapheight}}px;">
+            <button type="button" ng-click="togglemapview()" title="{{maptooltip}}"
+				class="btn btn-default pull-right" style="position:absolute; right:5px; margin:5px;z-index:110;" >
+				<span class="{{resize_icon}}" aria-hidden="true"></span>
+			</button><lcp-map queryparams="queryParams" control="mapctrl"/>
+        </div>
+		
+		<div class="{{resclss}}">
+	      <div class="col-md-12 top-buffer10" ng-if="beforesearch">
+			<div class="alert alert-success"><strong>{{tr_c.SearchText}}</strong></div>
+	      </div>
+		
+		  <tabset>
+			     <tab heading="{{tr_lcp.Plants}}"
+					active="active.plants"> <span
+					us-spinner="{radius:16, width:6, length: 12}"
+					spinner-key="spinner-1"></span>
+				<div id="facility" class=" col-md-12 table-responsive top-buffer10">
+					<div class="row top-buffer10" ng-show="searchResults">
+						<div class="col-md-6">
+							<table>
+								<tr>
+									<td class="fdTitles">{{tr_c.Year }}:</td>
+									<td>{{ queryParams.ReportingYear }}</td>
+								</tr>
+								<tr>
+									<td class="fdTitles">{{ tr_c.Area }}:</td>
+									<td>{{ tr_lco[queryParams.countryCode] }}</td>
+								</tr>
+								<tr>
+									<td class="fdTitles">{{ tr_lcp.Plants }}:</td>
+									<td>{{ plantdata.length }}</td>
+								</tr>
+							</table>
+						</div>
+						<div class="col-md-6">
+							<button class="print-button btn btn-default pull-right" ng-print
+								print-element-id="plants">
+								<i class="fa fa-print"></i>
+							</button>
+							<button class="btn btn-default pull-right"
+								ng-click="downloadClick()">
+								<span class="glyphicon glyphicon-download-alt"
+									aria-hidden="true"></span>
+							</button>
+						</div>
+					</div>
+				<scrollable-table watch="plantdata">
+					<table class="table table-striped table-condensed table-hover top-buffer10" >
+						<thead>
+							<tr>
+								<th class="col-Min100" sortable-header col="plant">{{tr_lcp.PlantName}}</th>
+								<th class="col-Min100" sortable-header col="facility">{{tr_f.FacilityName}}</th>
+								<th class="col-Min75" sortable-header col="address">{{tr_f.Address}}</th>
+								<th class="col-Min75" sortable-header col="city">{{tr_f.TownVillage}}</th>
+								<th class="text-right col-Min75" sortable-header col="postalcode">{{tr_f.PostalCode}}</th>
+								<th class="col-Min75" sortable-header col="region">{{tr_c.Region}}</th>
+								<th class="col-Min75" sortable-header col="country">{{tr_f.Country}}</th>
+							</tr>
+						</thead>
+						<!-- tfoot>
+							<td colspan="6">
+								<div class='pagination' ng-show="hasItems()">
+									<pagination boundary-links="true"
+										ng-model="$parent.currentPage" total-items="totalItemCount"
+										items-per-page="itemsPerPage" max-size="gap"
+										class="pagination pull-right" previous-text="&lsaquo;"
+										next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+								</div>
+							</td>
+						</tfoot-->
+						<tbody>
+							<tr ng-repeat="item in plantdata" row-id="{{ item.plantid }}" >
+								<td><a href="#/lcpdetailsview?PlantID={{item.plantid}}">{{item.plant}}</a></td>
+								<td>{{item.facility}}</td>
+								<td>{{item.address}}</td>
+								<td>{{item.city}}</td>
+								<td>{{item.postalcode}}</td>
+								<td>{{item.region}}</td>
+								<td>{{item.country}}</td>
+								
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				</tab> 
+			  </tabset>
+			
+			</div>
+					         
+		
+        </div>
+	</div> 
+</div> 

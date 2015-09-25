@@ -9,7 +9,7 @@ angular.module('myApp.home', ['ngRoute'])
   });
 }])
 
-.controller('HomeCtrl', ['$scope','$filter', 'translationService', '$http', function($scope, $filter, translationService, $http) {
+.controller('HomeCtrl', ['$scope','$rootScope','$filter', 'translationService', '$http', function($scope, $rootScope, $filter, translationService, $http) {
 	/**
 	 * DO NOT REMOVE - part of home.test
 	 */

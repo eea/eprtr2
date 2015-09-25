@@ -1,0 +1,81 @@
+<div id="lcp_details" class="container-fluid" >
+   <!--Main Banner-->
+   <div class="row">
+      <div class="col-md-6 " style="display: inline-block; vertical-align: bottom;">
+          <h2>{{tr_lcp.PlantName}}</h2>
+      </div>
+      <div class="col-md-6 text-right"><button class="print-button btn btn-default pull-right" ng-print print-element-id="facility_details"><i class="fa fa-print"></i></button>	</div>
+      <div class="col-md-2" ></div>
+   </div>
+   <div class="row" >
+   
+          <tabset>
+            <tab heading="{{tr_lcp.PlantDetails}}" active="active.plant">
+   <div class="row" style="padding-top:10px;" >
+        <div class="col-md-3" style="height:350px;" >
+	        <leaflet height="100%" ></leaflet>
+		</div>
+
+		<div class="col-md-5" >
+			 <table >
+			  <tr ng-repeat="(key, value) in plantdata |  filter: plantfilter" >
+			    <td class="fdTitles">{{ key }}:</td><td>{{ value }}</td>
+			  </tr>
+			</table>
+		</div>
+		<div class="col-md-4" >
+            <table>
+			  <tr ng-repeat="(key, value) in detailsdata |  filter: detailsfilter" >
+			    <td class="fdTitles">{{ key }}:</td><td>{{ value }}</td>
+			  </tr>
+			</table>
+			 </br>
+		</div>
+	</div>
+</tab>
+
+		<tab heading="LcpArt15" active="active.lcpart15">
+		<div class="col-md-5" >
+			 <table >
+			  <tr ng-repeat="(key, value) in lcpart15data |  filter: lcpart15filter" >
+			    <td class="fdTitles">{{ key }}:</td><td>{{ value }}</td>
+			  </tr>
+			</table>
+		</div>
+		</tab>
+
+		<tab heading="OptOutsAndNERP" active="active.nerp">
+		<div class="col-md-5" >
+			 <table >
+			  <tr ng-repeat="(key, value) in nerpdata |  filter: nerpfilter" >
+			    <td class="fdTitles">{{ key }}:</td><td>{{ value }}</td>
+			  </tr>
+			</table>
+		</div>
+		</tab>
+
+		<tab heading="Energy Input And Total Emissions To Air" active="active.energy">
+		<div class="col-md-5" >
+			 <table >
+			  <tr ng-repeat="(key, value) in energydata |  filter: energyfilter" >
+			    <td class="fdTitles">{{ key }}:</td><td>{{ value }}</td>
+			  </tr>
+			</table>
+		</div>
+		</tab>
+
+		<tab heading="Reporting Authority" active="active.basic">
+		<div class="col-md-5" >
+			 <table >
+			  <tr ng-repeat="(key, value) in basicdata |  filter: basicfilter" >
+			    <td class="fdTitles">{{ key }}:</td><td>{{ value }}</td>
+			  </tr>
+			</table>
+		</div>
+		</tab>
+
+		</tabset>
+    </div>
+
+
+ </div> 

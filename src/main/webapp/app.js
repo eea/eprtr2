@@ -31,7 +31,9 @@ var myApp = angular.module('myApp', [
         'myApp.pollutantinfo',
         'myApp.pd-main',
         'myApp.faqview',
-        'myApp.glossaryview'
+        'myApp.glossaryview',
+        'myApp.lcplevels',
+        'myApp.lcpdetailsview'
     ])
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.otherwise({redirectTo: '/home'});

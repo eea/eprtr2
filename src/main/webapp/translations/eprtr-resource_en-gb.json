@@ -5544,8 +5544,14 @@
 		"SearchPollutantTransfers": "Pollutant Transfers",
 		"SearchWasteTransfers": "Waste Transfers",
 		"TimePollutantReleases": "Pollutant Releases",
-		"TimePollutantTransfers": "Pollutant Transfers",
+		"TimePollutantTransfers": "Pollutant Transfers",	
 		"TimeSeries": "Time Series",
 		"TimeWasteTransfers": "Waste Transfers"
+	},
+	"LCP":{
+		"Headline":"Large Combustion Plants (demo)",
+		"Plants": "Plants",
+		"PlantName": "Plant",
+		"PlantDetails":"Plant Details"
 	}
 }

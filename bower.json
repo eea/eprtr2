@@ -28,7 +28,8 @@
     "underscore": "*",
     "angular-spinner":"*",
     "spin":"*",
-    "ng-csv":"*"
+    "ng-csv":"*",
+    "angular-scrollable-table":"*"
   },
   "appPath": "src/main/webapp"
 }
