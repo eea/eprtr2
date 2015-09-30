@@ -23,7 +23,7 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 		    'envelope_url': 'envelope_url', 'filename': 'filename', 'envelope_isreleased': 'envelope_isreleased'},
 		2:{'id': 'ID', 'fk_plant_id': 'FK_Plant_ID', 'biomass': 'Biomass', 'othersolidfuels': 'OtherSolidFuels',
 			'liquidfuels': 'LiquidFuels', 'naturalgas': 'NaturalGas', 'othergases': 'OtherGases', 'hardcoal': 'HardCoal',
-			'lignite': 'Lignite', 'so2': 'SO2', 'no': 'NOx', 'dust': 'Dust'},
+			'lignite': 'Lignite', 'so2': 'SO2', 'nox': 'NOx', 'dust': 'Dust'},
 		3:{'id': 'ID', 'fk_plant_id': 'FK_Plant_ID', 'art5_1': 'Art5_1', 'operatinghours': 'OperatingHours',
 			'elvso2': 'ElvSO2', 'notabeneannexIII': 'NotaBeneAnnexIII', 'notabeneelvso2': 'NotaBeneElvSO2',
 			'desulphurisationrate': 'DesulphurisationRate', 'sinput': 'SInput', 'annexVI_a_footnote2': 'AnnexVI_A_Footnote2',

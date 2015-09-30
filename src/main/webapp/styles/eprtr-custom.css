@@ -21,6 +21,9 @@ body {margin-top:120px;}
 .col-Min100 { min-width:100px; }
 .col-Min150 { min-width:150px; }
 .col-Min200 { min-width:200px; }
+.col-Max100 { max-width:100px; }
+.col-Max150 { max-width:150px; }
+.col-Max200 { max-width:200px; }
 
 .ontop{z-index: 500;}
 
@@ -492,6 +495,17 @@ padding-left: 10px;
 padding-right: 10px;
 vertical-align: top;	
 } 
+
+.fdSubTitles label {
+color: Gray;
+border-bottom: Solid 0px Transparent;
+white-space: pre;
+padding-left: 0px;
+padding-right: 10px;
+vertical-align: top;
+font-weight: normal;	
+} 
+
 
 .indentLevel0
 {
