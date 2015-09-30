@@ -7,10 +7,10 @@
 		<div class="col-md-12" ng-repeat="item in content | orderBy: 'Title'">
 			<p>
 				<a><span class="trigger" ng-click="item.show = !item.show" style="cursor:pointer;">
-					{{item.Title}}</span></a>&nbsp;&nbsp;
-					<div ng-show="item.show"><span ng-bind-html="item.Content"></span></div>
-				</p>
-			</div>
+					{{item.Title}}</span>
+				</a>&nbsp;&nbsp;
+				<div ng-show="item.show"><span ng-bind-html="item.Content"></span></div>
+			</p>
 		</div>
 	</div>
 </div>
