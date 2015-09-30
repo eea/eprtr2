@@ -1,16 +1,16 @@
 <div class="container">
 	<div class="row">
 		<h3>{{pageTitle}}</h3>
-		<p>
-			<span ng-bind-html="pageHeader"></span>
+		<span ng-bind-html="pageHeader"></span>
 	</div>
 	<div class="row">
 		<div class="col-md-12" ng-repeat="item in content | orderBy: 'Title'">
 			<p>
-				<em><span class="trigger" ng-click="item.show = !item.show">
-						{{item.Title}}</span></em>&nbsp;&nbsp;<span ng-show="item.show"
-					ng-bind-html="item.Content"></span>
-			</p>
+				<em><span class="trigger" ng-click="item.show = !item.show" style="cursor:pointer;">
+					{{item.Title}}</span></em>&nbsp;&nbsp;
+					<div ng-show="item.show"><span ng-bind-html="item.Content"></span></div>
+				</p>
+			</div>
 		</div>
 	</div>
 </div>

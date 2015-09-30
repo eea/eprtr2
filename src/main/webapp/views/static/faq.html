@@ -2,11 +2,11 @@
 	<div class="row">
 		<h3>{{pageTitle}}</h3>
 		<p><span ng-bind-html="pageHeader"></span>
+		</div>
+		<div class="row">
+			<div class="col-md-12" ng-repeat="item in content | orderBy: 'Order'">
+				<h5><a><span class="trigger" ng-click="item.show = !item.show" style="cursor:pointer;">{{item.Order}}. {{item.Title}}</span></a></h5>
+				<div ng-show="item.show"><span ng-bind-html="item.Content"></span></div>
+			</div>
+		</div>
 	</div>
-	<div class="row">
-	  <div class="col-md-12" ng-repeat="item in content | orderBy: 'Order'">
-	  	<a><h5><span class="trigger" ng-click="item.show = !item.show">{{item.Order}}. {{item.Title}}</span></h5></a>
-	  	<div ng-show="item.show"><span ng-bind-html="item.Content"></span></div>
-	  </div>
-</div>
-</div>
