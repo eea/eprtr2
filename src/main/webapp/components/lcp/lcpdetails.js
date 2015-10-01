@@ -286,11 +286,19 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.
         		  for(var key in query) {
         			  switch(key) {
         			  case 'countryCode':
-        				  qs.push(lcpconf.layerfields[id].memberstate + "='"+query[key]+"'");
+        				  qs.push(lcpconf.layerfields[1].memberstate + "='"+query[key]+"'");
+				          break;
+        			  case 'regionCodes':
+        				  //http://localhost:8080/nutsRegionChilds/235
+        				  qs.push(lcpconf.layerfields[0].region + " in ('" + query[key].join("','") + "')");
+				          break;
+        			  case 'regionCode':
+        				  //http://localhost:8080/nutsRegionChilds/235
+        				  qs.push(lcpconf.layerfields[0].region + "='"+query[key]+"'");
 				          break;
 				      case 'ReportingYear':
-        				  qs.push(lcpconf.layerfields[id].referenceyear + "=2013");
-        				  //qs.push(lcpconf.layerfields[id].referenceyear + "="+query[key]);
+        				  //qs.push(lcpconf.layerfields[id].referenceyear + "=2013");
+        				  qs.push(lcpconf.layerfields[id].referenceyear + "="+query[key]);
 				          break;
 				      case 'BasicID':
 				    	  if(id==1){
@@ -345,7 +353,6 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.
         }
       };
     })
-
 
 /*
  * This directive enables us to define this module as a custom HTML element

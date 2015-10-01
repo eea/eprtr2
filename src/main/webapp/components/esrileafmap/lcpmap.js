@@ -69,11 +69,11 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 		$scope.lov = data;
     });
 	
-	$scope.$watchCollection('[lov,elm_ctrl]', function(value){
+	/*$scope.$watchCollection('[lov,elm_ctrl]', function(value){
     	if($scope.lov && elm_ctrl.elm_map){
     		$scope.createLegend();
     	}
-    });
+    });*/
 	/*
 	 * We extend scope with a collection of icons and two functions
 	 * Icons uses the Leaflet.awsome-markers plugin
@@ -86,18 +86,19 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 			//console.log('setWhere: ' + where_str);
 			if ($scope.where != where_str){
 				$scope.where = where_str;
-				if(elm_ctrl.dmlay){
-					elm_ctrl.dmlay.setLayerDefs(where_str);
-					//console.log('elm_ctrl.dmlay: True');
-				}
-				else if(elm_ctrl.elm_map){
-					var dmlay = elm_ctrl.elm_map.getLayer(1); 
-					dmlay.setLayerDefs(where_str);
-				}
-				else {
-					$scope.where = where_str;
-				}			
-			};
+			}
+			//{5:"STATE_NAME='Kansas'", 4:"STATE_NAME='Kansas'}
+			if(elm_ctrl.dmlay){
+				elm_ctrl.dmlay.setLayerDefs({0:where_str});
+				//console.log('elm_ctrl.dmlay: True');
+			}
+			else if(elm_ctrl.elm_map){
+				var dmlay = elm_ctrl.elm_map.getLayer(1); 
+				dmlay.setLayerDefs({0:where_str});
+			}
+			else {
+				$scope.where = where_str;
+			}			
 		},
 	    buildWhere: function(queryparams) {
 	    	//
@@ -124,6 +125,14 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 			      case 'ReportingYear':
 			    	  //arrQue.push(lcpconf.layerfields[0].referenceyear + "=2013");
     				  //qs.push(lcpconf.layerfields[0].referenceyear + "="+query[key]);
+			          break;
+    			  case 'regionCodes':
+    				  //http://localhost:8080/nutsRegionChilds/235
+    				  arrQue.push(lcpconf.layerfields[0].region + " in ('" + queryparams[key].join("','") + "')");
+			          break;
+    			  case 'regionCode':
+    				  //http://localhost:8080/nutsRegionChilds/235
+    				  arrQue.push(lcpconf.layerfields[0].region + "='"+queryparams[key]+"'");
 			          break;
 			      case 'BasicID':
 			    	  arrQue.push(lcpconf.layerfields[0].fk_basicdata_id + "="+queryparams[key]);
@@ -203,7 +212,7 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 
 		//$scope.createLegend();
 
-		$scope.toggleLegend = L.easyButton({
+		/*$scope.toggleLegend = L.easyButton({
 			  states: [{
 			    stateName: 'show-legend',
 			    icon: 'fa-bars',
@@ -222,7 +231,7 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 			    title: 'hide legend'
 			  }]
 			});
-		$scope.toggleLegend.addTo(elm_ctrl.elm_map);
+		$scope.toggleLegend.addTo(elm_ctrl.elm_map);*/
 		
 	});
 	
@@ -232,7 +241,7 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 		}
 	};
 	
-	$scope.createLegend = function(){
+	/*$scope.createLegend = function(){
 
 		elm_ctrl.legend = L.control({position: 'bottomright'});
 		
@@ -262,7 +271,7 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 		//Hide again
         elm_ctrl.elm_map.removeControl(elm_ctrl.legend);
 
-	}
+	}*/
 	
 	
 }])

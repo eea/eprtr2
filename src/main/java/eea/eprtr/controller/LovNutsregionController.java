@@ -1,5 +1,7 @@
 package eea.eprtr.controller;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -24,4 +26,11 @@ public class LovNutsregionController {
     	return query.getSingleResult();
 	}
 	
+	@RequestMapping("/nutsRegionChilds/{id}")
+	public List<LovNutsregion> getLovNutsregionChildsById(
+			@PathVariable(value = "id") Integer id) {
+		TypedQuery<LovNutsregion> query = em.createQuery("SELECT l FROM LovNutsregion l where l.parentID = :Id", LovNutsregion.class);
+    	query.setParameter("Id", id);
+    	return query.getResultList();
+	}
 }

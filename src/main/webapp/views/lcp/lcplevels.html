@@ -25,7 +25,7 @@
                         <input type="submit" value="Search >>" ng-click="search()" class="btn btn-success" />
                     </div>
                     </div>
-					<div search-placement>	</div>		
+					<div lcp-search-placement>	</div>		
 				</div>
 			</div>
 			
@@ -36,7 +36,7 @@
             <button type="button" ng-click="togglemapview()" title="{{maptooltip}}"
 				class="btn btn-default pull-right" style="position:absolute; right:5px; margin:5px;z-index:110;" >
 				<span class="{{resize_icon}}" aria-hidden="true"></span>
-			</button><lcp-map queryparams="queryParams" control="mapctrl"/>
+			</button><lcp-map queryparams="mapQuery" control="mapctrl"/>
         </div>
 		
 		<div class="{{resclss}}">
