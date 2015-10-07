@@ -24,7 +24,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
     	//$scope.maptooltip = "Expand map area";
 
         $scope.mapctrl = {};
-    	$scope.mapheight = window.innerHeight > 820 ? 600 : window.innerHeight -230;
+    	$scope.mapheight = window.innerHeight > 820 ? 600+'px' : (window.innerHeight -230)+'px';
             
         $scope.searchFilter = searchFilter;
         $scope.queryParams = {};

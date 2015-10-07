@@ -192,9 +192,8 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 		    opacity: 0.5,
 		    useCors: false,
 		    layers:[0],
-			f: 'image',
-			proxy:''
-		  });//.addTo(map);
+			f: 'image'
+			});//.addTo(map);
 		
 		elm_ctrl.dmlay.addTo(map);
 		

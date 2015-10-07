@@ -21,7 +21,7 @@ angular.module('myApp.home', ['ngRoute'])
 	$http.get('translations/eprtr-resource-static_en-gb.json').success(function(data, status) {
 		$scope.welcome = data['Static']['HomeWelcomeText'];
     });
-	$scope.mapheight = window.innerHeight > 820 ? 600 : window.innerHeight -190;
+	$scope.mapheight = window.innerHeight > 820 ? 600+'px' : (window.innerHeight -190)+'px';
 	
     $scope.$watch('mapctrl', function(value) {
     	if(typeof $scope.mapctrl.redraw == 'function'){

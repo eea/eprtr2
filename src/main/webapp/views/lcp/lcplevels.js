@@ -34,7 +34,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     $scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
     $scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
     $scope.mapctrl = {};
-	$scope.mapheight = window.innerHeight > 820 ? 600 : window.innerHeight -230;
+	$scope.mapheight = window.innerHeight > 820 ? 600+'px' : (window.innerHeight -230)+'px';
 
     $scope.translate = function()
     {
@@ -250,7 +250,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
 			_pl['postalcode'] = item.attributes[lcpconf.layerfields[0].postalcode];
 			_pl['country'] = $scope.basicidcountrycode[item.attributes[lcpconf.layerfields[0].fk_basicdata_id]];
 			if(item.attributes[lcpconf.layerfields[0].address1]){
-				console.log('Adrrss');
+				//console.log('Adrrss');
 			}
 			$scope.plantdata.push(_pl);
 		});
