@@ -42,7 +42,7 @@
                 <property name="showSql" value="true" />
             </bean>
         </property>
-    </bean>      
+    </bean>
     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
         <property name="jndiName" value="java:comp/env/jdbc/datasource" />
         <property name="resourceRef" value="true" />        
@@ -51,5 +51,4 @@
         <property name="jndiName" value="java:comp/env/jdbc/datasourcecms" />
         <property name="resourceRef" value="true" />        
     </bean>
-
 </beans>
