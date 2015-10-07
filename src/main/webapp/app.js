@@ -33,6 +33,7 @@ var myApp = angular.module('myApp', [
         'myApp.faqview',
         'myApp.glossaryview',
         'myApp.lcplevels',
+        'myApp.lcp-search-placement',
         'myApp.lcpdetailsview'
     ])
     .config(['$routeProvider', function($routeProvider) {

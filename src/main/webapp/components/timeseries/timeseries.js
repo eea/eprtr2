@@ -1350,6 +1350,8 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
     return lovNutsRegion;
 }])
 
+
+
 .service('riverBasinDistrictsService', ['Restangular', function(Restangular){
     var riverBasinDistricts = Restangular.service('riverBasinDistricts');
 

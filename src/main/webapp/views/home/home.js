@@ -22,15 +22,16 @@ angular.module('myApp.home', ['ngRoute'])
 		$scope.welcome = data['Static']['HomeWelcomeText'];
     });
 	$scope.mapheight = window.innerHeight > 820 ? 600 : window.innerHeight -190;
-	//$scope.mapctrl.redraw();
 	
     $scope.$watch('mapctrl', function(value) {
     	if(typeof $scope.mapctrl.redraw == 'function'){
         	$scope.mapctrl.redraw();
         }
     });
-	//HomeWelcomeText
-	
+
+    $scope.$on('mapctrl', function(){
+        $scope.mapctrl.redraw();
+      });
 }])
 
 .factory('formatStrFactory', ['$filter', function($filter){
