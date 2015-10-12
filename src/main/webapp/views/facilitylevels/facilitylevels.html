@@ -139,7 +139,7 @@
 						<tbody>
 							<tr ng-repeat="item in items">
 								<td><a
-									href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">{{formatText(item.facilityName,
+									ng-click="openFDmodal(item.facilityID, item.facilityReportID, item.reportingYear)" style="cursor:pointer;">{{formatText(item.facilityName,
 										item.confidentialIndicator)}}</a></td>
 								<td>{{formatText(item.postalCode,
 									item.confidentialIndicator)}}</td>
