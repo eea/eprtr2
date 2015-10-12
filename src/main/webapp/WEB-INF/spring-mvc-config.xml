@@ -11,7 +11,7 @@
 	<mvc:resources location="/" mapping="/*"/>
 
 	<!-- Scans the classpath of this application for @Components to deploy as beans -->
-	<context:component-scan base-package="eea.eprtr.controller eea.eprtr.dao" />
+	<context:component-scan base-package="eea.*" />
 	
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />
@@ -20,9 +20,9 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
-    <!-- bean id="transactionManagerCms" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactoryCms" ref="entityManagerFactoryCms" />
-    </bean-->
+    <bean id="transactionManagerCms" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactoryCms" />
+    </bean>
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     	<property name="persistenceUnitName" value="eprtr"/>
         <property name="dataSource" ref="dataSource" />
@@ -33,7 +33,7 @@
             </bean>
         </property>
     </bean>      
-    <!--bean id="entityManagerFactoryCms" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <bean id="entityManagerFactoryCms" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     	<property name="persistenceUnitName" value="eprtrcms"/>
         <property name="dataSource" ref="dataSourceEprtrCms" />
         <property name="packagesToScan" value="eea.eprtrcms.*" />
@@ -42,14 +42,13 @@
                 <property name="showSql" value="true" />
             </bean>
         </property>
-    </bean-->      
+    </bean>
     <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
         <property name="jndiName" value="java:comp/env/jdbc/datasource" />
         <property name="resourceRef" value="true" />        
     </bean>
-    <!--bean id="dataSourceEprtrCms" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
-        <property name="jndiName" value="java:comp/env/jdbc/dataSourceEprtrCms" />
+    <bean id="dataSourceEprtrCms" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
+        <property name="jndiName" value="java:comp/env/jdbc/datasourcecms" />
         <property name="resourceRef" value="true" />        
-    </bean-->
-
+    </bean>
 </beans>

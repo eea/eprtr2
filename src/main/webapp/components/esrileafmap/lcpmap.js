@@ -184,6 +184,7 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 		
 		elm_ctrl.elm_map = map
 		
+		L.esri.get = L.esri.Request.get.JSONP;
 		//We set the baselayer - in version 2 we can add more baselayers and a selector
 		L.esri.basemapLayer("Streets").addTo(map);
 
@@ -192,7 +193,7 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 		    useCors: false,
 		    layers:[0],
 			f: 'image'
-		  });//.addTo(map);
+			});//.addTo(map);
 		
 		elm_ctrl.dmlay.addTo(map);
 		

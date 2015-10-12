@@ -16,7 +16,7 @@ import eea.eprtrcms.model.StringResource;
 @Repository
 public class StringResourceRepository {
 	
-	@PersistenceContext(unitName="cms")
+	@PersistenceContext(unitName="eprtrcms")
     private EntityManager emcms;
 
 	public List<StringResource> getStringResources(StringResourceFilter filter) {

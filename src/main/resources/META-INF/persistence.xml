@@ -2,8 +2,8 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="eprtr" transaction-type="RESOURCE_LOCAL">
 		<mapping-file>META-INF/database-mapping.xml</mapping-file>
-		<class>eea.eprtr.model.StringResource</class>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<!-- jta-data-source>java:comp/env/jdbc/datasource</jta-data-source -->
 		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 		<properties>
 			<property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
@@ -11,9 +11,22 @@
         	<property name="hibernate.cache.use_query_cache" value="true" />
 		</properties>
 	</persistence-unit>
-	<persistence-unit name="eprtrcms" transaction-type="RESOURCE_LOCAL">
+	<!--persistence-unit name="eprtrcms" transaction-type="JTA">
 		<mapping-file>META-INF/database-mapping-cms.xml</mapping-file>
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<jta-data-source>java:comp/env/jdbc/datasourcecms</jta-data-source>
+		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+		<properties>
+			<property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
+        	<property name="hibernate.cache.use_second_level_cache" value="true" />
+        	<property name="hibernate.cache.use_query_cache" value="true" />
+		</properties>
+	</persistence-unit -->
+	<persistence-unit name="eprtrcms" transaction-type="RESOURCE_LOCAL">
+		<mapping-file>META-INF/database-mapping-cms.xml</mapping-file>
+		<jta-data-source>java:comp/env/jdbc/datasourcecms</jta-data-source>
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		<class>eea.eprtrcms.model</class>
 		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 		<properties>
 			<property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
@@ -21,4 +34,5 @@
         	<property name="hibernate.cache.use_query_cache" value="true" />
 		</properties>
 	</persistence-unit>
+	
 </persistence>

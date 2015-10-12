@@ -22,7 +22,7 @@ angular.module('myApp.diffemissionswater', ['ngRoute','ngSanitize', 'myApp.emiss
     $scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
     $scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
     $scope.mapctrl = {};
-	$scope.mapheight = window.innerHeight > 820 ? 600 : window.innerHeight -350;
+	$scope.mapheight = window.innerHeight > 820 ? 600+'px' : (window.innerHeight -350)+'px';
 
     $scope.$watch('mapctrl', function(value) {
     	if(typeof $scope.mapctrl.redraw == 'function'){
