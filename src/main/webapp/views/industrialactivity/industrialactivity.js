@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize','angularSpinner','myApp.eprtrgooglechart'])
+angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize','angularSpinner','myApp.eprtrgooglechart', 'anguFixedHeaderTable'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/industrialactivity', {
@@ -10,9 +10,9 @@ angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'r
     }])
 
     .controller('IndustrialActivityCtrl', ['$scope', '$filter', '$modal','searchFilter', 'Restangular','translationService'
-                                           ,'formatStrFactory', 'countFactory','usSpinnerService', 
+                                           ,'formatStrFactory', 'countFactory','usSpinnerService', '$timeout',  
                                            function($scope, $filter, $modal, searchFilter, Restangular,translationService,
-                                        		   formatStrFactory,countFactory,usSpinnerService) {
+                                        		   formatStrFactory,countFactory,usSpinnerService, $timeout) {
         $scope.beforesearch = true;
     	$scope.activityPanel = true;
         $scope.searchFilter = searchFilter;
@@ -136,6 +136,14 @@ angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'r
         $scope.activateTab = function(tab) {
         	$scope.active = {}; //reset
         	$scope.active[tab] = true;
+          /*
+          $timeout(function() {
+            var tmp =$scope.pollutanttransferItems;
+            $scope.pollutanttransferItems = 0;
+            $scope.pollutanttransferItems = tmp;
+          }, 0);
+          */
+          $scope.getTabData(tab);
     	};
     	$scope.setActiveTab = function(tab) {
     		$scope.active[tab] = true;

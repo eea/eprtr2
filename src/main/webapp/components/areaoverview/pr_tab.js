@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.areaOverviewPrTab', ['restangular','ngSanitize','angularSpinner'])
+angular.module('myApp.areaOverviewPrTab', ['restangular','ngSanitize','angularSpinner', 'anguFixedHeaderTable'])
 
    .controller('AreaOverviewPrTabCtrl', ['$scope', '$rootScope','$filter', 'Restangular',
                                        'translationService','formatStrFactory', 'countFactory','usSpinnerService', function($scope, $filter,  
