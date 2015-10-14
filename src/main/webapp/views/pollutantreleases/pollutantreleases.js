@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize','angularSpinner'])
+angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize','angularSpinner', 'anguFixedHeaderTable'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/pollutantreleases', {
@@ -1208,6 +1208,36 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
               }
             });
         };
+
+        $scope.openFDmodal = function (fdID, fdrID, year) {
+
+            var modalInstance = $modal.open({
+              templateUrl: 'components/facilitydetails/fdmodal.html',
+              controller: 'ModalFacilityDetailsCtrl',
+              size: 'lg',
+              resolve: {
+               fdrID: function () {
+                return fdrID;
+                },
+                fdID: function () {
+                    return fdID;
+                },
+                year: function() {
+                    return year;
+                }
+
+            }
+        });
+        };
                 
     }])
-;
+
+.controller('ModalFacilityDetailsCtrl', function ($scope, $modalInstance, fdID, fdrID, year) {
+    $scope.fdID = fdID;
+    $scope.fdrID = fdrID;
+    $scope.year = year;
+
+    $scope.ok = function () {
+        $modalInstance.close();
+    };
+});

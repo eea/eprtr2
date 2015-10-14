@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize', 'ngCsv'])
+angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'restangular','ngSanitize', 'ngCsv', 'anguFixedHeaderTable'])
 
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/pollutanttransfers', {
@@ -999,5 +999,36 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
               }
             });
         };
+
+        $scope.openFDmodal = function (fdID, fdrID, year) {
+
+        var modalInstance = $modal.open({
+          templateUrl: 'components/facilitydetails/fdmodal.html',
+          controller: 'ModalFacilityDetailsCtrl',
+            size: 'lg',
+          resolve: {
+             fdrID: function () {
+                return fdrID;
+            },
+            fdID: function () {
+                return fdID;
+            },
+            year: function() {
+                return year;
+            }
+
+        }
+    });
+    };
     
-    }]);
+    }])
+
+.controller('ModalFacilityDetailsCtrl', function ($scope, $modalInstance, fdID, fdrID, year) {
+    $scope.fdID = fdID;
+    $scope.fdrID = fdrID;
+    $scope.year = year;
+
+    $scope.ok = function () {
+        $modalInstance.close();
+    };
+});
