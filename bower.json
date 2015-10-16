@@ -29,7 +29,7 @@
     "angular-spinner":"*",
     "spin":"*",
     "ng-csv":"*",
-    "angular-scrollable-table":"*"
+    "angu-fixed-header-table":"*"
   },
   "appPath": "src/main/webapp"
 }

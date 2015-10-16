@@ -26,4 +26,6 @@ describe('myApp.search-placement module', function() {
 
     });
 
+    
+    
 });
