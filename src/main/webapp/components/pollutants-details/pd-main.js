@@ -2,12 +2,12 @@
 
 angular.module('myApp.pd-main', ['ngSanitize'])
 
-.controller('PdController', ['$scope', '$http', 'translationService', function($scope, $http, translationService) {
+.controller('PdController', ['$scope', '$http', 'eprtrcms', function($scope, $http, eprtrcms) {
 	var pollutant_group_details = null;
 
 	//$scope.pollutantid;
-	translationService.get().then(function (data) {
-		$scope.tr_c = data.Common;
+	eprtrcms.get('Common',null).then(function (data) {
+		$scope.tr_c = data;
 	});
 	
 	$scope.getPollutantData = function(){
@@ -19,7 +19,7 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 					$scope.pollutant_details = data.pollutants.pollutant[i];
 				}
 			}
-			if (!($scope.pollutant_details.main_methods_of_release.text instanceof Array)){
+			if ($scope.pollutant_details.main_methods_of_release && !($scope.pollutant_details.main_methods_of_release.text instanceof Array)){
 				var txt = $scope.pollutant_details.main_methods_of_release.text;
 				$scope.pollutant_details.main_methods_of_release.text = [txt];
 			}
@@ -47,7 +47,7 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 					}
 				}
 			}
-			if(!($scope.pollutant_group_details.other_provisions.other_provision instanceof Array) && 
+			if($scope.pollutant_group_details.other_provisions && !($scope.pollutant_group_details.other_provisions.other_provision instanceof Array) && 
 					$scope.pollutant_group_details.other_provisions.hasOwnProperty('other_provision')){
 				$scope.pollutant_group_details.other_provisions.other_provision = [$scope.pollutant_group_details.other_provisions.other_provision];
 			}

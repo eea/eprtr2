@@ -2,15 +2,14 @@
 
 angular.module('myApp.lcp-search-placement', ['myApp.home', 'myApp.search-filter'])
 
-.controller('LcpSearchPlacementController', ['$scope', '$http', 'searchFilter','translationService', 'lcpconf', function($scope, $http, searchFilter,translationService,lcpconf) {
+.controller('LcpSearchPlacementController', ['$scope', '$http', 'searchFilter','eprtrcms', 'lcpconf', function($scope, $http, searchFilter,eprtrcms,lcpconf) {
     
 	$scope.searchFilter = searchFilter;
 	$scope.searchFilter.regionType = '1';
 
-	translationService.get().then(function (data) {
-		$scope.tr_c = data.Common;
+	eprtrcms.get('Common',null).then(function (data) {
+		$scope.tr_c = data;
 	});
-
 	/*$http.get('/reportingYears').success(function(data, status, headers, config) {
         $scope.reportingYears = data;
         $scope.searchFilter.selectedReportingYear = $scope.reportingYears[$scope.reportingYears.length - 1];

@@ -3,8 +3,8 @@
 angular.module('myApp.areaOverviewPtTab', ['restangular','ngSanitize','angularSpinner', 'anguFixedHeaderTable'])
 
    .controller('AreaOverviewPtTabCtrl', ['$scope', '$filter', 'Restangular',
-                                       'translationService','formatStrFactory', 'countFactory','usSpinnerService', function($scope, $filter,  
-                                    		   Restangular,translationService,formatStrFactory,countFactory, usSpinnerService) {
+                                       'eprtrcms','formatStrFactory', 'countFactory','usSpinnerService', function($scope, $filter,  
+                                    		   Restangular,eprtrcms,formatStrFactory,countFactory, usSpinnerService) {
 	    $scope.beforesearch = true;
         $scope.ff = formatStrFactory;
 	    $scope.cf = countFactory;
@@ -14,18 +14,23 @@ angular.module('myApp.areaOverviewPtTab', ['restangular','ngSanitize','angularSp
 	    $scope.headeritems = [];
 //	    $scope.prfilter.pselect = {};
 	    //        $scope.queryParams = {};
-        $scope.translate = function()
-        {
-        	translationService.get().then(function (data) {
-        		$scope.tr_c = data.Common;
-        		$scope.tr_p = data.Pollutant;
-        		$scope.tr_lpo = data.LOV_POLLUTANT;
-        		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
-        		$scope.tr_ao = data.AreaOverview;
-       	  });
-        };
-        $scope.translate();
-        
+  
+//    	Requesting text and title resources 
+    	eprtrcms.get('Pollutant',null).then(function (data) {
+    		$scope.tr_p = data;
+    	});
+    	eprtrcms.get('Common',null).then(function (data) {
+    		$scope.tr_c = data;
+    	});
+    	eprtrcms.get('LOV_POLLUTANT',null).then(function (data) {
+    		$scope.tr_lpo = data;
+    	});
+    	eprtrcms.get('LOV_ANNEXIACTIVITY',null).then(function (data) {
+    		$scope.tr_laa = data;
+    	});
+    	eprtrcms.get('AreaOverview',null).then(function (data) {
+    		$scope.tr_ao = data;
+    	});
 /**
  * Spinner
  */

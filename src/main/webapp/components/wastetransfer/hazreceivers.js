@@ -3,24 +3,31 @@
 angular.module('myApp.HazReceiversWasteTab', ['restangular','ngSanitize','angularSpinner','myApp.HazReceiversTreatmentTab'])
 
    .controller('HazReceiversWasteTabCtrl', ['$scope', '$filter', 'Restangular',
-                                       'translationService','formatStrFactory', 'countFactory','usSpinnerService', function($scope, $filter,  
-                                    		   Restangular,translationService,formatStrFactory,countFactory, usSpinnerService) {
+                                       'eprtrcms','formatStrFactory', 'countFactory','usSpinnerService', function($scope, $filter,  
+                                    		   Restangular,eprtrcms,formatStrFactory,countFactory, usSpinnerService) {
         $scope.ff = formatStrFactory;
 	    $scope.cf = countFactory;
 	    $scope.items = [];
 	    //$scope.header = {};
 	    //$scope.queryParams = {};
-        $scope.translate = function()
-        {
-        	translationService.get().then(function (data) {
-        		$scope.tr_c = data.Common;
-        		$scope.tr_f = data.Facility;
-        		$scope.tr_wt = data.WasteTransfers;
-        		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
-        		$scope.tr_lco = data.LOV_COUNTRY;
-        	  });
-        };
-        $scope.translate();
+           
+//		Requesting text and title resources 
+    	eprtrcms.get('Facility',null).then(function (data) {
+    		$scope.tr_f = data;
+    	});
+    	eprtrcms.get('Common',null).then(function (data) {
+    		$scope.tr_c = data;
+    	});
+    	eprtrcms.get('WasteTransfers',null).then(function (data) {
+    		$scope.tr_wt = data;
+    	});
+    	eprtrcms.get('LOV_COUNTRY',null).then(function (data) {
+    		$scope.tr_lco = data;
+    	});
+    	eprtrcms.get('LOV_ANNEXIACTIVITY',null).then(function (data) {
+    		$scope.tr_laa = data;
+    	});
+        
     	$scope.showTable = false;
         
         /**

@@ -12,7 +12,7 @@ angular.module('myApp.staticview', ['ngRoute','restangular','ngSanitize'])
 	items:{
 		'about':{'c':'AboutPageContent','h':'AboutPageHeader','t':'Static'},
 		'downloaddata':{'c':'DownloadDataSetPageContent','h':'DownloadDataSetPageHeader','t':'Static'},
-		'downloadguidance':{'c':'DownloadGuidancePageContent','h':'DownloadGuidancePageHeader','t':'Static'},
+		//'downloadguidance':{'c':'DownloadGuidancePageContent','h':'DownloadGuidancePageHeader','t':'Static'},
 		'events':{'c':'EventsAndMeetingsPageContent','h':'EventsAndMeetingsPageHeader','t':'Static'},
 		'faq':{'c':'FAQPageContent','h':'FAQPageHeader','t':'Static'},
 		'feedback':{'c':'FeedbackPageContent','h':'FeedbackPageHeader','t':'Static'},
@@ -34,7 +34,7 @@ angular.module('myApp.staticview', ['ngRoute','restangular','ngSanitize'])
 })
 
 .controller('StaticViewController', 
-		['$scope', '$routeParams', 'translationService', 'statconf', '$http', function($scope, $routeParams, translationService, statconf, $http ) {
+		['$scope', '$routeParams', 'eprtrcms', 'statconf', function($scope, $routeParams, eprtrcms, statconf ) {
 
 		$scope.id = $routeParams.cont !== undefined ? $routeParams.cont: null;// 10;
 
@@ -42,10 +42,16 @@ angular.module('myApp.staticview', ['ngRoute','restangular','ngSanitize'])
 //		Requesting text and title resources 
 			var item = statconf.items[$scope.id];
 //			translationService.get(item.t).then(function (data) {
-			$http.get('translations/eprtr-resource-static_en-gb.json').success(function(data, status) {
+			
+			eprtrcms.get(item.t,null).then(function (data) {
+				$scope.content = data[item.c];
+				$scope.head = data[item.h];
+			});	
+			
+			/*$http.get('translations/eprtr-resource-static_en-gb.json').success(function(data, status) {
 				$scope.content = data[item.t][item.c];
 				$scope.head = data[item.t][item.h];
-		    });
+		    });*/
 		}
 }]);
 

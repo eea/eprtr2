@@ -87,7 +87,7 @@
 								<th class="col-Min100" sortable-header col="facility">{{tr_f.FacilityName}}</th>
 								<th class="col-Min75" sortable-header col="address">{{tr_f.Address}}</th>
 								<th class="col-Min75" sortable-header col="city">{{tr_f.TownVillage}}</th>
-								<th class="text-right col-Min75" sortable-header col="postalcode">{{tr_f.PostalCode}}</th>
+								<th class="col-Min75" sortable-header col="postalcode">{{tr_f.PostalCode}}</th>
 								<th class="col-Min75" sortable-header col="region">{{tr_c.Region}}</th>
 								<th class="col-Min75" sortable-header col="country">{{tr_f.Country}}</th>
 							</tr>
@@ -110,7 +110,7 @@
 								<td>{{item.address}}</td>
 								<td>{{item.city}}</td>
 								<td>{{item.postalcode}}</td>
-								<td>{{item.region}}</td>
+								<td>{{tr_lnr[item.region]}}</td>
 								<td>{{item.country}}</td>
 								
 							</tr>

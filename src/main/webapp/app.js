@@ -31,6 +31,7 @@ var myApp = angular.module('myApp', [
         'myApp.pollutantinfo',
         'myApp.pd-main',
         'myApp.faqview',
+        'myApp.downloadguidance',
         'myApp.glossaryview',
         'myApp.lcplevels',
         'myApp.lcp-search-placement',

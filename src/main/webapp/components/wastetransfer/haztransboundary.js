@@ -2,31 +2,50 @@
 
 angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpinner','myApp.eprtrgooglechart'])
 
-   .controller('HazTransboundaryCtrl', ['$scope', '$filter', 'Restangular', 'translationService','formatStrFactory','countFactory', 'usSpinnerService', function($scope, $filter,  
-                                    		   Restangular,  translationService, formatStrFactory, countFactory, usSpinnerService) {
+   .controller('HazTransboundaryCtrl', ['$scope', '$filter', 'Restangular', 'eprtrcms','formatStrFactory','countFactory', 'usSpinnerService', function($scope, $filter,  
+                                    		   Restangular,  eprtrcms, formatStrFactory, countFactory, usSpinnerService) {
         $scope.ff = formatStrFactory;
         $scope.cf = countFactory;
         $scope.wtfilter = {};
         $scope.nodata = true;
         $scope.coords = {};
         //$scope.queryparams = {};
-        $scope.translate = function()
-        {
-        	translationService.get().then(function (data) {
-        		$scope.tr_f = data.Facility;
-        		$scope.tr_c = data.Common;
-        		$scope.tr_cl = data.ChartLabels;
-        		$scope.tr_con =data.Confidentiality;
-        		$scope.tr_wt = data.WasteTransfers;
-        		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
-        		$scope.tr_lcon =data.LOV_CONFIDENTIALITY;
-        		$scope.tr_lnr = data.LOV_NUTSREGION;
-        		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
-        		$scope.tr_lco = data.LOV_COUNTRY;
-        		$scope.tr_lovwt = data.LOV_WASTETYPE;
-        	  });
-        };
-        $scope.translate();
+
+//		Requesting text and title resources 
+    	eprtrcms.get('Facility',null).then(function (data) {
+    		$scope.tr_f = data;
+    	});
+    	eprtrcms.get('Common',null).then(function (data) {
+    		$scope.tr_c = data;
+    	});
+    	eprtrcms.get('WasteTransfers',null).then(function (data) {
+    		$scope.tr_wt = data;
+    	});
+    	eprtrcms.get('LOV_NUTSREGION',null).then(function (data) {
+    		$scope.tr_lnr = data;
+    	});
+    	eprtrcms.get('LOV_RIVERBASINDISTRICT',null).then(function (data) {
+    		$scope.tr_lrbd = data;
+    	});
+    	eprtrcms.get('LOV_CONFIDENTIALITY',null).then(function (data) {
+    		$scope.tr_lcon = data;
+    	});
+    	eprtrcms.get('LOV_COUNTRY',null).then(function (data) {
+    		$scope.tr_lco = data;
+    	});
+    	eprtrcms.get('LOV_ANNEXIACTIVITY',null).then(function (data) {
+    		$scope.tr_laa = data;
+    	});
+    	eprtrcms.get('LOV_WASTETYPE',null).then(function (data) {
+    		$scope.tr_lwt = data;
+    	});
+    	eprtrcms.get('ChartLabels',null).then(function (data) {
+    		$scope.tr_cl = data;
+    	});
+    	eprtrcms.get('Confidentiality',null).then(function (data) {
+    		$scope.tr_con = data;
+    	});
+        
         
     	$scope.restconfig = Restangular.withConfig(function(RestangularConfigurer) {
             RestangularConfigurer.setFullResponse(true);

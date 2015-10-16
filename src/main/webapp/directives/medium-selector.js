@@ -3,8 +3,8 @@
 // a directive to auto-collapse long text
 // in elements with the "dd-text-collapse" attribute
 //angular.module('myApp.textcollapse', [])
-myApp.directive('prSelector', ['$compile','$http', '$filter', 'Restangular', 'translationService', 
-                               function($compile,$http, $filter, Restangular, translationService) {
+myApp.directive('prSelector', ['$compile','$http', '$filter', 'Restangular', 'eprtrcms', 
+                               function($compile,$http, $filter, Restangular, eprtrcms) {
 
     return {
         restrict: 'A',
@@ -16,10 +16,13 @@ myApp.directive('prSelector', ['$compile','$http', '$filter', 'Restangular', 'tr
         //transclude: true,
         link: function(scope, element, attrs) {
 
-    		translationService.get().then(function (data) {
-    			scope.tr_c = data.Common;
-    			scope.tr_p = data.Pollutant;
-    	    });
+        	eprtrcms.get('Common',null).then(function (data) {
+        		scope.tr_c = data;
+        	});
+        	eprtrcms.get('Pollutant',null).then(function (data) {
+        		scope.tr_p = data;
+        	});
+
     		scope.medfilter = {};
 
     		/*

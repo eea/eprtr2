@@ -12,9 +12,9 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 
 
 
-.controller('AreaOverviewCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular', 'translationService', 
+.controller('AreaOverviewCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular', 'eprtrcms', 
                                  'lovCountryType', 'lovAreaGroupType', 'lovNutsRegionType', 'riverBasinDistrictsType', 'countFactory', 'formatStrFactory',
-                                 function($scope, $filter, $http, searchFilter, Restangular, translationService,
+                                 function($scope, $filter, $http, searchFilter, Restangular, eprtrcms,
                                 		 lovCountryType, lovAreaGroupType, lovNutsRegionType, riverBasinDistrictsType, countFactory, formatStrFactory) {
 	
 	$scope.beforesearch = true;
@@ -28,10 +28,6 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 	$scope.ptitems = {};
 	$scope.ptHeaderItems= {};
 	$scope.wasteTransferItems = {};
-/*	$scope.prfilter = {};// .polsearch
-    $scope.prfilter.pgselect = {};
-	$scope.ptfilter = {};// .polsearch
-    $scope.ptfilter.pgselect = {};*/
     $scope.searchResults = false;
     $scope.cf = countFactory;
     $scope.ff = formatStrFactory;
@@ -43,37 +39,39 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
     $scope.mapctrl = {};
 	$scope.mapheight = window.innerHeight > 820 ? 600+'px' : (window.innerHeight -230)+'px';
 
-    
-/*    $scope.regionSearch = false;
-    //$scope.summaryItems = [];
-    $scope.pollutantreleaseItems = [];
-    $scope.pollutanttransferItems = [];
-    $scope.itemsConfidentiality =[];
-    $scope.itemCon = [];
-    $scope.itemConReason = [];
-    $scope.summaryItems = [];
-    $scope.sectorIA ="";
-    $scope.totalSearchResult = 0;
-	*/
-	
-    $scope.translate = function()
-    {
-		translationService.get().then(function (data) {
-			$scope.tr_ao = data.AreaOverview;
-			$scope.tr_f = data.Facility;
-			$scope.tr_c = data.Common;
-			$scope.tr_lco = data.LOV_COUNTRY;
-			$scope.tr_lnr = data.LOV_NUTSREGION;
-			$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
-			$scope.tr_lag = data.LOV_AREAGROUP;
-			$scope.tr_con =data.Confidentiality;
-    		$scope.tr_wt = data.WasteTransfers;
-    		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
-    		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
 
-	    });
-    };
-    $scope.translate();
+//	Requesting text and title resources 
+	eprtrcms.get('Facility',null).then(function (data) {
+		$scope.tr_f = data;
+	});
+	eprtrcms.get('Common',null).then(function (data) {
+		$scope.tr_c = data;
+		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
+	});
+	eprtrcms.get('LOV_COUNTRY',null).then(function (data) {
+		$scope.tr_lco = data;
+	});
+	eprtrcms.get('Confidentiality',null).then(function (data) {
+		$scope.tr_con = data;
+	});
+	eprtrcms.get('LOV_NUTSREGION',null).then(function (data) {
+		$scope.tr_lnr = data;
+	});
+	eprtrcms.get('AreaOverview',null).then(function (data) {
+		$scope.tr_ao = data;
+	});
+	eprtrcms.get('LOV_RIVERBASINDISTRICT',null).then(function (data) {
+		$scope.tr_lrbd = data;
+	});
+	eprtrcms.get('LOV_AREAGROUP',null).then(function (data) {
+		$scope.tr_lag = data;
+	});
+	eprtrcms.get('WasteTransfers',null).then(function (data) {
+		$scope.tr_wt = data;
+	});
+	eprtrcms.get('LOV_ANNEXIACTIVITY',null).then(function (data) {
+		$scope.tr_laa = data;
+	});
     
     $scope.$watchCollection('[pritems.data, prHeaderItems.data ,ptitems.data, ptHeaderItems.data, wasteTransferItems.data]', function(value) {
 //    	console.log("HTD is there.");

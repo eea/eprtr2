@@ -3,21 +3,23 @@
 angular.module('myApp.areaOverviewWasteTab', ['restangular','ngSanitize','angularSpinner'])
 
    .controller('AreaOverviewWasteTabCtrl', ['$scope', '$filter', 'Restangular',
-                                       'translationService','formatStrFactory', 'countFactory','usSpinnerService', function($scope, $filter,  
-                                    		   Restangular,translationService,formatStrFactory,countFactory, usSpinnerService) {
+                                       'eprtrcms','formatStrFactory', 'countFactory','usSpinnerService', function($scope, $filter,  
+                                    		   Restangular,eprtrcms,formatStrFactory,countFactory, usSpinnerService) {
 	    $scope.beforesearch = true;
 	    $scope.cf = countFactory;
         //$scope.queryParams = {};
-        $scope.translate = function()
-        {
-        	translationService.get().then(function (data) {
-        		$scope.tr_c = data.Common;
-        		$scope.tr_wt = data.WasteTransfers;
-        		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
-        	  });
-        };
-        $scope.translate();
-    	$scope.showTable = false;
+
+//    	Requesting text and title resources 
+    	eprtrcms.get('Common',null).then(function (data) {
+    		$scope.tr_c = data;
+    	});
+    	eprtrcms.get('WasteTransfers',null).then(function (data) {
+    		$scope.tr_wt = data;
+    	});
+    	eprtrcms.get('LOV_ANNEXIACTIVITY',null).then(function (data) {
+    		$scope.tr_laa = data;
+    	});
+        $scope.showTable = false;
         
         /**
          * Spinner

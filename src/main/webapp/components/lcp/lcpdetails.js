@@ -3,8 +3,8 @@
 angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.lcpmap','leaflet-directive'])
 
 .controller('lcpDetailsController', 
-		['$scope', '$http', '$filter', '$sce', '$modal', 'leafletData','translationService', 'formatStrFactory', 'lcpDataService', 'lcpconf',
-		 function($scope, $http, $filter, $sce, $modal, leafletData,translationService,formatStrFactory, lcpDataService,lcpconf) {
+		['$scope', '$http', '$filter', '$sce', '$modal', 'leafletData','eprtrcms', 'formatStrFactory', 'lcpDataService', 'lcpconf',
+		 function($scope, $http, $filter, $sce, $modal, leafletData,eprtrcms,formatStrFactory, lcpDataService,lcpconf) {
 
 /*
  * Basic parameters
@@ -21,16 +21,30 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.
  * Load translation resources 
  * */        
 //	Requesting text and title resources 
-	translationService.get().then(function (data) {
-		$scope.tr_f = data.Facility;
-		$scope.tr_c = data.Common;
-		$scope.tr_lcp = data.LCP;
-		$scope.tr_lco = data.LOV_COUNTRY;
-		$scope.tr_lnr = data.LOV_NUTSREGION;
-		$scope.tr_lmbn = data.LOV_METHODBASIS;
-		$scope.tr_lmtn = data.LOV_METHODTYPE;
-		$scope.tr_lib = data.Library;
-    });
+	eprtrcms.get('Facility',null).then(function (data) {
+		$scope.tr_f = data;
+	});
+	eprtrcms.get('Common',null).then(function (data) {
+		$scope.tr_c = data;
+	});
+	eprtrcms.get('LCP',null).then(function (data) {
+		$scope.tr_lcp = data;
+	});
+	eprtrcms.get('LOV_COUNTRY',null).then(function (data) {
+		$scope.tr_lco = data;
+	});
+	eprtrcms.get('LOV_NUTSREGION',null).then(function (data) {
+		$scope.tr_lnr = data;
+	});
+	eprtrcms.get('LOV_METHODBASIS',null).then(function (data) {
+		$scope.tr_lmbn = data;
+	});
+	eprtrcms.get('LOV_METHODTYPE',null).then(function (data) {
+		$scope.tr_lmtn = data;
+	});
+	eprtrcms.get('Library',null).then(function (data) {
+		$scope.tr_lib = data;
+	});
 /*	translationService.get('Facility').then(function (data) {
 		$scope.tr_f = data;
     });*/
@@ -69,9 +83,9 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.
         lcpDataService.get(2, qp).then(function (data) {
 			$scope.ajustenergydata(data);
         });        	
-        lcpDataService.get(3, qp).then(function (data) {
+        /*lcpDataService.get(3, qp).then(function (data) {
 			$scope.ajustart15data(data);
-        });        	
+        });*/        	
         lcpDataService.get(4, qp).then(function (data) {
 			$scope.ajustnerpdata(data);
         });        	
@@ -207,7 +221,7 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.
 		}
 	} 
 
-	$scope.ajustart15data = function(data){
+	/*$scope.ajustart15data = function(data){
 		$scope.lcpart15data = {};
 		if (data.features){
 
@@ -230,7 +244,7 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.
 
 			$scope.lcpart15data = _ad;
 		}
-	} 
+	} */
 
 	$scope.ajustnerpdata = function(data){
 		$scope.nerpdata = {};
@@ -298,7 +312,8 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.
 				          break;
 				      case 'ReportingYear':
         				  //qs.push(lcpconf.layerfields[id].referenceyear + "=2013");
-        				  qs.push(lcpconf.layerfields[id].referenceyear + "="+query[key]);
+				    	  //Need all years
+        				  //qs.push(lcpconf.layerfields[id].referenceyear + "="+query[key]);
 				          break;
 				      case 'BasicID':
 				    	  if(id==1){
@@ -353,7 +368,19 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.
         }
       };
     })
+  .controller('ModalLcpCtrl', function ($scope, $modalInstance, eprtrcms, plantid) {
+		eprtrcms.get('LCP',null).then(function (data) {
+			$scope.title = data.Headline;
+		});
+  $scope.plantid = plantid;
+  $scope.ok = function () {
+    $modalInstance.close();
+  };
 
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+})
 /*
  * This directive enables us to define this module as a custom HTML element
  * <esri-leaf-map queryparams="" /> 

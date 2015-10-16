@@ -15,52 +15,52 @@ public class StringResource implements Serializable {
 
 	@Id
 	@Column(name="CultureCode")
-	private String cultureCode;
+	private String i18n;
 
 	@Id
 	@Column(name="ResourceKey")
-	private String resourceKey;
+	private String key;
 
 	@Id
 	@Column(name="ResourceType")
-	private String resourceType;
+	private String type;
 
 	@Column(name="ResourceValue")
-	private String resourceValue;
+	private String val;
 
 	public StringResource() {
 	}
 
 	public String getCultureCode() {
-		return this.cultureCode;
+		return this.i18n;
 	}
 
 	public void setCultureCode(String cultureCode) {
-		this.cultureCode = cultureCode;
+		this.i18n = cultureCode;
 	}
 
 	public String getResourceKey() {
-		return this.resourceKey;
+		return this.key;
 	}
 
 	public void setResourceKey(String resourceKey) {
-		this.resourceKey = resourceKey;
+		this.key = resourceKey;
 	}
 
 	public String getResourceType() {
-		return this.resourceType;
+		return this.type;
 	}
 
 	public void setResourceType(String resourceType) {
-		this.resourceType = resourceType;
+		this.type = resourceType;
 	}
 
 	public String getResourceValue() {
-		return this.resourceValue;
+		return this.val;
 	}
 
 	public void setResourceValue(String resourceValue) {
-		this.resourceValue = resourceValue;
+		this.val = resourceValue;
 	}
 
 }

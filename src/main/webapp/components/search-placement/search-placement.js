@@ -2,15 +2,15 @@
 
 angular.module('myApp.search-placement', ['myApp.home', 'myApp.search-filter'])
 
-.controller('SearchPlacementController', ['$scope', '$http', 'searchFilter','translationService', function($scope, $http, searchFilter,translationService) {
+.controller('SearchPlacementController', ['$scope', '$http', 'searchFilter','eprtrcms', function($scope, $http, searchFilter,eprtrcms) {
     
 	$scope.searchFilter = searchFilter;
 	$scope.searchFilter.regionType = '1';
 
-	translationService.get().then(function (data) {
-		$scope.tr_c = data.Common;
+	eprtrcms.get('Common',null).then(function (data) {
+		$scope.tr_c = data;
 	});
-
+	
 	$http.get('/reportingYears').success(function(data, status, headers, config) {
         $scope.reportingYears = data;
         $scope.searchFilter.selectedReportingYear = $scope.reportingYears[$scope.reportingYears.length - 1];

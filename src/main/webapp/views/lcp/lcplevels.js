@@ -11,9 +11,9 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
 
 
 
-.controller('lcpLevelsCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular', 'translationService', 
+.controller('lcpLevelsCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular', 'eprtrcms', 
                                  'lovCountryType', 'lovAreaGroupType', 'lovNutsRegionType','formatStrFactory', 'lcpDataService', 'lcpconf',
-                                 function($scope, $filter, $http, searchFilter, Restangular, translationService,
+                                 function($scope, $filter, $http, searchFilter, Restangular, eprtrcms,
                                 		 lovCountryType, lovAreaGroupType, lovNutsRegionType, formatStrFactory, lcpDataService, lcpconf) {
 	
 	$scope.beforesearch = true;
@@ -36,21 +36,27 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     $scope.mapctrl = {};
 	$scope.mapheight = window.innerHeight > 820 ? 600+'px' : (window.innerHeight -230)+'px';
 
-    $scope.translate = function()
-    {
-		translationService.get().then(function (data) {
-			$scope.tr_c = data.Common;
-			$scope.tr_f = data.Facility;
-			$scope.tr_lcp = data.LCP;
-			$scope.tr_lco = data.LOV_COUNTRY;
-			$scope.tr_con =data.Confidentiality;
-    		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
-    		//$scope.headline
-	    });
-    };
-    $scope.translate();
-	
-    $scope.$watch('mapctrl', function(value) {
+//	Requesting text and title resources 
+	eprtrcms.get('Facility',null).then(function (data) {
+		$scope.tr_f = data;
+	});
+	eprtrcms.get('Common',null).then(function (data) {
+		$scope.tr_c = data;
+		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
+	});
+	eprtrcms.get('LCP',null).then(function (data) {
+		$scope.tr_lcp = data;
+	});
+	eprtrcms.get('LOV_COUNTRY',null).then(function (data) {
+		$scope.tr_lco = data;
+	});
+	eprtrcms.get('Confidentiality',null).then(function (data) {
+		$scope.tr_con = data;
+	});
+	eprtrcms.get('LOV_NUTSREGION',null).then(function (data) {
+		$scope.tr_lnr = data;
+	});
+	$scope.$watch('mapctrl', function(value) {
     	if(typeof $scope.mapctrl.redraw == 'function'){
         	$scope.mapctrl.redraw();
         }

@@ -26,13 +26,13 @@ public class StringResourceFilter {
 	public Predicate buildWhereClause(CriteriaBuilder cb, Root<StringResource> qr) {
 		Predicate whereClause = cb.conjunction();
 		if (resourceType != null) {
-			whereClause.getExpressions().add(cb.equal(qr.get(StringResource_.resourceType), resourceType));
+			whereClause.getExpressions().add(cb.equal(qr.get(StringResource_.type), resourceType));
 		}  
 		if (cultureCode != null) {
-			whereClause.getExpressions().add(cb.equal(qr.get(StringResource_.cultureCode), cultureCode));
+			whereClause.getExpressions().add(cb.equal(qr.get(StringResource_.i18n), cultureCode));
 		}
 		if (resourceKey != null) {
-			whereClause.getExpressions().add(cb.equal(qr.get(StringResource_.resourceKey), resourceKey));
+			whereClause.getExpressions().add(cb.equal(qr.get(StringResource_.key), resourceKey));
 		}
 		return whereClause;
 	}

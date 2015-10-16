@@ -3,9 +3,9 @@
 angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esrileafmap'])
 
 .controller('FDMainController', 
-	['$scope', '$http', '$filter', '$sce', '$modal', 'translationService', 'formatStrFactory','fdDetailsType', 'fdAuthorityType', 'fdActivityType',
+	['$scope', '$http', '$filter', '$sce', '$modal', 'eprtrcms', 'formatStrFactory','fdDetailsType', 'fdAuthorityType', 'fdActivityType',
 	'fdPollutantreleasesType', 'fdWastetransfersType', 'fdPollutanttransfersType', 
-	function($scope, $http, $filter, $sce, $modal, translationService,formatStrFactory, fdDetailsType, fdAuthorityType, fdActivityType, 
+	function($scope, $http, $filter, $sce, $modal, eprtrcms,formatStrFactory, fdDetailsType, fdAuthorityType, fdActivityType, 
 		fdPollutantreleasesType, fdWastetransfersType, fdPollutanttransfersType) {
 
 /*
@@ -23,25 +23,58 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esr
  * Load translation resources 
  * */        
 //	Requesting text and title resources 
-translationService.get().then(function (data) {
-	$scope.tr_f = data.Facility;
-	$scope.tr_c = data.Common;
-	$scope.tr_p = data.Pollutant;
-	$scope.tr_w = data.WasteTransfers;
-	$scope.tr_lna = data.LOV_NACEACTIVITY;
-	$scope.tr_lnr = data.LOV_NUTSREGION;
-	$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
-	$scope.tr_lu = data.LOV_UNIT;
-	$scope.tr_lcf = data.LOV_CONFIDENTIALITY;
-	$scope.tr_lco = data.LOV_COUNTRY;
-	$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
-	$scope.tr_lmbn = data.LOV_METHODBASIS;
-	$scope.tr_lmtn = data.LOV_METHODTYPE;
-	$scope.tr_lpo = data.LOV_POLLUTANT;
-	$scope.tr_lwt = data.LOV_WASTETREATMENT;
-	$scope.tr_lme = data.LOV_MEDIUM;
-	$scope.tr_lib = data.Library;
+eprtrcms.get('Facility',null).then(function (data) {
+	$scope.tr_f = data;
 });
+eprtrcms.get('Common',null).then(function (data) {
+	$scope.tr_c = data;
+});
+eprtrcms.get('Pollutant',null).then(function (data) {
+	$scope.tr_p = data;
+});
+eprtrcms.get('WasteTransfers',null).then(function (data) {
+	$scope.tr_wt = data;
+});
+eprtrcms.get('LOV_NACEACTIVITY',null).then(function (data) {
+	$scope.tr_lna = data;
+});
+eprtrcms.get('LOV_NUTSREGION',null).then(function (data) {
+	$scope.tr_lnr = data;
+});
+eprtrcms.get('LOV_RIVERBASINDISTRICT',null).then(function (data) {
+	$scope.tr_lrbd = data;
+});
+eprtrcms.get('LOV_UNIT',null).then(function (data) {
+	$scope.tr_lu = data;
+});
+eprtrcms.get('LOV_CONFIDENTIALITY',null).then(function (data) {
+	$scope.tr_lcon = data;
+});
+eprtrcms.get('LOV_COUNTRY',null).then(function (data) {
+	$scope.tr_lco = data;
+});
+eprtrcms.get('LOV_ANNEXIACTIVITY',null).then(function (data) {
+	$scope.tr_laa = data;
+});
+eprtrcms.get('LOV_METHODBASIS',null).then(function (data) {
+	$scope.tr_lmbn = data;
+});
+eprtrcms.get('LOV_METHODTYPE',null).then(function (data) {
+	$scope.tr_lmtn = data;
+});
+eprtrcms.get('LOV_POLLUTANT',null).then(function (data) {
+	$scope.tr_lpo = data;
+});
+eprtrcms.get('LOV_WASTETREATMENT',null).then(function (data) {
+	$scope.tr_lwt = data;
+});
+eprtrcms.get('LOV_MEDIUM',null).then(function (data) {
+	$scope.tr_lme = data;
+});
+eprtrcms.get('Library',null).then(function (data) {
+	$scope.tr_lib = data;
+});
+
 /*	translationService.get('Facility').then(function (data) {
 		$scope.tr_f = data;
 	});*/

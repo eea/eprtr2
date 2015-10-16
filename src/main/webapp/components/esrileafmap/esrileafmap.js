@@ -30,14 +30,17 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 
 	})
 
-.controller('esriLeafMapController', ['$scope',  'leafletData', 'elmconf', 'translationService', function($scope,  leafletData, elmconf, translationService) {
+.controller('esriLeafMapController', ['$scope',  'leafletData', 'elmconf', 'eprtrcms', function($scope,  leafletData, elmconf, eprtrcms) {
 	var elm_ctrl = this;
 	var points = [];
 	$scope.showlegend = false;
 	var where = '';
-	translationService.get('LOV_ANNEXIACTIVITY').then(function (data) {
-		$scope.lov = data;
-    });
+
+	eprtrcms.get('LOV_ANNEXIACTIVITY',null).then(function (data) {
+		$scope.tr_laa = data;
+	});
+
+	
 	
 	$scope.$watchCollection('[lov,elm_ctrl]', function(value){
     	if($scope.lov && elm_ctrl.elm_map){

@@ -10,9 +10,28 @@ angular.module('myApp.faqview', ['ngRoute','restangular','ngSanitize'])
 }])
 
 .controller('FaqController', 
-		['$scope', '$routeParams', 'translationService', '$http', function($scope, $routeParams, translationService, $http ) {
+		['$scope', '$routeParams', 'eprtrcms', function($scope, $routeParams, eprtrcms  ) {
 
-		$scope.getData = function(){
+		eprtrcms.get('Static',null).then(function (data) {
+			$scope.pageTitle = data.FAQPageTitle;
+			$scope.pageHeader = data.FAQPageHeader;
+		});	
+
+		eprtrcms.get('FAQ',null).then(function (data) {
+			$scope.setData(data);
+		});	
+
+		$scope.setData = function(data){
+			var res = [];
+			angular.forEach(data, function(item) {
+				res.push(JSON.parse(item));
+    		});
+			$scope.content = res;
+			for(var i = 0; i<$scope.content.length; i++){
+				$scope.content[i].show= false;
+			}
+		}
+		/*$scope.getData = function(){
 			$http.get('translations/eprtr-resource-static_en-gb.json').success(function(data, status) {
 				$scope.content = data.Static.FAQPageContent;
 				$scope.pageTitle = data.Static.FAQPageTitle;
@@ -21,9 +40,9 @@ angular.module('myApp.faqview', ['ngRoute','restangular','ngSanitize'])
 					$scope.content[i].show= false;
 				}
 			});
-		}
+		}*/
 		
-		$scope.getData();
+		//$scope.getData();
 		
 		
 }]);

@@ -60,14 +60,15 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 
 })
 
-.controller('lcpMapController', ['$scope',  'leafletData', 'lcpconf', 'translationService', function($scope,  leafletData, lcpconf, translationService) {
+.controller('lcpMapController', ['$scope',  'leafletData', 'lcpconf', 'eprtrcms', function($scope,  leafletData, lcpconf, eprtrcms) {
 	var elm_ctrl = this;
 	$scope.legenddef = {};
 
 	var where = '';
-	translationService.get('LCP').then(function (data) {
+	eprtrcms.get('LCP',null).then(function (data) {
 		$scope.lov = data;
-    });
+	});
+
 	
 	/*$scope.$watchCollection('[lov,elm_ctrl]', function(value){
     	if($scope.lov && elm_ctrl.elm_map){
@@ -204,76 +205,37 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 		    	var keys = Object.keys(featureCollection.features[0].properties);
 		    	var _str = '<p><em>Plant</em>: '+featureCollection.features[0].properties[keys[3]]+'<br>';
 		    	_str += '<em>Facility</em>: '+featureCollection.features[0].properties[keys[5]]+'<br>';
-			    _str += '<a href="#lcpdetailsview?PlantID='+featureCollection.features[0].properties[keys[4]]+'">details</a></p>';
+			    _str += '<a class="btn" ng-click="setDetails('+featureCollection.features[0].properties[keys[1]]+')">details</a></p>';
 		    	//, feature.properties
         	    return _str;//L.Util.template(_str, featureCollection.features[0].properties);
-
+//href="#lcpdetailsview?PlantID='+featureCollection.features[0].properties[keys[1]]+'"
 		    }
 		  });
-
-		//$scope.createLegend();
-
-		/*$scope.toggleLegend = L.easyButton({
-			  states: [{
-			    stateName: 'show-legend',
-			    icon: 'fa-bars',
-			    title: 'show legend',
-			    onClick: function(control) {
-			    	elm_ctrl.legend.addTo(elm_ctrl.elm_map);
-			      control.state('hide-legend');
-			    }
-			  }, {
-			    icon: 'fa-bars',
-			    stateName: 'hide-legend',
-			    onClick: function(control) {
-			      elm_ctrl.elm_map.removeControl(elm_ctrl.legend);
-			      control.state('show-legend');
-			    },
-			    title: 'hide legend'
-			  }]
-			});
-		$scope.toggleLegend.addTo(elm_ctrl.elm_map);*/
-		
 	});
+	
+	$scope.setDetails = function(plantid){
+		$scope.openLcpDmodal(plantid);
+	}
+
+	$scope.openLcpDmodal = function (plantid) {
+
+        var modalInstance = $modal.open({
+          templateUrl: 'components/lcp/lcpmodal.html',
+          controller: 'ModalLcpCtrl',
+            size: 'lg',
+          resolve: {
+             PlantID: function () {
+                return plantid;
+            }
+        }
+    });
+    };
 	
 	$scope.redraw = function(){
 		if(elm_ctrl.elm_map){
 			window.setTimeout(function(){elm_ctrl.elm_map.invalidateSize();}, 600)
 		}
 	};
-	
-	/*$scope.createLegend = function(){
-
-		elm_ctrl.legend = L.control({position: 'bottomright'});
-		
-		elm_ctrl.legend.onAdd = function (map) {
-			elm_ctrl.legend._div = L.DomUtil.create('div', 'leaflet-control-layers legend');
-			elm_ctrl.legend.update();
-		    return elm_ctrl.legend._div;
-
-		}
-
-		elm_ctrl.legend.update = function(){
-			var layerdef = [];
-			angular.forEach($scope.legenddef.layers, function(item) {
-				if (item.layerId.toString() == elm_ctrl._layid){
-					elm_ctrl.legend._div.innerHTML = '<h4>'+item.layerName+'</h4>';
-				    angular.forEach(item.legend, function(leg) {
-				    	var _url = lcpconf.lcpLayerUrl + '/0/images/' + leg.url;
-				    	//<img style="-webkit-user-select: none" src="http://test.discomap.eea.europa.eu/arcgis/rest/services/AIR/EPRTRDiffuseEmissionsWater/MapServer/0/images/7f34224c77c077f1d419c50fac65e787">
-				    	elm_ctrl.legend._div.innerHTML += '<img src="'+_url+'" style="width:'+leg.width+';height:'+leg.height+';" > ' + leg.label + '<br>';
-				    });
-				}
-			});
-		}
-		//Need to create first time
-		elm_ctrl.legend.addTo(elm_ctrl.elm_map);
-
-		//Hide again
-        elm_ctrl.elm_map.removeControl(elm_ctrl.legend);
-
-	}*/
-	
 	
 }])
 
@@ -294,7 +256,8 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 			wherestr: '=',
 			queryparams: '=',
 			contenttype: '=', 
-			control: '='
+			control: '=',
+			details:'='
 		},
 		templateUrl: 'components/esrileafmap/lcpmap.html',
 		link: function(scope, element, attrs){

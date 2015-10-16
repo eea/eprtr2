@@ -3,8 +3,8 @@
 angular.module('myApp.areaOverviewPrTab', ['restangular','ngSanitize','angularSpinner', 'anguFixedHeaderTable'])
 
    .controller('AreaOverviewPrTabCtrl', ['$scope', '$rootScope','$filter', 'Restangular',
-                                       'translationService','formatStrFactory', 'countFactory','usSpinnerService', function($scope, $filter,  
-                                    		   $rootScope, Restangular,translationService,formatStrFactory,countFactory,usSpinnerService) {
+                                       'eprtrcms','formatStrFactory', 'countFactory','usSpinnerService', function($scope, $filter,  
+                                    		   $rootScope, Restangular,eprtrcms,formatStrFactory,countFactory,usSpinnerService) {
 	    $scope.beforesearch = true;
         $scope.ff = formatStrFactory;
 	    $scope.cf = countFactory;
@@ -14,17 +14,23 @@ angular.module('myApp.areaOverviewPrTab', ['restangular','ngSanitize','angularSp
 
 	    $scope.headeritems = [];
     	$scope.pttotal = [];
-        $scope.translate = function()
-        {
-        	translationService.get().then(function (data) {
-        		$scope.tr_c = data.Common;
-        		$scope.tr_p = data.Pollutant;
-        		$scope.tr_lpo = data.LOV_POLLUTANT;
-        		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
-        		$scope.tr_ao = data.AreaOverview;
-       	  });
-        };
-        $scope.translate();
+    	
+//    	Requesting text and title resources 
+    	eprtrcms.get('Pollutant',null).then(function (data) {
+    		$scope.tr_p = data;
+    	});
+    	eprtrcms.get('Common',null).then(function (data) {
+    		$scope.tr_c = data;
+    	});
+    	eprtrcms.get('LOV_POLLUTANT',null).then(function (data) {
+    		$scope.tr_lpo = data;
+    	});
+    	eprtrcms.get('LOV_ANNEXIACTIVITY',null).then(function (data) {
+    		$scope.tr_laa = data;
+    	});
+    	eprtrcms.get('AreaOverview',null).then(function (data) {
+    		$scope.tr_ao = data;
+    	});
         
     	$scope.restconfig = Restangular.withConfig(function(RestangularConfigurer) {
             RestangularConfigurer.setFullResponse(true);
@@ -48,15 +54,6 @@ angular.module('myApp.areaOverviewPrTab', ['restangular','ngSanitize','angularSp
           };
           $scope.spinneractive = false;
 
-   /*       $rootScope.$on('us-spinner:spin', function(event, key) {
-            $scope.spinneractive = true;
-          });
-
-          $rootScope.$on('us-spinner:stop', function(event, key) {
-            $scope.spinneractive = false;
-          });
-*/
-    	
         $scope.$watchCollection('[pollutant, queryparams]', function(value){
 //        	if($scope.prtabfilter.pgselect && $scope.prtabfilter.pgselect.lov_PollutantID && $scope.queryparams){
            	if($scope.pollutant && $scope.queryparams){

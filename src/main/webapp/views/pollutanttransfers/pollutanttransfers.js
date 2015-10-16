@@ -9,9 +9,9 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
         });
     }])
 
-    .controller('PollutantTransfersCtrl', ['$scope','$filter', '$modal', '$rootScope','searchFilter', 'Restangular','translationService',
+    .controller('PollutantTransfersCtrl', ['$scope','$filter', '$modal', '$rootScope','searchFilter', 'Restangular','eprtrcms',
                                            'formatStrFactory','countFactory',  function($scope, $filter, $modal, $rootScope, searchFilter, Restangular,
-                                        		   translationService,formatStrFactory, countFactory) {
+                                        		   eprtrcms,formatStrFactory, countFactory) {
     	$scope.ff = formatStrFactory;
 	    $scope.cf = countFactory;
         $scope.beforesearch = true;
@@ -29,23 +29,42 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
         $scope.searchFilter = searchFilter;
         $scope.queryParams = {};
         $scope.queryParams.ReportingYear = -1;
-    	translationService.get().then(function (data) {
-    		$scope.tr_lco = data.LOV_COUNTRY;
-    		$scope.tr_lnr = data.LOV_NUTSREGION;
-    		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
-    		$scope.tr_f = data.Facility;
-    		$scope.tr_c = data.Common;
-    		$scope.tr_p = data.Pollutant;
-    		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
-    		$scope.tr_lcon =data.LOV_CONFIDENTIALITY;
-    		$scope.tr_con =data.Confidentiality;
-    		$scope.tr_lpo = data.LOV_POLLUTANT;
-    		$scope.tr_lnr = data.LOV_NUTSREGION;
-    		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
-    		
-    		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
 
-    	  });
+//		Requesting text and title resources 
+		eprtrcms.get('Facility',null).then(function (data) {
+			$scope.tr_f = data;
+		});
+		eprtrcms.get('Common',null).then(function (data) {
+			$scope.tr_c = data;
+			$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
+		});
+		eprtrcms.get('LOV_COUNTRY',null).then(function (data) {
+			$scope.tr_lco = data;
+		});
+		eprtrcms.get('Confidentiality',null).then(function (data) {
+			$scope.tr_con = data;
+		});
+		eprtrcms.get('LOV_NUTSREGION',null).then(function (data) {
+			$scope.tr_lnr = data;
+		});
+		eprtrcms.get('LOV_RIVERBASINDISTRICT',null).then(function (data) {
+			$scope.tr_lrbd = data;
+		});
+		eprtrcms.get('Pollutant',null).then(function (data) {
+			$scope.tr_p = data;
+		});
+		eprtrcms.get('LOV_ANNEXIACTIVITY',null).then(function (data) {
+			$scope.tr_laa = data;
+		});
+		eprtrcms.get('LOV_CONFIDENTIALITY',null).then(function (data) {
+			$scope.tr_lcon = data;
+		});
+		eprtrcms.get('LOV_POLLUTANT',null).then(function (data) {
+			$scope.tr_lpo = data;
+		});
+		eprtrcms.get('LOV_RIVERBASINDISTRICT',null).then(function (data) {
+			$scope.tr_lrbd = data;
+		});
         
         /*
          * Tab handling

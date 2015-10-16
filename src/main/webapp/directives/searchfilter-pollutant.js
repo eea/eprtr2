@@ -3,8 +3,8 @@
 /**
  * Pollutant filter 
  */
-myApp.directive('sfPollutant', ['$compile','$http', '$filter', 'Restangular', 'translationService', 'pollutantService', 
-                                function($compile,$http, $filter, Restangular, translationService, pollutantService) {
+myApp.directive('sfPollutant', ['$compile','$http', '$filter', 'Restangular', 'eprtrcms', 'pollutantService', 
+                                function($compile,$http, $filter, Restangular, eprtrcms, pollutantService) {
 
     return {
         restrict: 'A',
@@ -21,10 +21,13 @@ myApp.directive('sfPollutant', ['$compile','$http', '$filter', 'Restangular', 't
             var allPollutantGroups = {name: 'All pollutant groups'};
             var allPollutants = {name: 'All pollutants'};
 
-    		translationService.get().then(function (data) {
-    			scope.tr_c = data.Common;
-    			scope.tr_lpo = data.LOV_POLLUTANT;
-    	    });
+        	eprtrcms.get('Common',null).then(function (data) {
+        		scope.tr_c = data;
+        	});
+        	eprtrcms.get('LOV_POLLUTANT',null).then(function (data) {
+        		scope.tr_lpo = data;
+        	});
+
     		scope.polfilter = {};
     		if (scope.grpOnly == undefined){
     			scope.grpOnly = false;

@@ -23,9 +23,9 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 })
 
 .controller('TimeseriesController', 
-		['$scope', '$http', '$filter', 'Restangular', 'tsconf', 'translationService', 'formatStrFactory', 'lovPollutantType','lovCountryType', 
+		['$scope', '$http', '$filter', 'Restangular', 'tsconf', 'eprtrcms', 'formatStrFactory', 'lovPollutantType','lovCountryType', 
 		 'lovAreaGroupType', 'lovNutsRegionType', 'riverBasinDistrictsType', 'annexIActivityType', 'naceActivityType', 'reportingYearsType', 'fdDetailsType',
-          function($scope, $http, $filter, Restangular, tsconf, translationService, formatStrFactory, lovPollutantType, lovCountryType, 
+          function($scope, $http, $filter, Restangular, tsconf, eprtrcms, formatStrFactory, lovPollutantType, lovCountryType, 
         		  lovAreaGroupType, lovNutsRegionType, riverBasinDistrictsType, annexIActivityType, naceActivityType, reportingYearsType,fdDetailsType ) {
 
 /**		
@@ -106,36 +106,67 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
  * Load translation resources 
  * */        
 //		Requesting text and title resources 
-	translationService.get().then(function (data) {
-		$scope.tr_f = data.Facility;
-		$scope.tr_c = data.Common;
-		$scope.tr_t = data.Timeseries;
-		$scope.tr_p = data.Pollutant;
-		$scope.tr_w = data.WasteTransfers;
-		$scope.tr_lcf = data.LOV_CONFIDENTIALITY;
-		$scope.tr_lag = data.LOV_AREAGROUP;
-		$scope.tr_lnr = data.LOV_NUTSREGION;
-		$scope.tr_lrbd = data.LOV_RIVERBASINDISTRICT;
-		$scope.tr_lco = data.LOV_COUNTRY;
-		$scope.tr_la = data.Activity;
-		$scope.tr_lna = data.LOV_NACEACTIVITY;
-		$scope.tr_laa = data.LOV_ANNEXIACTIVITY;
-		$scope.tr_lp = data.LOV_POLLUTANT;
-		$scope.tr_lm = data.LOV_MEDIUM;
-		$scope.tr_lwt = data.LOV_WASTETYPE;
-		$scope.tr_lu = data.LOV_UNIT;
+	eprtrcms.get('Facility',null).then(function (data) {
+		$scope.tr_f = data;
+	});
+	eprtrcms.get('Common',null).then(function (data) {
+		$scope.tr_c = data;
+	});
+	eprtrcms.get('Pollutant',null).then(function (data) {
+		$scope.tr_p = data;
+	});
+	eprtrcms.get('WasteTransfers',null).then(function (data) {
+		$scope.tr_wt = data;
+	});
+	eprtrcms.get('LOV_NACEACTIVITY',null).then(function (data) {
+		$scope.tr_lna = data;
+	});
+	eprtrcms.get('LOV_NUTSREGION',null).then(function (data) {
+		$scope.tr_lnr = data;
+	});
+	eprtrcms.get('LOV_RIVERBASINDISTRICT',null).then(function (data) {
+		$scope.tr_lrbd = data;
+	});
+	eprtrcms.get('LOV_UNIT',null).then(function (data) {
+		$scope.tr_lu = data;
 	    /*Maybe wrong place*/
 		$scope.tsStackseriesObject.options["vAxis"] = {"title": $scope.tr_lu['KGM']};
-		
-    });
+	});
+	eprtrcms.get('LOV_CONFIDENTIALITY',null).then(function (data) {
+		$scope.tr_lcon = data;
+	});
+	eprtrcms.get('LOV_COUNTRY',null).then(function (data) {
+		$scope.tr_lco = data;
+	});
+	eprtrcms.get('LOV_ANNEXIACTIVITY',null).then(function (data) {
+		$scope.tr_laa = data;
+	});
+	eprtrcms.get('LOV_POLLUTANT',null).then(function (data) {
+		$scope.tr_lpo = data;
+	});
+	eprtrcms.get('LOV_MEDIUM',null).then(function (data) {
+		$scope.tr_lme = data;
+	});
 
+	eprtrcms.get('Activity',null).then(function (data) {
+		$scope.tr_la = data;
+	});
+	eprtrcms.get('LOV_AREAGROUP',null).then(function (data) {
+		$scope.tr_lag = data;
+	});
+	eprtrcms.get('LOV_WASTETYPE',null).then(function (data) {
+		$scope.tr_lwt = data;
+	});
+	eprtrcms.get('Timeseries',null).then(function (data) {
+		$scope.tr_t = data;
+	});
 		/**
 		 * events
 		 */
 	/*Initial load*/
-	$scope.$watchCollection('[content,queryParams,tr_c]', function(value) {
+	$scope.$watchCollection('[content,queryParams,tr_c,tr_t]', function(value) {
 
-		if($scope.tr_c != undefined){
+		if($scope.tr_c && $scope.tr_t){
 		    /*Header input*/
 			$scope.createheader();
 			//Is Confident
@@ -1133,7 +1164,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 				lovPollutantType.getByID($scope.queryParams.LOV_PollutantGroupID).get().then(function(data) {
 					// returns pollutant object 
 					$scope.base.pollutant = data;
-					pol.val = $scope.tr_lp[data.code];
+					pol.val = $scope.tr_lpo[data.code];
 					$scope.headitms.push(pol);
 				});
 	        }
@@ -1142,7 +1173,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 				lovPollutantType.getByID($scope.queryParams.LOV_PollutantID).get().then(function(data) {
 					// returns pollutant object 
 					$scope.base.pollutant = data;
-					pol.val = $scope.tr_lp[data.code];
+					pol.val = $scope.tr_lpo[data.code];
 					$scope.headitms.push(pol);
 					if(data.parentID != null){
 						// We use the pollutant.ParentID.Value for requesting parent pollutant
@@ -1377,8 +1408,8 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 
     return reportingYears;
 }])
-  .controller('ModalTimeSeriesCtrl', function ($scope, $modalInstance, translationService, isoContType, isoQP) {
-	translationService.get('Common').then(function (data) {
+  .controller('ModalTimeSeriesCtrl', function ($scope, $modalInstance, eprtrcms, isoContType, isoQP) {
+		eprtrcms.get('Common',null).then(function (data) {
 		switch(isoContType){
 		case 'pollutantrelease': 
 			$scope.title = 'Time Series - ' + data.PollutantReleases;

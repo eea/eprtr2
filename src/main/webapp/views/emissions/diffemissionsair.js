@@ -9,7 +9,7 @@ angular.module('myApp.diffemissionsair', ['ngRoute','ngSanitize', 'myApp.emissio
   });
 }])
 
-.controller('DiffEmissionsAirCtrl', ['$scope','$filter', 'searchFilter', 'emissionsService', 'translationService', function($scope, $filter, searchFilter, emissionsService,translationService) {
+.controller('DiffEmissionsAirCtrl', ['$scope','$filter', 'searchFilter', 'emissionsService', 'eprtrcms', function($scope, $filter, searchFilter, emissionsService,eprtrcms) {
 	
 	$scope.searchFilter = searchFilter;
     $scope.resize_icon = "fa fa-arrow-left"
@@ -58,11 +58,11 @@ angular.module('myApp.diffemissionsair', ['ngRoute','ngSanitize', 'myApp.emissio
 	$scope.setActiveTab = function(tab) {
 		$scope.active[tab] = true;
 	};
-	translationService.get().then(function (data) {
-		$scope.tr_c = data.Common;
+	eprtrcms.get('Common',null).then(function (data) {
+		$scope.tr_c = data;
 		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
-    });
-
+	});
+	
 	emissionsService.get().then(function (data) {
 		$scope.de = data.DiffuseSources;
     });
