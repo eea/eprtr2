@@ -41,17 +41,11 @@ angular.module('myApp.staticview', ['ngRoute','restangular','ngSanitize'])
 		if($scope.id !== null && statconf.items[$scope.id] !== undefined){
 //		Requesting text and title resources 
 			var item = statconf.items[$scope.id];
-//			translationService.get(item.t).then(function (data) {
 			
 			eprtrcms.get(item.t,null).then(function (data) {
 				$scope.content = data[item.c];
 				$scope.head = data[item.h];
 			});	
-			
-			/*$http.get('translations/eprtr-resource-static_en-gb.json').success(function(data, status) {
-				$scope.content = data[item.t][item.c];
-				$scope.head = data[item.t][item.h];
-		    });*/
 		}
 }]);
 

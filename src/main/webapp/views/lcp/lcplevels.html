@@ -105,7 +105,7 @@
 						</tfoot-->
 						<tbody>
 							<tr ng-repeat="item in plantdata" row-id="{{ item.plantid }}" >
-								<td><a href="#/lcpdetailsview?PlantID={{item.id}}">{{item.plant}}</a></td>
+								<td><a ng-click="ldopen(item.id)" alt="" >{{item.plant}}</a></td>
 								<td>{{item.facility}}</td>
 								<td>{{item.address}}</td>
 								<td>{{item.city}}</td>
@@ -117,6 +117,11 @@
 						</tbody>
 					</table>
 				</div>
+				
+				<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && !plantdata.length)">
+     <div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+</div>
+				
 				</tab> 
 			  </tabset>
 			

@@ -1,14 +1,14 @@
 <div id="lcp_details" >
    <!--Main Banner-->
-   <div class="row">
+   <!--div class="row">
       <div class="col-md-6 " style="display: inline-block; vertical-align: bottom;">
-          <h2>{{tr_lcp.PlantName}}</h2>
+          <h2>{{tr_lcp.Plant}}</h2>
       </div>
       <div class="col-md-6 text-right"><button class="print-button btn btn-default pull-right" ng-print print-element-id="facility_details"><i class="fa fa-print"></i></button>	</div>
       <div class="col-md-2" ></div>
-   </div>
+   </div-->
    <div class="row" >
-        <div class="col-md-4 ">
+        <div class="col-md-6 ">
         <table>
 			  <tr ><td class="fdTitles">{{tr_lcp.PlantName}}:</td><td>{{plantdata.plant}}</td></tr>
 			  <tr ><td class="fdTitles">{{tr_lcp.FacilityName}}:</td><td>{{plantdata.facility}}</td></tr>
@@ -35,8 +35,8 @@
 			    <tr ><td class="fdSubTitles">{{tr_lcp.Refineries}}</td><td><input type="checkbox" value="" disabled ng-checked="detailsdata.Refineries"></td></tr>
 				</table>
 		</div-->   
-        <div class="col-md-4 ">
-			 <table class="top-buffer10" >
+        <div class="col-md-6 ">
+			 <table >
 				<tr ><td class="fdTitles">{{tr_f.CompetentA}}:</td><td>{{basicdata.reporteddate}}</td></tr>
  			    <tr ><td class="fdSubTitles">{{tr_lcp.Organization}}:</td><td>{{basicdata.organization}}</td></tr>
  			    <tr ><td class="fdSubTitles">{{tr_f.Address}}:</td><td>{{basicdata.address}}</td></tr>
@@ -45,48 +45,75 @@
  			    <tr ><td class="fdSubTitles">{{tr_lcp.Nameofcontactperson}}:</td><td>{{basicdata.nameofcontactperson}}</td></tr>
 			</table>
 		</div>   
-			<div class="col-md-4" >
+
+   </div>
+   <hr>
+   <div class="row" >
+        <div class="col-md-6" style="height:300px;" >
+	        <leaflet height="100%" ></leaflet>
+		</div>
+		
+					<div class="col-md-6" >
 			 
-			<table class="top-buffer10">
+			<table >
 				<thead>
 		<tr >
 					<th class="fdTitles">{{tr_lcp.Source}}</th>
 					<th class="fdTitles"> </th>
-					<th class="fdTitles">{{tr_lcp.Thermalinput}}</th>
+					<th class="fdTitles text-right">{{tr_lcp.Thermalinput}}</th>
 					</tr>
 				</thead>
-					<tbody>
-				<tr ><td class="fdSubTitles">{{tr_lcp.Gasturbine}} </td><td><input type="checkbox" value="" disabled ng-checked="(detailsdata.Gasturbine)?true:false"></td>
+				<tr ><td class="fdSubTitles">{{tr_lcp.Gasturbine}} </td><td>
+				<input type="radio" value="" disabled ng-checked="(detailsdata.Gasturbine)?true:false"> Yes &nbsp;&nbsp; 
+			    		<input type="radio" value="" disabled ng-checked="(detailsdata.Gasturbine)?false:true"> No 
+			    		</td>
 					<td class="text-right">{{detailsdata.Gasturbinethermalinput}} </td></tr>
-			    <tr ><td class="fdSubTitles">{{tr_lcp.Boiler}} </td><td><input type="checkbox" value="" disabled ng-checked="(detailsdata.Boiler)?true:false"></td>
+			    <tr ><td class="fdSubTitles">{{tr_lcp.Boiler}} </td><td>
+			    		<input type="radio" value="" disabled ng-checked="(detailsdata.Boiler)?true:false"> Yes &nbsp;&nbsp; 
+			    		<input type="radio" value="" disabled ng-checked="(detailsdata.Boiler)?false:true"> No 
+			    	</td>
 			    	<td class="text-right">{{detailsdata.Boilerthermalinput}} </td></tr>
-			    <tr ><td class="fdSubTitles">{{tr_lcp.Gasengine}} </td><td><input type="checkbox" value="" disabled ng-checked="(detailsdata.Gasengine)?true:false"></td>
+			    <tr ><td class="fdSubTitles">{{tr_lcp.Gasengine}} </td>
+			    <td><input type="radio" value="" disabled ng-checked="(detailsdata.Gasengine)?true:false"> Yes &nbsp;&nbsp; 
+			    		<input type="radio" value="" disabled ng-checked="(detailsdata.Gasengine)?false:true"> No 
+			    		</td>
 			    	<td class="text-right">{{detailsdata.Gasenginethermalinput}} </td></tr>
-			    <tr ><td class="fdSubTitles">{{tr_lcp.Dieselengine}} </td><td><input type="checkbox" value="" disabled ng-checked="(detailsdata.Dieselengine)?true:false"></td>
+			    <tr ><td class="fdSubTitles">{{tr_lcp.Dieselengine}} </td><td>
+			    <input type="radio" value="" disabled ng-checked="(detailsdata.Dieselengine)?true:false"> Yes &nbsp;&nbsp; 
+			    		<input type="radio" value="" disabled ng-checked="(detailsdata.Dieselengine)?false:true"> No 
+			    		</td>
 			    	<td class="text-right">{{detailsdata.Dieselengineturbinethermalinput}} </td></tr>
-				</tbody>
-			</table>
-			 <table class="top-buffer10" >
-				<tr ><td class="fdTitles">{{tr_lcp.OptOutsAndNERP}}:</td><td></td></tr>
-			    <tr ><td class="fdSubTitles">{{tr_lcp.Optoutplant}}</td><td><input type="checkbox" value="" disabled ng-checked="nerpdata.optoutplant"> </td></tr>
-			  	<tr ><td class="fdSubTitles">{{tr_lcp.Capacityoptedoutmw}}:</td><td class="text-right">{{nerpdata.capacityoptedoutmw}}</td></tr>
-			  	<tr ><td class="fdSubTitles">{{tr_lcp.Hoursoperated}}:</td><td class="text-right">{{nerpdata.hoursoperated}}</td></tr>
-			    <tr ><td class="fdSubTitles">{{tr_lcp.Plantincludedinnerp}}</td><td><input type="checkbox" value="" disabled ng-checked="nerpdata.plantincludedinnerp"> </td></tr>
+<tr ><td>&nbsp; </td><td>&nbsp; </td><td>&nbsp; </td></tr>
+				<tr ><td class="fdTitles">{{tr_lcp.OptOutsAndNERP}}:</td><td></td><td></td></tr>
+			    <tr ><td class="fdSubTitles">{{tr_lcp.Optoutplant}}</td><td>
+			    <input type="radio" value="" disabled ng-checked="(nerpdata.optoutplant)?true:false"> Yes &nbsp;&nbsp; 
+			    		<input type="radio" value="" disabled ng-checked="(nerpdata.optoutplant)?false:true"> No 
+</td><td></td></tr>
+			  	<tr ><td class="fdSubTitles">{{tr_lcp.Capacityoptedoutmw}}:</td><td class="text-right">{{nerpdata.capacityoptedoutmw}}</td><td></td></tr>
+			  	<tr ><td class="fdSubTitles">{{tr_lcp.Hoursoperated}}:</td><td class="text-right">{{nerpdata.hoursoperated}}</td><td></td></tr>
+			    <tr ><td class="fdSubTitles">{{tr_lcp.Plantincludedinnerp}}</td><td>
+			    <input type="radio" value="" disabled ng-checked="(nerpdata.plantincludedinnerp)?true:false"> Yes &nbsp;&nbsp; 
+			    		<input type="radio" value="" disabled ng-checked="(nerpdata.plantincludedinnerp)?false:true"> No 
+</td><td></td></tr>
 			</table>
 
 
 		</div>
-   </div>
-   <hr>
-   <div class="row" style="padding-top:10px;" >
-        <div class="col-md-4" style="height:350px;" >
-	        <leaflet height="100%" ></leaflet>
-		</div>
-<div class="col-md-8" >
+		
+		
+		 </div>
+		 <hr>
+   <div class="row" >
+		
+		
+		
+		
+<div class="col-md-12" >
+<label class="control-label" >Energy input (expressed in Terajoules)</label>
 			 <table class="table table-striped table-condensed table-hover top-buffer10" >
 				<thead>
 					<tr>
-						<th class="text-right">{{tr_c.Year}}</th>
+						<th class="text-right" style="width:75px;">{{tr_c.Year}}</th>
 						<th class="text-right">{{tr_lcp.Biomass}}</th>
 						<th class="text-right" >{{tr_lcp.Hardcoal}}</th>
 						<th class="text-right" >{{tr_lcp.Lignite}}</th>
@@ -97,7 +124,7 @@
 					</tr>
 				</thead>
 			  <tr ng-repeat="item in energyinput">
-			    <td class="text-right">{{ item.year }}</td>
+			    <td class="text-right col-Min75">{{ item.year }}</td>
 			    <td class="text-right">{{ item.biomass }}</td>
 			    <td class="text-right">{{ item.othersolidfuels }}</td>
 			    <td class="text-right">{{ item.liquidfuels }}</td>
@@ -107,18 +134,24 @@
 			    <td class="text-right">{{ item.lignite }}</td>
 			  </tr>
 			</table>
-
+<label class="control-label top-buffer10" >Emissions (in tonnes)</label>
 			 <table class="table table-striped table-condensed table-hover top-buffer10" >
 				<thead>
 					<tr>
-						<th class="text-right">{{tr_c.Year}}</th>
-						<th class="text-right" >{{tr_lcp.So2}}</th>
-						<th class="text-right" >{{tr_lcp.Nox}}</th>
+						<th class="text-right col-Min75" style="width:75px;">{{tr_c.Year}}</th>
+						<th class="text-right col-Min50"></th>
+						<th class="text-right col-Min50" ></th>
+						<th class="text-right col-Min50" ></th>
+						<th class="text-right" ng-bind-html="tr_lcp.So2"></th>
+						<th class="text-right" ng-bind-html="tr_lcp.Nox" ></th>
 						<th class="text-right" >{{tr_lcp.Dust}}</th>
 					</tr>
 				</thead>
 			  <tr ng-repeat="item in emissioninput">
 			    <td class="text-right">{{ item.year }}</td>
+			    <td class="text-right"></td>
+			    <td class="text-right"></td>
+			    <td class="text-right"></td>
 			    <td class="text-right">{{ item.so2 }}</td>
 			    <td class="text-right">{{ item.nox }}</td>
 			    <td class="text-right">{{ item.dust }}</td>

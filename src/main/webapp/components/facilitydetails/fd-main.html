@@ -5,7 +5,7 @@
           <h2>{{tr_f.Facilitylevel}}</h2>
           <table>
 			  <tr ng-repeat="x in headitms | orderBy : 'order'" >
-			    <td class="{{x.clss}}">{{ x.title }}:</td>
+			    <td class="{{x.clss}}">{{ x.title }}</td>
 			    <td>{{ x.val }}</td>
 			  </tr>
 			</table>
@@ -14,7 +14,7 @@
       <div class="col-md-6 text-right"><button class="print-button btn btn-default pull-right" ng-print print-element-id="facility_details"><i class="fa fa-print"></i></button>	</div>
       <div class="col-md-2" ></div>
       <div class="col-md-4" style="display: inline-block; vertical-align: bottom; float: none; padding-bottom: 5px;">
-			<label class="control-label" for="inputReportingYear">Reporting Year:</label>
+			<label class="control-label" for="inputReportingYear">Reporting Year</label>
 			<select class="form-control" ng-change="updateWithNewYear()" ng-model="selectedReportingYear" ng-options="c.name for c in reportingYears | orderBy : 'name'" id="inputReportingYear"></select>
       </div>
    </div>
@@ -32,31 +32,25 @@ DETAILS
 
             <tab heading="{{tr_f.FacilitylevelDetails}}" active="active.fddetails">
    <div class="row" style="padding-top:10px;" >
-        <div class="col-md-3" style="height:350px;" >
-	        <esri-leaf-map queryparams="map.wh"  />
+        <div class="col-md-4" style="height:350px;" >
+	        <!--esri-leaf-map queryparams="map.wh"  /-->
+	        <leaflet height="100%" ></leaflet>
 		</div>
 
-		<div class="col-md-5" >
+		<div class="col-md-8" >
 			 <table >
 			  <tr ng-repeat="i1 in infoitms | orderBy : 'order'" >
-			    <td class="{{i1.clss}}">{{ i1.title }}:</td>
+			    <td class="{{i1.clss}} ">{{ i1.title }}</td>
 			    <td>{{ i1.val }}</td>
 			  </tr>
-			</table>
-		</div>
-		<div class="col-md-4" >
-            <table>
+			  <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 			  <tr ng-repeat="i2 in infoitms2 | orderBy : 'order'" >
-			    <td class="{{i2.clss}}">{{ i2.title }}:</td>
+			    <td class="{{i2.clss}}">{{ i2.title }}</td>
 			    <td>{{ i2.val }}</td>
 			  </tr>
 			</table>
 			 </br>
-		</div>
-		<div class="col-md-9 .col-md-offset-3" >
-		</br>
-		</br>
-	           <table class="table table-hover table-condensed borderless">
+			 	           <table class="table table-hover table-condensed borderless top-buffer10">
                     <thead>
                         <tr>
                             <th class="col-sm-10 " ><button class="btn btn-default btn-xs"  ng-click="openActivity()" title=""><i class="fa fa-info-circle"></i></button> {{tr_f.IndustrialActivities}}</th>
@@ -70,16 +64,14 @@ DETAILS
                         </tr>
                     </tbody>
                 </table>
+			 
 		</div>
 	</div>
 	
     <!-- public info -->
     <div class="row" >
 		<div class="col-md-8" ng-show="if(details != undefined && details.publicInformation != null && details.publicInformation != '')?true:false" >
-		</br>
-		</br>
-		</br>
-            <p>{{tr_c.PublicInfo}}</p>
+            <p class="top-buffer10">{{tr_c.PublicInfo}}</p>
             <p><Small>{{details.publicInformation}}</Small></p>
         </div>
 	</div>		

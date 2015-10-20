@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.lcpmap','leaflet-directive'])
+angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leaflet-directive'])
 
 .controller('lcpDetailsController', 
 		['$scope', '$http', '$filter', '$sce', '$modal', 'leafletData','eprtrcms', 'formatStrFactory', 'lcpDataService', 'lcpconf',
@@ -10,12 +10,7 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.
  * Basic parameters
  * */
 	$scope.ff = formatStrFactory;
-	$scope.headitms = [];
-	$scope.infoitms = [{'order':0,	'clss':'fdTitles', 	'title':'Facility Details',	'val': ' '}];
-	$scope.infoitms2 = [];
-	$scope.showalert = false;
 	var degrees = "°";
-
 
 /*
  * Load translation resources 
@@ -45,31 +40,7 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.
 	eprtrcms.get('Library',null).then(function (data) {
 		$scope.tr_lib = data;
 	});
-/*	translationService.get('Facility').then(function (data) {
-		$scope.tr_f = data;
-    });*/
 	
-/*
- * Reset collection when Reporting year changed  
- * */
-	$scope.resetcollections = function(){
-		$scope.headitms = [];
-		$scope.infoitms = [{'order':0,	'clss':'fdTitles', 	'title':'Facility Details',	'val': ' '}];
-		$scope.infoitms2 = [];
-	}
-        
-/*
- * Tab handling
- * */
-        
-    $scope.active = {
-		plant: true
-	};
-    $scope.activateTab = function(tab) {
-    	  $scope.active = {}; //reset
-    	  $scope.active[tab] = true;
-    	}
-
 	/*
 	 * Request data by FacilityReportID
 	 * */
@@ -80,21 +51,21 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.
         	$scope.initBasicData(data);
         	$scope.ajustplantdata(data);
         });        	
-        lcpDataService.get(2, qp).then(function (data) {
-			$scope.ajustenergydata(data);
-        });        	
         /*lcpDataService.get(3, qp).then(function (data) {
 			$scope.ajustart15data(data);
-        });*/        	
-        lcpDataService.get(4, qp).then(function (data) {
+	    });*/        	
+	    lcpDataService.get(4, qp).then(function (data) {
 			$scope.ajustnerpdata(data);
-        });        	
-        lcpDataService.get(5, qp).then(function (data) {
+	    });        	
+	    lcpDataService.get(5, qp).then(function (data) {
 			$scope.ajustdetailsdata(data);
-        });        	
-
+	    });        	
 	};
-	$scope.updateByPlantid();
+	$scope.$watch('plantid', function() {
+		if($scope.plantid){
+			$scope.updateByPlantid();
+		}
+	});
 	//Watch results for FacilitydetailsDetail request and common resources
 	$scope.initBasicData = function(plantdata) {
 		if(plantdata){
@@ -102,6 +73,9 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.
 			var qp = {'BasicID':item[lcpconf.layerfields[0].fk_basicdata_id]};
 	        lcpDataService.get(1, qp).then(function (data) {
 				$scope.ajustbasicdata(data);// = (data.features)?data.features[0].attributes:{};
+		        lcpDataService.get(2, {'PlantID':$scope.plantid}).then(function (data) {
+					$scope.ajustenergydata(data);
+		        });        	
 	        });        	
 			var coord = [item[lcpconf.layerfields[0].latitude],item[lcpconf.layerfields[0].longitude]];
 	      //Here we initialize the map
@@ -119,27 +93,6 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.
 	    	
 		}
 	};
-	/**
-	 * Filters
-	 */
-	/*$scope.plantfilter = function(key, value){
-		return key in lcpconf.displayfields[0] ? true : false;
-	};
-	$scope.basicfilter = function(key, value){
-		return key in lcpconf.displayfields[1] ? true : false;
-	};
-	$scope.energyfilter = function(key, value){
-		return key in lcpconf.displayfields[2] ? true : false;
-	};
-	$scope.lcpart15filter = function(key, value){
-		return key in lcpconf.displayfields[3] ? true : false;
-	};
-	$scope.nerpfilter = function(key, value){
-		return key in lcpconf.displayfields[4] ? true : false;
-	};
-	$scope.detailsfilter = function(key, value){
-		return key in lcpconf.displayfields[5] ? true : false;
-	};*/
 	
 	$scope.ajustplantdata = function(data){
 		$scope.plantdata = {};
@@ -216,7 +169,7 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.
 			_bd['address'] += ', '+ _bd['postalcode'] +', '+ _bd['city'];
 			_bd['reporteddate'] = '(Last updated: ';
 			_bd['reporteddate'] += (_bd['report_submissiondate'])? $filter('date')(_bd['report_submissiondate'], "dd MMM yyyy")+')' : 'Unknown)';
-			_bd['country'] = $scope.tr_lco[_bd['memberstate']];
+			_bd['country'] = ($scope.tr_lco)?$scope.tr_lco[_bd['memberstate']]:_bd['memberstate'];
 			$scope.basicdata = _bd;
 		}
 	} 
@@ -261,20 +214,32 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.
 
 	$scope.ajustenergydata = function(data){
 		$scope.energydata = {};
+		$scope.emissioninput = [];
+		$scope.energyinput = [];
 		if (data.features){
 			var item = data.features[0].attributes;
-			var _ed = {'id':item[lcpconf.layerfields[2].id]};
-			_ed['biomass'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].biomass], null);
-			_ed['othersolidfuels'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].othersolidfuels], null);
-			_ed['liquidfuels'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].liquidfuels], null);
-			_ed['naturalgas'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].naturalgas], null);
-			_ed['othergases'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].othergases], null);
-			_ed['hardcoal'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].hardcoal], null);
-			_ed['lignite'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].lignite], null);
-			_ed['so2'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].so2], null);
-			_ed['nox'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].nox], null);
-			_ed['dust'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].dust], null);
-			$scope.energydata = _ed;
+//TODO: fix years
+			var _em = {}, _en = {};
+			//var _ed = {'id':item[lcpconf.layerfields[2].id]};
+			if($scope.basicdata && $scope.basicdata.referenceyear){
+				_en.year= $scope.basicdata.referenceyear;
+				_em.year= $scope.basicdata.referenceyear;
+			}
+			_en['biomass'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].biomass], null);
+			_en['othersolidfuels'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].othersolidfuels], null);
+			_en['liquidfuels'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].liquidfuels], null);
+			_en['naturalgas'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].naturalgas], null);
+			_en['othergases'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].othergases], null);
+			_en['hardcoal'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].hardcoal], null);
+			_en['lignite'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].lignite], null);
+			_em['so2'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].so2], null);
+			_em['nox'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].nox], null);
+			_em['dust'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[2].dust], null);
+			//$scope.energydata = _ed;
+			
+			$scope.emissioninput.push(_em)
+			$scope.energyinput.push(_en)
+			
 		}
 	} 
 	
@@ -313,7 +278,7 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.
 				      case 'ReportingYear':
         				  //qs.push(lcpconf.layerfields[id].referenceyear + "=2013");
 				    	  //Need all years
-        				  //qs.push(lcpconf.layerfields[id].referenceyear + "="+query[key]);
+        				  qs.push(lcpconf.layerfields[id].referenceyear + "="+query[key]);
 				          break;
 				      case 'BasicID':
 				    	  if(id==1){
@@ -370,7 +335,7 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','myApp.
     })
   .controller('ModalLcpCtrl', function ($scope, $modalInstance, eprtrcms, plantid) {
 		eprtrcms.get('LCP',null).then(function (data) {
-			$scope.title = data.Headline;
+			$scope.title = data.Plant;
 		});
   $scope.plantid = plantid;
   $scope.ok = function () {

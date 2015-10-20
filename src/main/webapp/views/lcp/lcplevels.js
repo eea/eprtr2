@@ -11,9 +11,9 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
 
 
 
-.controller('lcpLevelsCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular', 'eprtrcms', 
+.controller('lcpLevelsCtrl', ['$scope', '$filter', '$http', '$modal','searchFilter', 'Restangular', 'eprtrcms', 
                                  'lovCountryType', 'lovAreaGroupType', 'lovNutsRegionType','formatStrFactory', 'lcpDataService', 'lcpconf',
-                                 function($scope, $filter, $http, searchFilter, Restangular, eprtrcms,
+                                 function($scope, $filter, $http, $modal, searchFilter, Restangular, eprtrcms,
                                 		 lovCountryType, lovAreaGroupType, lovNutsRegionType, formatStrFactory, lcpDataService, lcpconf) {
 	
 	$scope.beforesearch = true;
@@ -122,7 +122,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     		lovCountryType.getByID($scope.queryParams.LOV_CountryID).get().then(function(data) {
     			$scope.countryCode = data.countryCode;
     		});  
-            if ($scope.searchFilter.selectedRegion.lov_NUTSRegionID) {
+            /*if ($scope.searchFilter.selectedRegion.lov_NUTSRegionID) {
     			lovNutsRegionType.getByID($scope.searchFilter.selectedRegion.lov_NUTSRegionID).get().then(function(data) {
                 	$scope.regionCode = data.code;
     			});
@@ -138,7 +138,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
             		$scope.regionCodes = _regions;
                 });
 
-            }
+            }*/
 
     	}
         if ($scope.searchFilter.selectedReportingCountry !== undefined && $scope.searchFilter.selectedReportingCountry.groupId) {
@@ -199,7 +199,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     	}
     });
 	
-    $scope.$watchCollection('[basicdata,regionCode,regionCodes]', function(value) {
+    $scope.$watch('basicdata', function(value) {
     	if($scope.basicdata){
     		$scope.basicidcountrycode = {};
     		var _que = {}, _cou = -1;
@@ -221,12 +221,12 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
         			$scope.queryParams.BasicID = _que.BasicID;
     				$scope.basicidcountrycode[_que.BasicID] = $scope.basicdata[0].attributes[lcpconf.layerfields[1].memberstate];
         		}
-        		if($scope.regionCode && (!$scope.regionCodes || $scope.regionCodes.length == 0)){
+        		/*if($scope.regionCode && (!$scope.regionCodes || $scope.regionCodes.length == 0)){
     				_que.regionCode = $scope.regionCode;
         		}
         		if($scope.regionCodes && $scope.regionCodes.length > 0){
         			_que.regionCodes = $scope.regionCodes;
-        		}
+        		}*/
     		}
     		$scope.mapQuery = _que;
     		if(!jQuery.isEmptyObject(_que)){
@@ -340,6 +340,20 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
 		array[i]= new Array();
 		array[i][0] = ' ';
 	}
+	
+	$scope.ldopen = function(plantid){
+    	var modalInstance = $modal.open({
+            templateUrl: 'components/lcp/lcpmodal.html',
+            controller: 'ModalLcpCtrl',
+            size: 'lg',
+//            size: size,
+            resolve: {
+          	  plantid: function () {
+          		  return plantid;
+          	  }       
+            }
+          });
+    };
 }])
 
 

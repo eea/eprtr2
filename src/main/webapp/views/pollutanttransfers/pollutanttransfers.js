@@ -1040,14 +1040,4 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
     });
     };
     
-    }])
-
-.controller('ModalFacilityDetailsCtrl', function ($scope, $modalInstance, fdID, fdrID, year) {
-    $scope.fdID = fdID;
-    $scope.fdrID = fdrID;
-    $scope.year = year;
-
-    $scope.ok = function () {
-        $modalInstance.close();
-    };
-});
+    }]);

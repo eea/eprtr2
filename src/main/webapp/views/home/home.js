@@ -9,7 +9,7 @@ angular.module('myApp.home', ['ngRoute'])
   });
 }])
 
-.controller('HomeCtrl', ['$scope','$rootScope', '$filter', 'translationService', '$http' , function($scope, $rootScope,  $filter, translationService, $http) {
+.controller('HomeCtrl', ['$scope','$rootScope', '$filter', 'eprtrcms', '$http' , function($scope, $rootScope,  $filter, eprtrcms, $http) {
 	/**
 	 * DO NOT REMOVE - part of home.test
 	 */
@@ -18,9 +18,11 @@ angular.module('myApp.home', ['ngRoute'])
 	}
     $scope.mapctrl = {};
 	
-	$http.get('translations/eprtr-resource-static_en-gb.json').success(function(data, status) {
-		$scope.welcome = data['Static']['HomeWelcomeText'];
-    });
+	eprtrcms.get('Static',null).then(function (data) {
+		$scope.tr_f = data;
+		$scope.welcome = data.HomeWelcomeText;
+	});
+
 	$scope.mapheight = window.innerHeight > 820 ? 600+'px' : (window.innerHeight -190)+'px';
 	
     $scope.$watch('mapctrl', function(value) {
@@ -32,6 +34,12 @@ angular.module('myApp.home', ['ngRoute'])
     $scope.$on('mapctrl', function(){
         $scope.mapctrl.redraw();
       });
+    
+    angular.element(document).ready(function () {
+    	if($scope.mapctrl && typeof $scope.mapctrl.redraw == 'function'){
+    		$scope.mapctrl.redraw();
+    	}
+    });
 }])
 
 .factory('formatStrFactory', ['$filter', function($filter){
@@ -468,7 +476,7 @@ angular.module('myApp.home', ['ngRoute'])
 
 
 
-.service('translationService', function($http, $q) {
+/*.service('translationService', function($http, $q) {
       return {
     	  get: function(type) {
         	var deferred = $q.defer();
@@ -492,7 +500,7 @@ angular.module('myApp.home', ['ngRoute'])
          }
       };
     })
-
+*/
 
     .service('emissionsService', function($http, $q) {
       return {

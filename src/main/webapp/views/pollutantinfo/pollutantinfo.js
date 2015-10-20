@@ -9,11 +9,9 @@ angular.module('myApp.pollutantinfo', ['ngRoute'])
   });
 }])
 
-.controller('PollutantInfoCtrl', ['$scope','$filter', 'translationService', 'searchFilter', '$http', function($scope, $filter, searchFilter, translationService, $http) {
+.controller('PollutantInfoCtrl', ['$scope','$filter', 'searchFilter', '$http', function($scope, $filter, searchFilter, $http) {
 	
-		/*translationService.get('Static').then(function (data) {
-		$scope.welcome = data['HomeWelcomeText'];
-    });*/
+
 	//HomeWelcomeText
 	$scope.searchFilter = searchFilter;
 	$scope.showPollutantDetails = false;

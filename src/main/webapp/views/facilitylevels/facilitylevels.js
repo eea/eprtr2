@@ -343,16 +343,6 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp
     };
 }])
 
-.controller('ModalFacilityDetailsCtrl', function ($scope, $modalInstance, fdID, fdrID, year) {
-    $scope.fdID = fdID;
-    $scope.fdrID = fdrID;
-    $scope.year = year;
-
-    $scope.ok = function () {
-        $modalInstance.close();
-    };
-})
-
 .directive("customSort", function() {
 	return {
 		restrict: 'A',

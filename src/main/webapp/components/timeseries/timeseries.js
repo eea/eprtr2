@@ -1195,12 +1195,12 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 					for (var i=0; i< $scope.queryParams.MediumCode.length; i++) {
 						var m = $scope.queryParams.MediumCode[i];
 			    		if (m != 'WASTEWATER'){
-			    			med.push($scope.tr_lm[m]);
+			    			med.push($scope.tr_lme[m]);
 			    		}
 			    	}
 				}
 				else{
-					med.push($scope.tr_lm[$scope.queryParams.MediumCode]);
+					med.push($scope.tr_lme[$scope.queryParams.MediumCode]);
 				}
 		    	if (med.length > 0){
 			    	rel.val = med.join(", ");
@@ -1209,7 +1209,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 				if($scope.queryParams.MediumCode.indexOf('WASTEWATER') >-1){
 					rel = {'order':5, 'clss':'fdTitles'};
 					rel.title = $scope.tr_c["TransfersTo"];
-					rel.val = $scope.tr_lm["WASTEWATER"];
+					rel.val = $scope.tr_lme["WASTEWATER"];
 					$scope.headitms.push(rel);
 				}
 		    }

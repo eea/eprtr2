@@ -125,7 +125,7 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 			          break;
 			      case 'ReportingYear':
 			    	  //arrQue.push(lcpconf.layerfields[0].referenceyear + "=2013");
-    				  //qs.push(lcpconf.layerfields[0].referenceyear + "="+query[key]);
+			    	  arrQue.push(lcpconf.layerfields[0].referenceyear + "="+query[key]);
 			          break;
     			  case 'regionCodes':
     				  //http://localhost:8080/nutsRegionChilds/235
@@ -205,7 +205,7 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 		    	var keys = Object.keys(featureCollection.features[0].properties);
 		    	var _str = '<p><em>Plant</em>: '+featureCollection.features[0].properties[keys[3]]+'<br>';
 		    	_str += '<em>Facility</em>: '+featureCollection.features[0].properties[keys[5]]+'<br>';
-			    _str += '<a class="btn" ng-click="setDetails('+featureCollection.features[0].properties[keys[1]]+')">details</a></p>';
+			    _str += '<a href=#lcpdetailsview?PlantID='+featureCollection.features[0].properties[keys[1]]+' >details</a></p>';
 		    	//, feature.properties
         	    return _str;//L.Util.template(_str, featureCollection.features[0].properties);
 //href="#lcpdetailsview?PlantID='+featureCollection.features[0].properties[keys[1]]+'"
@@ -239,6 +239,26 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 	
 }])
 
+//Directive for showing an alert on click
+/*.directive("showdialog", function(){
+	return function(scope, element, attrs){
+		element.bind("click", function(){
+			console.log(attrs);
+			alert("This is alert #"+attrs.alert);
+		});
+	};
+})*/
+
+.directive("showdialog", function($compile){
+	return function(scope, element, attrs){
+		
+		element.bind("click", function(){
+			console.log(attrs);
+			//scope.count++;
+			//angular.element(document.getElementById('space-for-buttons')).append($compile("<div><button class='btn btn-default' data-alert="+scope.count+">Show alert #"+scope.count+"</button></div>")(scope));
+		});
+	};
+})
 /*
  * This directive enables us to define this module as a custom HTML element
  * <esri-leaf-map queryparams="" /> 

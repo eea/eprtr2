@@ -1255,12 +1255,4 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
                 
     }])
 
-.controller('ModalFacilityDetailsCtrl', function ($scope, $modalInstance, fdID, fdrID, year) {
-    $scope.fdID = fdID;
-    $scope.fdrID = fdrID;
-    $scope.year = year;
-
-    $scope.ok = function () {
-        $modalInstance.close();
-    };
-});
+;

@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize','myApp.esrileafmap'])
+angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize'])
 
 .controller('FDMainController', 
-	['$scope', '$http', '$filter', '$sce', '$modal', 'eprtrcms', 'formatStrFactory','fdDetailsType', 'fdAuthorityType', 'fdActivityType',
+	['$scope', '$http', '$filter', '$sce', '$modal', 'leafletData','eprtrcms', 'formatStrFactory','fdDetailsType', 'fdAuthorityType', 'fdActivityType',
 	'fdPollutantreleasesType', 'fdWastetransfersType', 'fdPollutanttransfersType', 
-	function($scope, $http, $filter, $sce, $modal, eprtrcms,formatStrFactory, fdDetailsType, fdAuthorityType, fdActivityType, 
+	function($scope, $http, $filter, $sce, $modal, leafletData, eprtrcms,formatStrFactory, fdDetailsType, fdAuthorityType, fdActivityType, 
 		fdPollutantreleasesType, fdWastetransfersType, fdPollutanttransfersType) {
 
 /*
@@ -157,7 +157,7 @@ $scope.orderReportingYears = function(data){
 	 * Request data by FacilityReportID
 	 * */
 	 $scope.updateByFdrid = function(){
-	 	$scope.map = {wh : {'FacilityReportID': $scope.frid}};
+	 	//$scope.map = {wh : {'FacilityReportID': $scope.frid}};
 	 	fdDetailsType.getByFdrID($scope.frid).get().then(function (fddata) {
 	 		$scope.details = fddata;
 	 		$scope.fid = fddata.facilityId;
@@ -194,7 +194,7 @@ $scope.orderReportingYears = function(data){
 	 * Request data by FacilityID and ReportingYear
 	 * */
 	 $scope.updateByFdidAndyear = function(){
-	 	$scope.map = {wh : {'FacilityID': $scope.fid, 'ReportingYear': $scope.year}};
+	 	//$scope.map = {wh : {'FacilityID': $scope.fid, 'ReportingYear': $scope.year}};
 	 	fdDetailsType.getByFdIDAndYear($scope.fid,$scope.year).then(function (details) {
 	 		$scope.details = details[0];
 	 		$scope.frid = details[0].facilityReportID;
@@ -265,37 +265,50 @@ $scope.orderReportingYears = function(data){
 	//Watch results for FacilitydetailsDetail request and common resources
 	$scope.$watchCollection('[tr_c,tr_f, details]', function(value) {
 		if ($scope.tr_c !== undefined && $scope.tr_f !== undefined && $scope.details !== undefined){
+
+			/**
+			 * Set map
+			 */
+			var coord = $scope.details.coordinates.replace('POINT','').replace('(','').replace(')','').trim().split(' ');
+			//var coord = [item[lcpconf.layerfields[0].latitude],item[lcpconf.layerfields[0].longitude]];
+	    	leafletData.getMap().then(function(map) {
+	    		//Initial extent
+	    		
+	    		map.invalidateSize();
+	    		map.setView([coord[1],coord[0]], 7);
+	    		map.attributionControl = false;
+	    		
+	    		//We set the baselayer - in version 2 we can add more baselayers and a selector
+	    		L.esri.basemapLayer("Streets").addTo(map);
+	    		
+	    		L.marker([coord[1],coord[0]], {icon: L.AwesomeMarkers.icon({icon: 'home', prefix: 'fa', markerColor: 'darkgreen'})}).addTo(map);
+	    	});
+			
 			var adr = $scope.details.address != null?
-			$scope.details.address + ", " +  $scope.details.postalCode + ", " +  $scope.details.city:
-			null;
+					$scope.details.address + ", " +  $scope.details.postalCode + ", " +  $scope.details.city:
+					null;
 			$scope.headitms = [
-			{'order':0,	'clss':'fdTitles',
-			'title':$scope.tr_f.FacilityName,
-			'val': $scope.fFactory.ConfidentialFormat($scope.details.facilityName, $scope.details.confidentialIndicator)
-		},
-		{'order':1, 'clss':'fdTitles',
-		'title': $scope.tr_f.Address,
-		'val': $scope.fFactory.ConfidentialFormat(adr, $scope.details.confidentialIndicator)
-	},
-	{'order':3,'clss':'fdTitles',
-	'title':$scope.tr_c.Year,
-	'val': $scope.details.reportingYear +  " (published: " + $filter('date')($scope.details.published, "dd MMM yyyy") + ")"
-},
-{'order':4,'clss':'fdTitles',
-'title':$scope.tr_c.Regulation,
-'val': $scope.details.reportingYear < 2007 ? "EPER Regulation" : "E-PRTR Regulation"
-}];
-
-
+			  {'order':0,	'clss':'fdTitles', 'title':$scope.tr_f.FacilityName,
+			   'val': $scope.fFactory.ConfidentialFormat($scope.details.facilityName, $scope.details.confidentialIndicator)
+			  },
+			  {'order':1, 'clss':'fdTitles', 'title': $scope.tr_f.Address,
+				  'val': $scope.fFactory.ConfidentialFormat(adr, $scope.details.confidentialIndicator)
+			  },
+			  {'order':3,'clss':'fdTitles',	'title':$scope.tr_c.Year,
+				  'val': $scope.details.reportingYear +  " (published: " + $filter('date')($scope.details.published, "dd MMM yyyy") + ")"
+			  },
+			  {'order':4,'clss':'fdTitles', 'title':$scope.tr_c.Regulation,
+				  'val': $scope.details.reportingYear < 2007 ? "EPER Regulation" : "E-PRTR Regulation"
+			  }];
 
 $scope.infoitms.push({'order':1, 'clss':'fdSubTitles', 	
 	'title':$scope.tr_f.ParentCompanyName, 
 	'val': $scope.details.confidentialIndicator ? 'CONFIDENTIAL' : $scope.details.parentCompanyName
 });
 
-var crd = $scope.details.coordinates.replace('POINT','').replace('(','').replace(')','').trim().split(' ');
+
 $scope.infoitms.push({'order':2, 'clss':'fdSubTitles', 	
-	'title':$scope.tr_f.Coords, 'val': "("+crd[0]+degrees+", "+crd[1]+degrees+")"});
+	'title':$scope.tr_f.Coords, 'val': "("+coord[0]+degrees+", "+coord[1]+degrees+")"});
 
 			//No. of IPPC installations is voluntary. Only add if reported.
 			if ($scope.details.totalIPPCInstallationQuantity != '' && $scope.details.totalIPPCInstallationQuantity != null)
@@ -780,7 +793,16 @@ resolve: {
 		$modalInstance.dismiss('cancel');
 	};
 })
+.controller('ModalFacilityDetailsCtrl', function ($scope, $modalInstance, fdID, fdrID, year) {
+    $scope.fdID = fdID;
+    $scope.fdrID = fdrID;
+    $scope.year = year;
+    $scope.title = 'Facility Details';
 
+    $scope.ok = function () {
+        $modalInstance.close();
+    };
+})
 
 
 /*
