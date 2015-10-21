@@ -101,8 +101,15 @@
 							</div>
 						</div>
 
+						
+
 						<div id="prSumMediumSelector" pr-selector
 							medium="mediumFilter.prSumMedium" queryparams="queryParams"></div>
+						
+						<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && items.length < 1)">
+     						<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+						</div>
+
 						<div google-chart chart="summaryChart"></div>
 
 						<!--div class="top-buffer10" google-chart="summaryChartObject" style="height:400px; width:100%;"></div-->
@@ -163,6 +170,11 @@
 								</button>
 							</div>
 						</div>
+
+						<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && activities.length < 1)">
+     						<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+						</div>
+
 						<!-- message -->
 						<table class="table table-striped table-condensed table-hover">
 							<thead>
@@ -331,6 +343,9 @@
 							</div>
 						</div>
 
+						<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && areas.length < 1)">
+     						<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+						</div>
 
 						<table class="table table-striped table-condensed table-hover">
 							<thead>
@@ -472,6 +487,11 @@
 						{{tr_p.AllValuesArePercentOfEuroTotal}}
 						<div class="top-buffer10" id="prAreaMediumSelector" pr-selector
 							medium="mediumFilter.prAreaMedium" queryparams="queryParams"></div>
+
+						<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && items.length < 1)">
+     						<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+						</div>
+
 						<div google-chart chart="areaComparisonChart"></div>
 						<!--div class="top-buffer10" google-chart="areaComparisonChartObject" style="width:100%;"></div-->
 					</div>
@@ -533,6 +553,11 @@
 						</div>
 						<div class="top-buffer10" id="prFacMediumSelector" pr-selector
 							medium="mediumFilter.prFacMedium" queryparams="queryParams"></div>
+
+						<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && items.length < 1)">
+     						<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+						</div>
+
 						<div class="col-md-12 table-responsive -topbuffer10">
 							<table class="table table-striped table-condensed table-hover">
 								<thead>

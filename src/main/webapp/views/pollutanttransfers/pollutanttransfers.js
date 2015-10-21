@@ -1039,5 +1039,4 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
         }
     });
     };
-    
     }]);

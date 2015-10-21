@@ -110,6 +110,11 @@
 								</button>
 							</div>
 						</div>
+
+						<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && pollutantreleaseItems.length < 1 )">
+	    	 					<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+							</div>
+
 						<div class="col-md-12 table-responsive top-buffer10" >
 							<table class="table table-striped table-condensed table-hover" fixed-header table-height="500px">
 								<thead>
@@ -165,6 +170,8 @@
 							</table>
 						</div>
 					</div>
+
+							
 					</tab> <tab heading="Pollutant Transfer"
 						active="active.pollutanttransfer"
 						ng-click="activateTab('pollutanttransfer')">
@@ -204,6 +211,11 @@
 							</button>
 
 						</div>
+
+						<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && pollutanttransferItems.length < 1 )">
+	    	 					<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+							</div>
+
 						<div class="col-md-12 table-responsive top-buffer10">
 							<table class="table table-striped table-condensed table-hover" fixed-header style="height:500px">
 								<thead>
@@ -247,7 +259,7 @@
 										<td>{{ queryParams.ReportingYear }}</td>
 									</tr>
 									<tr>
-										<td class="fdTitles">{{ tr_c.Country }}:</td>
+										<td class="fdTitles">{{ tr_c.Area }}:</td>
 										<td>{{ currentSearchFilter.selectedReportingCountry.name
 											}}</td>
 									</tr>
@@ -280,6 +292,11 @@
 								</button>
 							</div>
 						</div>
+
+							<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && wastetransfercount < 1 )">
+	    	 					<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+							</div>
+
 						<div class="row top-buffer10">
 							<div class="col-md-6">
 								<div google-chart chart="summaryChart2"></div>
@@ -291,7 +308,7 @@
 	            </div-->
 							</div>
 						</div>
-						</table>
+
 						<div class="col-md-12 table-responsive top-buffer10">
 							<table class="table table-striped table-condensed table-hover">
 								<thead>

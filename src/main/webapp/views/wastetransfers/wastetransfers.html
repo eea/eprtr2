@@ -106,6 +106,11 @@
 								</button>
 							</div>
 						</div>
+
+						<div class="row" style="padding-top:10px;" ng-show="(searchResults && (summaryItems[0].facilityCount < 1 && summaryItems[1].facilityCount < 1 && summaryItems[2].facilityCount < 1 && summaryItems[3].facilityCount < 1))">
+     						<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+						</div>
+
 						<div class="row top-buffer10">
 
 							<div class="col-md-6">
@@ -196,6 +201,10 @@
 									<span class="glyphicon glyphicon-download-alt"
 										aria-hidden="true"></span>
 								</button>
+							</div>
+
+							<div class="row" style="padding-top:10px;" ng-show="(searchResults && activities.length < 1)">
+     							<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
 							</div>
 
 							<div class="col-md-12 table-responsive top-buffer10">
@@ -413,6 +422,10 @@
 								</button>
 							</div>
 
+							<div class="row" style="padding-top:10px;" ng-show="(searchResults && areas.length < 1)">
+     							<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+							</div>
+
 							<div class="col-md-12 table-responsive top-buffer10">
 
 								<table class="table table-striped table-condensed table-hover">
@@ -573,14 +586,14 @@
 									</tr>
 								</table>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-5">
 								<blockquote>
 									<div class="text-info">
 										<small>{{tr_wt.AllValuesAreYearlyTransfers}}</small>
 									</div>
 								</blockquote>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<button class="print-button btn btn-default pull-right" ng-print
 									print-element-id="waste_transfers_area_comparison">
 									<i class="fa fa-print"></i>
@@ -632,10 +645,18 @@
 								</button>
 							</div>
 						</div>
+
+
+
 						<div class="row top-buffer10">
 							<div class="col-md-12" wt-selector queryparams="queryParams"
 								wtsel="wtfcsel.wtsel"></div>
 						</div>
+
+						<div class="row" style="padding-top:10px;" ng-show="(searchResults && facilitiesItems.length <1)">
+     						<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+						</div>
+
 						<div class="col-md-12 table-responsive top-buffer10">
 							<table class="table table-striped table-condensed table-hover">
 								<thead>
@@ -681,6 +702,11 @@
 					<tab heading="Haz. transboundary"
 						ng-click="getTabData('HAZTRANSBOUNDARY');activateTab('haztransboundary')"
 						active="active.haztransboundary">
+
+					<div class="row" style="padding-top:10px;" ng-show="(searchResults && hazTransboundaryData.data.length < 1)">
+     						<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+						</div>
+
 					<div id="waste_transfers_haz_transboundary" ng-show="searchResults">
 						<haz-transboundary queryparams="queryParams"
 							haztransboundaryitems="hazTransboundaryData.data" header="header" />
@@ -689,6 +715,11 @@
 					<tab heading="Haz. receivers"
 						ng-click="getTabData('HAZRECEIVERS');activateTab('hazreceivers')"
 						active="active.hazreceivers">
+
+					<div class="row" style="padding-top:10px;" ng-show="(searchResults && !showhazreceivers)">
+     						<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+						</div>
+
 					<div id="waste_transfers_haz_receivers" ng-show="searchResults">
 						<!--div class="row top-buffer10">
 							<div class="col-md-5">

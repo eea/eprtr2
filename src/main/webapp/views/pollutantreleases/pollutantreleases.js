@@ -1253,6 +1253,4 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         });
         };
                 
-    }])
-
-;
+    }]);

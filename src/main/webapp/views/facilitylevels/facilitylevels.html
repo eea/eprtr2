@@ -151,7 +151,13 @@
 							</tr>
 						</tbody>
 					</table>
+				
 				</div>
+
+				<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && !items.hasItems())">
+     					<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+					</div>
+				
 				</tab> <tab heading="{{tr_c.ContentConfidientiality}}"
 					active="active.confidentiality"> <br />
 				<div ng-show="confidentialFacilities">

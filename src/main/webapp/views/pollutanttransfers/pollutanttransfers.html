@@ -103,6 +103,11 @@
 								</button>
 							</div>
 						</div>
+
+						<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && items.length < 1)">
+     						<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+						</div>
+
 						<div>{{tr_p.TransfersToWastePerIndustryActivity}}</div>
 						<div google-chart chart="summaryChart"
 							ng-if="summaryItems.length > 0"></div>
@@ -163,6 +168,11 @@
 								</button>
 							</div>
 						</div>
+
+						<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && activities.length < 1)">
+     						<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+						</div>
+
 						<div class="col-md-12 table-responsive">
 						<table class="table table-striped table-condensed table-hover">
 							<thead>
@@ -298,6 +308,11 @@
 								</button>
 							</div>
 						</div>
+
+						<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && areas.length < 1)">
+     						<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+						</div>
+
 						<div class="col-md-12 table-responsive">
 						<table class="table table-striped table-condensed table-hover">
 							<thead>
@@ -409,6 +424,11 @@
 								</button>
 							</div>
 						</div>
+
+						<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && areaComparisonItems.length < 1)">
+     						<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+						</div>
+
 						{{tr_p.AllValuesArePercentOfEuroTotal}}
 						<div google-chart chart="areaComparisonChart"
 							ng-if="areaComparisonItems.length > 0"></div>
@@ -470,6 +490,11 @@
 								</button>
 							</div>
 						</div>
+
+						<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && facilitiesItems.length < 1)">
+     						<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+						</div>
+						
 						<div class="col-md-12 table-responsive">
 						<table class="table table-striped table-condensed table-hover">
 							<thead>
