@@ -160,7 +160,7 @@ $scope.orderReportingYears = function(data){
 	 	//$scope.map = {wh : {'FacilityReportID': $scope.frid}};
 	 	fdDetailsType.getByFdrID($scope.frid).get().then(function (fddata) {
 	 		$scope.details = fddata;
-	 		$scope.fid = fddata.facilityId;
+	 		$scope.fid = fddata.facilityID;
 	 		$scope.year = fddata.reportingYear;
 	 		$scope.showalert = fddata.confidentialIndicator;
 	 	});
@@ -239,6 +239,10 @@ $scope.orderReportingYears = function(data){
  	$scope.fid != '' && $scope.year != ''){
  	$scope.updateByFdidAndyear();
 }
+
+	$scope.$watch('fid', function(value){
+		console.log('FacilityID: '+ $scope.fid);
+	});
 
 /*
  * Watching scope parameters for changes
@@ -827,6 +831,7 @@ resolve: {
  		link: function(scope, element, attrs){
  			scope.$watchCollection('[frid, fid, year]', function() {
  				console.log('FacilityReportID changed:' + scope.frid);
+ 				console.log('FacilityID changed:' + scope.fid);
 	        	//scope.setwhere(scope.buildWhere(scope.queryparams));
 	        },true);
  		}
