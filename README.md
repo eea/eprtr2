@@ -3,7 +3,7 @@ E-PRTR 2
 
 [![Build Status](http://ci.eionet.europa.eu/job/EPRTR2/badge/icon)](http://ci.eionet.europa.eu/job/EPRTR2/)
 
-The application is available here: http://prtrproto.cloudapp.net/
+The application is available here: http://prtr-demo.eea.europa.eu/
 
 Testing
 -------

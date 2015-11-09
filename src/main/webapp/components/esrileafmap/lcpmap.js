@@ -7,15 +7,15 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 .constant('lcpconf',{
 	//http://air.discomap.eea.europa.eu/arcgis/rest/services/Air/EprtrFacilities_Dyna_WGS84/FeatureServer
 	//http://sdkcga6350:6080/arcgis/rest/services/EprtrFacilities/FeatureServer/0
-	'lcpLayerUrl':'http://test.discomap.eea.europa.eu/arcgis/rest/services/AIR/EPRTR_LCP_demo/MapServer/',
+	'lcpLayerUrl':'http://air.discomap.eea.europa.eu/arcgis/rest/services/EPRTR/EPRTR_LCP/MapServer/',
 	'europebounds': [53.526, 10.667],
 	'europezoom': 3,
 	'layerfields':{
-		0:{'id': 'ID', 'fk_basicdata_id': 'FK_BasicData_ID', 'plantname': 'PlantName',
+		0:{'id': 'PlantID', 'fk_basicdata_id': 'FK_BasicData_ID', 'plantname': 'PlantName',
 			'plantid': 'PlantId', 'facilityname': 'FacilityName', 'eprtrnationalid': 'EPRTRNationalId',
 			'address1': 'Address1', 'address2': 'Address2', 'city': 'City', 'region': 'Region',
 			'postalcode': 'PostalCode', 'longitude': 'Longitude', 'latitude': 'Latitude'},
-		1:{'id':'ID','reportId':'Report_ID', 'most_recent_report': 'most_recent_report',
+		1:{'id':'BasicID','reportId':'Report_ID', 'most_recent_report': 'most_recent_report',
 		    'memberstate':'MemberState', 'referenceyear':  'ReferenceYear', 'numberofplants': 'NumberOfPlants',
 		    'organization': 'Organization', 'address1': 'Address1', 'address2': 'Address2',
 		    'city': 'City', 'state': 'State', 'postalcode': 'PostalCode', 'nameofcontactperson': 'NameOfContactPerson',
