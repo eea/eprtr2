@@ -45,7 +45,7 @@
 		            <plugin>
 		                <groupId>com.github.eirslett</groupId>
 		                <artifactId>frontend-maven-plugin</artifactId>
-		                <version>0.0.22</version>
+		                <version>0.0.26</version>
 		                <executions>
 		
 		                    <!-- 1. Install node and npm locally -->
@@ -140,6 +140,90 @@
 		            </plugin>
     			</plugins>
     		</build>
+    	</profile>
+        <profile>
+            <id>only-eclipse</id>
+            <activation>
+                <property>
+                    <name>m2e.version</name>
+                </property>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+        		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        		<plugin>
+        			<groupId>org.eclipse.m2e</groupId>
+        			<artifactId>lifecycle-mapping</artifactId>
+        			<version>1.0.0</version>
+        			<configuration>
+        				<lifecycleMappingMetadata>
+        					<pluginExecutions>
+        						<pluginExecution>
+        							<pluginExecutionFilter>
+        								<groupId>
+        									com.github.eirslett
+        								</groupId>
+        								<artifactId>
+        									frontend-maven-plugin
+        								</artifactId>
+        								<versionRange>
+        									[0.0.26,)
+        								</versionRange>
+        								<goals>
+        									<goal>karma</goal>
+        								</goals>
+        							</pluginExecutionFilter>
+        							<action>
+        								<ignore></ignore>
+        							</action>
+        						</pluginExecution>
+        						<pluginExecution>
+        							<pluginExecutionFilter>
+        								<groupId>
+        									org.apache.maven.plugins
+        								</groupId>
+        								<artifactId>
+        									maven-dependency-plugin
+        								</artifactId>
+        								<versionRange>
+        									[2.8,)
+        								</versionRange>
+        								<goals>
+        									<goal>
+        										unpack-dependencies
+        									</goal>
+        								</goals>
+        							</pluginExecutionFilter>
+        							<action>
+        								<ignore></ignore>
+        							</action>
+        						</pluginExecution>
+        						<pluginExecution>
+        							<pluginExecutionFilter>
+        								<groupId>org.liquibase</groupId>
+        								<artifactId>
+        									liquibase-maven-plugin
+        								</artifactId>
+        								<versionRange>
+        									[3.3.1,)
+        								</versionRange>
+        								<goals>
+        									<goal>update</goal>
+        									<goal>dropAll</goal>
+        								</goals>
+        							</pluginExecutionFilter>
+        							<action>
+        								<ignore></ignore>
+        							</action>
+        						</pluginExecution>
+        					</pluginExecutions>
+        				</lifecycleMappingMetadata>
+        			</configuration>
+        		</plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
     	</profile>
     </profiles>
 
@@ -327,7 +411,7 @@
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
-                <version>0.0.22</version>
+                <version>0.0.26</version>
                 <executions>
 
                     <!-- 1. Install node and npm locally -->
@@ -457,80 +541,6 @@
         <!-- name of the bundled project when it is finally built -->
         <finalName>eprtr</finalName>
 
-        <pluginManagement>
-        	<plugins>
-        		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-        		<plugin>
-        			<groupId>org.eclipse.m2e</groupId>
-        			<artifactId>lifecycle-mapping</artifactId>
-        			<version>1.0.0</version>
-        			<configuration>
-        				<lifecycleMappingMetadata>
-        					<pluginExecutions>
-        						<pluginExecution>
-        							<pluginExecutionFilter>
-        								<groupId>
-        									com.github.eirslett
-        								</groupId>
-        								<artifactId>
-        									frontend-maven-plugin
-        								</artifactId>
-        								<versionRange>
-        									[0.0.22,)
-        								</versionRange>
-        								<goals>
-        									<goal>karma</goal>
-        								</goals>
-        							</pluginExecutionFilter>
-        							<action>
-        								<ignore></ignore>
-        							</action>
-        						</pluginExecution>
-        						<pluginExecution>
-        							<pluginExecutionFilter>
-        								<groupId>
-        									org.apache.maven.plugins
-        								</groupId>
-        								<artifactId>
-        									maven-dependency-plugin
-        								</artifactId>
-        								<versionRange>
-        									[2.8,)
-        								</versionRange>
-        								<goals>
-        									<goal>
-        										unpack-dependencies
-        									</goal>
-        								</goals>
-        							</pluginExecutionFilter>
-        							<action>
-        								<ignore></ignore>
-        							</action>
-        						</pluginExecution>
-        						<pluginExecution>
-        							<pluginExecutionFilter>
-        								<groupId>org.liquibase</groupId>
-        								<artifactId>
-        									liquibase-maven-plugin
-        								</artifactId>
-        								<versionRange>
-        									[3.3.1,)
-        								</versionRange>
-        								<goals>
-        									<goal>update</goal>
-        									<goal>dropAll</goal>
-        								</goals>
-        							</pluginExecutionFilter>
-        							<action>
-        								<ignore></ignore>
-        							</action>
-        						</pluginExecution>
-        					</pluginExecutions>
-        				</lifecycleMappingMetadata>
-        			</configuration>
-        		</plugin>
-        	</plugins>
-        </pluginManagement>
     </build>
 
     <!-- dependencies -->
