@@ -13,3 +13,13 @@
 	<label class="control-label" for="inputYear">{{tr_c.Year}}</label>
 	<select class="form-control" ng-model="searchFilter.selectedReportingYear" ng-options="y.year for y in reportingYears track by y.year" id="inputYear"></select>
 </div>
+
+<div class="form-group">
+	<label class="control-label" for="inputCapacities">Capacities</label>
+	<select class="form-control" ng-model="searchFilter.selectedLCPCapacities" id="inputCapacities">
+		<option value="all" selected="selected">All capacities</option>
+		<option value="300_up">More than 300 MWth</option>
+		<option value="100_300">Between 100 and 300 MWth</option>
+		<option value="50_100">value':'Between 50 to 100 MWth</option>
+	</select>
+</div>

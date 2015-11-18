@@ -116,7 +116,8 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     }
 	
 	$scope.performBasicSearch = function() {
-		$scope.queryParams = {ReportingYear: $scope.searchFilter.selectedReportingYear.year};
+		$scope.queryParams = {ReportingYear: $scope.searchFilter.selectedReportingYear.year, LcpCapacities:$scope.searchFilter.selectedLCPCapacities};
+		$scope.lcpcapacities = $scope.searchFilter.selectedLCPCapacities;
 		$scope.reportingYear = $scope.searchFilter.selectedReportingYear.year;
 		$scope.countryCode = null;
         if ($scope.searchFilter.selectedReportingCountry !== undefined && $scope.searchFilter.selectedReportingCountry.countryId) {
@@ -156,7 +157,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
         $scope.createheader();
 	}
 	
-    $scope.$watchCollection('[countryCode,reportingYear]', function(newvalue,oldvalue) {
+    $scope.$watchCollection('[countryCode,reportingYear,lcpcapacities]', function(newvalue,oldvalue) {
     	if($scope.queryParams && $scope.queryParams.ReportingYear != -1){
     		//if(($scope.areaFilter && $scope.countryCode) || (!$scope.areaFilter && $scope.countryCode == undefined)){
     			if($scope.countryCode){
@@ -196,7 +197,9 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     	        		}
     	        	}
    // 				$scope.basicdata = data.features;
-    	        });        	
+    	        });
+
+    	        
     		//}
 	        $scope.searchResults = true;
     	}
@@ -234,7 +237,46 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     		$scope.mapQuery = _que;
     		if(!jQuery.isEmptyObject(_que)){
                 lcpDataService.get(0,_que).then(function (data) {
-        			$scope.formatPlantdata(data.features);
+                	if($scope.lcpcapacities == 'all'){
+                		$scope.formatPlantdata(data.features);
+                	}
+                	else{
+                		var _oids = []; 
+                		var _pids = []; 
+                		//Add capabilities filter
+                		angular.forEach(data.features, function(item) {
+                			_oids.push(item.attributes[lcpconf.layerfields[0].id]);
+                		});
+                		var _qp;
+            			switch ($scope.lcpcapacities) {
+            			  case '300_up':
+            			    _qp = "MWth > 300";
+            			    break;
+            			  case '100_300':
+              			    _qp = "MWth BETWEEN 100 AND 300";
+              			    break;
+            			  case '50_100':
+              			    _qp = "MWth BETWEEN 50 AND 100";
+              			    break;
+            			}
+            			var _qstring = lcpconf.lcpLayerUrl + "0/queryRelatedRecords?objectIds="+ _oids.join(",") 
+            			+"&definitionExpression=" + _qp
+            			+"&relationshipId=3&outFields="+ lcpconf.layerfields[5].fk_plant_id +"&f=pjson";
+
+            			//Request years
+            			$http.get(_qstring).success(function(data, status, headers, config) {
+            				angular.forEach(data.relatedRecordGroups, function(plantdetails) {
+                        		_pids.push(plantdetails.relatedRecords[0].attributes[lcpconf.layerfields[5].fk_plant_id]); 
+            				});
+            				//Recall Plants
+            				var _que2 = {'PlantGroup':_pids};
+            				$scope.mapQuery = _que2;
+        	                lcpDataService.get(0,_que2).then(function (data2) {
+    	                		$scope.formatPlantdata(data2.features);
+    	                	});
+        				});
+                		
+                	}
                 });
     		}
     		else{

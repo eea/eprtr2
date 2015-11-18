@@ -6,6 +6,7 @@ angular.module('myApp.lcp-search-placement', ['myApp.home', 'myApp.search-filter
     
 	$scope.searchFilter = searchFilter;
 	$scope.searchFilter.regionType = '1';
+    $scope.searchFilter.selectedLCPCapacities = 'all';	
 
 	eprtrcms.get('Common',null).then(function (data) {
 		$scope.tr_c = data;
@@ -13,7 +14,11 @@ angular.module('myApp.lcp-search-placement', ['myApp.home', 'myApp.search-filter
 	eprtrcms.get('LOV_COUNTRY',null).then(function (data) {
 		$scope.tr_lco = data;
 	});
-	
+
+	/**
+	 * Capacities
+	 */
+
 /*	$http.get('/reportingYears').success(function(data, status, headers, config) {
         $scope.reportingYears = data;
         $scope.searchFilter.selectedReportingYear = $scope.reportingYears[$scope.reportingYears.length - 1];
@@ -51,8 +56,15 @@ angular.module('myApp.lcp-search-placement', ['myApp.home', 'myApp.search-filter
 			    $scope.reportingCountries = _countries;
 			    $scope.searchFilter.selectedReportingCountry = $scope.reportingCountries[0];	
 			});
+			
+			/*$scope.lcpcapacities = [{'code':'all','value':'All capacities'},
+				                     {'code':'300_up','value':'More than 300 MWth'},
+				                     {'code':'100_300','value':'Between 100 and 300 MWth'},
+				                     {'code':'50_100','value':'Between 50 to 100 MWth'}];*/
 		}
 	});
+	
+
 
 	
 	/*$http.get('/areagroupReportingCountries').success(function(data, status, headers, config) {
