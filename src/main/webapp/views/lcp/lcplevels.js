@@ -11,7 +11,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
 
 
 
-.controller('lcpLevelsCtrl', ['$scope', '$filter', '$http', '$modal','searchFilter', 'Restangular', 'eprtrcms', 
+.controller('lcpLevelsCtrl', ['$scope', '$filter', '$http', '$modal', 'searchFilter', 'Restangular', 'eprtrcms', 
                                  'lovCountryType', 'lovAreaGroupType', 'lovNutsRegionType','formatStrFactory', 'lcpDataService', 'lcpconf',
                                  function($scope, $filter, $http, $modal, searchFilter, Restangular, eprtrcms,
                                 		 lovCountryType, lovAreaGroupType, lovNutsRegionType, formatStrFactory, lcpDataService, lcpconf) {
@@ -35,6 +35,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     $scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
     $scope.mapctrl = {};
 	$scope.mapheight = window.innerHeight > 820 ? 600+'px' : (window.innerHeight -230)+'px';
+	
 
 //	Requesting text and title resources 
 	eprtrcms.get('Facility',null).then(function (data) {
@@ -116,12 +117,15 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
 	
 	$scope.performBasicSearch = function() {
 		$scope.queryParams = {ReportingYear: $scope.searchFilter.selectedReportingYear.year};
+		$scope.reportingYear = $scope.searchFilter.selectedReportingYear.year;
+		$scope.countryCode = null;
         if ($scope.searchFilter.selectedReportingCountry !== undefined && $scope.searchFilter.selectedReportingCountry.countryId) {
             $scope.areaFilter = true;
-            $scope.queryParams.LOV_CountryID = $scope.searchFilter.selectedReportingCountry.countryId;
+            $scope.countryCode = $scope.searchFilter.selectedReportingCountry.countryId;
+            /*$scope.queryParams.LOV_CountryID = $scope.searchFilter.selectedReportingCountry.countryId;
     		lovCountryType.getByID($scope.queryParams.LOV_CountryID).get().then(function(data) {
     			$scope.countryCode = data.countryCode;
-    		});  
+    		});*/  
             /*if ($scope.searchFilter.selectedRegion.lov_NUTSRegionID) {
     			lovNutsRegionType.getByID($scope.searchFilter.selectedRegion.lov_NUTSRegionID).get().then(function(data) {
                 	$scope.regionCode = data.code;
@@ -152,10 +156,9 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
         $scope.createheader();
 	}
 	
-    $scope.$watch('countryCode', function(newvalue,oldvalue) {
+    $scope.$watchCollection('[countryCode,reportingYear]', function(newvalue,oldvalue) {
     	if($scope.queryParams && $scope.queryParams.ReportingYear != -1){
-    		if(($scope.areaFilter && $scope.countryCode) || 
-    				(!$scope.areaFilter && $scope.countryCode == undefined)){
+    		//if(($scope.areaFilter && $scope.countryCode) || (!$scope.areaFilter && $scope.countryCode == undefined)){
     			if($scope.countryCode){
     				$scope.queryParams.countryCode = $scope.countryCode;
     			}
@@ -194,7 +197,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     	        	}
    // 				$scope.basicdata = data.features;
     	        });        	
-    		}
+    		//}
 	        $scope.searchResults = true;
     	}
     });
@@ -210,7 +213,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
         			angular.forEach($scope.basicdata, function(item) {
         				var _id = item.attributes[lcpconf.layerfields[1].id];
         				var _cc = item.attributes[lcpconf.layerfields[1].memberstate];
-        				_basicids.push(item.attributes[_id]);
+        				_basicids.push(_id);
         				$scope.basicidcountrycode[_id] = _cc;
         			});
         			_que.BasicGroup = _basicids;

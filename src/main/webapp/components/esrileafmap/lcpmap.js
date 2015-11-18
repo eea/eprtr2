@@ -11,10 +11,12 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 	'europebounds': [53.526, 10.667],
 	'europezoom': 3,
 	'layerfields':{
-		0:{'id': 'PlantID', 'fk_basicdata_id': 'FK_BasicData_ID', 'plantname': 'PlantName',
-			'plantid': 'PlantId', 'facilityname': 'FacilityName', 'eprtrnationalid': 'EPRTRNationalId',
+		0:{'id': 'ID', 'fk_basicdata_id': 'FK_BasicData_ID', 'uniqueplantid': 'Unique_Plant_ID',
+			'reportedplantid': 'Reported_Plant_ID', 'plantname': 'PlantName',
+			'plantid': 'PlantID', 'facilityname': 'FacilityName', 'eprtrnationalid': 'EPRTRNationalId',
 			'address1': 'Address1', 'address2': 'Address2', 'city': 'City', 'region': 'Region',
-			'postalcode': 'PostalCode', 'longitude': 'Longitude', 'latitude': 'Latitude'},
+			'postalcode': 'PostalCode', 'longitude': 'Longitude', 'latitude': 'Latitude',
+			'updated': 'Updated', 'updatecomment':'UpdateComment', 'inactive': 'Inactive'},
 		1:{'id':'BasicID','reportId':'Report_ID', 'most_recent_report': 'most_recent_report',
 		    'memberstate':'MemberState', 'referenceyear':  'ReferenceYear', 'numberofplants': 'NumberOfPlants',
 		    'organization': 'Organization', 'address1': 'Address1', 'address2': 'Address2',
@@ -129,7 +131,7 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 			          break;
     			  case 'regionCodes':
     				  //http://localhost:8080/nutsRegionChilds/235
-    				  arrQue.push(lcpconf.layerfields[0].region + " in ('" + queryparams[key].join("','") + "')");
+    				  arrQue.push(lcpconf.layerfields[0].region + " in (" + queryparams[key].join(",") + ")");
 			          break;
     			  case 'regionCode':
     				  //http://localhost:8080/nutsRegionChilds/235
@@ -139,13 +141,13 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 			    	  arrQue.push(lcpconf.layerfields[0].fk_basicdata_id + "="+queryparams[key]);
 			          break;
 			      case 'BasicGroup':
-		    		  arrQue.push(lcpconf.layerfields[0].fk_basicdata_id + " in ('" + queryparams[key].join("','") + "')");
+		    		  arrQue.push(lcpconf.layerfields[0].fk_basicdata_id + " in (" + queryparams[key].join(",") + ")");
 			          break;
 			      case 'PlantID':
 		    		  arrQue.push(lcpconf.layerfields[0].plantid + "=" + queryparams[key]);
 			          break;
 			      case 'PlantGroup':
-		    		  arrQue.push(lcpconf.layerfields[0].plantid + " in ('" + queryparams[key].join("','") + "')");
+		    		  arrQue.push(lcpconf.layerfields[0].plantid + " in (" + queryparams[key].join(",") + ")");
 			          break;
 			          
 			   /*   default:

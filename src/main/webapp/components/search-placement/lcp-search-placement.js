@@ -10,12 +10,16 @@ angular.module('myApp.lcp-search-placement', ['myApp.home', 'myApp.search-filter
 	eprtrcms.get('Common',null).then(function (data) {
 		$scope.tr_c = data;
 	});
-	$http.get('/reportingYears').success(function(data, status, headers, config) {
+	eprtrcms.get('LOV_COUNTRY',null).then(function (data) {
+		$scope.tr_lco = data;
+	});
+	
+/*	$http.get('/reportingYears').success(function(data, status, headers, config) {
         $scope.reportingYears = data;
         $scope.searchFilter.selectedReportingYear = $scope.reportingYears[$scope.reportingYears.length - 1];
     });
-
-	/*var _refyer_q = lcpconf.lcpLayerUrl + '1/query?where=1%3D1&outFields='
+*/
+	var _refyer_q = lcpconf.lcpLayerUrl + '1/query?where=1%3D1&outFields='
 		+ lcpconf.layerfields[1].referenceyear + '&orderByFields=' 
 		+ lcpconf.layerfields[1].referenceyear + '&returnDistinctValues=true&f=pjson';
     
@@ -26,9 +30,32 @@ angular.module('myApp.lcp-search-placement', ['myApp.home', 'myApp.search-filter
 		});
 	    $scope.reportingYears = _years;
 	    $scope.searchFilter.selectedReportingYear = $scope.reportingYears[$scope.reportingYears.length - 1];
-	});*/
+	});
 
-    $http.get('/areagroupReportingCountries').success(function(data, status, headers, config) {
+
+	$scope.$watch('tr_lco', function(value) {
+		if($scope.tr_lco){
+			var _refcoun_q = lcpconf.lcpLayerUrl + '1/query?where=1%3D1&outFields='
+			+ lcpconf.layerfields[1].memberstate + '&orderByFields=' 
+			+ lcpconf.layerfields[1].memberstate + '&returnDistinctValues=true&f=pjson';
+		
+			$http.get(_refcoun_q).success(function(data, status, headers, config) {
+				var _countries = [{"countryId":null,"groupId":1,"id":0,"name":"All Countries"}];
+				//{"countryId":15,"groupId":null,"id":4,"name":"Austria"},{"countryId":22,"groupId":null,"id":5,"name":"Belgium"}
+				var _c = 0;
+				angular.forEach(data.features, function(item) {
+					var _m = item.attributes[lcpconf.layerfields[1].memberstate];
+					_countries.push({"countryId":_m,"groupId":null,"id":_c,"name":$scope.tr_lco[_m]});
+					_c++;
+				});
+			    $scope.reportingCountries = _countries;
+			    $scope.searchFilter.selectedReportingCountry = $scope.reportingCountries[0];	
+			});
+		}
+	});
+
+	
+	/*$http.get('/areagroupReportingCountries').success(function(data, status, headers, config) {
         $scope.reportingCountries = data;
         $scope.searchFilter.selectedReportingCountry = $scope.reportingCountries[0];
     });
@@ -40,7 +67,7 @@ angular.module('myApp.lcp-search-placement', ['myApp.home', 'myApp.search-filter
         }
         //$scope.updateRegions();
     });
-
+*/
     
    /* $scope.$watch('searchFilter.regionType', function(value) {
         $scope.updateRegions();

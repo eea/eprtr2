@@ -58,14 +58,22 @@ angular.module('myApp.diffemissionsair', ['ngRoute','ngSanitize', 'myApp.emissio
 	$scope.setActiveTab = function(tab) {
 		$scope.active[tab] = true;
 	};
+	eprtrcms.get('DiffuseSources',null).then(function (data) {
+		$scope.de = data;
+		if(!data){
+			emissionsService.get().then(function (edata) {
+				$scope.de = edata.DiffuseSources;
+		    });	
+		}
+	});
 	eprtrcms.get('Common',null).then(function (data) {
 		$scope.tr_c = data;
 		$scope.maptooltip = $scope.tr_c['ShowExpandedMap'];
 	});
 	
-	emissionsService.get().then(function (data) {
+/*	emissionsService.get().then(function (data) {
 		$scope.de = data.DiffuseSources;
-    });
+    });*/
 	
     $scope.$watch('searchFilter.selectedLayer', function(value) {
     	if(value != undefined && $scope.de){

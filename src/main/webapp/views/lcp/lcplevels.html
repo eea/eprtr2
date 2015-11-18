@@ -61,10 +61,14 @@
 									<td class="fdTitles">{{ tr_lcp.Plants }}:</td>
 									<td>{{ plantdata.length }}</td>
 								</tr>
+								<tr>
+									<td class="fdTitles">Filter:</td>
+									<td><input type="text" class="form-control ng-pristine ng-valid" ng-model="searchKeyword"></td>
+								</tr>
 							</table>
 						</div>
 						<div class="col-md-6">
-							<button class="print-button btn btn-default pull-right" ng-print
+							<!-- <button class="print-button btn btn-default pull-right" ng-print
 								print-element-id="plants">
 								<i class="fa fa-print"></i>
 							</button>
@@ -72,20 +76,19 @@
 								ng-click="downloadClick()">
 								<span class="glyphicon glyphicon-download-alt"
 									aria-hidden="true"></span>
-							</button>
+							</button> -->
 						</div>
 					</div>
-				<scrollable-table watch="plantdata">
-					<table class="table table-striped table-condensed table-hover top-buffer10" >
+					<table class="table table-striped table-condensed table-hover top-buffer10">
 						<thead>
 							<tr>
-								<th class="col-Min100" sortable-header col="plant">{{tr_lcp.PlantName}}</th>
-								<th class="col-Min100" sortable-header col="facility">{{tr_f.FacilityName}}</th>
-								<th class="col-Min75" sortable-header col="address">{{tr_f.Address}}</th>
-								<th class="col-Min75" sortable-header col="city">{{tr_f.TownVillage}}</th>
-								<th class="col-Min75" sortable-header col="postalcode">{{tr_f.PostalCode}}</th>
-								<th class="col-Min75" sortable-header col="region">{{tr_c.Region}}</th>
-								<th class="col-Min75" sortable-header col="country">{{tr_f.Country}}</th>
+								<th class="col-Min100"><a href="" ng-click="orderByField='plant'; reverseSort = !reverseSort">{{tr_lcp.PlantName}}</a></th>
+								<th class="col-Min100"><a href="" ng-click="orderByField='facility'; reverseSort = !reverseSort">{{tr_f.FacilityName}}</a></th>
+								<th class="col-Min75" ><a href="" ng-click="orderByField='address'; reverseSort = !reverseSort">{{tr_f.Address}}</a></th>
+								<th class="col-Min75" ><a href="" ng-click="orderByField='city'; reverseSort = !reverseSort">{{tr_f.TownVillage}}</a></th>
+								<th class="col-Min75" ><a href="" ng-click="orderByField='postalcode'; reverseSort = !reverseSort">{{tr_f.PostalCode}}</a></th>
+								<th class="col-Min75" ><a href="" ng-click="orderByField='region'; reverseSort = !reverseSort">{{tr_c.Region}}</a></th>
+								<th class="col-Min75" ><a href="" ng-click="orderByField='country'; reverseSort = !reverseSort">{{tr_f.Country}}</a></th>
 							</tr>
 						</thead>
 						<!-- tfoot>
@@ -100,14 +103,14 @@
 							</td>
 						</tfoot-->
 						<tbody>
-							<tr ng-repeat="item in plantdata" row-id="{{ item.plantid }}" >
-								<td><a ng-click="ldopen(item.id)" alt="" >{{item.plant}}</a></td>
-								<td>{{item.facility}}</td>
-								<td>{{item.address}}</td>
-								<td>{{item.city}}</td>
-								<td>{{item.postalcode}}</td>
-								<td>{{tr_lnr[item.region]}}</td>
-								<td>{{item.country}}</td>
+							<tr ng-repeat="item in plantdata  | filter: searchKeyword| orderBy:orderByField:reverseSort" >
+								<td ><a ng-click="ldopen(item.id)" alt="" >{{item.plant}}</a></td>
+								<td >{{item.facility}}</td>
+								<td >{{item.address}}</td>
+								<td >{{item.city}}</td>
+								<td >{{item.postalcode}}</td>
+								<td >{{tr_lnr[item.region]}}</td>
+								<td >{{item.country}}</td>
 								
 							</tr>
 						</tbody>

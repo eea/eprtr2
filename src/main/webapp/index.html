@@ -45,7 +45,7 @@
           <ul class="nav navbar-nav">
          	<li ng-class="{ active: isActive('/home')}"><a href="#home" ng-click="subtitle = 'Welcome to E-PRTR'">Home</a></li>
             <li ng-class="{ active: isActive('/facilitylevels')}" class="dropdown" dropdown>
-              <a href="#" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Search E-PRTR data <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Search the register<span class="caret"></span></a>
               <ul class="dropdown-menu" dropdown-menu role="menu">
                 <li><a href="#facilitylevels" ng-click="subtitle = 'Facility Level'">Facility Level</a></li>
                 <li><a href="#industrialactivity" ng-click="subtitle = 'Industrial Activity'">Industrial Activity</a></li>
@@ -54,6 +54,9 @@
                 <li><a href="#pollutantreleases" ng-click="subtitle = 'Pollutant Releases'">Pollutant Releases</a></li>
                 <li><a href="#pollutanttransfers" ng-click="subtitle = 'Pollutant Transfers'">Pollutant Transfers</a></li>
                 <li><a href="#wastetransfers" ng-click="subtitle = 'Waste Transfers'">Waste Transfers</a></li>
+                <li class="divider"></li>
+                <li><a href="#diffemissionsair" ng-click="subtitle = 'Diffuse emissions - releases to air'">Releases to air</a></li>
+                <li><a href="#diffemissionswater" ng-click="subtitle = 'Diffuse emissions - releases to water'">Releases to water</a></li>
                 <!--li class="divider"></li>
                 <li><a href="#facilitydetails">Facility details</a></li -->
               </ul>
@@ -182,6 +185,7 @@
   <script src="bower_components/lodash/dist/lodash.compat.js"></script>
   <script src="bower_components/restangular/dist/restangular.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/leaflet/dist/leaflet.js"></script>
   <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
   <script src="bower_components/leaflet-plugins/control/Distance.js"></script>
   <script src="bower_components/leaflet-plugins/control/Layers.Load.js"></script>

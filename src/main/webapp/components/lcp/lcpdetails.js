@@ -10,6 +10,8 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
  * Basic parameters
  * */
 	$scope.ff = formatStrFactory;
+	$scope.alldata = [];
+	
 	var degrees = "°";
 
 /*
@@ -48,8 +50,9 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
 		var qp = {'PlantID':$scope.plantid};
 		//$scope.map = {wh : {'FacilityReportID': $scope.frid}};
         lcpDataService.get(0, qp).then(function (data) {
-        	$scope.initBasicData(data);
-        	$scope.ajustplantdata(data);
+        	//$scope.initBasicData(data);
+        	//$scope.ajustplantdata(data);
+        	$scope.callAllPlants(data.features[0].attributes[lcpconf.layerfields[0].uniqueplantid]);
         });        	
         /*lcpDataService.get(3, qp).then(function (data) {
 			$scope.ajustart15data(data);
@@ -67,15 +70,15 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
 		}
 	});
 	//Watch results for FacilitydetailsDetail request and common resources
-	$scope.initBasicData = function(plantdata) {
-		if(plantdata){
-			var item = plantdata.features[0].attributes;
+	$scope.initBasicData = function(item) {
+		if(item){
+			//var item = plantdata.features[0].attributes;
 			var qp = {'BasicID':item[lcpconf.layerfields[0].fk_basicdata_id]};
 	        lcpDataService.get(1, qp).then(function (data) {
 				$scope.ajustbasicdata(data);// = (data.features)?data.features[0].attributes:{};
-		        lcpDataService.get(2, {'PlantID':$scope.plantid}).then(function (data) {
+		        /*cpDataService.get(2, {'PlantID':$scope.plantid}).then(function (data) {
 					$scope.ajustenergydata(data);
-		        });        	
+		        });*/        	
 	        });        	
 			var coord = [item[lcpconf.layerfields[0].latitude],item[lcpconf.layerfields[0].longitude]];
 	      //Here we initialize the map
@@ -94,7 +97,7 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
 		}
 	};
 	
-	$scope.ajustplantdata = function(data){
+	/*$scope.ajustplantdata = function(data){
 		$scope.plantdata = {};
 		if (data.features){
 			var item = data.features[0].attributes;
@@ -114,7 +117,7 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
 			
 			$scope.plantdata = _pl;
 		}
-	} 
+	} */
 
 	$scope.ajustdetailsdata = function(data){
 		$scope.detailsdata = {};
@@ -199,6 +202,122 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
 		}
 	} */
 
+	$scope.callAllPlants = function(uniqueID){
+		var _qstring = lcpconf.lcpLayerUrl + "0/query?where="+ lcpconf.layerfields[0].uniqueplantid
+			+"='"+uniqueID+"'&outFields=*&orderByFields=" 
+			+ lcpconf.layerfields[0].id + '&f=pjson';
+		$http.get(_qstring).success(function(data, status, headers, config) {
+			var _plants = [];
+			angular.forEach(data.features, function(plant) {
+				var item = plant.attributes;
+				if (item[lcpconf.layerfields[0].latitude]!=0 && item[lcpconf.layerfields[0].longitude]!=0){
+					//This is the one we display
+					$scope.setPlantData(item); 
+				}
+				$scope.alldata.push({'plantid':item[lcpconf.layerfields[0].plantid],
+					'basicid':item[lcpconf.layerfields[0].fk_basicdata_id],
+					'oid':item[lcpconf.layerfields[0].id]});
+				//_years.push({"year":item.attributes[lcpconf.layerfields[1].referenceyear]});
+				
+			});
+			if(!$scope.plantdata){
+				//default
+				$scope.setPlantData(data.features[0].attributes); 
+			}
+			$scope.callAllBasic();
+		});
+	}
+	
+	$scope.setPlantData = function(item){
+		var _pl = {'plantid':item[lcpconf.layerfields[0].plantid]};
+		_pl['id'] = item[lcpconf.layerfields[0].id];
+		_pl['facility'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[0].facilityname], null);
+		_pl['plant'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[0].plantname], null);
+		_pl['address'] = (item[lcpconf.layerfields[0].address2])?
+				$scope.ff.ConfidentialFormat(item[lcpconf.layerfields[0].address1], null) + ', ' + $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[0].address2], null):
+					$scope.ff.ConfidentialFormat(item[lcpconf.layerfields[0].address1], null);
+		_pl['city'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[0].city], null);
+		_pl['region'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[0].region], null);
+		_pl['postalcode'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[0].postalcode], null);
+		_pl['coords'] = "("+item[lcpconf.layerfields[0].latitude]+degrees+", "+item[lcpconf.layerfields[0].longitude]+degrees+")";
+		_pl['address'] += ', '+ _pl['postalcode'] +', '+ _pl['city'];
+		_pl['eprtrnationalid'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[0].eprtrnationalid], null);
+		$scope.plantdata = _pl;
+		$scope.initBasicData(item);
+	}
+	
+	$scope.callAllBasic = function(){
+		if($scope.alldata.length > 0){
+			var _oids = [];
+			angular.forEach($scope.alldata, function(item) {
+				_oids.push(item.oid);
+			});
+			var _qstring = lcpconf.lcpLayerUrl + "0/queryRelatedRecords?objectIds="+ _oids.join(",") 
+			+"&relationshipId=4&outFields=*&f=pjson";
+			//Request years
+			$http.get(_qstring).success(function(data, status, headers, config) {
+				angular.forEach(data.relatedRecordGroups, function(basic) {
+					var itemb = basic.relatedRecords[0].attributes;
+					angular.forEach($scope.alldata, function(itema) {
+						if(itemb[lcpconf.layerfields[1].id] == itema.basicid){
+							itema['year'] = itemb[lcpconf.layerfields[1].referenceyear];
+						}
+					});
+				});
+				
+				//Energy data
+				_qstring = lcpconf.lcpLayerUrl + "0/queryRelatedRecords?objectIds="+ _oids.join(",") 
+				+"&relationshipId=0&outFields=*&f=pjson";
+				$scope.emissioninput = [];
+				$scope.energyinput = [];
+
+				$http.get(_qstring).success(function(data, status, headers, config) {
+					angular.forEach(data.relatedRecordGroups, function(energy) {
+						var iteme = energy.relatedRecords[0].attributes;
+						angular.forEach($scope.alldata, function(itema) {
+							if(iteme[lcpconf.layerfields[2].fk_plant_id] == itema.plantid){
+								var _em = {}, _en = {};
+								//var _ed = {'id':item[lcpconf.layerfields[2].id]};
+								if($scope.basicdata && $scope.basicdata.referenceyear){
+									_en.year = itema.year;
+									_em.year = itema.year;
+								}
+								_en['biomass'] = $scope.ff.ConfidentialFormat(iteme[lcpconf.layerfields[2].biomass], null);
+								_en['othersolidfuels'] = $scope.ff.ConfidentialFormat(iteme[lcpconf.layerfields[2].othersolidfuels], null);
+								_en['liquidfuels'] = $scope.ff.ConfidentialFormat(iteme[lcpconf.layerfields[2].liquidfuels], null);
+								_en['naturalgas'] = $scope.ff.ConfidentialFormat(iteme[lcpconf.layerfields[2].naturalgas], null);
+								_en['othergases'] = $scope.ff.ConfidentialFormat(iteme[lcpconf.layerfields[2].othergases], null);
+								_en['hardcoal'] = $scope.ff.ConfidentialFormat(iteme[lcpconf.layerfields[2].hardcoal], null);
+								_en['lignite'] = $scope.ff.ConfidentialFormat(iteme[lcpconf.layerfields[2].lignite], null);
+								_em['so2'] = $scope.ff.ConfidentialFormat(iteme[lcpconf.layerfields[2].so2], null);
+								_em['nox'] = $scope.ff.ConfidentialFormat(iteme[lcpconf.layerfields[2].nox], null);
+								_em['dust'] = $scope.ff.ConfidentialFormat(iteme[lcpconf.layerfields[2].dust], null);
+								//$scope.energydata = _ed;
+								
+								$scope.emissioninput.push(_em);
+								$scope.energyinput.push(_en);
+							}
+						});
+					});
+				});
+			});
+		}
+	}
+			
+	/*
+	 * 
+	 * http://air.discomap.eea.europa.eu/arcgis/rest/services/EPRTR/EPRTR_LCP/MapServer/0/query?
+	 * where=
+	 * 	Unique_Plant_ID+%3D+%27AT0001%27
+	 *  &outFields=*&orderByFields=&f=pjson
+	 * 
+	 * http://air.discomap.eea.europa.eu/arcgis/rest/services/EPRTR/EPRTR_LCP/MapServer/0/queryRelatedRecords?
+	 * objectIds=%5B427%2C528%2C628%2C725%2C820&relationshipId=4&outFields=*&definitionExpression=&returnGeometry=true&maxAllowableOffset=
+	 * &geometryPrecision=&outSR=&returnZ=false&returnM=false&gdbVersion=&f=html
+	 * 
+	 * */
+	
+	
 	$scope.ajustnerpdata = function(data){
 		$scope.nerpdata = {};
 		if (data.features){
@@ -212,7 +331,7 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
 		}
 	} 
 
-	$scope.ajustenergydata = function(data){
+/*	$scope.ajustenergydata = function(data){
 		$scope.energydata = {};
 		$scope.emissioninput = [];
 		$scope.energyinput = [];
@@ -241,7 +360,7 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
 			$scope.energyinput.push(_en)
 			
 		}
-	} 
+	} */
 	
 
 }])
@@ -269,7 +388,7 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
 				          break;
         			  case 'regionCodes':
         				  //http://localhost:8080/nutsRegionChilds/235
-        				  qs.push(lcpconf.layerfields[0].region + " in ('" + query[key].join("','") + "')");
+        				  qs.push(lcpconf.layerfields[0].region + " in (" + query[key].join(",") + ")");
 				          break;
         			  case 'regionCode':
         				  //http://localhost:8080/nutsRegionChilds/235
@@ -290,10 +409,10 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
 				          break;
 				      case 'BasicGroup':
 				    	  if(id==1){
-	        				  qs.push(lcpconf.layerfields[id].id + " in ('" + query[key].join("','") + "')");
+	        				  qs.push(lcpconf.layerfields[id].id + " in (" + query[key].join(",") + ")");
 				    	  }
 				    	  else{
-	        				  qs.push(lcpconf.layerfields[id].fk_basicdata_id + " in ('" + query[key].join("','") + "')");
+	        				  qs.push(lcpconf.layerfields[id].fk_basicdata_id + " in (" + query[key].join(",") + ")");
 				    	  }
 				          break;
 				      case 'PlantID':
@@ -306,10 +425,10 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
 				          break;
 				      case 'PlantGroup':
 				    	  if(id==0){
-	        				  qs.push(lcpconf.layerfields[id].plantid + " in ('" + query[key].join("','") + "')");
+	        				  qs.push(lcpconf.layerfields[id].plantid + " in (" + query[key].join(",") + ")");
 				    	  }
 				    	  else{
-	        				  qs.push(lcpconf.layerfields[id].fk_plant_id + " in ('" + query[key].join("','") + "')");
+	        				  qs.push(lcpconf.layerfields[id].fk_plant_id + " in (" + query[key].join(",") + ")");
 				    	  }
 				          break;
 				          
