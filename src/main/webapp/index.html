@@ -54,13 +54,19 @@
                 <li><a href="#pollutantreleases" ng-click="subtitle = 'Pollutant Releases'">Pollutant Releases</a></li>
                 <li><a href="#pollutanttransfers" ng-click="subtitle = 'Pollutant Transfers'">Pollutant Transfers</a></li>
                 <li><a href="#wastetransfers" ng-click="subtitle = 'Waste Transfers'">Waste Transfers</a></li>
-                <li class="divider"></li>
-                <li><a href="#diffemissionsair" ng-click="subtitle = 'Diffuse emissions - releases to air'">Releases to air</a></li>
-                <li><a href="#diffemissionswater" ng-click="subtitle = 'Diffuse emissions - releases to water'">Releases to water</a></li>
                 <!--li class="divider"></li>
                 <li><a href="#facilitydetails">Facility details</a></li -->
               </ul>
             </li>
+
+            <li ng-class="{ active: isActive('/facilitylevels')}" class="dropdown" dropdown>
+              <a href="#" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Diffuse emissions<span class="caret"></span></a>
+              <ul class="dropdown-menu" dropdown-menu role="menu">
+                <li><a href="#diffemissionsair" ng-click="subtitle = 'Diffuse emissions - releases to air'">Releases to air</a></li>
+                <li><a href="#diffemissionswater" ng-click="subtitle = 'Diffuse emissions - releases to water'">Releases to water</a></li>
+              </ul>
+            </li>
+
             <li ng-class="{ active: isActive('/about')}"><a href="#static?cont=about" ng-click="subtitle = 'About E-PRTR'">About E-PRTR</a></li>
             <li><a href="#faq" ng-click="subtitle = 'faq'">FAQ</a></li>
             <li><a href="#static?cont=feedback" ng-click="subtitle = 'faq'">Feedback</a></li>
