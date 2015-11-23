@@ -82,13 +82,13 @@
 					<table class="table table-striped table-condensed table-hover top-buffer10">
 						<thead>
 							<tr>
-								<th class="col-Min100"><a href="" ng-click="orderByField='plant'; reverseSort = !reverseSort">{{tr_lcp.PlantName}}</a></th>
-								<th class="col-Min100"><a href="" ng-click="orderByField='facility'; reverseSort = !reverseSort">{{tr_f.FacilityName}}</a></th>
-								<th class="col-Min75" ><a href="" ng-click="orderByField='address'; reverseSort = !reverseSort">{{tr_f.Address}}</a></th>
-								<th class="col-Min75" ><a href="" ng-click="orderByField='city'; reverseSort = !reverseSort">{{tr_f.TownVillage}}</a></th>
-								<th class="col-Min75" ><a href="" ng-click="orderByField='postalcode'; reverseSort = !reverseSort">{{tr_f.PostalCode}}</a></th>
-								<th class="col-Min75" ><a href="" ng-click="orderByField='region'; reverseSort = !reverseSort">{{tr_c.Region}}</a></th>
-								<th class="col-Min75" ><a href="" ng-click="orderByField='country'; reverseSort = !reverseSort">{{tr_f.Country}}</a></th>
+								<th ><a href="" ng-click="orderByField='plant'; reverseSort = !reverseSort">{{tr_lcp.PlantName}}</a></th>
+								<!--th ><a href="" ng-click="orderByField='facility'; reverseSort = !reverseSort">{{tr_f.FacilityName}}</a></th-->
+								<th ><a href="" ng-click="orderByField='address'; reverseSort = !reverseSort">{{tr_f.Address}}</a></th>
+								<th ><a href="" ng-click="orderByField='city'; reverseSort = !reverseSort">{{tr_f.TownVillage}}</a></th>
+								<!--th ><a href="" ng-click="orderByField='postalcode'; reverseSort = !reverseSort">{{tr_f.PostalCode}}</a></th-->
+								<!--th ><a href="" ng-click="orderByField='region'; reverseSort = !reverseSort">{{tr_c.Region}}</a></th-->
+								<th ><a href="" ng-click="orderByField='country'; reverseSort = !reverseSort">{{tr_f.Country}}</a></th>
 							</tr>
 						</thead>
 						<!-- tfoot>
@@ -105,11 +105,11 @@
 						<tbody>
 							<tr ng-repeat="item in plantdata  | filter: searchKeyword| orderBy:orderByField:reverseSort" >
 								<td ><a ng-click="ldopen(item.id)" alt="" >{{item.plant}}</a></td>
-								<td >{{item.facility}}</td>
+								<!--td >{{item.facility}}</td-->
 								<td >{{item.address}}</td>
 								<td >{{item.city}}</td>
-								<td >{{item.postalcode}}</td>
-								<td >{{tr_lnr[item.region]}}</td>
+								<!--td >{{item.postalcode}}</td-->
+								<!--td >{{tr_lnr[item.region]}}</td-->
 								<td >{{item.country}}</td>
 								
 							</tr>
