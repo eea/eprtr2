@@ -11,7 +11,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
 
 
 
-.controller('lcpLevelsCtrl', ['$scope', '$filter', '$http', '$modal','searchFilter', 'Restangular', 'eprtrcms', 
+.controller('lcpLevelsCtrl', ['$scope', '$filter', '$http', '$modal', 'searchFilter', 'Restangular', 'eprtrcms', 
                                  'lovCountryType', 'lovAreaGroupType', 'lovNutsRegionType','formatStrFactory', 'lcpDataService', 'lcpconf',
                                  function($scope, $filter, $http, $modal, searchFilter, Restangular, eprtrcms,
                                 		 lovCountryType, lovAreaGroupType, lovNutsRegionType, formatStrFactory, lcpDataService, lcpconf) {
@@ -35,6 +35,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     $scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
     $scope.mapctrl = {};
 	$scope.mapheight = window.innerHeight > 820 ? 600+'px' : (window.innerHeight -230)+'px';
+	
 
 //	Requesting text and title resources 
 	eprtrcms.get('Facility',null).then(function (data) {
@@ -115,13 +116,17 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     }
 	
 	$scope.performBasicSearch = function() {
-		$scope.queryParams = {ReportingYear: $scope.searchFilter.selectedReportingYear.year};
+		$scope.queryParams = {ReportingYear: $scope.searchFilter.selectedReportingYear.year, LcpCapacities:$scope.searchFilter.selectedLCPCapacities};
+		$scope.lcpcapacities = $scope.searchFilter.selectedLCPCapacities;
+		$scope.reportingYear = $scope.searchFilter.selectedReportingYear.year;
+		$scope.countryCode = null;
         if ($scope.searchFilter.selectedReportingCountry !== undefined && $scope.searchFilter.selectedReportingCountry.countryId) {
             $scope.areaFilter = true;
-            $scope.queryParams.LOV_CountryID = $scope.searchFilter.selectedReportingCountry.countryId;
+            $scope.countryCode = $scope.searchFilter.selectedReportingCountry.countryId;
+            /*$scope.queryParams.LOV_CountryID = $scope.searchFilter.selectedReportingCountry.countryId;
     		lovCountryType.getByID($scope.queryParams.LOV_CountryID).get().then(function(data) {
     			$scope.countryCode = data.countryCode;
-    		});  
+    		});*/  
             /*if ($scope.searchFilter.selectedRegion.lov_NUTSRegionID) {
     			lovNutsRegionType.getByID($scope.searchFilter.selectedRegion.lov_NUTSRegionID).get().then(function(data) {
                 	$scope.regionCode = data.code;
@@ -152,10 +157,9 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
         $scope.createheader();
 	}
 	
-    $scope.$watch('countryCode', function(newvalue,oldvalue) {
+    $scope.$watchCollection('[countryCode,reportingYear,lcpcapacities]', function(newvalue,oldvalue) {
     	if($scope.queryParams && $scope.queryParams.ReportingYear != -1){
-    		if(($scope.areaFilter && $scope.countryCode) || 
-    				(!$scope.areaFilter && $scope.countryCode == undefined)){
+    		//if(($scope.areaFilter && $scope.countryCode) || (!$scope.areaFilter && $scope.countryCode == undefined)){
     			if($scope.countryCode){
     				$scope.queryParams.countryCode = $scope.countryCode;
     			}
@@ -193,8 +197,10 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     	        		}
     	        	}
    // 				$scope.basicdata = data.features;
-    	        });        	
-    		}
+    	        });
+
+    	        
+    		//}
 	        $scope.searchResults = true;
     	}
     });
@@ -210,7 +216,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
         			angular.forEach($scope.basicdata, function(item) {
         				var _id = item.attributes[lcpconf.layerfields[1].id];
         				var _cc = item.attributes[lcpconf.layerfields[1].memberstate];
-        				_basicids.push(item.attributes[_id]);
+        				_basicids.push(_id);
         				$scope.basicidcountrycode[_id] = _cc;
         			});
         			_que.BasicGroup = _basicids;
@@ -231,7 +237,46 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     		$scope.mapQuery = _que;
     		if(!jQuery.isEmptyObject(_que)){
                 lcpDataService.get(0,_que).then(function (data) {
-        			$scope.formatPlantdata(data.features);
+                	if($scope.lcpcapacities == 'all'){
+                		$scope.formatPlantdata(data.features);
+                	}
+                	else{
+                		var _oids = []; 
+                		var _pids = []; 
+                		//Add capabilities filter
+                		angular.forEach(data.features, function(item) {
+                			_oids.push(item.attributes[lcpconf.layerfields[0].id]);
+                		});
+                		var _qp;
+            			switch ($scope.lcpcapacities) {
+            			  case '300_up':
+            			    _qp = "MWth > 300";
+            			    break;
+            			  case '100_300':
+              			    _qp = "MWth BETWEEN 100 AND 300";
+              			    break;
+            			  case '50_100':
+              			    _qp = "MWth BETWEEN 50 AND 100";
+              			    break;
+            			}
+            			var _qstring = lcpconf.lcpLayerUrl + "0/queryRelatedRecords?objectIds="+ _oids.join(",") 
+            			+"&definitionExpression=" + _qp
+            			+"&relationshipId=3&outFields="+ lcpconf.layerfields[5].fk_plant_id +"&f=pjson";
+
+            			//Request years
+            			$http.get(_qstring).success(function(data, status, headers, config) {
+            				angular.forEach(data.relatedRecordGroups, function(plantdetails) {
+                        		_pids.push(plantdetails.relatedRecords[0].attributes[lcpconf.layerfields[5].fk_plant_id]); 
+            				});
+            				//Recall Plants
+            				var _que2 = {'PlantGroup':_pids};
+            				$scope.mapQuery = _que2;
+        	                lcpDataService.get(0,_que2).then(function (data2) {
+    	                		$scope.formatPlantdata(data2.features);
+    	                	});
+        				});
+                		
+                	}
                 });
     		}
     		else{
@@ -261,85 +306,6 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
 			$scope.plantdata.push(_pl);
 		});
     }
-
-    
-/*	$scope.downloadClick = function(tab){
-
-    	var contentArray = new Array();
-    	var contentAvailable = true;
-    	var fileName = '';
-    	var date = new Date();
-    	var dateString = '_'+ date.getFullYear() +'_'+date.getMonth()+'_'+date.getDate();
-    	if(tab === 'wasteTransfer'){
-    		$scope.updateWasteTransferDownloadData();
-    		contentArray = $scope.wasteTransferDownload;
-    		fileName = 'EPRTR_Area_Overview_Waste_Transfer'+dateString+'.csv';
-    	}else if(tab ==='pollutantRelease' && $scope.pritems.data != undefined){
-    		$scope.pollutantReleaseDownload= new Array();
-    		$scope.updatePollutantDownloadData($scope.pritems,$scope.pollutantReleaseDownload, $scope.prHeaderItems );
-    		contentArray = $scope.pollutantReleaseDownload;
-    		fileName = 'EPRTR_Area_Overview_Pollutant_Release'+dateString+'.csv';
-    	}else if(tab === 'pollutantTransfer' && $scope.ptitems.data != undefined){
-    		$scope.pollutantTransferDownload= new Array();
-    		$scope.updatePollutantDownloadData($scope.ptitems,$scope.pollutantTransferDownload, $scope.ptHeaderItems );
-    		contentArray = $scope.pollutantTransferDownload;
-    		fileName = 'EPRTR_Area_Overview_Pollutant_Transfer'+dateString+'.csv';
-    	}else{
-    		contentAvailable = false;
-    	}
-
-    	var csvContent = 'data:text/csv;charset=utf-8,';
-    	contentArray.forEach(function(infoArray, index){
-
-    		var dataString = infoArray.join(';').split();
-    		csvContent += dataString + "\n";
-    	});
-    	
-    	var encodedUri = encodeURI(csvContent);
-		var link = document.createElement("a");
-		link.setAttribute("href", encodedUri);
-		link.setAttribute("download", fileName);
-		if(contentAvailable){
-			link.click(); // This will download the data file named "my_data.csv".
-		}
-
-    }*/
-	
-	/*
-	 * http://test.discomap.eea.europa.eu/arcgis/rest/services/AIR/EPRTR_LCP_demo/MapServer/0
-	 * 
-	 * /query?where=&text=&objectIds=1&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects
-	 * &relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false
-	 * &maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false
-	 * &returnCountOnly=false&orderByFields=
-	 * &groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=
-	 * &returnDistinctValues=false&resultOffset=&resultRecordCount=&f=pjson
-	 * 
-	 * */
-	
-	$scope.roman = function deromanize (str) {
-		var	str = str.toUpperCase(),
-			validator = /^M*(?:D?C{0,3}|C[MD])(?:L?X{0,3}|X[CL])(?:V?I{0,3}|I[XV])$/,
-			token = /[MDLV]|C[MD]?|X[CL]?|I[XV]?/g,
-			key = {M:1000,CM:900,D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1},
-			num = 0, m;
-		if (!(str && validator.test(str)))
-			return false;
-		while (m = token.exec(str))
-			num += key[m[0]];
-		return num;
-	}
-
-	$scope.topInfoDownload = function(array){
-		var i;
-		for(i=0;i<$scope.headitms.length;i++){
-			array[i]= new Array();
-			array[i][0] = $scope.headitms[i].title;
-			array[i][1] = $scope.headitms[i].val;
-		}
-		array[i]= new Array();
-		array[i][0] = ' ';
-	}
 	
 	$scope.ldopen = function(plantid){
     	var modalInstance = $modal.open({
