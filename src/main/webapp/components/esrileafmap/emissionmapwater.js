@@ -90,7 +90,8 @@ angular.module('myApp.emissionmapwater', ['ngRoute','leaflet-directive'])
 		//We set the baselayer - in version 2 we can add more baselayers and a selector
 		L.esri.basemapLayer("Streets").addTo(map);
 
-		elm_ctrl.dmlay = L.esri.dynamicMapLayer(emwconf.EPRTRDiffuseEmissionsWaterUrl, {
+		elm_ctrl.dmlay = L.esri.dynamicMapLayer({
+			url: emwconf.EPRTRDiffuseEmissionsWaterUrl, 
 		    opacity: 0.5,
 		    useCors: false,
 		    layers:[0],

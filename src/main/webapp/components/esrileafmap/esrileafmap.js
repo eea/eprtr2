@@ -342,7 +342,8 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 		L.esri.basemapLayer("Streets").addTo(map);
 
 		//Here we define the Clustered Feature Service layer
-		elm_ctrl.fdlay = L.esri.clusteredFeatureLayer(elmconf.eprtrLayerUrl, {
+		elm_ctrl.fdlay = L.esri.clusteredFeatureLayer({
+			url: elmconf.eprtrLayerUrl,
 			spiderfyOnMaxZoom:false,
 		    disableClusteringAtZoom: 9,
 		    polygonOptions: {
