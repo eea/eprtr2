@@ -15,7 +15,7 @@
  * Agency. All Rights Reserved.
  *
  * Contributor(s):
- *        Søren Roug
+ *        Soren Roug
  */
 package eea.eprtr.dao;
 

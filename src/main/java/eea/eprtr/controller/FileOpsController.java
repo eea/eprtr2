@@ -9,13 +9,13 @@
  * implied. See the License for the specific language governing
  * rights and limitations under the License.
  *
- * The Original Code is EPRTR CMS 2.0
+ * The Original Code is EPRTR 2.0
  *
  * The Initial Owner of the Original Code is European Environment
  * Agency. All Rights Reserved.
  *
  * Contributor(s):
- *        Søren Roug
+ *        Soren Roug
  */
 package eea.eprtr.controller;
 
