@@ -64,11 +64,11 @@ angular.module('myApp.diffemissionswater', ['ngRoute','ngSanitize', 'myApp.emiss
 	};
 	eprtrcms.get('DiffuseSources',null).then(function (data) {
 		$scope.de = data;
-		if(!data){
+		/*if(!data){
 			emissionsService.get().then(function (edata) {
 				$scope.de = edata.DiffuseSources;
 		    });	
-		}
+		}*/
 	});
 	eprtrcms.get('Common',null).then(function (data) {
 		$scope.tr_c = data;

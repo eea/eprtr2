@@ -127,24 +127,6 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     		lovCountryType.getByID($scope.queryParams.LOV_CountryID).get().then(function(data) {
     			$scope.countryCode = data.countryCode;
     		});*/  
-            /*if ($scope.searchFilter.selectedRegion.lov_NUTSRegionID) {
-    			lovNutsRegionType.getByID($scope.searchFilter.selectedRegion.lov_NUTSRegionID).get().then(function(data) {
-                	$scope.regionCode = data.code;
-    			});
-            	$scope.regionCodes = [];
-            	$http.get('/nutsRegionChilds/' + $scope.searchFilter.selectedRegion.lov_NUTSRegionID).success(function(data, status, headers, config) {
-            		var _regions = [];
-            		_regions.push($scope.regionCode);
-            		if(data && typeof data !== 'string' && data.length > 1){ 
-    	        		angular.forEach(data, function(item) {
-    	        			_regions.push(item.code);
-    	        		});
-            		}
-            		$scope.regionCodes = _regions;
-                });
-
-            }*/
-
     	}
         if ($scope.searchFilter.selectedReportingCountry !== undefined && $scope.searchFilter.selectedReportingCountry.groupId) {
             $scope.areaFilter = true;

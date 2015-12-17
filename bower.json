@@ -20,7 +20,7 @@
     "leaflet": "0.7.x",
     "leaflet-plugins": "*",
     "leaflet.markercluster": "0.4.0", 
-    "esri-leaflet": "1.0.0",
+    "esri-leaflet": "1.0.1",
     "esri-leaflet-clustered-feature-layer": "1.0.2",
     "Leaflet.EasyButton": "*",
     "angular-leaflet-directive": "0.7.8",

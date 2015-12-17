@@ -48,8 +48,8 @@ angular.module('myApp.emission-air-search-filter', ['myApp.home', 'myApp.search-
 
 })
 
-.controller('SearchEmissionAirController', ['$scope', '$http', '$filter', 'deconf_air', 'searchFilter','emissionsService', 
-                                         function($scope, $http, $filter, deconf_air, searchFilter,emissionsService) {
+.controller('SearchEmissionAirController', ['$scope', '$http', '$filter', 'deconf_air', 'searchFilter','emissionsService','eprtrcms', 
+                                         function($scope, $http, $filter, deconf_air, searchFilter,emissionsService,eprtrcms) {
     
 	$scope.searchFilter = searchFilter;
 
@@ -57,8 +57,10 @@ angular.module('myApp.emission-air-search-filter', ['myApp.home', 'myApp.search-
 	$scope.diffemissionlayers = [];//deconf.layers;
 	$scope.searchFilter.sector = $scope.diffemissionsectors[0];
 	
-	emissionsService.get().then(function (data) {
-		$scope.de = data.DiffuseSources;
+	eprtrcms.get('DiffuseSources',null).then(function (data) {
+		$scope.de = data;
+	/*emissionsService.get().then(function (data) {
+		$scope.de = data.DiffuseSources;*/
 	});
 
     $scope.$watch('searchFilter.sector', function(value) {

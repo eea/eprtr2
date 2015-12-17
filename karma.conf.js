@@ -16,7 +16,6 @@ module.exports = function(config){
       'src/main/webapp/bower_components/lodash/dist/lodash.compat.js',
       'src/main/webapp/bower_components/restangular/dist/restangular.js',
       'src/main/webapp/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-      'src/main/webapp/bower_components/leaflet/dist/leaflet.js',
       'src/main/webapp/bower_components/leaflet/dist/leaflet-src.js',
       'src/main/webapp/bower_components/leaflet-plugins/control/Distance.js',
       'src/main/webapp/bower_components/leaflet-plugins/control/Layers.Load.js',

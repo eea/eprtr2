@@ -55,8 +55,8 @@ angular.module('myApp.emission-water-search-filter', ['myApp.home', 'myApp.searc
 
 })
 
-.controller('SearchEmissionWaterController', ['$scope', '$http', '$filter', 'deconf_water', 'searchFilter','emissionsService', 
-                                         function($scope, $http, $filter, deconf_water, searchFilter,emissionsService) {
+.controller('SearchEmissionWaterController', ['$scope', '$http', '$filter', 'deconf_water', 'searchFilter','emissionsService', 'eprtrcms',
+                                         function($scope, $http, $filter, deconf_water, searchFilter,emissionsService, eprtrcms) {
     
 	$scope.searchFilter = searchFilter;
 
@@ -64,8 +64,10 @@ angular.module('myApp.emission-water-search-filter', ['myApp.home', 'myApp.searc
 	$scope.diffemissionlayers = [];//deconf.layers;
 	$scope.searchFilter.sector = $scope.diffemissionsectors[0];
 	
-	emissionsService.get().then(function (data) {
-		$scope.de = data.DiffuseSources;
+	eprtrcms.get('DiffuseSources',null).then(function (data) {
+		$scope.de = data;
+/*	emissionsService.get().then(function (data) {
+		$scope.de = data.DiffuseSources;*/
 	});
 
     $scope.$watch('searchFilter.sector', function(value) {

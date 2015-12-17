@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import eea.eprtr.Util.DataHelperPollutantRelease;
+import eea.eprtr.util.DataHelperPollutantRelease;
 import eea.eprtr.dao.ActivitySearchFilter;
 import eea.eprtr.dao.CountryAreaGroupRepository;
 import eea.eprtr.dao.FacilityItemSearchFilter;

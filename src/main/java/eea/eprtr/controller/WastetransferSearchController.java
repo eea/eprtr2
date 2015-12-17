@@ -33,7 +33,7 @@ import eea.eprtr.model.WastetransferSeries;
 import eea.eprtr.model.MediumCode;
 import eea.eprtr.model.WasteType;
 import eea.eprtr.model.Wastetransfer;
-import eea.eprtr.Util.DataHelperWasteTransfer;
+import eea.eprtr.util.DataHelperWasteTransfer;
 
 @RestController
 public class WastetransferSearchController {
