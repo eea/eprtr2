@@ -562,6 +562,7 @@
 							<table class="table table-striped table-condensed table-hover">
 								<thead>
 									<tr>
+										<th></th>
 										<th>{{tr_c.Facility}}&nbsp;</th>
 										<th class="text-right col-Min75">{{tr_c.Quantity}}&nbsp;</th>
 										<th class="text-right col-Min75">{{tr_c.Accidental}}&nbsp;</th>
@@ -573,6 +574,7 @@
 								</thead>
 								<tbody>
 									<tr ng-repeat="item in facilitiesItems">
+									<td><a title="Open as external link" href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}" style="cursor:pointer;"><i class="fa fa-external-link"></i></a></td>
 										<td><a
 											ng-click="openFDmodal(item.facilityID, item.facilityReportID, item.reportingYear)" style="cursor:pointer;">
 												{{ff.ConfidentialFormat(item.facilityName,

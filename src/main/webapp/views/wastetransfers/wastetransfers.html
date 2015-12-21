@@ -661,6 +661,7 @@
 							<table class="table table-striped table-condensed table-hover">
 								<thead>
 									<tr>
+										<th></th>
 										<th custom-sort order="'facilityName'" sort="sort">{{tr_c.Facility}}&nbsp;</th>
 										<th class="text-right">{{tr_c.Total}}&nbsp;</th>
 										<th class="text-right">{{tr_c.Recovery}}&nbsp;</th>
@@ -684,6 +685,7 @@
 								</tfoot>
 								<tbody>
 									<tr ng-repeat="item in facilitiesItems">
+									<td><a title="Open as external link" href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}" style="cursor:pointer;"><i class="fa fa-external-link"></i></a></td>
 										<td><a
 											href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">
 												{{item.facilityName}}</a></td>
