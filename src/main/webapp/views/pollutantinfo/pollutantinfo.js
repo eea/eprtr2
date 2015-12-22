@@ -9,7 +9,7 @@ angular.module('myApp.pollutantinfo', ['ngRoute'])
   });
 }])
 
-.controller('PollutantInfoCtrl', ['$scope','$filter', 'searchFilter', '$http', function($scope, $filter, searchFilter, $http) {
+.controller('PollutantInfoCtrl', ['$scope','$filter', 'searchFilter', '$http', 'eprtrcms', function($scope, $filter, searchFilter, $http, eprtrcms) {
 	
 
 	//HomeWelcomeText
@@ -23,7 +23,11 @@ angular.module('myApp.pollutantinfo', ['ngRoute'])
 			}
 	});
 	
-	$scope.getHeadData = function(){
+	eprtrcms.get('Pollutantinfo',null).then(function (data) {
+		$scope.pi = data;
+	});
+	
+	/*$scope.getHeadData = function(){
 		$http.get('translations/pollutants_labels_en-gb.json').success(function(data, status) {
 			for(var i = 0; i<data.labels.label.length;i++){
 				var label = data.labels.label[i];
@@ -54,7 +58,7 @@ angular.module('myApp.pollutantinfo', ['ngRoute'])
 				}
 			}
 		})
-	};
+	};*/
 	
 	$scope.stringReplaceSub = function(str, subs){
 		if(subs == undefined || subs.length<1){
@@ -80,7 +84,7 @@ angular.module('myApp.pollutantinfo', ['ngRoute'])
 		return str;
 	}
 	
-	$scope.getHeadData();
+	//$scope.getHeadData();
 		
 }]).directive('pollutantinfo', function() {
 	return {

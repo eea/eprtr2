@@ -442,7 +442,7 @@ angular.module('myApp.home', ['ngRoute'])
     			'LOV_WASTETYPE':{},'MAP_BookmarkWidgetStrings':{},'MAP_ControllerStrings':{},'MAP_FilterAllWidgetString':{},
     			'MAP_FilterAllWidgetStrings':{},'MAP_GazetteerWidgetStrings':{},'MAP_LookupSearchAllWidgetStrings':{},
     			'MAP_OverviewMapWidgetStrings':{},'MAP_PrintWidgetStrings':{},'MAP_SearchAllWidgetStrings':{},
-    			'MAP_WidgetTemplateStrings':{},'MapSearch':{},'Pollutant':{},'Static':{},'Timeseries':{},'WasteTransfers':{}};
+    			'MAP_WidgetTemplateStrings':{},'MapSearch':{},'Pollutant':{},'Static':{},'Timeseries':{},'WasteTransfers':{},'Pollutantinfo':{}};
     	
     	return {
     	  get: function(type,i18n) {

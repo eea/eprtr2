@@ -1,13 +1,13 @@
 <div class="container-fluid" ng-controller="PollutantInfoCtrl">
 	<div class="row">
 		<div class="col-md-12">
-			<h3>{{ label_pollutant_head }}</h3>
+			<h3>{{ pi['POLLUTANTINFO.pollutanthead'] }}</h3>
 		</div>
 			<div class="top-buffer10">
 				<div class="panel-body">
-					<p>{{ label_pollutant_headnotes}}</p>
-					<p>{{label_pollutant_headnotes2}}<a href="{{label_pollutant_headlink}}">{{label_pollutant_headlink_label}}</a></p>
-					<p><i><span ng-bind-html="label_pollutant_headnotes3"></span></i></p>
+					<p>{{ pi['POLLUTANTINFO.pollutantheadnotes'] }}</p>
+					<p>{{pi['POLLUTANTINFO.pollutantheadnotes2']}}<a href="{{pi['POLLUTANTINFO.pollutantheadlink']}}">{{pi['POLLUTANTINFO.pollutantheadlinkLabel']}}</a></p>
+					<p><i><span ng-bind-html="pi['POLLUTANTINFO.pollutantheadnotes3']"></span></i></p>
 				</div>
 			</div>
 	</div>

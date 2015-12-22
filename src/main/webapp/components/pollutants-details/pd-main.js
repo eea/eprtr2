@@ -9,6 +9,9 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 	eprtrcms.get('Common',null).then(function (data) {
 		$scope.tr_c = data;
 	});
+	eprtrcms.get('Pollutantinfo',null).then(function (data) {
+		$scope.tr_pi = data;
+	});
 	
 	$scope.getPollutantData = function(){
 		$http.get('translations/pollutants_details_en-gb.json').success(function(data, status) {
@@ -238,7 +241,7 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 		});
 	};
 	
-	$scope.getLabelData = function(){
+	/*$scope.getLabelData = function(){
 		$http.get('translations/pollutants_labels_en-gb.json').success(function(data, status) {
 			for(var i = 0; i<data.labels.label.length;i++){
 				var label = data.labels.label[i];
@@ -406,7 +409,7 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 			}).error(function(data, status) {
 			console.log("Error: " + data + " status: " + status);
 		});
-	};
+	};*/
 	
 	$scope.getPollutantPhysicalData = function(){
 		var physical_properties = new Array();
@@ -617,7 +620,7 @@ angular.module('myApp.pd-main', ['ngSanitize'])
 		if($scope.pollutantid != undefined){
 			$scope.getPollutantData();
 			$scope.getPollutantGroupData();
-			$scope.getLabelData();
+			//$scope.getLabelData();
 		}
 	});
 	
