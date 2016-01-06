@@ -4,13 +4,14 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize'])
 
 .controller('FDMainController', 
 	['$scope', '$http', '$filter', '$sce', '$modal', 'leafletData','eprtrcms', 'formatStrFactory','fdDetailsType', 'fdAuthorityType', 'fdActivityType',
-	'fdPollutantreleasesType', 'fdWastetransfersType', 'fdPollutanttransfersType', 
+	'fdPollutantreleasesType', 'fdWastetransfersType', 'fdPollutanttransfersType', 'fdReportingYearsService',
 	function($scope, $http, $filter, $sce, $modal, leafletData, eprtrcms,formatStrFactory, fdDetailsType, fdAuthorityType, fdActivityType, 
-		fdPollutantreleasesType, fdWastetransfersType, fdPollutanttransfersType) {
+		fdPollutantreleasesType, fdWastetransfersType, fdPollutanttransfersType, fdReportingYearsService) {
 
 /*
  * Basic parameters
  * */
+ $scope.hideNoData = true;
  $scope.fFactory = formatStrFactory;
  $scope.headitms = [];
  $scope.infoitms = [{'order':0,	'clss':'fdTitles', 	'title':'Facility Details',	'val': ' '}];
@@ -78,6 +79,8 @@ eprtrcms.get('Library',null).then(function (data) {
 /*	translationService.get('Facility').then(function (data) {
 		$scope.tr_f = data;
 	});*/
+
+
 
 /*
  * Reset collection when Reporting year changed  
@@ -196,35 +199,41 @@ $scope.orderReportingYears = function(data){
 	 $scope.updateByFdidAndyear = function(){
 	 	//$scope.map = {wh : {'FacilityID': $scope.fid, 'ReportingYear': $scope.year}};
 	 	fdDetailsType.getByFdIDAndYear($scope.fid,$scope.year).then(function (details) {
-	 		$scope.details = details[0];
-	 		$scope.frid = details[0].facilityReportID;
-	 		if(!$scope.showalert && details[0].confidentialIndicator != undefined){
-	 			$scope.showalert = details[0].confidentialIndicator;
+	 		if (!details[0]){
+	 			$scope.hideNoData = false;
 	 		}
-	 		fdAuthorityType.get(details[0].facilityReportID).get().then(function(authority) {
-	 			$scope.authority = authority;
-	 		});
-	 		fdActivityType.getList(details[0].facilityReportID).then(function(activit) {
-	 			$scope.activities = $scope.orderActivities(activit);
-	 		});
-	 		fdPollutantreleasesType.getList(details[0].facilityReportID).then(function(data) {
-	 			$scope.pollutantreleases = data;
-	 			if(!$scope.showalert && data.confidentialIndicator != undefined){
-	 				$scope.showalert = data.confidentialIndicator;
-	 			}
-	 		});
-	 		fdPollutanttransfersType.getList(details[0].facilityReportID).then(function(data) {
-	 			$scope.pollutanttransfers = data;
-	 			if(!$scope.showalert && data.confidentialIndicator != undefined){
-	 				$scope.showalert = data.confidentialIndicator;
-	 			}
-	 		});
-	 		fdWastetransfersType.getList(details[0].facilityReportID).then(function(data) {
-	 			$scope.wastetransfers = data;
-	 			if(!$scope.showalert && data.confidentialIndicator != undefined){
-	 				$scope.showalert = data.confidentialIndicator;
-	 			}
-	 		});
+	 		else{
+	 			$scope.hideNoData = true;
+		 		$scope.details = details[0];
+		 		$scope.frid = details[0].facilityReportID;
+		 		if(!$scope.showalert && details[0].confidentialIndicator != undefined){
+		 			$scope.showalert = details[0].confidentialIndicator;
+		 		}
+		 		fdAuthorityType.get(details[0].facilityReportID).get().then(function(authority) {
+		 			$scope.authority = authority;
+		 		});
+		 		fdActivityType.getList(details[0].facilityReportID).then(function(activit) {
+		 			$scope.activities = $scope.orderActivities(activit);
+		 		});
+		 		fdPollutantreleasesType.getList(details[0].facilityReportID).then(function(data) {
+		 			$scope.pollutantreleases = data;
+		 			if(!$scope.showalert && data.confidentialIndicator != undefined){
+		 				$scope.showalert = data.confidentialIndicator;
+		 			}
+		 		});
+		 		fdPollutanttransfersType.getList(details[0].facilityReportID).then(function(data) {
+		 			$scope.pollutanttransfers = data;
+		 			if(!$scope.showalert && data.confidentialIndicator != undefined){
+		 				$scope.showalert = data.confidentialIndicator;
+		 			}
+		 		});
+		 		fdWastetransfersType.getList(details[0].facilityReportID).then(function(data) {
+		 			$scope.wastetransfers = data;
+		 			if(!$scope.showalert && data.confidentialIndicator != undefined){
+		 				$scope.showalert = data.confidentialIndicator;
+		 			}
+		 		});
+	 		}
 	 	});
 };
 
@@ -233,6 +242,14 @@ $scope.orderReportingYears = function(data){
  * */	
  if ($scope.frid !== undefined && $scope.frid != null && $scope.frid != ''){
  	$scope.updateByFdrid();
+ }
+ else if ($scope.fid != undefined && !$scope.year){
+	 fdReportingYearsService.getList().then(function(data) {
+		 
+		 var reportingYears = data;
+		 $scope.year = reportingYears[reportingYears.length - 1].year;
+		 $scope.updateByFdidAndyear();
+	})
  }
  else if ($scope.fid != undefined && $scope.year != undefined && 
  	$scope.fid != null && $scope.year != null &&
@@ -262,6 +279,10 @@ $scope.orderReportingYears = function(data){
 					}
 				});
 				$scope.selectedReportingYear = $scope.reportingYears[indexes[0]];
+				if(indexes.length<1){
+					$scope.reportingYears.unshift({name:'Select a reporting year!',id:-1});
+					$scope.selectedReportingYear = $scope.reportingYears[0];
+				} 
 			});
 	}
 });
@@ -655,7 +676,16 @@ resolve: {
 /*
  * Services
  * */
- .service('fdAuthorityService', ['Restangular', function(Restangular){
+ 
+/* $http.get('/reportingYears').success(function(data, status, headers, config) {
+        $scope.reportingYears = data;
+        $scope.searchFilter.selectedReportingYear = $scope.reportingYears[$scope.reportingYears.length - 1];
+    });*/
+.service('fdReportingYearsService', ['Restangular', function(Restangular){
+        return Restangular.service('reportingYears');
+    }])
+
+.service('fdAuthorityService', ['Restangular', function(Restangular){
  	var fdAuthority = Restangular.service('facilitydetailAuthority');
 
  	Restangular.extendModel('facilitydetailAuthority', function(model) {

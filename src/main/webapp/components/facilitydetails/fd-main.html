@@ -23,8 +23,15 @@
       	<a class="text-danger" ng-click="activateTab('fdconf')" ><i class="fa fa-exclamation-triangle"></i>  {{tr_f.ConfidentialityAlertLink}}</a>
       </div>
    </div>
-   <div class="row" >
+       <!-- Disclaimer -->
+    <div class="row" ng-hide="hideNoData">
+		<div class="alert alert-warning">
+		<h4>No data found!</h4>
+		<div>The combination of facilityID: {{fid}} and reporting year: {{year}} returned no data. Try with another reporting year</div>
+		</div>
+	</div>
    
+   <div class="row" ng-hide="!hideNoData" >
           <tabset>
 <!-- 
 DETAILS
@@ -430,6 +437,7 @@ CONFIDENTIALITY
 	</div>
 		</tab>
 		</tabset>
+
     </div>
 
 <!-- 

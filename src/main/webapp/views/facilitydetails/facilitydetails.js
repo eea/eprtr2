@@ -14,7 +14,7 @@ angular.module('myApp.facilitydetails', ['ngRoute','myApp.fd-main'])
     $scope.fdrID = $routeParams.FacilityReportID !== undefined ? $routeParams.FacilityReportID: null;// 10;
     if($scope.fdrID === null){
 	    $scope.fdID = $routeParams.FacilityID !== undefined ? $routeParams.FacilityID: 9893;//null;
-	    $scope.year = $routeParams.ReportingYear !== undefined ? $routeParams.ReportingYear: 2010;//null;
+	    $scope.year = $routeParams.ReportingYear !== undefined ? $routeParams.ReportingYear: null;
     }
 
 }]);
