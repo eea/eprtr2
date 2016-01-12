@@ -46,6 +46,8 @@ module.exports = function(config){
       'src/main/webapp/bower_components/spin/javascripts/jquery.spin.js',
       'src/main/webapp/bower_components/ng-csv/build/ng-csv.min.js',
       'src/main/webapp/bower_components/angu-fixed-header-table/angu-fixed-header-table.js',
+      'src/main/webapp/bower_components/angular-wizard/dist/angular-wizard.min.js',
+      'src/main/webapp/bower_components/angular-cookie-law/dist/angular-cookie-law.min.js',
       // endbower
       'src/main/webapp/components/**/*.js',
       'src/main/webapp/view*/**/*.js'

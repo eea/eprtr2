@@ -22,7 +22,8 @@
                 trailing-slash="false"/>
         </mvc:annotation-driven>
 
-    <tx:annotation-driven transaction-manager="transactionManager" />  
+    <!--tx:annotation-driven transaction-manager="transactionManager" /-->  
+    <tx:annotation-driven  />  
 
     <util:properties id="application" location="classpath:application.properties"/>
 
@@ -30,9 +31,13 @@
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
+        <qualifier value="tmEprtr"/>
     </bean>
+
+    <!--tx:annotation-driven transaction-manager="transactionManagerCms" /-->  
     <bean id="transactionManagerCms" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactoryCms" />
+        <qualifier value="tmEprtrCms"/>
     </bean>
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     	<property name="persistenceUnitName" value="eprtr"/>
