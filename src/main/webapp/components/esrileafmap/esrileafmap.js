@@ -7,7 +7,7 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 .constant('elmconf',{
 	//http://air.discomap.eea.europa.eu/arcgis/rest/services/Air/EprtrFacilities_Dyna_WGS84/FeatureServer
 	//http://sdkcga6350:6080/arcgis/rest/services/EprtrFacilities/FeatureServer/0
-	'eprtrLayerUrl':'http://discomap.eea.europa.eu/arcgis/rest/services/Air/EprtrFacilities_Dyna_WGS84/FeatureServer/0',
+	'eprtrLayerUrl':'http://air.discomap.eea.europa.eu/arcgis/rest/services/Air/EprtrFacilities_Dyna_WGS84/FeatureServer/0',
 	'europebounds': [53.526, 10.667],
 	'europezoom': 3,
 	'passInFilter': ['FacilityReportID','FacilityName','FacilityID','NationalID',

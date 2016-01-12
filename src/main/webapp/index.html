@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="bower_components/Leaflet.EasyButton/src/easy-button.css" />
   <link rel="stylesheet" href="bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css" />
   <link rel="stylesheet" href="bower_components/spin/stylesheets/jquery.spin.css" />
+  <link rel="stylesheet" href="bower_components/angular-wizard/dist/angular-wizard.min.css" />
+  <link rel="stylesheet" href="bower_components/angular-cookie-law/dist/angular-cookie-law.min.css" />
   <!-- endbower -->
   <!-- build:css(.tmp) styles/main.css -->
   <link href="styles/eprtr-custom.css" rel="stylesheet">
@@ -29,6 +31,7 @@
 <body>
 
 <div ng-controller="HeaderController">
+<cookie-law-banner policy-button="true" message="We use cookies to record some preference settings and to analyse how visitors use our web site. Cookies do not contain any personal information about you. If you wish, see how to delete/disable cookies in your web browser but then our site may not work correctly. See also our privacy policy." policy-url="http://www.eea.europa.eu/#tlspu_cookiepolicy_title"></cookie-law-banner>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
       <div class="row bs-header">
@@ -125,7 +128,7 @@
 
     <div id="container" class="container-fluid">
   	    <div class="col-md-12"> 
-  	    <div ng-controller="HeaderController"> 
+  	    <div ><!--  ng-controller="HeaderController"-->  
 <!--   	         <h2>{{subtitle}}</h2> -->
   	     </div>   
 	    	<div id="workarea">
@@ -135,6 +138,22 @@
 	      	</div> <!-- workarea -->      
       	</div>
     </div>  <!-- container -->
+ 
+ <!-- 
+POLLUTANT MODAL
+ -->
+    <script type="text/ng-template" id="eprtrSurveyContent.html">
+		<div class="modal-header ">
+        <button type="button" class="close" ng-click="ok()" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="eprtrSurveyTitel">E-PRTR Survey</h4>
+      </div>
+        <div class="modal-body">
+			<div class="top-buffer10 panel " >
+				<eprtrsurvey finish="finish"/>
+			</div>
+        </div>
+    </script>
+ 
  
 <footer class="footer">
 	<div class="container-fluid bs-footer">
@@ -221,6 +240,8 @@
   <script src="bower_components/spin/javascripts/jquery.spin.js"></script>
   <script src="bower_components/ng-csv/build/ng-csv.min.js"></script>
   <script src="bower_components/angu-fixed-header-table/angu-fixed-header-table.js"></script>
+  <script src="bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
+  <script src="bower_components/angular-cookie-law/dist/angular-cookie-law.min.js"></script>
   <!-- endbower -->
   <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
   <!-- endbuild --> 
@@ -276,6 +297,7 @@
   <script src="components/pollutants-details/pd-main.js"></script>
   <script src="components/charts/ng-google-chart.js"></script>
   <script src="components/lcp/lcpdetails.js"></script>
+  <script src="components/survey/survey.js"></script>
   <script src="components/search-placement/lcp-search-placement.js"></script>
   <script src="directives/dd-text-collapse.js"></script>
   <script src="directives/wastetype-selector.js"></script>

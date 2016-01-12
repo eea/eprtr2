@@ -1,0 +1,42 @@
+<div id="facility_details" class="container-fluid" >
+ <div class="row">
+<wizard on-finish="finishedWizard()"> 
+    <!-- wz-step title="Starting">
+        <h1>Hello</h1>
+        <p>Would you mind helping us answering ...</p>
+        <input type="submit" class="btn btn-primary" value="No thanks" /><span/><input type="submit" class="btn btn-success" wz-next value="Continue" />
+    </wz-step -->
+    <wz-step ng-repeat="survey in surveyitems | orderBy:'index'" title="{{survey.surveyLabel}}" canexit="validateanswer(survey.surveyID)">
+    	<div style="min-height:150px;padding: 0px 40px;">
+        <div ng-bind-html="survey.surveyText"></div>
+        <div ng-repeat="item in survey.surveyItems | orderBy : 'index'" class="radio">
+  			<label><input type="radio" ng-model="qradio[survey.surveyID]" name="optradio_{{survey.surveyID}}" value="{{item.surveyItemResultID}}">{{item.surveyItem}}</label>
+		</div>
+		</div>
+		<div class="text-center" style="margin-bottom:10px;">
+        <input type="submit" class="btn btn-primary" ng-click="cancel()" value="{{survey.btnnotxt}}" ng-hide="!survey.btnnotxt" />
+        <input type="submit" class="btn btn-success" wz-next value="{{survey.btngotxt}}" ng-hide="!survey.btngotxt"  />
+        <input type="submit" class="btn btn-success" ng-click="finishsurvey()" value="{{survey.btnfinishtxt}}" ng-hide="!survey.btnfinishtxt"  />
+        </div>
+    </wz-step>
+    <!--wz-step title="Thanks">
+        <p>Thank you for the help!</p>
+        <input type="submit" class="btn btn-success" value="Finish now" ng-click="finishsurvey" />
+    </wz-step-->
+</wizard>
+</div>
+</div>
+
+<!-- 
+<wizard on-finish="finishedWizard()" hide-indicators="true" current-step="currentPage"> 
+
+<wz-step title="{{page.label}}" ng-repeat="page in pages | orderBy:sequenceSort" class="clearfix"> 
+	<div ng-repeat="question in page.questions"> 
+		<question my-question="question" my-assignment-id="assignmentId" page="page" ng-model="question" class="questionMargin"></question> 
+	</div> 
+	{{page.sequence}} 
+	<button class="btn btn-primary pull-left" ng-click="cancel()">Annuleer</button> 
+	<button class="btn btn-primary pull-right" type="submit" wz-next>Volgende</button> 
+</wz-step> 
+</wizard>
+ -->

@@ -7,7 +7,7 @@ angular.module('myApp.emissionmapair', ['ngRoute','leaflet-directive'])
 .constant('emaconf',{
 	//http://air.discomap.eea.europa.eu/arcgis/rest/services/Air/EprtrFacilities_Dyna_WGS84/FeatureServer
 	//http://sdkcga6350:6080/arcgis/rest/services/EprtrFacilities/FeatureServer/0
-	'EPRTRDiffuseEmissionsAirUrl':'http://discomap.eea.europa.eu/arcgis/rest/services/Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer',
+	'EPRTRDiffuseEmissionsAirUrl':'http://air.discomap.eea.europa.eu/arcgis/rest/services/Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer',
 	'europebounds': [53.526, 10.667],
 	'europezoom': 3,
 	'dealayers':{

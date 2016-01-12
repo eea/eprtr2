@@ -9,7 +9,7 @@ angular.module('myApp.home', ['ngRoute'])
   });
 }])
 
-.controller('HomeCtrl', ['$scope','$rootScope', '$filter', 'eprtrcms', '$http' , function($scope, $rootScope,  $filter, eprtrcms, $http) {
+.controller('HomeCtrl', ['$scope','$rootScope', '$filter', 'eprtrcms', '$http' , function($scope, $rootScope,  $filter,  eprtrcms, $http) {
 	/**
 	 * DO NOT REMOVE - part of home.test
 	 */
@@ -17,6 +17,8 @@ angular.module('myApp.home', ['ngRoute'])
 		return inp;
 	}
     $scope.mapctrl = {};
+    
+
 	
 	eprtrcms.get('Static',null).then(function (data) {
 		$scope.tr_f = data;
@@ -40,6 +42,9 @@ angular.module('myApp.home', ['ngRoute'])
     		$scope.mapctrl.redraw();
     	}
     });
+    
+
+
 }])
 
 .factory('formatStrFactory', ['$filter', function($filter){
@@ -442,7 +447,7 @@ angular.module('myApp.home', ['ngRoute'])
     			'LOV_WASTETYPE':{},'MAP_BookmarkWidgetStrings':{},'MAP_ControllerStrings':{},'MAP_FilterAllWidgetString':{},
     			'MAP_FilterAllWidgetStrings':{},'MAP_GazetteerWidgetStrings':{},'MAP_LookupSearchAllWidgetStrings':{},
     			'MAP_OverviewMapWidgetStrings':{},'MAP_PrintWidgetStrings':{},'MAP_SearchAllWidgetStrings':{},
-    			'MAP_WidgetTemplateStrings':{},'MapSearch':{},'Pollutant':{},'Static':{},'Timeseries':{},'WasteTransfers':{},'Pollutantinfo':{}};
+    			'MAP_WidgetTemplateStrings':{},'MapSearch':{},'Pollutant':{},'Static':{},'Timeseries':{},'WasteTransfers':{},'Pollutantinfo':{},'SURVEY':{}};
     	
     	return {
     	  get: function(type,i18n) {

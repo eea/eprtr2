@@ -29,7 +29,9 @@
     "angular-spinner":"*",
     "spin":"*",
     "ng-csv":"*",
-    "angu-fixed-header-table":"*"
+    "angu-fixed-header-table":"*",
+    "angular-wizard":"0.6.1",
+    "angular-cookie-law":"0.1.x"
   },
   "appPath": "src/main/webapp"
 }
