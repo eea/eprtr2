@@ -115,12 +115,12 @@
 					<tr>
 						<th class="text-right" style="width:75px;">{{tr_c.Year}}</th>
 						<th class="text-right">{{tr_lcp.Biomass}}</th>
-						<th class="text-right" >{{tr_lcp.Hardcoal}}</th>
-						<th class="text-right" >{{tr_lcp.Lignite}}</th>
 						<th class="text-right" >{{tr_lcp.Othersolidfuels}}</th>
 						<th class="text-right" >{{tr_lcp.Liquidfuels}}</th>
 						<th class="text-right" >{{tr_lcp.Naturalgas}}</th>
 						<th class="text-right" >{{tr_lcp.Othergases}}</th>
+						<!--th class="text-right" >{{tr_lcp.Hardcoal}}</th>
+						<th class="text-right" >{{tr_lcp.Lignite}}</th-->
 					</tr>
 				</thead>
 			  <tr ng-repeat="item in energyinput">
@@ -130,8 +130,8 @@
 			    <td class="text-right">{{ item.liquidfuels }}</td>
 			    <td class="text-right">{{ item.naturalgas }}</td>
 			    <td class="text-right">{{ item.othergases }}</td>
-			    <td class="text-right">{{ item.hardcoal }}</td>
-			    <td class="text-right">{{ item.lignite }}</td>
+			    <!--td class="text-right">{{ item.hardcoal }}</td>
+			    <td class="text-right">{{ item.lignite }}</td-->
 			  </tr>
 			</table>
 <label class="control-label top-buffer10" >Emissions (in tonnes)</label>
