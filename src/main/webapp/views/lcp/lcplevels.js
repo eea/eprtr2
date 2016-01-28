@@ -12,9 +12,9 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
 
 
 .controller('lcpLevelsCtrl', ['$scope', '$filter', '$http', '$modal', 'searchFilter', 'Restangular', 'eprtrcms', 
-                                 'lovCountryType', 'lovAreaGroupType', 'lovNutsRegionType','formatStrFactory', 'lcpDataService', 'lcpconf',
+                                 'lovCountryType', 'lovAreaGroupType', 'lovNutsRegionType','formatStrFactory', 'lcpDataService', 'lcpconf','eprtrmaps',
                                  function($scope, $filter, $http, $modal, searchFilter, Restangular, eprtrcms,
-                                		 lovCountryType, lovAreaGroupType, lovNutsRegionType, formatStrFactory, lcpDataService, lcpconf) {
+                                		 lovCountryType, lovAreaGroupType, lovNutsRegionType, formatStrFactory, lcpDataService, lcpconf,eprtrmaps) {
 	
 	$scope.beforesearch = true;
     $scope.areaFilter = false;
@@ -56,6 +56,9 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
 	});
 	eprtrcms.get('LOV_NUTSREGION',null).then(function (data) {
 		$scope.tr_lnr = data;
+	});
+	eprtrmaps.get().then(function (data){
+		$scope.mapurls = data;
 	});
 	$scope.$watch('mapctrl', function(value) {
     	if(typeof $scope.mapctrl.redraw == 'function'){
@@ -139,8 +142,8 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
         $scope.createheader();
 	}
 	
-    $scope.$watchCollection('[countryCode,reportingYear,lcpcapacities]', function(newvalue,oldvalue) {
-    	if($scope.queryParams && $scope.queryParams.ReportingYear != -1){
+    $scope.$watchCollection('[countryCode,reportingYear,lcpcapacities,mapurls]', function(newvalue,oldvalue) {
+    	if($scope.queryParams && $scope.queryParams.ReportingYear != -1 && $scope.mapurls){
     		//if(($scope.areaFilter && $scope.countryCode) || (!$scope.areaFilter && $scope.countryCode == undefined)){
     			if($scope.countryCode){
     				$scope.queryParams.countryCode = $scope.countryCode;
@@ -148,7 +151,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     			/*if($scope.regionCode){
     				$scope.queryParams.regionCode = $scope.regionCode;
     			}*/
-    	        lcpDataService.get(1,$scope.queryParams).then(function (data) {
+    	        lcpDataService.get($scope.mapurls.lcpUrl,1,$scope.queryParams).then(function (data) {
     	        	$scope.basicdata = [];
     	        	var _basicitems = {};
     	        	if(data){
@@ -187,8 +190,8 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     	}
     });
 	
-    $scope.$watch('basicdata', function(value) {
-    	if($scope.basicdata){
+    $scope.$watchCollection('[basicdata,mapurls]', function(value) {
+    	if($scope.basicdata && $scope.mapurls){
     		$scope.basicidcountrycode = {};
     		var _que = {}, _cou = -1;
     		if (typeof $scope.basicdata !== 'string'){
@@ -218,7 +221,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     		}
     		$scope.mapQuery = _que;
     		if(!jQuery.isEmptyObject(_que)){
-                lcpDataService.get(0,_que).then(function (data) {
+                lcpDataService.get($scope.mapurls.lcpUrl,0,_que).then(function (data) {
                 	if($scope.lcpcapacities == 'all'){
                 		$scope.formatPlantdata(data.features);
                 	}
@@ -241,7 +244,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
               			    _qp = "MWth BETWEEN 50 AND 100";
               			    break;
             			}
-            			var _qstring = lcpconf.lcpLayerUrl + "0/queryRelatedRecords?objectIds="+ _oids.join(",") 
+            			var _qstring = $scope.mapurls.lcpUrl + "/0/queryRelatedRecords?objectIds="+ _oids.join(",") 
             			+"&definitionExpression=" + _qp
             			+"&relationshipId=3&outFields="+ lcpconf.layerfields[5].fk_plant_id +"&f=pjson";
 
@@ -253,7 +256,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
             				//Recall Plants
             				var _que2 = {'PlantGroup':_pids};
             				$scope.mapQuery = _que2;
-        	                lcpDataService.get(0,_que2).then(function (data2) {
+        	                lcpDataService.get($scope.mapurls.lcpUrl,0,_que2).then(function (data2) {
     	                		$scope.formatPlantdata(data2.features);
     	                	});
         				});

@@ -362,83 +362,7 @@ angular.module('myApp.home', ['ngRoute'])
 	}
 }])
 
-/*.factory('ChartService', function() {
-    return {
-        loadGoogleVisualization: function() {
-            
-            // Using a try/catch block to guard against unanticipated 
-            // errors when loading the visualization lib
-            try {
-
-                // Arbitrary callback required in google.load() to 
-                // support loading after initial page rendering
-                google.load('visualization', '1', {
-                    'callback':'console.log(\'success\');', 
-                    'packages':['bar']
-                });
-               
-                return true;
-            
-            } catch(e) {
-                console.log('Could not load Google lib', e);
-                return false;  
-            }
-
-        }
-    };
-})*/
-/*
- * This service returns the resource part (type) requested
- * Look at the resource files in \translations folder for part overview
- * */
-/*    .service('eprtrcms', function(Restangular, $q) {
-    	var res ={'Activity':{},'AreaOverview':{},'ChartLabels':{},'Common':{},'Confidentiality':{},
-    			'DiffuseSources':{},'Facility':{},'FAQ':{},'FilterAllWidgetStrings':{},'Glossary':{},'Help':{},'IndustrialActivity':{},'LCP':{},
-    			'Library':{},'LOV_ANNEXIACTIVITY':{},'LOV_AREAGROUP':{},'LOV_CONFIDENTIALITY':{},'LOV_COUNTRY':{},
-    			'LOV_MEDIUM':{},'LOV_METHODBASIS':{},'LOV_METHODTYPE':{},'LOV_NACEACTIVITY':{},'LOV_NUTSREGION':{},
-    			'LOV_POLLUTANT':{},'LOV_REGULATION':{},'LOV_RIVERBASINDISTRICT':{},'LOV_UNIT':{},'LOV_WASTETREATMENT':{},
-    			'LOV_WASTETYPE':{},'MAP_BookmarkWidgetStrings':{},'MAP_ControllerStrings':{},'MAP_FilterAllWidgetString':{},
-    			'MAP_FilterAllWidgetStrings':{},'MAP_GazetteerWidgetStrings':{},'MAP_LookupSearchAllWidgetStrings':{},
-    			'MAP_OverviewMapWidgetStrings':{},'MAP_PrintWidgetStrings':{},'MAP_SearchAllWidgetStrings':{},
-    			'MAP_WidgetTemplateStrings':{},'MapSearch':{},'Pollutant':{},'Static':{},'Timeseries':{},'WasteTransfers':{}};
-    	
-    	return {
-    	  get: function(type,i18n) {
-        	var deferred = $q.defer();
-        	//We extend the service at some point with language - we can get it from cookie or drop down:
-        	//language = (language == undefined || language == '')? 'en-gb': language;
-        	var language = (i18n)?i18n:'en-gb';
-        	if(res[type] && typeof res[type] !== 'string' && Object.keys(res[type]).length < 1){
-        		var rest = Restangular.withConfig(function(RestangularConfigurer) {
-        			RestangularConfigurer.setFullResponse(true);
-        		});
-        		var _qp = {'i18n':language,'Type':type};
-        		var eprtrresource = rest.all('eprtrresource');
-        		eprtrresource.getList(_qp).then(function(response) {
-        			angular.forEach(response.data, function(item) {
-        				res[type][item.type]= item.value;
-	        		});
-        			//res[type] = response.data;
-        			deferred.resolve(res[type]); 	
-            	//return res[type];
-	          },
-	          function(errors) {
-	            deferred.reject(errors);
-	          },
-	          function(updates) {
-	            deferred.update(updates);
-	          });
-        	}
-        	else{
-        		deferred.resolve(res[type]);        		
-        	}
-          return deferred.promise;
-        }
-      };
-    })
-*/
-
-    .service('eprtrcms', function($http, $q) {
+.service('eprtrcms', function($http, $q) {
     	var res ={'Activity':{},'AreaOverview':{},'ChartLabels':{},'Common':{},'Confidentiality':{},
     			'DiffuseSources':{},'Facility':{},'FAQ':{},'FilterAllWidgetStrings':{},'Glossary':{},'Help':{},'IndustrialActivity':{},'LCP':{},
     			'Library':{},'LOV_ANNEXIACTIVITY':{},'LOV_AREAGROUP':{},'LOV_CONFIDENTIALITY':{},'LOV_COUNTRY':{},
@@ -479,35 +403,39 @@ angular.module('myApp.home', ['ngRoute'])
       };
     })
 
+ .service('eprtrmaps', function($http, $q) {
+	 var mapurls={};
+
+	 return {
+		 get: function() {
+			 var deferred = $q.defer();
+			//We extend the service at some point with language - we can get it from cookie or drop down:
+			 if(Object.keys(mapurls).length < 1){
+				 var _qp = '/mapurls';
+		
+				 $http.get(_qp).success(function(results) {
+					 angular.forEach(results, function(value, key) {
+						mapurls[key]= value;
+					 });
+		        	 deferred.resolve(mapurls); 
+				 },
+				 function(errors) {
+					 deferred.reject(errors);
+				 },
+				 function(updates) {
+					 deferred.update(updates);
+				 });
+			}
+			else{
+				deferred.resolve(mapurls);        		
+			}
+			 return deferred.promise;
+		 }
+	};
+})
 
 
-/*.service('translationService', function($http, $q) {
-      return {
-    	  get: function(type) {
-        	var deferred = $q.defer();
-        	//We extend the service at some point with language - we can get it from cookie or drop down:
-        	//language = (language == undefined || language == '')? 'en-gb': language;
-        	var language = 'en-gb';
-		    var languageFilePath = 'translations/eprtr-resource_' + language + '.json';
-		    $http.get(languageFilePath).success(function(results) {
-        	  if(type != undefined && type != ''){
-        		  results = results[type];
-        	  }
-        	  deferred.resolve(results) 
-		    },
-	          function(errors) {
-	            deferred.reject(errors);
-	          },
-	          function(updates) {
-	            deferred.update(updates);
-	          });
-	          return deferred.promise;
-         }
-      };
-    })
-*/
-
-    .service('emissionsService', function($http, $q) {
+.service('emissionsService', function($http, $q) {
       return {
     	  get: function(type) {
         	var deferred = $q.defer();

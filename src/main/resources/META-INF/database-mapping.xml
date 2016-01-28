@@ -9,15 +9,15 @@
             mapped-superclasses and embeddable metadata should be picked up from
             XML (ie ignore annotations).
         -->
-        <persistence-unit-defaults>
+        <!--persistence-unit-defaults -->
             <!--
                 schema / catalog will override all default definitions of schema and
                 catalog in the metadata (both XML and annotations).
             -->
-            <schema>dbo</schema>
+            <!--schema>dbo</schema>
             <catalog>EPRTRpublic</catalog>
             <access>FIELD</access>
-        </persistence-unit-defaults>
+        </persistence-unit-defaults -->
         
     </persistence-unit-metadata>
 </entity-mappings>

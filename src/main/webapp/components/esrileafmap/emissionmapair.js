@@ -47,7 +47,7 @@ angular.module('myApp.emissionmapair', ['ngRoute','leaflet-directive'])
 
 	})
 
-.controller('emissionMapAirController', ['$scope', '$http',  'leafletData', 'emaconf', function($scope, $http, leafletData, emaconf) {
+.controller('emissionMapAirController', ['$scope', '$http',  'leafletData', 'emaconf', 'eprtrmaps', function($scope, $http, leafletData, emaconf,eprtrmaps) {
 	var elm_ctrl = this;
 	
 	$scope.legenddef = {};
@@ -65,64 +65,74 @@ angular.module('myApp.emissionmapair', ['ngRoute','leaflet-directive'])
 		}
 	};
 	$scope.getLegenddef = function(){
-		$http.get(emaconf.EPRTRDiffuseEmissionsAirUrl+'/legend?f=pjson').success(function(data, status) {
+		$http.get($scope.mapurls.emissionairUrl+'/legend?f=pjson').success(function(data, status) {
 			$scope.legenddef = data;
 		});
 	}
-	$scope.getLegenddef();
-	//Here we initialize the map
-	leafletData.getMap().then(function(map) {
-		//Initial extent
-		map.invalidateSize();
-		map.setView(emaconf.europebounds, emaconf.europezoom);
-		map.attributionControl = false;
-		
-		elm_ctrl.elm_map = map
-		
-		//We set the baselayer - in version 2 we can add more baselayers and a selector
-		L.esri.basemapLayer("Streets").addTo(map);
-
-		elm_ctrl.dmlay = L.esri.dynamicMapLayer({
-			url:emaconf.EPRTRDiffuseEmissionsAirUrl, 
-		    opacity: 0.5,
-		    useCors: false,
-		    layers:[0],
-			f: 'image'
-		  });//.addTo(map);
-
-		if($scope.layerid != undefined){
-			elm_ctrl.dmlay.layers = [emaconf.dealayers[$scope.layerid]];	
-		}
-		elm_ctrl.dmlay.addTo(map);
-		
-		$scope.createLegend();
-
-		$scope.toggleLegend = L.easyButton({
-			  states: [{
-			    stateName: 'show-legend',
-			    icon: 'fa-bars',
-			    title: 'show legend',
-			    onClick: function(control) {
-			    	if(elm_ctrl.legend != undefined){
-			    		elm_ctrl.legend.addTo(elm_ctrl.elm_map);
-			    		control.state('hide-legend');
-			    	}
-			    }
-			  }, {
-			    icon: 'fa-bars',
-			    stateName: 'hide-legend',
-			    onClick: function(control) {
-			    	if(elm_ctrl.legend != undefined){
-				      elm_ctrl.elm_map.removeControl(elm_ctrl.legend);
-				      control.state('show-legend');
-			    	}
-			    },
-			    title: 'hide legend'
-			  }]
-			});
-		$scope.toggleLegend.addTo(elm_ctrl.elm_map);
 	
+	eprtrmaps.get().then(function (data){
+		$scope.mapurls = data;
+	});
 
+	$scope.$watch('mapurls', function() {
+		if($scope.mapurls){
+
+			$scope.getLegenddef();
+			//Here we initialize the map
+			leafletData.getMap().then(function(map) {
+				//Initial extent
+				map.invalidateSize();
+				map.setView(emaconf.europebounds, emaconf.europezoom);
+				map.attributionControl = false;
+				
+				elm_ctrl.elm_map = map
+				
+				//We set the baselayer - in version 2 we can add more baselayers and a selector
+				L.esri.basemapLayer("Streets").addTo(map);
+		
+				elm_ctrl.dmlay = L.esri.dynamicMapLayer({
+					url:$scope.mapurls.emissionairUrl, 
+				    opacity: 0.5,
+				    useCors: false,
+				    layers:[0],
+					f: 'image'
+				  });//.addTo(map);
+		
+				if($scope.layerid != undefined){
+					elm_ctrl.dmlay.layers = [emaconf.dealayers[$scope.layerid]];	
+				}
+				elm_ctrl.dmlay.addTo(map);
+				
+				$scope.createLegend();
+		
+				$scope.toggleLegend = L.easyButton({
+					  states: [{
+					    stateName: 'show-legend',
+					    icon: 'fa-bars',
+					    title: 'show legend',
+					    onClick: function(control) {
+					    	if(elm_ctrl.legend != undefined){
+					    		elm_ctrl.legend.addTo(elm_ctrl.elm_map);
+					    		control.state('hide-legend');
+					    	}
+					    }
+					  }, {
+					    icon: 'fa-bars',
+					    stateName: 'hide-legend',
+					    onClick: function(control) {
+					    	if(elm_ctrl.legend != undefined){
+						      elm_ctrl.elm_map.removeControl(elm_ctrl.legend);
+						      control.state('show-legend');
+					    	}
+					    },
+					    title: 'hide legend'
+					  }]
+					});
+				$scope.toggleLegend.addTo(elm_ctrl.elm_map);
+			
+		
+			});
+		}
 	});
 	
 	$scope.redraw = function(){
@@ -148,7 +158,7 @@ angular.module('myApp.emissionmapair', ['ngRoute','leaflet-directive'])
 				if (item.layerId.toString() == elm_ctrl._layid){
 					elm_ctrl.legend._div.innerHTML = '<h4>'+item.layerName+'</h4>';
 				    angular.forEach(item.legend, function(leg) {
-				    	var _url = emaconf.EPRTRDiffuseEmissionsAirUrl + '/0/images/' + leg.url;
+				    	var _url = $scope.mapurls.emissionairUrl + '/0/images/' + leg.url;
 				    	//<img style="-webkit-user-select: none" src="http://test.discomap.eea.europa.eu/arcgis/rest/services/AIR/EPRTRDiffuseEmissionsWater/MapServer/0/images/7f34224c77c077f1d419c50fac65e787">
 				    	elm_ctrl.legend._div.innerHTML += '<img src="'+_url+'" style="width:'+leg.width+';height:'+leg.height+';" > ' + leg.label + '<br>';
 				    });

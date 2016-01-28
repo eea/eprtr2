@@ -62,7 +62,7 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 
 })
 
-.controller('lcpMapController', ['$scope',  'leafletData', 'lcpconf', 'eprtrcms', function($scope,  leafletData, lcpconf, eprtrcms) {
+.controller('lcpMapController', ['$scope',  'leafletData', 'lcpconf', 'eprtrcms','eprtrmaps', function($scope,  leafletData, lcpconf, eprtrcms,eprtrmaps) {
 	var elm_ctrl = this;
 	$scope.legenddef = {};
 
@@ -71,7 +71,10 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 		$scope.lov = data;
 	});
 
-	
+	eprtrmaps.get().then(function (data){
+		$scope.mapurls = data;
+	});
+
 	/*$scope.$watchCollection('[lov,elm_ctrl]', function(value){
     	if($scope.lov && elm_ctrl.elm_map){
     		$scope.createLegend();
@@ -178,42 +181,47 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
         }
     };
 
-	//Here we initialize the map
-	leafletData.getMap().then(function(map) {
-		//Initial extent
-		map.invalidateSize();
-		map.setView(lcpconf.europebounds, lcpconf.europezoom);
-		map.attributionControl = false;
-		
-		elm_ctrl.elm_map = map
-		
-		L.esri.get = L.esri.Request.get.JSONP;
-		//We set the baselayer - in version 2 we can add more baselayers and a selector
-		L.esri.basemapLayer("Streets").addTo(map);
+	$scope.$watch('mapurls', function() {
+		if($scope.mapurls){
 
-		elm_ctrl.dmlay = L.esri.dynamicMapLayer({
-			url: lcpconf.lcpLayerUrl,
-		    opacity: 0.5,
-		    useCors: false,
-		    layers:[0],
-			f: 'image'
-			});//.addTo(map);
+			//Here we initialize the map
+			leafletData.getMap().then(function(map) {
+				//Initial extent
+				map.invalidateSize();
+				map.setView(lcpconf.europebounds, lcpconf.europezoom);
+				map.attributionControl = false;
+				
+				elm_ctrl.elm_map = map
+				
+				L.esri.get = L.esri.Request.get.JSONP;
+				//We set the baselayer - in version 2 we can add more baselayers and a selector
+				L.esri.basemapLayer("Streets").addTo(map);
 		
-		elm_ctrl.dmlay.addTo(map);
-		
-		elm_ctrl.dmlay.bindPopup(function (error, featureCollection) {
-		    if(error || featureCollection.features.length === 0) {
-		      return false;
-		    } else {
-		    	var keys = Object.keys(featureCollection.features[0].properties);
-		    	var _str = '<p><em>Plant</em>: '+featureCollection.features[0].properties[keys[3]]+'<br>';
-		    	_str += '<em>Facility</em>: '+featureCollection.features[0].properties[keys[5]]+'<br>';
-			    _str += '<a href=#lcpdetailsview?PlantID='+featureCollection.features[0].properties[keys[1]]+' >details</a></p>';
-		    	//, feature.properties
-        	    return _str;//L.Util.template(_str, featureCollection.features[0].properties);
-//href="#lcpdetailsview?PlantID='+featureCollection.features[0].properties[keys[1]]+'"
-		    }
-		  });
+				elm_ctrl.dmlay = L.esri.dynamicMapLayer({
+					url: $scope.mapurls.lcpUrl,
+				    opacity: 0.5,
+				    useCors: false,
+				    layers:[0],
+					f: 'image'
+					});//.addTo(map);
+				
+				elm_ctrl.dmlay.addTo(map);
+				
+				elm_ctrl.dmlay.bindPopup(function (error, featureCollection) {
+				    if(error || featureCollection.features.length === 0) {
+				      return false;
+				    } else {
+				    	var keys = Object.keys(featureCollection.features[0].properties);
+				    	var _str = '<p><em>Plant</em>: '+featureCollection.features[0].properties[keys[3]]+'<br>';
+				    	_str += '<em>Facility</em>: '+featureCollection.features[0].properties[keys[5]]+'<br>';
+					    _str += '<a href=#lcpdetailsview?PlantID='+featureCollection.features[0].properties[keys[1]]+' >details</a></p>';
+				    	//, feature.properties
+		        	    return _str;//L.Util.template(_str, featureCollection.features[0].properties);
+		//href="#lcpdetailsview?PlantID='+featureCollection.features[0].properties[keys[1]]+'"
+				    }
+				  });
+			});
+		}
 	});
 	
 	$scope.setDetails = function(plantid){

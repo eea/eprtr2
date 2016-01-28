@@ -1,6 +1,7 @@
 package eea.eprtrcms.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 

@@ -225,6 +225,157 @@
                 </pluginManagement>
             </build>
     	</profile>
+    	        <profile>
+          <id>docker</id>
+          <properties>
+            <tomcat.port>4180</tomcat.port>
+          </properties>
+
+          <build>
+            <plugins>
+              <plugin>
+                <groupId>org.jolokia</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.13.6</version>
+                <configuration>
+                  <verbose>true</verbose>
+                  <logDate>default</logDate>
+                  <autoPull>true</autoPull>
+                  <images>
+                    <image>
+                      <alias>service</alias>
+                      <name>dockerrepo.eionet.europa.eu:5000/${project.artifactId}</name>
+                      <build>
+                        <from>tomcat:8.0.28-jre7</from>
+                        <maintainer>Søren Roug &lt;soren.roug@eea.europa.eu&gt;</maintainer>
+                        <tags>
+                          <tag>latest</tag>
+                          <tag>${project.version}</tag>
+                        </tags>
+                        <assembly>
+                          <descriptor>assembly.xml</descriptor>
+                        </assembly>
+                        <runCmds>
+                          <run>rm -rf /usr/local/tomcat/webapps/*</run>
+                          <run>mv /maven/ROOT.war /usr/local/tomcat/webapps/ROOT.war</run>
+                          <run>mv /maven/sqljdbc41.jar /usr/local/tomcat/lib/sqljdbc41.jar</run>
+                        </runCmds>
+                        <optimise>true</optimise>
+
+                        <!-- Expose ports -->
+                        <ports>
+                          <port>8080</port>
+                          <port>8009</port>
+                        </ports>
+                        <!-- Default command for the build image -->
+                        <!--<cmd>catalina.sh run</cmd> -->
+                      </build>
+                      <run>
+                        <env>
+                          <CATALINA_OPTS>-Dspring.profiles.active=test -Dcmsdb.driver=net.sourceforge.jtds.jdbc.Driver -Dcmsdb.url=jdbc:jtds:sqlserver://sdkcga6350;database=EPRTRcms -Dcmsdb.username=dbuser -Dcmsdb.password=password -Deprtrdb.driver=net.sourceforge.jtds.jdbc.Driver -Deprtrdb.url=jdbc:jtds:sqlserver://sdkcga6350;database=EPRTRPublic -Deprtrdb.username=dbuser -Deprtrdb.password=password</CATALINA_OPTS>
+                        </env>
+                        <!-- Assign dynamically mapped ports to maven variables (which can be reused in integration tests) -->
+                        <ports>
+                          <port>tomcat.port:8080</port>
+                        </ports>
+                        <wait>
+                          <log>Deployment of web application archive /usr/local/tomcat/webapps/ROOT.war has finished in</log>
+                          <!-- Check for this URL to return a 200 return code .... -->
+                          <!-- <url>http://${docker.host.address}:${tomcat.port}/</url>-->
+                          <time>60000</time>
+                        </wait>
+                        <links>
+                          <link>database</link>
+                        </links>
+                        <log>
+                          <prefix>TC</prefix>
+                          <color>cyan</color>
+                        </log>
+                      </run>
+                    </image>
+                  </images>
+
+                </configuration>
+
+                <!-- Hooking into the lifecycle -->
+                <executions>
+                  <execution>
+                    <id>start</id>
+                    <phase>pre-integration-test</phase>
+                    <goals>
+                      <goal>build</goal>
+                      <goal>start</goal>
+                    </goals>
+                  </execution>
+                  <execution>
+                    <id>stop</id>
+                    <phase>post-integration-test</phase>
+                    <goals>
+                      <goal>stop</goal>
+                    </goals>
+                  </execution>
+                </executions>
+              </plugin>
+
+              <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.19</version>
+                <configuration>
+                  <systemPropertyVariables>
+                  	<env>dev</env>
+                    <cmsdb.url>jdbc:jtds:sqlserver://${docker.host.address}:${database.port};database=${database.cmsname}</cmsdb.url><!--;MODE=MSSQLServer-->
+                    <cmsdb.driver>net.sourceforge.jtds.jdbc.Driver</cmsdb.driver>
+                    <cmsdb.username>dbuser</cmsdb.username>
+                    <cmsdb.password>password</cmsdb.password>
+                    <eprtrdb.url>jdbc:jtds:sqlserver://${docker.host.address}:${database.port};database=${database.eprtrname}</eprtrdb.url><!--;MODE=MSSQLServer-->
+                    <eprtrdb.driver>net.sourceforge.jtds.jdbc.Driver</eprtrdb.driver>
+                    <eprtrdb.username>dbuser</eprtrdb.username>
+                    <eprtrdb.password>password</eprtrdb.password>
+                  </systemPropertyVariables>
+                </configuration>
+                <executions>
+                  <execution>
+                    <goals>
+                      <goal>integration-test</goal>
+                      <goal>verify</goal>
+                    </goals>
+                  </execution>
+                </executions>
+              </plugin>
+
+              <!-- Update database tables -->
+              <plugin>
+                  <groupId>org.liquibase</groupId>
+                  <artifactId>liquibase-maven-plugin</artifactId>
+                  <version>3.3.1</version>
+                  <configuration>
+                      <propertyFile>prod-liquibase.properties</propertyFile>
+                      <changeLogFile>${liquibase.changeLogFile}</changeLogFile>
+                  </configuration>
+                  <executions>
+                      <execution>
+                          <id>Update test database</id>
+                          <phase>pre-integration-test</phase>
+                          <configuration>
+                              <skip>${maven.test.skip}</skip>
+                              <url>jdbc:h2:tcp://${docker.host.address}:${database.port}//var/tmp/cmstest</url><!--;MODE=MSSQLServer-->
+                              <driver>org.h2.Driver</driver>
+                              <username>dbuser</username>
+                              <password>password</password>
+                              <contexts>test,demo</contexts>
+                              <!-- <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase> -->
+                          </configuration>
+                          <goals>
+                              <goal>dropAll</goal>
+                              <goal>update</goal>
+                          </goals>
+                      </execution>
+                  </executions>
+              </plugin>
+            </plugins>
+          </build>
+        </profile>
     </profiles>
 
     <!-- the build configuration -->
@@ -748,4 +899,5 @@
             </plugin>
         </plugins>
     </reporting>
+    
 </project>

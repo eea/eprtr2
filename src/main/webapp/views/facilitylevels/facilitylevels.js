@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp.fd-main', 'restangular', 'myApp.activitySearchFilter', 'myApp.pollutantSearchFilter', 'myApp.wasteSearchFilter','angularSpinner','ngCsv'])
+angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp.fd-main', 'restangular', 'myApp.activitySearchFilter', 'myApp.pollutantSearchFilter', 
+                                        'myApp.wasteSearchFilter','angularSpinner','ngCsv'])
 
 .config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/facilitylevels', {

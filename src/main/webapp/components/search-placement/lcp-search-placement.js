@@ -2,7 +2,7 @@
 
 angular.module('myApp.lcp-search-placement', ['myApp.home', 'myApp.search-filter'])
 
-.controller('LcpSearchPlacementController', ['$scope', '$http', 'searchFilter','eprtrcms', 'lcpconf', function($scope, $http, searchFilter,eprtrcms,lcpconf) {
+.controller('LcpSearchPlacementController', ['$scope', '$http', 'searchFilter','eprtrcms', 'eprtrmaps', 'lcpconf', function($scope, $http, searchFilter,eprtrcms,eprtrmaps,lcpconf) {
     
 	$scope.searchFilter = searchFilter;
 	$scope.searchFilter.regionType = '1';
@@ -14,6 +14,12 @@ angular.module('myApp.lcp-search-placement', ['myApp.home', 'myApp.search-filter
 	eprtrcms.get('LOV_COUNTRY',null).then(function (data) {
 		$scope.tr_lco = data;
 	});
+	eprtrmaps.get().then(function (data){
+		$scope.mapurls = data;
+	});
+	eprtrmaps.get().then(function (data){
+		$scope.mapurls = data;
+	});
 
 	/**
 	 * Capacities
@@ -24,7 +30,10 @@ angular.module('myApp.lcp-search-placement', ['myApp.home', 'myApp.search-filter
         $scope.searchFilter.selectedReportingYear = $scope.reportingYears[$scope.reportingYears.length - 1];
     });
 */
-	var _refyer_q = lcpconf.lcpLayerUrl + '1/query?where=1%3D1&outFields='
+
+	$scope.$watch('mapurls', function(value) {
+		if($scope.mapurls){
+			var _refyer_q = $scope.mapurls.lcpUrl + '/1/query?where=1%3D1&outFields='
 		+ lcpconf.layerfields[1].referenceyear + '&orderByFields=' 
 		+ lcpconf.layerfields[1].referenceyear + '&returnDistinctValues=true&f=pjson';
     
@@ -35,12 +44,13 @@ angular.module('myApp.lcp-search-placement', ['myApp.home', 'myApp.search-filter
 		});
 	    $scope.reportingYears = _years;
 	    $scope.searchFilter.selectedReportingYear = $scope.reportingYears[$scope.reportingYears.length - 1];
+		});
+		}
 	});
 
-
-	$scope.$watch('tr_lco', function(value) {
-		if($scope.tr_lco){
-			var _refcoun_q = lcpconf.lcpLayerUrl + '1/query?where=1%3D1&outFields='
+	$scope.$watchCollection('[tr_lco,mapurls]', function(value) {
+		if($scope.tr_lco && $scope.mapurls){
+			var _refcoun_q = $scope.mapurls.lcpUrl + '/1/query?where=1%3D1&outFields='
 			+ lcpconf.layerfields[1].memberstate + '&orderByFields=' 
 			+ lcpconf.layerfields[1].memberstate + '&returnDistinctValues=true&f=pjson';
 		

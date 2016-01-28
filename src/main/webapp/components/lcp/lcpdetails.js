@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leaflet-directive'])
+angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize', 'myApp.lcpmap','leaflet-directive'])
 
 .controller('lcpDetailsController', 
-		['$scope', '$http', '$filter', '$sce', '$modal', 'leafletData','eprtrcms', 'formatStrFactory', 'lcpDataService', 'lcpconf',
-		 function($scope, $http, $filter, $sce, $modal, leafletData,eprtrcms,formatStrFactory, lcpDataService,lcpconf) {
+		['$scope', '$http', '$filter', '$sce', '$modal', 'leafletData','eprtrcms', 'eprtrmaps', 'formatStrFactory', 'lcpDataService', 'lcpconf',
+		 function($scope, $http, $filter, $sce, $modal, leafletData,eprtrcms, eprtrmaps,formatStrFactory,  lcpDataService,lcpconf) {
 
 /*
  * Basic parameters
@@ -42,14 +42,17 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
 	eprtrcms.get('Library',null).then(function (data) {
 		$scope.tr_lib = data;
 	});
-	
+	eprtrmaps.get().then(function (data){
+		$scope.mapurls = data;
+	});
+
 	/*
 	 * Request data by FacilityReportID
 	 * */
 	$scope.updateByPlantid = function(){
 		var qp = {'PlantID':$scope.plantid};
 		//$scope.map = {wh : {'FacilityReportID': $scope.frid}};
-        lcpDataService.get(0, qp).then(function (data) {
+        lcpDataService.get($scope.mapurls.lcpUrl,0, qp).then(function (data) {
         	//$scope.initBasicData(data);
         	//$scope.ajustplantdata(data);
         	$scope.callAllPlants(data.features[0].attributes[lcpconf.layerfields[0].uniqueplantid]);
@@ -57,15 +60,15 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
         /*lcpDataService.get(3, qp).then(function (data) {
 			$scope.ajustart15data(data);
 	    });*/        	
-	    lcpDataService.get(4, qp).then(function (data) {
+	    lcpDataService.get($scope.mapurls.lcpUrl,4, qp).then(function (data) {
 			$scope.ajustnerpdata(data);
 	    });        	
-	    lcpDataService.get(5, qp).then(function (data) {
+	    lcpDataService.get($scope.mapurls.lcpUrl,5, qp).then(function (data) {
 			$scope.ajustdetailsdata(data);
 	    });        	
 	};
-	$scope.$watch('plantid', function() {
-		if($scope.plantid){
+	$scope.$watchCollection('[plantid,mapurls]', function() {
+		if($scope.plantid && $scope.mapurls){
 			$scope.updateByPlantid();
 		}
 	});
@@ -74,7 +77,7 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
 		if(item){
 			//var item = plantdata.features[0].attributes;
 			var qp = {'BasicID':item[lcpconf.layerfields[0].fk_basicdata_id]};
-	        lcpDataService.get(1, qp).then(function (data) {
+	        lcpDataService.get($scope.mapurls.lcpUrl,1, qp).then(function (data) {
 				$scope.ajustbasicdata(data);// = (data.features)?data.features[0].attributes:{};
 		        /*cpDataService.get(2, {'PlantID':$scope.plantid}).then(function (data) {
 					$scope.ajustenergydata(data);
@@ -203,7 +206,7 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
 	} */
 
 	$scope.callAllPlants = function(uniqueID){
-		var _qstring = lcpconf.lcpLayerUrl + "0/query?where="+ lcpconf.layerfields[0].uniqueplantid
+		var _qstring = $scope.mapurls.lcpUrl + "/0/query?where="+ lcpconf.layerfields[0].uniqueplantid
 			+"='"+uniqueID+"'&outFields=*&orderByFields=" 
 			+ lcpconf.layerfields[0].id + '&f=pjson';
 		$http.get(_qstring).success(function(data, status, headers, config) {
@@ -252,7 +255,7 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
 			angular.forEach($scope.alldata, function(item) {
 				_oids.push(item.oid);
 			});
-			var _qstring = lcpconf.lcpLayerUrl + "0/queryRelatedRecords?objectIds="+ _oids.join(",") 
+			var _qstring = $scope.mapurls.lcpUrl + "/0/queryRelatedRecords?objectIds="+ _oids.join(",") 
 			+"&relationshipId=4&outFields=*&f=pjson";
 			//Request years
 			$http.get(_qstring).success(function(data, status, headers, config) {
@@ -266,7 +269,7 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
 				});
 				
 				//Energy data
-				_qstring = lcpconf.lcpLayerUrl + "0/queryRelatedRecords?objectIds="+ _oids.join(",") 
+				_qstring = $scope.mapurls.lcpUrl + "/0/queryRelatedRecords?objectIds="+ _oids.join(",") 
 				+"&relationshipId=0&outFields=*&f=pjson";
 				$scope.emissioninput = [];
 				$scope.energyinput = [];
@@ -370,11 +373,12 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
  * */
     .service('lcpDataService', function($http, $q, lcpconf) {
       return {
-    	  get: function(id, query) {
+    	  get: function(url, id, query) {
+
         	var deferred = $q.defer();
             //http://test.discomap.eea.europa.eu/arcgis/rest/services/AIR/EPRTR_LCP_demo/MapServer
             //1/query?wher}e=MemberState+%3D+%27DE%27&outFields=*&f=pjson
-              var url = lcpconf.lcpLayerUrl + id+'/query?';
+              var url = url +'/'+ id+'/query?';
               if(query){
             	  url += "where="
             	  var qs = [];
@@ -449,7 +453,8 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize','leafle
             deferred.update(updates);
           });
           return deferred.promise;
-        }
+
+    	  }
       };
     })
   .controller('ModalLcpCtrl', function ($scope, $modalInstance, eprtrcms, plantid) {

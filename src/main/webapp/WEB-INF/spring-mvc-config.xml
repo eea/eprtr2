@@ -71,5 +71,16 @@
     <bean id="storageService" class="eea.eprtr.dao.StorageServiceFiles">
         <property name="storageDir" value="${storage.dir}" />
     </bean>
+    <bean id="mapurlService" class="eea.eprtr.dao.MapServiceUrlsRepository">
+        <property name="profile" value="${profile}" />
+        <property name="prodFacilitiesUrl" value="${mapsource.prod.facilitiesurl}" />
+        <property name="prodEmissionWaterUrl" value="${mapsource.prod.emissionwaterurl}" />
+        <property name="prodEmissionAirUrl" value="${mapsource.prod.emissionairurl}" />
+        <property name="prodLcpUrl" value="${mapsource.prod.lcpurl}" />
+        <property name="testFacilitiesUrl" value="${mapsource.test.facilitiesurl}" />
+        <property name="testEmissionWaterUrl" value="${mapsource.test.emissionwaterurl}" />
+        <property name="testEmissionAirUrl" value="${mapsource.test.emissionairurl}" />
+        <property name="testLcpUrl" value="${mapsource.test.lcpurl}" />
+    </bean>
 
 </beans>

@@ -54,7 +54,7 @@ angular.module('myApp.emissionmapwater', ['ngRoute','leaflet-directive'])
 		}
 	})
 
-.controller('emissionMapWaterController', ['$scope', '$http', 'leafletData', 'emwconf', function($scope, $http, leafletData, emwconf) {
+.controller('emissionMapWaterController', ['$scope', '$http', 'leafletData', 'emwconf','eprtrmaps', function($scope, $http, leafletData, emwconf,eprtrmaps) {
 	var elm_ctrl = this;
 	$scope.legenddef = {};
 	
@@ -71,84 +71,94 @@ angular.module('myApp.emissionmapwater', ['ngRoute','leaflet-directive'])
 			elm_ctrl.legend.update();
 		}
 	};
+	eprtrmaps.get().then(function (data){
+		$scope.mapurls = data;
+	});
+
 	$scope.getLegenddef = function(){
-		$http.get(emwconf.EPRTRDiffuseEmissionsWaterUrl+'/legend?f=pjson').success(function(data, status) {
+		$http.get($scope.mapurls.emissionwaterUrl+'/legend?f=pjson').success(function(data, status) {
 			$scope.legenddef = data;
 		});
 	}
-	$scope.getLegenddef();
+	
+	$scope.$watch('mapurls', function() {
+		if($scope.mapurls){
+			$scope.getLegenddef();
 
-	//Here we initialize the map
-	leafletData.getMap().then(function(map) {
-		//Initial extent
-		map.invalidateSize();
-		map.setView(emwconf.europebounds, emwconf.europezoom);
-		map.attributionControl = false;
+			//Here we initialize the map
+			leafletData.getMap().then(function(map) {
+				//Initial extent
+				map.invalidateSize();
+				map.setView(emwconf.europebounds, emwconf.europezoom);
+				map.attributionControl = false;
+				
+				elm_ctrl.elm_map = map
+				
+				//We set the baselayer - in version 2 we can add more baselayers and a selector
+				L.esri.basemapLayer("Streets").addTo(map);
 		
-		elm_ctrl.elm_map = map
+				elm_ctrl.dmlay = L.esri.dynamicMapLayer({
+					url: $scope.mapurls.emissionwaterUrl, 
+				    opacity: 0.5,
+				    useCors: false,
+				    layers:[0],
+					f: 'image'
+				  });//.addTo(map);
 		
-		//We set the baselayer - in version 2 we can add more baselayers and a selector
-		L.esri.basemapLayer("Streets").addTo(map);
-
-		elm_ctrl.dmlay = L.esri.dynamicMapLayer({
-			url: emwconf.EPRTRDiffuseEmissionsWaterUrl, 
-		    opacity: 0.5,
-		    useCors: false,
-		    layers:[0],
-			f: 'image'
-		  });//.addTo(map);
-
-		if($scope.layerid != undefined){
-			elm_ctrl.dmlay.layers = [emwconf.dealayers[$scope.layerid]];	
-		}
-		elm_ctrl.dmlay.addTo(map); 
-
-		elm_ctrl.dmlay.bindPopup(function (error, featureCollection) {
-		    if(error || featureCollection.features.length === 0) {
-		      return false;
-		    } else {
-		    	var keys = Object.keys(featureCollection.features[0].properties);
-		    	var _str = '<p><em>'+keys[3]+'</em>: '+featureCollection.features[0].properties[keys[3]]+'<br>';
-		    	_str += '<em>'+keys[4]+'</em>: '+featureCollection.features[0].properties[keys[4]]+'<br>';
-		    	_str += '<em>'+keys[5]+'</em>: '+featureCollection.features[0].properties[keys[5]]+'<br>';
-		    	_str += '<em>'+keys[6]+'</em>: '+featureCollection.features[0].properties[keys[6]]+'<br>';
-		    	_str += '<em>'+keys[7]+'</em>: '+featureCollection.features[0].properties[keys[7]]+'<br>';
-		    	_str += '<em>'+keys[8]+'</em>: '+featureCollection.features[0].properties[keys[8]]+'<br>';
-		    	_str += '<em>'+keys[9]+'</em>: '+featureCollection.features[0].properties[keys[9]]+'</p>';
-		    	//, feature.properties
-        	    return _str;//L.Util.template(_str, featureCollection.features[0].properties);
-
-		    }
-		  });
-
-		$scope.createLegend();
-
-		$scope.toggleLegend = L.easyButton({
-			  states: [{
-			    stateName: 'show-legend',
-			    icon: 'fa-bars',
-			    title: 'show legend',
-			    onClick: function(control) {
-			    	if(elm_ctrl.legend != undefined){
-			    		elm_ctrl.legend.addTo(elm_ctrl.elm_map);
-			    		control.state('hide-legend');
-			    	}
-			    }
-			  }, {
-			    icon: 'fa-bars',
-			    stateName: 'hide-legend',
-			    onClick: function(control) {
-			    	if(elm_ctrl.legend != undefined){
-				      elm_ctrl.elm_map.removeControl(elm_ctrl.legend);
-				      control.state('show-legend');
-			    	}
-			    },
-			    title: 'hide legend'
-			  }]
+				if($scope.layerid != undefined){
+					elm_ctrl.dmlay.layers = [emwconf.dealayers[$scope.layerid]];	
+				}
+				elm_ctrl.dmlay.addTo(map); 
+		
+				elm_ctrl.dmlay.bindPopup(function (error, featureCollection) {
+				    if(error || featureCollection.features.length === 0) {
+				      return false;
+				    } else {
+				    	var keys = Object.keys(featureCollection.features[0].properties);
+				    	var _str = '<p><em>'+keys[3]+'</em>: '+featureCollection.features[0].properties[keys[3]]+'<br>';
+				    	_str += '<em>'+keys[4]+'</em>: '+featureCollection.features[0].properties[keys[4]]+'<br>';
+				    	_str += '<em>'+keys[5]+'</em>: '+featureCollection.features[0].properties[keys[5]]+'<br>';
+				    	_str += '<em>'+keys[6]+'</em>: '+featureCollection.features[0].properties[keys[6]]+'<br>';
+				    	_str += '<em>'+keys[7]+'</em>: '+featureCollection.features[0].properties[keys[7]]+'<br>';
+				    	_str += '<em>'+keys[8]+'</em>: '+featureCollection.features[0].properties[keys[8]]+'<br>';
+				    	_str += '<em>'+keys[9]+'</em>: '+featureCollection.features[0].properties[keys[9]]+'</p>';
+				    	//, feature.properties
+		        	    return _str;//L.Util.template(_str, featureCollection.features[0].properties);
+		
+				    }
+				  });
+		
+				$scope.createLegend();
+		
+				$scope.toggleLegend = L.easyButton({
+					  states: [{
+					    stateName: 'show-legend',
+					    icon: 'fa-bars',
+					    title: 'show legend',
+					    onClick: function(control) {
+					    	if(elm_ctrl.legend != undefined){
+					    		elm_ctrl.legend.addTo(elm_ctrl.elm_map);
+					    		control.state('hide-legend');
+					    	}
+					    }
+					  }, {
+					    icon: 'fa-bars',
+					    stateName: 'hide-legend',
+					    onClick: function(control) {
+					    	if(elm_ctrl.legend != undefined){
+						      elm_ctrl.elm_map.removeControl(elm_ctrl.legend);
+						      control.state('show-legend');
+					    	}
+					    },
+					    title: 'hide legend'
+					  }]
+					});
+				$scope.toggleLegend.addTo(elm_ctrl.elm_map);
+		
 			});
-		$scope.toggleLegend.addTo(elm_ctrl.elm_map);
-
+		}
 	});
+
 	
 	$scope.redraw = function(){
 		if(elm_ctrl.elm_map){
@@ -172,7 +182,7 @@ angular.module('myApp.emissionmapwater', ['ngRoute','leaflet-directive'])
 				if (item.layerId.toString() == elm_ctrl._layid){
 					elm_ctrl.legend._div.innerHTML = '<h4>'+item.layerName+'</h4>';
 				    angular.forEach(item.legend, function(leg) {
-				    	var _url = emwconf.EPRTRDiffuseEmissionsWaterUrl + '/0/images/' + leg.url;
+				    	var _url = $scope.mapurls.emissionwaterUrl + '/0/images/' + leg.url;
 				    	//<img style="-webkit-user-select: none" src="http://test.discomap.eea.europa.eu/arcgis/rest/services/AIR/EPRTRDiffuseEmissionsWater/MapServer/0/images/7f34224c77c077f1d419c50fac65e787">
 				    	elm_ctrl.legend._div.innerHTML += '<img src="'+_url+'" style="width:'+leg.width+';height:'+leg.height+';" > ' + leg.label + '<br>';
 				    });

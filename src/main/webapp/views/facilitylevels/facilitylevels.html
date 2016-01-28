@@ -29,12 +29,12 @@
 				<div class="form-group">
 					<label class="control-label" for="inputFacilityName">{{tr_c.FacilityName}}</label>
 					<input type="text" class="form-control" id="inputFacilityName"
-						placeholder="Enter facility name"
+						placeholder="Enter facility name" my-enter="search()"
 						ng-model="searchFilter.facilityName">
 				</div>
 				<div class="form-group">
 					<label class="control-label" for="inputTown">{{tr_f.TownVillage}}</label>
-					<input type="text" class="form-control" id="inputTown"
+					<input type="text" class="form-control" id="inputTown" my-enter="search()"
 						placeholder="Enter town" ng-model="searchFilter.cityName">
 				</div>
 

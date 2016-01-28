@@ -30,7 +30,7 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 
 	})
 
-.controller('esriLeafMapController', ['$scope',  'leafletData', 'elmconf', 'eprtrcms', function($scope,  leafletData, elmconf, eprtrcms) {
+.controller('esriLeafMapController', ['$scope',  'leafletData', 'elmconf', 'eprtrcms', 'eprtrmaps', function($scope,  leafletData, elmconf, eprtrcms, eprtrmaps) {
 	var elm_ctrl = this;
 	var points = [];
 	$scope.showlegend = false;
@@ -40,7 +40,9 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 		$scope.tr_laa = data;
 	});
 
-	
+	eprtrmaps.get().then(function (data){
+		$scope.mapurls = data;
+	});
 	
 	$scope.$watchCollection('[lov,elm_ctrl]', function(value){
     	if($scope.lov && elm_ctrl.elm_map){
@@ -329,100 +331,104 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 		  return new L.LatLngBounds(southWest, northEast);	
 	};
 
-	//Here we initialize the map
-	leafletData.getMap().then(function(map) {
-		//Initial extent
-		map.invalidateSize();
-		map.setView(elmconf.europebounds, elmconf.europezoom);
-		map.attributionControl = false;
+	$scope.$watch('mapurls', function() {
+		if($scope.mapurls){
+			//Here we initialize the map
+			leafletData.getMap().then(function(map) {
+				//Initial extent
+				map.invalidateSize();
+				map.setView(elmconf.europebounds, elmconf.europezoom);
+				map.attributionControl = false;
+				
+				elm_ctrl.elm_map = map
+				
+				//We set the baselayer - in version 2 we can add more baselayers and a selector
+				L.esri.basemapLayer("Streets").addTo(map);
 		
-		elm_ctrl.elm_map = map
+				//Here we define the Clustered Feature Service layer
+				elm_ctrl.fdlay = L.esri.clusteredFeatureLayer({
+					url: $scope.mapurls.facilitiesUrl, // elmconf.eprtrLayerUrl,
+					spiderfyOnMaxZoom:false,
+				    disableClusteringAtZoom: 9,
+				    polygonOptions: {
+				      color: '#2d84c8',
+				      weight: 4,
+				      opacity: 1,
+				      fillOpacity: 0.5
+				    },
+		   		   	iconCreateFunction: function(cluster) {
+		  		      // get the number of items in the cluster
+		  		      var count = cluster.getChildCount();
 		
-		//We set the baselayer - in version 2 we can add more baselayers and a selector
-		L.esri.basemapLayer("Streets").addTo(map);
-
-		//Here we define the Clustered Feature Service layer
-		elm_ctrl.fdlay = L.esri.clusteredFeatureLayer({
-			url: elmconf.eprtrLayerUrl,
-			spiderfyOnMaxZoom:false,
-		    disableClusteringAtZoom: 9,
-		    polygonOptions: {
-		      color: '#2d84c8',
-		      weight: 4,
-		      opacity: 1,
-		      fillOpacity: 0.5
-		    },
-   		   	iconCreateFunction: function(cluster) {
-  		      // get the number of items in the cluster
-  		      var count = cluster.getChildCount();
-
-  		      // figure out how many digits long the number is
-  		      var digits = (count+'').length;
-
-  		      // return a new L.DivIcon with our classes so we can
-  		      // style them with CSS. Take a look at the CSS in
-  		      // the <head> to see these styles. You have to set
-  		      // iconSize to null if you want to use CSS to set the
-  		      // width and height.
-  		      return new L.DivIcon({
-  		        html: count,
-  		        className:'cluster digits-'+digits,
-  		        iconSize: null
-  		      });
-  		    },
-   		   	where: $scope.where,
-   		   	name: "E-PRTR Facilities",
-		    pointToLayer: function (geojson, latlng) {
-		       //Points used by zoomToFeatures
-			   //points.push(latlng)
-			   var sec = geojson.properties.IASectorCode.toLowerCase();
-			   return L.marker(latlng, {
-			        icon: L.AwesomeMarkers.icon($scope.eprtricons[(elmconf.sectors.indexOf(sec)>0)?sec:'others'])
-			      });
-		    },
-		});
-
-		//Here we try to navigate to the extent of the selected features - still not satisfied
-/*		elm_ctrl.fdlay.on('load', function(e){
-//			console.log('pnts: '+ points.length);
-			if (points.length > 0){
-				var bounds = $scope.updateExtent(points);
-	//			console.log('Once: '+ bounds.toBBoxString());
-	  		    map.fitBounds(bounds,{maxZoom:3});
-	  		    points = [];
-			};
-		  // do something on load
-		});*/
-		//Now we add the clusterlayer to the map
-		elm_ctrl.fdlay.addTo(map);
-
-		//Here we bind a HTML template to the the popup - TODO 
-		elm_ctrl.fdlay.bindPopup(function (feature) {
-				//console.log('pop: '+ feature.properties.X + ' ' + feature.properties.Y);
-        	    return L.Util.template('<p><em>Facility</em>: {FacilityName }<br><em>Reporting Year</em>: {ReportingYear }<br><em>Country</em>: {CountryCode }<br><a href="#facilitydetails?FacilityID={FacilityID}&ReportingYear={ReportingYear}">details</a></p>', feature.properties);
-        	  });
-
-		$scope.toggleLegend = L.easyButton({
-			  states: [{
-			    stateName: 'show-legend',
-			    icon: 'fa-bars',
-			    title: 'show legend',
-			    onClick: function(control) {
-			    	elm_ctrl.legend.addTo(elm_ctrl.elm_map);
-			      control.state('hide-legend');
-			    }
-			  }, {
-			    icon: 'fa-bars',
-			    stateName: 'hide-legend',
-			    onClick: function(control) {
-			      elm_ctrl.elm_map.removeControl(elm_ctrl.legend);
-			      control.state('show-legend');
-			    },
-			    title: 'hide legend'
-			  }]
+		  		      // figure out how many digits long the number is
+		  		      var digits = (count+'').length;
+		
+		  		      // return a new L.DivIcon with our classes so we can
+		  		      // style them with CSS. Take a look at the CSS in
+		  		      // the <head> to see these styles. You have to set
+		  		      // iconSize to null if you want to use CSS to set the
+		  		      // width and height.
+		  		      return new L.DivIcon({
+		  		        html: count,
+		  		        className:'cluster digits-'+digits,
+		  		        iconSize: null
+		  		      });
+		  		    },
+		   		   	where: $scope.where,
+		   		   	name: "E-PRTR Facilities",
+				    pointToLayer: function (geojson, latlng) {
+				       //Points used by zoomToFeatures
+					   //points.push(latlng)
+					   var sec = geojson.properties.IASectorCode.toLowerCase();
+					   return L.marker(latlng, {
+					        icon: L.AwesomeMarkers.icon($scope.eprtricons[(elmconf.sectors.indexOf(sec)>0)?sec:'others'])
+					      });
+				    },
+				});
+		
+				//Here we try to navigate to the extent of the selected features - still not satisfied
+		/*		elm_ctrl.fdlay.on('load', function(e){
+		//			console.log('pnts: '+ points.length);
+					if (points.length > 0){
+						var bounds = $scope.updateExtent(points);
+			//			console.log('Once: '+ bounds.toBBoxString());
+			  		    map.fitBounds(bounds,{maxZoom:3});
+			  		    points = [];
+					};
+				  // do something on load
+				});*/
+				//Now we add the clusterlayer to the map
+				elm_ctrl.fdlay.addTo(map);
+		
+				//Here we bind a HTML template to the the popup - TODO 
+				elm_ctrl.fdlay.bindPopup(function (feature) {
+						//console.log('pop: '+ feature.properties.X + ' ' + feature.properties.Y);
+		        	    return L.Util.template('<p><em>Facility</em>: {FacilityName }<br><em>Reporting Year</em>: {ReportingYear }<br><em>Country</em>: {CountryCode }<br><a href="#facilitydetails?FacilityID={FacilityID}&ReportingYear={ReportingYear}">details</a></p>', feature.properties);
+		        	  });
+		
+				$scope.toggleLegend = L.easyButton({
+					  states: [{
+					    stateName: 'show-legend',
+					    icon: 'fa-bars',
+					    title: 'show legend',
+					    onClick: function(control) {
+					    	elm_ctrl.legend.addTo(elm_ctrl.elm_map);
+					      control.state('hide-legend');
+					    }
+					  }, {
+					    icon: 'fa-bars',
+					    stateName: 'hide-legend',
+					    onClick: function(control) {
+					      elm_ctrl.elm_map.removeControl(elm_ctrl.legend);
+					      control.state('show-legend');
+					    },
+					    title: 'hide legend'
+					  }]
+					});
+				$scope.toggleLegend.addTo(elm_ctrl.elm_map);
+				
 			});
-		$scope.toggleLegend.addTo(elm_ctrl.elm_map);
-		
+		}
 	});
 	
 	$scope.redraw = function(){
