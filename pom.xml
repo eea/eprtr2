@@ -272,7 +272,7 @@
                       </build>
                       <run>
                         <env>
-                          <CATALINA_OPTS>-Dspring.profiles.active=test -Dcmsdb.driver=net.sourceforge.jtds.jdbc.Driver -Dcmsdb.url=jdbc:jtds:sqlserver://sdkcga6350;database=EPRTRcms -Dcmsdb.username=dbuser -Dcmsdb.password=password -Deprtrdb.driver=net.sourceforge.jtds.jdbc.Driver -Deprtrdb.url=jdbc:jtds:sqlserver://sdkcga6350;database=EPRTRPublic -Deprtrdb.username=dbuser -Deprtrdb.password=password</CATALINA_OPTS>
+                          <CATALINA_OPTS>-Dprofile=test -Dcmsdb.driver=net.sourceforge.jtds.jdbc.Driver -Dcmsdb.url=jdbc:jtds:sqlserver://sdkcga6350;database=EPRTRcms -Dcmsdb.username=dbuser -Dcmsdb.password=password -Deprtrdb.driver=net.sourceforge.jtds.jdbc.Driver -Deprtrdb.url=jdbc:jtds:sqlserver://sdkcga6350;database=EPRTRPublic -Deprtrdb.username=dbuser -Deprtrdb.password=password</CATALINA_OPTS>
                         </env>
                         <!-- Assign dynamically mapped ports to maven variables (which can be reused in integration tests) -->
                         <ports>
