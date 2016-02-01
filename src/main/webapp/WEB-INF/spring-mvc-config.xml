@@ -27,7 +27,7 @@
 
     <util:properties id="application" location="classpath:application.properties"/>
 
-    <context:property-placeholder order="0" ignore-unresolvable="true" system-properties-mode="OVERRIDE" properties-ref="application"/>
+    <context:property-placeholder order="0" ignore-unresolvable="true" location="classpath:application.properties" system-properties-mode="OVERRIDE" properties-ref="application"/>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
@@ -42,7 +42,7 @@
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     	<property name="persistenceUnitName" value="eprtr"/>
         <property name="dataSource" ref="dataSource" />
-        <property name="packagesToScan" value="eea.eprtr.*" />
+        <property name="packagesToScan" value="eea.eprtr.*.model" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="showSql" value="true" />
@@ -52,21 +52,41 @@
     <bean id="entityManagerFactoryCms" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     	<property name="persistenceUnitName" value="eprtrcms"/>
         <property name="dataSource" ref="dataSourceEprtrCms" />
-        <property name="packagesToScan" value="eea.eprtrcms.*" />
+        <property name="packagesToScan" value="eea.eprtrcms.*.model" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="showSql" value="true" />
+                <!-- 	  	    <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
+			<property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
+        	<property name="hibernate.cache.use_second_level_cache" value="true" />
+        	<property name="hibernate.cache.use_query_cache" value="true" />
+                 -->
             </bean>
         </property>
     </bean>
-    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
+    
+     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${eprtrdb.driver}" />
+        <property name="url" value="${eprtrdb.url}" />
+        <property name="username" value="${eprtrdb.username}" />
+        <property name="password" value="${eprtrdb.password}" />
+    </bean>
+
+    <bean id="dataSourceEprtrCms" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${cmsdb.driver}" />
+        <property name="url" value="${cmsdb.url}" />
+        <property name="username" value="${cmsdb.username}" />
+        <property name="password" value="${cmsdb.password}" />
+    </bean>
+    
+    <!--bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
         <property name="jndiName" value="java:comp/env/jdbc/datasource" />
         <property name="resourceRef" value="true" />        
     </bean>
     <bean id="dataSourceEprtrCms" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
         <property name="jndiName" value="java:comp/env/jdbc/datasourcecms" />
         <property name="resourceRef" value="true" />        
-    </bean>
+    </bean-->
 
     <bean id="storageService" class="eea.eprtr.dao.StorageServiceFiles">
         <property name="storageDir" value="${storage.dir}" />

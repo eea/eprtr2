@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+  <!--
+     You can run this change log on your database as many times as you want, it will ignore the
+     changes that are already applied. It also means that you can't modify an existing revision.
+     Always add to the end.
+
+     Use the maven goals: liquibase:update and liquibase:status
+      Potentially with -Dliquibase.dropFirst=true
+ -->
+ <changeSet author="hjelm" id="rev-2"><createTable tableName="FACILITYDETAIL_ACTIVITY">
+      <column name="FacilityReportID" type="INT"/>
+      <column name="MainActivityIndicator" type="BOOLEAN"/>
+      <column name="RankingNumeric" type="INT"/>
+      <column name="IAReportedActivityCode" type="VARCHAR(255)"/>
+      <column name="IPPCReportedActivityCode" type="VARCHAR(255)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="SectorCode" type="VARCHAR(255)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="ActivityCode" type="VARCHAR(255)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="SubActivityCode" type="VARCHAR(255)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="ActivityIPPCCode" type="VARCHAR(255)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="SubActivityIPPCCode" type="VARCHAR(255)">
+        <constraints nullable="true"/>
+      </column>
+    </createTable>  </changeSet>
+
+	<changeSet author="hjelm" id="rev-3"><createTable tableName="FACILITYDETAIL_COMPETENTAUTHORITYPARTY">
+      <column name="FacilityReportID" type="INT"/>
+      <column name="CAName" type="VARCHAR(255)"/>
+      <column name="CAAddress" type="VARCHAR(511)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="CACity" type="VARCHAR(255)"/>
+      <column name="CAPostalCode" type="VARCHAR(50)">
+        <constraints nullable="true"/>
+      </column>
+      <column name="CATelephoneCommunication" type="VARCHAR(50)"/>
+      <column name="CAFaxCommunication" type="VARCHAR(50)"/>
+      <column name="CAEmailCommunication" type="VARCHAR(255)"/>
+      <column name="CAContactPersonName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="CAReportingYear" type="INT"/>
+      <column name="CALastUpdate" type="datetime"><constraints nullable="true"/></column>
+    </createTable>  </changeSet>
+
+	<changeSet author="hjelm" id="rev-4"><createTable tableName="FACILITYDETAIL_DETAIL">
+      <column name="FacilityReportID" type="INT"/>
+      <column name="FacilityName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="FacilityID" type="INT"/>
+      <column name="NationalID" type="VARCHAR(255)"/>
+      <column name="ReportingYear" type="INT"/>
+      <column name="Address" type="VARCHAR(511)"><constraints nullable="true"/></column>
+      <column name="City" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="PostalCode" type="VARCHAR(50)"><constraints nullable="true"/></column>
+      <column name="CountryCode" type="VARCHAR(255)"/>
+      <column name="Published" type="datetime"><constraints nullable="true"/></column>
+      <column name="ParentCompanyName" type="VARCHAR(255)"/>
+      <column name="Coordinates" type="VARCHAR(max)"><constraints nullable="true"/></column>
+      <column name="CoordinateStatusCode" type="VARCHAR(255)"/>
+      <column name="NUTSRegionLevel1Code" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NUTSRegionLevel2Code" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NUTSRegionLevel3Code" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NUTSRegionSourceCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="RiverBasinDistrictCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="RiverBasinDistrictSourceCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACESectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACEActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACESubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IASectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IAActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IASubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="ProductionVolumeProductName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="ProductionVolumeQuantity" type="float"><constraints nullable="true"/></column>
+      <column name="ProductionVolumeUnitCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="TotalIPPCInstallationQuantity" type="INT"><constraints nullable="true"/></column>
+      <column name="TotalEmployeeQuantity" type="INT"><constraints nullable="true"/></column>
+      <column name="OperatingHours" type="INT"><constraints nullable="true"/></column>
+      <column name="WebsiteCommunication" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="PublicInformation" type="VARCHAR(max)"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicator" type="BOOLEAN"/>
+      <column name="ConfidentialIndicatorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicatorWaste" type="INT"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicatorPollutantRelease" type="INT"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicatorPollutantTransfer" type="INT"><constraints nullable="true"/></column>
+    </createTable>  </changeSet> TEXTIMAGE_ON [PRIMARY]
+
+ <changeSet author="hjelm" id="rev-5"><createTable tableName="FACILITYDETAIL_POLLUTANTRELEASE">
+      <column name="FacilityReportID" type="INT"/>
+      <column name="FacilityID" type="INT"/>
+      <column name="PollutantTo" type="VARCHAR(255)"/>
+      <column name="GroupCode" type="VARCHAR(255)"/>
+      <column name="PollutantCode" type="VARCHAR(255)"/>
+      <column name="CAS" type="VARCHAR(20)"><constraints nullable="true"/></column>
+      <column name="MethodCode" type="VARCHAR(255)"/>
+      <column name="MethodDesignation" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="MethodTypeCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="TotalQuantity" type="float"/>
+      <column name="TotalQuantityUnitCode" type="VARCHAR(255)"/>
+      <column name="AccidentalQuantity" type="float"/>
+      <column name="AccidentalQuantityUnitCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicator" type="BOOLEAN"/>
+      <column name="ConfidentialCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_MediumID" type="INT"/>
+      <column name="MethodListID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_PollutantID" type="INT"/>
+      <column name="LOV_PollutantGroupID" type="INT"/>
+      <column name="LOV_MethodBasisID" type="INT"/>
+      <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
+      <column name="ident" type="int">
+        <constraints primaryKey="true"/>
+      </column>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-6"><createTable tableName="FACILITYDETAIL_POLLUTANTTRANSFER">
+      <column name="FacilityReportID" type="INT"/>
+      <column name="FacilityID" type="INT"/>
+      <column name="GroupCode" type="VARCHAR(255)"/>
+      <column name="PollutantCode" type="VARCHAR(255)"/>
+      <column name="CAS" type="VARCHAR(20)"><constraints nullable="true"/></column>
+      <column name="MethodCode" type="VARCHAR(255)"/>
+      <column name="MethodDesignation" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="MethodTypeCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="Quantity" type="float"/>
+      <column name="UnitCode" type="VARCHAR(255)"/>
+      <column name="ConfidentialIndicator" type="BOOLEAN"/>
+      <column name="ConfidentialCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="MethodListID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_PollutantID" type="INT"/>
+      <column name="LOV_PollutantGroupID" type="INT"/>
+      <column name="LOV_MethodBasisID" type="INT"/>
+      <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-7"><createTable tableName="FACILITYDETAIL_WASTETRANSFER">
+      <column name="FacilityReportID" type="INT"/>
+      <column name="WasteTransferID" type="INT"/>
+      <column name="FacilityID" type="INT"/>
+      <column name="WasteTypeCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="WasteTreatmentCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="MethodCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="MethodDesignation" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="MethodTypeCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="Quantity" type="float"><constraints nullable="true"/></column>
+      <column name="UnitCode" type="VARCHAR(255)"/>
+      <column name="WHPName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="WHPAddress" type="VARCHAR(511)"><constraints nullable="true"/></column>
+      <column name="WHPCity" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="WHPPostalCode" type="VARCHAR(50)"><constraints nullable="true"/></column>
+      <column name="WHPCountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="WHPSiteAddress" type="VARCHAR(511)"><constraints nullable="true"/></column>
+      <column name="WHPSiteCity" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="WHPSitePostalCode" type="VARCHAR(50)"><constraints nullable="true"/></column>
+      <column name="WHPSiteCountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicator" type="BOOLEAN"/>
+      <column name="ConfidentialCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_WasteTypeID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_WasteTreatmentID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_MethodBasisID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
+    </createTable>  </changeSet>
+
+	<changeSet author="hjelm" id="rev-8"><createTable tableName="FACILITYSEARCH_ALL">
+      <column name="FacilityReportID" type="INT"/>
+      <column name="LOV_PollutantGroupID" type="INT"><constraints nullable="true"/></column>
+      <column name="PollutantGroupCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_PollutantID" type="INT"><constraints nullable="true"/></column>
+      <column name="PollutantCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="CAS" type="VARCHAR(20)"><constraints nullable="true"/></column>
+      <column name="MediumCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicatorPollutant" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="LOV_MediumID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_ConfidentialityIDPollutant" type="INT"><constraints nullable="true"/></column>
+      <column name="ConfidentialCodePollutant" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="Accidental" type="INT"><constraints nullable="true"/></column>
+      <column name="IDWaste" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_WasteTypeID" type="INT"><constraints nullable="true"/></column>
+      <column name="WasteTypeCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_WasteTreatmentID" type="INT"><constraints nullable="true"/></column>
+      <column name="WasteTreatmentCode" type="VARCHAR(255)"/>
+      <column name="WHPCountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="WHPCountryID" type="INT"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicatorWaste" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="LOV_ConfidentialityIDWaste" type="INT"><constraints nullable="true"/></column>
+      <column name="ConfidentialCodeWaste" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="FacilityName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="FacilityID" type="INT"/>
+      <column name="NationalID" type="VARCHAR(255)"/>
+      <column name="ParentCompanyName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="ReportingYear" type="INT"/>
+      <column name="Address" type="VARCHAR(511)"><constraints nullable="true"/></column>
+      <column name="City" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="PostalCode" type="VARCHAR(50)"><constraints nullable="true"/></column>
+      <column name="CountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_CountryID" type="INT"/>
+      <column name="RiverBasinDistrictCode" type="VARCHAR(255)"/>
+      <column name="LOV_RiverBasinDistrictID" type="INT"/>
+      <column name="NUTSLevel2RegionCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel1ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel2ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel3ID" type="INT"><constraints nullable="true"/></column>
+      <column name="IASectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IAActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IASubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_IASectorID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IAActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IASubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="NACESectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACEActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACESubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NACESectorID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NACEActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NACESubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="IAReportedActivityCode" type="VARCHAR(255)"/>
+      <column name="IPPCReportedActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACEReportedActivityCode" type="VARCHAR(255)"/>
+      <column name="ConfidentialIndicatorFacility" type="BOOLEAN"/>
+      <column name="ConfidentialCodeFacility" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_ConfidentialityIDFacility" type="INT"><constraints nullable="true"/></column>
+      <column name="ObjectID" type="int">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="DistinctID" type="BOOLEAN"/>
+      <column name="FacilitySearchName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="CitySearchName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="ParentCompanySearchName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+    </createTable>  </changeSet>
+
+
+ <changeSet author="hjelm" id="rev-9"><createTable tableName="FACILITYSEARCH_MAINACTIVITY">
+      <column name="FacilityReportID" type="INT">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="FacilityName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="FacilityID" type="INT"/>
+      <column name="NationalID" type="VARCHAR(255)"/>
+      <column name="ParentCompanyName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="ReportingYear" type="INT"/>
+      <column name="Address" type="VARCHAR(511)"><constraints nullable="true"/></column>
+      <column name="City" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="PostalCode" type="VARCHAR(50)"><constraints nullable="true"/></column>
+      <column name="CountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_CountryID" type="INT"/>
+      <column name="RiverBasinDistrictCode" type="VARCHAR(255)"/>
+      <column name="LOV_RiverBasinDistrictID" type="INT"/>
+      <column name="NUTSLevel2RegionCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel1ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel2ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel3ID" type="INT"><constraints nullable="true"/></column>
+      <column name="IASectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IAActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IASubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_IASectorID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IAActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IASubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="NACESectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACEActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACESubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NACESectorID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NACEActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NACESubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="IAReportedActivityCode" type="VARCHAR(255)"/>
+      <column name="IPPCReportedActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACEReportedActivityCode" type="VARCHAR(255)"/>
+      <column name="ConfidentialIndicator" type="BOOLEAN"/>
+      <column name="ConfidentialCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
+   </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-10"><createTable tableName="FACILITYSEARCH_POLLUTANT">
+      <column name="FacilityReportID" type="INT"/>
+      <column name="PollutantGroupCode" type="VARCHAR(255)"/>
+      <column name="PollutantGroupName" type="VARCHAR(255)"/>
+      <column name="PollutantCode" type="VARCHAR(255)"/>
+      <column name="PollutantName" type="VARCHAR(255)"/>
+      <column name="CAS" type="VARCHAR(20)"><constraints nullable="true"/></column>
+      <column name="MediumCode" type="VARCHAR(255)"/>
+      <column name="ConfidentialIndicator" type="BOOLEAN"/>
+      <column name="ConfidentialCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_MediumID" type="INT"/>
+      <column name="LOV_PollutantID" type="INT"/>
+      <column name="LOV_PollutantGroupID" type="INT"/>
+      <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
+      <column name="Accidental" type="INT"/>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-11"><createTable tableName="FACILITYSEARCH_WASTETRANSFER">
+      <column name="FacilityReportID" type="INT"/>
+      <column name="WasteTransferID" type="INT"/>
+      <column name="WasteTypeCode" type="VARCHAR(255)"/>
+      <column name="WasteTreatmentCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="WHPCountryID" type="INT"><constraints nullable="true"/></column>
+      <column name="WHPCountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicator" type="BOOLEAN"/>
+      <column name="ConfidentialCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_WasteTypeID" type="INT"/>
+      <column name="LOV_WasteTreatmentID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-12"><createTable tableName="LOV_ANNEXIACTIVITY">
+      <column name="LOV_AnnexIActivityID" type="int">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="Code" type="VARCHAR(255)"/>
+      <column name="Name" type="VARCHAR(255)"/>
+      <column name="StartYear" type="INT"><constraints nullable="true"/></column>
+      <column name="EndYear" type="INT"><constraints nullable="true"/></column>
+      <column name="ParentID" type="INT"><constraints nullable="true"/></column>
+      <column name="IPPCCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="eperAnnex3_ID" type="INT"><constraints nullable="true"/></column>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-13"><createTable tableName="LOV_AREAGROUP">
+      <column name="LOV_AreaGroupID" type="int">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="Code" type="VARCHAR(255)"/>
+      <column name="Name" type="VARCHAR(255)"/>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-14"><createTable tableName="LOV_COUNTRY">
+      <column name="LOV_CountryID" type="int">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="Code" type="VARCHAR(255)"/>
+      <column name="Name" type="VARCHAR(255)"/>
+      <column name="StartYear" type="INT"><constraints nullable="true"/></column>
+      <column name="EndYear" type="INT"><constraints nullable="true"/></column>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-15"><createTable tableName="LOV_COUNTRYAREAGROUP">
+      <column name="LOV_AreaGroupID" type="INT"/>
+      <column name="LOV_CountryID" type="INT"/>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-16"><createTable tableName="LOV_NACEACTIVITY">
+      <column name="LOV_NACEActivityID" type="int">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="Code" type="VARCHAR(255)"/>
+      <column name="Name" type="VARCHAR(255)"/>
+      <column name="StartYear" type="INT"><constraints nullable="true"/></column>
+      <column name="EndYear" type="INT"><constraints nullable="true"/></column>
+      <column name="ParentID" type="INT"><constraints nullable="true"/></column>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-17"><createTable tableName="LOV_NUTSREGION">
+      <column name="LOV_NUTSRegionID" type="int">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="Code" type="VARCHAR(255)"/>
+      <column name="Name" type="VARCHAR(255)"/>
+      <column name="StartYear" type="INT"><constraints nullable="true"/></column>
+      <column name="EndYear" type="INT"><constraints nullable="true"/></column>
+      <column name="ParentID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_CountryID" type="INT"/>
+      <column name="Level" type="INT"><constraints nullable="true"/></column>
+    </createTable>  </changeSet>
+
+	<changeSet author="hjelm" id="rev-18"><createTable tableName="LOV_POLLUTANT">
+      <column name="LOV_PollutantID" type="int">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="Code" type="VARCHAR(255)"/>
+      <column name="Name" type="VARCHAR(255)"/>
+      <column name="StartYear" type="INT"><constraints nullable="true"/></column>
+      <column name="EndYear" type="INT"><constraints nullable="true"/></column>
+      <column name="ParentID" type="INT"><constraints nullable="true"/></column>
+      <column name="CAS" type="VARCHAR(20)"><constraints nullable="true"/></column>
+      <column name="eperPollutant_ID" type="INT"><constraints nullable="true"/></column>
+      <column name="CodeEPER" type="VARCHAR(255)"><constraints nullable="true"/></column>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-19"><createTable tableName="LOV_RIVERBASINDISTRICT">
+      <column name="LOV_RiverBasinDistrictID" type="int">
+        <constraints primaryKey="true"/>
+      </column>
+      <column name="Code" type="VARCHAR(255)"/>
+      <column name="Name" type="VARCHAR(255)"/>
+      <column name="StartYear" type="INT"><constraints nullable="true"/></column>
+      <column name="EndYear" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_CountryID" type="INT"><constraints nullable="true"/></column>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-20"><createTable tableName="POLLUTANTRELEASE">
+      <column name="FacilityReportID" type="INT"/>
+      <column name="FacilityName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="FacilityID" type="INT"/>
+      <column name="ReportingYear" type="INT"/>
+      <column name="PollutantCode" type="VARCHAR(255)"/>
+      <column name="PollutantGroupCode" type="VARCHAR(255)"/>
+      <column name="LOV_PollutantID" type="INT"/>
+      <column name="LOV_PollutantGroupID" type="INT"/>
+      <column name="CAS" type="VARCHAR(20)"><constraints nullable="true"/></column>
+      <column name="QuantityAir" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityAccidentalAir" type="float"><constraints nullable="true"/></column>
+      <column name="PercentAccidentalAir" type="float"><constraints nullable="true"/></column>
+      <column name="MethodTypeDesignationAir" type="VARCHAR(4000)"><constraints nullable="true"/></column>
+      <column name="MethodTypeCodeAir" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="MethodCodeAir" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="QuantityWater" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityAccidentalWater" type="float"><constraints nullable="true"/></column>
+      <column name="PercentAccidentalWater" type="float"><constraints nullable="true"/></column>
+      <column name="MethodTypeDesignationWater" type="VARCHAR(4000)"><constraints nullable="true"/></column>
+      <column name="MethodTypeCodeWater" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="MethodCodeWater" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="QuantitySoil" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityAccidentalSoil" type="float"><constraints nullable="true"/></column>
+      <column name="PercentAccidentalSoil" type="float"><constraints nullable="true"/></column>
+      <column name="MethodTypeDesignationSoil" type="VARCHAR(4000)"><constraints nullable="true"/></column>
+      <column name="MethodTypeCodeSoil" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="MethodCodeSoil" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="UnitAir" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="UnitAccidentalAir" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="UnitWater" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="UnitAccidentalWater" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="UnitSoil" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="UnitAccidentalSoil" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="CountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_CountryID" type="INT"/>
+      <column name="RiverBasinDistrictCode" type="VARCHAR(255)"/>
+      <column name="LOV_RiverBasinDistrictID" type="INT"/>
+      <column name="NUTSLevel2RegionCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel1ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel2ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel3ID" type="INT"><constraints nullable="true"/></column>
+      <column name="IASectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IAActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IASubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_IASectorID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IAActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IASubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="NACESectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACEActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACESubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NACESectorID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NACEActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NACESubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_ConfidentialityIDAir" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_ConfidentialityIDWater" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_ConfidentialityIDSoil" type="INT"><constraints nullable="true"/></column>
+      <column name="ConfidentialCodeAir" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="ConfidentialCodeWater" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="ConfidentialCodeSoil" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicator" type="BOOLEAN"/>
+      <column name="ConfidentialIndicatorFacility" type="BOOLEAN"/>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-21"><createTable tableName="POLLUTANTTRANSFER">
+      <column name="FacilityReportID" type="INT"/>
+      <column name="FacilityName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="FacilityID" type="INT"/>
+      <column name="ReportingYear" type="INT"/>
+      <column name="MethodCode" type="VARCHAR(255)"/>
+      <column name="Quantity" type="float"/>
+      <column name="MethodTypeDesignation" type="VARCHAR(4000)"><constraints nullable="true"/></column>
+      <column name="MethodTypeCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="UnitCode" type="VARCHAR(255)"/>
+      <column name="PollutantGroupCode" type="VARCHAR(255)"/>
+      <column name="PollutantCode" type="VARCHAR(255)"/>
+      <column name="CAS" type="VARCHAR(20)"><constraints nullable="true"/></column>
+      <column name="LOV_PollutantGroupID" type="INT"/>
+      <column name="LOV_PollutantID" type="INT"/>
+      <column name="CountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_CountryID" type="INT"/>
+      <column name="RiverBasinDistrictCode" type="VARCHAR(255)"/>
+      <column name="LOV_RiverBasinDistrictID" type="INT"/>
+      <column name="NUTSLevel2RegionCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel1ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel2ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel3ID" type="INT"><constraints nullable="true"/></column>
+      <column name="IASectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IAActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IASubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_IASectorID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IAActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IASubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="NACESectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACEActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACESubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NACESectorID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NACEActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NACESubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
+      <column name="ConfidentialCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicator" type="BOOLEAN"/>
+      <column name="ConfidentialIndicatorFacility" type="BOOLEAN"/>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-22"><createTable tableName="RECEIVINGCOUNTRY">
+      <column name="LOV_CountryID" type="INT"/>
+      <column name="Code" type="VARCHAR(255)"/>
+      <column name="Name" type="VARCHAR(255)"/>
+      <column name="StartYear" type="INT"><constraints nullable="true"/></column>
+      <column name="EndYear" type="INT"><constraints nullable="true"/></column>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-23"><createTable tableName="REPORTINGCOUNTRY">
+      <column name="LOV_CountryID" type="INT"/>
+      <column name="Code" type="VARCHAR(255)"/>
+      <column name="Name" type="VARCHAR(255)"/>
+      <column name="StartYear" type="INT"><constraints nullable="true"/></column>
+      <column name="EndYear" type="INT"><constraints nullable="true"/></column>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-24"><createTable tableName="REPORTINGYEAR">
+	  <column name="Year" type="INT"/>
+      <column name="Countries" type="INT"><constraints nullable="true"/></column>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-25"><createTable tableName="WASTETRANSFER">
+      <column name="FacilityReportID" type="INT"/>
+      <column name="FacilityName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="FacilityID" type="INT"/>
+      <column name="ReportingYear" type="INT"/>
+      <column name="QuantityRecoveryNONHW" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityDisposalNONHW" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityUnspecNONHW" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityTotalNONHW" type="float"><constraints nullable="true"/></column>
+      <column name="UnitCodeNONHW" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="QuantityRecoveryHWIC" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityDisposalHWIC" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityUnspecHWIC" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityTotalHWIC" type="float"><constraints nullable="true"/></column>
+      <column name="UnitCodeHWIC" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="QuantityRecoveryHWOC" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityDisposalHWOC" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityUnspecHWOC" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityTotalHWOC" type="float"><constraints nullable="true"/></column>
+      <column name="UnitCodeHWOC" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="CountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_CountryID" type="INT"/>
+      <column name="RiverBasinDistrictCode" type="VARCHAR(255)"/>
+      <column name="LOV_RiverBasinDistrictID" type="INT"/>
+      <column name="NUTSLevel2RegionCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel1ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel2ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel3ID" type="INT"><constraints nullable="true"/></column>
+      <column name="IASectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IAActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IASubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_IASectorID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IAActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IASubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="NACESectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACEActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACESubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NACESectorID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NACEActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NACESubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="HasReportedRecovery" type="BOOLEAN"/>
+      <column name="HasReportedDisposal" type="BOOLEAN"/>
+      <column name="HasReportedUnspecified" type="BOOLEAN"/>
+      <column name="ConfidentialIndicatorNONHW" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicatorHWOC" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicatorHWIC" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicatorWaste" type="BOOLEAN"/>
+      <column name="ConfidentialIndicatorFacility" type="BOOLEAN"/>
+      <column name="ConfidentialIndicator_HWIC_Recovery" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicator_HWIC_Disposal" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicator_HWIC_Unspec" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicator_HWOC_Recovery" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicator_HWOC_Disposal" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicator_HWOC_Unspec" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicator_NONHW_Recovery" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicator_NONHW_Disposal" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicator_NONHW_Unspec" type="BOOLEAN"><constraints nullable="true"/></column>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-26"><createTable tableName="WASTETRANSFER_CONFIDENTIAL">
+      <column name="FacilityReportID" type="INT"/>
+      <column name="LOV_WasteTypeID" type="INT"/>
+      <column name="WasteTypeCode" type="VARCHAR(255)"/>
+      <column name="LOV_ConfidentialityID" type="INT"/>
+      <column name="ConfidentialCode" type="VARCHAR(255)"/>
+      <column name="ConfidentialityOnQuantity" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="ConfidentialityOnTreatmant" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="ConfidentialityOnReceivingCountry" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="ReportingYear" type="INT"/>
+      <column name="CountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_CountryID" type="INT"/>
+      <column name="RiverBasinDistrictCode" type="VARCHAR(255)"/>
+      <column name="LOV_RiverBasinDistrictID" type="INT"/>
+      <column name="NUTSLevel2RegionCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel1ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel2ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel3ID" type="INT"><constraints nullable="true"/></column>
+      <column name="IASectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IAActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IASubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_IASectorID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IAActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IASubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="NACESectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACEActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACESubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NACESectorID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NACEActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NACESubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="HasReportedRecovery" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="HasReportedDisposal" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="HasReportedUnspecified" type="BOOLEAN"><constraints nullable="true"/></column>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-27"><createTable tableName="WASTETRANSFER_HAZARDOUSTREATERS">
+      <column name="FacilityReportID" type="INT"/>
+      <column name="FacilityName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="FacilityID" type="INT"/>
+      <column name="ReportingYear" type="INT"/>
+      <column name="WHPName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="WHPAddress" type="VARCHAR(511)"><constraints nullable="true"/></column>
+      <column name="WHPCity" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="WHPPostalCode" type="VARCHAR(50)"><constraints nullable="true"/></column>
+      <column name="WHPCountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="WHPSiteAddress" type="VARCHAR(511)"><constraints nullable="true"/></column>
+      <column name="WHPSiteCity" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="WHPSitePostalCode" type="VARCHAR(50)"><constraints nullable="true"/></column>
+      <column name="WHPSiteCountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="Quantity" type="float"><constraints nullable="true"/></column>
+      <column name="UnitCode" type="VARCHAR(255)"/>
+      <column name="WasteTreatmentCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NumberOfReports" type="INT"><constraints nullable="true"/></column>
+      <column name="CountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_CountryID" type="INT"/>
+      <column name="RiverBasinDistrictCode" type="VARCHAR(255)"/>
+      <column name="LOV_RiverBasinDistrictID" type="INT"/>
+      <column name="NUTSLevel2RegionCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel1ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel2ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel3ID" type="INT"><constraints nullable="true"/></column>
+      <column name="IASectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IAActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IASubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_IASectorID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IAActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IASubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="NACESectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACEActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACESubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NACESectorID" type="INT"/><constraints nullable="true"/></column>>
+      <column name="LOV_NACEActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NACESubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="ConfidentialCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicator" type="BOOLEAN"/>
+      <column name="ConfidentialIndicatorFacility" type="BOOLEAN"/>
+    </createTable>  </changeSet>
+
+ <changeSet author="hjelm" id="rev-28"><createTable tableName="WASTETRANSFER_RECEIVINGCOUNTRY">
+      <column name="FacilityReportID" type="INT"/>
+      <column name="FacilityName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="FacilityID" type="INT"/>
+      <column name="ReportingYear" type="INT"/>
+      <column name="QuantityRecovery" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityDisposal" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityUnspec" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityTotal" type="float"><constraints nullable="true"/></column>
+      <column name="ReceivingCountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>>
+      <column name="UnitCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
+      <column name="CountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_CountryID" type="INT"/>
+      <column name="RiverBasinDistrictCode" type="VARCHAR(255)"/>
+      <column name="LOV_RiverBasinDistrictID" type="INT"/>
+      <column name="NUTSLevel2RegionCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel1ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel2ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel3ID" type="INT"><constraints nullable="true"/></column>
+      <column name="IASectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IAActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IASubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_IASectorID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IAActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IASubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="NACESectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACEActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACESubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NACESectorID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NACEActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NACESubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="HasReportedRecovery" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="HasReportedDisposal" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="HasReportedUnspecified" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicator" type="BOOLEAN"/>
+      <column name="ConfidentialIndicatorFacility" type="BOOLEAN"/>
+    </createTable>  </changeSet>
+
+	<changeSet author="hjelm" id="rev-29"><createTable tableName="WASTETRANSFER_TREATMENT">
+      <column name="FacilityReportID" type="INT"/>
+      <column name="WasteTypeCode" type="varchar(6)"/>
+      <column name="FacilityName" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="FacilityID" type="INT"/>
+      <column name="ReportingYear" type="INT"/>
+      <column name="QuantityRecovery" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityDisposal" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityUnspec" type="float"><constraints nullable="true"/></column>
+      <column name="QuantityTotal" type="float"><constraints nullable="true"/></column>
+      <column name="UnitCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="CountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_CountryID" type="INT"/>
+      <column name="RiverBasinDistrictCode" type="VARCHAR(255)"/>
+      <column name="LOV_RiverBasinDistrictID" type="INT"/>
+      <column name="NUTSLevel2RegionCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel1ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel2ID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NUTSRLevel3ID" type="INT"><constraints nullable="true"/></column>
+      <column name="IASectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IAActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IASubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="IPPCSubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_IASectorID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IAActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_IASubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="NACESectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACEActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="NACESubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
+      <column name="LOV_NACESectorID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NACEActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="LOV_NACESubActivityID" type="INT"><constraints nullable="true"/></column>
+      <column name="HasReportedRecovery" type="INT"/>
+      <column name="HasReportedDisposal" type="INT"/>
+      <column name="HasReportedUnspecified" type="INT"/>
+      <column name="ConfidentialIndicatorFacility" type="BOOLEAN"/>
+      <column name="ConfidentialIndicatorRecovery" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicatorDisposal" type="BOOLEAN"><constraints nullable="true"/></column>
+      <column name="ConfidentialIndicatorUnspec" type="BOOLEAN"><constraints nullable="true"/></column>
+    </createTable>  </changeSet>
+</databaseChangeLog>
