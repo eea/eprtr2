@@ -19,9 +19,9 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
-    <bean id="transactionManagerCms" class="org.springframework.orm.jpa.JpaTransactionManager">
+    <!--bean id="transactionManagerCms" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactoryCms" />
-    </bean>
+    </bean-->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     	<property name="persistenceUnitName" value="eprtr"/>
     	<!--property name="persistenceXmlLocation" value="classpath:META-INF/persistence-test.xml"/-->
@@ -32,16 +32,16 @@
             </bean>
         </property>
     </bean>      
-    <bean id="entityManagerFactoryCms" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <!--bean id="entityManagerFactoryCms" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     	<property name="persistenceUnitName" value="eprtrcms"/>
-    	<!--property name="persistenceXmlLocation" value="classpath:META-INF/persistence-test.xml"/-->
+    	<property name="persistenceXmlLocation" value="classpath:META-INF/persistence-test.xml"/>
         <property name="dataSource" ref="dataSourceEprtrCms" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="showSql" value="true" />
             </bean>
         </property>
-    </bean>      
+    </bean-->      
  
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	    <property name="driverClassName" value="org.h2.Driver" />
@@ -51,7 +51,7 @@
     </bean>
     <bean id="dataSourceEprtrCms" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	    <property name="driverClassName" value="org.h2.Driver" />
-	    <property name="url" value="jdbc:h2:file:eprtrcmstest" />
+	    <property name="url" value="jdbc:h2:file:eprtrtest" />
 	    <property name="username" value="dbuser" />
 	    <property name="password" value="password" />
     </bean>
@@ -60,7 +60,6 @@
         <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
                 <property name="dataSource" ref="dataSource" />
                 <property name="changeLog" value="classpath:changelog-master.xml" />
-
 -->
               <!-- contexts specifies the runtime contexts to use.  -->
               <!--
