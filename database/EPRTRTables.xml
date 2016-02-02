@@ -666,7 +666,7 @@
       <column name="NACESectorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="NACEActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="NACESubActivityCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
-      <column name="LOV_NACESectorID" type="INT"/><constraints nullable="true"/></column>>
+      <column name="LOV_NACESectorID" type="INT"/><constraints nullable="true"/></column>
       <column name="LOV_NACEActivityID" type="INT"><constraints nullable="true"/></column>
       <column name="LOV_NACESubActivityID" type="INT"><constraints nullable="true"/></column>
       <column name="ConfidentialCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
