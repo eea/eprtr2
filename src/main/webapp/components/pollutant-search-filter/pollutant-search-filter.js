@@ -58,10 +58,10 @@ angular.module('myApp.pollutantSearchFilter', ['restangular', 'myApp.search-filt
                 if (this.releasesToSoil) {
                     mediumCodes = mediumCodes.concat('SOIL');
                 }
-                if (this.transfersToWasteWater) {
+                /*if (this.transfersToWasteWater && showTransfersToInputField) {
                     mediumCodes = mediumCodes.concat('WASTEWATER');
-                }
-                if (mediumCodes.length > 0 && mediumCodes.length < 4) {
+                }*/
+                if (mediumCodes.length > 0 && mediumCodes.length < 3) {
                     queryParams.MediumCode = mediumCodes;
                 }
                 if (this.selectedPollutant.lov_PollutantID) {

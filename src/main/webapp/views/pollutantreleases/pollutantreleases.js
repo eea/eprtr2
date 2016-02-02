@@ -239,9 +239,9 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
                 $scope.quantityWater = response.headers('X-QuantityWater');
                 $scope.quantitySoil = response.headers('X-QuantitySoil');
 
-                $scope.mediumFilter.prSumMedium = 'AIR';
-                $scope.mediumFilter.prFacMedium = 'AIR';
-                $scope.mediumFilter.prAreaMedium = 'AIR';
+                $scope.mediumFilter.prSumMedium = $scope.queryParams.MediumCode?$scope.queryParams.MediumCode[0]:'AIR';
+                $scope.mediumFilter.prFacMedium = $scope.queryParams.MediumCode?$scope.queryParams.MediumCode[0]:'AIR';
+                $scope.mediumFilter.prAreaMedium = $scope.queryParams.MediumCode?$scope.queryParams.MediumCode[0]:'AIR';
 
                 $scope.updateSummaryData();
                 $scope.updateFacilitiesData();
@@ -346,11 +346,15 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
                 }
             }
 
-            var graphDataArray = [];
+            var graphDataArray = [],keys = [];
             for (var key in graphData) {
                 if (graphData.hasOwnProperty(key)) {
-                    graphDataArray = graphDataArray.concat(graphData[key]);
+                    keys.push(key);
                 }
+            }
+            keys.sort();
+            for (var i = 0; i < keys.length; i++) {
+              graphDataArray = graphDataArray.concat(graphData[keys[i]]);
             }
 
             var heigh = Object.keys(graphData).length * 40;

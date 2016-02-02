@@ -101,7 +101,7 @@ myApp.directive('prSelector', ['$compile','$http', '$filter', 'Restangular', 'ep
             
     		scope.$watchCollection('[quantityAir,quantityWater,quantitySoil,tr_c,tr_p]', function(value) {
     			
-                if (scope.quantityAir != undefined && scope.tr_p != undefined ) {
+                if (scope.quantityAir != undefined && scope.tr_c != undefined && scope.tr_p != undefined ) {
 
                     // create some new html elements to hold the separate info
                     var title = $compile('<label class="control-label"><strong>'+scope.tr_p.ShowFacilitiesReleasingToMedium+':</strong></label></br>')(scope); 
