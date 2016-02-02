@@ -684,7 +684,7 @@
       <column name="QuantityDisposal" type="float"><constraints nullable="true"/></column>
       <column name="QuantityUnspec" type="float"><constraints nullable="true"/></column>
       <column name="QuantityTotal" type="float"><constraints nullable="true"/></column>
-      <column name="ReceivingCountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>>
+      <column name="ReceivingCountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="UnitCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
       <column name="CountryCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
