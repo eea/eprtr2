@@ -90,7 +90,7 @@
       <column name="ConfidentialIndicatorWaste" type="INT"><constraints nullable="true"/></column>
       <column name="ConfidentialIndicatorPollutantRelease" type="INT"><constraints nullable="true"/></column>
       <column name="ConfidentialIndicatorPollutantTransfer" type="INT"><constraints nullable="true"/></column>
-    </createTable>  </changeSet> TEXTIMAGE_ON [PRIMARY]
+    </createTable>  </changeSet>
 
  <changeSet author="hjelm" id="rev-5"><createTable tableName="FACILITYDETAIL_POLLUTANTRELEASE">
       <column name="FacilityReportID" type="INT"/>
@@ -758,5 +758,6 @@
       <column name="ConfidentialIndicatorRecovery" type="BOOLEAN"><constraints nullable="true"/></column>
       <column name="ConfidentialIndicatorDisposal" type="BOOLEAN"><constraints nullable="true"/></column>
       <column name="ConfidentialIndicatorUnspec" type="BOOLEAN"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 </databaseChangeLog>
