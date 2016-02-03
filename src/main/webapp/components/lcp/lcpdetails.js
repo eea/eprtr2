@@ -50,16 +50,29 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize', 'myApp
 	 * Request data by FacilityReportID
 	 * */
 	$scope.updateByPlantid = function(){
-		var qp = {'PlantID':$scope.plantid};
+		var qp = {'PlantID':$scope.plantid}, uid;
 		//$scope.map = {wh : {'FacilityReportID': $scope.frid}};
         lcpDataService.get($scope.mapurls.lcpUrl,0, qp).then(function (data) {
         	//$scope.initBasicData(data);
         	//$scope.ajustplantdata(data);
-        	$scope.callAllPlants(data.features[0].attributes[lcpconf.layerfields[0].uniqueplantid]);
+        	uid = data.features[0].attributes[lcpconf.layerfields[0].uniqueplantid];
+        	$scope.callAllPlants(uid);
+        	$scope.updateByUid(uid);
         });        	
         /*lcpDataService.get(3, qp).then(function (data) {
 			$scope.ajustart15data(data);
 	    });*/        	
+	    /*lcpDataService.get($scope.mapurls.lcpUrl,4, qp).then(function (data) {
+			$scope.ajustnerpdata(data);
+	    });        	
+	    lcpDataService.get($scope.mapurls.lcpUrl,5, qp).then(function (data) {
+			$scope.ajustdetailsdata(data);
+	    });*/        	
+	};
+	$scope.updateByUid = function(uid){
+		var qp = {};
+		qp[lcpconf.layerfields[0].uniqueplantid] = uid;
+		//$scope.map = {wh : {'FacilityReportID': $scope.frid}};
 	    lcpDataService.get($scope.mapurls.lcpUrl,4, qp).then(function (data) {
 			$scope.ajustnerpdata(data);
 	    });        	
@@ -125,7 +138,22 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize', 'myApp
 	$scope.ajustdetailsdata = function(data){
 		$scope.detailsdata = {};
 		if (data.features){
-			var item = data.features[0].attributes;
+			/*Not all years have same amount of data, we pick the one with most*/
+			var indx = 0,nonnull = 0;
+			angular.forEach(data.features, function(detail, index) {
+				var nonempty = 0;
+				for (var key in detail.attributes){
+					if(detail.attributes[key] != '' && detail.attributes[key] != null && detail.attributes[key] != undefined){
+						nonempty ++;
+					}
+				}
+				if(nonempty >nonnull){
+					indx = index;
+					nonnull = nonempty;
+				}
+				
+			});
+			var item = data.features[indx].attributes;
 			var _dd = {'Statusotheplant':$scope.ff.ConfidentialFormat(item[lcpconf.layerfields[5].statusotheplant], null)};
 			_dd['Mwth'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[5].mwth], null);
 			_dd['Extensionby50mwormore'] = item[lcpconf.layerfields[5].extensionby50mwormore];
@@ -324,7 +352,22 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize', 'myApp
 	$scope.ajustnerpdata = function(data){
 		$scope.nerpdata = {};
 		if (data.features){
-			var item = data.features[0].attributes;
+			/*Not all years have same amount of data, we pick the one with most*/
+			var indx = 0,nonnull = 0;
+			angular.forEach(data.features, function(nerp, index) {
+				var nonempty = 0;
+				for (var key in nerp.attributes){
+					if(nerp.attributes[key] != '' && nerp.attributes[key] != null && nerp.attributes[key] != undefined){
+						nonempty ++;
+					}
+				}
+				if(nonempty >nonnull){
+					indx = index;
+					nonnull = nonempty;
+				}
+				
+			});
+			var item = data.features[indx].attributes;
 			var _nd = {'id':item[lcpconf.layerfields[4].id]};
 			_nd['optoutplant'] =item[lcpconf.layerfields[4].optoutplant];
 			_nd['capacityoptedoutmw'] = $scope.ff.ConfidentialFormat(item[lcpconf.layerfields[4].capacityoptedoutmw], null);
@@ -435,6 +478,9 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize', 'myApp
 	        				  qs.push(lcpconf.layerfields[id].fk_plant_id + " in (" + query[key].join(",") + ")");
 				    	  }
 				          break;
+				      case 'Unique_Plant_ID':
+				    	  qs.push(lcpconf.layerfields[0].uniqueplantid + "='"+query[key]+"'");
+				    	  break;
 				          
 				   /*   default:
 				          default code block*/
@@ -461,14 +507,14 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize', 'myApp
 		eprtrcms.get('LCP',null).then(function (data) {
 			$scope.title = data.Plant;
 		});
-  $scope.plantid = plantid;
-  $scope.ok = function () {
-    $modalInstance.close();
-  };
-
-  $scope.cancel = function () {
-    $modalInstance.dismiss('cancel');
-  };
+	  $scope.plantid = plantid;
+	  $scope.ok = function () {
+	    $modalInstance.close();
+	  };
+	
+	  $scope.cancel = function () {
+	    $modalInstance.dismiss('cancel');
+	  };
 })
 /*
  * This directive enables us to define this module as a custom HTML element

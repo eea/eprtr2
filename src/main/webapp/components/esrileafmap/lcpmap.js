@@ -152,6 +152,9 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 			      case 'PlantGroup':
 		    		  arrQue.push(lcpconf.layerfields[0].plantid + " in (" + queryparams[key].join(",") + ")");
 			          break;
+			      case 'Unique_Plant_ID':
+			    	  qs.push(lcpconf.layerfields[0].uniqueplantid + "='"+query[key]+"'");
+			    	  break;
 			          
 			   /*   default:
 			          default code block*/
