@@ -14,7 +14,7 @@
 
     <util:properties id="application" location="classpath:application.properties"/>
 
-    <context:property-placeholder order="0" ignore-unresolvable="true" system-properties-mode="OVERRIDE" location="classpath:application.properties"  properties-ref="application" location="classpath:application.properties" />
+    <context:property-placeholder order="0" ignore-unresolvable="true" system-properties-mode="OVERRIDE" location="classpath:application.properties"  properties-ref="application" />
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
