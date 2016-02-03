@@ -50,12 +50,12 @@
 	    <property name="username" value="dbuser" />
 	    <property name="password" value="password" />
     </bean>
-    <!-- bean id="dataSourceEprtrCms" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <bean id="dataSourceEprtrCms" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	    <property name="driverClassName" value="org.h2.Driver" />
 	    <property name="url" value="jdbc:h2:file:eprtrtest" />
 	    <property name="username" value="dbuser" />
 	    <property name="password" value="password" />
-    </bean-->
+    </bean>
 
 <!--
         <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
