@@ -31,7 +31,7 @@
       <column name="StartYear" valueNumeric="2007"/>
     </insert>
     <insert tableName="LOV_NACEACTIVITY">
-      <column name="LOV_NACEActivityID" valueNumeric="2"/>
+      <column name="LOV_NACEActivityID" valueNumeric="3"/>
       <column name="Code" value="01.1"/>
       <column name="Name" value="Activity 1"/>
       <column name="StartYear" valueNumeric="2007"/>
