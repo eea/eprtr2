@@ -14,7 +14,7 @@
 
     <util:properties id="application" location="classpath:application.properties"/>
 
-    <context:property-placeholder order="0" ignore-unresolvable="true" system-properties-mode="OVERRIDE" properties-ref="application" location="classpath:application.properties" />
+    <context:property-placeholder order="0" ignore-unresolvable="true" system-properties-mode="OVERRIDE" location="classpath:application.properties"  properties-ref="application" location="classpath:application.properties" />
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
@@ -26,6 +26,7 @@
     	<property name="persistenceUnitName" value="eprtr"/>
     	<!--property name="persistenceXmlLocation" value="classpath:META-INF/persistence-test.xml"/-->
         <property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="eea.eprtr.*.model" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="showSql" value="true" />
@@ -49,12 +50,12 @@
 	    <property name="username" value="dbuser" />
 	    <property name="password" value="password" />
     </bean>
-    <bean id="dataSourceEprtrCms" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <!-- bean id="dataSourceEprtrCms" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	    <property name="driverClassName" value="org.h2.Driver" />
 	    <property name="url" value="jdbc:h2:file:eprtrtest" />
 	    <property name="username" value="dbuser" />
 	    <property name="password" value="password" />
-    </bean>
+    </bean-->
 
 <!--
         <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
