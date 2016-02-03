@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+  <!--
+     You can run this change log on your database as many times as you want, it will ignore the
+     changes that are already applied. It also means that you can't modify an existing revision.
+     Always add to the end.
+
+     Use the maven goals: liquibase:update and liquibase:status
+      Potentially with -Dliquibase.dropFirst=true
+ -->
+
+  <changeSet author="hjelm" id="rev-1" context="demo">
+    <preConditions>
+      <sqlCheck expectedResult="0">SELECT COUNT(*) FROM LOV_NACEACTIVITY</sqlCheck>
+    </preConditions>
+
+    <comment>Load some demo data</comment>
+
+    <insert tableName="LOV_NACEACTIVITY">
+      <column name="LOV_NACEActivityID" valueNumeric="1"/>
+      <column name="Code" value="01"/>
+      <column name="Name" value="Root Activity 1"/>
+      <column name="StartYear" valueNumeric="2007"/>
+    </insert>
+    <insert tableName="LOV_NACEACTIVITY">
+      <column name="LOV_NACEActivityID" valueNumeric="2"/>
+      <column name="Code" value="02"/>
+      <column name="Name" value="Root Activity 2"/>
+      <column name="StartYear" valueNumeric="2007"/>
+    </insert>
+    <insert tableName="LOV_NACEACTIVITY">
+      <column name="LOV_NACEActivityID" valueNumeric="2"/>
+      <column name="Code" value="01.1"/>
+      <column name="Name" value="Activity 1"/>
+      <column name="StartYear" valueNumeric="2007"/>
+      <column name="ParentID" valueNumeric="1" /> 
+    </insert>
+     </changeSet>
+
+</databaseChangeLog>
