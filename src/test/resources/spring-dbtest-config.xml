@@ -24,7 +24,7 @@
     </bean-->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
     	<property name="persistenceUnitName" value="eprtr"/>
-    	<property name="persistenceXmlLocation" value="classpath:META-INF/persistence-test.xml">
+    	<property name="persistenceXmlLocation" value="classpath:META-INF/persistence-test.xml"/>
         <property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" value="eea.eprtr.*.model" />
         <property name="jpaVendorAdapter">
