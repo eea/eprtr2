@@ -69,13 +69,6 @@
 <!--
         </bean>
 -->
-	<bean id="simpleDocService" class="eea.eprtr.dao.SimpleDocServiceJdbc">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
-	<bean id="simpleDocServiceEprtrCms" class="eea.eprtr.dao.SimpleDocServiceJdbc">
-		<property name="dataSource" ref="dataSourceEprtrCms" />
-	</bean>
-
     <bean id="storageService" class="eea.eprtr.dao.StorageServiceFiles">
         <property name="storageDir" value="${storage.dir}" />
     </bean>
