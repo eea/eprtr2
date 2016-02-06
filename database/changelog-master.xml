@@ -15,7 +15,7 @@
 
 
  <include file="database/EPRTRTables.xml"/>
- <include file="database/eprtr_cms.xml"/>
+ <!--include file="database/eprtr_cms.xml"/-->
  <!--include file="database/CreateRDFViews.xml"/-->
 
  <include file="database/loaddemodata.xml"/>

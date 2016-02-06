@@ -10,12 +10,12 @@ import eea.eprtr.model.MapServiceUrls;
 @RestController
 public class MapServiceUrlsController {
 
-	@Autowired
-	private MapServiceUrlsRepository mapServiceUrlsRepository;
+    @Autowired
+    private MapServiceUrlsRepository mapServiceUrlsRepository;
 
-	@RequestMapping("/mapurls")
+    @RequestMapping("/mapurls")
     public MapServiceUrls getMapServiceUrls() {
-		MapServiceUrls msu = mapServiceUrlsRepository.getMapUrls();
-		return msu;
+        MapServiceUrls msu = mapServiceUrlsRepository.getMapUrls();
+        return msu;
     }
 }

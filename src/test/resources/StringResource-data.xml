@@ -6,10 +6,10 @@
 
   <ReviseResourceKey
       ResourceKeyID="3" ResourceKey="AboutPageContent" ResourceType="Static"
-      KeyDescription="" KeyTitle="About E-PRTR"
+      AllowHTML="true" KeyDescription="X" KeyTitle="About E-PRTR"
       ContentsGroupID="2" CreatedDate="2010-03-17 00:00:00"
    />
-   <!-- AllowHTML="true" -->
+
   <ReviseResourceValue
       ResourceValueID="3" ResourceKeyID="3" CultureCode="en-GB"
       ResourceValue="About time" ChangedDate="2013-03-17 09:39:01"

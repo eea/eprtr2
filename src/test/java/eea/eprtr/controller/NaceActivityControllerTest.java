@@ -11,25 +11,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.unitils.UnitilsJUnit4;
-import org.unitils.dbunit.annotation.DataSet;
-import org.unitils.spring.annotation.SpringApplicationContext;
-import org.unitils.spring.annotation.SpringBean;
-import org.unitils.database.annotations.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
 
 import eea.eprtr.dao.NaceActivityRepository;
 import eea.eprtr.model.NaceActivity;
 
-@DataSet("NaceActivity-data.xml")
-@SpringApplicationContext({"spring-mvc-config.xml"})
-@Transactional(transactionManagerName="transactionManager")
-public class NaceActivityControllerTest extends UnitilsJUnit4 {
-    
-    @SpringBean("naceActivityController")
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:spring-mvc-config.xml"})
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
+        DirtiesContextTestExecutionListener.class,
+        TransactionalTestExecutionListener.class,
+        DbUnitTestExecutionListener.class })
+@DatabaseSetup("/NaceActivity-data.xml")
+public class NaceActivityControllerTest {
+
+    @Autowired
     private NaceActivityController controller;
-    
+
     @Test
     public void testThatControllerListReturnsTheSameAsRepositoryList() {
         NaceActivityRepository repository = mock(NaceActivityRepository.class);
@@ -40,7 +49,7 @@ public class NaceActivityControllerTest extends UnitilsJUnit4 {
         List<NaceActivity> list = controller.list(parentID);
         assertSame(list, listReturnedByRepository);
     }
-    
+
     @Test
     public void testThatControllerListReturnsTheCorrectFormattedJson() throws Exception {
         String expectedResponse = "[{\"code\":\"01\",\"endYear\":null,\"name\":\"Root Activity 1\",\"parentID\":null,\"startYear\":2007,\"lov_NACEActivityID\":1},"
@@ -51,7 +60,7 @@ public class NaceActivityControllerTest extends UnitilsJUnit4 {
             .andExpect(content().contentType("application/json;charset=UTF-8"))
             .andExpect(content().string(expectedResponse));
     }
-    
+
     @Test
     public void testThatControllerGetReturnsTheSameAsRepositoryGet() {
         NaceActivityRepository repository = mock(NaceActivityRepository.class);

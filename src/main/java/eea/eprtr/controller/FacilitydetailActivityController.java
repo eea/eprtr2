@@ -12,34 +12,29 @@ import eea.eprtr.model.FacilitydetailActivity;
 
 @RestController
 public class FacilitydetailActivityController {
-	
-	@PersistenceContext(unitName="eprtr")
+
+    @PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
-	
-/*	@RequestMapping("/facilitydetailDetails")
+
+/*  @RequestMapping("/facilitydetailDetails")
     public FacilitydetailDetail[] reportingYears(@RequestParam("FacilityId") Integer facilityID) {
-    	TypedQuery<FacilitydetailDetail> query = em.createNamedQuery("FacilitydetailDetail.findByFacilityID", FacilitydetailDetail.class);
-    	query.setParameter("FacilityId", facilityID);
-    	return query.getResultList().toArray(new FacilitydetailDetail[0]);
+        TypedQuery<FacilitydetailDetail> query = em.createNamedQuery("FacilitydetailDetail.findByFacilityID", FacilitydetailDetail.class);
+        query.setParameter("FacilityId", facilityID);
+        return query.getResultList().toArray(new FacilitydetailDetail[0]);
     }
-*/	
-	
-	@RequestMapping("/facilitydetailActivity")
-	public FacilitydetailActivity[] getByFacilityReportID(
-    		@RequestParam(value = "FacilityReportID") Integer facilityReportID){
+*/
 
-		TypedQuery<FacilitydetailActivity> query = null;
-		
-		query = em.createNamedQuery("FacilitydetailActivity.findByFacilityReportID", FacilitydetailActivity.class);
-		query.setParameter("FacilityReportID", facilityReportID);
-		
-		return query.getResultList().toArray(new FacilitydetailActivity[0]);
-	}
+    @RequestMapping("/facilitydetailActivity")
+    public FacilitydetailActivity[] getByFacilityReportID(
+            @RequestParam(value = "FacilityReportID") Integer facilityReportID){
 
+        TypedQuery<FacilitydetailActivity> query = null;
 
+        query = em.createNamedQuery("FacilitydetailActivity.findByFacilityReportID", FacilitydetailActivity.class);
+        query.setParameter("FacilityReportID", facilityReportID);
 
+        return query.getResultList().toArray(new FacilitydetailActivity[0]);
+    }
 
-	
-	
 }

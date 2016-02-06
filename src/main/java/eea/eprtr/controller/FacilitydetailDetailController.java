@@ -13,48 +13,42 @@ import eea.eprtr.model.FacilitydetailDetail;
 
 @RestController
 public class FacilitydetailDetailController {
-	
-	@PersistenceContext(unitName="eprtr")
+
+    @PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
-	
-/*	@RequestMapping("/facilitydetailDetails")
+/*  @RequestMapping("/facilitydetailDetails")
     public FacilitydetailDetail[] reportingYears(@RequestParam("FacilityId") Integer facilityID) {
-    	TypedQuery<FacilitydetailDetail> query = em.createNamedQuery("FacilitydetailDetail.findByFacilityID", FacilitydetailDetail.class);
-    	query.setParameter("FacilityId", facilityID);
-    	return query.getResultList().toArray(new FacilitydetailDetail[0]);
+        TypedQuery<FacilitydetailDetail> query = em.createNamedQuery("FacilitydetailDetail.findByFacilityID", FacilitydetailDetail.class);
+        query.setParameter("FacilityId", facilityID);
+        return query.getResultList().toArray(new FacilitydetailDetail[0]);
     }
-*/	
-	
-	@RequestMapping("/facilitydetailDetails")
-	public FacilitydetailDetail[] getByFacilityIDAndYear(
-    		@RequestParam(value = "FacilityID") Integer facilityID,
-    		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear){
+*/
 
-		TypedQuery<FacilitydetailDetail> query = null;
-		if (reportingYear != null) {
-			query = em.createNamedQuery("FacilitydetailDetail.findByFacilityIDAndYear", FacilitydetailDetail.class);
-			query.setParameter("FacilityID", facilityID);
-			query.setParameter("ReportingYear", reportingYear);
-		}
-		else{
-			query = em.createNamedQuery("FacilitydetailDetail.findByFacilityID", FacilitydetailDetail.class);
-			query.setParameter("FacilityID", facilityID);
-		}
-		return query.getResultList().toArray(new FacilitydetailDetail[0]);
-	}
-	
-	@RequestMapping("/facilitydetailDetails/{facilityReportID}")
-	public FacilitydetailDetail getByFacilityReportID(
-			@PathVariable(value = "facilityReportID") Integer facilityReportID) {
-		TypedQuery<FacilitydetailDetail> query = em.createNamedQuery("FacilitydetailDetail.findByFacilityReportID", FacilitydetailDetail.class);
-    	query.setParameter("FacilityReportID", facilityReportID);
-    	return query.getSingleResult();
-	}
+    @RequestMapping("/facilitydetailDetails")
+    public FacilitydetailDetail[] getByFacilityIDAndYear(
+            @RequestParam(value = "FacilityID") Integer facilityID,
+            @RequestParam(value = "ReportingYear", required = false) Integer reportingYear){
 
+        TypedQuery<FacilitydetailDetail> query = null;
+        if (reportingYear != null) {
+            query = em.createNamedQuery("FacilitydetailDetail.findByFacilityIDAndYear", FacilitydetailDetail.class);
+            query.setParameter("FacilityID", facilityID);
+            query.setParameter("ReportingYear", reportingYear);
+        }
+        else{
+            query = em.createNamedQuery("FacilitydetailDetail.findByFacilityID", FacilitydetailDetail.class);
+            query.setParameter("FacilityID", facilityID);
+        }
+        return query.getResultList().toArray(new FacilitydetailDetail[0]);
+    }
 
+    @RequestMapping("/facilitydetailDetails/{facilityReportID}")
+    public FacilitydetailDetail getByFacilityReportID(
+            @PathVariable(value = "facilityReportID") Integer facilityReportID) {
+        TypedQuery<FacilitydetailDetail> query = em.createNamedQuery("FacilitydetailDetail.findByFacilityReportID", FacilitydetailDetail.class);
+        query.setParameter("FacilityReportID", facilityReportID);
+        return query.getSingleResult();
+    }
 
-
-	
-	
 }

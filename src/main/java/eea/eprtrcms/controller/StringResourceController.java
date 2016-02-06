@@ -16,24 +16,24 @@ import eea.eprtrcms.model.CmsResource;
 @RestController
 public class StringResourceController {
 
-	@Autowired
-	private StringResourceRepository stringResourceRepository;
+    @Autowired
+    private StringResourceRepository stringResourceRepository;
 
-	
-	@RequestMapping("/eprtrresource")
+    
+    @RequestMapping("/eprtrresource")
     public List<CmsResource> pollutantreleaseSearch(
-    		
-    		@RequestParam(value = "Type", required = false) String resourceType,
-    		@RequestParam(value = "i18n", required = false) String cultureCode,
-    		@RequestParam(value = "Key", required = false) String resourceKey,
-    		HttpServletResponse response
-    		) {
-		
-		StringResourceFilter stringResourceFilter = new StringResourceFilter(resourceType, cultureCode, resourceKey);
+            
+            @RequestParam(value = "Type", required = false) String resourceType,
+            @RequestParam(value = "i18n", required = false) String cultureCode,
+            @RequestParam(value = "Key", required = false) String resourceKey,
+            HttpServletResponse response
+            ) {
+        
+        StringResourceFilter stringResourceFilter = new StringResourceFilter(resourceType, cultureCode, resourceKey);
 
-		List<CmsResource> stringResources = stringResourceRepository.getStringResources(stringResourceFilter);
-		
-		return stringResources;
-	
-	}
-}	
+        List<CmsResource> stringResources = stringResourceRepository.getStringResources(stringResourceFilter);
+        
+        return stringResources;
+    
+    }
+}   

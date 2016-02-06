@@ -19,28 +19,25 @@ npm test
 Deploying
 ---------
 
-One of the following Resource fragments must be added to context.xml for the web application before deploying the WAR archive.
-You must also install the relevant JDBC driver jar file to /usr/share/tomcat/lib.
+The default configuration is to allow you to deploy to your own workstation directly. You install the target/eprtr-cms.war to Tomcat's webapps directory as cms.war. You can make it create an initial user with administrator rights by setting system properties to configure the application.
 
+On a CentOS system you can start Tomcat with the environment variable CATALINA_OPTS set to some value or add lines to /etc/sysconfig/tomcat that looks like this:
 ```
-<Resource name="jdbc/datasource" auth="Container" type="javax.sql.DataSource"
-        username="<username>"
-        password="<password>"
-    	driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-    	url="jdbc:sqlserver://<instance>.database.windows.net:1433;database=<databasename>;encrypt=true;hostNameInCertificate=*.database.windows.net;loginTimeout=30"
-    	maxActive="20"
-    	maxIdle="10"
-    	validationQuery="select 1" />
-
-<Resource name="jdbc/datasource" auth="Container" type="javax.sql.DataSource"
-        username="<username>"
-        password="<password>"
-        driverClassName="net.sourceforge.jtds.jdbc.Driver"
-        url="jdbc:jtds:sqlserver://<servername>;database=<databasename>"
-    	maxActive="20"
-    	maxIdle="10"
-    	validationQuery="select 1" />
+CATALINA_OPTS="-Dcmsdb.url=jdbc:h2:tcp://localhost:8043//work/eprtrcms -Dstorage.dir=/work -Dupload.dir=/work"
 ```
+These are the properties you can set:
+```
+cmsdb.driver
+cmsdb.url
+cmsdb.username
+cmsdb.password
+eprtrdb.driver
+eprtrdb.url
+eprtrdb.username
+eprtrdb.password
+storage.dir
+```
+The default values are in src/main/resources/application.properties
 
 How to build
 ------------

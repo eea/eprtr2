@@ -11,26 +11,37 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.runner.RunWith;
 import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.unitils.UnitilsJUnit4;
-import org.unitils.dbunit.annotation.DataSet;
-import org.unitils.spring.annotation.SpringApplicationContext;
-import org.unitils.spring.annotation.SpringBean;
-import org.unitils.database.annotations.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
+import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.DbUnitConfiguration;
+import com.github.springtestdbunit.DbUnitTestExecutionListener;
 
 import eea.eprtrcms.dao.StringResourceRepository;
 import eea.eprtrcms.model.StringResource;
 
-/* There seems to be a bug in dbunit. It doesn't see the AllowHTML column in the database.
- */
-@DataSet("StringResource-data.xml")
-@SpringApplicationContext({"spring-mvc-config.xml"})
-@Transactional(transactionManagerName="transactionManagerCms")
-public class StringResourceControllerTest extends UnitilsJUnit4 {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:spring-mvc-config.xml"})
+@DbUnitConfiguration(databaseConnection={"dataSource", "dataSourceEprtrCms"})
+@TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
+        DirtiesContextTestExecutionListener.class,
+        TransactionalTestExecutionListener.class,
+        DbUnitTestExecutionListener.class })
+@DatabaseSetup(connection="dataSourceEprtrCms", value="/StringResource-data.xml")
+
+public class StringResourceControllerTest {
     
-    @SpringBean("stringResourceController")
+    @Autowired
     private StringResourceController controller;
 
 /*
@@ -45,6 +56,9 @@ public class StringResourceControllerTest extends UnitilsJUnit4 {
         assertSame(list, listReturnedByRepository);
     }
 */
+    /*
+     * For jsonPath see https://github.com/jayway/JsonPath
+     */
     @Test
     public void testThatControllerListReturnsTheCorrectFormattedJson() throws Exception {
         String expectedResponse = "[{\"key\":\"Static\",\"type\":\"AboutPageContent\",\"value\":\"About time\"}]";

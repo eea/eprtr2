@@ -76,7 +76,7 @@
       </column>
       <column name="ResourceKey" type="varchar(200)"/>  <!-- NOTE: ResourceKey type is inconsistent in DB -->
       <column name="ResourceType" type="varchar(250)"/>
-      <column name="AllowHTML" type="BOOLEAN" defaultValueBoolean="true">
+      <column name="AllowHTML" type="BOOLEAN">
         <constraints nullable="false"/>
       </column>
       <column name="KeyDescription" type="varchar(255)"/>
