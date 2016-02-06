@@ -1,33 +1,35 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:tx="http://www.springframework.org/schema/tx"
         xmlns:util="http://www.springframework.org/schema/util"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        xmlns:mvc="http://www.springframework.org/schema/mvc"
+        xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+                http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
                 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
-	
-	<mvc:resources location="/" mapping="/*"/>
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+                http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+        
+    <mvc:resources location="/" mapping="/*"/>
 
-	<!-- Scans the classpath of this application for @Components to deploy as beans -->
-	<context:component-scan base-package="eea.*" />
-	
-	<!-- Configures the @Controller programming model -->
-        <mvc:annotation-driven>
-            <mvc:path-matching
-                suffix-pattern="false"
-                trailing-slash="false"/>
-        </mvc:annotation-driven>
+    <!-- Scans the classpath of this application for @Components to deploy as beans -->
+    <context:component-scan base-package="eea.*" />
+    
+    <!-- Configures the @Controller programming model -->
+    <mvc:annotation-driven>
+        <mvc:path-matching
+            suffix-pattern="false"
+            trailing-slash="false"/>
+    </mvc:annotation-driven>
 
     <!--tx:annotation-driven transaction-manager="transactionManager" /-->  
     <tx:annotation-driven  />  
 
     <util:properties id="application" location="classpath:application.properties"/>
 
-    <context:property-placeholder order="0" ignore-unresolvable="true" location="classpath:application.properties" system-properties-mode="OVERRIDE" properties-ref="application"/>
+    <context:property-placeholder order="0" ignore-unresolvable="true"
+        location="classpath:application.properties"
+        system-properties-mode="OVERRIDE" properties-ref="application"/>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
@@ -39,8 +41,10 @@
         <property name="entityManagerFactory" ref="entityManagerFactoryCms" />
         <qualifier value="tmEprtrCms"/>
     </bean>
+
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-    	<property name="persistenceUnitName" value="eprtr"/>
+        <property name="persistenceUnitName" value="eprtr"/>
+        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
         <property name="dataSource" ref="dataSource" />
         <property name="packagesToScan" value="eea.eprtr.*.model" />
         <property name="jpaVendorAdapter">
@@ -49,48 +53,57 @@
             </bean>
         </property>
     </bean>      
+
     <bean id="entityManagerFactoryCms" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-    	<property name="persistenceUnitName" value="eprtrcms"/>
+        <property name="persistenceUnitName" value="eprtrcms"/>
+        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
         <property name="dataSource" ref="dataSourceEprtrCms" />
         <property name="packagesToScan" value="eea.eprtrcms.*.model" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="showSql" value="true" />
-                <!-- 	  	    <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
-			<property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
-        	<property name="hibernate.cache.use_second_level_cache" value="true" />
-        	<property name="hibernate.cache.use_query_cache" value="true" />
+                <!--
+                <property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
+                <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
+                <property name="hibernate.cache.use_second_level_cache" value="true" />
+                <property name="hibernate.cache.use_query_cache" value="true" />
                  -->
             </bean>
         </property>
     </bean>
     
-     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${eprtrdb.driver}" />
         <property name="url" value="${eprtrdb.url}" />
         <property name="username" value="${eprtrdb.username}" />
         <property name="password" value="${eprtrdb.password}" />
+        <property name="maxActive" value="20" />
+        <property name="maxIdle" value="10" />
+        <property name="removeAbandoned" value="true"/>
+        <property name="removeAbandonedTimeout" value="300"/>
+        <property name="timeBetweenEvictionRunsMillis" value="300000"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="validationQuery" value="select 1" />
     </bean>
 
-    <bean id="dataSourceEprtrCms" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <bean id="dataSourceEprtrCms" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${cmsdb.driver}" />
         <property name="url" value="${cmsdb.url}" />
         <property name="username" value="${cmsdb.username}" />
         <property name="password" value="${cmsdb.password}" />
+        <property name="maxActive" value="20" />
+        <property name="maxIdle" value="10" />
+        <property name="removeAbandoned" value="true"/>
+        <property name="removeAbandonedTimeout" value="300"/>
+        <property name="timeBetweenEvictionRunsMillis" value="300000"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="validationQuery" value="select 1" />
     </bean>
     
-    <!--bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
-        <property name="jndiName" value="java:comp/env/jdbc/datasource" />
-        <property name="resourceRef" value="true" />        
-    </bean>
-    <bean id="dataSourceEprtrCms" class="org.springframework.jndi.JndiObjectFactoryBean" scope="singleton">
-        <property name="jndiName" value="java:comp/env/jdbc/datasourcecms" />
-        <property name="resourceRef" value="true" />        
-    </bean-->
-
     <bean id="storageService" class="eea.eprtr.dao.StorageServiceFiles">
         <property name="storageDir" value="${storage.dir}" />
     </bean>
+
     <bean id="mapurlService" class="eea.eprtr.dao.MapServiceUrlsRepository">
         <property name="profile" value="${profile}" />
         <property name="prodFacilitiesUrl" value="${mapsource.prod.facilitiesurl}" />

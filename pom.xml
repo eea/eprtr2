@@ -323,7 +323,7 @@
                 <version>2.19</version>
                 <configuration>
                   <systemPropertyVariables>
-                  	<env>dev</env>
+                    <env>dev</env>
                     <cmsdb.url>jdbc:jtds:sqlserver://${docker.host.address}:${database.port};database=${database.cmsname}</cmsdb.url><!--;MODE=MSSQLServer-->
                     <cmsdb.driver>net.sourceforge.jtds.jdbc.Driver</cmsdb.driver>
                     <cmsdb.username>dbuser</cmsdb.username>
@@ -447,6 +447,15 @@
                 <configuration>
                     <redirectTestOutputToFile>true</redirectTestOutputToFile>
                     <systemPropertyVariables>
+                        <eprtrdb.driver>org.h2.Driver</eprtrdb.driver>
+                        <eprtrdb.url>jdbc:h2:file:eprtrtest</eprtrdb.url>
+                        <eprtrdb.username>dbuser</eprtrdb.username>
+                        <eprtrdb.password>password</eprtrdb.password>
+                        <cmsdb.driver>org.h2.Driver</cmsdb.driver>
+                        <cmsdb.url>jdbc:h2:file:eprtrtest</cmsdb.url>
+                        <cmsdb.username>dbuser</cmsdb.username>
+                        <cmsdb.password>password</cmsdb.password>
+                        <profile>demo</profile>
                         <storage.dir>${project.build.directory}</storage.dir>
                     </systemPropertyVariables>
                 </configuration>
@@ -562,13 +571,12 @@
                     Install node, npm and karma locally and execute the JS unit tests 
                     during the test lifecycle phase. 
             -->
+
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
                 <version>0.0.26</version>
                 <executions>
-
-                    <!-- 1. Install node and npm locally -->
                     <execution>
                         <id>install node and npm</id>
                         <goals>
@@ -580,7 +588,6 @@
                         </configuration>
                     </execution>
 
-                    <!-- 2. Install karma and karma plugins -->
                     <execution>
                         <id>npm install</id>
                         <goals>
@@ -589,39 +596,32 @@
                     </execution>
                     
                     <execution>
-					    <id>bower install</id>
-					    <goals>
-					        <goal>bower</goal>
-					    </goals>
-					
-					    <configuration>
-					        <!-- optional: The default argument is actually
-					        "install", so unless you need to run some other bower command,
-					        you can remove this whole <configuration> section.
-					        -->
-					        <arguments>install</arguments>
-					    </configuration>
-					</execution>   
+                        <id>bower install</id>
+                        <goals>
+                            <goal>bower</goal>
+                        </goals>
+                    
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                    </execution>   
 
-                    <!-- 3. Grunt -->
                     <execution>
-    					<id>grunt build</id>
-    					<goals>
-        					<goal>grunt</goal>
-    					</goals>
-    					<configuration>
-    						<!-- We dont want Eclipse to run grunt on every code change as we only want grunt to do wiredep -->
-    						<srcdir>${basedir}/non-existing</srcdir>
-    						<outputdir>${basedir}/src/main/webapp</outputdir>
-  							<triggerfiles>
-  								<triggerfile>bower.json</triggerfile>
-    							<triggerfile>Gruntfile.js</triggerfile>
-    							<triggerfile>package.json</triggerfile>
-  							</triggerfiles>
-					    </configuration>
-					</execution>
+                        <id>grunt build</id>
+                        <goals>
+                                <goal>grunt</goal>
+                        </goals>
+                        <configuration>
+                            <srcdir>${basedir}/non-existing</srcdir>
+                            <outputdir>${basedir}/src/main/webapp</outputdir>
+                            <triggerfiles>
+                                <triggerfile>bower.json</triggerfile>
+                            <triggerfile>Gruntfile.js</triggerfile>
+                            <triggerfile>package.json</triggerfile>
+                            </triggerfiles>
+                        </configuration>
+                        </execution>
 
-                    <!-- 4. Run karma tests -->
                     <execution>
                         <id>javascript tests</id>
                         <phase>process-test-classes</phase>
@@ -634,16 +634,8 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
-
-
-        <!-- filters for src/main/resources and src/test/resources -->
-
-        <!--
-        <filters>
-            <filter>${env}.properties</filter>
-        </filters>
-        -->
 
         <!-- resources for the main code -->
 
@@ -878,11 +870,17 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-		    <groupId>org.mockito</groupId>
-		    <artifactId>mockito-all</artifactId>
-		    <version>1.10.19</version>
-		    <scope>test</scope>
-		</dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>2.1.0</version>
+            <scope>test</scope>
+        </dependency>
         <!-- End TEST dependencies -->
 
     </dependencies>

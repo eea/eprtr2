@@ -18,8 +18,7 @@ import eea.eprtr.dao.StorageService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(locations = {"classpath:spring-mvctest-config.xml", "classpath:spring-dbtest-config.xml"})
-//@ContextConfiguration(locations = {"classpath:spring-mvc-config.xml"})
+@ContextConfiguration(locations = {"classpath:spring-mvc-config.xml"})
 
 /**
  * Test the File storage controller.
