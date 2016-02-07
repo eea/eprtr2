@@ -12,12 +12,14 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <env>local</env>
         <java_version>1.7</java_version>
         <spring.version>4.1.4.RELEASE</spring.version>
         <checkstyle.config.location>${basedir}/doc/checkstyle.xml</checkstyle.config.location>
         <liquibase.changeLogFile>database/changelog-master.xml</liquibase.changeLogFile>
         <m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
+        <h2.version>1.3.172</h2.version>
     </properties>
 
     <!-- configuration of Maven repositories to be used -->
@@ -225,18 +227,19 @@
                       <alias>service</alias>
                       <name>dockerrepo.eionet.europa.eu:5000/${project.groupId}/${project.artifactId}</name>
                       <build>
-                        <from>tomcat:8.0.28-jre7</from>
+                        <from>tomcat:7-jre7</from>
                         <maintainer>Søren Roug &lt;soren.roug@eea.europa.eu&gt;</maintainer>
                         <tags>
                           <tag>latest</tag>
                           <tag>${project.version}</tag>
                         </tags>
                         <assembly>
-                          <!--descriptor>assembly.xml</descriptor-->
-                          <descriptorRef>rootWar</descriptorRef>
+                          <descriptor>assembly.xml</descriptor>
+                          <!--descriptorRef>rootWar</descriptorRef-->
                         </assembly>
                         <runCmds>
                           <run>rm -rf /usr/local/tomcat/webapps/*</run>
+                          <run>mv /maven/cms.war /usr/local/tomcat/webapps/cms.war</run>
                           <run>mv /maven/ROOT.war /usr/local/tomcat/webapps/ROOT.war</run>
                         </runCmds>
                         <optimise>true</optimise>
@@ -372,16 +375,35 @@
                   </configuration>
                   <executions>
                       <execution>
-                          <id>Update test database</id>
+                          <id>Update PUBLIC database</id>
                           <phase>pre-integration-test</phase>
                           <configuration>
                               <skip>${maven.test.skip}</skip>
+                              <changeLogFile>${liquibase.changeLogFile}</changeLogFile>
+                              <url>jdbc:h2:tcp://${docker.host.address}:${database.port}//var/tmp/eprtrtest</url><!--;MODE=MSSQLServer-->
+                              <driver>org.h2.Driver</driver>
+                              <username>dbuser</username>
+                              <password>password</password>
+                              <contexts>test,demo</contexts>
+                              <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                          </configuration>
+                          <goals>
+                              <goal>dropAll</goal>
+                              <goal>update</goal>
+                          </goals>
+                      </execution>
+                      <execution>
+                          <id>Update CMS database</id>
+                          <phase>pre-integration-test</phase>
+                          <configuration>
+                              <skip>${maven.test.skip}</skip>
+                              <changeLogFile>database/eprtr_cms.xml</changeLogFile>
                               <url>jdbc:h2:tcp://${docker.host.address}:${database.port}//var/tmp/cmstest</url><!--;MODE=MSSQLServer-->
                               <driver>org.h2.Driver</driver>
                               <username>dbuser</username>
                               <password>password</password>
                               <contexts>test,demo</contexts>
-                              <!-- <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase> -->
+                              <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
                           </configuration>
                           <goals>
                               <goal>dropAll</goal>
@@ -504,11 +526,6 @@
                 <groupId>org.liquibase</groupId>
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>3.3.1</version>
-                <!--
-                <configuration>
-                    <changeLogFile>${liquibase.changeLogFile}</changeLogFile>
-                </configuration>
-                -->
                 <executions>
                     <execution>
                         <id>Update PUBLIC database</id>
@@ -516,12 +533,12 @@
                         <configuration>
                             <skip>${maven.test.skip}</skip>
                             <changeLogFile>${liquibase.changeLogFile}</changeLogFile>
-                            <!-- <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase> -->
                             <driver>org.h2.Driver</driver>
                             <url>jdbc:h2:file:eprtrtest</url>
                             <username>dbuser</username>
                             <password>password</password>
                             <contexts>test,demo</contexts>
+                            <!-- <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase> -->
                         </configuration>
                         <goals>
                             <goal>dropAll</goal>
@@ -534,12 +551,12 @@
                         <configuration>
                             <skip>${maven.test.skip}</skip>
                             <changeLogFile>database/eprtr_cms.xml</changeLogFile>
-                            <!-- <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase> -->
                             <driver>org.h2.Driver</driver>
                             <url>jdbc:h2:file:cmstest</url>
                             <username>dbuser</username>
                             <password>password</password>
                             <contexts>test,demo</contexts>
+                            <!-- <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase> -->
                         </configuration>
                         <goals>
                             <goal>dropAll</goal>
@@ -608,6 +625,48 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <!-- http port -->
+                    <port>8080</port>
+                    <!-- application path always starts with /-->
+                    <path>/</path>
+                    <!-- optional path to a context file -->
+                    <!-- <contextFile>${tomcatContextXml}</contextFile> -->
+                    <warSourceDirectory>${project.build.directory}</warSourceDirectory>
+                    <!-- optional system properties you want to add -->
+                    <systemProperties>
+                        <eprtrdb.driver>org.h2.Driver</eprtrdb.driver>
+                        <eprtrdb.url>jdbc:h2:mem:eprtrtest;DB_CLOSE_DELAY=-1</eprtrdb.url>
+                        <eprtrdb.username>dbuser</eprtrdb.username>
+                        <eprtrdb.password>password</eprtrdb.password>
+                        <cmsdb.driver>org.h2.Driver</cmsdb.driver>
+                        <cmsdb.url>jdbc:h2:mem:cmstest;DB_CLOSE_DELAY=-1</cmsdb.url>
+                        <cmsdb.username>dbuser</cmsdb.username>
+                        <cmsdb.password>password</cmsdb.password>
+                        <profile>demo</profile>
+                        <storage.dir>${project.build.directory}</storage.dir>
+                    </systemProperties>
+                    <!-- if you want to use test dependencies rather than only runtime -->
+                    <useTestClasspath>false</useTestClasspath>
+                    <!-- optional if you want to add some extra directories into the classloader -->
+                    <additionalClasspathDirs>
+                        <additionalClasspathDir></additionalClasspathDir>
+                    </additionalClasspathDirs>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.h2database</groupId>
+                        <artifactId>h2</artifactId>
+                        <version>${h2.version}</version>
+                    </dependency>
+                </dependencies>
+           </plugin>
+
             <!--
                     Install node, npm and karma locally and execute the JS unit tests
                     during the test lifecycle phase.
@@ -852,7 +911,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.3.172</version>
+            <version>${h2.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
