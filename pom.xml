@@ -275,7 +275,7 @@
 
                     <image>
                       <alias>database</alias>
-                      <name>${project.artifactId}-db</name>
+                      <name>dockerrepo.eionet.europa.eu:5000/${project.groupId}/${project.artifactId}-testdb</name>
                       <build>
                         <from>java:8</from>
                         <maintainer>Søren Roug &lt;soren.roug@eea.europa.eu&gt;</maintainer>
