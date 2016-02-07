@@ -223,7 +223,7 @@
                   <images>
                     <image>
                       <alias>service</alias>
-                      <name>dockerrepo.eionet.europa.eu:5000/${project.artifactId}</name>
+                      <name>dockerrepo.eionet.europa.eu:5000/${project.groupId}/${project.artifactId}</name>
                       <build>
                         <from>tomcat:8.0.28-jre7</from>
                         <maintainer>Søren Roug &lt;soren.roug@eea.europa.eu&gt;</maintainer>
@@ -232,7 +232,8 @@
                           <tag>${project.version}</tag>
                         </tags>
                         <assembly>
-                          <descriptor>assembly.xml</descriptor>
+                          <!--descriptor>assembly.xml</descriptor-->
+                          <descriptorRef>rootWar</descriptorRef>
                         </assembly>
                         <runCmds>
                           <run>rm -rf /usr/local/tomcat/webapps/*</run>
@@ -250,7 +251,7 @@
                       </build>
                       <run>
                         <env>
-                          <CATALINA_OPTS>-Djava.security.egd=file:/dev/./urandom -Dprofile=test -Dcmsdb.driver=org.h2.Driver -Dcmsdb.url=jdbc:h2:tcp://database:1521//var/tmp/cmstest -Dcmsdb.username=dbuser -Dcmsdb.password=password -Deprtrdb.driver=org.h2.Driver -Deprtrdb.url=jdbc:h2:tcp://database:1521//var/tmp/eprtrtest Deprtrdb.username=dbuser -Deprtrdb.password=password</CATALINA_OPTS>
+                          <CATALINA_OPTS>-Djava.security.egd=file:/dev/./urandom -Dprofile=test -Dcmsdb.driver=org.h2.Driver -Dcmsdb.url=jdbc:h2:tcp://database:1521//var/tmp/cmstest -Dcmsdb.username=dbuser -Dcmsdb.password=password -Deprtrdb.driver=org.h2.Driver -Deprtrdb.url=jdbc:h2:tcp://database:1521//var/tmp/eprtrtest -Deprtrdb.username=dbuser -Deprtrdb.password=password</CATALINA_OPTS>
                         </env>
                         <!-- Assign dynamically mapped ports to maven variables (which can be reused in integration tests) -->
                         <ports>
@@ -269,6 +270,45 @@
                           <prefix>TC</prefix>
                           <color>cyan</color>
                         </log>
+                      </run>
+                    </image>
+
+                    <image>
+                      <alias>database</alias>
+                      <name>${project.artifactId}-db</name>
+                      <build>
+                        <from>java:8</from>
+                        <maintainer>Søren Roug &lt;soren.roug@eea.europa.eu&gt;</maintainer>
+                        <tags>
+                          <tag>latest</tag>
+                        </tags>
+                        <env>
+                          <!--H2_RELEASE_DATE>2015-10-11</H2_RELEASE_DATE-->
+                          <H2_RELEASE_DATE>2014-04-05</H2_RELEASE_DATE>
+                        </env>
+                        <workdir>/tmp</workdir>
+                        <runCmds>
+                          <run>wget http://www.h2database.com/h2-$H2_RELEASE_DATE.zip</run>
+                          <run>unzip h2-$H2_RELEASE_DATE.zip</run>
+                          <run>rm -f h2-$H2_RELEASE_DATE.zip</run>
+                          <run>mv h2 /opt</run>
+                        </runCmds>
+                        <optimise>true</optimise>
+
+                        <!-- Expose ports -->
+                        <ports>
+                          <port>1521</port>
+                        </ports>
+                        <cmd>java -cp /opt/h2/bin/h2*.jar org.h2.tools.Server -tcp -tcpAllowOthers -tcpPort 1521 -baseDir /var/tmp</cmd>
+                      </build>
+                      <run>
+                        <ports>
+                          <port>database.port:1521</port>
+                        </ports>
+                        <wait>
+                          <log>TCP server running at </log>
+                          <time>30000</time>
+                        </wait>
                       </run>
                     </image>
                   </images>
@@ -572,7 +612,7 @@
                     Install node, npm and karma locally and execute the JS unit tests
                     during the test lifecycle phase.
             -->
-
+<!-- JSTESTS -->
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
@@ -635,7 +675,7 @@
                     </execution>
                 </executions>
             </plugin>
-
+<!-- JSTESTS -->
         </plugins>
 
         <!-- resources for the main code -->
@@ -866,8 +906,6 @@
             <version>2.5.1</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- Unitils -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>

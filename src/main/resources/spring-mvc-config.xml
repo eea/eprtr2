@@ -44,13 +44,20 @@
 
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceUnitName" value="eprtr"/>
-        <property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/>
+        <!--property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"/-->
         <property name="dataSource" ref="dataSource" />
         <property name="packagesToScan" value="eea.eprtr.model" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="showSql" value="true" />
             </bean>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>
+            </props>
         </property>
     </bean>
 
@@ -77,7 +84,6 @@
                 <prop key="hibernate.cache.use_query_cache">true</prop>
             </props>
         </property>
-
     </bean>
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
