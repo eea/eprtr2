@@ -1,0 +1,25 @@
+# Application
+web:
+    image: dockerrepo.eionet.europa.eu:5000/eprtr/eprtr:latest
+    ports:
+        - "8080:8080"
+    links:
+        - database:database
+    volumes_from:
+        - filedata
+    labels:
+        io.rancher.sidekicks: filedata
+    environment:
+        - CATALINA_OPTS="-Djava.security.egd=file:/dev/./urandom" "-Dprofile=test" "-Dcmsdb.driver=org.h2.Driver" "-Dcmsdb.url=jdbc:h2:tcp://database:1521//var/tmp/cmstest" "-Dcmsdb.username=dbuser" "-Dcmsdb.password=password" "-Deprtrdb.driver=org.h2.Driver" "-Deprtrdb.url=jdbc:h2:tcp://database:1521//var/tmp/eprtrtest" "-Deprtrdb.username=dbuser" "-Deprtrdb.password=password" "-Dstorage.dir=/var/local/eprtr"
+
+filedata:
+  image: tianon/true
+  volumes:
+    - /var/local/eprtr:/var/local/eprtr:z
+  labels:
+      io.rancher.container.start_once: "true"
+      #io.rancher.scheduler.affinity:host_label: hostname=swarm1-reportnet
+
+# Database for test
+database:
+    image: dockerrepo.eionet.europa.eu:5000/eprtr/eprtr-testdb:latest
