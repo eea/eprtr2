@@ -12,16 +12,19 @@
     </appender>
 
 
+    <logger name="org.hibernate">
+        <level value="WARN"/>
+    </category>
+
     <logger name="org.springframework.web">
-        <level value="trace" />
+        <level value="WARN" />
     </logger>
 
 
     <!-- Root Logger -->
     <root>
-        <priority value="info" /><!--
-        <level value="info"></level>
-        --><appender-ref ref="console" />
+        <priority value="INFO" />
+        <appender-ref ref="console" />
     </root>
 
 </log4j:configuration>
