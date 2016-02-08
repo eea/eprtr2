@@ -125,6 +125,7 @@
                                     <includes>
                                         <include>*.xml</include>
                                         <include>*.content</include>
+                                        <include>*.csv</include>
                                     </includes>
                                 </resource>
                                 <resource>
@@ -234,12 +235,13 @@
                           <tag>${project.version}</tag>
                         </tags>
                         <assembly>
-                          <descriptor>assembly.xml</descriptor>
-                          <!--descriptorRef>rootWar</descriptorRef-->
+                          <!--descriptor>assembly.xml</descriptor-->
+                          <descriptorRef>rootWar</descriptorRef>
                         </assembly>
                         <runCmds>
                           <run>rm -rf /usr/local/tomcat/webapps/*</run>
-                          <run>mv /maven/cms.war /usr/local/tomcat/webapps/cms.war</run>
+                          <!-- Hack until CMS is integrated into this project -->
+                          <run>curl --output /usr/local/tomcat/webapps/cms.war http://ci.eionet.europa.eu/view/Java/job/EPRTR2-CMS/lastSuccessfulBuild/artifact/target/eprtr-cms.war</run>
                           <run>mv /maven/ROOT.war /usr/local/tomcat/webapps/ROOT.war</run>
                         </runCmds>
                         <optimise>true</optimise>
