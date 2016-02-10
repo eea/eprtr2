@@ -10,8 +10,8 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp
 	});
 }])
 
-.controller('FacilityLevelsCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular','eprtrcms','usSpinnerService', '$modal', 
-	function($scope, $filter, $http, searchFilter, Restangular,eprtrcms,usSpinnerService, $modal) {
+.controller('FacilityLevelsCtrl', ['$scope', '$filter', 'searchFilter', 'Restangular','eprtrcms','usSpinnerService', '$modal', 
+	function($scope, $filter, searchFilter, Restangular,eprtrcms,usSpinnerService, $modal) {
 
 		$scope.showReceivingCountryInputField = true;
 		$scope.showReleasesToInputField = true;

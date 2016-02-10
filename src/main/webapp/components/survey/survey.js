@@ -71,14 +71,28 @@ angular.module('myApp.survey', ['ngRoute','restangular','ngSanitize','mgo-angula
 		angular.forEach($scope.qradio, function(key, val){
 			answers.push(key);
 		});
-		$scope.surveyResultsService = $scope.restconfig.all('addeprtrsurveyresult').post("result", answers.join(','));
+		//$scope.surveyResultsService = $scope.restconfig.all('addeprtrsurveyresult').post("result", answers.join(','));
+		
+		var req = {
+				 method: 'POST',
+				 url: 'addeprtrsurveyresult?result='+answers.join(',')};
+		/*,
+				 headers: {
+				   'Content-Type': undefined
+				 },
+				 data: { result: answers.join(',') }
+				};*/
+
+		$http(req).then(function(){
+			document.cookie= "eprtrsurvey=1; expires=" + $scope.expiredate;
+			$scope.finish();
+		});
+		
 		//console.log('Finish');
 		/**
 		 * write to Cookie
 		 */
 		//var _expiredate = new Date(new Date($scope.now).setMonth($scope.now.getMonth()+3)).toUTCString();
-		document.cookie= "eprtrsurvey=1; expires=" + $scope.expiredate;
-		$scope.finish();
 		//Done
 	};
 

@@ -12,9 +12,9 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
 
 
 
-.controller('AreaOverviewCtrl', ['$scope', '$filter', '$http', 'searchFilter', 'Restangular', 'eprtrcms', 
+.controller('AreaOverviewCtrl', ['$scope', '$filter', 'searchFilter', 'Restangular', 'eprtrcms', 
                                  'lovCountryType', 'lovAreaGroupType', 'lovNutsRegionType', 'riverBasinDistrictsType', 'countFactory', 'formatStrFactory',
-                                 function($scope, $filter, $http, searchFilter, Restangular, eprtrcms,
+                                 function($scope, $filter, searchFilter, Restangular, eprtrcms,
                                 		 lovCountryType, lovAreaGroupType, lovNutsRegionType, riverBasinDistrictsType, countFactory, formatStrFactory) {
 	
 	$scope.beforesearch = true;
