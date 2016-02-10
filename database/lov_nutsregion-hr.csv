@@ -1,0 +1,27 @@
+LOV_NUTSRegionID,Code,Name,StartYear,EndYear,ParentID,LOV_CountryID,Level
+1830,HR0,HRVATSKA,1990,NULL,NULL,55,1
+1831,HR03,Jadranska Hrvatska,1990,NULL,1830,55,2
+1832,HR031,Primorsko-goranska županija,1990,NULL,1831,55,3
+1833,HR032,Ličko-senjska županija,1990,NULL,1831,55,3
+1834,HR033,Zadarska županija,1990,NULL,1831,55,3
+1835,HR034,Šibensko-kninska županija,1990,NULL,1831,55,3
+1836,HR035,Splitsko-dalmatinska županija,1990,NULL,1831,55,3
+1837,HR036,Istarska županija,1990,NULL,1831,55,3
+1838,HR037,Dubrovačko-neretvanska županija,1990,NULL,1831,55,3
+1839,HR04,Kontinentalna Hrvatska,2015,NULL,1830,55,2
+1840,HR041,Grad Zagreb,2015,NULL,1839,55,3
+1841,HR042,Zagrebačka županija,2015,NULL,1839,55,3
+1842,HR043,Krapinsko-zagorska županija,2015,NULL,1839,55,3
+1843,HR044,Varaždinska županija,2015,NULL,1839,55,3
+1844,HR045,Koprivničko-križevačka županija,2015,NULL,1839,55,3
+1845,HR046,Međimurska županija,2015,NULL,1839,55,3
+1846,HR047,Bjelovarsko-bilogorska županija,2015,NULL,1839,55,3
+1847,HR048,Virovitičko-podravska županija,2015,NULL,1839,55,3
+1848,HR049,Požeško-slavonska županija,2015,NULL,1839,55,3
+1849,HR04A,Brodsko-posavska županija,2015,NULL,1839,55,3
+1850,HR04B,Osječko-baranjska županija,2015,NULL,1839,55,3
+1851,HR04C,Vukovarsko-srijemska županija,2015,NULL,1839,55,3
+1852,HR04D,Karlovačka županija,2015,NULL,1839,55,3
+1853,HR04E,Sisačko-moslavačka županija,2015,NULL,1839,55,3
+1854,HRZ,EXTRA-REGIO NUTS 1,2015,NULL,NULL,55,1
+1855,HRZZ,Extra-Regio NUTS 2,2015,NULL,1854,55,2

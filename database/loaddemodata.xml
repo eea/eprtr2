@@ -41,7 +41,7 @@
 
   <changeSet author="roug" id="rev-2" context="demo">
       <!-- The CSV file must have a header row with the correct column names -->
-      <loadData tableName="LOV_COUNTRY" file="database/country.csv"/>
+      <loadData tableName="LOV_COUNTRY" file="database/lov_country.csv"/>
   </changeSet>
 
 </databaseChangeLog>
