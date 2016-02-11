@@ -16,32 +16,24 @@
       <sqlCheck expectedResult="0">SELECT COUNT(*) FROM LOV_NACEACTIVITY</sqlCheck>
     </preConditions>
 
-    <comment>Load some demo data</comment>
-
-    <insert tableName="LOV_NACEACTIVITY">
-      <column name="LOV_NACEActivityID" valueNumeric="1"/>
-      <column name="Code" value="01"/>
-      <column name="Name" value="Root Activity 1"/>
-      <column name="StartYear" valueNumeric="2007"/>
-    </insert>
-    <insert tableName="LOV_NACEACTIVITY">
-      <column name="LOV_NACEActivityID" valueNumeric="2"/>
-      <column name="Code" value="02"/>
-      <column name="Name" value="Root Activity 2"/>
-      <column name="StartYear" valueNumeric="2007"/>
-    </insert>
-    <insert tableName="LOV_NACEACTIVITY">
-      <column name="LOV_NACEActivityID" valueNumeric="3"/>
-      <column name="Code" value="01.1"/>
-      <column name="Name" value="Activity 1"/>
-      <column name="StartYear" valueNumeric="2007"/>
-      <column name="ParentID" valueNumeric="1" /> 
-    </insert>
+    <comment>Load lookup values data</comment>
+    <!-- The CSV file must have a header row with the correct column names -->
+    <loadData tableName="LOV_NACEACTIVITY" file="database/lov_naceactivity.csv"/>
+    <loadData tableName="LOV_COUNTRY" file="database/lov_country.csv"/>
+    <loadData tableName="LOV_POLLUTANT" file="database/lov_pollutant.csv"/>
   </changeSet>
 
   <changeSet author="roug" id="rev-2" context="demo">
-      <!-- The CSV file must have a header row with the correct column names -->
-      <loadData tableName="LOV_COUNTRY" file="database/lov_country.csv"/>
+    <preConditions>
+      <sqlCheck expectedResult="0">SELECT COUNT(*) FROM FACILITYDETAIL_DETAIL</sqlCheck>
+    </preConditions>
+    <comment>Load example facility #7019</comment>
+    <loadData tableName="FACILITYDETAIL_ACTIVITY" file="database/facilitydetail_activity.csv"/>
+    <loadData tableName="FACILITYDETAIL_COMPETENTAUTHORITYPARTY" file="database/facilitydetail_competentauthorityparty.csv"/>
+    <loadData tableName="FACILITYDETAIL_DETAIL" file="database/facilitydetail_detail.csv"/>
+    <loadData tableName="FACILITYDETAIL_POLLUTANTRELEASE" file="database/facilitydetail_pollutantrelease.csv"/>
+    <loadData tableName="FACILITYDETAIL_POLLUTANTTRANSFER" file="database/facilitydetail_pollutanttransfer.csv"/>
+    <loadData tableName="FACILITYDETAIL_WASTETRANSFER" file="database/facilitydetail_wastetransfer.csv"/>
   </changeSet>
 
 </databaseChangeLog>

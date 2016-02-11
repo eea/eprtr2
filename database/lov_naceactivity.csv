@@ -1,0 +1,1712 @@
+LOV_NACEActivityID,Code,Name,StartYear,EndYear,ParentID
+1,01,"Crop and animal production, hunting and related service activities",2007,NULL,NULL
+2,02,Forestry and logging,2007,NULL,NULL
+3,03,Fishing and aquaculture,2007,NULL,NULL
+4,05,Mining of coal and lignite,2007,NULL,NULL
+5,06,Extraction of crude petroleum and natural gas,2007,NULL,NULL
+6,07,Mining of metal ores,2007,NULL,NULL
+7,08,Other mining and quarrying,2007,NULL,NULL
+8,09,Mining support service activities,2007,NULL,NULL
+9,10,Manufacture of food products,2007,NULL,NULL
+10,11,Manufacture of beverages,2007,NULL,NULL
+11,12,Manufacture of tobacco products,2007,NULL,NULL
+12,13,Manufacture of textiles,2007,NULL,NULL
+13,14,Manufacture of wearing apparel,2007,NULL,NULL
+14,15,Manufacture of leather and related products,2007,NULL,NULL
+15,16,"Manufacture of wood and of products of wood and cork, except furniture; manufacture of articles of straw and plaiting materials",2007,NULL,NULL
+16,17,Manufacture of paper and paper products,2007,NULL,NULL
+17,18,Printing and reproduction of recorded media,2007,NULL,NULL
+18,19,Manufacture of coke and reined petroleum products,2007,NULL,NULL
+19,20,Manufacture of chemicals and chemical products,2007,NULL,NULL
+20,21,Manufacture of basic pharmaceutical products and pharmaceutical preparations,2007,NULL,NULL
+21,22,Manufacture of rubber and plastic products,2007,NULL,NULL
+22,23,Manufacture of other non-metallic mineral products,2007,NULL,NULL
+23,24,Manufacture of basic metals,2007,NULL,NULL
+24,25,"Manufacture of fabricated metal products, except machinery and equipment",2007,NULL,NULL
+25,26,"Manufacture of computer, electronic and optical products",2007,NULL,NULL
+26,27,Manufacture of electrical equipment,2007,NULL,NULL
+27,28,Manufacture of machinery and equipment n.e.c.,2007,NULL,NULL
+28,29,"Manufacture of motor vehicles, trailers and semi-trailers",2007,NULL,NULL
+29,30,Manufacture of other transport equipment,2007,NULL,NULL
+30,31,Manufacture of furniture,2007,NULL,NULL
+31,32,Other manufacturing,2007,NULL,NULL
+32,33,Repair and installation of machinery and equipment,2007,NULL,NULL
+33,35,"Electricity, gas, steam and air conditioning supply",2007,NULL,NULL
+34,36,"Water collection, treatment and supply",2007,NULL,NULL
+35,37,Sewerage,2007,NULL,NULL
+36,38,"Waste collection, treatment and disposal activities; materials recovery",2007,NULL,NULL
+37,39,Remediation activities and other waste management services,2007,NULL,NULL
+38,41,Construction of buildings,2007,NULL,NULL
+39,42,Civil engineering,2007,NULL,NULL
+40,43,Specialised construction activities,2007,NULL,NULL
+41,45,Wholesale and retail trade and repair of motor vehicles and motorcycles,2007,NULL,NULL
+42,46,"Wholesale trade, except of motor vehicles and motorcycles",2007,NULL,NULL
+43,47,"Retail trade, except of motor vehicles and motorcycles",2007,NULL,NULL
+44,49,Land transport and transport via pipelines,2007,NULL,NULL
+45,50,Water transport,2007,NULL,NULL
+46,51,Air transport,2007,NULL,NULL
+47,52,Warehousing and support activities for transportation,2007,NULL,NULL
+48,53,Postal and courier activities,2007,NULL,NULL
+49,55,Accommodation,2007,NULL,NULL
+50,56,Food and beverage service activities,2007,NULL,NULL
+51,58,Publishing activities,2007,NULL,NULL
+52,59,"Motion picture, video and television programme production, sound recording and music publishing activities",2007,NULL,NULL
+53,60,Programming and broadcasting activities,2007,NULL,NULL
+54,61,Telecommunications,2007,NULL,NULL
+55,62,"Computer programming, consultancy and related activities",2007,NULL,NULL
+56,63,Information service activities,2007,NULL,NULL
+57,64,"Financial service activities, except insurance and pension funding",2007,NULL,NULL
+58,65,"Insurance, reinsurance and pension funding, except compulsory social security",2007,NULL,NULL
+59,66,Activities auxiliary to financial services and insurance activities,2007,NULL,NULL
+60,68,Real estate activities,2007,NULL,NULL
+61,69,Legal and accounting activities,2007,NULL,NULL
+62,70,Activities of head offices; management consultancy activities,2007,NULL,NULL
+63,71,Architectural and engineering activities; technical testing and analysis,2007,NULL,NULL
+64,72,Scientific research and development,2007,NULL,NULL
+65,73,Advertising and market research,2007,NULL,NULL
+66,74,"Other professional, scientiic and technical activities",2007,NULL,NULL
+67,75,Veterinary activities,2007,NULL,NULL
+68,77,Rental and leasing activities,2007,NULL,NULL
+69,78,Employment activities,2007,NULL,NULL
+70,79,"Travel agency, tour operator and other reservation service and related activities",2007,NULL,NULL
+71,80,Security and investigation activities,2007,NULL,NULL
+72,81,Services to buildings and landscape activities,2007,NULL,NULL
+73,82,"Office administrative, office support and other business support activities",2007,NULL,NULL
+74,84,Public administration and defence; compulsory social security,2007,NULL,NULL
+75,85,Education,2007,NULL,NULL
+76,86,Human health activities,2007,NULL,NULL
+77,87,Residential care activities,2007,NULL,NULL
+78,88,Social work activities without accommodation,2007,NULL,NULL
+79,90,"Creative, arts and entertainment activities",2007,NULL,NULL
+80,91,"Libraries, archives, museums and other cultural activities",2007,NULL,NULL
+81,92,Gambling and betting activities,2007,NULL,NULL
+82,93,Sports activities and amusement and recreation activities,2007,NULL,NULL
+83,94,Activities of membership organisations,2007,NULL,NULL
+84,95,Repair of computers and personal and household goods,2007,NULL,NULL
+85,96,Other personal service activities,2007,NULL,NULL
+86,97,Activities of households as employers of domestic personnel,2007,NULL,NULL
+87,98,Undifferentiated goods- and services-producing activities of private households for own use,2007,NULL,NULL
+88,99,Activities of extraterritorial organisations and bodies,2007,NULL,NULL
+89,01.1,Growing of non-perennial crops,2007,NULL,1
+90,01.2,Growing of perennial crops,2007,NULL,1
+91,01.3,Plant propagation,2007,NULL,1
+92,01.4,Animal Production,2007,NULL,1
+93,01.5,Mixed farming,2007,NULL,1
+94,01.6,Support activities to agriculture and post-harvest crop activities,2007,NULL,1
+95,01.7,"Hunting, trapping and related service activities",2007,NULL,1
+96,02.1,Silviculture and other forestry activities,2007,NULL,2
+97,02.2,Logging,2007,NULL,2
+98,02.3,Gathering of wild growing non-wood products,2007,NULL,2
+99,02.4,Support services to forestry,2007,NULL,2
+100,03.1,Fishing,2007,NULL,3
+101,03.2,Aquaculture,2007,NULL,3
+102,05.1,Mining of hard coal,2007,NULL,4
+103,05.2,Mining of lignite,2007,NULL,4
+104,06.1,Extraction of crude petroleum,2007,NULL,5
+105,06.2,Extraction of natural gas,2007,NULL,5
+106,07.1,Mining of iron ores,2007,NULL,6
+107,07.2,Mining of non-ferrous metal ores,2007,NULL,6
+108,08.1,"Quarrying of stone, sand and clay",2007,NULL,7
+109,08.9,Mining and quarrying n.e.c.,2007,NULL,7
+110,09.1,Support activities for petroleum and natural gas extraction,2007,NULL,8
+111,09.9,Support activities for other mining and quarrying,2007,NULL,8
+112,10.1,Processing and preserving of meat and production of meat products,2007,NULL,9
+113,10.2,"Processing and preserving of ish, crustaceans and molluscs",2007,NULL,9
+114,10.3,Processing and preserving of fruit and vegetables,2007,NULL,9
+115,10.4,Manufacture of vegetable and animal oils and fats,2007,NULL,9
+116,10.5,Manufacture of dairy products,2007,NULL,9
+117,10.6,"Manufacture of grain mill products, starches and starch products",2007,NULL,9
+118,10.7,Manufacture of bakery and farinaceous products,2007,NULL,9
+119,10.8,Manufacture of other food products,2007,NULL,9
+120,10.9,Manufacture of prepared animal feeds,2007,NULL,9
+121,11.0,Manufacture of beverages,2007,NULL,10
+122,12.0,Manufacture of tobacco products,2007,NULL,11
+123,13.1,Preparation and spinning of textile fibres,2007,NULL,12
+124,13.2,Weaving of textiles,2007,NULL,12
+125,13.3,Finishing of textiles,2007,NULL,12
+126,13.9,Manufacture of other textiles,2007,NULL,12
+127,14.1,"Manufacture of wearing apparel, except fur apparel",2007,NULL,13
+128,14.2,Manufacture of articles of fur,2007,NULL,13
+129,14.3,Manufacture of knitted and crocheted apparel,2007,NULL,13
+130,15.1,"Tanning and dressing of leather; manufacture of luggage, handbags, saddlery and harness; dressing and dyeing of fur",2007,NULL,14
+131,15.2,Manufacture of footwear,2007,NULL,14
+132,16.1,Sawmilling and planing of wood,2007,NULL,15
+133,16.2,"Manufacture of products of wood, cork, straw and plaiting materials",2007,NULL,15
+134,17.1,"Manufacture of pulp, paper and paperboard",2007,NULL,16
+135,17.2,Manufacture of articles of paper and paperboard,2007,NULL,16
+136,18.1,Printing and service activities related to printing,2007,NULL,17
+137,18.2,Reproduction of recorded media,2007,NULL,17
+138,19.1,Manufacture of coke oven products,2007,NULL,18
+139,19.2,Manufacture of refined petroleum products,2007,NULL,18
+140,20.1,"Manufacture of basic chemicals, fertilisers and nitrogen compounds, plastics and synthetic rubber in primary forms",2007,NULL,19
+141,20.2,Manufacture of pesticides and other agrochemical products,2007,NULL,19
+142,20.3,"Manufacture of paints, varnishes and similar coatings, printing ink and mastics",2007,NULL,19
+143,20.4,"Manufacture of soap and detergents, cleaning and polishing preparations, perfumes",2007,NULL,19
+144,20.5,Manufacture of other chemical products,2007,NULL,19
+145,20.6,Manufacture of man-made fibres,2007,NULL,19
+146,21.1,Manufacture of basic pharmaceutical products,2007,NULL,20
+147,21.2,Manufacture of pharmaceutical preparations,2007,NULL,20
+148,22.1,Manufacture of rubber products,2007,NULL,21
+149,22.2,Manufacture of plastics products,2007,NULL,21
+150,23.1,Manufacture of glass and glass products,2007,NULL,22
+151,23.2,Manufacture of refractory products,2007,NULL,22
+152,23.3,Manufacture of clay building materials,2007,NULL,22
+153,23.4,Manufacture of other porcelain and ceramic products,2007,NULL,22
+154,23.5,"Manufacture of cement, lime and plaster",2007,NULL,22
+155,23.6,"Manufacture of articles of concrete, cement and plaster",2007,NULL,22
+156,23.7,"Cutting, shaping and finishing of stone",2007,NULL,22
+157,23.9,Manufacture of abrasive products and non-metallic mineral products n.e.c.,2007,NULL,22
+158,24.1,Manufacture of basic iron and steel and of ferro-alloys,2007,NULL,23
+159,24.2,"Manufacture of tubes, pipes, hollow profiles and related fittings, of steel",2007,NULL,23
+160,24.3,Manufacture of other products of first processing of steel,2007,NULL,23
+161,24.4,Manufacture of basic precious and other non-ferrous metals,2007,NULL,23
+162,24.5,Casting of metals,2007,NULL,23
+163,25.1,Manufacture of structural metal products,2007,NULL,24
+164,25.2,"Manufacture of tanks, reservoirs and containers of metal",2007,NULL,24
+165,25.3,"Manufacture of steam generators, except central heating hot water boilers",2007,NULL,24
+166,25.4,Manufacture of weapons and ammunition,2007,NULL,24
+167,25.5,"Forging, pressing, stamping and roll-forming of metal; powder metallurgy",2007,NULL,24
+168,25.6,Treatment and coating of metals; machining,2007,NULL,24
+169,25.7,"Manufacture of cutlery, tools and general hardware",2007,NULL,24
+170,25.9,Manufacture of other fabricated metal products,2007,NULL,24
+171,26.1,Manufacture of electronic components and boards,2007,NULL,25
+172,26.2,Manufacture of computers and peripheral equipment,2007,NULL,25
+173,26.3,Manufacture of communication equipment,2007,NULL,25
+174,26.4,Manufacture of consumer electronics,2007,NULL,25
+175,26.5,"Manufacture of instruments and appliances for measuring, testing and navigation; watches and clocks",2007,NULL,25
+176,26.6,"Manufacture of irradiation, electromedical and electrotherapeutic equipment",2007,NULL,25
+177,26.7,Manufacture of optical instruments and photographic equipment,2007,NULL,25
+178,26.8,Manufacture of magnetic and optical media,2007,NULL,25
+179,27.1,"Manufacture of electric motors, generators, transformers and electricity distribution and control apparatus",2007,NULL,26
+180,27.2,Manufacture of batteries and accumulators,2007,NULL,26
+181,27.3,Manufacture of wiring and wiring devices,2007,NULL,26
+182,27.4,Manufacture of electric lighting equipment,2007,NULL,26
+183,27.5,Manufacture of domestic appliances,2007,NULL,26
+184,27.9,Manufacture of other electrical equipment,2007,NULL,26
+185,28.1,Manufacture of general-purpose machinery,2007,NULL,27
+186,28.2,Manufacture of other general-purpose machinery,2007,NULL,27
+187,28.3,Manufacture of agricultural and forestry machinery,2007,NULL,27
+188,28.4,Manufacture of metal forming machinery and machine tools,2007,NULL,27
+189,28.9,Manufacture of other special-purpose machinery,2007,NULL,27
+190,29.1,Manufacture of motor vehicles,2007,NULL,28
+191,29.2,Manufacture of bodies (coachwork) for motor vehicles; manufacture of trailers and semi trailers,2007,NULL,28
+192,29.3,Manufacture of parts and accessories for motor vehicles,2007,NULL,28
+193,30.1,Building of ships and boats,2007,NULL,29
+194,30.2,Manufacture of railway locomotives and rolling stock,2007,NULL,29
+195,30.3,Manufacture of air and spacecraft and related machinery,2007,NULL,29
+196,30.4,Manufacture of military fighting vehicles,2007,NULL,29
+197,30.9,Manufacture of transport equipment n.e.c.,2007,NULL,29
+198,31.0,Manufacture of furniture,2007,NULL,30
+199,32.1,"Manufacture of jewellery, bijouterie and related articles",2007,NULL,31
+200,32.2,Manufacture of musical instruments,2007,NULL,31
+201,32.3,Manufacture of sports goods,2007,NULL,31
+202,32.4,Manufacture of games and toys,2007,NULL,31
+203,32.5,Manufacture of medical and dental instruments and supplies,2007,NULL,31
+204,32.9,Manufacturing n.e.c.,2007,NULL,31
+205,33.1,"Repair of fabricated metal products, machinery and equipment",2007,NULL,32
+206,33.2,Installation of industrial machinery and equipment,2007,NULL,32
+207,35.1,"Electric power generation, transmission and distribution",2007,NULL,33
+208,35.2,Manufacture of gas; distribution of gaseous fuels through mains,2007,NULL,33
+209,35.3,Steam and air conditioning supply,2007,NULL,33
+210,36.0,"Water collection, treatment and supply",2007,NULL,34
+211,37.0,Sewerage,2007,NULL,35
+212,38.1,Waste collection,2007,NULL,36
+213,38.2,Waste treatment and disposal,2007,NULL,36
+214,38.3,Materials recovery,2007,NULL,36
+215,39.0,Remediation activities and other waste management services,2007,NULL,37
+216,41.1,Development of building projects,2007,NULL,38
+217,41.2,Construction of residential and non-residential buildings,2007,NULL,38
+218,42.1,Construction of roads and railways,2007,NULL,39
+219,42.2,Construction of utility projects,2007,NULL,39
+220,42.9,Construction of other civil engineering projects,2007,NULL,39
+221,43.1,Demolition and site preparation,2007,NULL,40
+222,43.2,"Electrical, plumbing and other construction installation activities",2007,NULL,40
+223,43.3,Building completion and finishing,2007,NULL,40
+224,43.9,Other specialised construction activities,2007,NULL,40
+225,45.1,Sale of motor vehicles,2007,NULL,41
+226,45.2,Maintenance and repair of motor vehicles,2007,NULL,41
+227,45.3,Sale of motor vehicle parts and accessories,2007,NULL,41
+228,45.4,"Sale, maintenance and repair of motorcycles and related parts and accessories",2007,NULL,41
+229,46.1,Wholesale on a fee or contract basis,2007,NULL,42
+230,46.2,Wholesale of agricultural raw materials and live animals,2007,NULL,42
+231,46.3,"Wholesale of food, beverages and tobacco",2007,NULL,42
+232,46.4,Wholesale of household goods,2007,NULL,42
+233,46.5,Wholesale of information and communication equipment,2007,NULL,42
+234,46.6,"Wholesale of other machinery, equipment and supplies",2007,NULL,42
+235,46.7,Other specialised wholesale,2007,NULL,42
+236,46.9,Non-specialised wholesale trade,2007,NULL,42
+237,47.1,Retail sale in non-specialised stores,2007,NULL,43
+238,47.2,"Retail sale of food, beverages and tobacco in specialised stores",2007,NULL,43
+239,47.3,Retail sale of automotive fuel in specialised stores,2007,NULL,43
+240,47.4,Retail sale of information and communication equipment in specialised stores,2007,NULL,43
+241,47.5,Retail sale of other household equipment in specialised stores,2007,NULL,43
+242,47.6,Retail sale of cultural and recreation goods in specialised stores,2007,NULL,43
+243,47.7,Retail sale of other goods in specialised stores,2007,NULL,43
+244,47.8,Retail sale via stalls and markets,2007,NULL,43
+245,47.9,"Retail trade not in stores, stalls or markets",2007,NULL,43
+246,49.1,"Passenger rail transport, interurban",2007,NULL,44
+247,49.2,Freight rail transport,2007,NULL,44
+248,49.3,Other passenger land transport,2007,NULL,44
+249,49.4,Freight transport by road and removal services,2007,NULL,44
+250,49.5,Transport via pipeline,2007,NULL,44
+251,50.1,Sea and coastal passenger water transport,2007,NULL,45
+252,50.2,Sea and coastal freight water transport,2007,NULL,45
+253,50.3,Inland passenger water transport,2007,NULL,45
+254,50.4,Inland freight water transport,2007,NULL,45
+255,51.1,Passenger air transport,2007,NULL,46
+256,51.2,Freight air transport and space transport,2007,NULL,46
+257,52.1,Warehousing and storage,2007,NULL,47
+258,52.2,Support activities for transportation,2007,NULL,47
+259,53.1,Postal activities under universal service obligation,2007,NULL,48
+260,53.2,Other postal and courier activities,2007,NULL,48
+261,55.1,Hotels and similar accommodation,2007,NULL,49
+262,55.2,Holiday and other short-stay accommodation,2007,NULL,49
+263,55.3,"Camping grounds, recreational vehicle parks and trailer parks",2007,NULL,49
+264,55.9,Other accommodation,2007,NULL,49
+265,56.1,Restaurants and mobile food service activities,2007,NULL,50
+266,56.2,Event catering and other food service activities,2007,NULL,50
+267,56.3,Beverage serving activities,2007,NULL,50
+268,58.1,"Publishing of books, periodicals and other publishing activities",2007,NULL,51
+269,58.2,Software publishing,2007,NULL,51
+270,59.1,"Motion picture, video and television programme activities",2007,NULL,52
+271,59.2,Sound recording and music publishing activities,2007,NULL,52
+272,60.1,Radio broadcasting,2007,NULL,53
+273,60.2,Television programming and broadcasting activities,2007,NULL,53
+274,61.1,Wired telecommunications activities,2007,NULL,54
+275,61.2,Wireless telecommunications activities,2007,NULL,54
+276,61.3,Satellite telecommunications activities,2007,NULL,54
+277,61.9,Other telecommunications activities,2007,NULL,54
+278,62.0,"Computer programming, consultancy and related activities",2007,NULL,55
+279,63.1,"Data processing, hosting and related activities; web portals",2007,NULL,56
+280,63.9,Other information service activities,2007,NULL,56
+281,64.1,Monetary intermediation,2007,NULL,57
+282,64.2,Activities of holding companies,2007,NULL,57
+283,64.3,"Trusts, funds and similar financial entities",2007,NULL,57
+284,64.9,"Other financial service activities, except insurance and pension funding",2007,NULL,57
+285,65.1,Insurance,2007,NULL,58
+286,65.2,Reinsurance,2007,NULL,58
+287,65.3,Pension funding,2007,NULL,58
+288,66.1,"Activities auxiliary to financial services, except insurance and pension funding",2007,NULL,59
+289,66.2,Activities auxiliary to insurance and pension funding,2007,NULL,59
+290,66.3,Fund management activities,2007,NULL,59
+291,68.1,Buying and selling of own real estate,2007,NULL,60
+292,68.2,Renting and operating of own or leased real estate,2007,NULL,60
+293,68.3,Real estate activities on a fee or contract basis,2007,NULL,60
+294,69.1,Legal activities,2007,NULL,61
+295,69.2,"Accounting, bookkeeping and auditing activities; tax consultancy",2007,NULL,61
+296,70.1,Activities of head offices,2007,NULL,62
+297,70.2,Management consultancy activities,2007,NULL,62
+298,71.1,Architectural and engineering activities and related technical consultancy,2007,NULL,63
+299,71.2,Technical testing and analysis,2007,NULL,63
+300,72.1,Research and experimental development on natural sciences and engineering,2007,NULL,64
+301,72.2,Research and experimental development on social sciences and humanities,2007,NULL,64
+302,73.1,Advertising,2007,NULL,65
+303,73.2,Market research and public opinion polling,2007,NULL,65
+304,74.1,Specialised design activities,2007,NULL,66
+305,74.2,Photographic activities,2007,NULL,66
+306,74.3,Translation and interpretation activities,2007,NULL,66
+307,74.9,"Other professional, scientific and technical activities n.e.c.",2007,NULL,66
+308,75.0,Veterinary activities,2007,NULL,67
+309,77.1,Renting and leasing of motor vehicles,2007,NULL,68
+310,77.2,Renting and leasing of personal and household goods,2007,NULL,68
+311,77.3,"Renting and leasing of other machinery, equipment and tangible goods",2007,NULL,68
+312,77.4,"Leasing of intellectual property and similar products, except copyrighted works",2007,NULL,68
+313,78.1,Activities of employment placement agencies,2007,NULL,69
+314,78.2,Temporary employment agency activities,2007,NULL,69
+315,78.3,Other human resources provision,2007,NULL,69
+316,79.1,Travel agency and tour operator activities,2007,NULL,70
+317,79.9,Other reservation service and related activities,2007,NULL,70
+318,80.1,Private security activities,2007,NULL,71
+319,80.2,Security systems service activities,2007,NULL,71
+320,80.3,Investigation activities,2007,NULL,71
+321,81.1,Combined facilities support activities,2007,NULL,72
+322,81.2,Cleaning activities,2007,NULL,72
+323,81.3,Landscape service activities,2007,NULL,72
+324,82.1,Office administrative and support activities,2007,NULL,73
+325,82.2,Activities of call centres,2007,NULL,73
+326,82.3,Organisation of conventions and trade shows,2007,NULL,73
+327,82.9,Business support service activities n.e.c.,2007,NULL,73
+328,84.1,Administration of the State and the economic and social policy of the community,2007,NULL,74
+329,84.2,Provision of services to the community as a whole,2007,NULL,74
+330,84.3,Compulsory social security activities,2007,NULL,74
+331,85.1,Pre-primary education,2007,NULL,75
+332,85.2,Primary education,2007,NULL,75
+333,85.3,Secondary education,2007,NULL,75
+334,85.4,Higher education,2007,NULL,75
+335,85.5,Other education,2007,NULL,75
+336,85.6,Educational support activities,2007,NULL,75
+337,86.1,Hospital activities,2007,NULL,76
+338,86.2,Medical and dental practice activities,2007,NULL,76
+339,86.9,Other human health activities,2007,NULL,76
+340,87.1,Residential nursing care activities,2007,NULL,77
+341,87.2,"Residential care activities for mental retardation, mental health and substance abuse",2007,NULL,77
+342,87.3,Residential care activities for the elderly and disabled,2007,NULL,77
+343,87.9,Other residential care activities,2007,NULL,77
+344,88.1,Social work activities without accommodation for the elderly and disabled,2007,NULL,78
+345,88.9,Other social work activities without accommodation,2007,NULL,78
+346,90.0,"Creative, arts and entertainment activities",2007,NULL,79
+347,91.0,"Libraries, archives, museums and other cultural activities",2007,NULL,80
+348,92.0,Gambling and betting activities,2007,NULL,81
+349,93.1,Sports activities,2007,NULL,82
+350,93.2,Amusement and recreation activities,2007,NULL,82
+351,94.1,"Activities of business, employers and professional membership organisations",2007,NULL,83
+352,94.2,Activities of trade unions,2007,NULL,83
+353,94.9,Activities of other membership organisations,2007,NULL,83
+354,95.1,Repair of computers and communication equipment,2007,NULL,84
+355,95.2,Repair of personal and household goods,2007,NULL,84
+356,96.0,Other personal service activities,2007,NULL,85
+357,97.0,Activities of households as employers of domestic personnel,2007,NULL,86
+358,98.1,Undifferentiated goods-producing activities of private households for own use,2007,NULL,87
+359,98.2,Undifferentiated service-producing activities of private households for own use,2007,NULL,87
+360,99.0,Activities of extraterritorial organisations and bodies,2007,NULL,88
+361,01.11,"Growing of cereals (except rice), leguminous crops and oil seeds",2007,NULL,89
+362,01.12,Growing of rice,2007,NULL,89
+363,01.13,"Growing of vegetables and melons, roots and tubers",2007,NULL,89
+364,01.14,Growing of sugar cane,2007,NULL,89
+365,01.15,Growing of tobacco,2007,NULL,89
+366,01.16,Growing of fibre crops,2007,NULL,89
+367,01.19,Growing of other non-perennial crops,2007,NULL,89
+368,01.21,Growing of grapes,2007,NULL,90
+369,01.22,Growing of tropical and subtropical fruits,2007,NULL,90
+370,01.23,Growing of citrus fruits,2007,NULL,90
+371,01.24,Growing of pome fruits and stone fruits,2007,NULL,90
+372,01.25,Growing of other tree and bush fruits and nuts,2007,NULL,90
+373,01.26,Growing of oleaginous fruits,2007,NULL,90
+374,01.27,Growing of beverage crops,2007,NULL,90
+375,01.28,"Growing of spices, aromatic, drug and pharmaceutical crops",2007,NULL,90
+376,01.29,Growing of other perennial crops,2007,NULL,90
+377,01.30,Plant propagation,2007,NULL,91
+378,01.41,Raising of dairy cattle,2007,NULL,92
+379,01.42,Raising of other cattle and buffaloes,2007,NULL,92
+380,01.43,Raising of horses and other equines,2007,NULL,92
+381,01.44,Raising of camels and camelids,2007,NULL,92
+382,01.45,Raising of sheep and goats,2007,NULL,92
+383,01.46,Raising of swine/pigs,2007,NULL,92
+384,01.47,Raising of poultry,2007,NULL,92
+385,01.49,Raising of other animals,2007,NULL,92
+386,01.50,Mixed farming,2007,NULL,93
+387,01.61,Support activities for crop production,2007,NULL,94
+388,01.62,Support activities for animal production,2007,NULL,94
+389,01.63,Post-harvest crop activities,2007,NULL,94
+390,01.64,Seed processing for propagation,2007,NULL,94
+391,01.70,"Hunting, trapping and related service activities",2007,NULL,95
+392,02.10,Silviculture and other forestry activities,2007,NULL,96
+393,02.20,Logging,2007,NULL,97
+394,02.30,Gathering of wild growing non-wood products,2007,NULL,98
+395,02.40,Support services to forestry,2007,NULL,99
+396,03.11,Marine fishing,2007,NULL,100
+397,03.12,Freshwater fishing,2007,NULL,100
+398,03.21,Marine aquaculture,2007,NULL,101
+399,03.22,Freshwater aquaculture,2007,NULL,101
+400,05.10,Mining of hard coal,2007,NULL,102
+401,05.20,Mining of lignite,2007,NULL,103
+402,06.10,Extraction of crude petroleum,2007,NULL,104
+403,06.20,Extraction of natural gas,2007,NULL,105
+404,07.10,Mining of iron ores,2007,NULL,106
+405,07.21,Mining of uranium and thorium ores,2007,NULL,107
+406,07.29,Mining of other non-ferrous metal ores,2007,NULL,107
+407,08.11,"Quarrying of ornamental and building stone, limestone, gypsum, chalk and slate",2007,NULL,108
+408,08.12,Operation of gravel and sand pits; mining of clays and kaolin,2007,NULL,108
+409,08.91,Mining of chemical and fertiliser minerals,2007,NULL,109
+410,08.92,Extraction of peat,2007,NULL,109
+411,08.93,Extraction of salt,2007,NULL,109
+412,08.99,Other mining and quarrying n.e.c.,2007,NULL,109
+413,09.10,Support activities for petroleum and natural gas extraction,2007,NULL,110
+414,09.90,Support activities for other mining and quarrying,2007,NULL,111
+415,10.11,Processing and preserving of meat,2007,NULL,112
+416,10.12,Processing and preserving of poultry meat,2007,NULL,112
+417,10.13,Production of meat and poultry meat products,2007,NULL,112
+418,10.20,"Processing and preserving of ish, crustaceans and molluscs",2007,NULL,113
+419,10.31,Processing and preserving of potatoes,2007,NULL,114
+420,10.32,Manufacture of fruit and vegetable juice,2007,NULL,114
+421,10.39,Other processing and preserving of fruit and vegetables,2007,NULL,114
+422,10.41,Manufacture of oils and fats,2007,NULL,115
+423,10.42,Manufacture of margarine and similar edible fats,2007,NULL,115
+424,10.51,Operation of dairies and cheese making,2007,NULL,116
+425,10.52,Manufacture of ice cream,2007,NULL,116
+426,10.61,Manufacture of grain mill products,2007,NULL,117
+427,10.62,Manufacture of starches and starch products,2007,NULL,117
+428,10.71,Manufacture of bread; manufacture of fresh pastry goods and cakes,2007,NULL,118
+429,10.72,Manufacture of rusks and biscuits; manufacture of preserved pastry goods and cakes,2007,NULL,118
+430,10.73,"Manufacture of macaroni, noodles, couscous and similar farinaceous products",2007,NULL,118
+431,10.81,Manufacture of sugar,2007,NULL,119
+432,10.82,"Manufacture of cocoa, chocolate and sugar confectionery",2007,NULL,119
+433,10.83,Processing of tea and cofee,2007,NULL,119
+434,10.84,Manufacture of condiments and seasonings,2007,NULL,119
+435,10.85,Manufacture of prepared meals and dishes,2007,NULL,119
+436,10.86,Manufacture of homogenised food preparations and dietetic food,2007,NULL,119
+437,10.89,Manufacture of other food products n.e.c.,2007,NULL,119
+438,10.91,Manufacture of prepared feeds for farm animals,2007,NULL,120
+439,10.92,Manufacture of prepared pet foods,2007,NULL,120
+440,11.01,"Distilling, rectifying and blending of spirits",2007,NULL,121
+441,11.02,Manufacture of wine from grape,2007,NULL,121
+442,11.03,Manufacture of cider and other fruit wines,2007,NULL,121
+443,11.04,Manufacture of other non-distilled fermented beverages,2007,NULL,121
+444,11.05,Manufacture of beer,2007,NULL,121
+445,11.06,Manufacture of malt,2007,NULL,121
+446,11.07,Manufacture of soft drinks; production of mineral waters and other bottled waters,2007,NULL,121
+447,12.00,Manufacture of tobacco products,2007,NULL,122
+448,13.10,Preparation and spinning of textile fibres,2007,NULL,123
+449,13.20,Weaving of textiles,2007,NULL,124
+450,13.30,Finishing of textiles,2007,NULL,125
+451,13.91,Manufacture of knitted and crocheted fabrics,2007,NULL,126
+452,13.92,"Manufacture of made-up textile articles, except apparel",2007,NULL,126
+453,13.93,Manufacture of carpets and rugs,2007,NULL,126
+454,13.94,"Manufacture of cordage, rope, twine and netting",2007,NULL,126
+455,13.95,"Manufacture of non-wovens and articles made from non-wovens, except apparel",2007,NULL,126
+456,13.96,Manufacture of other technical and industrial textiles,2007,NULL,126
+457,13.99,Manufacture of other textiles n.e.c.,2007,NULL,126
+458,14.11,Manufacture of leather clothes,2007,NULL,127
+459,14.12,Manufacture of workwear,2007,NULL,127
+460,14.13,Manufacture of other outerwear,2007,NULL,127
+461,14.14,Manufacture of underwear,2007,NULL,127
+462,14.19,Manufacture of other wearing apparel and accessories,2007,NULL,127
+463,14.20,Manufacture of articles of fur,2007,NULL,128
+464,14.31,Manufacture of knitted and crocheted hosiery,2007,NULL,129
+465,14.39,Manufacture of other knitted and crocheted apparel,2007,NULL,129
+466,15.11,Tanning and dressing of leather; dressing and dyeing of fur,2007,NULL,130
+467,15.12,"Manufacture of luggage, handbags and the like, saddlery and harness",2007,NULL,130
+468,15.20,Manufacture of footwear,2007,NULL,131
+469,16.10,Sawmilling and planing of wood,2007,NULL,132
+470,16.21,Manufacture of veneer sheets and wood-based panels,2007,NULL,133
+471,16.22,Manufacture of assembled parquet loors,2007,NULL,133
+472,16.23,Manufacture of other builders' carpentry and joinery,2007,NULL,133
+473,16.24,Manufacture of wooden containers,2007,NULL,133
+474,16.29,"Manufacture of other products of wood; manufacture of articles of cork, straw and plaiting",2007,NULL,133
+475,17.11,Manufacture of pulp,2007,NULL,134
+476,17.12,Manufacture of paper and paperboard,2007,NULL,134
+477,17.21,Manufacture of corrugated paper and paperboard and of containers of paper and paperboard,2007,NULL,135
+478,17.22,Manufacture of household and sanitary goods and of toilet requisites,2007,NULL,135
+479,17.23,Manufacture of paper stationery,2007,NULL,135
+480,17.24,Manufacture of wallpaper,2007,NULL,135
+481,17.29,Manufacture of other articles of paper and paperboard,2007,NULL,135
+482,18.11,Printing of newspapers,2007,NULL,136
+483,18.12,Other printing,2007,NULL,136
+484,18.13,Pre-press and pre-media services,2007,NULL,136
+485,18.14,Binding and related services,2007,NULL,136
+486,18.20,Reproduction of recorded media,2007,NULL,137
+487,19.10,Manufacture of coke oven products,2007,NULL,138
+488,19.20,Manufacture of refined petroleum products,2007,NULL,139
+489,20.11,Manufacture of industrial gases,2007,NULL,140
+490,20.12,Manufacture of dyes and pigments,2007,NULL,140
+491,20.13,Manufacture of other inorganic basic chemicals,2007,NULL,140
+492,20.14,Manufacture of other organic basic chemicals,2007,NULL,140
+493,20.15,Manufacture of fertilisers and nitrogen compounds,2007,NULL,140
+494,20.16,Manufacture of plastics in primary forms,2007,NULL,140
+495,20.17,Manufacture of synthetic rubber in primary forms,2007,NULL,140
+496,20.20,Manufacture of pesticides and other agrochemical products,2007,NULL,141
+497,20.30,"Manufacture of paints, varnishes and similar coatings, printing ink and mastics",2007,NULL,142
+498,20.41,"Manufacture of soap and detergents, cleaning and polishing preparations",2007,NULL,143
+499,20.42,Manufacture of perfumes and toilet preparations,2007,NULL,143
+500,20.51,Manufacture of explosives,2007,NULL,144
+501,20.52,Manufacture of glues,2007,NULL,144
+502,20.53,Manufacture of essential oils,2007,NULL,144
+503,20.59,Manufacture of other chemical products n.e.c.,2007,NULL,144
+504,20.60,Manufacture of man-made fibres,2007,NULL,145
+505,21.10,Manufacture of basic pharmaceutical products,2007,NULL,146
+506,21.20,Manufacture of pharmaceutical preparations,2007,NULL,147
+507,22.11,Manufacture of rubber tyres and tubes; retreading and rebuilding of rubber tyres,2007,NULL,148
+508,22.19,Manufacture of other rubber products,2007,NULL,148
+509,22.21,"Manufacture of plastic plates, sheets, tubes and proiles",2007,NULL,149
+510,22.22,Manufacture of plastic packing goods,2007,NULL,149
+511,22.23,Manufacture of builders' ware of plastic,2007,NULL,149
+512,22.29,Manufacture of other plastic products,2007,NULL,149
+513,23.11,Manufacture of flat glass,2007,NULL,150
+514,23.12,Shaping and processing of flat glass,2007,NULL,150
+515,23.13,Manufacture of hollow glass,2007,NULL,150
+516,23.14,Manufacture of glass fibres,2007,NULL,150
+517,23.19,"Manufacture and processing of other glass, including technical glassware",2007,NULL,150
+518,23.20,Manufacture of refractory products,2007,NULL,151
+519,23.31,Manufacture of ceramic tiles and flags,2007,NULL,152
+520,23.32,"Manufacture of bricks, tiles and construction products, in baked clay",2007,NULL,152
+521,23.41,Manufacture of ceramic household and ornamental articles,2007,NULL,153
+522,23.42,Manufacture of ceramic sanitary fixtures,2007,NULL,153
+523,23.43,Manufacture of ceramic insulators and insulating fittings,2007,NULL,153
+524,23.44,Manufacture of other technical ceramic products,2007,NULL,153
+525,23.49,Manufacture of other ceramic products,2007,NULL,153
+526,23.51,Manufacture of cement,2007,NULL,154
+527,23.52,Manufacture of lime and plaster,2007,NULL,154
+528,23.61,Manufacture of concrete products for construction purposes,2007,NULL,155
+529,23.62,Manufacture of plaster products for construction purposes,2007,NULL,155
+530,23.63,Manufacture of ready-mixed concrete,2007,NULL,155
+531,23.64,Manufacture of mortars,2007,NULL,155
+532,23.65,Manufacture of fibre cement,2007,NULL,155
+533,23.69,"Manufacture of other articles of concrete, plaster and cement",2007,NULL,155
+534,23.70,"Cutting, shaping and finishing of stone",2007,NULL,156
+535,23.91,Production of abrasive products,2007,NULL,157
+536,23.99,Manufacture of other non-metallic mineral products n.e.c.,2007,NULL,157
+537,24.10,Manufacture of basic iron and steel and of ferro-alloys,2007,NULL,158
+538,24.20,"Manufacture of tubes, pipes, hollow profiles and related fittings, of steel",2007,NULL,159
+539,24.31,Cold drawing of bars,2007,NULL,160
+540,24.32,Cold rolling of narrow strip,2007,NULL,160
+541,24.33,Cold forming or folding,2007,NULL,160
+542,24.34,Cold drawing of wire,2007,NULL,160
+543,24.41,Precious metals production,2007,NULL,161
+544,24.42,Aluminium production,2007,NULL,161
+545,24.43,"Lead, zinc and tin production",2007,NULL,161
+546,24.44,Copper production,2007,NULL,161
+547,24.45,Other non-ferrous metal production,2007,NULL,161
+548,24.46,Processing of nuclear fuel,2007,NULL,161
+549,24.51,Casting of iron,2007,NULL,162
+550,24.52,Casting of steel,2007,NULL,162
+551,24.53,Casting of light metals,2007,NULL,162
+552,24.54,Casting of other non-ferrous metals,2007,NULL,162
+553,25.11,Manufacture of metal structures and parts of structures,2007,NULL,163
+554,25.12,Manufacture of doors and windows of metal,2007,NULL,163
+555,25.21,Manufacture of central heating radiators and boilers,2007,NULL,164
+556,25.29,"Manufacture of other tanks, reservoirs and containers of metal",2007,NULL,164
+557,25.30,"Manufacture of steam generators, except central heating hot water boilers",2007,NULL,165
+558,25.40,Manufacture of weapons and ammunition,2007,NULL,166
+559,25.50,"Forging, pressing, stamping and roll-forming of metal; powder metallurgy",2007,NULL,167
+560,25.61,Treatment and coating of metals,2007,NULL,168
+561,25.62,Machining,2007,NULL,168
+562,25.71,Manufacture of cutlery,2007,NULL,169
+563,25.72,Manufacture of locks and hinges,2007,NULL,169
+564,25.73,Manufacture of tools,2007,NULL,169
+565,25.91,Manufacture of steel drums and similar containers,2007,NULL,170
+566,25.92,Manufacture of light metal packaging,2007,NULL,170
+567,25.93,"Manufacture of wire products, chain and springs",2007,NULL,170
+568,25.94,Manufacture of fasteners and screw machine products,2007,NULL,170
+569,25.99,Manufacture of other fabricated metal products n.e.c.,2007,NULL,170
+570,26.11,Manufacture of electronic components,2007,NULL,171
+571,26.12,Manufacture of loaded electronic boards,2007,NULL,171
+572,26.20,Manufacture of computers and peripheral equipment,2007,NULL,172
+573,26.30,Manufacture of communication equipment,2007,NULL,173
+574,26.40,Manufacture of consumer electronics,2007,NULL,174
+575,26.51,"Manufacture of instruments and appliances for measuring, testing and navigation",2007,NULL,175
+576,26.52,Manufacture of watches and clocks,2007,NULL,175
+577,26.60,"Manufacture of irradiation, electromedical and electrotherapeutic equipment",2007,NULL,176
+578,26.70,Manufacture of optical instruments and photographic equipment,2007,NULL,177
+579,26.80,Manufacture of magnetic and optical media,2007,NULL,178
+580,27.11,"Manufacture of electric motors, generators and transformers",2007,NULL,179
+581,27.12,Manufacture of electricity distribution and control apparatus,2007,NULL,179
+582,27.20,Manufacture of batteries and accumulators,2007,NULL,180
+583,27.31,Manufacture of fibre optic cables,2007,NULL,181
+584,27.32,Manufacture of other electronic and electric wires and cables,2007,NULL,181
+585,27.33,Manufacture of wiring devices,2007,NULL,181
+586,27.40,Manufacture of electric lighting equipment,2007,NULL,182
+587,27.51,Manufacture of electric domestic appliances,2007,NULL,183
+588,27.52,Manufacture of non-electric domestic appliances,2007,NULL,183
+589,27.90,Manufacture of other electrical equipment,2007,NULL,184
+590,28.11,"Manufacture of engines and turbines, except aircraft, vehicle and cycle engines",2007,NULL,185
+591,28.12,Manufacture of fluid power equipment,2007,NULL,185
+592,28.13,Manufacture of other pumps and compressors,2007,NULL,185
+593,28.14,Manufacture of other taps and valves,2007,NULL,185
+594,28.15,"Manufacture of bearings, gears, gearing and driving elements",2007,NULL,185
+595,28.21,"Manufacture of ovens, furnaces and furnace burners",2007,NULL,186
+596,28.22,Manufacture of lifting and handling equipment,2007,NULL,186
+597,28.23,Manufacture of office machinery and equipment (except computers and peripheral equipment),2007,NULL,186
+598,28.24,Manufacture of power-driven hand tools,2007,NULL,186
+599,28.25,Manufacture of non-domestic cooling and ventilation equipment,2007,NULL,186
+600,28.29,Manufacture of other general-purpose machinery n.e.c.,2007,NULL,186
+601,28.30,Manufacture of agricultural and forestry machinery,2007,NULL,187
+602,28.41,Manufacture of metal forming machinery,2007,NULL,188
+603,28.49,Manufacture of other machine tools,2007,NULL,188
+604,28.91,Manufacture of machinery for metallurgy,2007,NULL,189
+605,28.92,"Manufacture of machinery for mining, quarrying and construction",2007,NULL,189
+606,28.93,"Manufacture of machinery for food, beverage and tobacco processing",2007,NULL,189
+607,28.94,"Manufacture of machinery for textile, apparel and leather production",2007,NULL,189
+608,28.95,Manufacture of machinery for paper and paperboard production,2007,NULL,189
+609,28.96,Manufacture of plastics and rubber machinery,2007,NULL,189
+610,28.99,Manufacture of other special-purpose machinery n.e.c.,2007,NULL,189
+611,29.10,Manufacture of motor vehicles,2007,NULL,190
+612,29.20,Manufacture of bodies (coachwork) for motor vehicles; manufacture of trailers and semi trailers,2007,NULL,191
+613,29.31,Manufacture of electrical and electronic equipment for motor vehicles,2007,NULL,192
+614,29.32,Manufacture of other parts and accessories for motor vehicles,2007,NULL,192
+615,30.11,Building of ships and floating structures,2007,NULL,193
+616,30.12,Building of pleasure and sporting boats,2007,NULL,193
+617,30.20,Manufacture of railway locomotives and rolling stock,2007,NULL,194
+618,30.30,Manufacture of air and spacecraft and related machinery,2007,NULL,195
+619,30.40,Manufacture of military fighting vehicles,2007,NULL,196
+620,30.91,Manufacture of motorcycles,2007,NULL,197
+621,30.92,Manufacture of bicycles and invalid carriages,2007,NULL,197
+622,30.99,Manufacture of other transport equipment n.e.c.,2007,NULL,197
+623,31.01,Manufacture of office and shop furniture,2007,NULL,198
+624,31.02,Manufacture of kitchen furniture,2007,NULL,198
+625,31.03,Manufacture of mattresses,2007,NULL,198
+626,31.09,Manufacture of other furniture,2007,NULL,198
+627,32.11,Striking of coins,2007,NULL,199
+628,32.12,Manufacture of jewellery and related articles,2007,NULL,199
+629,32.13,Manufacture of imitation jewellery and related articles,2007,NULL,199
+630,32.20,Manufacture of musical instruments,2007,NULL,200
+631,32.30,Manufacture of sports goods,2007,NULL,201
+632,32.40,Manufacture of games and toys,2007,NULL,202
+633,32.50,Manufacture of medical and dental instruments and supplies,2007,NULL,203
+634,32.91,Manufacture of brooms and brushes,2007,NULL,204
+635,32.99,Other manufacturing n.e.c.,2007,NULL,204
+636,33.11,Repair of fabricated metal products,2007,NULL,205
+637,33.12,Repair of machinery,2007,NULL,205
+638,33.13,Repair of electronic and optical equipment,2007,NULL,205
+639,33.14,Repair of electrical equipment,2007,NULL,205
+640,33.15,Repair and maintenance of ships and boats,2007,NULL,205
+641,33.16,Repair and maintenance of aircraft and spacecraft,2007,NULL,205
+642,33.17,Repair and maintenance of other transport equipment,2007,NULL,205
+643,33.19,Repair of other equipment,2007,NULL,205
+644,33.20,Installation of industrial machinery and equipment,2007,NULL,206
+645,35.11,Production of electricity,2007,NULL,207
+646,35.12,Transmission of electricity,2007,NULL,207
+647,35.13,Distribution of electricity,2007,NULL,207
+648,35.14,Trade of electricity,2007,NULL,207
+649,35.21,Manufacture of gas,2007,NULL,208
+650,35.22,Distribution of gaseous fuels through mains,2007,NULL,208
+651,35.23,Trade of gas through mains,2007,NULL,208
+652,35.30,Steam and air conditioning supply,2007,NULL,209
+653,36.00,"Water collection, treatment and supply",2007,NULL,210
+654,37.00,Sewerage,2007,NULL,211
+655,38.11,Collection of non-hazardous waste,2007,NULL,212
+656,38.12,Collection of hazardous waste,2007,NULL,212
+657,38.21,Treatment and disposal of non-hazardous waste,2007,NULL,213
+658,38.22,Treatment and disposal of hazardous waste,2007,NULL,213
+659,38.31,Dismantling of wrecks,2007,NULL,214
+660,38.32,Recovery of sorted materials,2007,NULL,214
+661,39.00,Remediation activities and other waste management services,2007,NULL,215
+662,41.10,Development of building projects,2007,NULL,216
+663,41.20,Construction of residential and non-residential buildings,2007,NULL,217
+664,42.11,Construction of roads and motorways,2007,NULL,218
+665,42.12,Construction of railways and underground railways,2007,NULL,218
+666,42.13,Construction of bridges and tunnels,2007,NULL,218
+667,42.21,Construction of utility projects for fluids,2007,NULL,219
+668,42.22,Construction of utility projects for electricity and telecommunications,2007,NULL,219
+669,42.91,Construction of water projects,2007,NULL,220
+670,42.99,Construction of other civil engineering projects n.e.c.,2007,NULL,220
+671,43.11,Demolition,2007,NULL,221
+672,43.12,Site preparation,2007,NULL,221
+673,43.13,Test drilling and boring,2007,NULL,221
+674,43.21,Electrical installation,2007,NULL,222
+675,43.22,"Plumbing, heat and air-conditioning installation",2007,NULL,222
+676,43.29,Other construction installation,2007,NULL,222
+677,43.31,Plastering,2007,NULL,223
+678,43.32,Joinery installation,2007,NULL,223
+679,43.33,Floor and wall covering,2007,NULL,223
+680,43.34,Painting and glazing,2007,NULL,223
+681,43.39,Other building completion and finishing,2007,NULL,223
+682,43.91,Roofing activities,2007,NULL,224
+683,43.99,Other specialised construction activities n.e.c.,2007,NULL,224
+684,45.11,Sale of cars and light motor vehicles,2007,NULL,225
+685,45.19,Sale of other motor vehicles,2007,NULL,225
+686,45.20,Maintenance and repair of motor vehicles,2007,NULL,226
+687,45.31,Wholesale trade of motor vehicle parts and accessories,2007,NULL,227
+688,45.32,Retail trade of motor vehicle parts and accessories,2007,NULL,227
+689,45.40,"Sale, maintenance and repair of motorcycles and related parts and accessories",2007,NULL,228
+690,46.11,"Agents involved in the sale of agricultural raw materials, live animals, textile raw materials and semi-finished goods",2007,NULL,229
+691,46.12,"Agents involved in the sale of fuels, ores, metals and industrial chemicals",2007,NULL,229
+692,46.13,Agents involved in the sale of timber and building materials,2007,NULL,229
+693,46.14,"Agents involved in the sale of machinery, industrial equipment, ships and aircraft",2007,NULL,229
+694,46.15,"Agents involved in the sale of furniture, household goods, hardware and ironmongery",2007,NULL,229
+695,46.16,"Agents involved in the sale of textiles, clothing, fur, footwear and leather goods",2007,NULL,229
+696,46.17,"Agents involved in the sale of food, beverages and tobacco",2007,NULL,229
+697,46.18,Agents specialised in the sale of other particular products,2007,NULL,229
+698,46.19,Agents involved in the sale of a variety of goods,2007,NULL,229
+699,46.21,"Wholesale of grain, unmanufactured tobacco, seeds and animal feeds",2007,NULL,230
+700,46.22,Wholesale of flowers and plants,2007,NULL,230
+701,46.23,Wholesale of live animals,2007,NULL,230
+702,46.24,"Wholesale of hides, skins and leather",2007,NULL,230
+703,46.31,Wholesale of fruit and vegetables,2007,NULL,231
+704,46.32,Wholesale of meat and meat products,2007,NULL,231
+705,46.33,"Wholesale of dairy products, eggs and edible oils and fats",2007,NULL,231
+706,46.34,Wholesale of beverages,2007,NULL,231
+707,46.35,Wholesale of tobacco products,2007,NULL,231
+708,46.36,Wholesale of sugar and chocolate and sugar confectionery,2007,NULL,231
+709,46.37,"Wholesale of cofee, tea, cocoa and spices",2007,NULL,231
+710,46.38,"Wholesale of other food, including fish, crustaceans and molluscs",2007,NULL,231
+711,46.39,"Non-specialised wholesale of food, beverages and tobacco",2007,NULL,231
+712,46.41,Wholesale of textiles,2007,NULL,232
+713,46.42,Wholesale of clothing and footwear,2007,NULL,232
+714,46.43,Wholesale of electrical household appliances,2007,NULL,232
+715,46.44,Wholesale of china and glassware and cleaning materials,2007,NULL,232
+716,46.45,Wholesale of perfume and cosmetics,2007,NULL,232
+717,46.46,Wholesale of pharmaceutical goods,2007,NULL,232
+718,46.47,"Wholesale of furniture, carpets and lighting equipment",2007,NULL,232
+719,46.51,"Wholesale of computers, computer peripheral equipment and software",2007,NULL,233
+720,46.52,Wholesale of electronic and telecommunications equipment and parts,2007,NULL,233
+721,46.61,"Wholesale of agricultural machinery, equipment and supplies",2007,NULL,234
+722,46.62,Wholesale of machine tools,2007,NULL,234
+723,46.65,Wholesale of office furniture,2007,NULL,234
+724,46.66,Wholesale of other office machinery and equipment,2007,NULL,234
+725,46.69,Wholesale of other machinery and equipment,2007,NULL,234
+726,46.71,"Wholesale of solid, liquid and gaseous fuels and related products",2007,NULL,235
+727,46.72,Wholesale of metals and metal ores,2007,NULL,235
+728,46.73,"Wholesale of wood, construction materials and sanitary equipment",2007,NULL,235
+729,46.74,"Wholesale of hardware, plumbing and heating equipment and supplies",2007,NULL,235
+730,46.75,Wholesale of chemical products,2007,NULL,235
+731,46.76,Wholesale of other intermediate products,2007,NULL,235
+732,46.77,Wholesale of waste and scrap,2007,NULL,235
+733,46.90,Non-specialised wholesale trade,2007,NULL,236
+734,47.11,"Retail sale in non-specialised stores with food, beverages or tobacco predominating",2007,NULL,237
+735,47.19,Other retail sale in non-specialised stores,2007,NULL,237
+736,47.21,Retail sale of fruit and vegetables in specialised stores,2007,NULL,238
+737,47.22,Retail sale of meat and meat products in specialised stores,2007,NULL,238
+738,47.23,"Retail sale of fish, crustaceans and molluscs in specialised stores",2007,NULL,238
+739,47.26,Retail sale of tobacco products in specialised stores,2007,NULL,238
+740,47.29,Other retail sale of food in specialised stores,2007,NULL,238
+741,47.30,Retail sale of automotive fuel in specialised stores,2007,NULL,239
+742,47.41,"Retail sale of computers, peripheral units and software in specialised stores",2007,NULL,240
+743,47.51,Retail sale of textiles in specialised stores,2007,NULL,241
+744,47.52,"Retail sale of hardware, paints and glass in specialised stores",2007,NULL,241
+745,47.53,"Retail sale of carpets, rugs, wall and floor coverings in specialised stores",2007,NULL,241
+746,47.54,Retail sale of electrical household appliances in specialised stores,2007,NULL,241
+747,47.59,"Retail sale of furniture, lighting equipment and other household articles in specialised stores",2007,NULL,241
+748,47.61,Retail sale of books in specialised stores,2007,NULL,242
+749,47.62,Retail sale of newspapers and stationery in specialised stores,2007,NULL,242
+750,47.63,Retail sale of music and video recordings in specialised stores,2007,NULL,242
+751,47.64,Retail sale of sporting equipment in specialised stores,2007,NULL,242
+752,47.65,Retail sale of games and toys in specialised stores,2007,NULL,242
+753,47.71,Retail sale of clothing in specialised stores,2007,NULL,243
+754,47.72,Retail sale of footwear and leather goods in specialised stores,2007,NULL,243
+755,47.73,Dispensing chemist in specialised stores,2007,NULL,243
+756,47.74,Retail sale of medical and orthopaedic goods in specialised stores,2007,NULL,243
+757,47.75,Retail sale of cosmetic and toilet articles in specialised stores,2007,NULL,243
+758,47.76,"Retail sale of flowers, plants, seeds, fertilisers, pet animals and pet food in specialised stores",2007,NULL,243
+759,47.77,Retail sale of watches and jewellery in specialised stores,2007,NULL,243
+760,47.78,Other retail sale of new goods in specialised stores,2007,NULL,243
+761,47.79,Retail sale of second-hand goods in stores,2007,NULL,243
+762,47.81,"Retail sale via stalls and markets of food, beverages and tobacco products",2007,NULL,244
+763,47.82,"Retail sale via stalls and markets of textiles, clothing and footwear",2007,NULL,244
+764,47.89,Retail sale via stalls and markets of other goods,2007,NULL,244
+765,47.91,Retail sale via mail order houses or via Internet,2007,NULL,245
+766,47.99,"Other retail sale not in stores, stalls or markets",2007,NULL,245
+767,49.10,"Passenger rail transport, interurban",2007,NULL,246
+768,49.20,Freight rail transport,2007,NULL,247
+769,49.31,Urban and suburban passenger land transport,2007,NULL,248
+770,49.32,Taxi operation,2007,NULL,248
+771,49.39,Other passenger land transport n.e.c.,2007,NULL,248
+772,49.41,Freight transport by road,2007,NULL,249
+773,49.42,Removal services,2007,NULL,249
+774,49.50,Transport via pipeline,2007,NULL,250
+775,50.10,Sea and coastal passenger water transport,2007,NULL,251
+776,50.20,Sea and coastal freight water transport,2007,NULL,252
+777,50.30,Inland passenger water transport,2007,NULL,253
+778,50.40,Inland freight water transport,2007,NULL,254
+779,51.10,Passenger air transport,2007,NULL,255
+780,51.21,Freight air transport,2007,NULL,256
+781,51.22,Space transport,2007,NULL,256
+782,52.10,Warehousing and storage,2007,NULL,257
+783,52.21,Service activities incidental to land transportation,2007,NULL,258
+784,52.22,Service activities incidental to water transportation,2007,NULL,258
+785,52.23,Service activities incidental to air transportation,2007,NULL,258
+786,52.24,Cargo handling,2007,NULL,258
+787,52.29,Other transportation support activities,2007,NULL,258
+788,53.10,Postal activities under universal service obligation,2007,NULL,259
+789,53.20,Other postal and courier activities,2007,NULL,260
+790,55.10,Hotels and similar accommodation,2007,NULL,261
+791,55.20,Holiday and other short-stay accommodation,2007,NULL,262
+792,55.30,"Camping grounds, recreational vehicle parks and trailer parks",2007,NULL,263
+793,55.90,Other accommodation,2007,NULL,264
+794,56.10,Restaurants and mobile food service activities,2007,NULL,265
+795,56.21,Event catering activities,2007,NULL,266
+796,56.29,Other food service activities,2007,NULL,266
+797,56.30,Beverage serving activities,2007,NULL,267
+798,58.11,Book publishing,2007,NULL,268
+799,58.12,Publishing of directories and mailing lists,2007,NULL,268
+800,58.13,Publishing of newspapers,2007,NULL,268
+801,58.14,Publishing of journals and periodicals,2007,NULL,268
+802,58.19,Other publishing activities,2007,NULL,268
+803,58.21,Publishing of computer games,2007,NULL,269
+804,58.29,Other software publishing,2007,NULL,269
+805,59.11,"Motion picture, video and television programme production activities",2007,NULL,270
+806,59.12,"Motion picture, video and television programme post-production activities",2007,NULL,270
+807,59.13,"Motion picture, video and television programme distribution activities",2007,NULL,270
+808,59.14,Motion picture projection activities,2007,NULL,270
+809,59.20,Sound recording and music publishing activities,2007,NULL,271
+810,60.10,Radio broadcasting,2007,NULL,272
+811,60.20,Television programming and broadcasting activities,2007,NULL,273
+812,61.10,Wired telecommunications activities,2007,NULL,274
+813,61.20,Wireless telecommunications activities,2007,NULL,275
+814,61.30,Satellite telecommunications activities,2007,NULL,276
+815,61.90,Other telecommunications activities,2007,NULL,277
+816,62.01,Computer programming activities,2007,NULL,278
+817,62.02,Computer consultancy activities,2007,NULL,278
+818,62.03,Computer facilities management activities,2007,NULL,278
+819,62.09,Other information technology and computer service activities,2007,NULL,278
+820,63.11,"Data processing, hosting and related activities",2007,NULL,279
+821,63.12,Web portals,2007,NULL,279
+822,63.91,News agency activities,2007,NULL,280
+823,63.99,Other information service activities n.e.c.,2007,NULL,280
+824,64.11,Central banking,2007,NULL,281
+825,64.19,Other monetary intermediation,2007,NULL,281
+826,64.20,Activities of holding companies,2007,NULL,282
+827,64.30,"Trusts, funds and similar financial entities",2007,NULL,283
+828,64.91,Financial leasing,2007,NULL,284
+829,64.92,Other credit granting,2007,NULL,284
+830,64.99,"Other financial service activities, except insurance and pension funding n.e.c.",2007,NULL,284
+831,65.11,Life insurance,2007,NULL,285
+832,65.12,Non-life insurance,2007,NULL,285
+833,65.20,Reinsurance,2007,NULL,286
+834,65.30,Pension funding,2007,NULL,287
+835,66.11,Administration of financial markets,2007,NULL,288
+836,66.12,Security and commodity contracts brokerage,2007,NULL,288
+837,66.19,"Other activities auxiliary to financial services, except insurance and pension funding",2007,NULL,288
+838,66.21,Risk and damage evaluation,2007,NULL,289
+839,66.22,Activities of insurance agents and brokers,2007,NULL,289
+840,66.29,Other activities auxiliary to insurance and pension funding,2007,NULL,289
+841,66.30,Fund management activities,2007,NULL,290
+842,68.10,Buying and selling of own real estate,2007,NULL,291
+843,68.20,Renting and operating of own or leased real estate,2007,NULL,292
+844,68.31,Real estate agencies,2007,NULL,293
+845,68.32,Management of real estate on a fee or contract basis,2007,NULL,293
+846,69.10,Legal activities,2007,NULL,294
+847,69.20,"Accounting, bookkeeping and auditing activities; tax consultancy",2007,NULL,295
+848,70.10,Activities of head offices,2007,NULL,296
+849,70.21,Public relations and communication activities,2007,NULL,297
+850,70.22,Business and other management consultancy activities,2007,NULL,297
+851,71.11,Architectural activities,2007,NULL,298
+852,71.12,Engineering activities and related technical consultancy,2007,NULL,298
+853,71.20,Technical testing and analysis,2007,NULL,299
+854,72.11,Research and experimental development on biotechnology,2007,NULL,300
+855,72.19,Other research and experimental development on natural sciences and engineering,2007,NULL,300
+856,72.20,Research and experimental development on social sciences and humanities,2007,NULL,301
+857,73.11,Advertising agencies,2007,NULL,302
+858,73.12,Media representation,2007,NULL,302
+859,73.20,Market research and public opinion polling,2007,NULL,303
+860,74.10,Specialised design activities,2007,NULL,304
+861,74.20,Photographic activities,2007,NULL,305
+862,74.30,Translation and interpretation activities,2007,NULL,306
+863,74.90,"Other professional, scientific and technical activities n.e.c.",2007,NULL,307
+864,75.00,Veterinary activities,2007,NULL,308
+865,77.11,Renting and leasing of cars and light motor vehicles,2007,NULL,309
+866,77.12,Renting and leasing of trucks,2007,NULL,309
+867,77.21,Renting and leasing of recreational and sports goods,2007,NULL,310
+868,77.22,Renting of video tapes and disks,2007,NULL,310
+869,77.29,Renting and leasing of other personal and household goods,2007,NULL,310
+870,77.31,Renting and leasing of agricultural machinery and equipment,2007,NULL,311
+871,77.32,Renting and leasing of construction and civil engineering machinery and equipment,2007,NULL,311
+872,77.33,Renting and leasing of office machinery and equipment (including computers),2007,NULL,311
+873,77.34,Renting and leasing of water transport equipment,2007,NULL,311
+874,77.35,Renting and leasing of air transport equipment,2007,NULL,311
+875,77.39,"Renting and leasing of other machinery, equipment and tangible goods n.e.c.",2007,NULL,311
+876,77.40,"Leasing of intellectual property and similar products, except copyrighted works",2007,NULL,312
+877,78.10,Activities of employment placement agencies,2007,NULL,313
+878,78.20,Temporary employment agency activities,2007,NULL,314
+879,78.30,Other human resources provision,2007,NULL,315
+880,79.11,Travel agency activities,2007,NULL,316
+881,79.12,Tour operator activities,2007,NULL,316
+882,79.90,Other reservation service and related activities,2007,NULL,317
+883,80.10,Private security activities,2007,NULL,318
+884,80.20,Security systems service activities,2007,NULL,319
+885,80.30,Investigation activities,2007,NULL,320
+886,81.10,Combined facilities support activities,2007,NULL,321
+887,81.21,General cleaning of buildings,2007,NULL,322
+888,81.22,Other building and industrial cleaning activities,2007,NULL,322
+889,81.29,Other cleaning activities,2007,NULL,322
+890,81.30,Landscape service activities,2007,NULL,323
+891,82.11,Combined office administrative service activities,2007,NULL,324
+892,82.19,"Photocopying, document preparation and other specialised office support activities",2007,NULL,324
+893,82.20,Activities of call centres,2007,NULL,325
+894,82.30,Organisation of conventions and trade shows,2007,NULL,326
+895,82.91,Activities of collection agencies and credit bureaus,2007,NULL,327
+896,82.92,Packaging activities,2007,NULL,327
+897,82.99,Other business support service activities n.e.c.,2007,NULL,327
+898,84.11,General public administration activities,2007,NULL,328
+899,84.12,"Regulation of the activities of providing health care, education, cultural services and other social services, excluding social security",2007,NULL,328
+900,84.13,Regulation of and contribution to more efficient operation of businesses,2007,NULL,328
+901,84.21,Foreign affairs,2007,NULL,329
+902,84.22,Defence activities,2007,NULL,329
+903,84.23,Justice and judicial activities,2007,NULL,329
+904,84.24,Public order and safety activities,2007,NULL,329
+905,84.25,Fire service activities,2007,NULL,329
+906,84.30,Compulsory social security activities,2007,NULL,330
+907,85.10,Pre-primary education,2007,NULL,331
+908,85.20,Primary education,2007,NULL,332
+909,85.31,General secondary education,2007,NULL,333
+910,85.32,Technical and vocational secondary education,2007,NULL,333
+911,85.41,Post-secondary non-tertiary education,2007,NULL,334
+912,85.42,Tertiary education,2007,NULL,334
+913,85.51,Sports and recreation education,2007,NULL,335
+914,85.52,Cultural education,2007,NULL,335
+915,85.53,Driving school activities,2007,NULL,335
+916,85.59,Other education n.e.c.,2007,NULL,335
+917,85.60,Educational support activities,2007,NULL,336
+918,86.10,Hospital activities,2007,NULL,337
+919,86.21,General medical practice activities,2007,NULL,338
+920,86.22,Specialist medical practice activities,2007,NULL,338
+921,86.23,Dental practice activities,2007,NULL,338
+922,86.90,Other human health activities,2007,NULL,339
+923,87.10,Residential nursing care activities,2007,NULL,340
+924,87.20,"Residential care activities for mental retardation, mental health and substance abuse",2007,NULL,341
+925,87.30,Residential care activities for the elderly and disabled,2007,NULL,342
+926,87.90,Other residential care activities,2007,NULL,343
+927,88.10,Social work activities without accommodation for the elderly and disabled,2007,NULL,344
+928,88.91,Child day-care activities,2007,NULL,345
+929,88.99,Other social work activities without accommodation n.e.c.,2007,NULL,345
+930,90.01,Performing arts,2007,NULL,346
+931,90.02,Support activities to performing arts,2007,NULL,346
+932,90.03,Artistic creation,2007,NULL,346
+933,90.04,Operation of arts facilities,2007,NULL,346
+934,91.01,Library and archives activities,2007,NULL,347
+935,91.02,Museums activities,2007,NULL,347
+936,91.03,Operation of historical sites and buildings and similar visitor attractions,2007,NULL,347
+937,91.04,Botanical and zoological gardens and nature reserves activities,2007,NULL,347
+938,92.00,Gambling and betting activities,2007,NULL,348
+939,93.11,Operation of sports facilities,2007,NULL,349
+940,93.12,Activities of sport clubs,2007,NULL,349
+941,93.13,Fitness facilities,2007,NULL,349
+942,93.19,Other sports activities,2007,NULL,349
+943,93.21,Activities of amusement parks and theme parks,2007,NULL,350
+944,93.29,Other amusement and recreation activities,2007,NULL,350
+945,94.11,Activities of business and employers membership organisations,2007,NULL,351
+946,94.12,Activities of professional membership organisations,2007,NULL,351
+947,94.20,Activities of trade unions,2007,NULL,352
+948,94.91,Activities of religious organisations,2007,NULL,353
+949,94.92,Activities of political organisations,2007,NULL,353
+950,94.99,Activities of other membership organisations n.e.c.,2007,NULL,353
+951,95.11,Repair of computers and peripheral equipment,2007,NULL,354
+952,95.12,Repair of communication equipment,2007,NULL,354
+953,95.21,Repair of consumer electronics,2007,NULL,355
+954,95.22,Repair of household appliances and home and garden equipment,2007,NULL,355
+955,95.23,Repair of footwear and leather goods,2007,NULL,355
+956,95.24,Repair of furniture and home furnishings,2007,NULL,355
+957,95.25,"Repair of watches, clocks and jewellery",2007,NULL,355
+958,95.29,Repair of other personal and household goods,2007,NULL,355
+959,96.01,Washing and (dry-)cleaning of textile and fur products,2007,NULL,356
+960,96.02,Hairdressing and other beauty treatment,2007,NULL,356
+961,96.03,Funeral and related activities,2007,NULL,356
+962,96.04,Physical well-being activities,2007,NULL,356
+963,96.09,Other personal service activities n.e.c.,2007,NULL,356
+964,97.00,Activities of households as employers of domestic personnel,2007,NULL,357
+965,98.10,Undifferentiated goods-producing activities of private households for own use,2007,NULL,358
+966,98.20,Undifferentiated service-producing activities of private households for own use,2007,NULL,359
+967,99.00,Activities of extraterritorial organisations and bodies,2007,NULL,360
+968,NACE_1.1:OTHER,"OTHER",2001,2004,NULL
+969,NACE_1.1:A,"Section A Agriculture, Hunting and Forestry",2001,2004,NULL
+970,NACE_1.1:B,"Section B Fishing",2001,2004,NULL
+971,NACE_1.1:C,"Section C Mining and quarrying",2001,2004,NULL
+972,NACE_1.1:D,"Section D Manufacturing",2001,2004,NULL
+973,NACE_1.1:E,"Section E Electricity, gas and water supply",2001,2004,NULL
+974,NACE_1.1:F,"Section F Construction",2001,2004,NULL
+975,NACE_1.1:G,"Section G Wholesale & retail trade; repair of motor vehicles, household ...",2001,2004,NULL
+976,NACE_1.1:H,"Section H Hotels and restaurants",2001,2004,NULL
+977,NACE_1.1:I,"Section I Transport, storage and communication",2001,2004,NULL
+978,NACE_1.1:J,"Section J Financial intermediation",2001,2004,NULL
+979,NACE_1.1:K,"Section K Real estate, renting and business activities",2001,2004,NULL
+980,NACE_1.1:L,"Section L Public administration and defence; compulsory social security",2001,2004,NULL
+981,NACE_1.1:M,"Section M Education",2001,2004,NULL
+982,NACE_1.1:N,"Section N Health and social work",2001,2004,NULL
+983,NACE_1.1:O,"Section O Other community, social and personal service activities",2001,2004,NULL
+984,NACE_1.1:CA,"SubSection CA Mining and quarrying of energy producing materials",2001,2004,971
+985,NACE_1.1:CB,"SubSection CB Mining and quarrying except energy producing materials",2001,2004,971
+986,NACE_1.1:DA,"SubSection DA Manufacture of food products; beverages and tobacco",2001,2004,972
+987,NACE_1.1:DB,"SubSection DB Manufacture of textiles and textile products",2001,2004,972
+988,NACE_1.1:DC,"SubSection DC Manufacture of leather and leather products",2001,2004,972
+989,NACE_1.1:DD,"SubSection DD Manufacture of wood and wood products",2001,2004,972
+990,NACE_1.1:DE,"SubSection DE Manuf. of pulp, paper & paper product; publishing & printing",2001,2004,972
+991,NACE_1.1:DF,"SubSection DF Manufac. of coke, refined petroleum products & nuclear fuel",2001,2004,972
+992,NACE_1.1:DM,"SubSection DM Manufacture of transport equipment",2001,2004,972
+993,NACE_1.1:DN,"SubSection DN Manufacturing n.e.c",2001,2004,972
+994,NACE_1.1:DG,"SubSection DG Manufac. of chemicals, chemical products and man-made fibres",2001,2004,972
+995,NACE_1.1:DH,"SubSection DH Manufacture of rubber and plastic products",2001,2004,972
+996,NACE_1.1:DI,"SubSection DI Manufacture of other non-metallic mineral products",2001,2004,972
+997,NACE_1.1:DJ,"SubSection DJ Manufacture of basic metals and fabricated metal products",2001,2004,972
+998,NACE_1.1:DK,"SubSection DK Manufacture of machinery and equipment n.e.c",2001,2004,972
+999,NACE_1.1:DL,"SubSection DL Manufacture of electrical and optical equipment",2001,2004,972
+1000,NACE_1.1:10.00,"Mining of coal and lignite; extraction of peat",2001,2004,984
+1001,NACE_1.1:10.10,"Mining and agglomeration of hard coal",2001,2004,984
+1002,NACE_1.1:10.20,"Mining and agglomeration of lignite",2001,2004,984
+1003,NACE_1.1:10.30,"Extraction and agglomeration of peat",2001,2004,984
+1004,NACE_1.1:11.00,"Extraction of crude petroleum and natural gas + service activities, excl..",2001,2004,984
+1005,NACE_1.1:11.10,"Extraction of crude petroleum and natural gas",2001,2004,984
+1006,NACE_1.1:11.11,"Extraction of crude petroleum",2001,2004,984
+1007,NACE_1.1:11.12,"Extraction of natural gas",2001,2004,984
+1008,NACE_1.1:11.13,"Extraction of bituminous shale and sand",2001,2004,984
+1009,NACE_1.1:11.20,"Service activities incidental to oil and gas extraction excluding surveying",2001,2004,984
+1010,NACE_1.1:12.00,"Mining of uranium and thorium ores",2001,2004,984
+1011,NACE_1.1:13.00,"Mining of metal ores",2001,2004,985
+1012,NACE_1.1:13.10,"Mining of iron ores",2001,2004,985
+1013,NACE_1.1:13.20,"Mining of non-ferrous metal ores, except uranium and thorium ores",2001,2004,985
+1014,NACE_1.1:14.00,"Other mining and quarrying",2001,2004,985
+1015,NACE_1.1:14.10,"Quarrying of stone",2001,2004,985
+1016,NACE_1.1:14.11,"Quarrying of stone for construction",2001,2004,985
+1017,NACE_1.1:14.12,"Quarrying of limestone, gypsum and chalk",2001,2004,985
+1018,NACE_1.1:14.13,"Quarrying of slate",2001,2004,985
+1019,NACE_1.1:14.20,"Quarrying of sand and clay",2001,2004,985
+1020,NACE_1.1:14.21,"Operation of gravel and sand pits",2001,2004,985
+1021,NACE_1.1:14.22,"Mining of clays and kaolin",2001,2004,985
+1022,NACE_1.1:14.30,"Mining of chemical and fertiliser minerals",2001,2004,985
+1023,NACE_1.1:14.40,"Production of salt",2001,2004,985
+1024,NACE_1.1:14.50,"Other mining and quarrying n.e.c",2001,2004,985
+1025,NACE_1.1:15.00,"Manufacture of food products and beverages",2001,2004,986
+1026,NACE_1.1:15.10,"Production, processing and preserving of meat and meat products",2001,2004,986
+1027,NACE_1.1:15.11,"Production and preserving of meat",2001,2004,986
+1028,NACE_1.1:15.12,"Production and preserving of poultry meat",2001,2004,986
+1029,NACE_1.1:15.13,"Production of meat and poultry meat products",2001,2004,986
+1030,NACE_1.1:15.20,"Processing and preserving of fish and fish products",2001,2004,986
+1031,NACE_1.1:15.30,"Processing and preserving of fruit and vegetables",2001,2004,986
+1032,NACE_1.1:15.31,"Processing and preserving of potatoes",2001,2004,986
+1033,NACE_1.1:15.32,"Manufacture of fruit and vegetable juice",2001,2004,986
+1034,NACE_1.1:15.33,"Processing and preserving of fruit and vegetables n.e.c",2001,2004,986
+1035,NACE_1.1:15.40,"Manufacture of vegetable and animal oils and fats",2001,2004,986
+1036,NACE_1.1:15.41,"Manufacture of crude oils and fats",2001,2004,986
+1037,NACE_1.1:15.42,"Manufacture of refined oils and fats",2001,2004,986
+1038,NACE_1.1:15.43,"Manufacture of margarine and similar edible fats",2001,2004,986
+1039,NACE_1.1:15.50,"Manufacture of dairy products",2001,2004,986
+1040,NACE_1.1:15.51,"Operation of dairies and cheese making",2001,2004,986
+1041,NACE_1.1:15.52,"Manufacture of ice cream",2001,2004,986
+1042,NACE_1.1:15.60,"Manufacture of grain mill products, starches and starch products",2001,2004,986
+1043,NACE_1.1:15.61,"Manufacture of grain mill products",2001,2004,986
+1044,NACE_1.1:15.62,"Manufacture of starches and starch products",2001,2004,986
+1045,NACE_1.1:15.70,"Manufacture of prepared animal feeds",2001,2004,986
+1046,NACE_1.1:15.71,"Manufacture of prepared feeds for farm animals",2001,2004,986
+1047,NACE_1.1:15.72,"Manufacture of prepared pet foods",2001,2004,986
+1048,NACE_1.1:15.80,"Manufacture of other food products",2001,2004,986
+1049,NACE_1.1:15.81,"Manufacture of bread; manufacture of fresh pastry goods and cakes",2001,2004,986
+1050,NACE_1.1:15.82,"Manufacture of rusks and biscuits and of preserved pastry goods and cakes",2001,2004,986
+1051,NACE_1.1:15.83,"Manufacture of sugar",2001,2004,986
+1052,NACE_1.1:15.84,"Manufacture of cocoa; chocolate and sugar confectionery",2001,2004,986
+1053,NACE_1.1:15.85,"Manufacture of macaroni, noodles, couscous and similar farinaceous products",2001,2004,986
+1054,NACE_1.1:15.86,"Processing of tea and coffee",2001,2004,986
+1055,NACE_1.1:15.87,"Manufacture of condiments and seasonings",2001,2004,986
+1056,NACE_1.1:15.88,"Manufacture of homogenised food preparations and dietetic food",2001,2004,986
+1057,NACE_1.1:15.89,"Manufacture of other food products n.e.c",2001,2004,986
+1058,NACE_1.1:15.90,"Manufacture of beverages",2001,2004,986
+1059,NACE_1.1:15.91,"Manufacture of distilled potable alcoholic beverages",2001,2004,986
+1060,NACE_1.1:15.92,"Production of ethyl alcohol from fermented materials",2001,2004,986
+1061,NACE_1.1:15.93,"Manufacture of wines",2001,2004,986
+1062,NACE_1.1:15.94,"Manufacture of cider and other fruit wines",2001,2004,986
+1063,NACE_1.1:15.95,"Manufacture of other non-distilled fermented beverages",2001,2004,986
+1064,NACE_1.1:15.96,"Manufacture of beer",2001,2004,986
+1065,NACE_1.1:15.97,"Manufacture of malt",2001,2004,986
+1066,NACE_1.1:15.98,"Production of mineral waters and soft drinks",2001,2004,986
+1067,NACE_1.1:16.00,"Manufacture of tobacco products",2001,2004,986
+1068,NACE_1.1:17.00,"Manufacture of textiles",2001,2004,987
+1069,NACE_1.1:17.10,"Preparation and spinning of textile fibres",2001,2004,987
+1070,NACE_1.1:17.11,"Preparation and spinning of cotton-type fibres",2001,2004,987
+1071,NACE_1.1:17.12,"Preparation and spinning of woollen-type fibres",2001,2004,987
+1072,NACE_1.1:17.13,"Preparation and spinning of worsted-type fibres",2001,2004,987
+1073,NACE_1.1:17.14,"Preparation and spinning of flax-type fibres",2001,2004,987
+1074,NACE_1.1:17.15,"Throwing and preparation of silk including from noils and throwing and ....",2001,2004,987
+1075,NACE_1.1:17.16,"Manufacture of sewing threads",2001,2004,987
+1076,NACE_1.1:17.17,"Preparation and spinning of other textile fibres",2001,2004,987
+1077,NACE_1.1:17.20,"Textile weaving",2001,2004,987
+1078,NACE_1.1:17.21,"Cotton-type weaving",2001,2004,987
+1079,NACE_1.1:17.22,"Woollen-type weaving",2001,2004,987
+1080,NACE_1.1:17.23,"Worsted-type weaving",2001,2004,987
+1081,NACE_1.1:17.24,"Silk-type weaving",2001,2004,987
+1082,NACE_1.1:17.25,"Other textile weaving",2001,2004,987
+1083,NACE_1.1:17.30,"Finishing of textiles",2001,2004,987
+1084,NACE_1.1:17.40,"Manufacture of made-up textile articles, except apparel",2001,2004,987
+1085,NACE_1.1:17.50,"Manufacture of other textiles",2001,2004,987
+1086,NACE_1.1:17.51,"Manufacture of carpets and rugs",2001,2004,987
+1087,NACE_1.1:17.52,"Manufacture of cordage, rope, twine and netting",2001,2004,987
+1088,NACE_1.1:17.53,"Manufacture of nonwovens and articles made from nonwovens, except apparel",2001,2004,987
+1089,NACE_1.1:17.54,"Manufacture of other textiles n.e.c",2001,2004,987
+1090,NACE_1.1:17.60,"Manufacture of knitted and crocheted fabrics",2001,2004,987
+1091,NACE_1.1:17.70,"Manufacture of knitted and crocheted articles",2001,2004,987
+1092,NACE_1.1:17.71,"Manufacture of knitted and crocheted hosiery",2001,2004,987
+1093,NACE_1.1:17.72,"Manufacture of knitted and crocheted pullovers, cardigans and similar art.",2001,2004,987
+1094,NACE_1.1:17.73,"Manufacture of knitted and crocheted outerwear",2001,2004,987
+1095,NACE_1.1:17.74,"Manufacture of knitted and crocheted underwear",2001,2004,987
+1096,NACE_1.1:17.75,"Manufacture of other knitted and crocheted articles and accessories",2001,2004,987
+1097,NACE_1.1:18.00,"Manufacture of wearing apparel; dressing and dyeing of fur",2001,2004,987
+1098,NACE_1.1:18.10,"Manufacture of leather clothes",2001,2004,987
+1099,NACE_1.1:18.20,"Manufacture of other wearing apparel and accessories",2001,2004,987
+1100,NACE_1.1:18.21,"Manufacture of workwear",2001,2004,987
+1101,NACE_1.1:18.22,"Manufacture of other outerwear",2001,2004,987
+1102,NACE_1.1:18.23,"Manufacture of underwear",2001,2004,987
+1103,NACE_1.1:18.24,"Manufacture of other wearing apparel and accessories n.e.c",2001,2004,987
+1104,NACE_1.1:18.30,"Dressing and dyeing of fur; manufacture of articles of fur",2001,2004,987
+1105,NACE_1.1:19.00,"Tanning & dressing of leather; manufacture of luggage, handbags, saddlery..",2001,2004,988
+1106,NACE_1.1:19.10,"Tanning and dressing of leather",2001,2004,988
+1107,NACE_1.1:19.20,"Manufacture of luggage, handbags and the like, saddlery and harness",2001,2004,988
+1108,NACE_1.1:19.30,"Manufacture of footwear",2001,2004,988
+1109,NACE_1.1:20.00,"Manufacture of wood & of products of wood & cork and of straw & plaiting...",2001,2004,989
+1110,NACE_1.1:20.10,"Sawmilling and planing of wood, impregnation of wood",2001,2004,989
+1111,NACE_1.1:20.20,"Manufacture of veneer sheets and of plywood and other panels & boards",2001,2004,989
+1112,NACE_1.1:20.30,"Manufacture of builders' carpentry and joinery",2001,2004,989
+1113,NACE_1.1:20.40,"Manufacture of wooden containers",2001,2004,989
+1114,NACE_1.1:20.50,"Manufacture of other products of wood, of cork, straw & plaiting materials",2001,2004,989
+1115,NACE_1.1:20.51,"Manufacture of other products of wood",2001,2004,989
+1116,NACE_1.1:20.52,"Manufacture of articles of cork, straw and plaiting materials",2001,2004,989
+1117,NACE_1.1:21.00,"Manufacture of pulp, paper and paper products",2001,2004,990
+1118,NACE_1.1:21.10,"Manufacture of pulp, paper and paperboard",2001,2004,990
+1119,NACE_1.1:21.11,"Manufacture of pulp",2001,2004,990
+1120,NACE_1.1:21.12,"Manufacture of paper and paperboard",2001,2004,990
+1121,NACE_1.1:21.20,"Manufacture of articles of paper and paperboard",2001,2004,990
+1122,NACE_1.1:21.21,"Manufacture of corrugated paper(board) and of containers of paper(board)",2001,2004,990
+1123,NACE_1.1:21.22,"Manufacture of household & sanitary goods and of toilet requisites",2001,2004,990
+1124,NACE_1.1:21.23,"Manufacture of paper stationery",2001,2004,990
+1125,NACE_1.1:21.24,"Manufacture of wallpaper",2001,2004,990
+1126,NACE_1.1:21.25,"Manufacture of other articles of paper and paperboard n.e.c",2001,2004,990
+1127,NACE_1.1:22.00,"Publishing, printing and reproduction of recorded media",2001,2004,990
+1128,NACE_1.1:22.10,"Publishing",2001,2004,990
+1129,NACE_1.1:22.11,"Publishing of books",2001,2004,990
+1130,NACE_1.1:22.12,"Publishing of newspapers",2001,2004,990
+1131,NACE_1.1:22.13,"Publishing of journals and periodicals",2001,2004,990
+1132,NACE_1.1:22.14,"Publishing of sound recordings",2001,2004,990
+1133,NACE_1.1:22.15,"Other publishing",2001,2004,990
+1134,NACE_1.1:22.20,"Printing and service activities related to printing",2001,2004,990
+1135,NACE_1.1:22.21,"Printing of newspapers",2001,2004,990
+1136,NACE_1.1:22.22,"Printing n.e.c",2001,2004,990
+1137,NACE_1.1:22.23,"Bookbinding and finishing",2001,2004,990
+1138,NACE_1.1:22.24,"Composition and plate-making",2001,2004,990
+1139,NACE_1.1:22.25,"Other activities related to printing",2001,2004,990
+1140,NACE_1.1:22.30,"Reproduction of recorded media",2001,2004,990
+1141,NACE_1.1:22.31,"Reproduction of sound recording",2001,2004,990
+1142,NACE_1.1:22.32,"Reproduction of video recording",2001,2004,990
+1143,NACE_1.1:22.33,"Reproduction of computer media",2001,2004,990
+1144,NACE_1.1:23.00,"Manufacture of coke, refined petroleum products and nuclear fuel",2001,2004,991
+1145,NACE_1.1:23.10,"Manufacture of coke oven products",2001,2004,991
+1146,NACE_1.1:23.20,"Manufacture of refined petroleum products",2001,2004,991
+1147,NACE_1.1:23.30,"Processing of nuclear fuel",2001,2004,991
+1148,NACE_1.1:24.00,"Manufacture of chemicals, and chemical products",2001,2004,994
+1149,NACE_1.1:24.10,"Manufacture of basic chemicals",2001,2004,994
+1150,NACE_1.1:24.11,"Manufacture of industrial gases",2001,2004,994
+1151,NACE_1.1:24.12,"Manufacture of dyes and pigments",2001,2004,994
+1152,NACE_1.1:24.13,"Manufacture of other inorganic basic chemicals",2001,2004,994
+1153,NACE_1.1:24.14,"Manufacture of other organic basic chemicals",2001,2004,994
+1154,NACE_1.1:24.15,"Manufacture of fertilisers and nitrogen compounds",2001,2004,994
+1155,NACE_1.1:24.16,"Manufacture of plastics in primary forms",2001,2004,994
+1156,NACE_1.1:24.17,"Manufacture of synthetic rubber in primary forms",2001,2004,994
+1157,NACE_1.1:24.20,"Manufacture of pesticides and other agro-chemical products",2001,2004,994
+1158,NACE_1.1:24.30,"Manufacture of paints, varnishes & similar coatings, printing ink & mastics",2001,2004,994
+1159,NACE_1.1:24.40,"Manufacture of pharmaceuticals, medicinal chemicals and botanical products",2001,2004,994
+1160,NACE_1.1:24.41,"Manufacture of basic pharmaceutical products",2001,2004,994
+1161,NACE_1.1:24.42,"Manufacture of pharmaceutical preparations",2001,2004,994
+1162,NACE_1.1:24.50,"Manuf. of soap, detergents & perfumes; toilet, cleaning & polishing prepar.",2001,2004,994
+1163,NACE_1.1:24.51,"Manufacture of soap and detergents, cleaning and polishing preparations",2001,2004,994
+1164,NACE_1.1:24.52,"Manufacture of perfumes and toilet preparations",2001,2004,994
+1165,NACE_1.1:24.60,"Manufacture of other chemical products",2001,2004,994
+1166,NACE_1.1:24.61,"Manufacture of explosives",2001,2004,994
+1167,NACE_1.1:24.62,"Manufacture of glues and gelatines",2001,2004,994
+1168,NACE_1.1:24.63,"Manufacture of essential oils",2001,2004,994
+1169,NACE_1.1:24.64,"Manufacture of photographic chemical material",2001,2004,994
+1170,NACE_1.1:24.65,"Manufacture of prepared unrecorded media",2001,2004,994
+1171,NACE_1.1:24.66,"Manufacture of other chemical products n.e.c",2001,2004,994
+1172,NACE_1.1:24.70,"Manufacture of man-made fibres",2001,2004,994
+1173,NACE_1.1:25.00,"Manufacture of rubber and plastic products",2001,2004,995
+1174,NACE_1.1:25.10,"Manufacture of rubber products",2001,2004,995
+1175,NACE_1.1:25.11,"Manufacture of rubber tyres and tubes",2001,2004,995
+1176,NACE_1.1:25.12,"Retreading and rebuilding of rubber tyres",2001,2004,995
+1177,NACE_1.1:25.13,"Manufacture of other rubber products",2001,2004,995
+1178,NACE_1.1:25.20,"Manufacture of plastic products",2001,2004,995
+1179,NACE_1.1:25.21,"Manufacture of plastic plates, sheets, tubes and profiles",2001,2004,995
+1180,NACE_1.1:25.22,"Manufacture of plastic packing goods",2001,2004,995
+1181,NACE_1.1:25.23,"Manufacture of builders' ware of plastic",2001,2004,995
+1182,NACE_1.1:25.24,"Manufacture of other plastic products",2001,2004,995
+1183,NACE_1.1:26.00,"Manufacture of other non-metallic mineral products",2001,2004,996
+1184,NACE_1.1:26.10,"Manufacture of glass and glass products",2001,2004,996
+1185,NACE_1.1:26.11,"Manufacture of flat glass",2001,2004,996
+1186,NACE_1.1:26.12,"Shaping and processing of flat glass",2001,2004,996
+1187,NACE_1.1:26.13,"Manufacture of hollow glass",2001,2004,996
+1188,NACE_1.1:26.14,"Manufacture of glass fibres",2001,2004,996
+1189,NACE_1.1:26.15,"Manufacture and processing of other glass, incl. technical glassware",2001,2004,996
+1190,NACE_1.1:26.20,"Manuf. of non-refractory ceramic goods other than for construction and of",2001,2004,996
+1191,NACE_1.1:26.21,"Manufacture of ceramic household and ornamental articles",2001,2004,996
+1192,NACE_1.1:26.22,"Manufacture of ceramic sanitary fixtures",2001,2004,996
+1193,NACE_1.1:26.23,"Manufacture of ceramic insulators and insulating fittings",2001,2004,996
+1194,NACE_1.1:26.24,"Manufacture of other technical ceramic products",2001,2004,996
+1195,NACE_1.1:26.25,"Manufacture of other ceramic products",2001,2004,996
+1196,NACE_1.1:26.26,"Manufacture of refractory ceramic products",2001,2004,996
+1197,NACE_1.1:26.30,"Manufacture of ceramic tiles and flags",2001,2004,996
+1198,NACE_1.1:26.40,"Manufacture of bricks, tiles and& construction products, in baked clay",2001,2004,996
+1199,NACE_1.1:26.50,"Manufacture of cement, lime and plaster",2001,2004,996
+1200,NACE_1.1:26.51,"Manufacture of cement",2001,2004,996
+1201,NACE_1.1:26.52,"Manufacture of lime",2001,2004,996
+1202,NACE_1.1:26.53,"Manufacture of plaster",2001,2004,996
+1203,NACE_1.1:26.60,"Manufacture of articles of concrete, plaster and cement",2001,2004,996
+1204,NACE_1.1:26.61,"Manufacture of concrete products for construction purposes",2001,2004,996
+1205,NACE_1.1:26.62,"Manufacture of plaster products for construction purposes",2001,2004,996
+1206,NACE_1.1:26.63,"Manufacture of ready-mixed concrete",2001,2004,996
+1207,NACE_1.1:26.64,"Manufacture of mortars",2001,2004,996
+1208,NACE_1.1:26.65,"Manufacture of fibre cement",2001,2004,996
+1209,NACE_1.1:26.66,"Manufacture of other articles of concrete, plaster and cement",2001,2004,996
+1210,NACE_1.1:26.70,"Cutting, shaping and finishing of stone",2001,2004,996
+1211,NACE_1.1:26.80,"Manufacture of other non-metallic mineral products",2001,2004,996
+1212,NACE_1.1:26.81,"Production of abrasive products",2001,2004,996
+1213,NACE_1.1:26.82,"Manufacture of other non-metallic mineral products n.e.c",2001,2004,996
+1214,NACE_1.1:27.00,"Manufacture of basic metals",2001,2004,997
+1215,NACE_1.1:27.10,"Manufacture of basic iron and steel and of ferro-alloys (ECSC)*",2001,2004,997
+1216,NACE_1.1:27.20,"Manufacture of tubes",2001,2004,997
+1217,NACE_1.1:27.21,"Manufacture of cast iron tubes",2001,2004,997
+1218,NACE_1.1:27.22,"Manufacture of steel tubes",2001,2004,997
+1219,NACE_1.1:27.30,"Other first processing of iron & steel & prod. of non-ECSC* ferro",2001,2004,997
+1220,NACE_1.1:27.31,"Cold drawing",2001,2004,997
+1221,NACE_1.1:27.32,"Cold rolling of narrow strips",2001,2004,997
+1222,NACE_1.1:27.33,"Cold forming or folding",2001,2004,997
+1223,NACE_1.1:27.34,"Wire drawing",2001,2004,997
+1224,NACE_1.1:27.35,"Other first processing of iron & steel; prod. of non-ECSC* ferro",2001,2004,997
+1225,NACE_1.1:27.40,"Manufacture of basic precious and non-ferrous metals",2001,2004,997
+1226,NACE_1.1:27.41,"Precious metals production",2001,2004,997
+1227,NACE_1.1:27.42,"Aluminium production",2001,2004,997
+1228,NACE_1.1:27.43,"Lead, zinc and tin production",2001,2004,997
+1229,NACE_1.1:27.44,"Copper production",2001,2004,997
+1230,NACE_1.1:27.45,"Other non-ferrous metal production",2001,2004,997
+1231,NACE_1.1:27.50,"Casting of metals",2001,2004,997
+1232,NACE_1.1:27.51,"Casting of iron",2001,2004,997
+1233,NACE_1.1:27.52,"Casting of steel",2001,2004,997
+1234,NACE_1.1:27.53,"Casting of light metals",2001,2004,997
+1235,NACE_1.1:27.54,"Casting of other non-ferrous metals",2001,2004,997
+1236,NACE_1.1:28.00,"Manufacture of fabricated metal products, except machinery and equipment",2001,2004,997
+1237,NACE_1.1:28.10,"Manufacture of structural metal products",2001,2004,997
+1238,NACE_1.1:28.11,"Manufacture of metal structures and parts of structures",2001,2004,997
+1239,NACE_1.1:28.12,"Manufacture of builders' carpentry and joinery of metal",2001,2004,997
+1240,NACE_1.1:28.20,"Manufacture of tanks, reservoirs & containers of metal & central heating...",2001,2004,997
+1241,NACE_1.1:28.21,"Manufacture of tanks, reservoirs and containers of metal",2001,2004,997
+1242,NACE_1.1:28.22,"Manufacture of central heating radiators and boilers",2001,2004,997
+1243,NACE_1.1:28.30,"Manufacture of steam generators, except central heating hot water boilers",2001,2004,997
+1244,NACE_1.1:28.40,"Forging, pressing, stamping and roll forming of metal; powder metallurgy",2001,2004,997
+1245,NACE_1.1:28.50,"Treatment and coating of metals; general mechanical engineering",2001,2004,997
+1246,NACE_1.1:28.51,"Treatment and coating of metals",2001,2004,997
+1247,NACE_1.1:28.52,"General mechanical engineering",2001,2004,997
+1248,NACE_1.1:28.60,"Manufacture of cutlery, tools and general hardware",2001,2004,997
+1249,NACE_1.1:28.61,"Manufacture of cutlery",2001,2004,997
+1250,NACE_1.1:28.62,"Manufacture of tools",2001,2004,997
+1251,NACE_1.1:28.63,"Manufacture of locks and hinges",2001,2004,997
+1252,NACE_1.1:28.70,"Manufacture of other fabricated metal products",2001,2004,997
+1253,NACE_1.1:28.71,"Manufacture of steel drums and similar containers",2001,2004,997
+1254,NACE_1.1:28.72,"Manufacture of light metal packaging",2001,2004,997
+1255,NACE_1.1:28.73,"Manufacture of wire products",2001,2004,997
+1256,NACE_1.1:28.74,"Manufacture of fasteners, screw machine products, chain and springs",2001,2004,997
+1257,NACE_1.1:28.75,"Manufacture of other fabricated metal products, n.e.c",2001,2004,997
+1258,NACE_1.1:29.00,"Manufacture of machinery and equipment n.e.c",2001,2004,998
+1259,NACE_1.1:29.10,"Manufacture of machinery for the production & use of mechanical power, exc.",2001,2004,998
+1260,NACE_1.1:29.11,"Manufacture of engines and turbines, except aircraft, vehicle & cycle eng.",2001,2004,998
+1261,NACE_1.1:29.12,"Manufacture of pumps and compressors",2001,2004,998
+1262,NACE_1.1:29.13,"Manufacture of taps and valves",2001,2004,998
+1263,NACE_1.1:29.14,"Manufacture of bearings, gears, gearing and driving elements",2001,2004,998
+1264,NACE_1.1:29.20,"Manufacture of other general purpose machinery",2001,2004,998
+1265,NACE_1.1:29.21,"Manufacture of furnaces and furnace burners",2001,2004,998
+1266,NACE_1.1:29.22,"Manufacture of lifting and handling equipment",2001,2004,998
+1267,NACE_1.1:29.23,"Manufacture of non-domestic cooling and ventilation equipment",2001,2004,998
+1268,NACE_1.1:29.24,"Manufacture of other general purpose machinery n.e.c",2001,2004,998
+1269,NACE_1.1:29.30,"Manufacture of agricultural and forestry machinery",2001,2004,998
+1270,NACE_1.1:29.31,"Manufacture of agricultural tractors",2001,2004,998
+1271,NACE_1.1:29.32,"Manufacture of other agricultural and forestry machinery",2001,2004,998
+1272,NACE_1.1:29.40,"Manufacture of machine- tools",2001,2004,998
+1273,NACE_1.1:29.50,"Manufacture of other special purpose machinery",2001,2004,998
+1274,NACE_1.1:29.51,"Manufacture of machinery for metallurgy",2001,2004,998
+1275,NACE_1.1:29.52,"Manufacture of machinery for mining, quarrying and construction",2001,2004,998
+1276,NACE_1.1:29.53,"Manufacture of machinery for food, beverage and tobacco processing",2001,2004,998
+1277,NACE_1.1:29.54,"Manufacture of machinery for textile, apparel and leather production",2001,2004,998
+1278,NACE_1.1:29.55,"Manufacture of machinery for paper and paperboard production",2001,2004,998
+1279,NACE_1.1:29.56,"Manufacture of other special purpose machinery n.e.c",2001,2004,998
+1280,NACE_1.1:29.60,"Manufacture of weapons and ammunition",2001,2004,998
+1281,NACE_1.1:29.70,"Manufacture of domestic appliances n.e.c",2001,2004,998
+1282,NACE_1.1:29.71,"Manufacture of electric domestic appliances",2001,2004,998
+1283,NACE_1.1:29.72,"Manufacture of non-electric domestic appliances",2001,2004,998
+1284,NACE_1.1:30.00,"Manufacture of office machinery and computers",2001,2004,999
+1285,NACE_1.1:30.10,"Manufacture of office machinery",2001,2004,999
+1286,NACE_1.1:30.20,"Manufacture of computers and other information processing equipment",2001,2004,999
+1287,NACE_1.1:31.00,"Manufacture of electrical machinery and apparatus n.e.c",2001,2004,999
+1288,NACE_1.1:31.10,"Manufacture of electric motors, generators and transformers",2001,2004,999
+1289,NACE_1.1:31.20,"Manufacture of electricity distribution and control apparatus",2001,2004,999
+1290,NACE_1.1:31.30,"Manufacture of insulated wire and cable",2001,2004,999
+1291,NACE_1.1:31.40,"Manufacture of accumulators, primary cells and primary batteries",2001,2004,999
+1292,NACE_1.1:31.50,"Manufacture of lighting equipment and electric lamps",2001,2004,999
+1293,NACE_1.1:31.60,"Manufacture of electrical equipment n.e.c",2001,2004,999
+1294,NACE_1.1:31.61,"Manufacture of electrical equipment for engines (F1) & vehicles (F2) n.e.c",2001,2004,999
+1295,NACE_1.1:31.62,"Manufacture of other electrical equipment n.e.c",2001,2004,999
+1296,NACE_1.1:32.00,"Manufacture of radio, television and communication equipment and apparatus",2001,2004,999
+1297,NACE_1.1:32.10,"Manufacture of electronic valves & tubes & other electronic components",2001,2004,999
+1298,NACE_1.1:32.20,"Manufacture of TV & radio transmitters & apparatus for line telephony &",2001,2004,999
+1299,NACE_1.1:32.30,"Manufacture of TV & radio receivers, sound or video recording or ... app.",2001,2004,999
+1300,NACE_1.1:33.00,"Manufacture of medical, precision and optical instruments, watches & clocks",2001,2004,999
+1301,NACE_1.1:33.10,"Manufacture of medical & surgical equipment & orthopaedic appliances",2001,2004,999
+1302,NACE_1.1:33.20,"Manufacture of instruments & appliances for measuring, checking, testing,..",2001,2004,999
+1303,NACE_1.1:33.30,"Manufacture of industrial process control equipment",2001,2004,999
+1304,NACE_1.1:33.40,"Manufacture of optical instruments and photographic equipment",2001,2004,999
+1305,NACE_1.1:33.50,"Manufacture of watches and clocks",2001,2004,999
+1306,NACE_1.1:34.00,"Manufacture of motor vehicles, trailers and semi-trailers",2001,2004,992
+1307,NACE_1.1:34.10,"Manufacture of motor vehicles",2001,2004,992
+1308,NACE_1.1:34.20,"Manufacture of bodies (coachwork) for motor vehicles & of trailers &",2001,2004,992
+1309,NACE_1.1:34.30,"Manufacture of parts & accessories for motor vehicles & their engines",2001,2004,992
+1310,NACE_1.1:35.00,"Manufacture of other transport equipment",2001,2004,992
+1311,NACE_1.1:35.10,"Building and repairing of ships and boats",2001,2004,992
+1312,NACE_1.1:35.11,"Building and repairing of ships",2001,2004,992
+1313,NACE_1.1:35.12,"Building and repairing of pleasure and sporting boats",2001,2004,992
+1314,NACE_1.1:35.20,"Manufacture of railway and tramway locomotives and rolling stock",2001,2004,992
+1315,NACE_1.1:35.30,"Manufacture of aircraft and spacecraft",2001,2004,992
+1316,NACE_1.1:35.40,"Manufacture of motorcycles and bicycles",2001,2004,992
+1317,NACE_1.1:35.41,"Manufacture of motorcycles",2001,2004,992
+1318,NACE_1.1:35.42,"Manufacture of bicycles",2001,2004,992
+1319,NACE_1.1:35.43,"Manufacture of invalid carriages",2001,2004,992
+1320,NACE_1.1:35.50,"Manufacture of other transport equipment n.e.c",2001,2004,992
+1321,NACE_1.1:36.00,"Manufacture of furniture; manufacturing n.e.c",2001,2004,993
+1322,NACE_1.1:36.10,"Manufacture of furniture",2001,2004,993
+1323,NACE_1.1:36.11,"Manufacture of chairs and seats",2001,2004,993
+1324,NACE_1.1:36.12,"Manufacture of other office and shop furniture",2001,2004,993
+1325,NACE_1.1:36.13,"Manufacture of other kitchen furniture",2001,2004,993
+1326,NACE_1.1:36.14,"Manufacture of other furniture",2001,2004,993
+1327,NACE_1.1:36.15,"Manufacture of mattresses",2001,2004,993
+1328,NACE_1.1:36.20,"Manufacture of jewellery and related articles",2001,2004,993
+1329,NACE_1.1:36.21,"Striking of coins and medals",2001,2004,993
+1330,NACE_1.1:36.22,"Manufacture of jewellery and related articles n.e.c",2001,2004,993
+1331,NACE_1.1:36.30,"Manufacture of musical instruments",2001,2004,993
+1332,NACE_1.1:36.40,"Manufacture of sports goods",2001,2004,993
+1333,NACE_1.1:36.50,"Manufacture of games and toys",2001,2004,993
+1334,NACE_1.1:36.60,"Miscellaneous manufacturing n.e.c",2001,2004,993
+1335,NACE_1.1:36.61,"Manufacture of imitation jewellery",2001,2004,993
+1336,NACE_1.1:36.62,"Manufacture of brooms and brushes",2001,2004,993
+1337,NACE_1.1:36.63,"Other manufacturing n.e.c",2001,2004,993
+1338,NACE_1.1:37.00,"Recycling",2001,2004,993
+1339,NACE_1.1:37.10,"Recycling of metal waste and scrap",2001,2004,993
+1340,NACE_1.1:37.20,"Recycling of non-metal waste and scrap",2001,2004,993
+1341,NACE_1.1:01.00,"Agriculture, hunting and related service activities",2001,2004,969
+1342,NACE_1.1:01.10,"Growing of crops; market gardening; horticulture",2001,2004,969
+1343,NACE_1.1:01.11,"Growing of cereals and other crops n.e.c",2001,2004,969
+1344,NACE_1.1:01.12,"Growing of vegetables, horticultural specialities and nursery products",2001,2004,969
+1345,NACE_1.1:01.13,"Growing of fruit, nuts, beverage and spice crops",2001,2004,969
+1346,NACE_1.1:01.20,"Farming of animals",2001,2004,969
+1347,NACE_1.1:01.21,"Farming of cattle, dairy farming",2001,2004,969
+1348,NACE_1.1:01.22,"Farming of sheep, goats, horses, asses, mules and hinnies",2001,2004,969
+1349,NACE_1.1:01.23,"Farming of swine",2001,2004,969
+1350,NACE_1.1:01.24,"Farming of poultry",2001,2004,969
+1351,NACE_1.1:01.25,"Other farming of animals",2001,2004,969
+1352,NACE_1.1:01.30,"Growing of crops combined with farming of animals (mixed farming)",2001,2004,969
+1353,NACE_1.1:01.40,"Agricultural and animal husbandry service activities, except veterinary act",2001,2004,969
+1354,NACE_1.1:01.41,"Agricultural service activities",2001,2004,969
+1355,NACE_1.1:01.42,"Animal husbandry service activities, except veterinary activities",2001,2004,969
+1356,NACE_1.1:01.50,"Hunting, trapping and game propagation including related service activities",2001,2004,969
+1357,NACE_1.1:02.00,"Forestry, logging and related services activities",2001,2004,969
+1358,NACE_1.1:02.10,"Forestry and logging",2001,2004,969
+1359,NACE_1.1:02.20,"Forestry and logging related service activities",2001,2004,969
+1360,NACE_1.1:05.00,"Fishing, operation of fish hatcheries and fish farms + service activities",2001,2004,970
+1361,NACE_1.1:05.10,"Fishing",2001,2004,970
+1362,NACE_1.1:05.20,"Operation of fish hatcheries and fish farms",2001,2004,970
+1363,NACE_1.1:05.30,"Service activities incidental to fishing",2001,2004,970
+1364,NACE_1.1:40.00,"Electricity, gas, steam and hot water supply",2001,2004,973
+1365,NACE_1.1:40.10,"Production and distribution of electricity",2001,2004,973
+1366,NACE_1.1:40.20,"Manufacture of gas; distribution of gaseous fuels through mains",2001,2004,973
+1367,NACE_1.1:40.30,"Steam and hot water supply",2001,2004,973
+1368,NACE_1.1:41.00,"Collection, purification and distribution of water",2001,2004,973
+1369,NACE_1.1:45.00,"Construction",2001,2004,974
+1370,NACE_1.1:45.10,"Site preparation",2001,2004,974
+1371,NACE_1.1:45.11,"Demolition and wrecking of buildings; earth moving",2001,2004,974
+1372,NACE_1.1:45.12,"Test drilling and boring",2001,2004,974
+1373,NACE_1.1:45.20,"Building of complete constructions or parts thereof; civil engineering",2001,2004,974
+1374,NACE_1.1:45.21,"General construction of buildings and civil engineering works",2001,2004,974
+1375,NACE_1.1:45.22,"Erection of roof covering and frames",2001,2004,974
+1376,NACE_1.1:45.23,"Construction of highways, roads, airfields and sport facilities",2001,2004,974
+1377,NACE_1.1:45.24,"Construction of water projects",2001,2004,974
+1378,NACE_1.1:45.25,"Other construction work involving special trades",2001,2004,974
+1379,NACE_1.1:45.30,"Building installation",2001,2004,974
+1380,NACE_1.1:45.31,"Installation of electrical wiring and fittings",2001,2004,974
+1381,NACE_1.1:45.32,"Insulation work activities",2001,2004,974
+1382,NACE_1.1:45.33,"Plumbing",2001,2004,974
+1383,NACE_1.1:45.34,"Other building installation",2001,2004,974
+1384,NACE_1.1:45.40,"Building completion",2001,2004,974
+1385,NACE_1.1:45.41,"Plastering",2001,2004,974
+1386,NACE_1.1:45.42,"Joinery installation",2001,2004,974
+1387,NACE_1.1:45.43,"Floor and wall covering",2001,2004,974
+1388,NACE_1.1:45.44,"Painting and glazing",2001,2004,974
+1389,NACE_1.1:45.45,"Other building completion",2001,2004,974
+1390,NACE_1.1:45.50,"Renting of construction or demolition equipment with operator",2001,2004,974
+1391,NACE_1.1:50.00,"Sale, maintenance & repair of motor vehicles; retail sale of fuel",2001,2004,975
+1392,NACE_1.1:50.10,"Sale of motor vehicles",2001,2004,975
+1393,NACE_1.1:50.20,"Maintenance and repair of motor vehicles",2001,2004,975
+1394,NACE_1.1:50.30,"Sale of motor vehicle parts and accessories",2001,2004,975
+1395,NACE_1.1:50.40,"Sale, maintenance & repair of motorcycles & related parts & accessories",2001,2004,975
+1396,NACE_1.1:50.50,"Retail sale of automotive fuel",2001,2004,975
+1397,NACE_1.1:51.00,"Wholesale trade & commission trade, except of motor vehicles & motorcycles",2001,2004,975
+1398,NACE_1.1:51.10,"Wholesale on a fee or contract basis",2001,2004,975
+1399,NACE_1.1:51.11,"Agents involved in sale of agricultural raw materials, live animals, etc.",2001,2004,975
+1400,NACE_1.1:51.12,"Agents involved sale of ores, metals E1, fuels E3 & industrial chemicals E",2001,2004,975
+1401,NACE_1.1:51.13,"Agents involved in the sale of timber and building materials",2001,2004,975
+1402,NACE_1.1:51.14,"Agents sale of machinery, industrial equipment, ships & aircrafts",2001,2004,975
+1403,NACE_1.1:51.15,"Agents sale of furniture, household goods, hardware and ironmongery",2001,2004,975
+1404,NACE_1.1:51.16,"Agents involved in the sale of textiles, clothing, footwear & leather goods",2001,2004,975
+1405,NACE_1.1:51.17,"Agents involved in the sale of food, beverages and tobacco",2001,2004,975
+1406,NACE_1.1:51.18,"Agents specialising in the sale of particular products / ranges of products",2001,2004,975
+1407,NACE_1.1:51.19,"Agents involved in the sale of a variety of goods",2001,2004,975
+1408,NACE_1.1:51.20,"Wholesale of agricultural raw materials and live animals",2001,2004,975
+1409,NACE_1.1:51.21,"Wholesale of grain, seeds and animal feeds",2001,2004,975
+1410,NACE_1.1:51.22,"Wholesale of flowers and plants",2001,2004,975
+1411,NACE_1.1:51.23,"Wholesale of live animals",2001,2004,975
+1412,NACE_1.1:51.24,"Wholesale of hides, skins and leather",2001,2004,975
+1413,NACE_1.1:51.25,"Wholesale of unmanufactured tobacco",2001,2004,975
+1414,NACE_1.1:51.30,"Wholesale of food, beverages and tobacco",2001,2004,975
+1415,NACE_1.1:51.31,"Wholesale of fruit and vegetables",2001,2004,975
+1416,NACE_1.1:51.32,"Wholesale of meat and meat products",2001,2004,975
+1417,NACE_1.1:51.33,"Wholesale of dairy produce, eggs and edible oils and fats",2001,2004,975
+1418,NACE_1.1:51.34,"Wholesale of alcoholic and other beverages",2001,2004,975
+1419,NACE_1.1:51.35,"Wholesale of tobacco products",2001,2004,975
+1420,NACE_1.1:51.36,"Wholesale of sugar and chocolate and sugar confectionery",2001,2004,975
+1421,NACE_1.1:51.37,"Wholesale of coffee, tea, cocoa and spices",2001,2004,975
+1422,NACE_1.1:51.38,"Wholesale of other food including fish, crustaceans and molluscs",2001,2004,975
+1423,NACE_1.1:51.39,"Non-specialised wholesale of food, beverages and tobacco",2001,2004,975
+1424,NACE_1.1:51.40,"Wholesale of household goods",2001,2004,975
+1425,NACE_1.1:51.41,"Wholesale of textiles",2001,2004,975
+1426,NACE_1.1:51.42,"Wholesale of clothing and footwear",2001,2004,975
+1427,NACE_1.1:51.43,"Wholesale of electrical household appliances (F1) & radio &TV goods (C3)",2001,2004,975
+1428,NACE_1.1:51.44,"Wholesale of china and glassware, wallpaper and cleaning materials",2001,2004,975
+1429,NACE_1.1:51.45,"Wholesale of perfume and cosmetics",2001,2004,975
+1430,NACE_1.1:51.46,"Wholesale of pharmaceutical goods",2001,2004,975
+1431,NACE_1.1:51.47,"Wholesale of other household goods",2001,2004,975
+1432,NACE_1.1:51.50,"Wholesale of non-agricultural intermediate products, waste and scrap",2001,2004,975
+1433,NACE_1.1:51.51,"Wholesale of solid, liquid and gaseous fuels and related products",2001,2004,975
+1434,NACE_1.1:51.52,"Wholesale of metals and metal ores",2001,2004,975
+1435,NACE_1.1:51.53,"Wholesale of wood, construction materials and sanitary equipment",2001,2004,975
+1436,NACE_1.1:51.54,"Wholesale of hardware, plumbing and heating equipment and supplies",2001,2004,975
+1437,NACE_1.1:51.55,"Wholesale of chemical products",2001,2004,975
+1438,NACE_1.1:51.56,"Wholesale of other intermediate products",2001,2004,975
+1439,NACE_1.1:51.57,"Wholesale of waste and scrap",2001,2004,975
+1440,NACE_1.1:51.60,"Wholesale of machinery, equipment and supplies",2001,2004,975
+1441,NACE_1.1:51.61,"Wholesale of machine tools",2001,2004,975
+1442,NACE_1.1:51.62,"Wholesale of construction machinery",2001,2004,975
+1443,NACE_1.1:51.63,"Wholesale of machinery for textile industry & of sewing & knitting machines",2001,2004,975
+1444,NACE_1.1:51.64,"Wholesale of office machinery and equipment",2001,2004,975
+1445,NACE_1.1:51.65,"Wholesale of other machinery for use in industry, trade and navigation",2001,2004,975
+1446,NACE_1.1:51.66,"Wholesale of agricultural machinery & access. & implements, incl. tractors",2001,2004,975
+1447,NACE_1.1:51.70,"Other wholesale",2001,2004,975
+1448,NACE_1.1:52.00,"Retail trade, except ...; repair of personal & household goods",2001,2004,975
+1449,NACE_1.1:52.10,"Retail sale in non-specialised stores",2001,2004,975
+1450,NACE_1.1:52.11,"Retail sale: non-specialised stores with food ... or tobacco predominating",2001,2004,975
+1451,NACE_1.1:52.12,"Other retail sale in non-specialised stores",2001,2004,975
+1452,NACE_1.1:52.20,"Retail sale of food, beverages and tobacco in specialised stores",2001,2004,975
+1453,NACE_1.1:52.21,"Retail sale of fruit and vegetables",2001,2004,975
+1454,NACE_1.1:52.22,"Retail sale of meat and meat products",2001,2004,975
+1455,NACE_1.1:52.23,"Retail sale of fish, crustaceans and molluscs",2001,2004,975
+1456,NACE_1.1:52.24,"Retail sale of bread, cakes, flour confectionery and sugar confectionery",2001,2004,975
+1457,NACE_1.1:52.25,"Retail sale of alcoholic and other beverages",2001,2004,975
+1458,NACE_1.1:52.26,"Retail sale of tobacco products",2001,2004,975
+1459,NACE_1.1:52.27,"Other retail sale of food, beverages and tobacco in specialised stores",2001,2004,975
+1460,NACE_1.1:52.30,"Retail sale of pharmaceutical & medical goods, cosmetic & toilet articles",2001,2004,975
+1461,NACE_1.1:52.31,"Dispensing chemists",2001,2004,975
+1462,NACE_1.1:52.32,"Retail sale of medical and orthopaedic goods",2001,2004,975
+1463,NACE_1.1:52.33,"Retail sale of cosmetic and toilet articles",2001,2004,975
+1464,NACE_1.1:52.40,"Other retail sale of new goods in specialised stores",2001,2004,975
+1465,NACE_1.1:52.41,"Retail sale of textiles",2001,2004,975
+1466,NACE_1.1:52.42,"Retail sale of clothing",2001,2004,975
+1467,NACE_1.1:52.43,"Retail sale of footwear and leather goods",2001,2004,975
+1468,NACE_1.1:52.44,"Retail sale of furniture, lighting equipment and household articles n.e.c",2001,2004,975
+1469,NACE_1.1:52.45,"Retail sale of electrical household appliances (F1) & radio & TV goods (C3)",2001,2004,975
+1470,NACE_1.1:52.46,"Retail sale of hardware, paints and glass",2001,2004,975
+1471,NACE_1.1:52.47,"Retail sale of books, newspapers and stationery",2001,2004,975
+1472,NACE_1.1:52.48,"Other retail sale in specialised stores",2001,2004,975
+1473,NACE_1.1:52.50,"Retail sale of second-hand goods in stores",2001,2004,975
+1474,NACE_1.1:52.60,"Retail sale not in stores",2001,2004,975
+1475,NACE_1.1:52.61,"Retail sale via mail order houses",2001,2004,975
+1476,NACE_1.1:52.62,"Retail sale via stalls and markets",2001,2004,975
+1477,NACE_1.1:52.63,"Other non-store retail sale",2001,2004,975
+1478,NACE_1.1:52.70,"Repair of personal and household goods",2001,2004,975
+1479,NACE_1.1:52.71,"Repair of boots, shoes and other articles of leather",2001,2004,975
+1480,NACE_1.1:52.72,"Repair of electrical household goods",2001,2004,975
+1481,NACE_1.1:52.73,"Repair of watches, clocks and jewellery",2001,2004,975
+1482,NACE_1.1:52.74,"Repair n.e.c",2001,2004,975
+1483,NACE_1.1:55.00,"Hotels and restaurants",2001,2004,976
+1484,NACE_1.1:55.10,"Hotels",2001,2004,976
+1485,NACE_1.1:55.11,"Hotels and motels, with restaurant",2001,2004,976
+1486,NACE_1.1:55.12,"Hotels and motels, without restaurant",2001,2004,976
+1487,NACE_1.1:55.20,"Camping sites and other provision of short-stay accommodation",2001,2004,976
+1488,NACE_1.1:55.21,"Youth hostels and mountain refuges",2001,2004,976
+1489,NACE_1.1:55.22,"Camping sites, including caravan sites",2001,2004,976
+1490,NACE_1.1:55.23,"Other provision of lodgings n.e.c",2001,2004,976
+1491,NACE_1.1:55.30,"Restaurants",2001,2004,976
+1492,NACE_1.1:55.40,"Bars",2001,2004,976
+1493,NACE_1.1:55.50,"Canteens and catering",2001,2004,976
+1494,NACE_1.1:55.51,"Canteens",2001,2004,976
+1495,NACE_1.1:55.52,"Catering",2001,2004,976
+1496,NACE_1.1:60.00,"Land transport; transport via pipelines",2001,2004,977
+1497,NACE_1.1:60.10,"Transport via railways",2001,2004,977
+1498,NACE_1.1:60.20,"Other land transport",2001,2004,977
+1499,NACE_1.1:60.21,"Other scheduled passenger land transport",2001,2004,977
+1500,NACE_1.1:60.22,"Taxi operation",2001,2004,977
+1501,NACE_1.1:60.23,"Other land passenger transport",2001,2004,977
+1502,NACE_1.1:60.24,"Freight transport by road",2001,2004,977
+1503,NACE_1.1:60.30,"Transport via pipelines",2001,2004,977
+1504,NACE_1.1:61.00,"Water transport",2001,2004,977
+1505,NACE_1.1:61.10,"Sea and coastal water transport",2001,2004,977
+1506,NACE_1.1:61.11,"Sea transport",2001,2004,977
+1507,NACE_1.1:61.12,"Coastal water transport",2001,2004,977
+1508,NACE_1.1:61.20,"Inland water transport",2001,2004,977
+1509,NACE_1.1:62.00,"Air transport",2001,2004,977
+1510,NACE_1.1:62.10,"Scheduled air transport",2001,2004,977
+1511,NACE_1.1:62.20,"Non-scheduled air transport",2001,2004,977
+1512,NACE_1.1:62.30,"Space transport",2001,2004,977
+1513,NACE_1.1:63.00,"Supporting & auxiliary transport activities; activities of travel agencies",2001,2004,977
+1514,NACE_1.1:63.10,"Cargo handling and storage",2001,2004,977
+1515,NACE_1.1:63.11,"Cargo handling",2001,2004,977
+1516,NACE_1.1:63.12,"Storage and warehousing",2001,2004,977
+1517,NACE_1.1:63.20,"Other supporting transport activities",2001,2004,977
+1518,NACE_1.1:63.21,"Other supporting land transport activities",2001,2004,977
+1519,NACE_1.1:63.22,"Other supporting water transport activities",2001,2004,977
+1520,NACE_1.1:63.23,"Other supporting air transport activities",2001,2004,977
+1521,NACE_1.1:63.30,"Activities of travel agencies & tour operators; tourist assistance activiti",2001,2004,977
+1522,NACE_1.1:63.40,"Activities of other transport agencies",2001,2004,977
+1523,NACE_1.1:64.00,"Post and telecommunications",2001,2004,977
+1524,NACE_1.1:64.10,"Post and courier activities",2001,2004,977
+1525,NACE_1.1:64.11,"National post activities",2001,2004,977
+1526,NACE_1.1:64.12,"Courier activities other than national post activities",2001,2004,977
+1527,NACE_1.1:64.20,"Telecommunications",2001,2004,977
+1528,NACE_1.1:65.00,"Financial intermediation, except insurance and pension funding",2001,2004,978
+1529,NACE_1.1:65.10,"Monetary intermediation",2001,2004,978
+1530,NACE_1.1:65.11,"Central banking",2001,2004,978
+1531,NACE_1.1:65.12,"Other monetary intermediation",2001,2004,978
+1532,NACE_1.1:65.20,"Other financial intermediation",2001,2004,978
+1533,NACE_1.1:65.21,"Financial leasing",2001,2004,978
+1534,NACE_1.1:65.22,"Other credit granting",2001,2004,978
+1535,NACE_1.1:65.23,"Other financial intermediation n.e.c",2001,2004,978
+1536,NACE_1.1:66.00,"Insurance and pension funding, except compulsory social security",2001,2004,978
+1537,NACE_1.1:66.10,"Life insurance",2001,2004,978
+1538,NACE_1.1:66.20,"Pension funding",2001,2004,978
+1539,NACE_1.1:66.30,"Non-life insurance",2001,2004,978
+1540,NACE_1.1:67.00,"Activities auxiliary to financial intermediation",2001,2004,978
+1541,NACE_1.1:67.10,"Activities auxiliary to financial intermediation, exc. insurance & pension",2001,2004,978
+1542,NACE_1.1:67.11,"Administration of financial markets",2001,2004,978
+1543,NACE_1.1:67.12,"Security brooking and fund management",2001,2004,978
+1544,NACE_1.1:67.13,"Activities auxiliary to financial intermediation n.e.c",2001,2004,978
+1545,NACE_1.1:67.20,"Activities auxiliary to insurance and pension funding",2001,2004,978
+1546,NACE_1.1:70.00,"Real estate activities",2001,2004,979
+1547,NACE_1.1:70.10,"Real estate activities with own property",2001,2004,979
+1548,NACE_1.1:70.11,"Development and selling of real estate",2001,2004,979
+1549,NACE_1.1:70.12,"Buying and selling of own real estate",2001,2004,979
+1550,NACE_1.1:70.20,"Letting of own property",2001,2004,979
+1551,NACE_1.1:70.30,"Real estate activities on a fee or contract basis",2001,2004,979
+1552,NACE_1.1:70.31,"Real estate agencies",2001,2004,979
+1553,NACE_1.1:70.32,"Management of real estate on a fee or contract basis",2001,2004,979
+1554,NACE_1.1:71.00,"Renting of machinery & equipment without operator & of personal & household",2001,2004,979
+1555,NACE_1.1:71.10,"Renting of automobiles",2001,2004,979
+1556,NACE_1.1:71.20,"Renting of other transport equipment",2001,2004,979
+1557,NACE_1.1:71.21,"Renting of other land transport equipment",2001,2004,979
+1558,NACE_1.1:71.22,"Renting of water transport equipment",2001,2004,979
+1559,NACE_1.1:71.23,"Renting of air transport equipment",2001,2004,979
+1560,NACE_1.1:71.30,"Renting of other machinery and equipment",2001,2004,979
+1561,NACE_1.1:71.31,"Renting of agricultural machinery and equipment",2001,2004,979
+1562,NACE_1.1:71.32,"Renting of construction and civil engineering machinery and equipment",2001,2004,979
+1563,NACE_1.1:71.33,"Renting of office machinery and equipment including computers",2001,2004,979
+1564,NACE_1.1:71.34,"Renting of other machinery and equipment n.e.c",2001,2004,979
+1565,NACE_1.1:71.40,"Renting of personal and household goods n.e.c",2001,2004,979
+1566,NACE_1.1:72.00,"Computer and related activities",2001,2004,979
+1567,NACE_1.1:72.10,"Hardware consultancy",2001,2004,979
+1568,NACE_1.1:72.20,"Software consultancy and supply",2001,2004,979
+1569,NACE_1.1:72.30,"Data processing",2001,2004,979
+1570,NACE_1.1:72.40,"Data base activities",2001,2004,979
+1571,NACE_1.1:72.50,"Maintenance and repair of office, accounting and computing machinery",2001,2004,979
+1572,NACE_1.1:72.60,"Other computer related activities",2001,2004,979
+1573,NACE_1.1:73.00,"Research and development",2001,2004,979
+1574,NACE_1.1:73.10,"Research and experimental development on natural sciences and engineering",2001,2004,979
+1575,NACE_1.1:73.20,"Research and experimental development on social sciences and humanities",2001,2004,979
+1576,NACE_1.1:74.00,"Other business activities",2001,2004,979
+1577,NACE_1.1:74.10,"Legal, accounting & auditing activities; consultancy; market res.; holdings",2001,2004,979
+1578,NACE_1.1:74.11,"Legal activities",2001,2004,979
+1579,NACE_1.1:74.12,"Accounting, book-keeping and auditing activities; tax consultancy",2001,2004,979
+1580,NACE_1.1:74.13,"Market research and public opinion polling",2001,2004,979
+1581,NACE_1.1:74.14,"Business and management consultancy activities",2001,2004,979
+1582,NACE_1.1:74.15,"Management activities of holding companies",2001,2004,979
+1583,NACE_1.1:74.20,"Architectural and engineering activities and related technical consultancy",2001,2004,979
+1584,NACE_1.1:74.30,"Technical testing and analysis",2001,2004,979
+1585,NACE_1.1:74.40,"Advertising",2001,2004,979
+1586,NACE_1.1:74.50,"Labour recruitment and provision of personnel",2001,2004,979
+1587,NACE_1.1:74.60,"Investigation and security activities",2001,2004,979
+1588,NACE_1.1:74.70,"Industrial cleaning",2001,2004,979
+1589,NACE_1.1:74.80,"Miscellaneous business activities n.e.c",2001,2004,979
+1590,NACE_1.1:74.81,"Photographic activities",2001,2004,979
+1591,NACE_1.1:74.82,"Packaging activities",2001,2004,979
+1592,NACE_1.1:74.83,"Secretarial and translation activities",2001,2004,979
+1593,NACE_1.1:74.84,"Other business activities n.e.c",2001,2004,979
+1594,NACE_1.1:75.00,"Public administration and defence; compulsory social security",2001,2004,980
+1595,NACE_1.1:75.10,"Administration of the State & the economic & social policy of the community",2001,2004,980
+1596,NACE_1.1:75.11,"General (overall) public service activities",2001,2004,980
+1597,NACE_1.1:75.12,"Regulation activities of agencies that provide ... social services, excl ..",2001,2004,980
+1598,NACE_1.1:75.13,"Regulation of and contribution to more efficient operation of business",2001,2004,980
+1599,NACE_1.1:75.14,"Supporting service activities for the government as a whole",2001,2004,980
+1600,NACE_1.1:75.20,"Provision of services to the community as a whole",2001,2004,980
+1601,NACE_1.1:75.21,"Foreign affairs",2001,2004,980
+1602,NACE_1.1:75.22,"Defence activities",2001,2004,980
+1603,NACE_1.1:75.23,"Justice and judicial activities",2001,2004,980
+1604,NACE_1.1:75.24,"Public security, law and order activities",2001,2004,980
+1605,NACE_1.1:75.25,"Fire service activities",2001,2004,980
+1606,NACE_1.1:75.30,"Compulsory social security activities",2001,2004,980
+1607,NACE_1.1:80.00,"Education",2001,2004,981
+1608,NACE_1.1:80.10,"Primary education",2001,2004,981
+1609,NACE_1.1:80.20,"Secondary education",2001,2004,981
+1610,NACE_1.1:80.21,"General secondary education",2001,2004,981
+1611,NACE_1.1:80.22,"Technical and vocational secondary education",2001,2004,981
+1612,NACE_1.1:80.30,"Higher education",2001,2004,981
+1613,NACE_1.1:80.40,"Adult and other education",2001,2004,981
+1614,NACE_1.1:80.41,"Driving school activities",2001,2004,981
+1615,NACE_1.1:80.42,"Adult and other education n.e.c",2001,2004,981
+1616,NACE_1.1:85.00,"Health and social work",2001,2004,982
+1617,NACE_1.1:85.10,"Human health activities",2001,2004,982
+1618,NACE_1.1:85.11,"Hospital activities",2001,2004,982
+1619,NACE_1.1:85.12,"Medical practice activities",2001,2004,982
+1620,NACE_1.1:85.13,"Dental practice activities",2001,2004,982
+1621,NACE_1.1:85.14,"Other human health activities",2001,2004,982
+1622,NACE_1.1:85.20,"Veterinary activities",2001,2004,982
+1623,NACE_1.1:85.30,"Social work activities",2001,2004,982
+1624,NACE_1.1:85.31,"Social work activities with accommodation",2001,2004,982
+1625,NACE_1.1:85.32,"Social work activities without accommodation",2001,2004,982
+1626,NACE_1.1:90.00,"Sewage and refuse disposal, sanitation and similar activities",2001,2004,983
+1627,NACE_1.1:91.00,"Activities of membership organization n.e.c",2001,2004,983
+1628,NACE_1.1:91.10,"Activities of business, employers and professional organisations",2001,2004,983
+1629,NACE_1.1:91.11,"Activities of business and employers organisations",2001,2004,983
+1630,NACE_1.1:91.12,"Activities of professional organisations",2001,2004,983
+1631,NACE_1.1:91.20,"Activities of trade unions",2001,2004,983
+1632,NACE_1.1:91.30,"Activities of other membership organisations",2001,2004,983
+1633,NACE_1.1:91.31,"Activities of religious organisations",2001,2004,983
+1634,NACE_1.1:91.32,"Activities of political organisations",2001,2004,983
+1635,NACE_1.1:91.33,"Activities of other membership organisations n.e.c",2001,2004,983
+1636,NACE_1.1:92.00,"Recreational, cultural and sporting activities",2001,2004,983
+1637,NACE_1.1:92.10,"Motion picture and video activities",2001,2004,983
+1638,NACE_1.1:92.11,"Motion picture and video production",2001,2004,983
+1639,NACE_1.1:92.12,"Motion picture and video distribution",2001,2004,983
+1640,NACE_1.1:92.13,"Motion picture projection",2001,2004,983
+1641,NACE_1.1:92.20,"Radio and television activities",2001,2004,983
+1642,NACE_1.1:92.30,"Other entertainment activities",2001,2004,983
+1643,NACE_1.1:92.31,"Artistic and literary creation and interpretation",2001,2004,983
+1644,NACE_1.1:92.32,"Operation of arts facilities",2001,2004,983
+1645,NACE_1.1:92.33,"Fair and amusement park activities",2001,2004,983
+1646,NACE_1.1:92.34,"Other entertainment activities n.e.c",2001,2004,983
+1647,NACE_1.1:92.40,"News agency activities",2001,2004,983
+1648,NACE_1.1:92.50,"Library, archives, museums and other cultural activities",2001,2004,983
+1649,NACE_1.1:92.51,"Library and archives activities",2001,2004,983
+1650,NACE_1.1:92.52,"Museums activities and preservation of historical sites and buildings",2001,2004,983
+1651,NACE_1.1:92.53,"Botanical and zoological gardens and nature reserves activities",2001,2004,983
+1652,NACE_1.1:92.60,"Sporting activities",2001,2004,983
+1653,NACE_1.1:92.61,"Operation of sports arenas and stadiums",2001,2004,983
+1654,NACE_1.1:92.62,"Other sporting activities",2001,2004,983
+1655,NACE_1.1:92.70,"Other recreational activities",2001,2004,983
+1656,NACE_1.1:92.71,"Gambling and betting activities",2001,2004,983
+1657,NACE_1.1:92.72,"Other recreational activities n.e.c",2001,2004,983
+1658,NACE_1.1:93.00,"Other services activities",2001,2004,983
+1659,NACE_1.1:93.10,"Washing and dry-cleaning of textile and fur products",2001,2004,983
+1660,NACE_1.1:93.20,"Hairdressing and other beauty treatment",2001,2004,983
+1661,NACE_1.1:93.30,"Funeral and related activities",2001,2004,983
+1662,NACE_1.1:93.40,"Physical well-being activities",2001,2004,983
+1663,NACE_1.1:93.50,"Other service activities n.e.c",2001,2004,983
+1664,NACE_1.1:02.01,Forestry and logging,2001,2004,968
+1665,NACE_1.1:02.02,Forestry and logging related service activities,2001,2004,968
+1666,NACE_1.1:05.01,Fishing,2001,2004,968
+1667,NACE_1.1:05.02,Fish farming,2001,2004,968
+1668,NACE_1.1:29.41,Manufacture of portable hand held power tools,2001,2004,968
+1669,NACE_1.1:29.42,Manufacture of other metalworking machine tools,2001,2004,968
+1670,NACE_1.1:29.43,Manufacture of other machine tools n.n.e.c,2001,2004,968
+1671,NACE_1.1:30.01,Manufacture of office machinery,2001,2004,968
+1672,NACE_1.1:30.02,Manufacture of computers and other information processing equipment,2001,2004,968
+1673,NACE_1.1:40.11,Production of electricity,2001,2004,968
+1674,NACE_1.1:40.12,Transmission of electricity,2001,2004,968
+1675,NACE_1.1:40.13,Distribution and trade of electricity,2001,2004,968
+1676,NACE_1.1:40.21,Manufacture of gas,2001,2004,968
+1677,NACE_1.1:40.22,Distribution and trade of gaseous fuels through mains,2001,2004,968
+1678,NACE_1.1:51.80,"Wholesale of machinery, equipment and supplies",2001,2004,968
+1679,NACE_1.1:51.81,Wholesale of machine-tools,2001,2004,968
+1680,NACE_1.1:51.82,"Wholesale of mining, construction and civil engineering machinery",2001,2004,968
+1681,NACE_1.1:51.83,Wholesale of machinery for the textile industry and of sewing and knitting machines,2001,2004,968
+1682,NACE_1.1:51.84,"Wholesale of computers, computer peripheral equipment and software",2001,2004,968
+1683,NACE_1.1:51.85,Wholesale of other office machinery and equipment,2001,2004,968
+1684,NACE_1.1:51.86,Wholesale of other electronic parts and equipment,2001,2004,968
+1685,NACE_1.1:51.87,"Wholesale of other machinery for use in industry, trade and navigation",2001,2004,968
+1686,NACE_1.1:51.88,"Wholesale of agricultural machinery and accessories and implements, including tractors",2001,2004,968
+1687,NACE_1.1:51.90,Other wholesale,2001,2004,968
+1688,NACE_1.1:66.01,Life insurance,2001,2004,968
+1689,NACE_1.1:66.02,Pension funding,2001,2004,968
+1690,NACE_1.1:66.03,Non-life insurance,2001,2004,968
+1691,NACE_1.1:72.21,Publishing of software,2001,2004,968
+1692,NACE_1.1:72.22,Other software consultancy and supply,2001,2004,968
+1693,NACE_1.1:74.85,Secretarial and translation activities,2001,2004,968
+1694,NACE_1.1:74.86,Call centre activities,2001,2004,968
+1695,NACE_1.1:74.87,Other business activities n.n.e.c,2001,2004,968
+1696,NACE_1.1:90.01,Collection and treatment of sewage,2001,2004,968
+1697,NACE_1.1:90.02,Collection and treatment of other waste,2001,2004,968
+1698,NACE_1.1:90.03,"Sanitation, remediation and similar activities",2001,2004,968
+1699,NACE_1.1:93.01,Washing and dry-cleaning of textile and fur products,2001,2004,968
+1700,NACE_1.1:93.02,Hairdressing and other beauty treatment,2001,2004,968
+1701,NACE_1.1:93.03,Funeral and related activities,2001,2004,968
+1702,NACE_1.1:93.04,Physical well-being activities,2001,2004,968
+1703,NACE_1.1:93.05,Other service activities n.n.e.c,2001,2004,968
+1704,NACE_1.1:95.00,Activities of households as employers of domestic staff,2001,2004,968
+1705,NACE_1.1:96.00,Undifferentiated goods producing activities of private households for own use,2001,2004,968
+1706,NACE_1.1:97.00,Undifferentiated services producing activities of private households for own use,2001,2004,968
+1707,NACE_1.1:99.00,Extra-territorial organizations and bodies,2001,2004,968
+1708,46.48,Wholesale of watches and jewellery,2007,NULL,232
+1709,46.49,Wholesale of other household goods,2007,NULL,232
+1712,46.63,"Wholesale of mining, construction and civil engineering machinery",2007,NULL,234
+1713,46.64,Wholesale of machinery for the textile industry and of sewing and knitting machines,2007,NULL,234

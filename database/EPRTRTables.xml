@@ -8,7 +8,8 @@
      Use the maven goals: liquibase:update and liquibase:status
       Potentially with -Dliquibase.dropFirst=true
  -->
- <changeSet author="hjelm" id="rev-2"><createTable tableName="FACILITYDETAIL_ACTIVITY">
+  <changeSet author="hjelm" id="rev-2">
+    <createTable tableName="FACILITYDETAIL_ACTIVITY">
       <column name="FacilityReportID" type="INT"/>
       <column name="MainActivityIndicator" type="BOOLEAN"/>
       <column name="RankingNumeric" type="INT"/>
@@ -31,9 +32,11 @@
       <column name="SubActivityIPPCCode" type="VARCHAR(255)">
         <constraints nullable="true"/>
       </column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
-	<changeSet author="hjelm" id="rev-3"><createTable tableName="FACILITYDETAIL_COMPETENTAUTHORITYPARTY">
+  <changeSet author="hjelm" id="rev-3">
+    <createTable tableName="FACILITYDETAIL_COMPETENTAUTHORITYPARTY">
       <column name="FacilityReportID" type="INT"/>
       <column name="CAName" type="VARCHAR(255)"/>
       <column name="CAAddress" type="VARCHAR(511)">
@@ -49,9 +52,11 @@
       <column name="CAContactPersonName" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="CAReportingYear" type="INT"/>
       <column name="CALastUpdate" type="datetime"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
-	<changeSet author="hjelm" id="rev-4"><createTable tableName="FACILITYDETAIL_DETAIL">
+  <changeSet author="hjelm" id="rev-4">
+    <createTable tableName="FACILITYDETAIL_DETAIL">
       <column name="FacilityReportID" type="INT"/>
       <column name="FacilityName" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="FacilityID" type="INT"/>
@@ -90,9 +95,11 @@
       <column name="ConfidentialIndicatorWaste" type="INT"><constraints nullable="true"/></column>
       <column name="ConfidentialIndicatorPollutantRelease" type="INT"><constraints nullable="true"/></column>
       <column name="ConfidentialIndicatorPollutantTransfer" type="INT"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-5"><createTable tableName="FACILITYDETAIL_POLLUTANTRELEASE">
+ <changeSet author="hjelm" id="rev-5">
+    <createTable tableName="FACILITYDETAIL_POLLUTANTRELEASE">
       <column name="FacilityReportID" type="INT"/>
       <column name="FacilityID" type="INT"/>
       <column name="PollutantTo" type="VARCHAR(255)"/>
@@ -114,12 +121,18 @@
       <column name="LOV_PollutantGroupID" type="INT"/>
       <column name="LOV_MethodBasisID" type="INT"/>
       <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
-      <column name="ident" type="int">
-        <constraints primaryKey="true"/>
-      </column>
-    </createTable>  </changeSet>
+    </createTable>
+    <createIndex tableName="FACILITYDETAIL_POLLUTANTRELEASE" unique="false"
+                 indexName="FACILITYDETAIL_POLLUTANTRELEASE_INDEX">
+      <column name="LOV_MediumID" type="INT"/>
+      <column name="LOV_PollutantID" type="INT"/>
+      <column name="MethodTypeCode" type="VARCHAR(255)"/>
+      <column name="FacilityReportID" type="INT"/>
+    </createIndex>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-6"><createTable tableName="FACILITYDETAIL_POLLUTANTTRANSFER">
+ <changeSet author="hjelm" id="rev-6">
+    <createTable tableName="FACILITYDETAIL_POLLUTANTTRANSFER">
       <column name="FacilityReportID" type="INT"/>
       <column name="FacilityID" type="INT"/>
       <column name="GroupCode" type="VARCHAR(255)"/>
@@ -137,9 +150,11 @@
       <column name="LOV_PollutantGroupID" type="INT"/>
       <column name="LOV_MethodBasisID" type="INT"/>
       <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-7"><createTable tableName="FACILITYDETAIL_WASTETRANSFER">
+ <changeSet author="hjelm" id="rev-7">
+    <createTable tableName="FACILITYDETAIL_WASTETRANSFER">
       <column name="FacilityReportID" type="INT"/>
       <column name="WasteTransferID" type="INT"/>
       <column name="FacilityID" type="INT"/>
@@ -165,9 +180,11 @@
       <column name="LOV_WasteTreatmentID" type="INT"><constraints nullable="true"/></column>
       <column name="LOV_MethodBasisID" type="INT"><constraints nullable="true"/></column>
       <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
-	<changeSet author="hjelm" id="rev-8"><createTable tableName="FACILITYSEARCH_ALL">
+  <changeSet author="hjelm" id="rev-8">
+    <createTable tableName="FACILITYSEARCH_ALL">
       <column name="FacilityReportID" type="INT"/>
       <column name="LOV_PollutantGroupID" type="INT"><constraints nullable="true"/></column>
       <column name="PollutantGroupCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
@@ -234,10 +251,12 @@
       <column name="FacilitySearchName" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="CitySearchName" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="ParentCompanySearchName" type="VARCHAR(255)"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
 
- <changeSet author="hjelm" id="rev-9"><createTable tableName="FACILITYSEARCH_MAINACTIVITY">
+ <changeSet author="hjelm" id="rev-9">
+    <createTable tableName="FACILITYSEARCH_MAINACTIVITY">
       <column name="FacilityReportID" type="INT">
         <constraints primaryKey="true"/>
       </column>
@@ -278,9 +297,11 @@
       <column name="ConfidentialIndicator" type="BOOLEAN"/>
       <column name="ConfidentialCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
-   </createTable>  </changeSet>
+   </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-10"><createTable tableName="FACILITYSEARCH_POLLUTANT">
+ <changeSet author="hjelm" id="rev-10">
+    <createTable tableName="FACILITYSEARCH_POLLUTANT">
       <column name="FacilityReportID" type="INT"/>
       <column name="PollutantGroupCode" type="VARCHAR(255)"/>
       <column name="PollutantGroupName" type="VARCHAR(255)"/>
@@ -295,9 +316,11 @@
       <column name="LOV_PollutantGroupID" type="INT"/>
       <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
       <column name="Accidental" type="INT"/>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-11"><createTable tableName="FACILITYSEARCH_WASTETRANSFER">
+ <changeSet author="hjelm" id="rev-11">
+    <createTable tableName="FACILITYSEARCH_WASTETRANSFER">
       <column name="FacilityReportID" type="INT"/>
       <column name="WasteTransferID" type="INT"/>
       <column name="WasteTypeCode" type="VARCHAR(255)"/>
@@ -309,9 +332,11 @@
       <column name="LOV_WasteTypeID" type="INT"/>
       <column name="LOV_WasteTreatmentID" type="INT"><constraints nullable="true"/></column>
       <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-12"><createTable tableName="LOV_ANNEXIACTIVITY">
+ <changeSet author="hjelm" id="rev-12">
+    <createTable tableName="LOV_ANNEXIACTIVITY">
       <column name="LOV_AnnexIActivityID" type="int">
         <constraints primaryKey="true"/>
       </column>
@@ -322,17 +347,21 @@
       <column name="ParentID" type="INT"><constraints nullable="true"/></column>
       <column name="IPPCCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="eperAnnex3_ID" type="INT"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-13"><createTable tableName="LOV_AREAGROUP">
+ <changeSet author="hjelm" id="rev-13">
+    <createTable tableName="LOV_AREAGROUP">
       <column name="LOV_AreaGroupID" type="int">
         <constraints primaryKey="true"/>
       </column>
       <column name="Code" type="VARCHAR(255)"/>
       <column name="Name" type="VARCHAR(255)"/>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-14"><createTable tableName="LOV_COUNTRY">
+ <changeSet author="hjelm" id="rev-14">
+    <createTable tableName="LOV_COUNTRY">
       <column name="LOV_CountryID" type="int">
         <constraints primaryKey="true"/>
       </column>
@@ -340,14 +369,18 @@
       <column name="Name" type="VARCHAR(255)"/>
       <column name="StartYear" type="INT"><constraints nullable="true"/></column>
       <column name="EndYear" type="INT"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-15"><createTable tableName="LOV_COUNTRYAREAGROUP">
+ <changeSet author="hjelm" id="rev-15">
+    <createTable tableName="LOV_COUNTRYAREAGROUP">
       <column name="LOV_AreaGroupID" type="INT"/>
       <column name="LOV_CountryID" type="INT"/>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-16"><createTable tableName="LOV_NACEACTIVITY">
+ <changeSet author="hjelm" id="rev-16">
+    <createTable tableName="LOV_NACEACTIVITY">
       <column name="LOV_NACEActivityID" type="int">
         <constraints primaryKey="true"/>
       </column>
@@ -356,9 +389,11 @@
       <column name="StartYear" type="INT"><constraints nullable="true"/></column>
       <column name="EndYear" type="INT"><constraints nullable="true"/></column>
       <column name="ParentID" type="INT"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-17"><createTable tableName="LOV_NUTSREGION">
+ <changeSet author="hjelm" id="rev-17">
+    <createTable tableName="LOV_NUTSREGION">
       <column name="LOV_NUTSRegionID" type="int">
         <constraints primaryKey="true"/>
       </column>
@@ -369,9 +404,11 @@
       <column name="ParentID" type="INT"><constraints nullable="true"/></column>
       <column name="LOV_CountryID" type="INT"/>
       <column name="Level" type="INT"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
-	<changeSet author="hjelm" id="rev-18"><createTable tableName="LOV_POLLUTANT">
+  <changeSet author="hjelm" id="rev-18">
+    <createTable tableName="LOV_POLLUTANT">
       <column name="LOV_PollutantID" type="int">
         <constraints primaryKey="true"/>
       </column>
@@ -383,9 +420,11 @@
       <column name="CAS" type="VARCHAR(20)"><constraints nullable="true"/></column>
       <column name="eperPollutant_ID" type="INT"><constraints nullable="true"/></column>
       <column name="CodeEPER" type="VARCHAR(255)"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-19"><createTable tableName="LOV_RIVERBASINDISTRICT">
+ <changeSet author="hjelm" id="rev-19">
+    <createTable tableName="LOV_RIVERBASINDISTRICT">
       <column name="LOV_RiverBasinDistrictID" type="int">
         <constraints primaryKey="true"/>
       </column>
@@ -394,9 +433,11 @@
       <column name="StartYear" type="INT"><constraints nullable="true"/></column>
       <column name="EndYear" type="INT"><constraints nullable="true"/></column>
       <column name="LOV_CountryID" type="INT"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-20"><createTable tableName="POLLUTANTRELEASE">
+ <changeSet author="hjelm" id="rev-20">
+    <createTable tableName="POLLUTANTRELEASE">
       <column name="FacilityReportID" type="INT"/>
       <column name="FacilityName" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="FacilityID" type="INT"/>
@@ -461,9 +502,11 @@
       <column name="ConfidentialCodeSoil" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="ConfidentialIndicator" type="BOOLEAN"/>
       <column name="ConfidentialIndicatorFacility" type="BOOLEAN"/>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-21"><createTable tableName="POLLUTANTTRANSFER">
+ <changeSet author="hjelm" id="rev-21">
+    <createTable tableName="POLLUTANTTRANSFER">
       <column name="FacilityReportID" type="INT"/>
       <column name="FacilityName" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="FacilityID" type="INT"/>
@@ -505,30 +548,38 @@
       <column name="ConfidentialCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="ConfidentialIndicator" type="BOOLEAN"/>
       <column name="ConfidentialIndicatorFacility" type="BOOLEAN"/>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-22"><createTable tableName="RECEIVINGCOUNTRY">
+ <changeSet author="hjelm" id="rev-22">
+    <createTable tableName="RECEIVINGCOUNTRY">
       <column name="LOV_CountryID" type="INT"/>
       <column name="Code" type="VARCHAR(255)"/>
       <column name="Name" type="VARCHAR(255)"/>
       <column name="StartYear" type="INT"><constraints nullable="true"/></column>
       <column name="EndYear" type="INT"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-23"><createTable tableName="REPORTINGCOUNTRY">
+ <changeSet author="hjelm" id="rev-23">
+    <createTable tableName="REPORTINGCOUNTRY">
       <column name="LOV_CountryID" type="INT"/>
       <column name="Code" type="VARCHAR(255)"/>
       <column name="Name" type="VARCHAR(255)"/>
       <column name="StartYear" type="INT"><constraints nullable="true"/></column>
       <column name="EndYear" type="INT"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-24"><createTable tableName="REPORTINGYEAR">
-	  <column name="Year" type="INT"/>
+ <changeSet author="hjelm" id="rev-24">
+    <createTable tableName="REPORTINGYEAR">
+      <column name="Year" type="INT"/>
       <column name="Countries" type="INT"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-25"><createTable tableName="WASTETRANSFER">
+ <changeSet author="hjelm" id="rev-25">
+    <createTable tableName="WASTETRANSFER">
       <column name="FacilityReportID" type="INT"/>
       <column name="FacilityName" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="FacilityID" type="INT"/>
@@ -588,9 +639,11 @@
       <column name="ConfidentialIndicator_NONHW_Recovery" type="BOOLEAN"><constraints nullable="true"/></column>
       <column name="ConfidentialIndicator_NONHW_Disposal" type="BOOLEAN"><constraints nullable="true"/></column>
       <column name="ConfidentialIndicator_NONHW_Unspec" type="BOOLEAN"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-26"><createTable tableName="WASTETRANSFER_CONFIDENTIAL">
+ <changeSet author="hjelm" id="rev-26">
+    <createTable tableName="WASTETRANSFER_CONFIDENTIAL">
       <column name="FacilityReportID" type="INT"/>
       <column name="LOV_WasteTypeID" type="INT"/>
       <column name="WasteTypeCode" type="VARCHAR(255)"/>
@@ -626,9 +679,11 @@
       <column name="HasReportedRecovery" type="BOOLEAN"><constraints nullable="true"/></column>
       <column name="HasReportedDisposal" type="BOOLEAN"><constraints nullable="true"/></column>
       <column name="HasReportedUnspecified" type="BOOLEAN"><constraints nullable="true"/></column>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-27"><createTable tableName="WASTETRANSFER_HAZARDOUSTREATERS">
+ <changeSet author="hjelm" id="rev-27">
+    <createTable tableName="WASTETRANSFER_HAZARDOUSTREATERS">
       <column name="FacilityReportID" type="INT"/>
       <column name="FacilityName" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="FacilityID" type="INT"/>
@@ -673,9 +728,11 @@
       <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
       <column name="ConfidentialIndicator" type="BOOLEAN"/>
       <column name="ConfidentialIndicatorFacility" type="BOOLEAN"/>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
- <changeSet author="hjelm" id="rev-28"><createTable tableName="WASTETRANSFER_RECEIVINGCOUNTRY">
+ <changeSet author="hjelm" id="rev-28">
+    <createTable tableName="WASTETRANSFER_RECEIVINGCOUNTRY">
       <column name="FacilityReportID" type="INT"/>
       <column name="FacilityName" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="FacilityID" type="INT"/>
@@ -715,9 +772,11 @@
       <column name="HasReportedUnspecified" type="BOOLEAN"><constraints nullable="true"/></column>
       <column name="ConfidentialIndicator" type="BOOLEAN"/>
       <column name="ConfidentialIndicatorFacility" type="BOOLEAN"/>
-    </createTable>  </changeSet>
+    </createTable>
+  </changeSet>
 
-	<changeSet author="hjelm" id="rev-29"><createTable tableName="WASTETRANSFER_TREATMENT">
+  <changeSet author="hjelm" id="rev-29">
+    <createTable tableName="WASTETRANSFER_TREATMENT">
       <column name="FacilityReportID" type="INT"/>
       <column name="WasteTypeCode" type="varchar(6)"/>
       <column name="FacilityName" type="VARCHAR(255)"><constraints nullable="true"/></column>
@@ -760,4 +819,5 @@
       <column name="ConfidentialIndicatorUnspec" type="BOOLEAN"><constraints nullable="true"/></column>
     </createTable>
   </changeSet>
+
 </databaseChangeLog>

@@ -1,0 +1,1 @@
+FacilityReportID,FacilityID,GroupCode,PollutantCode,CAS,MethodCode,MethodDesignation,MethodTypeCode,Quantity,UnitCode,ConfidentialIndicator,ConfidentialCode,MethodListID,LOV_PollutantID,LOV_PollutantGroupID,LOV_MethodBasisID,LOV_ConfidentialityID
