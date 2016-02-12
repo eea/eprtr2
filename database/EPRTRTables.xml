@@ -33,11 +33,19 @@
         <constraints nullable="true"/>
       </column>
     </createTable>
+    <createIndex tableName="FACILITYDETAIL_ACTIVITY" unique="true"
+                 indexName="FACILITYDETAIL_ACTIVITY_INDEX">
+      <column name="ActivityCode"/>
+      <column name="FacilityReportID"/>
+      <column name="RankingNumeric"/>
+    </createIndex>
   </changeSet>
 
   <changeSet author="hjelm" id="rev-3">
     <createTable tableName="FACILITYDETAIL_COMPETENTAUTHORITYPARTY">
-      <column name="FacilityReportID" type="INT"/>
+      <column name="FacilityReportID" type="INT">
+        <constraints primaryKey="true"/>
+      </column>
       <column name="CAName" type="VARCHAR(255)"/>
       <column name="CAAddress" type="VARCHAR(511)">
         <constraints nullable="true"/>
@@ -57,7 +65,9 @@
 
   <changeSet author="hjelm" id="rev-4">
     <createTable tableName="FACILITYDETAIL_DETAIL">
-      <column name="FacilityReportID" type="INT"/>
+      <column name="FacilityReportID" type="INT">
+        <constraints primaryKey="true"/>
+      </column>
       <column name="FacilityName" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="FacilityID" type="INT"/>
       <column name="NationalID" type="VARCHAR(255)"/>
@@ -151,6 +161,12 @@
       <column name="LOV_MethodBasisID" type="INT"/>
       <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
     </createTable>
+    <createIndex tableName="FACILITYDETAIL_POLLUTANTTRANSFER" unique="false"
+                 indexName="FACILITYDETAIL_POLLUTANTTRANSFER_INDEX">
+      <column name="LOV_PollutantID"/>
+      <column name="MethodTypeCode"/>
+      <column name="FacilityReportID"/>
+    </createIndex>
   </changeSet>
 
  <changeSet author="hjelm" id="rev-7">
@@ -181,6 +197,13 @@
       <column name="LOV_MethodBasisID" type="INT"><constraints nullable="true"/></column>
       <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
     </createTable>
+    <createIndex tableName="FACILITYDETAIL_WASTETRANSFER" unique="false"
+                 indexName="FACILITYDETAIL_WASTETRANSFER_INDEX">
+      <column name="LOV_WasteTypeID"/>
+      <column name="LOV_WasteTreatmentID"/>
+      <column name="LOV_MethodBasisID"/>
+      <column name="FacilityReportID"/>
+    </createIndex>
   </changeSet>
 
   <changeSet author="hjelm" id="rev-8">
@@ -245,13 +268,35 @@
       <column name="ConfidentialCodeFacility" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="LOV_ConfidentialityIDFacility" type="INT"><constraints nullable="true"/></column>
       <column name="ObjectID" type="int">
-        <constraints primaryKey="true"/>
+        <constraints primaryKey="true"/> <!-- Verify this -->
       </column>
       <column name="DistinctID" type="BOOLEAN"/>
       <column name="FacilitySearchName" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="CitySearchName" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="ParentCompanySearchName" type="VARCHAR(255)"><constraints nullable="true"/></column>
     </createTable>
+    <createIndex tableName="FACILITYSEARCH_ALL" unique="true"
+                 indexName="FACILITYSEARCH_ALL_INDEX">
+      <column name="ReportingYear"/>
+      <column name="LOV_CountryID"/>
+      <column name="LOV_MediumID"/>
+      <column name="LOV_PollutantID"/>
+      <column name="LOV_WasteTypeID"/>
+      <column name="LOV_WasteTreatmentID"/>
+      <column name="IDWaste"/>
+      <column name="FacilityReportID"/>
+    </createIndex>
+    <createIndex tableName="FACILITYSEARCH_ALL" unique="false"
+                 indexName="FACILITYSEARCH_ALL_INDEX_CI_FPW">
+      <column name="ReportingYear"/>
+      <column name="ConfidentialIndicatorFacility"/>
+      <column name="ConfidentialIndicatorPollutant"/>
+      <column name="ConfidentialIndicatorWaste"/>
+      <column name="ReportingYear"/>
+      <column name="ConfidentialIndicatorFacility"/>
+      <column name="ConfidentialIndicatorWaste"/>
+      <column name="ConfidentialIndicatorPollutant"/>
+    </createIndex>
   </changeSet>
 
 
