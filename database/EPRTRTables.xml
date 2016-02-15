@@ -134,10 +134,10 @@
     </createTable>
     <createIndex tableName="FACILITYDETAIL_POLLUTANTRELEASE" unique="false"
                  indexName="FACILITYDETAIL_POLLUTANTRELEASE_INDEX">
-      <column name="LOV_MediumID" type="INT"/>
-      <column name="LOV_PollutantID" type="INT"/>
-      <column name="MethodTypeCode" type="VARCHAR(255)"/>
-      <column name="FacilityReportID" type="INT"/>
+      <column name="LOV_MediumID"/>
+      <column name="LOV_PollutantID"/>
+      <column name="MethodTypeCode"/>
+      <column name="FacilityReportID"/>
     </createIndex>
   </changeSet>
 
@@ -343,6 +343,12 @@
       <column name="ConfidentialCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
    </createTable>
+    <createIndex tableName="FACILITYSEARCH_MAINACTIVITY" unique="true"
+                 indexName="FACILITYSEARCH_MAINACTIVITY_INDEX">
+      <column name="ReportingYear"/>
+      <column name="LOV_CountryID"/>
+      <column name="FacilityReportID"/>
+    </createIndex>
   </changeSet>
 
  <changeSet author="hjelm" id="rev-10">
@@ -362,6 +368,12 @@
       <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
       <column name="Accidental" type="INT"/>
     </createTable>
+    <createIndex tableName="FACILITYSEARCH_POLLUTANT" unique="false"
+                 indexName="FACILITYSEARCH_POLLUTANT_INDEX">
+      <column name="LOV_MediumID"/>
+      <column name="LOV_PollutantID"/>
+      <column name="FacilityReportID"/>
+    </createIndex>
   </changeSet>
 
  <changeSet author="hjelm" id="rev-11">
@@ -378,6 +390,13 @@
       <column name="LOV_WasteTreatmentID" type="INT"><constraints nullable="true"/></column>
       <column name="LOV_ConfidentialityID" type="INT"><constraints nullable="true"/></column>
     </createTable>
+    <createIndex tableName="FACILITYSEARCH_WASTETRANSFER" unique="true"
+                 indexName="FACILITYSEARCH_WASTETRANSFER_INDEX">
+      <column name="LOV_WasteTypeID"/>
+      <column name="LOV_WasteTreatmentID"/>
+      <column name="FacilityReportID"/>
+      <column name="WasteTransferID"/>
+    </createIndex>
   </changeSet>
 
  <changeSet author="hjelm" id="rev-12">
@@ -548,6 +567,19 @@
       <column name="ConfidentialIndicator" type="BOOLEAN"/>
       <column name="ConfidentialIndicatorFacility" type="BOOLEAN"/>
     </createTable>
+    <createIndex tableName="POLLUTANTRELEASE" unique="true"
+                 indexName="POLLUTANTRELEASE_INDEX">
+      <column name="ReportingYear"/>
+      <column name="LOV_CountryID"/>
+      <column name="LOV_PollutantID"/>
+      <column name="FacilityReportID"/>
+    </createIndex>
+    <createIndex tableName="POLLUTANTRELEASE" unique="false"
+                 indexName="POLLUTANTTRANSFER_INDEX_CI">
+      <column name="ReportingYear"/>
+      <column name="ConfidentialIndicator"/>
+      <column name="ConfidentialIndicatorFacility"/>
+    </createIndex>
   </changeSet>
 
  <changeSet author="hjelm" id="rev-21">
@@ -685,6 +717,18 @@
       <column name="ConfidentialIndicator_NONHW_Disposal" type="BOOLEAN"><constraints nullable="true"/></column>
       <column name="ConfidentialIndicator_NONHW_Unspec" type="BOOLEAN"><constraints nullable="true"/></column>
     </createTable>
+    <createIndex tableName="WASTETRANSFER" unique="true"
+                 indexName="WASTETRANSFER_INDEX">
+      <column name="ReportingYear"/>
+      <column name="LOV_CountryID"/>
+      <column name="FacilityReportID"/>
+    </createIndex>
+    <createIndex tableName="WASTETRANSFER" unique="false"
+                 indexName="WASTETRANSFER_INDEX_CI">
+      <column name="ReportingYear"/>
+      <column name="ConfidentialIndicatorWaste"/>
+      <column name="ConfidentialIndicatorFacility"/>
+    </createIndex>
   </changeSet>
 
  <changeSet author="hjelm" id="rev-26">
@@ -725,6 +769,14 @@
       <column name="HasReportedDisposal" type="BOOLEAN"><constraints nullable="true"/></column>
       <column name="HasReportedUnspecified" type="BOOLEAN"><constraints nullable="true"/></column>
     </createTable>
+    <createIndex tableName="WASTETRANSFER_CONFIDENTIAL" unique="false"
+                 indexName="WASTETRANSFER_CONFIDENTIAL_INDEX">
+      <column name="ReportingYear"/>
+      <column name="LOV_CountryID"/>
+      <column name="LOV_WasteTypeID"/>
+      <column name="LOV_ConfidentialityID"/>
+      <column name="FacilityReportID"/>
+    </createIndex>
   </changeSet>
 
  <changeSet author="hjelm" id="rev-27">
@@ -774,6 +826,13 @@
       <column name="ConfidentialIndicator" type="BOOLEAN"/>
       <column name="ConfidentialIndicatorFacility" type="BOOLEAN"/>
     </createTable>
+    <createIndex tableName="WASTETRANSFER_HAZARDOUSTREATERS" unique="false"
+                 indexName="WASTETRANSFER_HAZARDOUSTREATERS_INDEX">
+      <column name="ReportingYear"/>
+      <column name="LOV_CountryID"/>
+      <column name="WHPPostalCode"/>
+      <column name="FacilityReportID"/>
+    </createIndex>
   </changeSet>
 
  <changeSet author="hjelm" id="rev-28">
@@ -818,6 +877,13 @@
       <column name="ConfidentialIndicator" type="BOOLEAN"/>
       <column name="ConfidentialIndicatorFacility" type="BOOLEAN"/>
     </createTable>
+    <createIndex tableName="WASTETRANSFER_RECEIVINGCOUNTRY" unique="false"
+                 indexName="WASTETRANSFER_RECEIVINGCOUNTRY_INDEX">
+      <column name="ReportingYear"/>
+      <column name="LOV_CountryID"/>
+      <column name="ReceivingCountryCode"/>
+      <column name="FacilityReportID"/>
+    </createIndex>
   </changeSet>
 
   <changeSet author="hjelm" id="rev-29">

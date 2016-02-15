@@ -21,6 +21,8 @@
     <loadData tableName="LOV_NACEACTIVITY" file="database/lov_naceactivity.csv"/>
     <loadData tableName="LOV_COUNTRY" file="database/lov_country.csv"/>
     <loadData tableName="LOV_POLLUTANT" file="database/lov_pollutant.csv"/>
+    <loadData tableName="LOV_NUTSREGION" file="database/lov_nutsregion.csv"/>
+    <loadData tableName="LOV_NUTSREGION" file="database/lov_nutsregion-hr.csv"/> <!-- HR was added later -->
   </changeSet>
 
   <changeSet author="roug" id="rev-2" context="demo">
