@@ -1,0 +1,3 @@
+LOV_CoordinateSystemID,Code,Name,StartYear,EndYear
+1,EPSG:4326,WGS 84,2001,NULL
+2,EPSG:4258,ETRS89 (2D),2001,NULL

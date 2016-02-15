@@ -1,0 +1,16 @@
+LOV_UnitID,Code,Name,StartYear,EndYear
+1,PCS,pieces,2001,NULL
+2,KGM,kilogram,2001,NULL
+3,TNE,tonne (metric ton),2001,NULL
+4,KWH,kilowatt hour,2001,NULL
+5,MWH,megawatt hour,2001,NULL
+6,GWH,gigawatt hour,2001,NULL
+7,KWT,kilowatt,2001,NULL
+8,MAW,megawatt,2001,NULL
+9,A90,gigawatt,2001,NULL
+10,GV,gigajoule,2001,NULL
+11,LTR,litre,2001,NULL
+12,HLT,hectolitre,2001,NULL
+13,MTQ,cubic metre,2001,NULL
+14,MTK,square metre,2001,NULL
+15,UNKNOWN,N/A,2001,2004

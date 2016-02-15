@@ -1,0 +1,111 @@
+LOV_AnnexIActivityID,Code,Name,StartYear,EndYear,ParentID,IPPCCode,eperAnnex3_ID
+1,1,Energy sector,2007,NULL,NULL,NULL,NULL
+2,2,Productiona and processing of metals,2007,NULL,NULL,NULL,NULL
+3,3,Mineral industry,2007,NULL,NULL,NULL,NULL
+4,4,Chemical industry,2007,NULL,NULL,NULL,NULL
+5,5,Waste and waste water management,2007,NULL,NULL,NULL,NULL
+6,6,Paper and wood production processing,2007,NULL,NULL,NULL,NULL
+7,7,Intensive livestock production and aquaculture,2007,NULL,NULL,NULL,NULL
+8,8,Animal and vegetable products from the food and beverage sector,2007,NULL,NULL,NULL,NULL
+9,9,Other activities,2007,NULL,NULL,NULL,NULL
+10,1.(a),Mineral oil and gas refineries,2007,NULL,1,1.2,NULL
+11,1.(b),Installations for gasification and liquefaction,2007,NULL,1,1.4,NULL
+12,1.(c),Thermal power stations and other combustion installations,2007,NULL,1,1.1,NULL
+13,1.(d),Coke ovens,2007,NULL,1,1.3,NULL
+14,1.(e),Coal rolling mills,2007,NULL,1,NULL,NULL
+15,1.(f),Installations for the manufacture of coal products and solid smokeless fuel,2007,NULL,1,NULL,NULL
+16,2.(a),Metal ore (including sulphide ore) roasting or sintering installations,2007,NULL,2,2.1,NULL
+17,2.(b),Installations for the production of pig iron or steel (primary or secondary melting) including continuous casting,2007,NULL,2,2.2,NULL
+18,2.(c),Installations for the processing of ferrous metals,2007,NULL,2,2.3,NULL
+19,2.(d),Ferrous metal foundries,2007,NULL,2,2.4,NULL
+20,2.(e),Installations:,2007,NULL,2,2.5,NULL
+21,2.(f),Installations for surface treatment of metals and plastic materials using an electrolytic or chemical process,2007,NULL,2,2.6,NULL
+22,3.(a),Underground mining and related operations,2007,NULL,3,NULL,NULL
+23,3.(b),Opencast mining and quarrying,2007,NULL,3,NULL,NULL
+24,3.(c),Installations for the production of:,2007,NULL,3,3.1,NULL
+25,3.(d),Installations for the production of asbestos and the manufacture of asbestos-based products,2007,NULL,3,3.2,NULL
+26,3.(e),"Installations for the manufacture of glass, including glass fibre",2007,NULL,3,3.3,NULL
+27,3.(f),"Installations for melting mineral substances, including the production of mineral fibres",2007,NULL,3,3.4,NULL
+28,3.(g),"Installations for the manufacture of ceramic products by firing, in particular roofing tiles, bricks, refractory bricks, tiles, stoneware or porcelain",2007,NULL,3,3.5,NULL
+29,4.(a),"Chemical installations for the production on an industrial scale of basic organic chemicals, such as:",2007,NULL,4,4.1,NULL
+30,4.(b),"Chemical installations for the production on an industrial scale of basic inorganic chemicals, such as:",2007,NULL,4,4.2,NULL
+31,4.(c),"Chemical installations for the production on an industrial scale of phosphorous-, nitrogen- or potassium-based fertilisers (simple or compound fertilisers)",2007,NULL,4,4.3,NULL
+32,4.(d),Chemical installations for the production on an industrial scale of basic plant health products and of biocides,2007,NULL,4,4.4,NULL
+33,4.(e),Installations using a chemical or biological process for the production on an industrial scale of basic pharmaceutical products,2007,NULL,4,4.5,NULL
+34,4.(f),Installations for the production on an industrial scale of explosives and pyrotechnic products,2007,NULL,4,4.6,NULL
+35,5.(a),Installations for the recovery or disposal of hazardous waste,2007,NULL,5,5.1,NULL
+36,5.(b),Installations for the incineration of non-hazardous waste in the scope of Directive 2000/76/EC of the European Parliament and of the Council of 4 December 2000 on the incineration of waste,2007,NULL,5,5.2,NULL
+37,5.(c),Installations for the disposal of non-hazardous waste,2007,NULL,5,5.3,NULL
+38,5.(d),Landfills (see note in Guidance Document),2007,NULL,5,5.4,NULL
+39,5.(e),Installations for the disposal or recycling of animal carcasses and animal waste,2007,NULL,5,6.5,NULL
+40,5.(f),Urban waste-water treatment plants,2007,NULL,5,NULL,NULL
+41,5.(g),Independently operated industrial waste-water treatment plants which serve one or more activities of this annex,2007,NULL,5,NULL,NULL
+42,6.(a),Industrial plants for the production of pulp from timber or similar fibrous materials,2007,NULL,6,6.1.(a),NULL
+43,6.(b),Industrial plants for the production of paper and board and other primary wood products,2007,NULL,6,6.1.(b),NULL
+44,6.(c),Industrial plants for the preservation of wood and wood products with chemicals,2007,NULL,6,NULL,NULL
+45,7.(a),Installations for the intensive rearing of poultry or pigs,2007,NULL,7,6.6,NULL
+46,7.(b),Intensive aquaculture,2007,NULL,7,NULL,NULL
+47,8.(a),Slaughterhouses,2007,NULL,8,6.4.(a),NULL
+48,8.(b),Treatment and processing intended for the production of food and beverage products from:,2007,NULL,8,6.4.(b),NULL
+49,8.(c),Treatment and processing of milk,2007,NULL,8,6.4.(c),NULL
+50,9.(a),"Plants for the pre-treatment (operations such as washing, bleaching, mercerisation) or dyeing of fibres or textiles",2007,NULL,9,6.2,NULL
+51,9.(b),Plants for the tanning of hides and skins,2007,NULL,9,6.3,NULL
+52,9.(c),"Installations for the surface treatment of substances, objects or products using organic solvents, in particular for dressing, printing, coating, degreasing, waterproofing, sizing, painting, cleaning or impregnating",2007,NULL,9,6.7,NULL
+53,9.(d),Installations for the production of carbon (hard-burnt coal) or electro-graphite by means of incineration or graphitisation,2007,NULL,9,6.8,NULL
+54,9.(e),"Installations for the building of, and painting or removal of paint from ships",2007,NULL,9,NULL,NULL
+55,2.(c).(i),- Hot-rolling mills,2007,NULL,18,2.3.(a),NULL
+56,2.(c).(ii),- Smitheries with hammers,2007,NULL,18,2.3.(b),NULL
+57,2.(c).(iii),- Application of protective fused metal coats,2007,NULL,18,2.3.(c),NULL
+58,2.(e).(i),"- For the production of non-ferrous crude metals from ore, concentrates or secondary raw materials by metallurgical, chemical or electrolytic processes",2007,NULL,20,2.5.(a),NULL
+59,2.(e).(ii),"- For the smelting, including the alloying, of non-ferrous metals, including recovered products (refining, foundry casting, etc.)",2007,NULL,20,2.5.(b),NULL
+60,3.(c).(i),- Cement clinker in rotary kilns,2007,NULL,24,3.1,NULL
+61,3.(c).(ii),- Lime in rotary kilns,2007,NULL,24,3.1,NULL
+62,3.(c).(iii),- Cement clinker or lime in other furnaces,2007,NULL,24,3.1,NULL
+63,4.(a).(i),"- Simple hydrocarbons (linear or cyclic, saturated or unsaturated, aliphatic or aromatic)",2007,NULL,29,4.1.(a),NULL
+64,4.(a).(ii),- Oxygen-containing hydrocarbons,2007,NULL,29,4.1.(b),NULL
+65,4.(a).(iii),- Sulphurous hydrocarbons,2007,NULL,29,4.1.(c),NULL
+66,4.(a).(iv),- Nitrogenous hydrocarbons,2007,NULL,29,4.1.(d),NULL
+67,4.(a).(v),- Phosphorus-containing hydrocarbons,2007,NULL,29,4.1.(e),NULL
+68,4.(a).(vi),- Halogenic hydrocarbons,2007,NULL,29,4.1.(f),NULL
+69,4.(a).(vii),- Organometallic compounds,2007,NULL,29,4.1.(g),NULL
+70,4.(a).(viii),"- Basic plastic materials (polymers, synthetic fibres and cellulose-based fibres)",2007,NULL,29,4.1.(h),NULL
+71,4.(a).(ix),- Synthetic rubbers,2007,NULL,29,4.1.(i),NULL
+72,4.(a).(x),- Dyes and pigments,2007,NULL,29,4.1.(j),NULL
+73,4.(a).(xi),- Surface-active agents and surfactants,2007,NULL,29,4.1.(k),NULL
+74,4.(b).(i),- Gases,2007,NULL,30,4.2.(a),NULL
+75,4.(b).(ii),- Acids,2007,NULL,30,4.2.(b),NULL
+76,4.(b).(iii),- Bases,2007,NULL,30,4.2.(c),NULL
+77,4.(b).(iv),- Salts,2007,NULL,30,4.2.(d),NULL
+78,4.(b).(v),"- Non-metals, metal oxides or other inorganic compounds",2007,NULL,30,4.2.(e),NULL
+79,7.(a).(i),- With 40 000 places for poultry,2007,NULL,45,6.6.(a),NULL
+80,7.(a).(ii),- With 2 000 places for production pigs (over 30kg),2007,NULL,45,6.6.(b),NULL
+81,7.(a).(iii),- With 750 places for sows,2007,NULL,45,6.6.(c),NULL
+82,8.(b).(i),- Animal raw materials (other than milk),2007,NULL,48,NULL,NULL
+83,8.(b).(ii),- Vegetable raw materials,2007,NULL,48,NULL,NULL
+84,EPER_1,Energy industries,2001,2004,NULL,NULL,1
+85,EPER_2,Production and processing of metals,2001,2004,NULL,NULL,6
+86,EPER_3,Mineral Industry,2001,2004,NULL,NULL,8
+87,EPER_4,Chemical industry,2001,2004,NULL,NULL,11
+88,EPER_5,Waste management,2001,2004,NULL,NULL,16
+89,EPER_6,Other Annex I activities,2001,2004,NULL,NULL,19
+90,EPER_1.1,Combustion installations > 50 MW,2001,2004,84,NULL,2
+91,EPER_1.2,Mineral oil and gas refineries,2001,2004,84,NULL,3
+92,EPER_1.3,Coke ovens,2001,2004,84,NULL,4
+93,EPER_1.4,Coal gasification and liquefaction plants,2001,2004,84,NULL,5
+94,EPER_2.1/2.2/2.3/2.4/2.5/2.6,Metal industry,2001,2004,85,NULL,7
+95,EPER_3.1/3.3/3.4/3.5,"Cement, lime, glass, mineral substances or ceramic products ",2001,2004,86,NULL,9
+96,EPER_3.2,Production of asbestos and asbestos based products,2001,2004,86,NULL,10
+97,EPER_4.1,Basic organic chemicals,2001,2004,87,NULL,12
+98,EPER_4.2/4.3,Basic inorganic chemicals or fertilisers,2001,2004,87,NULL,13
+99,EPER_4.4/4.6,Biocides and explosives,2001,2004,87,NULL,14
+100,EPER_4.5,Pharmaceutical products,2001,2004,87,NULL,15
+101,EPER_5.1/5.2,"Disposal/recovery of hazardous or municipal waste ",2001,2004,88,NULL,17
+102,EPER_5.3/5.4,"Disposal of non-hazardous waste and landfills ",2001,2004,88,NULL,18
+103,EPER_6.1,"Pulp, paper or board production",2001,2004,89,NULL,20
+104,EPER_6.2,Pretreatment of fibres or textiles,2001,2004,89,NULL,21
+105,EPER_6.3,Tanning of hides and skins,2001,2004,89,NULL,22
+106,EPER_6.4,"Slaughterhouses, milk, animal and vegetable raw materials",2001,2004,89,NULL,23
+107,EPER_6.5,Disposal or recycling of animal carcasses and animal waste,2001,2004,89,NULL,24
+108,EPER_6.6,"Poultry, pigs and sows ",2001,2004,89,NULL,25
+109,EPER_6.7,"Surface treatment or products using organic solvents ",2001,2004,89,NULL,26
+110,EPER_6.8,"Production of carbon or graphite ",2001,2004,89,NULL,27

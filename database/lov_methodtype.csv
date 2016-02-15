@@ -1,0 +1,13 @@
+LOV_MethodTypeID,Code,Name,StartYear,EndYear
+1,CEN/ISO,Internationally approved measurement standard,2007,NULL
+2,ETS,Guidelines for the monitoring and reporting of greenhouse gas emissions under the Emission Trading Scheme.,2007,NULL
+3,IPCC,IPCC Guidelines,2007,NULL
+4,UNECE/EMEP,UNECE/EMEP EMEP/CORINAIR Emission Inventory Guidebook,2007,NULL
+5,PER,Measurement/Calculation Methodology already prescribed by the competent authority in a licence or an operating permit for that facility,2007,NULL
+6,NRB,National or regional binding measurement/calculation methodology prescribed by legal act for the pollutant and facility concerned.,2007,NULL
+7,ALT,Alternative measurement methodology in accordance with existing CEN/ISO measurement standards,2007,NULL
+8,CRM,Measurement methodology for the performance of which is demonstrated by means of certified reference materials and accepted by competent authority.,2007,NULL
+9,MAB,Mass balance method which is accepted by the competent authority,2007,NULL
+10,SSC,European-wide sector specific calculation method,2007,NULL
+11,WEIGH,Weighing,2007,NULL
+12,OTH,Other measurement/calculation methodology,2007,NULL

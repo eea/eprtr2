@@ -1,0 +1,4 @@
+LOV_MethodBasisID,Code,Name,StartYear,EndYear
+1,M,Measured,2001,NULL
+2,C,Calculated,2001,NULL
+3,E,Estimated,2001,NULL

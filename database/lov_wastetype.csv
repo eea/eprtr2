@@ -1,0 +1,5 @@
+LOV_WasteTypeID,Code,Name,StartYear,EndYear,ParentID
+1,HW,Hazardous waste,2007,NULL,NULL
+2,NON-HW,Non-hazardous waste,2007,NULL,NULL
+3,HWIC,Hazardous waste within country,2007,NULL,1
+4,HWOC,Hazardous waste outside country,2007,NULL,1

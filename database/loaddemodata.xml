@@ -18,14 +18,27 @@
 
     <comment>Load lookup values data</comment>
     <!-- The CSV file must have a header row with the correct column names -->
+    <loadData tableName="LOV_ANNEXIACTIVITY" file="database/lov_annexiactivity.csv"/>
     <loadData tableName="LOV_AREAGROUP" file="database/lov_areagroup.csv"/>
-    <loadData tableName="LOV_NACEACTIVITY" file="database/lov_naceactivity.csv"/>
+    <!--loadData tableName="LOV_CONFIDENTIALITY" file="database/lov_confidentiality.csv"/-->
+    <!--loadData tableName="LOV_COORDINATESYSTEM" file="database/lov_coordinatesystem.csv"/-->
+    <loadData tableName="LOV_COUNTRYAREAGROUP" file="database/lov_countryareagroup.csv"/>
     <loadData tableName="LOV_COUNTRY" file="database/lov_country.csv"/>
-    <loadData tableName="LOV_POLLUTANT" file="database/lov_pollutant.csv"/>
+    <!--loadData tableName="LOV_MEDIUM" file="database/lov_medium.csv"/-->
+    <!--loadData tableName="LOV_METHODBASIS" file="database/lov_methodbasis.csv"/-->
+    <!--loadData tableName="LOV_METHODTYPE" file="database/lov_methodtype.csv"/-->
+    <loadData tableName="LOV_NACEACTIVITY" file="database/lov_naceactivity.csv"/>
     <loadData tableName="LOV_NUTSREGION" file="database/lov_nutsregion.csv"/>
     <loadData tableName="LOV_NUTSREGION" file="database/lov_nutsregion-hr.csv"/> <!-- HR was added later -->
+    <loadData tableName="LOV_POLLUTANT" file="database/lov_pollutant.csv"/>
+    <!--loadData tableName="LOV_POLLUTANTTHRESHOLD" file="database/lov_pollutantthreshold.csv"/-->
     <loadData tableName="LOV_RIVERBASINDISTRICT" file="database/lov_riverbasindistrict.csv"/>
+    <!--loadData tableName="LOV_UNIT" file="database/lov_unit.csv"/-->
+    <!--loadData tableName="LOV_WASTETHRESHOLD" file="database/lov_wastethreshold.csv"/-->
+    <!--loadData tableName="LOV_WASTETREATMENT" file="database/lov_wastetreatment.csv"/-->
+    <!--loadData tableName="LOV_WASTETYPE" file="database/lov_wastetype.csv"/-->
     <loadData tableName="RECEIVINGCOUNTRY" file="database/receivingcountry.csv"/>
+    <loadData tableName="REPORTINGCOUNTRY" file="database/reportingcountry.csv"/>
     <loadData tableName="REPORTINGYEAR" file="database/reportingyear.csv"/>
   </changeSet>
 
@@ -41,6 +54,14 @@
     <loadData tableName="FACILITYDETAIL_POLLUTANTTRANSFER" file="database/facilitydetail_pollutanttransfer.csv"/>
     <loadData tableName="FACILITYDETAIL_WASTETRANSFER" file="database/facilitydetail_wastetransfer.csv"/>
     <loadData tableName="FACILITYSEARCH_ALL" file="database/facilitysearch_all.csv"/> <!-- Could this be generated from the other tables? -->
+    <loadData tableName="FACILITYSEARCH_MAINACTIVITY" file="database/facilitysearch_mainactivity.csv"/>
+    <loadData tableName="FACILITYSEARCH_WASTETRANSFER" file="database/facilitysearch_wastetransfer.csv"/>
+    <loadData tableName="POLLUTANTRELEASE" file="database/pollutantrelease.csv"/>
+    <loadData tableName="POLLUTANTTRANSFER" file="database/pollutanttransfer.csv"/>
+    <loadData tableName="WASTETRANSFER" file="database/wastetransfer.csv"/>
+    <loadData tableName="WASTETRANSFER_CONFIDENTIAL" file="database/wastetransfer_confidential.csv"/>
+    <loadData tableName="WASTETRANSFER_HAZARDOUSTREATERS" file="database/wastetransfer_hazardoustreaters.csv"/>
+    <loadData tableName="WASTETRANSFER_RECEIVINGCOUNTRY" file="database/wastetransfer_receivingcountry.csv"/>
+    <loadData tableName="WASTETRANSFER_TREATMENT" file="database/wastetransfer_treatment.csv"/>
   </changeSet>
-
 </databaseChangeLog>

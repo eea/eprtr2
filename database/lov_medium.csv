@@ -1,0 +1,5 @@
+LOV_MediumID,Code,Name,StartYear,EndYear
+1,AIR,Air,2001,NULL
+2,LAND,Soil,2001,NULL
+3,WATER,Water,2001,NULL
+4,WASTEWATER,Waste Water,2001,NULL
