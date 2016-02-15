@@ -25,17 +25,21 @@ On a CentOS system you can start Tomcat with the environment variable CATALINA_O
 ```
 CATALINA_OPTS="-Dcmsdb.url=jdbc:h2:tcp://localhost:8043//work/eprtrcms -Dstorage.dir=/work -Dupload.dir=/work"
 ```
-These are the properties you can set:
+These are the properties you can set along with their default values:
 ```
-cmsdb.driver
+cmsdb.driver = net.sourceforge.jtds.jdbc.Driver
 cmsdb.url
 cmsdb.username
 cmsdb.password
-eprtrdb.driver
+cmsdb.createtables = false  # Set to "true" to activate liquibase database refactoring
+eprtrdb.driver = net.sourceforge.jtds.jdbc.Driver
 eprtrdb.url
 eprtrdb.username
 eprtrdb.password
 storage.dir
+eprtrdb.createtables = false  # Set to "true" to activate liquibase database refactoring
+profile = test             # Determines what WFS URLs to use
+deploy.contexts = prod     # Change to "test,demo" to load demo data into the application.
 ```
 The default values are in src/main/resources/application.properties
 
