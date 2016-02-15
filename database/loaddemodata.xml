@@ -18,11 +18,15 @@
 
     <comment>Load lookup values data</comment>
     <!-- The CSV file must have a header row with the correct column names -->
+    <loadData tableName="LOV_AREAGROUP" file="database/lov_areagroup.csv"/>
     <loadData tableName="LOV_NACEACTIVITY" file="database/lov_naceactivity.csv"/>
     <loadData tableName="LOV_COUNTRY" file="database/lov_country.csv"/>
     <loadData tableName="LOV_POLLUTANT" file="database/lov_pollutant.csv"/>
     <loadData tableName="LOV_NUTSREGION" file="database/lov_nutsregion.csv"/>
     <loadData tableName="LOV_NUTSREGION" file="database/lov_nutsregion-hr.csv"/> <!-- HR was added later -->
+    <loadData tableName="LOV_RIVERBASINDISTRICT" file="database/lov_riverbasindistrict.csv"/>
+    <loadData tableName="RECEIVINGCOUNTRY" file="database/receivingcountry.csv"/>
+    <loadData tableName="REPORTINGYEAR" file="database/reportingyear.csv"/>
   </changeSet>
 
   <changeSet author="roug" id="rev-2" context="demo">
@@ -36,6 +40,7 @@
     <loadData tableName="FACILITYDETAIL_POLLUTANTRELEASE" file="database/facilitydetail_pollutantrelease.csv"/>
     <loadData tableName="FACILITYDETAIL_POLLUTANTTRANSFER" file="database/facilitydetail_pollutanttransfer.csv"/>
     <loadData tableName="FACILITYDETAIL_WASTETRANSFER" file="database/facilitydetail_wastetransfer.csv"/>
+    <loadData tableName="FACILITYSEARCH_ALL" file="database/facilitysearch_all.csv"/> <!-- Could this be generated from the other tables? -->
   </changeSet>
 
 </databaseChangeLog>
