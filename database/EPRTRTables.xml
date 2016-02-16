@@ -292,6 +292,9 @@
       <column name="ConfidentialIndicatorFacility"/>
       <column name="ConfidentialIndicatorPollutant"/>
       <column name="ConfidentialIndicatorWaste"/>
+    </createIndex>
+    <createIndex tableName="FACILITYSEARCH_ALL" unique="false"
+                 indexName="FACILITYSEARCH_ALL_INDEX_CI_FWP">
       <column name="ReportingYear"/>
       <column name="ConfidentialIndicatorFacility"/>
       <column name="ConfidentialIndicatorWaste"/>
