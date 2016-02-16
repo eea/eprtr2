@@ -78,7 +78,7 @@
       <column name="CountryCode" type="VARCHAR(255)"/>
       <column name="Published" type="datetime"><constraints nullable="true"/></column>
       <column name="ParentCompanyName" type="VARCHAR(255)"/>
-      <column name="Coordinates" type="VARCHAR(max)"><constraints nullable="true"/></column>
+      <column name="Coordinates" type="text"><constraints nullable="true"/></column>
       <column name="CoordinateStatusCode" type="VARCHAR(255)"/>
       <column name="NUTSRegionLevel1Code" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="NUTSRegionLevel2Code" type="VARCHAR(255)"><constraints nullable="true"/></column>
@@ -99,7 +99,7 @@
       <column name="TotalEmployeeQuantity" type="INT"><constraints nullable="true"/></column>
       <column name="OperatingHours" type="INT"><constraints nullable="true"/></column>
       <column name="WebsiteCommunication" type="VARCHAR(255)"><constraints nullable="true"/></column>
-      <column name="PublicInformation" type="VARCHAR(max)"><constraints nullable="true"/></column>
+      <column name="PublicInformation" type="text"><constraints nullable="true"/></column>
       <column name="ConfidentialIndicator" type="BOOLEAN"/>
       <column name="ConfidentialIndicatorCode" type="VARCHAR(255)"><constraints nullable="true"/></column>
       <column name="ConfidentialIndicatorWaste" type="INT"><constraints nullable="true"/></column>

@@ -325,7 +325,7 @@ ON  k.NewsKeyID = v.NewsKeyID
     </createView>
   </changeSet>
 
-  <changeSet author="roug" id="rev-14" dbms="h2,mssql">
+  <changeSet author="roug" id="rev-14">
     <preConditions onFail="MARK_RAN">
       <not>
         <viewExists viewName="StringResource"/>

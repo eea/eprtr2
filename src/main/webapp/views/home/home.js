@@ -412,7 +412,7 @@ angular.module('myApp.home', ['ngRoute'])
 			 var deferred = $q.defer();
 			//We extend the service at some point with language - we can get it from cookie or drop down:
 			 if(Object.keys(mapurls).length < 1){
-				 var _qp = '/mapurls';
+				 var _qp = 'mapurls';
 		
 				 $http.get(_qp).success(function(results) {
 					 angular.forEach(results, function(value, key) {
