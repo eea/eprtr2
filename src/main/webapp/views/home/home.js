@@ -77,7 +77,7 @@ angular.module('myApp.home', ['ngRoute'])
 				// Tons 3 dec 
 				fstr =  ($filter('number',3)(((val / 1000) *100) / 100)).toString() + ' t';
 			}
-			return fstr.toString().replace(',','');
+			return fstr.toString().replace(/,/g,'');
 		},
 
 	    ConfidentialFormat : function(txt, confidential)
@@ -151,7 +151,7 @@ angular.module('myApp.home', ['ngRoute'])
 	                result = $filter('number')((amount * 1000), 3) + " g";
 	            }
 	        }
-	        return result.toString().replace(',','');
+	        return result.toString().replace(/,/g,'');
 	    },
 
 		formatQuantity:function(quantity, unit, conf){
@@ -282,7 +282,7 @@ angular.module('myApp.home', ['ngRoute'])
         		return formatStrFactory.getStrFormat(sum);
     		}
     		else{
-    			return ($filter('number')(sum)).toString().replace(',','');
+    			return ($filter('number')(sum)).toString().replace(/,/g,'');
     		}
         },
         getSubSum : function(elements,property,unit){  
@@ -315,7 +315,8 @@ angular.module('myApp.home', ['ngRoute'])
         		return formatStrFactory.getStrFormat(total);
     		}
     		else{
-    			return ($filter('number')(total)).toString().replace(',','');
+    			//Replaces all 
+    			return ($filter('number')(total)).toString().replace(/,/g,'');
     		}
 //	        return total;
 	    },
