@@ -26,10 +26,10 @@ import eea.eprtr.model.NaceActivity;
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class,
         DbUnitTestExecutionListener.class })
-@DatabaseSetup("/NaceActivity-data.xml")
+//@DatabaseSetup("/NaceActivity-data.xml")
 
 //@Transactional(transactionManagerName="transactionManager")
-public class NaceActivityRepositoryTest {
+public class NaceActivityRepositoryIT {
 
     @Autowired
     protected NaceActivityRepository repository;
@@ -38,24 +38,24 @@ public class NaceActivityRepositoryTest {
     public void testThatRepositoryListReturnsOnlyRootActivitiesWhenNullIsSpecified() {
         List<NaceActivity> results = repository.list(null);
         assertNotNull(results);
-        assertEquals(2, results.size());
-        assertEquals("Root Activity 1", results.get(0).getName());
-        assertEquals("Root Activity 2", results.get(1).getName());
+        assertEquals(88, results.size());
+        assertEquals("Crop and animal production, hunting and related service activities", results.get(0).getName());
+        assertEquals("Forestry and logging", results.get(1).getName());
     }
 
     @Test
     public void testThatRepositoryListReturnsTheActivitiesThatHasAParentWithId1() {
         List<NaceActivity> results = repository.list(new Integer(1));
         assertNotNull(results);
-        assertEquals(1, results.size());
-        assertEquals("Activity 1", results.get(0).getName());
+        assertEquals(7, results.size());
+        assertEquals("Growing of non-perennial crops", results.get(0).getName());
     }
 
     @Test
     public void testThatRepositoryListReturnsTheActivitiesThatHasAParentWithId2() {
         List<NaceActivity> results = repository.list(new Integer(2));
         assertNotNull(results);
-        assertEquals(0, results.size());
+        assertEquals(4, results.size());
     }
 
     @Test
@@ -63,7 +63,7 @@ public class NaceActivityRepositoryTest {
         NaceActivity results = repository.get(1);
         assertNotNull(results);
         //assertEquals(1, results.size());
-        assertEquals("Root Activity 1", results.getName());
+        assertEquals("Crop and animal production, hunting and related service activities", results.getName());
     }
 
 }
