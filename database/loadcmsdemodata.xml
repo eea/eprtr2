@@ -19,8 +19,12 @@
 
     <comment>Load some demo data</comment>
 
+    <sql dbms="mssql">SET IDENTITY_INSERT LOV_ContentsGroup ON</sql>
     <loadData tableName="LOV_ContentsGroup" file="database/lov_contentsgroup.csv"/>
+    <sql dbms="mssql">SET IDENTITY_INSERT LOV_ContentsGroup OFF</sql>
+    <sql dbms="mssql">SET IDENTITY_INSERT LOV_Culture ON</sql>
     <loadData tableName="LOV_Culture" file="database/lov_culture.csv"/>
+    <sql dbms="mssql">SET IDENTITY_INSERT LOV_Culture OFF</sql>
 
     <insert tableName="ReviseResourceKey">
       <column name="ResourceKeyID" valueNumeric="2"/>
