@@ -21,6 +21,7 @@
         <m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
         <h2.version>1.3.172</h2.version>
         <eprtrdb.url>jdbc:h2:file:eprtrtest</eprtrdb.url>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HHmm</maven.build.timestamp.format>
     </properties>
 
     <!-- configuration of Maven repositories to be used -->
@@ -234,6 +235,7 @@
                         <tags>
                           <tag>latest</tag>
                           <tag>${project.version}</tag>
+                          <tag>${maven.build.timestamp}</tag>
                         </tags>
                         <assembly>
                           <!--descriptor>assembly.xml</descriptor-->
