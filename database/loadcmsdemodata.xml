@@ -19,42 +19,8 @@
 
     <comment>Load some demo data</comment>
 
-    <insert tableName="LOV_ContentsGroup">
-      <column name="LOV_ContentsGroupID" valueNumeric="1"/>
-      <column name="Code" value="DCL"/>
-      <column name="Name" value="Disclaimer Texts"/>
-      <column name="StartYear" valueNumeric="2007"/>
-    </insert>
-    <insert tableName="LOV_ContentsGroup">
-      <column name="LOV_ContentsGroupID" valueNumeric="2"/>
-      <column name="Code" value="STP"/>
-      <column name="Name" value="Static Pages"/>
-      <column name="StartYear" valueNumeric="2007"/>
-    </insert>
-    <insert tableName="LOV_ContentsGroup">
-      <column name="LOV_ContentsGroupID" valueNumeric="7"/>
-      <column name="Code" value="DIFSRC_AIR_NOX"/>
-      <column name="Name" value="Diffuse Sources Air, NOx"/>
-      <column name="StartYear" valueNumeric="2007"/>
-    </insert>
-
-    <insert tableName="LOV_Culture">
-      <column name="LOV_CultureID" valueNumeric="4"/>
-      <column name="EnglishName" value="Dutch"/>
-      <column name="Code" value="nl-NL"/>
-      <column name="CodeXliff" value="nl"/>
-      <column name="CodeAEAT" value="nl"/>
-      <column name="Name" value="Nederlandse"/>
-    </insert>
-
-    <insert tableName="LOV_Culture">
-      <column name="LOV_CultureID" valueNumeric="5"/>
-      <column name="EnglishName" value="English"/>
-      <column name="Code" value="en-GB"/>
-      <column name="CodeXliff" value="en"/>
-      <column name="CodeAEAT" value="en"/>
-      <column name="Name" value="English"/>
-    </insert>
+    <loadData tableName="LOV_ContentsGroup" file="database/lov_contentsgroup.csv"/>
+    <loadData tableName="LOV_Culture" file="database/lov_culture.csv"/>
 
     <insert tableName="ReviseResourceKey">
       <column name="ResourceKeyID" valueNumeric="2"/>
