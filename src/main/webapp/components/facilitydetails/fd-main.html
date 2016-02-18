@@ -319,7 +319,7 @@ WASTE TRANSFERS
                     <tbody>
                         <tr ng-repeat="item in wastetransfers | filter:{ wasteTypeCode:'NONHW' } ">
                     <td class="text-right">{{fFactory.formatQuantity(item.quantity, item.unitCode, item.confidentialIndicator)}}</td>
-                    <td>{{ConfidentialFormat(tr_lwt[item.wasteTreatmentCode], item.confidentialIndicator)}}</td>
+                    <td>{{fFactory.ConfidentialFormat(tr_lwt[item.wasteTreatmentCode], item.confidentialIndicator)}}</td>
                     <td>{{tr_lmbn[item.methodCode]}}</td>
                     <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
                     <td>{{tr_lcf[item.confidentialCode]}}</td>
@@ -354,7 +354,7 @@ WASTE TRANSFERS
                     <tbody>
                         <tr ng-repeat="item in wastetransfers | filter:{ wasteTypeCode:'HWIC' } ">
                     <td class="text-right">{{fFactory.formatQuantity(item.quantity, item.unitCode, item.confidentialIndicator)}}</td>
-                    <td>{{ConfidentialFormat(tr_lwt[item.wasteTreatmentCode], item.confidentialIndicator)}}</td>
+                    <td>{{fFactory.ConfidentialFormat(tr_lwt[item.wasteTreatmentCode], item.confidentialIndicator)}}</td>
                     <td>{{tr_lmbn[item.methodCode]}}</td>
                     <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
                     <td>{{tr_lcf[item.confidentialCode]}}</td>
@@ -389,7 +389,7 @@ WASTE TRANSFERS
                     <tbody>
                         <tr ng-repeat="item in wastetransfers | filter:{ wasteTypeCode:'HWOC' } ">
                     <td class="text-right">{{fFactory.formatQuantity(item.quantity, item.unitCode, item.confidentialIndicator)}}</td>
-                    <td>{{ConfidentialFormat(tr_lwt[item.wasteTreatmentCode], item.confidentialIndicator)}}</td>
+                    <td>{{fFactory.ConfidentialFormat(tr_lwt[item.wasteTreatmentCode], item.confidentialIndicator)}}</td>
                     <td>{{tr_lmbn[item.methodCode]}}</td>
                     <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
                     <td>{{tr_lcf[item.confidentialCode]}}</td>
