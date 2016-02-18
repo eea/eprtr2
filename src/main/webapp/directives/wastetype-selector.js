@@ -62,7 +62,7 @@ myApp.directive('wtSelector', ['$compile','$http', '$filter', 'Restangular', 'ep
             
     		scope.$watchCollection('[quantityNONHW,quantityHWIC,quantityHWOC,tr_c,tr_w]', function(value) {
     			
-                if (scope.quantityNONHW != undefined && scope.tr_c != undefined ) {
+                if (scope.quantityNONHW != undefined && scope.tr_c != undefined  && scope.tr_w != undefined ) {
 
                     // create some new html elements to hold the separate info
                     var title = $compile('<label class="control-label"><strong>'+scope.tr_w.ShowFacilitiesWithTransferOfWasteType+':</strong></label></br>')(scope); 

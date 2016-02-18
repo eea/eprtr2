@@ -92,10 +92,10 @@ angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpi
               myhtml += $scope.tr_cl['FROM'] + '</td><td class="text-right">' + $scope.tr_lco[item.transferFrom] + '</td></tr><tr><td class="fdTitles">';
               myhtml += $scope.tr_cl['TO'] + '</td><td class="text-right">' + $scope.tr_lco[item.transferTo] + '</td></tr><tr><td class="fdTitles">';
               myhtml += $scope.tr_cl['FACILITIES'] + '</td><td class="text-right">' + item.facilities + '</td></tr><tr><td class="fdTitles">';
-              myhtml += $scope.tr_c['Total'] + '</td><td class="text-right">' + $scope.ff.formatMethod(item.quantityTotal,false) + '</td></tr><tr><td class="fdTitles">';
-              myhtml += $scope.tr_c['Recovery'] + '</td><td class="text-right">' + $scope.ff.formatMethod(item.quantityRecovery,false) + '</td></tr><tr><td class="fdTitles">';
-              myhtml += $scope.tr_c['Disposal'] + '</td><td class="text-right">' + $scope.ff.formatMethod(item.quantityDisposal,false) + '</td></tr><tr><td class="fdTitles">';
-              myhtml += $scope.tr_c['Unspecified'] + '</td><td class="text-right">' + $scope.ff.formatMethod(item.quantityUnspec,false) + '</td></tr></table>';
+              myhtml += $scope.tr_c['Total'] + '</td><td class="text-right">' + $scope.ff.formatQuantity(item.quantityTotal,item.unitCodeHWOC,false) + '</td></tr><tr><td class="fdTitles">';
+              myhtml += $scope.tr_c['Recovery'] + '</td><td class="text-right">' + $scope.ff.formatQuantity(item.quantityRecovery,item.unitCodeHWOC,false) + '</td></tr><tr><td class="fdTitles">';
+              myhtml += $scope.tr_c['Disposal'] + '</td><td class="text-right">' + $scope.ff.formatQuantity(item.quantityDisposal,item.unitCodeHWOC,false) + '</td></tr><tr><td class="fdTitles">';
+              myhtml += $scope.tr_c['Unspecified'] + '</td><td class="text-right">' + $scope.ff.formatQuantity(item.quantityUnspec,item.unitCodeHWOC,false) + '</td></tr></table>';
               //myhtml += '<p>x: '+$scope.coords.x+' y:'+$scope.coords.y+' ox: '+$scope.coords.ox+' oy:'+$scope.coords.oy+'</p>';
               myhtml += '</div></div>';
               
@@ -115,8 +115,8 @@ angular.module('myApp.hazTransboundary', ['restangular','ngSanitize','angularSpi
           	}
           });*/
           
-        $scope.$watchCollection('[tr_lovwt,queryparams]', function(value){
-        	if($scope.queryparams != undefined && $scope.tr_lovwt != undefined){
+        $scope.$watchCollection('[tr_lwt,queryparams]', function(value){
+        	if($scope.queryparams != undefined && $scope.tr_lwt != undefined){
         		$scope.startSpin();
     			$scope.getData();
         	}

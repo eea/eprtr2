@@ -141,18 +141,18 @@
 												alt="" /></a> {{item.wastetype}}</td>
 										<td class="text-right">{{item.facilityCount}}</td>
 										<td class="text-right">
-											{{cf.getformat(item.quantityRecovery)}}<br />
+											{{ff.formatQuantity(item.quantityRecovery,item.unitCodeHWOC,item.confidentialIndicatorHWOC)}}<br />
 											{{cf.getpctformat(item.rpct)}}
 										</td>
 										<td class="text-right">
-											{{cf.getformat(item.quantityDisposal)}}<br />
+											{{ff.formatQuantity(item.quantityDisposal,item.unitCodeHWOC,item.confidentialIndicatorHWOC)}}<br />
 											{{cf.getpctformat(item.dpct)}}
 										</td>
 										<td class="text-right">
-											{{cf.getformat(item.quantityUnspec)}}<br />
+											{{ff.formatQuantity(item.quantityUnspec,item.unitCodeHWOC,item.confidentialIndicatorHWOC)}}<br />
 											{{cf.getpctformat(item.upct)}}
 										</td>
-										<td class="text-right">{{cf.getformat(item.quantityTotal)}}</td>
+										<td class="text-right">{{ff.formatQuantity(item.quantityTotal,item.unitCodeHWOC,item.confidentialIndicatorHWOC)}}</td>
 									</tr>
 								</tbody>
 							</table>
@@ -238,28 +238,28 @@
 												{{tr_c.Unspec}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(item.data,"quantityTotalHWIC",true)}}<br />
-												{{cf.getSum(item.data,"quantityRecoveryHWIC",true)}}<br />
-												{{cf.getSum(item.data,"quantityDisposalHWIC",true)}}<br />
-												{{cf.getSum(item.data,"quantityUnspecHWIC",true)}}
+												{{cf.getSum(item.data,"quantityTotalHWIC","unitCodeHWIC")}}<br />
+												{{cf.getSum(item.data,"quantityRecoveryHWIC","unitCodeHWIC")}}<br />
+												{{cf.getSum(item.data,"quantityDisposalHWIC","unitCodeHWIC")}}<br />
+												{{cf.getSum(item.data,"quantityUnspecHWIC","unitCodeHWIC")}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(item.data,"quantityTotalHWOC",true)}}<br />
-												{{cf.getSum(item.data,"quantityRecoveryHWOC",true)}}<br />
-												{{cf.getSum(item.data,"quantityDisposalHWOC",true)}}<br />
-												{{cf.getSum(item.data,"quantityUnspecHWOC",true)}}
+												{{cf.getSum(item.data,"quantityTotalHWOC","unitCodeHWOC")}}<br />
+												{{cf.getSum(item.data,"quantityRecoveryHWOC","unitCodeHWOC")}}<br />
+												{{cf.getSum(item.data,"quantityDisposalHWOC","unitCodeHWOC")}}<br />
+												{{cf.getSum(item.data,"quantityUnspecHWOC","unitCodeHWOC")}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(item.data,"quantityTotalHW",true)}}<br />
-												{{cf.getSum(item.data,"quantityRecoveryHW",true)}}<br />
-												{{cf.getSum(item.data,"quantityDisposalHW",true)}}<br />
-												{{cf.getSum(item.data,"quantityUnspecHW",true)}}
+												{{cf.getSum(item.data,"quantityTotalHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item.data,"quantityRecoveryHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item.data,"quantityDisposalHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item.data,"quantityUnspecHW","unitCodeNONHW")}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(item.data,"quantityTotalNONHW",true)}}<br />
-												{{cf.getSum(item.data,"quantityRecoveryNONHW",true)}}<br />
-												{{cf.getSum(item.data,"quantityDisposalNONHW",true)}}<br />
-												{{cf.getSum(item.data,"quantityUnspecNONHW",true)}}
+												{{cf.getSum(item.data,"quantityTotalNONHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item.data,"quantityRecoveryNONHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item.data,"quantityDisposalNONHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item.data,"quantityUnspecNONHW","unitCodeNONHW")}}
 											</td>
 										</tr>
 										<!-- Level2 -->
@@ -283,28 +283,28 @@
 												{{tr_c.Unspec}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(level2,"quantityTotalHWIC",true)}}<br />
-												{{cf.getSum(level2,"quantityRecoveryHWIC",true)}}<br />
-												{{cf.getSum(level2,"quantityDisposalHWIC",true)}}<br />
-												{{cf.getSum(level2,"quantityUnspecHWIC",true)}}
+												{{cf.getSum(level2,"quantityTotalHWIC","unitCodeHWIC")}}<br />
+												{{cf.getSum(level2,"quantityRecoveryHWIC","unitCodeHWIC")}}<br />
+												{{cf.getSum(level2,"quantityDisposalHWIC","unitCodeHWIC")}}<br />
+												{{cf.getSum(level2,"quantityUnspecHWIC","unitCodeHWIC")}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(level2,"quantityTotalHWOC",true)}}<br />
-												{{cf.getSum(level2,"quantityRecoveryHWOC",true)}}<br />
-												{{cf.getSum(level2,"quantityDisposalHWOC",true)}}<br />
-												{{cf.getSum(level2,"quantityUnspecHWOC",true)}}
+												{{cf.getSum(level2,"quantityTotalHWOC","unitCodeHWOC")}}<br />
+												{{cf.getSum(level2,"quantityRecoveryHWOC","unitCodeHWOC")}}<br />
+												{{cf.getSum(level2,"quantityDisposalHWOC","unitCodeHWOC")}}<br />
+												{{cf.getSum(level2,"quantityUnspecHWOC","unitCodeHWOC")}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(level2,"quantityTotalHW",true)}}<br />
-												{{cf.getSum(level2,"quantityRecoveryHW",true)}}<br />
-												{{cf.getSum(level2,"quantityDisposalHW",true)}}<br />
-												{{cf.getSum(level2,"quantityUnspecHW",true)}}
+												{{cf.getSum(level2,"quantityTotalHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(level2,"quantityRecoveryHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(level2,"quantityDisposalHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(level2,"quantityUnspecHW","unitCodeNONHW")}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(level2,"quantityTotalNONHW",true)}}<br />
-												{{cf.getSum(level2,"quantityRecoveryNONHW",true)}}<br />
-												{{cf.getSum(level2,"quantityDisposalNONHW",true)}}<br />
-												{{cf.getSum(level2,"quantityUnspecNONHW",true)}}
+												{{cf.getSum(level2,"quantityTotalNONHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(level2,"quantityRecoveryNONHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(level2,"quantityDisposalNONHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(level2,"quantityUnspecNONHW","unitCodeNONHW")}}
 											</td>
 										</tr>
 										<!-- Level3 -->
@@ -322,28 +322,28 @@
 												{{tr_c.Unspec}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(level3,"quantityTotalHWIC",true)}}<br />
-												{{cf.getSum(level3,"quantityRecoveryHWIC",true)}}<br />
-												{{cf.getSum(level3,"quantityDisposalHWIC",true)}}<br />
-												{{cf.getSum(level3,"quantityUnspecHWIC",true)}}
+												{{cf.getSum(level3,"quantityTotalHWIC","unitCodeHWIC")}}<br />
+												{{cf.getSum(level3,"quantityRecoveryHWIC","unitCodeHWIC")}}<br />
+												{{cf.getSum(level3,"quantityDisposalHWIC","unitCodeHWIC")}}<br />
+												{{cf.getSum(level3,"quantityUnspecHWIC","unitCodeHWIC")}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(level3,"quantityTotalHWOC",true)}}<br />
-												{{cf.getSum(level3,"quantityRecoveryHWOC",true)}}<br />
-												{{cf.getSum(level3,"quantityDisposalHWOC",true)}}<br />
-												{{cf.getSum(level3,"quantityUnspecHWOC",true)}}
+												{{cf.getSum(level3,"quantityTotalHWOC","unitCodeHWOC")}}<br />
+												{{cf.getSum(level3,"quantityRecoveryHWOC","unitCodeHWOC")}}<br />
+												{{cf.getSum(level3,"quantityDisposalHWOC","unitCodeHWOC")}}<br />
+												{{cf.getSum(level3,"quantityUnspecHWOC","unitCodeHWOC")}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(level3,"quantityTotalHW",true)}}<br />
-												{{cf.getSum(level3,"quantityRecoveryHW",true)}}<br />
-												{{cf.getSum(level3,"quantityDisposalHW",true)}}<br />
-												{{cf.getSum(level3,"quantityUnspecHW",true)}}
+												{{cf.getSum(level3,"quantityTotalHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(level3,"quantityRecoveryHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(level3,"quantityDisposalHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(level3,"quantityUnspecHW","unitCodeNONHW")}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(level3,"quantityTotalNONHW",true)}}<br />
-												{{cf.getSum(level3,"quantityRecoveryNONHW",true)}}<br />
-												{{cf.getSum(level3,"quantityDisposalNONHW",true)}}<br />
-												{{cf.getSum(level3,"quantityUnspecNONHW",true)}}
+												{{cf.getSum(level3,"quantityTotalNONHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(level3,"quantityRecoveryNONHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(level3,"quantityDisposalNONHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(level3,"quantityUnspecNONHW","unitCodeNONHW")}}
 											</td>
 										</tr>
 										<tr ng-repeat-end></tr>
@@ -459,28 +459,28 @@
 												{{tr_c.Unspec}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(item.data,"quantityTotalHWIC",true)}}<br />
-												{{cf.getSum(item.data,"quantityRecoveryHWIC",true)}}<br />
-												{{cf.getSum(item.data,"quantityDisposalHWIC",true)}}<br />
-												{{cf.getSum(item.data,"quantityUnspecHWIC",true)}}
+												{{cf.getSum(item.data,"quantityTotalHWIC","unitCodeHWIC")}}<br />
+												{{cf.getSum(item.data,"quantityRecoveryHWIC","unitCodeHWIC")}}<br />
+												{{cf.getSum(item.data,"quantityDisposalHWIC","unitCodeHWIC")}}<br />
+												{{cf.getSum(item.data,"quantityUnspecHWIC","unitCodeHWIC")}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(item.data,"quantityTotalHWOC",true)}}<br />
-												{{cf.getSum(item.data,"quantityRecoveryHWOC",true)}}<br />
-												{{cf.getSum(item.data,"quantityDisposalHWOC",true)}}<br />
-												{{cf.getSum(item.data,"quantityUnspecHWOC",true)}}
+												{{cf.getSum(item.data,"quantityTotalHWOC","unitCodeHWOC")}}<br />
+												{{cf.getSum(item.data,"quantityRecoveryHWOC","unitCodeHWOC")}}<br />
+												{{cf.getSum(item.data,"quantityDisposalHWOC","unitCodeHWOC")}}<br />
+												{{cf.getSum(item.data,"quantityUnspecHWOC","unitCodeHWOC")}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(item.data,"quantityTotalHW",true)}}<br />
-												{{cf.getSum(item.data,"quantityRecoveryHW",true)}}<br />
-												{{cf.getSum(item.data,"quantityDisposalHW",true)}}<br />
-												{{cf.getSum(item.data,"quantityUnspecHW",true)}}
+												{{cf.getSum(item.data,"quantityTotalHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item.data,"quantityRecoveryHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item.data,"quantityDisposalHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item.data,"quantityUnspecHW","unitCodeNONHW")}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(item.data,"quantityTotalNONHW",true)}}<br />
-												{{cf.getSum(item.data,"quantityRecoveryNONHW",true)}}<br />
-												{{cf.getSum(item.data,"quantityDisposalNONHW",true)}}<br />
-												{{cf.getSum(item.data,"quantityUnspecNONHW",true)}}
+												{{cf.getSum(item.data,"quantityTotalNONHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item.data,"quantityRecoveryNONHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item.data,"quantityDisposalNONHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item.data,"quantityUnspecNONHW","unitCodeNONHW")}}
 											</td>
 										</tr>
 
@@ -506,28 +506,28 @@
 												{{tr_c.Unspec}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(item2,"quantityTotalHWIC",true)}}<br />
-												{{cf.getSum(item2,"quantityRecoveryHWIC",true)}}<br />
-												{{cf.getSum(item2,"quantityDisposalHWIC",true)}}<br />
-												{{cf.getSum(item2,"quantityUnspecHWIC",true)}}
+												{{cf.getSum(item2,"quantityTotalHWIC","unitCodeHWIC")}}<br />
+												{{cf.getSum(item2,"quantityRecoveryHWIC","unitCodeHWIC")}}<br />
+												{{cf.getSum(item2,"quantityDisposalHWIC","unitCodeHWIC")}}<br />
+												{{cf.getSum(item2,"quantityUnspecHWIC","unitCodeHWIC")}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(item2,"quantityTotalHWOC",true)}}<br />
-												{{cf.getSum(item2,"quantityRecoveryHWOC",true)}}<br />
-												{{cf.getSum(item2,"quantityDisposalHWOC",true)}}<br />
-												{{cf.getSum(item2,"quantityUnspecHWOC",true)}}
+												{{cf.getSum(item2,"quantityTotalHWOC","unitCodeHWOC")}}<br />
+												{{cf.getSum(item2,"quantityRecoveryHWOC","unitCodeHWOC")}}<br />
+												{{cf.getSum(item2,"quantityDisposalHWOC","unitCodeHWOC")}}<br />
+												{{cf.getSum(item2,"quantityUnspecHWOC","unitCodeHWOC")}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(item2,"quantityTotalHW",true)}}<br />
-												{{cf.getSum(item2,"quantityRecoveryHW",true)}}<br />
-												{{cf.getSum(item2,"quantityDisposalHW",true)}}<br />
-												{{cf.getSum(item2,"quantityUnspecHW",true)}}
+												{{cf.getSum(item2,"quantityTotalHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item2,"quantityRecoveryHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item2,"quantityDisposalHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item2,"quantityUnspecHW","unitCodeNONHW")}}
 											</td>
 											<td class="text-right">
-												{{cf.getSum(item2,"quantityTotalNONHW",true)}}<br />
-												{{cf.getSum(item2,"quantityRecoveryNONHW",true)}}<br />
-												{{cf.getSum(item2,"quantityDisposalNONHW",true)}}<br />
-												{{cf.getSum(item2,"quantityUnspecNONHW",true)}}
+												{{cf.getSum(item2,"quantityTotalNONHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item2,"quantityRecoveryNONHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item2,"quantityDisposalNONHW","unitCodeNONHW")}}<br />
+												{{cf.getSum(item2,"quantityUnspecNONHW","unitCodeNONHW")}}
 											</td>
 										</tr>
 										<tr ng-repeat-end></tr>
@@ -689,10 +689,10 @@
 										<td><a
 											href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}">
 												{{item.facilityName}}</a></td>
-										<td class="text-right">{{ff.formatMethod(item.quantityTotal,item.confidentialIndicator)}}</td>
-										<td class="text-right">{{ff.formatMethod(item.quantityRecovery,item.confidentialIndicator)}}</td>
-										<td class="text-right">{{ff.formatMethod(item.quantityDisposal,item.confidentialIndicator)}}</td>
-										<td class="text-right">{{ff.formatMethod(item.quantityUnspec,item.confidentialIndicator)}}</td>
+										<td class="text-right">{{ff.formatQuantity(item.quantityTotal,item.unitCodeNONHW,item.confidentialIndicator)}}</td>
+										<td class="text-right">{{ff.formatQuantity(item.quantityRecovery,item.unitCodeNONHW,item.confidentialIndicator)}}</td>
+										<td class="text-right">{{ff.formatQuantity(item.quantityDisposal,item.unitCodeNONHW,item.confidentialIndicator)}}</td>
+										<td class="text-right">{{ff.formatQuantity(item.quantityUnspec,item.unitCodeNONHW,item.confidentialIndicator)}}</td>
 										<td>{{item.iaActivityCode}}</td>
 										<td>{{tr_lco[item.countryCode]}}</td>
 									</tr>

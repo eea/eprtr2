@@ -68,21 +68,35 @@ public class DataHelperWasteTransfer {
 	
 	private List<Wastetransfer> getSummary(List<Wastetransfer> elements)
 	{
+		Wastetransfer firstwt = elements.get(0);
+
 		List<Wastetransfer> list = new ArrayList<Wastetransfer>();
 		Wastetransfer wt = new Wastetransfer();
 		wt.wastetype ="NONHW";
+		wt.setUnitCodeNONHW(firstwt.getUnitCodeNONHW());
+		wt.setUnitCodeHWIC(firstwt.getUnitCodeHWIC());
+		wt.setUnitCodeHWOC(firstwt.getUnitCodeHWOC());
 		list.add(wt);
 		
 		wt = new Wastetransfer();
 		wt.wastetype ="HW";
+		wt.setUnitCodeNONHW(firstwt.getUnitCodeNONHW());
+		wt.setUnitCodeHWIC(firstwt.getUnitCodeHWIC());
+		wt.setUnitCodeHWOC(firstwt.getUnitCodeHWOC());
 		list.add(wt);
 		
 		wt = new Wastetransfer();
 		wt.wastetype ="HWIC";
+		wt.setUnitCodeNONHW(firstwt.getUnitCodeNONHW());
+		wt.setUnitCodeHWIC(firstwt.getUnitCodeHWIC());
+		wt.setUnitCodeHWOC(firstwt.getUnitCodeHWOC());
 		list.add(wt);
 		
 		wt = new Wastetransfer();
 		wt.wastetype ="HWOC";
+		wt.setUnitCodeNONHW(firstwt.getUnitCodeNONHW());
+		wt.setUnitCodeHWIC(firstwt.getUnitCodeHWIC());
+		wt.setUnitCodeHWOC(firstwt.getUnitCodeHWOC());
 		list.add(wt);
 		
 		for(Wastetransfer obj : elements)

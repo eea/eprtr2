@@ -220,7 +220,7 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 	        			qstr += '('+ arrfQue.join(" AND ")+')';
 	        		}
 	    			qstr += '))';
-	        		arrQue.push(qstr);
+	        		if(arrfQue)arrQue.push(qstr);
 					break;
 				case 'wastetransfer':
 	    			var arrwt = [];
@@ -231,10 +231,10 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 		        		if (arrwt.length > 0){
 		        			qstr += '('+  arrQue.join(" AND ") +')';
 		        		}
+		        		qstr += '))';
+		        		arrQue.push(qstr);
 	    			}
-	        		qstr += '))';
-	        		arrQue.push(qstr);
-		    		break;
+	    			break;
 			}
     		
 	    	return (arrQue.length > 0)?arrQue.join(" AND "):" ";

@@ -403,7 +403,7 @@ $scope.$watch('currentPage', function(value) {
        			$scope.summaryItems[i].rpct = Math.round((($scope.summaryItems[i].quantityRecovery * 100 / $scope.summaryItems[i].quantityTotal)*100)) /100;
        			$scope.summaryItems[i].dpct = Math.round((($scope.summaryItems[i].quantityDisposal * 100 / $scope.summaryItems[i].quantityTotal)*100)) /100;
        			$scope.summaryItems[i].upct = Math.round((($scope.summaryItems[i].quantityUnspec * 100 / $scope.summaryItems[i].quantityTotal)*100)) /100;
-       			formatStrFactory.getStrFormat($scope.summaryItems[i].quantityRecovery);
+       			//formatStrFactory.getStrFormat($scope.summaryItems[i].quantityRecovery);
        		}else
        		{
        			$scope.summaryItems[i].rpct = 0.0;
@@ -651,24 +651,24 @@ $scope.$watch('currentPage', function(value) {
         	$scope.activities = angular.copy($scope.items);
           	$scope.totalactivitiesfac = $scope.cf.getSubSum($scope.activities,"facilityCount",false);
         	$scope.totaltHWIC = $scope.cf.getSubSum($scope.activities,"quantityTotalHWIC",true);
-        	$scope.totalrHWIC = $scope.cf.getSubSum($scope.activities,"quantityRecoveryHWIC",true);
-        	$scope.totaldHWIC = $scope.cf.getSubSum($scope.activities,"quantityDisposalHWIC",true);
-        	$scope.totaluHWIC = $scope.cf.getSubSum($scope.activities,"quantityUnspecHWIC",true);
+        	$scope.totalrHWIC = $scope.cf.getSubSum($scope.activities,"quantityRecoveryHWIC","unitCodeHWIC");
+        	$scope.totaldHWIC = $scope.cf.getSubSum($scope.activities,"quantityDisposalHWIC","unitCodeHWIC");
+        	$scope.totaluHWIC = $scope.cf.getSubSum($scope.activities,"quantityUnspecHWIC","unitCodeHWIC");
         	
-        	$scope.totaltHWOC = $scope.cf.getSubSum($scope.activities,"quantityTotalHWOC",true);
-        	$scope.totalrHWOC = $scope.cf.getSubSum($scope.activities,"quantityRecoveryHWOC",true);
-        	$scope.totaldHWOC = $scope.cf.getSubSum($scope.activities,"quantityDisposalHWOC",true);
-        	$scope.totaluHWOC = $scope.cf.getSubSum($scope.activities,"quantityUnspecHWOC",true);
+        	$scope.totaltHWOC = $scope.cf.getSubSum($scope.activities,"quantityTotalHWOC","unitCodeHWOC");
+        	$scope.totalrHWOC = $scope.cf.getSubSum($scope.activities,"quantityRecoveryHWOC","unitCodeHWOC");
+        	$scope.totaldHWOC = $scope.cf.getSubSum($scope.activities,"quantityDisposalHWOC","unitCodeHWOC");
+        	$scope.totaluHWOC = $scope.cf.getSubSum($scope.activities,"quantityUnspecHWOC","unitCodeHWOC");
         	
-        	$scope.totalthaz = $scope.cf.getSubSum($scope.activities,"quantityTotalHW",true);
-        	$scope.totalrhaz = $scope.cf.getSubSum($scope.activities,"quantityRecoveryHW",true);
-        	$scope.totaldhaz = $scope.cf.getSubSum($scope.activities,"quantityDisposalHW",true);
-        	$scope.totaluhaz = $scope.cf.getSubSum($scope.activities,"quantityUnspecHW",true);
+        	$scope.totalthaz = $scope.cf.getSubSum($scope.activities,"quantityTotalHW","unitCodeNONHW");
+        	$scope.totalrhaz = $scope.cf.getSubSum($scope.activities,"quantityRecoveryHW","unitCodeNONHW");
+        	$scope.totaldhaz = $scope.cf.getSubSum($scope.activities,"quantityDisposalHW","unitCodeNONHW");
+        	$scope.totaluhaz = $scope.cf.getSubSum($scope.activities,"quantityUnspecHW","unitCodeNONHW");
         	
-        	$scope.totaltNONHW = $scope.cf.getSubSum($scope.activities,"quantityTotalNONHW",true);
-        	$scope.totalrNONHW = $scope.cf.getSubSum($scope.activities,"quantityRecoveryNONHW",true);
-        	$scope.totaldNONHW = $scope.cf.getSubSum($scope.activities,"quantityDisposalNONHW",true);
-        	$scope.totaluNONHW = $scope.cf.getSubSum($scope.activities,"quantityUnspecNONHW",true);
+        	$scope.totaltNONHW = $scope.cf.getSubSum($scope.activities,"quantityTotalNONHW","unitCodeNONHW");
+        	$scope.totalrNONHW = $scope.cf.getSubSum($scope.activities,"quantityRecoveryNONHW","unitCodeNONHW");
+        	$scope.totaldNONHW = $scope.cf.getSubSum($scope.activities,"quantityDisposalNONHW","unitCodeNONHW");
+        	$scope.totaluNONHW = $scope.cf.getSubSum($scope.activities,"quantityUnspecNONHW","unitCodeNONHW");
         	
         };
         
@@ -723,22 +723,22 @@ $scope.$watch('currentPage', function(value) {
             	$scope.activitiesDownload[i+add_fields]= new Array();
             	$scope.activitiesDownload[i+add_fields][0] = $scope.tr_laa[activity.key];
             	$scope.activitiesDownload[i+add_fields][1] = $scope.cf.getTypeCount(activity.data);
-            	$scope.activitiesDownload[i+add_fields][2] = $scope.cf.getSum(activity.data,"quantityTotalHWIC",true);
-            	$scope.activitiesDownload[i+add_fields][3] = $scope.cf.getSum(activity.data,"quantityRecoveryHWIC",true);
-            	$scope.activitiesDownload[i+add_fields][4] = $scope.cf.getSum(activity.data,"quantityDisposalHWIC",true);
-            	$scope.activitiesDownload[i+add_fields][5] = $scope.cf.getSum(activity.data,"quantityUnspecHWIC",true);
-            	$scope.activitiesDownload[i+add_fields][6] = $scope.cf.getSum(activity.data,"quantityTotalHWOC",true);
-            	$scope.activitiesDownload[i+add_fields][7] = $scope.cf.getSum(activity.data,"quantityRecoveryHWOC",true);
-            	$scope.activitiesDownload[i+add_fields][8] = $scope.cf.getSum(activity.data,"quantityDisposalHWOC",true);
-            	$scope.activitiesDownload[i+add_fields][9] = $scope.cf.getSum(activity.data,"quantityUnspecHWOC",true);
-            	$scope.activitiesDownload[i+add_fields][10] = $scope.cf.getSum(activity.data,"quantityTotalHW",true);
-            	$scope.activitiesDownload[i+add_fields][11] = $scope.cf.getSum(activity.data,"quantityRecoveryHW",true);
-            	$scope.activitiesDownload[i+add_fields][12] = $scope.cf.getSum(activity.data,"quantityDisposalHW",true);
-            	$scope.activitiesDownload[i+add_fields][13] = $scope.cf.getSum(activity.data,"quantityUnspecHW",true);
-            	$scope.activitiesDownload[i+add_fields][14] = $scope.cf.getSum(activity.data,"quantityTotalNONHW",true);
-            	$scope.activitiesDownload[i+add_fields][15] = $scope.cf.getSum(activity.data,"quantityRecoveryNONHW",true);
-            	$scope.activitiesDownload[i+add_fields][16] = $scope.cf.getSum(activity.data,"quantityDisposalNONHW",true);
-            	$scope.activitiesDownload[i+add_fields][17] = $scope.cf.getSum(activity.data,"quantityUnspecNONHW",true);
+            	$scope.activitiesDownload[i+add_fields][2] = $scope.cf.getSum(activity.data,"quantityTotalHWIC","unitCodeHWIC");
+            	$scope.activitiesDownload[i+add_fields][3] = $scope.cf.getSum(activity.data,"quantityRecoveryHWIC","unitCodeHWIC");
+            	$scope.activitiesDownload[i+add_fields][4] = $scope.cf.getSum(activity.data,"quantityDisposalHWIC","unitCodeHWIC");
+            	$scope.activitiesDownload[i+add_fields][5] = $scope.cf.getSum(activity.data,"quantityUnspecHWIC","unitCodeHWIC");
+            	$scope.activitiesDownload[i+add_fields][6] = $scope.cf.getSum(activity.data,"quantityTotalHWOC","unitCodeHWOC");
+            	$scope.activitiesDownload[i+add_fields][7] = $scope.cf.getSum(activity.data,"quantityRecoveryHWOC","unitCodeHWOC");
+            	$scope.activitiesDownload[i+add_fields][8] = $scope.cf.getSum(activity.data,"quantityDisposalHWOC","unitCodeHWOC");
+            	$scope.activitiesDownload[i+add_fields][9] = $scope.cf.getSum(activity.data,"quantityUnspecHWOC","unitCodeHWOC");
+            	$scope.activitiesDownload[i+add_fields][10] = $scope.cf.getSum(activity.data,"quantityTotalHW","unitCodeNONHW");
+            	$scope.activitiesDownload[i+add_fields][11] = $scope.cf.getSum(activity.data,"quantityRecoveryHW","unitCodeNONHW");
+            	$scope.activitiesDownload[i+add_fields][12] = $scope.cf.getSum(activity.data,"quantityDisposalHW","unitCodeNONHW");
+            	$scope.activitiesDownload[i+add_fields][13] = $scope.cf.getSum(activity.data,"quantityUnspecHW","unitCodeNONHW");
+            	$scope.activitiesDownload[i+add_fields][14] = $scope.cf.getSum(activity.data,"quantityTotalNONHW","unitCodeNONHW");
+            	$scope.activitiesDownload[i+add_fields][15] = $scope.cf.getSum(activity.data,"quantityRecoveryNONHW","unitCodeNONHW");
+            	$scope.activitiesDownload[i+add_fields][16] = $scope.cf.getSum(activity.data,"quantityDisposalNONHW","unitCodeNONHW");
+            	$scope.activitiesDownload[i+add_fields][17] = $scope.cf.getSum(activity.data,"quantityUnspecNONHW","unitCodeNONHW");
             	
             	activity.data = activity['data'].sort(function(a, b) {
             	    return a.iaactivityCode - b.iaactivityCode;
@@ -749,22 +749,22 @@ $scope.$watch('currentPage', function(value) {
             		$scope.activitiesDownload[i+add_fields+(++subActivities)]= new Array();
                 	$scope.activitiesDownload[i+add_fields+subActivities][0] = $scope.tr_laa[subActivity.iaActivityCode];
                 	$scope.activitiesDownload[i+add_fields+subActivities][1] = $scope.cf.getTypeCount(subActivity);
-                	$scope.activitiesDownload[i+add_fields+subActivities][2] = $scope.cf.getSum(subActivity,"quantityTotalHWIC",true);
-                	$scope.activitiesDownload[i+add_fields+subActivities][3] = $scope.cf.getSum(subActivity,"quantityRecoveryHWIC",true);
-                	$scope.activitiesDownload[i+add_fields+subActivities][4] = $scope.cf.getSum(subActivity,"quantityDisposalHWIC",true);
-                	$scope.activitiesDownload[i+add_fields+subActivities][5] = $scope.cf.getSum(subActivity,"quantityUnspecHWIC",true);
-                	$scope.activitiesDownload[i+add_fields+subActivities][6] = $scope.cf.getSum(subActivity,"quantityTotalHWOC",true);
-                	$scope.activitiesDownload[i+add_fields+subActivities][7] = $scope.cf.getSum(subActivity,"quantityRecoveryHWOC",true);
-                	$scope.activitiesDownload[i+add_fields+subActivities][8] = $scope.cf.getSum(subActivity,"quantityDisposalHWOC",true);
-                	$scope.activitiesDownload[i+add_fields+subActivities][9] = $scope.cf.getSum(subActivity,"quantityUnspecHWOC",true);
-                	$scope.activitiesDownload[i+add_fields+subActivities][10] = $scope.cf.getSum(subActivity,"quantityTotalHW",true);
-                	$scope.activitiesDownload[i+add_fields+subActivities][11] = $scope.cf.getSum(subActivity,"quantityRecoveryHW",true);
-                	$scope.activitiesDownload[i+add_fields+subActivities][12] = $scope.cf.getSum(subActivity,"quantityDisposalHW",true);
-                	$scope.activitiesDownload[i+add_fields+subActivities][13] = $scope.cf.getSum(subActivity,"quantityUnspecHW",true);
-                	$scope.activitiesDownload[i+add_fields+subActivities][14] = $scope.cf.getSum(subActivity,"quantityTotalNONHW",true);
-                	$scope.activitiesDownload[i+add_fields+subActivities][15] = $scope.cf.getSum(subActivity,"quantityRecoveryNONHW",true);
-                	$scope.activitiesDownload[i+add_fields+subActivities][16] = $scope.cf.getSum(subActivity,"quantityDisposalNONHW",true);
-                	$scope.activitiesDownload[i+add_fields+subActivities][17] = $scope.cf.getSum(subActivity,"quantityUnspecNONHW",true);
+                	$scope.activitiesDownload[i+add_fields+subActivities][2] = $scope.cf.getSum(subActivity,"quantityTotalHWIC","unitCodeHWIC");
+                	$scope.activitiesDownload[i+add_fields+subActivities][3] = $scope.cf.getSum(subActivity,"quantityRecoveryHWIC","unitCodeHWIC");
+                	$scope.activitiesDownload[i+add_fields+subActivities][4] = $scope.cf.getSum(subActivity,"quantityDisposalHWIC","unitCodeHWIC");
+                	$scope.activitiesDownload[i+add_fields+subActivities][5] = $scope.cf.getSum(subActivity,"quantityUnspecHWIC","unitCodeHWIC");
+                	$scope.activitiesDownload[i+add_fields+subActivities][6] = $scope.cf.getSum(subActivity,"quantityTotalHWOC","unitCodeHWOC");
+                	$scope.activitiesDownload[i+add_fields+subActivities][7] = $scope.cf.getSum(subActivity,"quantityRecoveryHWOC","unitCodeHWOC");
+                	$scope.activitiesDownload[i+add_fields+subActivities][8] = $scope.cf.getSum(subActivity,"quantityDisposalHWOC","unitCodeHWOC");
+                	$scope.activitiesDownload[i+add_fields+subActivities][9] = $scope.cf.getSum(subActivity,"quantityUnspecHWOC","unitCodeHWOC");
+                	$scope.activitiesDownload[i+add_fields+subActivities][10] = $scope.cf.getSum(subActivity,"quantityTotalHW","unitCodeNONHW");
+                	$scope.activitiesDownload[i+add_fields+subActivities][11] = $scope.cf.getSum(subActivity,"quantityRecoveryHW","unitCodeNONHW");
+                	$scope.activitiesDownload[i+add_fields+subActivities][12] = $scope.cf.getSum(subActivity,"quantityDisposalHW","unitCodeNONHW");
+                	$scope.activitiesDownload[i+add_fields+subActivities][13] = $scope.cf.getSum(subActivity,"quantityUnspecHW","unitCodeNONHW");
+                	$scope.activitiesDownload[i+add_fields+subActivities][14] = $scope.cf.getSum(subActivity,"quantityTotalNONHW","unitCodeNONHW");
+                	$scope.activitiesDownload[i+add_fields+subActivities][15] = $scope.cf.getSum(subActivity,"quantityRecoveryNONHW","unitCodeNONHW");
+                	$scope.activitiesDownload[i+add_fields+subActivities][16] = $scope.cf.getSum(subActivity,"quantityDisposalNONHW","unitCodeNONHW");
+                	$scope.activitiesDownload[i+add_fields+subActivities][17] = $scope.cf.getSum(subActivity,"quantityUnspecNONHW","unitCodeNONHW");
                 	
                 	if(subActivity.hasOwnProperty('sublevel') && subActivity.sublevel instanceof Array && subActivity.sublevel.length >=0){
                 		subActivity.sublevel= subActivity.sublevel.sort(function(a, b) {
@@ -776,22 +776,22 @@ $scope.$watch('currentPage', function(value) {
                     		$scope.activitiesDownload[i+add_fields+(++subActivities)]= new Array();
                         	$scope.activitiesDownload[i+add_fields+subActivities][0] = $scope.tr_laa[subSubActivity.iaSubActivityCode];
                         	$scope.activitiesDownload[i+add_fields+subActivities][1] = $scope.cf.getTypeCount(subSubActivity);
-                        	$scope.activitiesDownload[i+add_fields+subActivities][2] = $scope.cf.getSum(subSubActivity,"quantityTotalHWIC",true);
-                        	$scope.activitiesDownload[i+add_fields+subActivities][3] = $scope.cf.getSum(subSubActivity,"quantityRecoveryHWIC",true);
-                        	$scope.activitiesDownload[i+add_fields+subActivities][4] = $scope.cf.getSum(subSubActivity,"quantityDisposalHWIC",true);
-                        	$scope.activitiesDownload[i+add_fields+subActivities][5] = $scope.cf.getSum(subSubActivity,"quantityUnspecHWIC",true);
-                        	$scope.activitiesDownload[i+add_fields+subActivities][6] = $scope.cf.getSum(subSubActivity,"quantityTotalHWOC",true);
-                        	$scope.activitiesDownload[i+add_fields+subActivities][7] = $scope.cf.getSum(subSubActivity,"quantityRecoveryHWOC",true);
-                        	$scope.activitiesDownload[i+add_fields+subActivities][8] = $scope.cf.getSum(subSubActivity,"quantityDisposalHWOC",true);
-                        	$scope.activitiesDownload[i+add_fields+subActivities][9] = $scope.cf.getSum(subSubActivity,"quantityUnspecHWOC",true);
-                        	$scope.activitiesDownload[i+add_fields+subActivities][10] = $scope.cf.getSum(subSubActivity,"quantityTotalHW",true);
-                        	$scope.activitiesDownload[i+add_fields+subActivities][11] = $scope.cf.getSum(subSubActivity,"quantityRecoveryHW",true);
-                        	$scope.activitiesDownload[i+add_fields+subActivities][12] = $scope.cf.getSum(subSubActivity,"quantityDisposalHW",true);
-                        	$scope.activitiesDownload[i+add_fields+subActivities][13] = $scope.cf.getSum(subSubActivity,"quantityUnspecHW",true);
-                        	$scope.activitiesDownload[i+add_fields+subActivities][14] = $scope.cf.getSum(subSubActivity,"quantityTotalNONHW",true);
-                        	$scope.activitiesDownload[i+add_fields+subActivities][15] = $scope.cf.getSum(subSubActivity,"quantityRecoveryNONHW",true);
-                        	$scope.activitiesDownload[i+add_fields+subActivities][16] = $scope.cf.getSum(subSubActivity,"quantityDisposalNONHW",true);
-                        	$scope.activitiesDownload[i+add_fields+subActivities][17] = $scope.cf.getSum(subSubActivity,"quantityUnspecNONHW",true);
+                        	$scope.activitiesDownload[i+add_fields+subActivities][2] = $scope.cf.getSum(subSubActivity,"quantityTotalHWIC","unitCodeHWIC");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][3] = $scope.cf.getSum(subSubActivity,"quantityRecoveryHWIC","unitCodeHWIC");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][4] = $scope.cf.getSum(subSubActivity,"quantityDisposalHWIC","unitCodeHWIC");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][5] = $scope.cf.getSum(subSubActivity,"quantityUnspecHWIC","unitCodeHWIC");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][6] = $scope.cf.getSum(subSubActivity,"quantityTotalHWOC","unitCodeHWOC");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][7] = $scope.cf.getSum(subSubActivity,"quantityRecoveryHWOC","unitCodeHWOC");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][8] = $scope.cf.getSum(subSubActivity,"quantityDisposalHWOC","unitCodeHWOC");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][9] = $scope.cf.getSum(subSubActivity,"quantityUnspecHWOC","unitCodeHWOC");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][10] = $scope.cf.getSum(subSubActivity,"quantityTotalHW","unitCodeNONHW");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][11] = $scope.cf.getSum(subSubActivity,"quantityRecoveryHW","unitCodeNONHW");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][12] = $scope.cf.getSum(subSubActivity,"quantityDisposalHW","unitCodeNONHW");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][13] = $scope.cf.getSum(subSubActivity,"quantityUnspecHW","unitCodeNONHW");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][14] = $scope.cf.getSum(subSubActivity,"quantityTotalNONHW","unitCodeNONHW");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][15] = $scope.cf.getSum(subSubActivity,"quantityRecoveryNONHW","unitCodeNONHW");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][16] = $scope.cf.getSum(subSubActivity,"quantityDisposalNONHW","unitCodeNONHW");
+                        	$scope.activitiesDownload[i+add_fields+subActivities][17] = $scope.cf.getSum(subSubActivity,"quantityUnspecNONHW","unitCodeNONHW");
                     	}
                 	}
                 	
@@ -828,25 +828,25 @@ $scope.$watch('currentPage', function(value) {
         {
         	$scope.areas = angular.copy($scope.items);
          	$scope.totalareasfac = $scope.cf.getSubSum($scope.areas,"facilityCount");
-        	$scope.totalareastHWIC = $scope.cf.getSubSum($scope.areas,"quantityTotalHWIC",true);
-        	$scope.totalareasrHWIC = $scope.cf.getSubSum($scope.areas,"quantityRecoveryHWIC",true);
-        	$scope.totalareasdHWIC = $scope.cf.getSubSum($scope.areas,"quantityDisposalHWIC",true);
-        	$scope.totalareasuHWIC = $scope.cf.getSubSum($scope.areas,"quantityUnspecHWIC",true);
+        	$scope.totalareastHWIC = $scope.cf.getSubSum($scope.areas,"quantityTotalHWIC","unitCodeHWIC");
+        	$scope.totalareasrHWIC = $scope.cf.getSubSum($scope.areas,"quantityRecoveryHWIC","unitCodeHWIC");
+        	$scope.totalareasdHWIC = $scope.cf.getSubSum($scope.areas,"quantityDisposalHWIC","unitCodeHWIC");
+        	$scope.totalareasuHWIC = $scope.cf.getSubSum($scope.areas,"quantityUnspecHWIC","unitCodeHWIC");
         	
-        	$scope.totalareastHWOC = $scope.cf.getSubSum($scope.areas,"quantityTotalHWOC",true);
-        	$scope.totalareasrHWOC = $scope.cf.getSubSum($scope.areas,"quantityRecoveryHWOC",true);
-        	$scope.totalareasdHWOC = $scope.cf.getSubSum($scope.areas,"quantityDisposalHWOC",true);
-        	$scope.totalareasuHWOC = $scope.cf.getSubSum($scope.areas,"quantityUnspecHWOC",true);
+        	$scope.totalareastHWOC = $scope.cf.getSubSum($scope.areas,"quantityTotalHWOC","unitCodeHWOC");
+        	$scope.totalareasrHWOC = $scope.cf.getSubSum($scope.areas,"quantityRecoveryHWOC","unitCodeHWOC");
+        	$scope.totalareasdHWOC = $scope.cf.getSubSum($scope.areas,"quantityDisposalHWOC","unitCodeHWOC");
+        	$scope.totalareasuHWOC = $scope.cf.getSubSum($scope.areas,"quantityUnspecHWOC","unitCodeHWOC");
         	
-        	$scope.totalareasthaz = $scope.cf.getSubSum($scope.areas,"quantityTotalHW",true);
-        	$scope.totalareasrhaz = $scope.cf.getSubSum($scope.areas,"quantityRecoveryHW",true);
-        	$scope.totalareasdhaz = $scope.cf.getSubSum($scope.areas,"quantityDisposalHW",true);
-        	$scope.totalareasuhaz = $scope.cf.getSubSum($scope.areas,"quantityUnspecHW",true);
+        	$scope.totalareasthaz = $scope.cf.getSubSum($scope.areas,"quantityTotalHW","unitCodeNONHW");
+        	$scope.totalareasrhaz = $scope.cf.getSubSum($scope.areas,"quantityRecoveryHW","unitCodeNONHW");
+        	$scope.totalareasdhaz = $scope.cf.getSubSum($scope.areas,"quantityDisposalHW","unitCodeNONHW");
+        	$scope.totalareasuhaz = $scope.cf.getSubSum($scope.areas,"quantityUnspecHW","unitCodeNONHW");
         	
-        	$scope.totalareastNONHW = $scope.cf.getSubSum($scope.areas,"quantityTotalNONHW",true);
-        	$scope.totalareasrNONHW = $scope.cf.getSubSum($scope.areas,"quantityRecoveryNONHW",true);
-        	$scope.totalareasdNONHW = $scope.cf.getSubSum($scope.areas,"quantityDisposalNONHW",true);
-        	$scope.totalareasuNONHW = $scope.cf.getSubSum($scope.areas,"quantityUnspecNONHW",true);
+        	$scope.totalareastNONHW = $scope.cf.getSubSum($scope.areas,"quantityTotalNONHW","unitCodeNONHW");
+        	$scope.totalareasrNONHW = $scope.cf.getSubSum($scope.areas,"quantityRecoveryNONHW","unitCodeNONHW");
+        	$scope.totalareasdNONHW = $scope.cf.getSubSum($scope.areas,"quantityDisposalNONHW","unitCodeNONHW");
+        	$scope.totalareasuNONHW = $scope.cf.getSubSum($scope.areas,"quantityUnspecNONHW","unitCodeNONHW");
         	$scope.setAreaRegion();
         };
         
@@ -888,22 +888,22 @@ $scope.$watch('currentPage', function(value) {
             	$scope.areasDownload[i+add_fields]= new Array();
             	$scope.areasDownload[i+add_fields][0] = $scope.tr_lco[area.key];
             	$scope.areasDownload[i+add_fields][1] = $scope.cf.getTypeCount(area.data);
-            	$scope.areasDownload[i+add_fields][2] = $scope.cf.getSum(area.data,"quantityTotalHWIC",true);
-            	$scope.areasDownload[i+add_fields][3] = $scope.cf.getSum(area.data,"quantityRecoveryHWIC",true);
-            	$scope.areasDownload[i+add_fields][4] = $scope.cf.getSum(area.data,"quantityDisposalHWIC",true);
-            	$scope.areasDownload[i+add_fields][5] = $scope.cf.getSum(area.data,"quantityUnspecHWIC",true);
-            	$scope.areasDownload[i+add_fields][6] = $scope.cf.getSum(area.data,"quantityTotalHWOC",true);
-            	$scope.areasDownload[i+add_fields][7] = $scope.cf.getSum(area.data,"quantityRecoveryHWOC",true);
-            	$scope.areasDownload[i+add_fields][8] = $scope.cf.getSum(area.data,"quantityDisposalHWOC",true);
-            	$scope.areasDownload[i+add_fields][9] = $scope.cf.getSum(area.data,"quantityUnspecHWOC",true);
-            	$scope.areasDownload[i+add_fields][10] = $scope.cf.getSum(area.data,"quantityTotalHW",true);
-            	$scope.areasDownload[i+add_fields][11] = $scope.cf.getSum(area.data,"quantityRecoveryHW",true);
-            	$scope.areasDownload[i+add_fields][12] = $scope.cf.getSum(area.data,"quantityDisposalHW",true);
-            	$scope.areasDownload[i+add_fields][13] = $scope.cf.getSum(area.data,"quantityUnspecHW",true);
-            	$scope.areasDownload[i+add_fields][14] = $scope.cf.getSum(area.data,"quantityTotalNONHW",true);
-            	$scope.areasDownload[i+add_fields][15] = $scope.cf.getSum(area.data,"quantityRecoveryNONHW",true);
-            	$scope.areasDownload[i+add_fields][16] = $scope.cf.getSum(area.data,"quantityDisposalNONHW",true);
-            	$scope.areasDownload[i+add_fields][17] = $scope.cf.getSum(area.data,"quantityUnspecNONHW",true);
+            	$scope.areasDownload[i+add_fields][2] = $scope.cf.getSum(area.data,"quantityTotalHWIC","unitCodeHWIC");
+            	$scope.areasDownload[i+add_fields][3] = $scope.cf.getSum(area.data,"quantityRecoveryHWIC","unitCodeHWIC");
+            	$scope.areasDownload[i+add_fields][4] = $scope.cf.getSum(area.data,"quantityDisposalHWIC","unitCodeHWIC");
+            	$scope.areasDownload[i+add_fields][5] = $scope.cf.getSum(area.data,"quantityUnspecHWIC","unitCodeHWIC");
+            	$scope.areasDownload[i+add_fields][6] = $scope.cf.getSum(area.data,"quantityTotalHWOC","unitCodeHWOC");
+            	$scope.areasDownload[i+add_fields][7] = $scope.cf.getSum(area.data,"quantityRecoveryHWOC","unitCodeHWOC");
+            	$scope.areasDownload[i+add_fields][8] = $scope.cf.getSum(area.data,"quantityDisposalHWOC","unitCodeHWOC");
+            	$scope.areasDownload[i+add_fields][9] = $scope.cf.getSum(area.data,"quantityUnspecHWOC","unitCodeHWOC");
+            	$scope.areasDownload[i+add_fields][10] = $scope.cf.getSum(area.data,"quantityTotalHW","unitCodeNONHW");
+            	$scope.areasDownload[i+add_fields][11] = $scope.cf.getSum(area.data,"quantityRecoveryHW","unitCodeNONHW");
+            	$scope.areasDownload[i+add_fields][12] = $scope.cf.getSum(area.data,"quantityDisposalHW","unitCodeNONHW");
+            	$scope.areasDownload[i+add_fields][13] = $scope.cf.getSum(area.data,"quantityUnspecHW","unitCodeNONHW");
+            	$scope.areasDownload[i+add_fields][14] = $scope.cf.getSum(area.data,"quantityTotalNONHW","unitCodeNONHW");
+            	$scope.areasDownload[i+add_fields][15] = $scope.cf.getSum(area.data,"quantityRecoveryNONHW","unitCodeNONHW");
+            	$scope.areasDownload[i+add_fields][16] = $scope.cf.getSum(area.data,"quantityDisposalNONHW","unitCodeNONHW");
+            	$scope.areasDownload[i+add_fields][17] = $scope.cf.getSum(area.data,"quantityUnspecNONHW","unitCodeNONHW");
             	
             	area.data.sort(function(a, b) {
             		if($scope.regionSearch){
@@ -926,22 +926,22 @@ $scope.$watch('currentPage', function(value) {
                 		$scope.areasDownload[i+add_fields+(++subAreas)]= new Array();
                     	$scope.areasDownload[i+add_fields+subAreas][0] = areaName;
                     	$scope.areasDownload[i+add_fields+subAreas][1] = $scope.cf.getTypeCount(subArea,"facility");
-                    	$scope.areasDownload[i+add_fields+subAreas][2] = $scope.cf.getSum(subArea,"quantityTotalHWIC",true);
-                    	$scope.areasDownload[i+add_fields+subAreas][3] = $scope.cf.getSum(subArea,"quantityRecoveryHWIC",true);
-                    	$scope.areasDownload[i+add_fields+subAreas][4] = $scope.cf.getSum(subArea,"quantityDisposalHWIC",true);
-                    	$scope.areasDownload[i+add_fields+subAreas][5] = $scope.cf.getSum(subArea,"quantityUnspecHWIC",true);
-                    	$scope.areasDownload[i+add_fields+subAreas][6] = $scope.cf.getSum(subArea,"quantityTotalHWOC",true);
-                    	$scope.areasDownload[i+add_fields+subAreas][7] = $scope.cf.getSum(subArea,"quantityRecoveryHWOC",true);
-                    	$scope.areasDownload[i+add_fields+subAreas][8] = $scope.cf.getSum(subArea,"quantityDisposalHWOC",true);
-                    	$scope.areasDownload[i+add_fields+subAreas][9] = $scope.cf.getSum(subArea,"quantityUnspecHWOC",true);
-                    	$scope.areasDownload[i+add_fields+subAreas][10] = $scope.cf.getSum(subArea,"quantityTotalHW",true);
-                    	$scope.areasDownload[i+add_fields+subAreas][11] = $scope.cf.getSum(subArea,"quantityRecoveryHW",true);
-                    	$scope.areasDownload[i+add_fields+subAreas][12] = $scope.cf.getSum(subArea,"quantityDisposalHW",true);
-                    	$scope.areasDownload[i+add_fields+subAreas][13] = $scope.cf.getSum(subArea,"quantityUnspecHW",true);
-                    	$scope.areasDownload[i+add_fields+subAreas][14] = $scope.cf.getSum(subArea,"quantityTotalNONHW",true);
-                    	$scope.areasDownload[i+add_fields+subAreas][15] = $scope.cf.getSum(subArea,"quantityRecoveryNONHW",true);
-                    	$scope.areasDownload[i+add_fields+subAreas][16] = $scope.cf.getSum(subArea,"quantityDisposalNONHW",true);
-                    	$scope.areasDownload[i+add_fields+subAreas][17] = $scope.cf.getSum(subArea,"quantityUnspecNONHW",true);
+                    	$scope.areasDownload[i+add_fields+subAreas][2] = $scope.cf.getSum(subArea,"quantityTotalHWIC","unitCodeHWIC");
+                    	$scope.areasDownload[i+add_fields+subAreas][3] = $scope.cf.getSum(subArea,"quantityRecoveryHWIC","unitCodeHWIC");
+                    	$scope.areasDownload[i+add_fields+subAreas][4] = $scope.cf.getSum(subArea,"quantityDisposalHWIC","unitCodeHWIC");
+                    	$scope.areasDownload[i+add_fields+subAreas][5] = $scope.cf.getSum(subArea,"quantityUnspecHWIC","unitCodeHWIC");
+                    	$scope.areasDownload[i+add_fields+subAreas][6] = $scope.cf.getSum(subArea,"quantityTotalHWOC","unitCodeHWOC");
+                    	$scope.areasDownload[i+add_fields+subAreas][7] = $scope.cf.getSum(subArea,"quantityRecoveryHWOC","unitCodeHWOC");
+                    	$scope.areasDownload[i+add_fields+subAreas][8] = $scope.cf.getSum(subArea,"quantityDisposalHWOC","unitCodeHWOC");
+                    	$scope.areasDownload[i+add_fields+subAreas][9] = $scope.cf.getSum(subArea,"quantityUnspecHWOC","unitCodeHWOC");
+                    	$scope.areasDownload[i+add_fields+subAreas][10] = $scope.cf.getSum(subArea,"quantityTotalHW","unitCodeNONHW");
+                    	$scope.areasDownload[i+add_fields+subAreas][11] = $scope.cf.getSum(subArea,"quantityRecoveryHW","unitCodeNONHW");
+                    	$scope.areasDownload[i+add_fields+subAreas][12] = $scope.cf.getSum(subArea,"quantityDisposalHW","unitCodeNONHW");
+                    	$scope.areasDownload[i+add_fields+subAreas][13] = $scope.cf.getSum(subArea,"quantityUnspecHW","unitCodeNONHW");
+                    	$scope.areasDownload[i+add_fields+subAreas][14] = $scope.cf.getSum(subArea,"quantityTotalNONHW","unitCodeNONHW");
+                    	$scope.areasDownload[i+add_fields+subAreas][15] = $scope.cf.getSum(subArea,"quantityRecoveryNONHW","unitCodeNONHW");
+                    	$scope.areasDownload[i+add_fields+subAreas][16] = $scope.cf.getSum(subArea,"quantityDisposalNONHW","unitCodeNONHW");
+                    	$scope.areasDownload[i+add_fields+subAreas][17] = $scope.cf.getSum(subArea,"quantityUnspecNONHW","unitCodeNONHW");
                 	}
             	}
             	$scope.areasDownload[i+add_fields+(++subAreas)]= new Array();
@@ -1002,10 +1002,10 @@ $scope.$watch('currentPage', function(value) {
             	var facility = $scope.facilitiesCompleteItems[i];
             	$scope.facilitiesDownload[i+top_fields]= new Array();
             	$scope.facilitiesDownload[i+top_fields][0] = facility.facilityName;
-            	$scope.facilitiesDownload[i+top_fields][1] = $scope.ff.formatMethod(facility.quantityTotal,facility.confidentialIndicator);
-            	$scope.facilitiesDownload[i+top_fields][2] = $scope.ff.formatMethod(facility.quantityRecovery,facility.confidentialIndicator);
-            	$scope.facilitiesDownload[i+top_fields][3] = $scope.ff.formatMethod(facility.quantityDisposal,facility.confidentialIndicator);
-            	$scope.facilitiesDownload[i+top_fields][4] = $scope.ff.formatMethod(facility.quantityUnspec,facility.confidentialIndicator);
+            	$scope.facilitiesDownload[i+top_fields][1] = $scope.ff.formatQuantity(facility.quantityTotal,facility.unitCodeHWOC,facility.confidentialIndicator);
+            	$scope.facilitiesDownload[i+top_fields][2] = $scope.ff.formatQuantity(facility.quantityRecovery,facility.unitCodeHWOC,facility.confidentialIndicator);
+            	$scope.facilitiesDownload[i+top_fields][3] = $scope.ff.formatQuantity(facility.quantityDisposal,facility.unitCodeHWOC,facility.confidentialIndicator);
+            	$scope.facilitiesDownload[i+top_fields][4] = $scope.ff.formatQuantity(facility.quantityUnspec,facility.unitCodeHWOC,facility.confidentialIndicator);
             	$scope.facilitiesDownload[i+top_fields][5] = facility.Activity;
             	$scope.facilitiesDownload[i+top_fields][6] = $scope.tr_lco[facility.countryCode];
             }

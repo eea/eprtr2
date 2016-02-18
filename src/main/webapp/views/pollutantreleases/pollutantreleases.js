@@ -791,8 +791,8 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         };
 
         $scope.quantity = function(item) {
-        	var qm = $scope.getQuantityStr($scope.mediumType);
-            if (item[qm])
+        	var qm = $scope.getQuantityStr($scope.mediumFilter.prFacMedium);
+            if (item[qm] != null)
             {
                 return $scope.ff.formatMethod(item[qm]);
             }
@@ -807,9 +807,11 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         };
 
         $scope.quantityAccidental = function(item) {
-            if (item['quantityAccidental' + $scope.mediumType])
+        	var qam = $scope.getQuantityAccStr($scope.mediumFilter.prFacMedium);
+        	//var qm = 'quantityAccidental' + $scope.mediumFilter.prFacMedium;
+            if (item[qam] != null)
             {
-                return $scope.ff.formatMethod(item['quantityAccidental' + $scope.mediumType]);
+                return $scope.ff.formatMethod(item[qam]);
             }
             else if (item.confidentialIndicator)
             {
@@ -822,9 +824,11 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         };
 
         $scope.percentageAccidental = function(item) {
-        	if (item['quantityAccidental' + $scope.mediumType]){
+        	var qm = $scope.getQuantityStr($scope.mediumFilter.prFacMedium);
+        	var qam = $scope.getQuantityAccStr($scope.mediumFilter.prFacMedium);
+        	if (item[qam]){
         		
-        		return $scope.ff.DeterminePercent(item['quantity' + $scope.mediumType],item['quantityAccidental' + $scope.mediumType]);
+        		return $scope.ff.DeterminePercent(item[qm],item[qam]);
         	}
             else
             {
@@ -838,6 +842,10 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         	var subCollection = [];
         	for ( var i = 0; i < $scope.items.length; i++ ) {
         		var record = angular.copy($scope.items[i]);
+        		var unit = record["unitAir"]!=null?
+        					record["unitAir"]:record["unitSoil"]!=null?
+        							record["unitSoil"]:record["unitWater"]!=null?
+        									record["unitWater"]:"KGM";
         		var group = $scope.cf.findGroup(collection,record[propertyGP1]);		
         		if(!group)
         		{
@@ -888,6 +896,13 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         				exist = true;
         				break;
         			}
+        			//Qiuckfix
+        			group.data[j].unitAccidentalAir = group.data[j].unitAccidentalAir != null?group.data[j].unitAccidentalAir :unit;
+        			group.data[j].unitAccidentalSoil = group.data[j].unitAccidentalSoil != null?group.data[j].unitAccidentalSoil :unit;
+        			group.data[j].unitAccidentalWater = group.data[j].unitAccidentalWater != null?group.data[j].unitAccidentalWater :unit;
+        			group.data[j].unitAir = group.data[j].unitAir != null?group.data[j].unitAir :unit;
+        			group.data[j].unitSoil = group.data[j].unitSoil != null?group.data[j].unitSoil :unit;
+        			group.data[j].unitWater = group.data[j].unitWater != null?group.data[j].unitWater :unit;
         		}
         		var levelkey = record[propertyGP3];
     			if(levelkey) 
@@ -976,6 +991,14 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         		        				existSublevel = true;
         		        				break;
         		        			}
+        		        			//Qiuckfix
+        		        			sublevel[m].unitAccidentalAir = sublevel[m].unitAccidentalAir != null?sublevel[m].unitAccidentalAir :unit;
+        		        			sublevel[m].unitAccidentalSoil = sublevel[m].unitAccidentalSoil != null?sublevel[m].unitAccidentalSoil :unit;
+        		        			sublevel[m].unitAccidentalWater = sublevel[m].unitAccidentalWater != null?sublevel[m].unitAccidentalWater :unit;
+        		        			sublevel[m].unitAir = sublevel[m].unitAir != null?sublevel[m].unitAir :unit;
+        		        			sublevel[m].unitSoil = sublevel[m].unitSoil != null?sublevel[m].unitSoil :unit;
+        		        			sublevel[m].unitWater = sublevel[m].unitWater != null?sublevel[m].unitWater :unit;
+
         		        		} // end for
         		        		
         		        		if(!existSublevel)
@@ -998,12 +1021,12 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         	//$scope.cf.getSubSum($scope.activities,"facilityCount",true);
         	$scope.totalactivitiesfac = $scope.cf.getSubSum($scope.activities,"facilityCount",false);
         	$scope.totalactivitiesacc = $scope.cf.getSubSum($scope.activities,"facilityAccidentalCount",false);
-        	$scope.totalactivitiessumair = $scope.cf.getSubSum($scope.activities,"quantityAir",true);
-        	$scope.totalactivitiessumaair = $scope.cf.getSubSum($scope.activities,"quantityAccidentalAir",true);
-        	$scope.totalactivitiessumwater = $scope.cf.getSubSum($scope.activities,"quantityWater",true);
-        	$scope.totalactivitiessumawater = $scope.cf.getSubSum($scope.activities,"quantityAccidentalWater",true);
-        	$scope.totalactivitiessumsoal = $scope.cf.getSubSum($scope.activities,"quantitySoil",true);
-        	$scope.totalactivitiessumasoil = $scope.cf.getSubSum($scope.activities,"quantityAccidentalSoil",true);
+        	$scope.totalactivitiessumair = $scope.cf.getSubSum($scope.activities,"quantityAir","unitAir");
+        	$scope.totalactivitiessumaair = $scope.cf.getSubSum($scope.activities,"quantityAccidentalAir","unitAccidentalAir");
+        	$scope.totalactivitiessumwater = $scope.cf.getSubSum($scope.activities,"quantityWater","unitWater");
+        	$scope.totalactivitiessumawater = $scope.cf.getSubSum($scope.activities,"quantityAccidentalWater","unitAccidentalWater");
+        	$scope.totalactivitiessumsoil = $scope.cf.getSubSum($scope.activities,"quantitySoil","unitSoil");
+        	$scope.totalactivitiessumasoil = $scope.cf.getSubSum($scope.activities,"quantityAccidentalSoil","unitAccidentalSoil");
         	
         };
         
@@ -1011,6 +1034,10 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         {
         	for ( var i = 0; i < $scope.items.length; i++ ) {
         		var record = angular.copy($scope.items[i]);
+        		var unit = record["unitAir"]!=null?
+    					record["unitAir"]:record["unitSoil"]!=null?
+    							record["unitSoil"]:record["unitWater"]!=null?
+    									record["unitWater"]:"KGM";
         		var group = $scope.cf.findGroup(collection,record[propertyGP1]);		
         		if(!group)
         		{
@@ -1063,6 +1090,14 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         				exist = true;
         				break;
         			}
+        			//Qiuckfix
+        			group.data[j].unitAccidentalAir = group.data[j].unitAccidentalAir != null?group.data[j].unitAccidentalAir :unit;
+        			group.data[j].unitAccidentalSoil = group.data[j].unitAccidentalSoil != null?group.data[j].unitAccidentalSoil :unit;
+        			group.data[j].unitAccidentalWater = group.data[j].unitAccidentalWater != null?group.data[j].unitAccidentalWater :unit;
+        			group.data[j].unitAir = group.data[j].unitAir != null?group.data[j].unitAir :unit;
+        			group.data[j].unitSoil = group.data[j].unitSoil != null?group.data[j].unitSoil :unit;
+        			group.data[j].unitWater = group.data[j].unitWater != null?group.data[j].unitWater :unit;
+
         		}
         		if(!exist)
         		{
@@ -1124,12 +1159,12 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         	}
         	$scope.totalareasfac = $scope.cf.getSubSum($scope.areas,"facilityCount",false);
         	$scope.totalareasacc = $scope.cf.getSubSum($scope.areas,"facilityAccidentalCount",false);
-        	$scope.totalareassumair = $scope.cf.getSubSum($scope.areas,"quantityAir",true);
-        	$scope.totalareassumaair = $scope.cf.getSubSum($scope.areas,"quantityAccidentalAir",true);
-        	$scope.totalareassumwater = $scope.cf.getSubSum($scope.areas,"quantityWater",true);
-        	$scope.totalareassumawater = $scope.cf.getSubSum($scope.areas,"quantityAccidentalWater",true);
-        	$scope.totalareassumsoal = $scope.cf.getSubSum($scope.areas,"quantitySoil",true);
-        	$scope.totalareassumasoil = $scope.cf.getSubSum($scope.areas,"quantityAccidentalSoil",true);
+        	$scope.totalareassumair = $scope.cf.getSubSum($scope.areas,"quantityAir","unitAir");
+        	$scope.totalareassumaair = $scope.cf.getSubSum($scope.areas,"quantityAccidentalAir","unitAccidentalAir");
+        	$scope.totalareassumwater = $scope.cf.getSubSum($scope.areas,"quantityWater","unitWater");
+        	$scope.totalareassumawater = $scope.cf.getSubSum($scope.areas,"quantityAccidentalWater","unitAccidentalWater");
+        	$scope.totalareassumsoal = $scope.cf.getSubSum($scope.areas,"quantitySoil","unitSoil");
+        	$scope.totalareassumasoil = $scope.cf.getSubSum($scope.areas,"quantityAccidentalSoil","unitAccidentalSoil");
         };
         
         /**
@@ -1155,7 +1190,28 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
 					break;
 			}
     	}
-        
+
+        $scope.getQuantityAccStr = function(medium){
+	    	switch(medium){
+				case 'AIR':
+					//$scope.mediumType = 'Air';
+					return 'quantityAccidentalAir';
+					break;
+				case 'WATER':
+					//$scope.mediumType = 'Water';
+					return 'quantityAccidentalWater';
+					break;
+				case 'SOIL':
+					//$scope.mediumType = 'Soil';
+					return 'quantityAccidentalSoil';
+					break;
+				default:
+					//$scope.mediumType = 'Air';
+					return 'quantityAccidentalAir';
+					break;
+			}
+    	}
+
         /**
          * TimeSeries Modal popup
          */

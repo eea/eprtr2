@@ -28,7 +28,7 @@
                         <td >{{item.treaterName}}</td>
                         <td >{{item.treaterAddress}}, {{item.treaterPostalCode}}, {{item.treaterCity}}, {{tr_tr_lco[item.treaterCountryCode]}}</p></td>
                         <td >{{item.treaterSiteAddress}}, {{item.treaterSitePostalCode}}, {{item.treaterSiteCity}}, {{tr_tr_lco[item.treaterSiteCountryCode]}}</p></td>
-                        <td class="text-right">{{ff.formatMethod(item.quantity,item.confidentialIndicator)}}</td>
+                        <td class="text-right">{{ff.formatQuantity(item.quantity,item.unit,item.confidentialIndicator)}}</td>
                     </tr>
                     </tbody>
                 </table>

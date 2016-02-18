@@ -14,7 +14,7 @@ public class HazardousWasteRecievingCountry {
 
 	public HazardousWasteRecievingCountry(Integer reportingYear, Integer facilities, String recievingCountryCode,
 			Double quantityTotal, Double quantityRecovery, Double quantityDisposal, 
-			Double quantityUnspec) {
+			Double quantityUnspec, String unitCode) {
 		this.reportingYear = reportingYear;
 		this.facilities = facilities;
 		this.recievingCountryCode = recievingCountryCode;
@@ -22,7 +22,7 @@ public class HazardousWasteRecievingCountry {
 		this.quantityRecovery = quantityRecovery;
 		this.quantityDisposal = quantityDisposal;
 		this.quantityUnspec = quantityUnspec;
-		//this.quantityCommonUnit = quantityCommonUnit;
+		this.quantityCommonUnit = unitCode;
 		//this.showAsLink = showAsLink;
 	}
 

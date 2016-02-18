@@ -41,11 +41,12 @@ public class WastetransferReceivingcountryRepository {
 				cb.sum(qr.get(WastetransferReceivingcountry_.quantityTotal)),
 				cb.sum(qr.get(WastetransferReceivingcountry_.quantityRecovery)),
 				cb.sum(qr.get(WastetransferReceivingcountry_.quantityDisposal)),
-				cb.sum(qr.get(WastetransferReceivingcountry_.quantityUnspec))));
+				cb.sum(qr.get(WastetransferReceivingcountry_.quantityUnspec)),
+				qr.get(WastetransferReceivingcountry_.unitCode)));
 		
 		cq.where(filter.buildWhereClauseWastetransferReceivingcountry(cb, qr));
 		cq.groupBy(qr.get(WastetransferReceivingcountry_.reportingYear),
-				qr.get(WastetransferReceivingcountry_.receivingCountryCode));
+				qr.get(WastetransferReceivingcountry_.receivingCountryCode),qr.get(WastetransferReceivingcountry_.unitCode));
 		cq.orderBy(cb.desc(qr.get(WastetransferReceivingcountry_.reportingYear)),
 				cb.desc(cb.<Integer>selectCase().when(
 						cb.isNull(qr.get(WastetransferReceivingcountry_.receivingCountryCode))
@@ -65,10 +66,11 @@ public class WastetransferReceivingcountryRepository {
 				cb.sum(qr.get(WastetransferReceivingcountry_.quantityTotal)),
 				cb.sum(qr.get(WastetransferReceivingcountry_.quantityRecovery)),
 				cb.sum(qr.get(WastetransferReceivingcountry_.quantityDisposal)),
-				cb.sum(qr.get(WastetransferReceivingcountry_.quantityUnspec))));
+				cb.sum(qr.get(WastetransferReceivingcountry_.quantityUnspec)),
+				qr.get(WastetransferReceivingcountry_.unitCode)));
 		
 		cq.where(filter.buildWhereClauseWastetransferReceivingcountry(cb, qr));
-		cq.groupBy(qr.get(WastetransferReceivingcountry_.reportingYear));
+		cq.groupBy(qr.get(WastetransferReceivingcountry_.reportingYear),qr.get(WastetransferReceivingcountry_.unitCode));
 		cq.orderBy(cb.desc(qr.get(WastetransferReceivingcountry_.reportingYear)));
 		
 		TypedQuery<HazardousWasteRecievingCountry> q2 = em.createQuery(cq);

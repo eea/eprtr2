@@ -199,7 +199,7 @@
 										ng-click="showing=!showing">{{tr_laa[item.key]}}</a></td>
 									<td></td>
 									<td class="text-right">{{cf.getTypeCount(item.data)}}</td>
-									<td class="text-right">{{getSum(item.data,"quantity")}}</td>
+									<td class="text-right">{{cf.getSum(item.data,"quantity","unitCode")}}</td>
 								</tr>
 								<!-- Level2 -->
 								<tr ng-show="showing"
@@ -219,7 +219,7 @@
 									</td>
 									<td></td>
 									<td class="text-right">{{cf.getTypeCount(level2)}}</td>
-									<td class="text-right">{{getSum(level2,"quantity")}}</td>
+									<td class="text-right">{{cf.getSum(level2,"quantity","unitCode")}}</td>
 								</tr>
 								<!-- Level3 -->
 								<tr ng-show="showing2 && showing"
@@ -234,7 +234,7 @@
 									</td>
 									<td></td>
 									<td class="text-right">{{cf.getTypeCount(level3)}}</td>
-									<td class="text-right">{{getSum(level3,"quantity")}}</td>
+									<td class="text-right">{{cf.getSum(level3,"quantity","unitCode")}}</td>
 								</tr>
 								<tr ng-repeat-end></tr>
 								<tr ng-repeat-end ng-hide="true"></tr>
@@ -338,7 +338,7 @@
 										ng-click="showing=!showing">{{tr_lco[item.key]}}</a></td>
 									<td></td>
 									<td class="text-right">{{cf.getTypeCount(item.data)}}</td>
-									<td class="text-right">{{getSum(item.data,"quantity")}}</td>
+									<td class="text-right">{{cf.getSum(item.data,"quantity","unitCode")}}</td>
 								</tr>
 
 								<!-- Second level -->
@@ -356,7 +356,7 @@
 									</td>
 									<td></td>
 									<td class="text-right">{{cf.getTypeCount(item2)}}</td>
-									<td class="text-right">{{getSum(item2,"quantity")}}</td>
+									<td class="text-right">{{cf.getSum(item2,"quantity","unitCode")}}</td>
 								</tr>
 								<tr ng-repeat-end></tr>
 								<tr ng-if="$last">
