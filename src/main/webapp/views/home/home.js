@@ -278,7 +278,13 @@ angular.module('myApp.home', ['ngRoute'])
     		{
     			return "-";
     		}
-    		if (unit){
+    		if (elements[0][unit]){
+    			if (elements[0][unit] == 'KGM'){
+    				return  formatStrFactory.formatMethod(sum);// $filter('number')(sum)).toString().replace(/,/g,'');
+    			}
+    			else if (elements[0][unit] == 'TNE'){
+    				return ($filter('number')(sum)).toString().replace(/,/g,'') + ' t';
+    			}
         		return formatStrFactory.getStrFormat(sum);
     		}
     		else{
@@ -286,7 +292,7 @@ angular.module('myApp.home', ['ngRoute'])
     		}
         },
         getSubSum : function(elements,property,unit){  
-	      
+        	var subunit;
 	    	if(!elements.length)
 	    	{
 	    		elements = jQuery.makeArray(elements);
@@ -299,23 +305,30 @@ angular.module('myApp.home', ['ngRoute'])
 		        	for(var j = 0; j < elements[i].sublevel.length; j++){
 		        		total += elements[i].sublevel[j][property];
 		        	}
+		        	if(!subunit && elements[i].sublevel[0][unit]) subunit = elements[i].sublevel[0][unit];
 	        	}
 	        	else if(elements[i].data)
 	        	{ 
 		        	for(var j = 0; j < elements[i].data.length; j++){
 		        		total += elements[i].data[j][property];
 		        	}
+		        	if(!subunit && elements[i].data[0][unit]) subunit = elements[i].data[0][unit];
 	        	}
 	        	else
 	        	{ 
 	        		continue;
 	        	}
 	        }
-    		if (unit){
+    		if (subunit){
+    			if (subunit == 'KGM'){
+    				return formatStrFactory.formatMethod(total);//$filter('number')(total/1000)).toString().replace(/,/g,'');
+    			}
+    			else if (subunit == 'TNE'){
+    				return ($filter('number')(total)).toString().replace(/,/g,'') + ' t';
+    			}
         		return formatStrFactory.getStrFormat(total);
     		}
     		else{
-    			//Replaces all 
     			return ($filter('number')(total)).toString().replace(/,/g,'');
     		}
 //	        return total;
