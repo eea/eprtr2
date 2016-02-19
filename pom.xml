@@ -580,12 +580,15 @@
                         <eprtrdb.url>jdbc:h2:mem:eprtrtest;DB_CLOSE_DELAY=-1</eprtrdb.url>
                         <eprtrdb.username>dbuser</eprtrdb.username>
                         <eprtrdb.password>password</eprtrdb.password>
+                        <eprtrdb.createtables>true</eprtrdb.createtables>
                         <cmsdb.driver>org.h2.Driver</cmsdb.driver>
                         <cmsdb.url>jdbc:h2:mem:cmstest;DB_CLOSE_DELAY=-1</cmsdb.url>
                         <cmsdb.username>dbuser</cmsdb.username>
                         <cmsdb.password>password</cmsdb.password>
+                        <cmsdb.createtables>true</cmsdb.createtables>
                         <profile>demo</profile>
                         <storage.dir>${project.build.directory}</storage.dir>
+                        <deploy.contexts>test,demo</deploy.contexts>
                     </systemProperties>
                     <!-- if you want to use test dependencies rather than only runtime -->
                     <useTestClasspath>false</useTestClasspath>
