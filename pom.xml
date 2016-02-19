@@ -423,6 +423,7 @@
                         <eprtrdb.password>password</eprtrdb.password>
                         <profile>demo</profile>
                         <storage.dir>${project.build.directory}</storage.dir>
+                        <log4j.configuration>log4j-testing.xml</log4j.configuration>
                     </systemPropertyVariables>
                 </configuration>
                 <executions>

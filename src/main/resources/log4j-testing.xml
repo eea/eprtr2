@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
 
-<!-- This file is used for production. Set the system property log4j.configuration to
-     another file for debug purposes -->
+<!-- Set the system property log4j.configuration to this file for debug purposes -->
+
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
 
     <!-- Appenders -->
@@ -15,7 +15,11 @@
 
 
     <logger name="org.hibernate">
-        <level value="WARN"/>
+        <level value="INFO"/>
+    </logger>
+
+    <logger name="org.hibernate.SQL">
+        <level value="DEBUG"/>
     </logger>
 
     <logger name="org.springframework.web">
