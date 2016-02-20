@@ -244,6 +244,12 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.19</version>
                 <configuration>
+                  <includes>
+                      <include>**/IT*.java</include>
+                      <include>**/*IT.java</include>
+                      <include>**/*ITCase.java</include>
+                      <include>**/FT*.java</include>
+                  </includes>
                   <systemPropertyVariables>
                     <env>dev</env>
                     <cmsdb.url>jdbc:h2:tcp://${docker.host.address}:${database.port}//var/tmp/cmstest</cmsdb.url><!--;MODE=MSSQLServer-->
@@ -254,6 +260,9 @@
                     <eprtrdb.driver>org.h2.Driver</eprtrdb.driver>
                     <eprtrdb.username>dbuser</eprtrdb.username>
                     <eprtrdb.password>password</eprtrdb.password>
+                    <log4j.configuration>log4j.xml</log4j.configuration>
+                    <!-- For functional tests -->
+                    <tomcat.url>http://${docker.host.address}:${tomcat.port}/</tomcat.url>
                   </systemPropertyVariables>
                 </configuration>
                 <executions>
