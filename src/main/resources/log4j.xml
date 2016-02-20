@@ -22,6 +22,14 @@
         <level value="WARN" />
     </logger>
 
+    <logger name="org.springframework.test">
+        <level value="WARN" />
+    </logger>
+
+    <logger name="org.hibernate.SQL">
+        <level value="INFO" />
+    </logger>
+
 
     <!-- Root Logger -->
     <root>
