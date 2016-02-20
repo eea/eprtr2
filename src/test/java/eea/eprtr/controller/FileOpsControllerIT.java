@@ -23,7 +23,7 @@ import eea.eprtr.dao.StorageService;
 /**
  * Test the File storage controller.
  */
-public class FileOpsControllerTest {
+public class FileOpsControllerIT {
 
     @Autowired
     private WebApplicationContext wac;

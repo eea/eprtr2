@@ -39,7 +39,7 @@ import eea.eprtrcms.model.StringResource;
         DbUnitTestExecutionListener.class })
 @DatabaseSetup(connection="dataSourceEprtrCms", value="/StringResource-data.xml")
 
-public class StringResourceControllerTest {
+public class StringResourceControllerIT {
     
     @Autowired
     private StringResourceController controller;

@@ -13,14 +13,13 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <env>local</env>
         <java_version>1.7</java_version>
         <spring.version>4.1.4.RELEASE</spring.version>
         <checkstyle.config.location>${basedir}/doc/checkstyle.xml</checkstyle.config.location>
         <liquibase.changeLogFile>database/changelog-master.xml</liquibase.changeLogFile>
         <m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
         <h2.version>1.3.172</h2.version>
-        <eprtrdb.url>jdbc:h2:file:eprtrtest</eprtrdb.url>
+        <eprtrdb.url>jdbc:h2:file:${project.build.directory}/eprtrtest</eprtrdb.url>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HHmm</maven.build.timestamp.format>
     </properties>
 
@@ -140,7 +139,7 @@
                         <runCmds>
                           <run>rm -rf /usr/local/tomcat/conf/logging.properties /usr/local/tomcat/webapps/*</run>
                           <!-- Hack until CMS is integrated into this project -->
-                          <run>curl --output /usr/local/tomcat/webapps/cms.war http://ci.eionet.europa.eu/view/Java/job/EPRTR2-CMS/lastSuccessfulBuild/artifact/target/eprtr-cms.war</run>
+                          <run>curl --silent --output /usr/local/tomcat/webapps/cms.war http://ci.eionet.europa.eu/view/Java/job/EPRTR2-CMS/lastSuccessfulBuild/artifact/target/eprtr-cms.war</run>
                           <run>mv /maven/ROOT.war /usr/local/tomcat/webapps/ROOT.war</run>
                         </runCmds>
                         <optimise>true</optimise>
@@ -251,16 +250,14 @@
                       <include>**/FT*.java</include>
                   </includes>
                   <systemPropertyVariables>
-                    <env>dev</env>
-                    <cmsdb.url>jdbc:h2:tcp://${docker.host.address}:${database.port}//var/tmp/cmstest</cmsdb.url><!--;MODE=MSSQLServer-->
+                    <cmsdb.url>jdbc:h2:tcp://${docker.host.address}:${database.port}//var/tmp/cmstest</cmsdb.url>
                     <cmsdb.driver>org.h2.Driver</cmsdb.driver>
                     <cmsdb.username>dbuser</cmsdb.username>
                     <cmsdb.password>password</cmsdb.password>
-                    <eprtrdb.url>jdbc:h2:tcp://${docker.host.address}:${database.port}//var/tmp/eprtrtest</eprtrdb.url><!--;MODE=MSSQLServer-->
+                    <eprtrdb.url>jdbc:h2:tcp://${docker.host.address}:${database.port}//var/tmp/eprtrtest</eprtrdb.url>
                     <eprtrdb.driver>org.h2.Driver</eprtrdb.driver>
                     <eprtrdb.username>dbuser</eprtrdb.username>
                     <eprtrdb.password>password</eprtrdb.password>
-                    <log4j.configuration>log4j.xml</log4j.configuration>
                     <!-- For functional tests -->
                     <tomcat.url>http://${docker.host.address}:${tomcat.port}/</tomcat.url>
                   </systemPropertyVariables>
@@ -400,6 +397,7 @@
                     <redirectTestOutputToFile>true</redirectTestOutputToFile>
                     <systemPropertyVariables>
                         <!-- database variables can be removed when all db tests are integration tests -->
+                        <!--
                         <cmsdb.driver>org.h2.Driver</cmsdb.driver>
                         <cmsdb.url>jdbc:h2:file:cmstest</cmsdb.url>
                         <cmsdb.username>dbuser</cmsdb.username>
@@ -408,6 +406,7 @@
                         <eprtrdb.url>jdbc:h2:file:eprtrtest</eprtrdb.url>
                         <eprtrdb.username>dbuser</eprtrdb.username>
                         <eprtrdb.password>password</eprtrdb.password>
+                        -->
                         <profile>demo</profile>
                         <storage.dir>${project.build.directory}</storage.dir>
                     </systemPropertyVariables>
@@ -423,11 +422,11 @@
                 <configuration>
                     <systemPropertyVariables>
                         <cmsdb.driver>org.h2.Driver</cmsdb.driver>
-                        <cmsdb.url>jdbc:h2:file:cmstest</cmsdb.url>
+                        <cmsdb.url>jdbc:h2:file:${project.build.directory}/cmstest</cmsdb.url>
                         <cmsdb.username>dbuser</cmsdb.username>
                         <cmsdb.password>password</cmsdb.password>
                         <eprtrdb.driver>org.h2.Driver</eprtrdb.driver>
-                        <eprtrdb.url>jdbc:h2:file:eprtrtest</eprtrdb.url>
+                        <eprtrdb.url>jdbc:h2:file:${project.build.directory}/eprtrtest</eprtrdb.url>
                         <eprtrdb.username>dbuser</eprtrdb.username>
                         <eprtrdb.password>password</eprtrdb.password>
                         <profile>demo</profile>
@@ -475,37 +474,35 @@
                 <executions>
                     <execution>
                         <id>Update PUBLIC database</id>
-                        <phase>process-test-resources</phase>
+                        <phase>pre-integration-test</phase>
                         <configuration>
                             <skip>${maven.test.skip}</skip>
                             <changeLogFile>${liquibase.changeLogFile}</changeLogFile>
                             <driver>org.h2.Driver</driver>
-                            <url>jdbc:h2:file:eprtrtest</url>
+                            <url>jdbc:h2:file:${project.build.directory}/eprtrtest</url>
                             <username>dbuser</username>
                             <password>password</password>
                             <contexts>test,demo</contexts>
-                            <!-- <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase> -->
                         </configuration>
                         <goals>
-                            <goal>dropAll</goal>
+                            <!-- <goal>dropAll</goal> -->
                             <goal>update</goal>
                         </goals>
                     </execution>
                     <execution>
                         <id>Update CMS database</id>
-                        <phase>process-test-resources</phase>
+                        <phase>pre-integration-test</phase>
                         <configuration>
                             <skip>${maven.test.skip}</skip>
                             <changeLogFile>database/changelog-cms.xml</changeLogFile>
                             <driver>org.h2.Driver</driver>
-                            <url>jdbc:h2:file:cmstest</url>
+                            <url>jdbc:h2:file:${project.build.directory}/cmstest</url>
                             <username>dbuser</username>
                             <password>password</password>
                             <contexts>test,demo</contexts>
-                            <!-- <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase> -->
                         </configuration>
                         <goals>
-                            <goal>dropAll</goal>
+                            <!-- <goal>dropAll</goal> -->
                             <goal>update</goal>
                         </goals>
                     </execution>
@@ -571,50 +568,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <!-- http port -->
-                    <port>8080</port>
-                    <!-- application path always starts with /-->
-                    <path>/</path>
-                    <!-- optional path to a context file -->
-                    <!-- <contextFile>${tomcatContextXml}</contextFile> -->
-                    <warSourceDirectory>${project.build.directory}</warSourceDirectory>
-                    <!-- optional system properties you want to add -->
-                    <systemProperties>
-                        <eprtrdb.driver>org.h2.Driver</eprtrdb.driver>
-                        <eprtrdb.url>jdbc:h2:mem:eprtrtest;DB_CLOSE_DELAY=-1</eprtrdb.url>
-                        <eprtrdb.username>dbuser</eprtrdb.username>
-                        <eprtrdb.password>password</eprtrdb.password>
-                        <eprtrdb.createtables>true</eprtrdb.createtables>
-                        <cmsdb.driver>org.h2.Driver</cmsdb.driver>
-                        <cmsdb.url>jdbc:h2:mem:cmstest;DB_CLOSE_DELAY=-1</cmsdb.url>
-                        <cmsdb.username>dbuser</cmsdb.username>
-                        <cmsdb.password>password</cmsdb.password>
-                        <cmsdb.createtables>true</cmsdb.createtables>
-                        <profile>demo</profile>
-                        <storage.dir>${project.build.directory}</storage.dir>
-                        <deploy.contexts>test,demo</deploy.contexts>
-                    </systemProperties>
-                    <!-- if you want to use test dependencies rather than only runtime -->
-                    <useTestClasspath>false</useTestClasspath>
-                    <!-- optional if you want to add some extra directories into the classloader -->
-                    <additionalClasspathDirs>
-                        <additionalClasspathDir></additionalClasspathDir>
-                    </additionalClasspathDirs>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.h2database</groupId>
-                        <artifactId>h2</artifactId>
-                        <version>${h2.version}</version>
-                    </dependency>
-                </dependencies>
-           </plugin>
 
             <!--
                     Install node, npm and karma locally and execute the JS unit tests
@@ -698,17 +651,9 @@
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>log4j.xml</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources</directory>
                 <filtering>false</filtering>
                 <includes>
                     <include>**/*.xml</include>
-                    <include>*.ttf</include>
                 </includes>
             </resource>
         </resources>
