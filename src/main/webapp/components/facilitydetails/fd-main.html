@@ -123,11 +123,11 @@ POLLUTANT RELEASES
                         <tr ng-repeat="item in pollutantreleases | filter:{ pollutantTo: tr_lme.AIR } ">
  		                    <td><img src="images/timeseries.png" class="timesericesImage" ng-click="openTSmodal('pollutantrelease',item.lov_PollutantID,'AIR',null)" alt="" /></td>
 		                    <td>{{tr_lpo[item.pollutantCode]}}</td>
-		                    <td class="text-right">{{fFactory.formatQuantity(item.totalQuantity, item.totalQuantityUnitCode, item.confidentialIndicator)}}</td>
-		                    <td class="text-right">{{fFactory.formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
-		                    <td class="text-right">{{fFactory.DeterminePercent(item.totalQuantity, item.accidentalQuantity)}}</td>
+		                    <td class="text-right">{{ff.formatQuantity(item.totalQuantity, item.totalQuantityUnitCode, item.confidentialIndicator)}}</td>
+		                    <td class="text-right">{{ff.formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
+		                    <td class="text-right">{{ff.DeterminePercent(item.totalQuantity, item.accidentalQuantity)}}</td>
 		                    <td>{{tr_lmbn[item.methodCode]}}</td>
-		                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
+		                    <td ng-bind-html="ff.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
 		                    <td>{{tr_lcf[item.confidentialCode]}}</td>
 
 		                </tr>
@@ -164,11 +164,11 @@ POLLUTANT RELEASES
                         <tr ng-repeat="item in pollutantreleases | filter:{ pollutantTo: tr_lme.WATER } ">
 	                   <td><img src="images/timeseries.png" class="timesericesImage" ng-click="openTSmodal('pollutantrelease',item.lov_PollutantID,'WATER',null)" alt="" /></td>
                     <td>{{tr_lpo[item.pollutantCode]}}</td>
-                    <td class="text-right">{{fFactory.formatQuantity(item.totalQuantity, item.totalQuantityUnitCode, item.confidentialIndicator)}}</td>
-                    <td class="text-right">{{fFactory.formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
-                    <td class="text-right">{{fFactory.DeterminePercent(item.totalQuantity, item.accidentalQuantity)}}</td>
+                    <td class="text-right">{{ff.formatQuantity(item.totalQuantity, item.totalQuantityUnitCode, item.confidentialIndicator)}}</td>
+                    <td class="text-right">{{ff.formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
+                    <td class="text-right">{{ff.DeterminePercent(item.totalQuantity, item.accidentalQuantity)}}</td>
                     <td>{{tr_lmbn[item.methodCode]}}</td>
-                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
+                    <td ng-bind-html="ff.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
                     <td>{{tr_lcf[item.confidentialCode]}}</td>
                 </tr>
                 <!-- tr>
@@ -204,11 +204,11 @@ POLLUTANT RELEASES
                         <tr ng-repeat="item in pollutantreleases | filter:{ pollutantTo: tr_lme.LAND } ">
 	                   <td><img src="images/timeseries.png" class="timesericesImage" ng-click="openTSmodal('pollutantrelease',item.lov_PollutantID,'SOIL',null)" alt="" /></td>
                     <td>{{tr_lpo[item.pollutantCode]}}</td>
-                    <td class="text-right">{{fFactory.formatQuantity(item.totalQuantity, item.totalQuantityUnitCode, item.confidentialIndicator)}}</td>
-                    <td class="text-right">{{fFactory.formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
-                    <td class="text-right">{{fFactory.DeterminePercent(item.totalQuantity, item.accidentalQuantity)}}</td>
+                    <td class="text-right">{{ff.formatQuantity(item.totalQuantity, item.totalQuantityUnitCode, item.confidentialIndicator)}}</td>
+                    <td class="text-right">{{ff.formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
+                    <td class="text-right">{{ff.DeterminePercent(item.totalQuantity, item.accidentalQuantity)}}</td>
                     <td>{{tr_lmbn[item.methodCode]}}</td>
-                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
+                    <td ng-bind-html="ff.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
                     <td>{{tr_lcf[item.confidentialCode]}}</td>
                 </tr>
                 <!-- tr>
@@ -263,11 +263,11 @@ POLLUTANT TRANSFERS
                     <tbody>
                         <tr ng-repeat="item in pollutanttransfers | filter:{ pollutantTo: tr_lme.WASTEWATER } ">
 	                   <td><img src="images/timeseries.png" class="timesericesImage" ng-click="openTSmodal('pollutanttransfer',item.lov_PollutantID,'WASTEWATER',null)" alt="" /></td>
-                    <td class="text-right">{{fFactory.formatQuantity(item.totalQuantity, item.totalQuantityUnitCode, item.confidentialIndicator)}}</td>
-                    <td class="text-right">{{fFactory.formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
-                    <td class="text-right">{{fFactory.DeterminePercent(item.totalQuantity, item.accidentalQuantity)}}</td>
+                    <td class="text-right">{{ff.formatQuantity(item.totalQuantity, item.totalQuantityUnitCode, item.confidentialIndicator)}}</td>
+                    <td class="text-right">{{ff.formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
+                    <td class="text-right">{{ff.DeterminePercent(item.totalQuantity, item.accidentalQuantity)}}</td>
                     <td>{{tr_lmbn[item.methodCode]}}</td>
-                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
+                    <td ng-bind-html="ff.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
                     <td>{{tr_lcf[item.confidentialCode]}}</td>
                 </tr>
                 <!-- tr>
@@ -318,10 +318,10 @@ WASTE TRANSFERS
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in wastetransfers | filter:{ wasteTypeCode:'NONHW' } ">
-                    <td class="text-right">{{fFactory.formatQuantity(item.quantity, item.unitCode, item.confidentialIndicator)}}</td>
-                    <td>{{fFactory.ConfidentialFormat(tr_lwt[item.wasteTreatmentCode], item.confidentialIndicator)}}</td>
+                    <td class="text-right">{{ff.formatQuantity(item.quantity, item.unitCode, item.confidentialIndicator)}}</td>
+                    <td>{{ff.ConfidentialFormat(tr_lwt[item.wasteTreatmentCode], item.confidentialIndicator)}}</td>
                     <td>{{tr_lmbn[item.methodCode]}}</td>
-                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
+                    <td ng-bind-html="ff.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
                     <td>{{tr_lcf[item.confidentialCode]}}</td>
                 </tr>
                 <!-- tr>
@@ -353,10 +353,10 @@ WASTE TRANSFERS
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in wastetransfers | filter:{ wasteTypeCode:'HWIC' } ">
-                    <td class="text-right">{{fFactory.formatQuantity(item.quantity, item.unitCode, item.confidentialIndicator)}}</td>
-                    <td>{{fFactory.ConfidentialFormat(tr_lwt[item.wasteTreatmentCode], item.confidentialIndicator)}}</td>
+                    <td class="text-right">{{ ff.formatQuantity(item.quantity, item.unitCode, item.confidentialIndicator)}}</td>
+                    <td>{{ ff.ConfidentialFormat(tr_lwt[item.wasteTreatmentCode], item.confidentialIndicator)}}</td>
                     <td>{{tr_lmbn[item.methodCode]}}</td>
-                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
+                    <td ng-bind-html="ff.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
                     <td>{{tr_lcf[item.confidentialCode]}}</td>
                 </tr>
                 <!-- tr>
@@ -388,10 +388,10 @@ WASTE TRANSFERS
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in wastetransfers | filter:{ wasteTypeCode:'HWOC' } ">
-                    <td class="text-right">{{fFactory.formatQuantity(item.quantity, item.unitCode, item.confidentialIndicator)}}</td>
-                    <td>{{fFactory.ConfidentialFormat(tr_lwt[item.wasteTreatmentCode], item.confidentialIndicator)}}</td>
+                    <td class="text-right">{{ff.formatQuantity(item.quantity, item.unitCode, item.confidentialIndicator)}}</td>
+                    <td>{{ff.ConfidentialFormat(tr_lwt[item.wasteTreatmentCode], item.confidentialIndicator)}}</td>
                     <td>{{tr_lmbn[item.methodCode]}}</td>
-                    <td ng-bind-html="fFactory.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
+                    <td ng-bind-html="ff.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
                     <td>{{tr_lcf[item.confidentialCode]}}</td>
                 </tr>
                 <!-- tr>

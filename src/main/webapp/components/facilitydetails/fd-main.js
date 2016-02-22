@@ -12,7 +12,7 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize'])
  * Basic parameters
  * */
  $scope.hideNoData = true;
- $scope.fFactory = formatStrFactory;
+ $scope.ff = formatStrFactory;
  $scope.headitms = [];
  $scope.infoitms = [{'order':0,	'clss':'fdTitles', 	'title':'Facility Details',	'val': ' '}];
  $scope.infoitms2 = [];
@@ -314,10 +314,10 @@ $scope.orderReportingYears = function(data){
 					null;
 			$scope.headitms = [
 			  {'order':0,	'clss':'fdTitles', 'title':$scope.tr_f.FacilityName,
-			   'val': $scope.fFactory.ConfidentialFormat($scope.details.facilityName, $scope.details.confidentialIndicator)
+			   'val': $scope.ff.ConfidentialFormat($scope.details.facilityName, $scope.details.confidentialIndicator)
 			  },
 			  {'order':1, 'clss':'fdTitles', 'title': $scope.tr_f.Address,
-				  'val': $scope.fFactory.ConfidentialFormat(adr, $scope.details.confidentialIndicator)
+				  'val': $scope.ff.ConfidentialFormat(adr, $scope.details.confidentialIndicator)
 			  },
 			  {'order':3,'clss':'fdTitles',	'title':$scope.tr_c.Year,
 				  'val': $scope.details.reportingYear +  " (published: " + $filter('date')($scope.details.published, "dd MMM yyyy") + ")"
