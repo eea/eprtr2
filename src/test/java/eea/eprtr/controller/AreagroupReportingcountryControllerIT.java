@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:spring-mvc-config.xml")
-public class AreagroupReportingcountryControllerTest {
+public class AreagroupReportingcountryControllerIT {
 
     @Autowired
     AreagroupReportingcountryController controller;
