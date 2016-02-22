@@ -28,7 +28,7 @@ import com.github.springtestdbunit.DbUnitTestExecutionListener;
         DbUnitTestExecutionListener.class })
 //@DatabaseSetup(connection="dataSourceEprtrCms", value="/StringResource-data.xml")
 
-public class SurveyResultsControllerTest {
+public class SurveyResultsControllerIT {
 
     @Autowired
     private SurveyResultsController controller;

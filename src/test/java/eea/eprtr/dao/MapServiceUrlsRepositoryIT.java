@@ -23,7 +23,7 @@ import eea.eprtr.model.MapServiceUrls;
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class })
 
-public class MapServiceUrlsRepositoryTest {
+public class MapServiceUrlsRepositoryIT {
 
     @Autowired
     @Qualifier("mapurlService")
