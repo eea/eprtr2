@@ -64,4 +64,30 @@
     <loadData tableName="WASTETRANSFER_RECEIVINGCOUNTRY" file="database/wastetransfer_receivingcountry.csv"/>
     <loadData tableName="WASTETRANSFER_TREATMENT" file="database/wastetransfer_treatment.csv"/>
   </changeSet>
+
+  <changeSet author="roug" id="rev-3" context="demo">
+    <comment>Add Croatia to lookup tables</comment>
+    <insert tableName="LOV_COUNTRYAREAGROUP">
+       <column name="LOV_AreaGroupID" valueNumeric="1"/>
+       <column name="LOV_CountryID" valueNumeric="55"/>
+    </insert>
+    <sql dbms="mssql">SET IDENTITY_INSERT LOV_RIVERBASINDISTRICT ON</sql>
+    <insert tableName="LOV_RIVERBASINDISTRICT">
+       <column name="LOV_RiverBasinDistrictID" valueNumeric="205"/>
+       <column name="Code" value="HRC"/>
+       <column name="Name" value="Danube"/>
+       <column name="StartYear" valueNumeric="2015"/>
+       <column name="LOV_CountryID" valueNumeric="55"/>
+    </insert>
+    <insert tableName="LOV_RIVERBASINDISTRICT">
+       <column name="LOV_RiverBasinDistrictID" valueNumeric="206"/>
+       <column name="Code" value="HRJ"/>
+       <column name="Name" value="Adriatic"/>
+       <column name="StartYear" valueNumeric="2015"/>
+       <column name="LOV_CountryID" valueNumeric="55"/>
+    </insert>
+    <sql dbms="mssql">SET IDENTITY_INSERT LOV_RIVERBASINDISTRICT OFF</sql>
+
+  </changeSet>
+
 </databaseChangeLog>
