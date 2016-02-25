@@ -71,7 +71,6 @@
        <column name="LOV_AreaGroupID" valueNumeric="1"/>
        <column name="LOV_CountryID" valueNumeric="55"/>
     </insert>
-    <sql dbms="mssql">SET IDENTITY_INSERT LOV_RIVERBASINDISTRICT ON</sql>
     <insert tableName="LOV_RIVERBASINDISTRICT">
        <column name="LOV_RiverBasinDistrictID" valueNumeric="205"/>
        <column name="Code" value="HRC"/>
@@ -86,8 +85,6 @@
        <column name="StartYear" valueNumeric="2015"/>
        <column name="LOV_CountryID" valueNumeric="55"/>
     </insert>
-    <sql dbms="mssql">SET IDENTITY_INSERT LOV_RIVERBASINDISTRICT OFF</sql>
-
   </changeSet>
 
 </databaseChangeLog>
