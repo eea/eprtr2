@@ -125,11 +125,11 @@
 				</thead>
 			  <tr ng-repeat="item in energyinput">
 			    <td class="text-right col-Min75">{{ item.year }}</td>
-			    <td class="text-right">{{ item.biomass }}</td>
-			    <td class="text-right">{{ item.othersolidfuels }}</td>
-			    <td class="text-right">{{ item.liquidfuels }}</td>
-			    <td class="text-right">{{ item.naturalgas }}</td>
-			    <td class="text-right">{{ item.othergases }}</td>
+			    <td class="text-right">{{ ff.formatNoUnits(item.biomass,2) }}</td>
+			    <td class="text-right">{{ ff.formatNoUnits(item.othersolidfuels,2) }}</td>
+			    <td class="text-right">{{ ff.formatNoUnits(item.liquidfuels,2) }}</td>
+			    <td class="text-right">{{ ff.formatNoUnits(item.naturalgas,2) }}</td>
+			    <td class="text-right">{{ ff.formatNoUnits(item.othergases,2) }}</td>
 			    <!--td class="text-right">{{ item.hardcoal }}</td>
 			    <td class="text-right">{{ item.lignite }}</td-->
 			  </tr>
@@ -152,9 +152,9 @@
 			    <td class="text-right"></td>
 			    <td class="text-right"></td>
 			    <td class="text-right"></td>
-			    <td class="text-right">{{ item.so2 }}</td>
-			    <td class="text-right">{{ item.nox }}</td>
-			    <td class="text-right">{{ item.dust }}</td>
+			    <td class="text-right">{{ ff.formatNoUnits(item.so2,3) }}</td>
+			    <td class="text-right">{{ ff.formatNoUnits(item.nox,3) }}</td>
+			    <td class="text-right">{{ ff.formatNoUnits(item.dust,3) }}</td>
 			  </tr>
 			</table>
 </div>

@@ -97,7 +97,9 @@ angular.module('myApp.home', ['ngRoute'])
 	            }
 	            return result;
 	        },
-	        
+	    formatNoUnits:function(amount, decimals){
+	    	return ($filter('number')(amount, decimals)).toString().replace(/,/g,'');
+	    },    
 		formatMethod:function(amount, conf)    {
 	        var result = '';
 	        if (amount == null)
