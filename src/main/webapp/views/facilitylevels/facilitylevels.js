@@ -301,24 +301,50 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp
      	var top_fields = 4;
 
      	$scope.facilitiesDownload[top_fields]= new Array();
-     	$scope.facilitiesDownload[top_fields][0] = $scope.tr_f.FacilityName;
-     	$scope.facilitiesDownload[top_fields][1] = $scope.tr_f.PostalCode;
-     	$scope.facilitiesDownload[top_fields][2] = $scope.tr_f.Address;
-     	$scope.facilitiesDownload[top_fields][3] = $scope.tr_f.TownVillage;
-     	$scope.facilitiesDownload[top_fields][4] = $scope.tr_f.Activity;
-     	$scope.facilitiesDownload[top_fields][5] = $scope.tr_f.Country;
+        $scope.facilitiesDownload[top_fields][0] = $scope.tr_c.Year;
+        $scope.facilitiesDownload[top_fields][1] = $scope.tr_c.FacilityReportID;
+        $scope.facilitiesDownload[top_fields][2] = $scope.tr_f.NationalID;
+        $scope.facilitiesDownload[top_fields][3] = $scope.tr_f.EPRTRFacilityID;
+       	$scope.facilitiesDownload[top_fields][4] = $scope.tr_c.FacilityName;
+        $scope.facilitiesDownload[top_fields][5] = $scope.tr_f.ParentCompanyName;
+       	$scope.facilitiesDownload[top_fields][6] = $scope.tr_f.PostalCode;
+       	$scope.facilitiesDownload[top_fields][7] = $scope.tr_c.Address;
+        $scope.facilitiesDownload[top_fields][8] = 'City';//$scope.tr_f.City;
+        $scope.facilitiesDownload[top_fields][9] = $scope.tr_c.ActivityCode;
+        $scope.facilitiesDownload[top_fields][10] = $scope.tr_c.ActivityName;
+        $scope.facilitiesDownload[top_fields][11] = $scope.tr_c.CountryCode;
+        $scope.facilitiesDownload[top_fields][12] = $scope.tr_c.CountryName;
+        $scope.facilitiesDownload[top_fields][13] = $scope.tr_c.RiverBasinDistrictCode;
+        $scope.facilitiesDownload[top_fields][14] = $scope.tr_c.RiverBasinDistrictName;
+        $scope.facilitiesDownload[top_fields][15] = $scope.tr_c.NUTSRegionCode;
+        $scope.facilitiesDownload[top_fields][16] = $scope.tr_c.NUTSRegionName;
+        $scope.facilitiesDownload[top_fields][17] = $scope.tr_c.CONFIDENTIAL;
+        $scope.facilitiesDownload[top_fields][18] = $scope.tr_c.URL;
 
      	top_fields += 1;
 
      	for(var i =0; i<items.length;i++){
      		var facility = items[i];
      		$scope.facilitiesDownload[i+top_fields]= new Array();
-     		$scope.facilitiesDownload[i+top_fields][0] = $scope.formatText(facility.facilityName, facility.confidentialIndicator);
-     		$scope.facilitiesDownload[i+top_fields][1] = $scope.formatText(facility.postalCode, facility.confidentialIndicator);
-     		$scope.facilitiesDownload[i+top_fields][2] = $scope.formatText(facility.address, facility.confidentialIndicator)
-     		$scope.facilitiesDownload[i+top_fields][3] = $scope.formatText(facility.city, facility.confidentialIndicator);
-     		$scope.facilitiesDownload[i+top_fields][4] = facility.iaactivityCode;
-     		$scope.facilitiesDownload[i+top_fields][5] = facility.countryCode;
+            $scope.facilitiesDownload[i+top_fields][0] = facility.reportingYear;
+            $scope.facilitiesDownload[i+top_fields][1] = $scope.formatText(facility.facilityReportID, facility.confidentialIndicator);
+            $scope.facilitiesDownload[i+top_fields][2] = $scope.formatText(facility.nationalID, facility.confidentialIndicator);
+            $scope.facilitiesDownload[i+top_fields][3] = $scope.formatText(facility.facilityID, facility.confidentialIndicator);
+       		$scope.facilitiesDownload[i+top_fields][4] = $scope.formatText(facility.facilityName, facility.confidentialIndicator);
+            $scope.facilitiesDownload[i+top_fields][5] = $scope.formatText(facility.parentCompanyName , facility.confidentialIndicator);
+            $scope.facilitiesDownload[i+top_fields][6] = $scope.formatText(facility.postalCode, facility.confidentialIndicator);
+            $scope.facilitiesDownload[i+top_fields][7] = $scope.formatText(facility.address, facility.confidentialIndicator);
+            $scope.facilitiesDownload[i+top_fields][8] = $scope.formatText(facility.city, facility.confidentialIndicator);
+            $scope.facilitiesDownload[i+top_fields][9] = $scope.formatText(facility.iaactivityCode, facility.confidentialIndicator);
+            $scope.facilitiesDownload[i+top_fields][10] = $scope.formatText($scope.tr_laa[facility.iaactivityCode], facility.confidentialIndicator);
+            $scope.facilitiesDownload[i+top_fields][11] = $scope.formatText(facility.countryCode , facility.confidentialIndicator);
+            $scope.facilitiesDownload[i+top_fields][12] = $scope.formatText($scope.tr_lco[facility.countryCode] , facility.confidentialIndicator);
+            $scope.facilitiesDownload[i+top_fields][13] = $scope.formatText(facility.riverBasinDistrictCode , facility.confidentialIndicator);
+            $scope.facilitiesDownload[i+top_fields][14] = $scope.formatText($scope.tr_lrbd[facility.riverBasinDistrictCode] , facility.confidentialIndicator);
+            $scope.facilitiesDownload[i+top_fields][15] = $scope.formatText(facility.nutslevel2RegionCode, facility.confidentialIndicator);
+            $scope.facilitiesDownload[i+top_fields][16] = $scope.formatText($scope.tr_lnr[facility.nutslevel2RegionCode] , facility.confidentialIndicator);
+            $scope.facilitiesDownload[i+top_fields][17] = $scope.formatText(facility.confidentialIndicator, facility.confidentialIndicator);
+            $scope.facilitiesDownload[i+top_fields][18] = $scope.formatText("http://prtr.ec.europa.eu/#/facilitydetails?FacilityID="+facility.facilityID+"&ReportingYear="+facility.reportingYear, facility.confidentialIndicator);
      	}
      }
 
