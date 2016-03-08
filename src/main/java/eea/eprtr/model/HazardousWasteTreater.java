@@ -17,31 +17,31 @@ public class HazardousWasteTreater {
     private final String unit;
     private final String treatment;
     private final Boolean confidentialIndicator;
-	
-    public HazardousWasteTreater(String fromFacilityName, Boolean facilityConfidentialIndicator, 
-    		String treaterName, String treaterAddress, String treaterCity, String treaterPostalCode, 
-    		String treaterCountryCode, String treaterSiteAddress, String treaterSiteCity, 
-    		String treaterSitePostalCode, String treaterSiteCountryCode, Double quantity, 
-    		String unit, String treatment, Boolean confidentialIndicator) {
-    	this.fromFacilityName = fromFacilityName;
-    	this.facilityConfidentialIndicator = facilityConfidentialIndicator; 
-    	this.treaterName = treaterName;
-    	this.treaterAddress = treaterAddress;
-    	this.treaterCity = treaterCity;
-    	this.treaterPostalCode = treaterPostalCode;
-    	this.treaterCountryCode = treaterCountryCode;
-    	this.treaterSiteAddress = treaterSiteAddress;
-    	this.treaterSiteCity = treaterSiteCity;
-    	this.treaterSitePostalCode = treaterSitePostalCode;
-    	this.treaterSiteCountryCode = treaterSiteCountryCode;
-    	this.quantity = quantity;
-    	this.unit = unit;
-    	this.treatment = treatment;
-    	this.confidentialIndicator = confidentialIndicator;
+
+    public HazardousWasteTreater(String fromFacilityName, Boolean facilityConfidentialIndicator,
+            String treaterName, String treaterAddress, String treaterCity, String treaterPostalCode,
+            String treaterCountryCode, String treaterSiteAddress, String treaterSiteCity,
+            String treaterSitePostalCode, String treaterSiteCountryCode, Double quantity,
+            String unit, String treatment, Boolean confidentialIndicator) {
+        this.fromFacilityName = fromFacilityName;
+        this.facilityConfidentialIndicator = facilityConfidentialIndicator;
+        this.treaterName = treaterName;
+        this.treaterAddress = treaterAddress;
+        this.treaterCity = treaterCity;
+        this.treaterPostalCode = treaterPostalCode;
+        this.treaterCountryCode = treaterCountryCode;
+        this.treaterSiteAddress = treaterSiteAddress;
+        this.treaterSiteCity = treaterSiteCity;
+        this.treaterSitePostalCode = treaterSitePostalCode;
+        this.treaterSiteCountryCode = treaterSiteCountryCode;
+        this.quantity = quantity;
+        this.unit = unit;
+        this.treatment = treatment;
+        this.confidentialIndicator = confidentialIndicator;
     }
-	
-    public String getFromFacilityName() { 
-    	return fromFacilityName; 
+
+    public String getFromFacilityName() {
+        return fromFacilityName;
     }
     public Boolean getFacilityConfidentialIndicator() { return facilityConfidentialIndicator; }
     public String getTreaterName() { return treaterName; }
@@ -57,5 +57,5 @@ public class HazardousWasteTreater {
     public String getUnit() { return unit; }
     public String getTreatment() { return treatment; }
     public Boolean getConfidentialIndicator() { return confidentialIndicator; }
-	
+
 }

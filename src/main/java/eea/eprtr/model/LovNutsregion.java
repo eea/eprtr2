@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 /**
  * The persistent class for the LOV_NUTSREGION database table.
- * 
+ *
  */
 @Entity
 @Table(name="LOV_NUTSREGION")
