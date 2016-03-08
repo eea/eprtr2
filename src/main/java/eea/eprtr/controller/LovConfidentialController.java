@@ -13,14 +13,14 @@ import eea.eprtr.model.LovConfidentiality;
 @RestController
 public class LovConfidentialController {
 
-	@PersistenceContext(unitName="eprtr")
+    @PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
-	@RequestMapping("/lovConfidential/{confidentialCode}")
+    @RequestMapping("/lovConfidential/{confidentialCode}")
     public LovConfidentiality getLovUnit(@PathVariable(value = "confidentialCode") String confidentialCode){
-    	TypedQuery<LovConfidentiality> query = em.createNamedQuery("LovConfidentiality.findByCode", LovConfidentiality.class);
-    	query.setParameter("ConfidentialCode", confidentialCode);
-    	return query.getSingleResult();
+        TypedQuery<LovConfidentiality> query = em.createNamedQuery("LovConfidentiality.findByCode", LovConfidentiality.class);
+        query.setParameter("ConfidentialCode", confidentialCode);
+        return query.getSingleResult();
     }
-	
+
 }

@@ -15,22 +15,22 @@ import eea.eprtr.model.LovNutsregion;
 @RestController
 public class LovNutsregionController {
 
-	@PersistenceContext(unitName="eprtr")
+    @PersistenceContext(unitName="eprtr")
     private EntityManager em;
-	
-	@RequestMapping("/nutsRegion/{id}")
-	public LovNutsregion getLovNutsregionById(
-			@PathVariable(value = "id") Integer id) {
-		TypedQuery<LovNutsregion> query = em.createQuery("SELECT l FROM LovNutsregion l where l.LOV_NUTSRegionID = :Id", LovNutsregion.class);
-    	query.setParameter("Id", id);
-    	return query.getSingleResult();
-	}
-	
-	@RequestMapping("/nutsRegionChilds/{id}")
-	public List<LovNutsregion> getLovNutsregionChildsById(
-			@PathVariable(value = "id") Integer id) {
-		TypedQuery<LovNutsregion> query = em.createQuery("SELECT l FROM LovNutsregion l where l.parentID = :Id", LovNutsregion.class);
-    	query.setParameter("Id", id);
-    	return query.getResultList();
-	}
+
+    @RequestMapping("/nutsRegion/{id}")
+    public LovNutsregion getLovNutsregionById(
+            @PathVariable(value = "id") Integer id) {
+        TypedQuery<LovNutsregion> query = em.createQuery("SELECT l FROM LovNutsregion l where l.LOV_NUTSRegionID = :Id", LovNutsregion.class);
+        query.setParameter("Id", id);
+        return query.getSingleResult();
+    }
+
+    @RequestMapping("/nutsRegionChilds/{id}")
+    public List<LovNutsregion> getLovNutsregionChildsById(
+            @PathVariable(value = "id") Integer id) {
+        TypedQuery<LovNutsregion> query = em.createQuery("SELECT l FROM LovNutsregion l where l.parentID = :Id", LovNutsregion.class);
+        query.setParameter("Id", id);
+        return query.getResultList();
+    }
 }

@@ -13,18 +13,18 @@ import eea.eprtr.model.LovCountry;
 @RestController
 public class LovCountryController {
 
-	@PersistenceContext(unitName="eprtr")
+    @PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
-	
-	@RequestMapping("/lovCountry/{id}")
-	public LovCountry getPollutantByCode(
-			@PathVariable(value = "id") Integer id) {
-		TypedQuery<LovCountry> query = em.createQuery("SELECT l FROM LovCountry l where l.LOV_CountryID = :Id", LovCountry.class);
-    	query.setParameter("Id", id);
-    	return query.getSingleResult();
-	}
+
+    @RequestMapping("/lovCountry/{id}")
+    public LovCountry getPollutantByCode(
+            @PathVariable(value = "id") Integer id) {
+        TypedQuery<LovCountry> query = em.createQuery("SELECT l FROM LovCountry l where l.LOV_CountryID = :Id", LovCountry.class);
+        query.setParameter("Id", id);
+        return query.getSingleResult();
+    }
 
 
-	
+
 }

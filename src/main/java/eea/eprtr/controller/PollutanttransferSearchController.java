@@ -31,266 +31,266 @@ import eea.eprtr.model.Pollutanttransfer;
 @RestController
 public class PollutanttransferSearchController {
 
-	@Autowired
-	private PollutanttransferSearchRepository pollutanttransferSearchRepository;
+    @Autowired
+    private PollutanttransferSearchRepository pollutanttransferSearchRepository;
 
-	@Autowired
-	private PollutantSearchRepository pollutantSearchRepository;
+    @Autowired
+    private PollutantSearchRepository pollutantSearchRepository;
 
-	@Autowired
-	private CountryAreaGroupRepository countryAreaGroupRepository;
-	
-	@RequestMapping("/pollutanttransferSearch")
+    @Autowired
+    private CountryAreaGroupRepository countryAreaGroupRepository;
+    
+    @RequestMapping("/pollutanttransferSearch")
     public List<Pollutanttransfer> pollutanttransferSearch(
-    		
-    		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
-    		
-    		@RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,
-    		@RequestParam(value = "FacilityID", required = false) Integer facilityID,
+            
+            @RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
+            
+            @RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,
+            @RequestParam(value = "FacilityID", required = false) Integer facilityID,
 
-    		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
-    		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
-    		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
-    		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
-    		
-    		@RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
-    		@RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
-    		@RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
-    		@RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
-    		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
-    		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
-    		
-    		@RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
-    		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
-    		@RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
-    		@RequestParam(value = "Accidental", required = false) Integer accidental,
-    		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
-    		@RequestParam(value = "SearchType", required = false) String searchtype,
-    		HttpServletResponse response
-    		) {
+            @RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
+            @RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
+            @RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
+            @RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
+            
+            @RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
+            @RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
+            @RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
+            @RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
+            @RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
+            @RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
+            
+            @RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
+            @RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
+            @RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
+            @RequestParam(value = "Accidental", required = false) Integer accidental,
+            @RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
+            @RequestParam(value = "SearchType", required = false) String searchtype,
+            HttpServletResponse response
+            ) {
 
-		/*ReportingYearSearchFilter reportingYearFilter = null;
-		if (reportingYear != null) {
-			reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
-		}*/
-		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
-		FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(facilityReportID,facilityID,reportingYear); 
-		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
-		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
-		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
-		PollutanttransferSearchFilter filter = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter,facilityItemSearcFilter); 
-		
-		/*
-		PollutantreleaseCounts counts = pollutantreleaseSearchRepository.getPollutantreleaseCounts(filter);
-		response.setHeader("X-QuantityAir", String.valueOf(counts.getQuantityAir()));
-		response.setHeader("X-QuantitySoil", String.valueOf(counts.getQuantitySoil()));
-		response.setHeader("X-QuantityWater", String.valueOf(counts.getQuantityWater()));
-		*/
-		
-		//POLLUTANTTRANSFERSUM
-		List<Pollutanttransfer> pollutanttransfers = pollutanttransferSearchRepository.getPollutanttransfer(filter);
-		if(searchtype != null && !searchtype.equals(""))
-		{
-			List<Integer> foundFacilities = new ArrayList<Integer>(); 
-			for(Pollutanttransfer po : pollutanttransfers)
-			{
-				if(!foundFacilities.contains(po.getFacilityID()))
-				{
-					foundFacilities.add(po.getFacilityID());
-				}
-			}
-			response.setHeader("facilitiesCount", String.valueOf(foundFacilities.size()));
-			return new DataHelperPollutantTransfer().getSubdata(searchtype,pollutanttransfers);
-		}
-		return pollutanttransfers;
-	}
-	
-	@RequestMapping("/pollutanttransferSeries")
+        /*ReportingYearSearchFilter reportingYearFilter = null;
+        if (reportingYear != null) {
+            reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+        }*/
+        ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+        FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(facilityReportID,facilityID,reportingYear); 
+        LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
+        ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
+        PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
+        PollutanttransferSearchFilter filter = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter,facilityItemSearcFilter); 
+        
+        /*
+        PollutantreleaseCounts counts = pollutantreleaseSearchRepository.getPollutantreleaseCounts(filter);
+        response.setHeader("X-QuantityAir", String.valueOf(counts.getQuantityAir()));
+        response.setHeader("X-QuantitySoil", String.valueOf(counts.getQuantitySoil()));
+        response.setHeader("X-QuantityWater", String.valueOf(counts.getQuantityWater()));
+        */
+        
+        //POLLUTANTTRANSFERSUM
+        List<Pollutanttransfer> pollutanttransfers = pollutanttransferSearchRepository.getPollutanttransfer(filter);
+        if(searchtype != null && !searchtype.equals(""))
+        {
+            List<Integer> foundFacilities = new ArrayList<Integer>(); 
+            for(Pollutanttransfer po : pollutanttransfers)
+            {
+                if(!foundFacilities.contains(po.getFacilityID()))
+                {
+                    foundFacilities.add(po.getFacilityID());
+                }
+            }
+            response.setHeader("facilitiesCount", String.valueOf(foundFacilities.size()));
+            return new DataHelperPollutantTransfer().getSubdata(searchtype,pollutanttransfers);
+        }
+        return pollutanttransfers;
+    }
+    
+    @RequestMapping("/pollutanttransferSeries")
     public List<PollutanttransferSeries> pollutanttransferSeries(
-    		
-    		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
-    		
-    		/*@RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,*/
-    		@RequestParam(value = "FacilityID", required = false) Integer facilityID,
+            
+            @RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
+            
+            /*@RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,*/
+            @RequestParam(value = "FacilityID", required = false) Integer facilityID,
   
-    		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
-    		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
-    		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
-    		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
-    		
-    		@RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
-    		@RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
-    		@RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
-    		@RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
-    		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
-    		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
-    		
-    		@RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
-    		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
-    		@RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
-    		@RequestParam(value = "Accidental", required = false) Integer accidental,
-    		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
-    		@RequestParam(value = "SearchType", required = false) String searchtype,
-    		HttpServletResponse response
-    		) {
+            @RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
+            @RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
+            @RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
+            @RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
+            
+            @RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
+            @RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
+            @RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
+            @RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
+            @RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
+            @RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
+            
+            @RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
+            @RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
+            @RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
+            @RequestParam(value = "Accidental", required = false) Integer accidental,
+            @RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
+            @RequestParam(value = "SearchType", required = false) String searchtype,
+            HttpServletResponse response
+            ) {
 
-		//ReportingYearSearchFilter reportingYearFilter = null;
-		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
-		FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(null,facilityID,null); 
-		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
-		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
-		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
-		PollutanttransferSearchFilter filter = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter,facilityItemSearcFilter); 
-		
-		List<PollutanttransferSeries> pollutanttransferseries = pollutanttransferSearchRepository.getPollutanttransferSeries(filter);
-		return pollutanttransferseries;
-	}
+        //ReportingYearSearchFilter reportingYearFilter = null;
+        ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+        FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(null,facilityID,null); 
+        LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
+        ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
+        PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
+        PollutanttransferSearchFilter filter = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter,facilityItemSearcFilter); 
+        
+        List<PollutanttransferSeries> pollutanttransferseries = pollutanttransferSearchRepository.getPollutanttransferSeries(filter);
+        return pollutanttransferseries;
+    }
 
-	@RequestMapping("/pollutanttransferCompare")
+    @RequestMapping("/pollutanttransferCompare")
     public List<PollutanttransferCompare> pollutanttransferCompare(
-    		
-    		@RequestParam(value = "ReportingYearStart", required = true) Integer reportingYearStart,
-    		@RequestParam(value = "ReportingYearEnd", required = true) Integer reportingYearEnd,
-    		
-    		@RequestParam(value = "FacilityID", required = false) Integer facilityID,
+            
+            @RequestParam(value = "ReportingYearStart", required = true) Integer reportingYearStart,
+            @RequestParam(value = "ReportingYearEnd", required = true) Integer reportingYearEnd,
+            
+            @RequestParam(value = "FacilityID", required = false) Integer facilityID,
 
-    		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
-    		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
-    		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
-    		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
-    		
-    		@RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
-    		@RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
-    		@RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
-    		@RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
-    		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
-    		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
-    		
-    		@RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
-    		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
-    		@RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
-    		@RequestParam(value = "Accidental", required = false) Integer accidental,
-    		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
-    		@RequestParam(value = "SearchType", required = false) String searchtype,
-    		HttpServletResponse response
-    		) {
+            @RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
+            @RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
+            @RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
+            @RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
+            
+            @RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
+            @RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
+            @RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
+            @RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
+            @RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
+            @RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
+            
+            @RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
+            @RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
+            @RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
+            @RequestParam(value = "Accidental", required = false) Integer accidental,
+            @RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
+            @RequestParam(value = "SearchType", required = false) String searchtype,
+            HttpServletResponse response
+            ) {
 
-		ReportingYearSearchFilter reportingYearFilter = null;
-		FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(null,facilityID,null); 
-		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
-		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
-		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
-		PollutanttransferSearchFilter filter = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter,facilityItemSearcFilter); 
-		
-		List<PollutanttransferCompare> pollutanttransfercompare = pollutanttransferSearchRepository.getPollutanttransferCompare(filter, reportingYearStart, reportingYearEnd);
-		return pollutanttransfercompare;
-	}
+        ReportingYearSearchFilter reportingYearFilter = null;
+        FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(null,facilityID,null); 
+        LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
+        ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
+        PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
+        PollutanttransferSearchFilter filter = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter,facilityItemSearcFilter); 
+        
+        List<PollutanttransferCompare> pollutanttransfercompare = pollutanttransferSearchRepository.getPollutanttransferCompare(filter, reportingYearStart, reportingYearEnd);
+        return pollutanttransfercompare;
+    }
 
-	@RequestMapping("/pollutanttransferConfidentialityTS")
+    @RequestMapping("/pollutanttransferConfidentialityTS")
     public List<PollutantConfidentiality> pollutanttransferConfidentialityTS(
-    		
-    		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
-    		
-    		/*@RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,*/
-    		@RequestParam(value = "FacilityID", required = false) Integer facilityID,
+            
+            @RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
+            
+            /*@RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,*/
+            @RequestParam(value = "FacilityID", required = false) Integer facilityID,
 
-    		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
-    		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
-    		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
-    		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
-    		
-    		@RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
-    		@RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
-    		@RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
-    		@RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
-    		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
-    		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
-    		
-    		@RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
-    		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
-    		@RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
-    		@RequestParam(value = "Accidental", required = false) Integer accidental,
-    		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
-    		@RequestParam(value = "SearchType", required = false) String searchtype,
-    		HttpServletResponse response
-    		) {
+            @RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
+            @RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
+            @RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
+            @RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
+            
+            @RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
+            @RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
+            @RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
+            @RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
+            @RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
+            @RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
+            
+            @RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
+            @RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
+            @RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
+            @RequestParam(value = "Accidental", required = false) Integer accidental,
+            @RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
+            @RequestParam(value = "SearchType", required = false) String searchtype,
+            HttpServletResponse response
+            ) {
 
-		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
-		FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(null,facilityID,reportingYear); 
-		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
-		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
-		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
-		PollutanttransferSearchFilter filter = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter,facilityItemSearcFilter); 
-		
-		List<PollutantConfidentiality> pollutanttransfercompare = pollutanttransferSearchRepository.GetConfidentialTimeSeries(filter);
-		return pollutanttransfercompare;
-	}
+        ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+        FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(null,facilityID,reportingYear); 
+        LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
+        ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
+        PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
+        PollutanttransferSearchFilter filter = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter,facilityItemSearcFilter); 
+        
+        List<PollutantConfidentiality> pollutanttransfercompare = pollutanttransferSearchRepository.GetConfidentialTimeSeries(filter);
+        return pollutanttransfercompare;
+    }
 
-	@RequestMapping("/pollutanttransferIsConfidential")
+    @RequestMapping("/pollutanttransferIsConfidential")
     public Boolean pollutanttransferIsConfidential(
-    		
-    		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
-    		
-    		@RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,
-    		@RequestParam(value = "FacilityID", required = false) Integer facilityID,
+            
+            @RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
+            
+            @RequestParam(value = "FacilityReportID", required = false) Integer facilityReportID,
+            @RequestParam(value = "FacilityID", required = false) Integer facilityID,
 
-    		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
-    		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
-    		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
-    		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
-    		
-    		@RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
-    		@RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
-    		@RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
-    		@RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
-    		@RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
-    		@RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
-    		
-    		@RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
-    		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
-    		@RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
-    		@RequestParam(value = "Accidental", required = false) Integer accidental,
-    		@RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
-    		@RequestParam(value = "SearchType", required = false) String searchtype,
-    		HttpServletResponse response
-    		) {
+            @RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
+            @RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
+            @RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
+            @RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
+            
+            @RequestParam(value = "LOV_IASectorID", required = false) Integer aiSectorID,
+            @RequestParam(value = "LOV_IAActivityID", required = false) Integer aiActivityID,
+            @RequestParam(value = "LOV_IASubActivityID", required = false) Integer aiSubActivityID,
+            @RequestParam(value = "LOV_NACESectorID", required = false) Integer naceSectorID,
+            @RequestParam(value = "LOV_NACEActivityID", required = false) Integer naceActivityID,
+            @RequestParam(value = "LOV_NACESubActivityID", required = false) Integer naceSubActivityID,
+            
+            @RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
+            @RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
+            @RequestParam(value = "MediumCode", required = false) List<MediumCode> mediumCode,
+            @RequestParam(value = "Accidental", required = false) Integer accidental,
+            @RequestParam(value = "ConfidentialIndicator", required = false) Integer confidentialIndicator,
+            @RequestParam(value = "SearchType", required = false) String searchtype,
+            HttpServletResponse response
+            ) {
 
-		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
-		FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(facilityReportID,facilityID,reportingYear); 
-		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
-		ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
-		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
-		PollutanttransferSearchFilter filter = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter,facilityItemSearcFilter); 
-		
-		Boolean isconfidential = pollutanttransferSearchRepository.IsAffectedByConfidentiality(filter);
-		return isconfidential;
-	}
-	
-	
-	@RequestMapping("/pollutanttransferAreaoverview")
+        ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+        FacilityItemSearchFilter facilityItemSearcFilter = new FacilityItemSearchFilter(facilityReportID,facilityID,reportingYear); 
+        LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
+        ActivitySearchFilter activityFilter = new ActivitySearchFilter(aiSectorID, aiActivityID, aiSubActivityID, naceSectorID, naceActivityID, naceSubActivityID);
+        PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, mediumCode, accidental,confidentialIndicator);
+        PollutanttransferSearchFilter filter = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter,facilityItemSearcFilter); 
+        
+        Boolean isconfidential = pollutanttransferSearchRepository.IsAffectedByConfidentiality(filter);
+        return isconfidential;
+    }
+    
+    
+    @RequestMapping("/pollutanttransferAreaoverview")
     public List<ActivityPollutantQuantity> pollutanttransferAreaoverview(
-    		
-    		@RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
-    		@RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
-    		@RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
-    		@RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
-    		@RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
-    		@RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
-    		@RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
-    		HttpServletResponse response
-    		) throws CloneNotSupportedException {
-		ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
-		LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
-		ActivitySearchFilter activityFilter = new ActivitySearchFilter(null, null, null, null, null, null);
-		PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, null, null,null);
-		PollutanttransferSearchFilter filter = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter,null); 
-		
-		List<Pollutanttransfer> pollutanttransfers = pollutanttransferSearchRepository.getPollutanttransfer(filter);
-		List<LovPollutant> pollist = pollutantSearchRepository.getLovPollutants(new PollutantSearchFilter(null, pollutantGroupID, null, null, null));
+            
+            @RequestParam(value = "ReportingYear", required = false) Integer reportingYear,
+            @RequestParam(value = "LOV_CountryID", required = false) Integer countryID,
+            @RequestParam(value = "LOV_AreaGroupID", required = false) Integer areaGroupID,
+            @RequestParam(value = "LOV_NUTSRegionID", required = false) Integer regionID,
+            @RequestParam(value = "LOV_RiverBasinDistrictID", required = false) Integer rbdID,
+            @RequestParam(value = "LOV_PollutantID", required = false) Integer pollutantID,
+            @RequestParam(value = "LOV_PollutantGroupID", required = false) Integer pollutantGroupID,
+            HttpServletResponse response
+            ) throws CloneNotSupportedException {
+        ReportingYearSearchFilter reportingYearFilter = new ReportingYearSearchFilter(reportingYear);
+        LocationSearchFilter locationFilter = new LocationSearchFilter(countryAreaGroupRepository, countryID, areaGroupID, regionID, rbdID);
+        ActivitySearchFilter activityFilter = new ActivitySearchFilter(null, null, null, null, null, null);
+        PollutantSearchFilter pollutantFilter = new PollutantSearchFilter(pollutantID, pollutantGroupID, null, null,null);
+        PollutanttransferSearchFilter filter = new PollutanttransferSearchFilter(reportingYearFilter, locationFilter, activityFilter, pollutantFilter,null); 
+        
+        List<Pollutanttransfer> pollutanttransfers = pollutanttransferSearchRepository.getPollutanttransfer(filter);
+        List<LovPollutant> pollist = pollutantSearchRepository.getLovPollutants(new PollutantSearchFilter(null, pollutantGroupID, null, null, null));
 
-		return new DataHelperPollutantTransfer().getAreaOverview(pollutanttransfers, pollist, pollutantGroupID);
-	}
+        return new DataHelperPollutantTransfer().getAreaOverview(pollutanttransfers, pollist, pollutantGroupID);
+    }
 
-	
-	
+    
+    
 }

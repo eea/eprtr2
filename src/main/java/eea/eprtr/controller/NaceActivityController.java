@@ -18,7 +18,7 @@ import eea.eprtr.model.NaceActivity;
 public class NaceActivityController {
 
     private NaceActivityRepository repository;
-    
+
     @PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
@@ -30,12 +30,11 @@ public class NaceActivityController {
     @RequestMapping("/naceActivity")
     public List<NaceActivity> list(
             @RequestParam(value = "ParentID", required = false) Integer parentID) {
-            return repository.list(parentID);
-        }
+        return repository.list(parentID);
+    }
 
     @RequestMapping("/naceActivity/{id}")
-    public NaceActivity get(
-        @PathVariable(value = "id") Integer id) {
-            return repository.get(id);
+    public NaceActivity get(@PathVariable(value = "id") Integer id) {
+        return repository.get(id);
     }
 }

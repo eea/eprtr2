@@ -13,16 +13,16 @@ import eea.eprtr.model.FacilitydetailPollutantrelease;
 @RestController
 public class FacilitydetailPollutantreleaseController {
 
-	@PersistenceContext(unitName="eprtr")
+    @PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
-	@RequestMapping("/facilitydetailPollutantrelease")
+    @RequestMapping("/facilitydetailPollutantrelease")
     public FacilitydetailPollutantrelease[] getFacilitydetailPollutantrelease(@RequestParam(value = "FacilityReportID") Integer facilityReportID){
-    	TypedQuery<FacilitydetailPollutantrelease> query = em.createNamedQuery("FacilitydetailPollutantrelease.findByFacilityReportID", FacilitydetailPollutantrelease.class);
-    	query.setParameter("FacilityReportID", facilityReportID);
-    	return query.getResultList().toArray(new FacilitydetailPollutantrelease[0]);
+        TypedQuery<FacilitydetailPollutantrelease> query = em.createNamedQuery("FacilitydetailPollutantrelease.findByFacilityReportID", FacilitydetailPollutantrelease.class);
+        query.setParameter("FacilityReportID", facilityReportID);
+        return query.getResultList().toArray(new FacilitydetailPollutantrelease[0]);
     }
-	
+    
 
-	
+    
 }

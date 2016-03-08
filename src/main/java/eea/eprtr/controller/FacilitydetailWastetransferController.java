@@ -13,14 +13,14 @@ import eea.eprtr.model.FacilitydetailWastetransfer;
 @RestController
 public class FacilitydetailWastetransferController {
 
-	@PersistenceContext(unitName="eprtr")
+    @PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
-	@RequestMapping("/facilitydetailWastetransfer")
+    @RequestMapping("/facilitydetailWastetransfer")
     public FacilitydetailWastetransfer[] getFacilitydetailWastetransfer(@RequestParam(value = "FacilityReportID") Integer facilityReportID){
-    	TypedQuery<FacilitydetailWastetransfer> query = em.createNamedQuery("FacilitydetailWastetransfer.findByFacilityReportID", FacilitydetailWastetransfer.class);
-    	query.setParameter("FacilityReportID", facilityReportID);
-    	return query.getResultList().toArray(new FacilitydetailWastetransfer[0]);
+        TypedQuery<FacilitydetailWastetransfer> query = em.createNamedQuery("FacilitydetailWastetransfer.findByFacilityReportID", FacilitydetailWastetransfer.class);
+        query.setParameter("FacilityReportID", facilityReportID);
+        return query.getResultList().toArray(new FacilitydetailWastetransfer[0]);
     }
-	
+    
 }

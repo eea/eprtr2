@@ -13,14 +13,14 @@ import eea.eprtr.model.FacilitydetailAuthority;
 @RestController
 public class FacilitydetailAuthorityController {
 
-	@PersistenceContext(unitName="eprtr")
+    @PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
-	@RequestMapping("/facilitydetailAuthority/{facilityReportID}")
+    @RequestMapping("/facilitydetailAuthority/{facilityReportID}")
     public FacilitydetailAuthority getFacilitydetailAuthority(@PathVariable(value = "facilityReportID") Integer facilityReportID){
-    	TypedQuery<FacilitydetailAuthority> query = em.createNamedQuery("FacilitydetailAuthority.findByFacilityReportID", FacilitydetailAuthority.class);
-    	query.setParameter("FacilityReportID", facilityReportID);
-    	return query.getSingleResult();
+        TypedQuery<FacilitydetailAuthority> query = em.createNamedQuery("FacilitydetailAuthority.findByFacilityReportID", FacilitydetailAuthority.class);
+        query.setParameter("FacilityReportID", facilityReportID);
+        return query.getSingleResult();
     }
-	
+    
 }

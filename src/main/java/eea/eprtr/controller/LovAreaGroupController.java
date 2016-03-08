@@ -13,18 +13,17 @@ import eea.eprtr.model.LovAreagroup;
 @RestController
 public class LovAreaGroupController {
 
-	@PersistenceContext(unitName="eprtr")
+    @PersistenceContext(unitName="eprtr")
     private EntityManager em;
 
-	
-	@RequestMapping("/lovAreaGroup/{id}")
-	public LovAreagroup getLovAreagroupByCode(
-			@PathVariable(value = "id") Integer id) {
-		TypedQuery<LovAreagroup> query = em.createQuery("SELECT l FROM LovAreagroup l where l.LOV_AreaGroupID = :Id", LovAreagroup.class);
-    	query.setParameter("Id", id);
-    	return query.getSingleResult();
-	}
+
+    @RequestMapping("/lovAreaGroup/{id}")
+    public LovAreagroup getLovAreagroupByCode(
+            @PathVariable(value = "id") Integer id) {
+        TypedQuery<LovAreagroup> query = em.createQuery("SELECT l FROM LovAreagroup l where l.LOV_AreaGroupID = :Id", LovAreagroup.class);
+        query.setParameter("Id", id);
+        return query.getSingleResult();
+    }
 
 
-	
 }
