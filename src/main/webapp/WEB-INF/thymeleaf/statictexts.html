@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: headerFragment">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="developer.css"/>
+    <link rel="stylesheet" type="text/css" href="../../css/application.css" th:href="@{/css/application.css}" />
+  </head>
+  <body>
+    <div id="container">
+      <div th:include="layout :: bannerFragment">
+      </div>
+      <div id="workarea">
+        <h1 th:text="${title}">Page title here</h1>
+        <div th:if="${#lists.isEmpty(texts)}">Table is empty.</div>
+        <div th:if="${not #lists.isEmpty(texts)}">
+          <table class="datatable">
+            <thead>
+              <tr>
+                <th>Identifier</th>
+                <th>Group</th>
+                <th>Title</th>
+              </tr>
+            </thead>
+            <tbody th:remove="all-but-first">
+              <tr th:each="entry : ${texts}">
+                <td><a href="editpage.html" th:href="@{/cms/edittext(key=${entry.resourceValueID})}"
+                    th:text="${entry.resourceKey}">AirNH3_Agriculture.TitleShort</a></td>
+                <td th:text="${entry.contentsGroupName}">Contents group</td>
+                <td th:text="${entry.title}">Long realistic title</td>
+              </tr>
+              <tr>
+                <td>ConfReleaseDesc</td>
+                <td>Content group</td>
+                <td>Filename.txt</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- workarea -->
+    </div>
+    <!-- container -->
+    <div id="pagefoot" th:include="layout :: footerFragment">
+    Footer
+    </div>
+  </body>
+</html>

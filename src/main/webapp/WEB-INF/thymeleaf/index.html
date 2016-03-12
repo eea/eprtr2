@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: headerFragment">
+  </head>
+  <body>
+    <div id="container">
+      <div th:include="layout :: bannerFragment">
+      </div>
+      <div id="workarea">
+        <h1>E-PRTR Content Management System</h1>
+        <p>
+        With this CMS website you can edit those parts of the E-PRTR website that are CMS enabled.
+        </p>
+        <p>Select your operation:</p>
+        <ul>
+          <li><a href="statictexts.html" th:href="@{/cms/statictexts}">Static text editor</a></li>
+          <li><a href="eprtrsurvey.html" th:href="@{/cms/eprtrsurvey}">E-PRTR Survey</a></li>
+          <li><a href="filecatalogue.html" th:href="@{/cms/filecatalogue}">File catalogue</a></li>
+        </ul>
+        <p>
+        Roles: <span sec:authorize="isAuthenticated()" sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
+        </p>
+      </div>
+    </div>
+    <!-- container -->
+    <div id="pagefoot" th:include="layout :: footerFragment">
+    Footer
+    </div>
+  </body>
+</html>

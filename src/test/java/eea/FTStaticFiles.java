@@ -4,6 +4,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -53,6 +54,21 @@ public class FTStaticFiles {
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         assertEquals(200, con.getResponseCode());
         assertEquals("application/javascript", con.getContentType());
+    }
+
+    /**
+     * Test that leaflet.css is there.
+     */
+    @Ignore
+    @Test
+    public void testLeafletCSS() throws Exception {
+        if (context == null) {
+            return;
+        }
+        URL obj = new URL(context + "bower_components/leaflet/dist/leaflet.css");
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        assertEquals(200, con.getResponseCode());
+        assertEquals("text/stylesheet", con.getContentType());
     }
 
 }

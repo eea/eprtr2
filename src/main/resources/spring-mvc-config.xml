@@ -26,10 +26,47 @@
     <tx:annotation-driven  />
 
     <util:properties id="application" location="classpath:application.properties"/>
+    <util:properties id="cas" location="classpath:cas.properties"/>
 
     <context:property-placeholder order="0" ignore-unresolvable="true"
         location="classpath:application.properties"
         system-properties-mode="OVERRIDE" properties-ref="application"/>
+
+    <!-- You might want to try
+         class="org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver"
+     -->
+    <bean id="templateResolver"
+            class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
+        <property name="prefix" value="/WEB-INF/thymeleaf/" />
+        <property name="suffix" value=".html" />
+        <property name="templateMode" value="HTML5" />
+        <property name="cacheable" value="true" />
+        <property name="characterEncoding" value="UTF-8"/>
+    </bean>
+
+    <bean id="templateEngine" class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <property name="templateResolver" ref="templateResolver" />
+        <property name="additionalDialects">
+            <set>
+            <bean class="org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect"/>
+        <!--
+            <bean class="org.thymeleaf.presentation.dialect.PresentationDialect"/>
+            <bean class="eionet.thymeleaf.LayoutDialect"/>
+        -->
+            </set>
+        </property>
+    </bean>
+
+    <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+            <property name="templateEngine" ref="templateEngine" />
+            <property name="order" value="1" />
+            <property name="viewNames" value="*" />
+            <property name="contentType" value="text/html;charset=UTF-8"/>
+    </bean>
+
+    <bean id="multipartResolver"
+            class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
+    </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
@@ -106,6 +143,22 @@
         <property name="timeBetweenEvictionRunsMillis" value="300000"/>
         <property name="testWhileIdle" value="true"/>
         <property name="validationQuery" value="select 1" />
+    </bean>
+
+    <bean id="simpleDocService" class="eea.eprtrcms.dao.SimpleDocServiceJdbc">
+        <property name="dataSource" ref="dataSourceEprtrCms" />
+    </bean>
+
+    <bean id="eprtrSurveyService" class="eea.eprtrcms.dao.EprtrSurveyServiceJdbc">
+        <property name="dataSource" ref="dataSourceEprtrCms" />
+    </bean>
+
+    <bean id="cultureService" class="eea.eprtrcms.dao.CultureServiceJdbc">
+        <property name="dataSource" ref="dataSourceEprtrCms" />
+    </bean>
+
+    <bean id="userService" class="eea.eprtrcms.dao.UserManagementServiceJdbc">
+        <property name="dataSource" ref="dataSourceEprtrCms"/>
     </bean>
 
     <bean id="storageService" class="eea.eprtr.dao.StorageServiceFiles">
