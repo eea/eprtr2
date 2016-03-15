@@ -20,6 +20,7 @@ body {margin-top:120px;}
 .col-Min50 { min-width:50px; }
 .col-Min75 { min-width:75px; }
 .col-Min100 { min-width:100px; }
+.col-Min125 { min-width:125px; }
 .col-Min150 { min-width:150px; }
 .col-Min200 { min-width:200px; }
 .col-Max100 { max-width:100px; }

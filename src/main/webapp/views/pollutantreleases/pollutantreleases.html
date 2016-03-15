@@ -567,17 +567,16 @@
 								<thead>
 									<tr>
 										<th></th>
-										<th>{{tr_c.Facility}}&nbsp;</th>
-										<th class="text-right col-Min75">{{tr_c.Quantity}}&nbsp;</th>
-										<th class="text-right col-Min75">{{tr_c.Accidental}}&nbsp;</th>
-										<th class="text-right col-Min75">{{tr_c.Accidental}}
-											%&nbsp;</th>
-										<th class="col-Min100">{{tr_c.Activity}}&nbsp;</th>
-										<th class="col-Min75">{{tr_c.Country}}&nbsp;</th>
+										<th custom-sort order="'facilityName'" sort="sort" >{{tr_c.Facility}}&nbsp;</th>
+										<th custom-sort order="'quantity'+ ff.capitalizeFirst(mediumFilter.prFacMedium)" sort="sort" class="text-right col-Min100">{{tr_c.Quantity}}</th>
+										<th custom-sort order="'quantityAccidental'+ff.capitalizeFirst(mediumFilter.prFacMedium)" sort="sort" class="text-right col-Min100">{{tr_c.Accidental}}</th>
+										<th custom-sort order="'percentageAccidental'+ff.capitalizeFirst(mediumFilter.prFacMedium)" sort="sort" class="text-right col-Min125">{{tr_c.Accidental}} %</th>
+										<th custom-sort order="'iaactivityCode'" sort="sort" class="col-Min100">{{tr_c.Activity}}</th>
+										<th custom-sort order="'countryCode'" sort="sort" class="col-Min75">{{tr_c.Country}}</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr ng-repeat="item in facilitiesItems">
+									<tr ng-repeat="item in facilitiesItems | orderBy : sort.sortingOrder : sort.reverse">
 									<td><a title="Open as external link" href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}" style="cursor:pointer;"><i class="fa fa-external-link"></i></a></td>
 										<td><a
 											ng-click="openFDmodal(item.facilityID, item.facilityReportID, item.reportingYear)" style="cursor:pointer;">

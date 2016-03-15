@@ -29,7 +29,10 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         $scope.mediumFilter = {};
         $scope.queryParams = {};
         $scope.queryParams.ReportingYear = -1;
-
+        $scope.itemsPerPage = 15;
+        $scope.pagedItems = [];
+        $scope.currentPage = 1;
+        $scope.facilityItemCount = 0;
         
 //		Requesting text and title resources 
 		eprtrcms.get('Facility',null).then(function (data) {
@@ -107,6 +110,11 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
             }
           }
 
+          $scope.sort = {
+                  sortingOrder : 'facilityName',
+                  reverse : false
+              };
+          
         /**
          * Tab handling
          * */
@@ -117,6 +125,9 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         $scope.activateTab = function(tab) {
         	$scope.active = {}; //reset
         	$scope.active[tab] = true;
+        	
+        	/*$scope.SearchType = tab.toUpperCase();
+        	$scope.queryParams.SearchType=tab.toUpperCase();*/
     	};
     	$scope.setActiveTab = function(tab) {
     		$scope.active[tab] = true;
@@ -165,6 +176,20 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
 
         $scope.$watch('mediumFilter.prFacMedium', function(newvalue,oldvalue){
         	if($scope.mediumFilter.prFacMedium && $scope.items){
+/*            	switch ($scope.mediumFilter.prFacMedium) {
+				case 'AIR':
+					$scope.facilityItemCount = $scope.quantityAir;
+					break;
+				case 'WATER':
+					$scope.facilityItemCount = $scope.quantityWater;
+					break;
+				case 'SOIL':
+					$scope.facilityItemCount = $scope.quantitySoil;
+					break;
+				default:
+					break;
+				}*/
+        		 
         		$scope.updateFacilitiesData();
         	}
         });
@@ -173,10 +198,37 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
             $scope.beforesearch = false;
         	$scope.reqStatus = {'sum':0,'act':0,'are':0,'aco':0,'fac':0,'con':0 };
             $scope.currentSearchFilter = $scope.searchFilter;
+            $scope.currentPage = 1;
+            $scope.sort.sortingOrder = 'facilityName';
+            $scope.sort.reverse = false;
             $scope.searchResults = true;
             $scope.performSearch();
         };
 
+
+        $scope.$watch('currentPage', function(value) {
+            	if ($scope.currentSearchFilter !== undefined) {
+            		//$scope.performSearch();
+            	}
+            });
+            
+            $scope.$watch('sort.sortingOrder', function(value) {
+            	var prevPage = $scope.currentPage;
+            	$scope.currentPage = 1;
+            	if ($scope.currentSearchFilter !== undefined && prevPage == 1) {
+            		//$scope.performSearch(true);
+            	}
+            });
+            
+            $scope.$watch('sort.reverse', function(value) {
+            	var prevPage = $scope.currentPage;
+            	$scope.currentPage = 1;
+            	if ($scope.currentSearchFilter !== undefined && prevPage == 1) {
+            		//$scope.performSearch();
+            	}
+            });
+
+        
         $scope.performSearch = function() {
             var rest = Restangular.withConfig(function(RestangularConfigurer) {
                 RestangularConfigurer.setFullResponse(true);
@@ -232,6 +284,16 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
             }
             $scope.confidentialParams.ConfidentialIndicator = 1;
        
+        	/*if($scope.SearchType === "FACILITIES")
+        	{
+            	queryParams.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
+            	queryParams.limit = $scope.itemsPerPage;
+            	queryParams.order = $scope.sort.sortingOrder;
+        		queryParams.desc = $scope.sort.reverse;
+        	}*/
+
+            
+            
             pollutantreleaseSearch.getList(queryParams).then(function(response) {
                 $scope.items = response.data;
 
@@ -380,6 +442,18 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
                 }
                 return false;
             });
+            //$scope.facilitiesItems = $filter('orderBy')($scope.facilitiesItems, $scope.sort.sortingOrder, $scope.sort.reverse);
+            //$scope.facilitiesItems
+        	/*if($scope.SearchType === "FACILITIES")
+        	{
+            	queryParams.offset = ($scope.currentPage - 1) * $scope.itemsPerPage;
+            	queryParams.limit = $scope.itemsPerPage;
+            	queryParams.order = $scope.sort.sortingOrder;
+        		queryParams.desc = $scope.sort.reverse;
+        	}*/
+
+            
+            
             $scope.stopSpinPart('fac');
         };
         

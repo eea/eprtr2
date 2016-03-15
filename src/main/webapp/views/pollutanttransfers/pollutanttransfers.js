@@ -81,6 +81,11 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
     		$scope.active[tab] = true;
     	};
     	
+        $scope.sort = {
+                sortingOrder : 'facilityName',
+                reverse : false
+            };
+
     	/**
          * MAp handling*/
         $scope.togglemapview = function(){
@@ -105,6 +110,8 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
             $scope.beforesearch = false;
             $scope.currentSearchFilter = $scope.searchFilter;
             $scope.searchResults = true;
+            $scope.sort.sortingOrder = 'facilityName';
+            $scope.sort.reverse = false;
             $scope.performSearch();
         };
         
@@ -181,8 +188,6 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
             
         };
         
-  
-       
         $scope.updateSummaryData = function() {
         	 $scope.summaryItems = angular.copy($scope.items);
         	

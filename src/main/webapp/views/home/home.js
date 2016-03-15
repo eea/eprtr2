@@ -230,6 +230,14 @@ angular.module('myApp.home', ['ngRoute'])
 	        }
 	        return result;
 
+	    },
+	    capitalizeFirst: function(txt){
+	    	if (txt && txt !== null) {
+                return txt.replace(/\w\S*/g, function(t) {
+                    return t.charAt(0).toUpperCase() + t.substr(1).toLowerCase();
+                });
+            }
+	    	
 	    }
 	}
 }])

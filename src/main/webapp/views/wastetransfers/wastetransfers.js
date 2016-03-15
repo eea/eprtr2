@@ -173,7 +173,7 @@ $scope.$watch('currentPage', function(value) {
 	    	$scope.wtfilter.wtsel =  $scope.wtfcsel.wtsel;
 	    	$scope.currentPage = 1;
 	    	if ($scope.currentSearchFilter !== undefined) {
-	    		$scope.performSearch();
+	    		//$scope.performSearch();
 	    	}
     	}
     });
@@ -1205,6 +1205,27 @@ $scope.$watch('currentPage', function(value) {
            
                 }
               });
+        };
+        
+        $scope.openFDmodal = function (fdID, fdrID, year) {
+
+            var modalInstance = $modal.open({
+              templateUrl: 'components/facilitydetails/fdmodal.html',
+              controller: 'ModalFacilityDetailsCtrl',
+                size: 'lg',
+              resolve: {
+                 fdrID: function () {
+                    return fdrID;
+                },
+                fdID: function () {
+                    return fdID;
+                },
+                year: function() {
+                    return year;
+                }
+
+            }
+        });
         };
  
        
