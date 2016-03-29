@@ -9,6 +9,7 @@ import javax.persistence.*;
  *
  */
 @Entity
+@IdClass(FacilitydetailActivityPK.class)
 @Table(name="FACILITYDETAIL_ACTIVITY")
 @NamedQuery(name="FacilitydetailActivity.findByFacilityReportID", query="SELECT f FROM FacilitydetailActivity f where f.facilityReportID = :FacilityReportID")
 public class FacilitydetailActivity implements Serializable {
@@ -126,5 +127,5 @@ public class FacilitydetailActivity implements Serializable {
     public void setSubActivityIPPCCode(String subActivityIPPCCode) {
         this.subActivityIPPCCode = subActivityIPPCCode;
     }
-
+    
 }

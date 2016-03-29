@@ -9,6 +9,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@IdClass(WastetransferConfidentialPK.class)
 @Table(name="WASTETRANSFER_CONFIDENTIAL")
 @NamedQuery(name="WastetransferConfidential.findAll", query="SELECT w FROM WastetransferConfidential w WHERE w.reportingYear > 2006")
 public class WastetransferConfidential implements Serializable {

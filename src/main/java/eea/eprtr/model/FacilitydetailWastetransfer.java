@@ -1,6 +1,7 @@
 package eea.eprtr.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
  *
  */
 @Entity
+@IdClass(FacilitydetailWastetransferPK.class)
 @Table(name="FACILITYDETAIL_WASTETRANSFER")
 @NamedQueries({
     @NamedQuery(name="FacilitydetailWastetransfer.findAll", query="SELECT f FROM FacilitydetailWastetransfer f"),
@@ -284,5 +286,5 @@ public class FacilitydetailWastetransfer implements Serializable {
     public void setWHPSitePostalCode(String WHPSitePostalCode) {
         this.WHPSitePostalCode = WHPSitePostalCode;
     }
-
+    
 }

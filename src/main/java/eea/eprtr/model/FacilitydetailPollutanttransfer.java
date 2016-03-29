@@ -1,6 +1,7 @@
 package eea.eprtr.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
  *
  */
 @Entity
+@IdClass(FacilitydetailPollutanttransferPK.class)
 @Table(name="FACILITYDETAIL_POLLUTANTTRANSFER")
 @NamedQueries({
     @NamedQuery(name="FacilitydetailPollutanttransfer.findAll", query="SELECT f FROM FacilitydetailPollutanttransfer f"),
@@ -206,4 +208,37 @@ public class FacilitydetailPollutanttransfer implements Serializable {
         this.unitCode = unitCode;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + this.facilityReportID;
+        hash = 47 * hash + Objects.hashCode(this.LOV_PollutantID);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final FacilitydetailPollutanttransfer other = (FacilitydetailPollutanttransfer) obj;
+        if (this.facilityReportID != other.facilityReportID) {
+            return false;
+        }
+        if (!Objects.equals(this.LOV_PollutantID, other.LOV_PollutantID)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    
+    
+    
 }

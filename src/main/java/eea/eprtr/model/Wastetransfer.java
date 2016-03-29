@@ -2,6 +2,7 @@ package eea.eprtr.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.*;
 
@@ -721,5 +722,4 @@ public class Wastetransfer implements Serializable,Cloneable{
 		this.quantityUnspec = getQuantityUnspecHWIC() + getQuantityUnspecHWOC() + getQuantityUnspecNONHW(); 
 	}
 
-		
 }

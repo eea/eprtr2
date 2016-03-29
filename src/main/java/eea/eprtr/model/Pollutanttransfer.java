@@ -2,6 +2,7 @@ package eea.eprtr.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@IdClass(PollutanttransferPK.class)
 @Table(name="POLLUTANTTRANSFER")
 @NamedQuery(name="Pollutanttransfer.findAll", query="SELECT p FROM Pollutanttransfer p WHERE p.reportingYear > 2006")
 public class Pollutanttransfer implements Serializable,Cloneable {
@@ -422,6 +424,5 @@ public class Pollutanttransfer implements Serializable,Cloneable {
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-	
-	
+ 
 }
