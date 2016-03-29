@@ -1,4 +1,9 @@
-package eea.eprtr.model;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package eea.eprtrcms.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -7,26 +12,26 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * 
+ *
  * @author Vasilis Skiadas<vs@eworx.gr>
  */
-public class PollutanttransferPKTest {
+public class StringResourcePKTest {
     
-    PollutanttransferPK x;
-    PollutanttransferPK y;
-    PollutanttransferPK z;
-    PollutanttransferPK notx;
+     StringResourcePK x;
+    StringResourcePK y;
+    StringResourcePK z;
+    StringResourcePK notx;
     
     
     @Before
     public void initialize() {
-        x = new PollutanttransferPK(42, 9000);
+        x = new StringResourcePK("en-GB", "PT16B");
 
-        y = new PollutanttransferPK(42, 9000);
+        y = new StringResourcePK("en-GB", "PT16B");
 
-        z = new PollutanttransferPK(42, 9000);
+        z = new StringResourcePK("en-GB", "PT16B");
 
-        notx = new PollutanttransferPK(2, 2000);
+        notx = new StringResourcePK("el-GR", "PTR18N");
 
     }
     
@@ -46,7 +51,7 @@ public class PollutanttransferPKTest {
     @Test
     public void testPassIncompatibleType_isFalse() {
 
-        assertFalse("Passing incompatible object to equals should return false", x.equals("string"));
+        assertFalse("Passing incompatible object to equals should return false", x.equals(18));
     }
 
     /**
