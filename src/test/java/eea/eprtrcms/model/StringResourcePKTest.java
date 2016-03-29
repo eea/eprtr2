@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package eea.eprtrcms.model;
 
 import static org.junit.Assert.assertEquals;
@@ -16,13 +11,12 @@ import org.junit.Test;
  * @author Vasilis Skiadas<vs@eworx.gr>
  */
 public class StringResourcePKTest {
-    
-     StringResourcePK x;
+
+    StringResourcePK x;
     StringResourcePK y;
     StringResourcePK z;
     StringResourcePK notx;
-    
-    
+
     @Before
     public void initialize() {
         x = new StringResourcePK("en-GB", "PT16B");
@@ -34,7 +28,7 @@ public class StringResourcePKTest {
         notx = new StringResourcePK("el-GR", "PTR18N");
 
     }
-    
+
     @Test
     /**
      * A class is equal to itself.
