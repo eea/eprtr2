@@ -24,6 +24,34 @@ public class FacilitydetailPollutantrelease implements Serializable {
 /*  @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
 */
+    public FacilitydetailPollutantrelease(Double accidentalQuantity, String accidentalQuantityUnitCode, String cas, 
+    		String confidentialCode, boolean confidentialIndicator, Integer facilityID, Integer facilityReportID, 
+    		String groupCode, Integer LOV_ConfidentialityID, Integer LOV_MediumID, Integer LOV_MethodBasisID, 
+    		Integer LOV_PollutantGroupID, Integer LOV_PollutantID, String methodCode, String methodDesignation, 
+    		Integer methodListID, String methodTypeCode, String pollutantCode, String pollutantTo, 
+    		Double totalQuantity, String totalQuantityUnitCode){
+    	this.accidentalQuantity = accidentalQuantity; 
+    	this.accidentalQuantityUnitCode = accidentalQuantityUnitCode; 
+    	this.cas = cas; 
+    	this.confidentialCode = confidentialCode; 
+    	this.facilityID = facilityID; 
+    	this.facilityReportID = facilityReportID; 
+    	this.groupCode = groupCode; 
+    	this.LOV_ConfidentialityID = LOV_ConfidentialityID; 
+    	this.LOV_MediumID = LOV_MediumID; 
+    	this.LOV_MethodBasisID = LOV_MethodBasisID; 
+    	this.LOV_PollutantGroupID = LOV_PollutantGroupID; 
+    	this.LOV_PollutantID = LOV_PollutantID; 
+    	this.methodCode = methodCode; 
+    	this.methodDesignation = methodDesignation; 
+    	this.methodListID = methodListID; 
+    	this.methodTypeCode = methodTypeCode; 
+    	this.pollutantCode = pollutantCode; 
+    	this.pollutantTo = pollutantTo; 
+    	this.totalQuantity = totalQuantity; 
+    	this.totalQuantityUnitCode = totalQuantityUnitCode; 
+    }
+    
     @Column(name="AccidentalQuantity")
     private Double accidentalQuantity;
 
