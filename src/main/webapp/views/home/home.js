@@ -222,7 +222,7 @@ angular.module('myApp.home', ['ngRoute'])
 
 	                    if (designation != null && designation != '')
 	                    {
-	                        result += " " + "<span title=\""+designation+"\">"+designation+"</span>";
+	                        result += " " + "<span>"+designation+"</span>";
 	                    }
 	                    result += delim;
 	                }

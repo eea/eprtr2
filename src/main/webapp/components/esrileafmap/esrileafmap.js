@@ -384,7 +384,9 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 					        icon: L.AwesomeMarkers.icon($scope.eprtricons[(elmconf.sectors.indexOf(sec)>0)?sec:'others'])
 					      });
 				    },
-				});
+				}, function(error) {
+					console.log('esrileafmap error: '+ error);
+			    });
 		
 				//Here we try to navigate to the extent of the selected features - still not satisfied
 		/*		elm_ctrl.fdlay.on('load', function(e){
