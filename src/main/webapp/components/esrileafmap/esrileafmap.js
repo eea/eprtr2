@@ -414,7 +414,9 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 					    icon: 'fa-bars',
 					    title: 'show legend',
 					    onClick: function(control) {
-					    	elm_ctrl.legend.addTo(elm_ctrl.elm_map);
+					    	if(elm_ctrl.legend){
+					    		elm_ctrl.legend.addTo(elm_ctrl.elm_map);
+					    	};
 					      control.state('hide-legend');
 					    }
 					  }, {
