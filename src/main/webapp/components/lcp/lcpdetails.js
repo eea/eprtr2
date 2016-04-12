@@ -49,6 +49,7 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize', 'myApp
 	/*
 	 * Request data by FacilityReportID
 	 * */
+	/*Deprecated*/
 	$scope.updateByPlantid = function(){
 		var qp = {'PlantID':$scope.plantid}, uid;
 		//$scope.map = {wh : {'FacilityReportID': $scope.frid}};
@@ -82,7 +83,9 @@ angular.module('myApp.lcpdetails', ['ngRoute','restangular','ngSanitize', 'myApp
 	};
 	$scope.$watchCollection('[plantid,mapurls]', function() {
 		if($scope.plantid && $scope.mapurls){
-			$scope.updateByPlantid();
+			//$scope.updateByPlantid();
+        	$scope.callAllPlants($scope.plantid);
+			$scope.updateByUid($scope.plantid);
 		}
 	});
 	//Watch results for FacilitydetailsDetail request and common resources

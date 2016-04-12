@@ -275,7 +275,8 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     	$scope.plantdata = [];
 		angular.forEach(plantdata, function(item) {
 			var _pl = {'plantid':item.attributes[lcpconf.layerfields[0].plantid]};
-			_pl['id'] = item.attributes[lcpconf.layerfields[0].id];
+			_pl['id'] = item.attributes[lcpconf.layerfields[0].uniqueplantid];
+			//_pl['id'] = item.attributes[lcpconf.layerfields[0].id];
 			_pl['facility'] = item.attributes[lcpconf.layerfields[0].facilityname];
 			_pl['plant'] = item.attributes[lcpconf.layerfields[0].plantname];
 			_pl['address'] = (item.attributes[lcpconf.layerfields[0].address2])?

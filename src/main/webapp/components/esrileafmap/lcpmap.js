@@ -217,7 +217,7 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 				    	var keys = Object.keys(featureCollection.features[0].properties);
 				    	var _str = '<p><em>Plant</em>: '+featureCollection.features[0].properties[keys[3]]+'<br>';
 				    	_str += '<em>Facility</em>: '+featureCollection.features[0].properties[keys[5]]+'<br>';
-					    _str += '<a href=#lcpdetailsview?PlantID='+featureCollection.features[0].properties[keys[1]]+' >details</a></p>';
+					    _str += '<a target="_blank" href=#lcpdetailsview?PlantID='+featureCollection.features[0].properties[keys[3]]+' >details</a></p>';
 				    	//, feature.properties
 		        	    return _str;//L.Util.template(_str, featureCollection.features[0].properties);
 		//href="#lcpdetailsview?PlantID='+featureCollection.features[0].properties[keys[1]]+'"
