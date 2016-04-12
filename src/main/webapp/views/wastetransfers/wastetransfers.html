@@ -685,7 +685,7 @@
 								</tfoot>
 								<tbody>
 									<tr ng-repeat="item in facilitiesItems">
-									<td><a title="Open as external link" href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}" style="cursor:pointer;"><i class="fa fa-external-link"></i></a></td>
+									<td><a target="_blank" title="Open as external link" href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}" style="cursor:pointer;"><i class="fa fa-external-link"></i></a></td>
 										<td><a ng-click="openFDmodal(item.facilityID, item.facilityReportID, item.reportingYear)" >
 												{{item.facilityName}}</a></td>
 										<td class="text-right">{{ff.formatQuantity(item['quantityTotal'+wtfcsel.wtsel],item.unitCodeNONHW,item.confidentialIndicator)}}</td>

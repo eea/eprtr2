@@ -405,7 +405,7 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 				//Here we bind a HTML template to the the popup - TODO 
 				elm_ctrl.fdlay.bindPopup(function (feature) {
 						//console.log('pop: '+ feature.properties.X + ' ' + feature.properties.Y);
-		        	    return L.Util.template('<p><em>Facility</em>: {FacilityName }<br><em>Reporting Year</em>: {ReportingYear }<br><em>Country</em>: {CountryCode }<br><a href="#facilitydetails?FacilityID={FacilityID}&ReportingYear={ReportingYear}">details</a></p>', feature.properties);
+		        	    return L.Util.template('<p><em>Facility</em>: {FacilityName }<br><em>Reporting Year</em>: {ReportingYear }<br><em>Country</em>: {CountryCode }<br><a target="_blank" href="#facilitydetails?FacilityID={FacilityID}&ReportingYear={ReportingYear}">details</a></p>', feature.properties);
 		        	  });
 		
 				$scope.toggleLegend = L.easyButton({
