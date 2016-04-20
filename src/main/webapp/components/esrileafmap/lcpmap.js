@@ -198,7 +198,7 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
 				
 				L.esri.get = L.esri.Request.get.JSONP;
 				//We set the baselayer - in version 2 we can add more baselayers and a selector
-				L.esri.basemapLayer("Streets").addTo(map);
+				//L.esri.basemapLayer("Streets").addTo(map);
 		
 				elm_ctrl.dmlay = L.esri.dynamicMapLayer({
 					url: $scope.mapurls.lcpUrl,
