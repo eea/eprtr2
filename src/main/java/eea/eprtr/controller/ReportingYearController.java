@@ -12,12 +12,12 @@ import eea.eprtr.model.ReportingYear;
 @RestController
 public class ReportingYearController {
 
-	@PersistenceContext(unitName="eprtr")
+    @PersistenceContext(unitName="eprtr")
     private EntityManager em;
-	
-	@RequestMapping("/reportingYears")
+
+    @RequestMapping("/reportingYears")
     public ReportingYear[] reportingYears() {
-    	TypedQuery<ReportingYear> query = em.createNamedQuery("ReportingYear.findAll", ReportingYear.class);
-    	return query.getResultList().toArray(new ReportingYear[0]);
+        TypedQuery<ReportingYear> query = em.createNamedQuery("ReportingYear.findAll", ReportingYear.class);
+        return query.getResultList().toArray(new ReportingYear[0]);
     }
 }

@@ -18,18 +18,18 @@ public class FacilitydetailPollutantreleaseController {
 
     @PersistenceContext(unitName="eprtr")
     private EntityManager em;
-    
+
     @Autowired
     private FacilitydetailPollutantreleaseRepository facilitydetailPollutantreleaseRepository;
 
     @RequestMapping("/facilitydetailPollutantrelease")
     public List<FacilitydetailPollutantrelease> getFacilitydetailPollutantrelease(@RequestParam(value = "FacilityReportID") Integer facilityReportID){
-        
-    	List<FacilitydetailPollutantrelease> results = facilitydetailPollutantreleaseRepository.getFacilitydetailPollutantreleases(facilityReportID);
-/*    	TypedQuery<FacilitydetailPollutantrelease> query = em.createNamedQuery("FacilitydetailPollutantrelease.findByFacilityReportID", FacilitydetailPollutantrelease.class);
+
+        List<FacilitydetailPollutantrelease> results = facilitydetailPollutantreleaseRepository.getFacilitydetailPollutantreleases(facilityReportID);
+/*      TypedQuery<FacilitydetailPollutantrelease> query = em.createNamedQuery("FacilitydetailPollutantrelease.findByFacilityReportID", FacilitydetailPollutantrelease.class);
         query.setParameter("FacilityReportID", facilityReportID);
         return query.getResultList().toArray(new FacilitydetailPollutantrelease[0]);*/
-    	return results;
+        return results;
     }
-    
+
 }

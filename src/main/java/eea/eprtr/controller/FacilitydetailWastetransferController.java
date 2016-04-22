@@ -22,5 +22,5 @@ public class FacilitydetailWastetransferController {
         query.setParameter("FacilityReportID", facilityReportID);
         return query.getResultList().toArray(new FacilitydetailWastetransfer[0]);
     }
-    
+
 }

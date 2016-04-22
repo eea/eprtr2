@@ -14,12 +14,12 @@ import eea.eprtr.model.Receivingcountry;
 @RestController
 public class ReceivingcountryController {
 
-	@PersistenceContext(unitName="eprtr")
+    @PersistenceContext(unitName="eprtr")
     private EntityManager em;
-	
-	@RequestMapping("/receivingCountry")
+
+    @RequestMapping("/receivingCountry")
     public List<Receivingcountry> reportingYears() {
-    	TypedQuery<Receivingcountry> query = em.createNamedQuery("Receivingcountry.findAll", Receivingcountry.class);
-    	return query.getResultList();
+        TypedQuery<Receivingcountry> query = em.createNamedQuery("Receivingcountry.findAll", Receivingcountry.class);
+        return query.getResultList();
     }
 }

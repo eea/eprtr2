@@ -22,7 +22,4 @@ public class FacilitydetailPollutanttransferController {
         query.setParameter("FacilityReportID", facilityReportID);
         return query.getResultList().toArray(new FacilitydetailPollutanttransfer[0]);
     }
-    
-
-    
 }

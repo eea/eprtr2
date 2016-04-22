@@ -14,21 +14,21 @@ import eea.eprtr.model.RiverBasinDistrict;
 @RestController
 public class RiverBasinDistrictController {
 
-	@PersistenceContext(unitName="eprtr")
+    @PersistenceContext(unitName="eprtr")
     private EntityManager em;
-	
-	@RequestMapping("/riverBasinDistricts")
+
+    @RequestMapping("/riverBasinDistricts")
     public RiverBasinDistrict[] reportingYears(@RequestParam("LOV_CountryID") Integer countryId) {
-    	TypedQuery<RiverBasinDistrict> query = em.createNamedQuery("RiverBasinDistrict.findByLOVCountryID", RiverBasinDistrict.class);
-    	query.setParameter("LOV_CountryID", countryId);
-    	return query.getResultList().toArray(new RiverBasinDistrict[0]);
+        TypedQuery<RiverBasinDistrict> query = em.createNamedQuery("RiverBasinDistrict.findByLOVCountryID", RiverBasinDistrict.class);
+        query.setParameter("LOV_CountryID", countryId);
+        return query.getResultList().toArray(new RiverBasinDistrict[0]);
     }
 
-	@RequestMapping("/riverBasinDistricts/{id}")
+    @RequestMapping("/riverBasinDistricts/{id}")
     public RiverBasinDistrict getRiverBasinDistrict(@PathVariable(value = "id") Integer id){
-    	TypedQuery<RiverBasinDistrict> query = em.createNamedQuery("RiverBasinDistrict.findByID", RiverBasinDistrict.class);
-    	query.setParameter("Id", id);
-    	return query.getSingleResult();
+        TypedQuery<RiverBasinDistrict> query = em.createNamedQuery("RiverBasinDistrict.findByID", RiverBasinDistrict.class);
+        query.setParameter("Id", id);
+        return query.getSingleResult();
     }
 
 }
