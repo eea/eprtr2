@@ -647,7 +647,7 @@
                             </triggerfiles>
                         </configuration>
                         </execution>
-
+<!--
                     <execution>
                         <id>javascript tests</id>
                         <phase>process-test-classes</phase>
@@ -658,6 +658,7 @@
                             <karmaConfPath>karma.ci.conf.js</karmaConfPath>
                         </configuration>
                     </execution>
+-->
                 </executions>
             </plugin>
 <!-- JSTESTS -->
