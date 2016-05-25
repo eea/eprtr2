@@ -38,7 +38,7 @@
       </tr>
       <tr>
         <td>helen</td>
-        <td>ROLE_ADMIN, ROLE_NOEXPIRATION</td>
+        <td>ROLE_ADMIN, ROLE_REVIEWER</td>
           <td>
             <input class="edit-button" type="button" value="Edit" href="#" />
           </td>
@@ -64,8 +64,8 @@
                     <label for="role1" th:for="${#ids.prev('authorisations')}" th:text="${validRole}">ROLE_ADMIN</label>
                 </div>
                 <div th:remove="all">
-                    <input type="checkbox" value="ROLE_NOEXPIRATION" id="role2"/>
-                    <label for="role2">ROLE_NOEXPIRATION</label>
+                    <input type="checkbox" value="ROLE_REVIEWER" id="role2"/>
+                    <label for="role2">ROLE_REVIEWER</label>
                 </div>
             </td>
         </tr>

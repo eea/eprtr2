@@ -27,5 +27,5 @@ public enum UserRole {
     /**
      * Roles.
      */
-    ROLE_ADMIN, ROLE_AUTHOR
+    ROLE_ADMIN, ROLE_AUTHOR, ROLE_REVIEWER
 }
