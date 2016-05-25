@@ -595,8 +595,9 @@
             <!--
                     Install node, npm and karma locally and execute the JS unit tests
                     during the test lifecycle phase.
+                    REQUIRED FOR DEPLOYMENT
             -->
-<!-- JSTESTS x->
+<!-- JSTESTS -->
             <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
@@ -659,7 +660,7 @@
                     </execution>
                 </executions>
             </plugin>
-<!-x JSTESTS -->
+<!-- JSTESTS -->
         </plugins>
 
         <!-- resources for the main code -->
