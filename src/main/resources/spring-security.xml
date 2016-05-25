@@ -16,6 +16,7 @@
         <security:intercept-url pattern="/cms/filecatalogue" access="hasRole('AUTHOR')" />
         <security:intercept-url pattern="/cms/users/**" access="hasRole('ADMIN')"/>
         <security:intercept-url pattern="/cms/**" access="isAuthenticated()"/>
+        <security:intercept-url pattern="/**" access="${siteaccess}"/>
         <security:custom-filter position="CAS_FILTER" ref="casFilter" />
         <security:logout logout-success-url="/cms/logout"/>
         <security:custom-filter ref="requestSingleLogoutFilter" before="LOGOUT_FILTER"/>
