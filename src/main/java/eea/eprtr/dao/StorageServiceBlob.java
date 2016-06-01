@@ -155,6 +155,14 @@ public class StorageServiceBlob implements StorageService {
         return fileName;
     }
 
+    /**
+     * FIXME
+     */
+    @Override
+    public String save(String filePath, String section, InputStream dataStream) throws IOException {
+        throw new UnsupportedOperationException("Not implemented");
+    }
+
     @Override
     public InputStream getById(String fileName, String section) throws IOException {
         login();

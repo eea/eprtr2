@@ -647,7 +647,7 @@
                             </triggerfiles>
                         </configuration>
                         </execution>
-<!--
+
                     <execution>
                         <id>javascript tests</id>
                         <phase>process-test-classes</phase>
@@ -658,7 +658,7 @@
                             <karmaConfPath>karma.ci.conf.js</karmaConfPath>
                         </configuration>
                     </execution>
--->
+
                 </executions>
             </plugin>
 <!-- JSTESTS -->
@@ -882,6 +882,11 @@
             <groupId>org.webjars</groupId>
             <artifactId>angularjs</artifactId>
             <version>1.2.16</version>
+        </dependency>
+        <dependency>
+            <groupId>eionet</groupId>
+            <artifactId>rdf-exporter</artifactId>
+            <version>1.3-SNAPSHOT</version>
         </dependency>
         <!-- jclouds dependencies -->
         <dependency>

@@ -32,9 +32,14 @@ import org.springframework.web.multipart.MultipartFile;
 public interface StorageService {
 
     /**
-     * Store the file at a location and return a generated unique identifier for it.
+     * Store the file at a location and return a filename.
      */
     String save(MultipartFile myFile, String section) throws IOException;
+
+    /**
+     * Store the file at a location and return a filename.
+     */
+    String save(String filePath, String section, InputStream dataStream) throws IOException;
 
     /**
      * Get an open stream to the stored object.

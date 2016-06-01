@@ -26,10 +26,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
+import java.nio.file.Path;
+import java.nio.file.Files;
 
 /**
  * Service to store files in the file system.
@@ -51,6 +54,17 @@ public class StorageServiceFiles implements StorageService {
         String fileName = Filenames.removePath(myFile.getOriginalFilename());
         File destination = getLocation(section, fileName);
         myFile.transferTo(destination);
+        return fileName;
+    }
+
+    @Override
+    public String save(String filePath, String section, InputStream dataStream) throws IOException {
+        assert storageDir != null;
+        String fileName = Filenames.removePath(filePath);
+        File destination = getLocation(section, fileName);
+        Path destPath = destination.toPath();
+
+        Files.copy(dataStream, destPath, java.nio.file.StandardCopyOption.REPLACE_EXISTING);
         return fileName;
     }
 
