@@ -44,8 +44,8 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 		$scope.mapurls = data;
 	});
 	
-	$scope.$watchCollection('[lov,elm_ctrl]', function(value){
-    	if($scope.lov && elm_ctrl.elm_map){
+	$scope.$watch('tr_laa', function(value){
+    	if($scope.tr_laa){
     		$scope.createLegend();
     	}
     });
@@ -453,7 +453,7 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 		    /*eprtricons: {
 				1: {icon: 'home', prefix: 'fa',	markerColor: 'darkgreen'},	*/	
 		    angular.forEach($scope.eprtricons, function(value, key) {
-	    	  var lab = ($scope.lov.hasOwnProperty(key))?$scope.lov[key]:'Others';
+	    	  var lab = ($scope.tr_laa.hasOwnProperty(key))?$scope.tr_laa[key]:'Others';
 	    	  var clss = value.prefix +" " + value.prefix +"-"+ value.icon;
 	    	  tab.innerHTML += '<tr><td><i class="circle ' + clss + 
 	    	  '" style="background:' + $scope.eprtriconcolors[value.markerColor] + 
