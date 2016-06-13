@@ -16,6 +16,7 @@ angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'r
         $scope.beforesearch = true;
     	$scope.activityPanel = true;
         $scope.searchFilter = searchFilter;
+        $scope.localSearhFilter = {};
         $scope.queryParams = {};
         $scope.queryParams.ReportingYear = -1;
         $scope.regionSearch = false;
@@ -190,7 +191,10 @@ angular.module('myApp.industrialactivity', ['ngRoute', 'myApp.search-filter', 'r
         
         /*Need to do all in on search*/
         $scope.performSearch = function() {
-             
+
+            $scope.localSearhFilter = {};
+            $scope.localSearhFilter.Countryname = $scope.currentSearchFilter.selectedReportingCountry.name
+
             var queryParams = {ReportingYear: $scope.currentSearchFilter.selectedReportingYear.year};
             if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.countryId) {
                 queryParams.LOV_CountryID = $scope.currentSearchFilter.selectedReportingCountry.countryId;

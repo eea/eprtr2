@@ -247,7 +247,7 @@ POLLUTANT TRANSFERS
      <div class="row" >
 		<div class="col-md-12" >
 		<H3><small>{{tr_p.TransferToWasteWater}}</small></H3>
-		<table class="table table-striped table-condensed table-hover" ng-hide="(pollutanttransfers | filter:{ pollutantTo: tr_lme.WASTEWATER }).length > 0 ? false : true">
+		<table class="table table-striped table-condensed table-hover" ng-hide="(pollutanttransfers).length > 0 ? false : true">
                    <thead>
                         <tr class="generalListStyle_headerRow">
                           <th></th>
@@ -261,7 +261,7 @@ POLLUTANT TRANSFERS
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in pollutanttransfers | filter:{ pollutantTo: tr_lme.WASTEWATER } ">
+                        <tr ng-repeat="item in pollutanttransfers ">
 	                   <td><img src="images/timeseries.png" class="timesericesImage" ng-click="openTSmodal('pollutanttransfer',item.lov_PollutantID,'WASTEWATER',null)" alt="" /></td>
                     <td class="text-right">{{ff.formatQuantity(item.totalQuantity, item.totalQuantityUnitCode, item.confidentialIndicator)}}</td>
                     <td class="text-right">{{ff.formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>

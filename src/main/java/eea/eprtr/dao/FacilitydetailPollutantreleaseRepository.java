@@ -53,7 +53,7 @@ public class FacilitydetailPollutantreleaseRepository {
                 qr.get(FacilitydetailPollutantrelease_.pollutantTo),
                 qr.get(FacilitydetailPollutantrelease_.totalQuantity),
                 qr.get(FacilitydetailPollutantrelease_.totalQuantityUnitCode))
-                );
+                ).distinct(true);
 		
 		cq.where(cb.equal(qr.get(FacilitydetailPollutantrelease_.facilityReportID),facilityReportID));
 		TypedQuery<FacilitydetailPollutantrelease> q = em.createQuery(cq);

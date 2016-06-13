@@ -28,6 +28,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp
 
 		$scope.beforesearch = true;
 		$scope.searchFilter = searchFilter;
+        $scope.localSearhFilter = {};
 		$scope.queryParams = {};
 		$scope.queryParams.ReportingYear = -1;
 
@@ -187,6 +188,9 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp
 
      	var facilitySearch = rest.all('facilitySearch');
 
+        $scope.localSearhFilter = {};
+        $scope.localSearhFilter.Countryname = $scope.currentSearchFilter.selectedReportingCountry.name
+     	
      	var queryParams = {ReportingYear: $scope.currentSearchFilter.selectedReportingYear.year};
      	if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.countryId) {
      		queryParams.LOV_CountryID = $scope.currentSearchFilter.selectedReportingCountry.countryId;

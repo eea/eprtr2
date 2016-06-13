@@ -230,19 +230,25 @@ angular.module('myApp.areaoverview', ['ngRoute', 'myApp.search-filter',
         // Pollutant Releases
         var isPRconfservice = rest.all('pollutantreleaseSearch');
         isPRconfservice.getList(confidentialParams).then(function(response) {
-        	$scope.hasConfidentionalData = (response.data === 'true');
+        	if(!$scope.hasConfidentionalData){
+        		$scope.hasConfidentionalData = (response.data === 'true');
+        	}
         });
 
         // Pollutant Transfers
 		var isPTconfservice = rest.one('pollutanttransferIsConfidential');
 		isPTconfservice.get(confidentialParams).then(function(response) {
-            $scope.hasConfidentionalData = (response.data === 'true');
+        	if(!$scope.hasConfidentionalData){
+        		$scope.hasConfidentionalData = (response.data === 'true');
+        	}
         });
 
         // Waste Transfers
 		var isWTconfservice = rest.one('wastetransferIsConfidential');
 		isWTconfservice.get(confidentialParams).then(function(response) {
-            $scope.hasConfidentionalData = (response.data === 'true');
+        	if(!$scope.hasConfidentionalData){
+        		$scope.hasConfidentionalData = (response.data === 'true');
+        	}
         });
 		
 	}

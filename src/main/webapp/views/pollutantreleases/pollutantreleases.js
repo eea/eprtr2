@@ -27,6 +27,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
         
         $scope.searchFilter = searchFilter;
         $scope.mediumFilter = {};
+        $scope.localSearhFilter = {};
         $scope.queryParams = {};
         $scope.queryParams.ReportingYear = -1;
         $scope.itemsPerPage = 15;
@@ -230,6 +231,9 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
 
         
         $scope.performSearch = function() {
+            $scope.localSearhFilter = {};
+            $scope.localSearhFilter.PollutantName =  $scope.currentSearchFilter.pollutantSearchFilter.selectedPollutant.name
+            $scope.localSearhFilter.Countryname = $scope.currentSearchFilter.selectedReportingCountry.name
             var rest = Restangular.withConfig(function(RestangularConfigurer) {
                 RestangularConfigurer.setFullResponse(true);
             });

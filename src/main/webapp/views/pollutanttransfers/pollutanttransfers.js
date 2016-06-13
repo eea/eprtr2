@@ -27,6 +27,7 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
     	$scope.mapheight = window.innerHeight > 820 ? 600+'px' : (window.innerHeight -230)+'px';
             
         $scope.searchFilter = searchFilter;
+        $scope.localSearhFilter = {};
         $scope.queryParams = {};
         $scope.queryParams.ReportingYear = -1;
 
@@ -126,7 +127,11 @@ angular.module('myApp.pollutanttransfers', ['ngRoute', 'myApp.search-filter', 'r
                 RestangularConfigurer.setFullResponse(true);
             });
             $scope.regionSearch = false;
-            
+
+            $scope.localSearhFilter = {};
+            $scope.localSearhFilter.PollutantName =  $scope.currentSearchFilter.pollutantSearchFilter.selectedPollutant.name
+            $scope.localSearhFilter.Countryname = $scope.currentSearchFilter.selectedReportingCountry.name
+
             var pollutanttransferSearch = rest.all('pollutanttransferSearch');
             var queryParams = {ReportingYear: $scope.currentSearchFilter.selectedReportingYear.year};
             if ($scope.currentSearchFilter.selectedReportingCountry !== undefined && $scope.currentSearchFilter.selectedReportingCountry.countryId) {
