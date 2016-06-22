@@ -252,9 +252,7 @@ POLLUTANT TRANSFERS
                         <tr class="generalListStyle_headerRow">
                           <th></th>
                           <th class="col-md-4">{{tr_p.PollutantName}}</th>
-                          <th class="text-right">{{tr_p.TotalQuantity}}</th>
-                          <th class="text-right">{{tr_p.ReleasesAccidental}}</th>
-                          <th class="text-right">{{tr_p.ReleasesAccidentalPercent}}</th>
+                          <th class="text-right">{{tr_p.Quantity}}</th>
                           <th>{{tr_p.Method}}</th>
                           <th>{{tr_p.MethodUsed}}</th>
                           <th>{{tr_p.Confidentiality}}</th>
@@ -262,13 +260,12 @@ POLLUTANT TRANSFERS
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in pollutanttransfers ">
-	                   <td><img src="images/timeseries.png" class="timesericesImage" ng-click="openTSmodal('pollutanttransfer',item.lov_PollutantID,'WASTEWATER',null)" alt="" /></td>
-                    <td class="text-right">{{ff.formatQuantity(item.totalQuantity, item.totalQuantityUnitCode, item.confidentialIndicator)}}</td>
-                    <td class="text-right">{{ff.formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
-                    <td class="text-right">{{ff.DeterminePercent(item.totalQuantity, item.accidentalQuantity)}}</td>
-                    <td>{{tr_lmbn[item.methodCode]}}</td>
-                    <td ng-bind-html="ff.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
-                    <td>{{tr_lcf[item.confidentialCode]}}</td>
+		                <td><img src="images/timeseries.png" class="timesericesImage" ng-click="openTSmodal('pollutanttransfer',item.lov_PollutantID,'WASTEWATER',null)" alt="" /></td>
+	                    <td>{{tr_lpo[item.pollutantCode]}}</td>
+                    	<td class="text-right">{{ff.formatQuantity(item.quantity, item.unitCode, item.confidentialIndicator)}}</td>
+	                    <td>{{tr_lmbn[item.methodCode]}}</td>
+	                    <td ng-bind-html="ff.MethodUsedFormat(item.methodTypeCode, item.methodDesignation, item.confidentialIndicator, tr_lmtn)"></td>
+	                    <td>{{tr_lcf[item.confidentialCode]}}</td>
                 </tr>
                 <!-- tr>
                     <td colspan="100"> <%--span all--%>

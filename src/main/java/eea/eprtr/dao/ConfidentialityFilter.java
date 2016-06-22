@@ -11,7 +11,8 @@ public class ConfidentialityFilter {
 
 	public Predicate buildWhereClause(CriteriaBuilder cb, Root<FacilitySearchAll> qr) {
 		Predicate whereClause = cb.disjunction();
-		whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.confidentialIndicatorFacility), Boolean.TRUE));
+		whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.confidentialIndicatorFacility), 1));
+		//whereClause.getExpressions().add(cb.equal(qr.get(FacilitySearchAll_.confidentialIndicatorFacility), Boolean.TRUE));
 		return whereClause;
 	}
 

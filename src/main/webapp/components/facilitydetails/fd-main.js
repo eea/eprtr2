@@ -320,7 +320,7 @@ $scope.orderReportingYears = function(data){
 				  'val': $scope.ff.ConfidentialFormat(adr, $scope.details.confidentialIndicator)
 			  },
 			  {'order':3,'clss':'fdTitles',	'title':$scope.tr_c.Year,
-				  'val': $scope.details.reportingYear +  " (published: " + $filter('date')($scope.details.published, "dd MMM yyyy") + ")"
+				  'val': $scope.details.reportingYear +  " (published: " + ($scope.details.published?$filter('date')($scope.details.published, "dd MMM yyyy"):' - ') + ")"
 			  },
 			  {'order':4,'clss':'fdTitles', 'title':$scope.tr_c.Regulation,
 				  'val': $scope.details.reportingYear < 2007 ? "EPER Regulation" : "E-PRTR Regulation"
