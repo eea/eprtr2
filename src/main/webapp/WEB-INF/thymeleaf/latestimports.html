@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: headerFragment">
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="developer.css"/>
+  </head>
+  <body>
+    <div id="container">
+      <div th:include="layout :: bannerFragment">
+      </div>
+      <div id="workarea">
+        <div id="operations">
+          <h2>Operations</h2>
+          <ul>
+            <li><a href="rdfform.html" th:href="@{'/cms/generaterdf'}">Generate RDF</a></li>
+          </ul>
+        </div>
+        <h1>Latest data imports</h1>
+        <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
+<table class="datatable">
+  <thead>
+    <tr>
+        <th>Reporting year</th>
+        <th>Country</th>
+        <th>For review</th>
+        <th>Published</th>
+    </tr>
+  </thead>
+  <tbody th:remove="all-but-first">
+      <tr th:each="dataImport : ${allDataImports}">
+        <td th:text="${dataImport.reportingYear}">2014</td>
+        <td th:text="${dataImport.country}">Romania</td>
+        <td th:text="${dataImport.forReview}">2015-04-16 14:48:00</td>
+        <td th:text="${dataImport.published}">2010-01-01 01:01:00</td>
+      </tr>
+      <tr>
+        <td>2014</td>
+        <td>Bulgaria</td>
+        <td>2015-04-16 14:48:00</td>
+        <td>2010-01-01 01:01:00</td>
+      </tr>
+  </tbody>
+</table>
+      </div>
+    </div>
+    <!-- container -->
+    <div id="pagefoot" th:include="layout :: footerFragment">
+    Footer
+    </div>
+  </body>
+</html>

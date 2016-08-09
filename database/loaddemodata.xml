@@ -87,4 +87,8 @@
     </insert>
   </changeSet>
 
+  <changeSet author="roug" id="rev-4" context="demo">
+    <loadData tableName="LATEST_DATAIMPORT" file="database/latest_dataimport.csv"/>
+  </changeSet>
+
 </databaseChangeLog>
