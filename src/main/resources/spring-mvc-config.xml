@@ -145,6 +145,20 @@
         <property name="validationQuery" value="select 1" />
     </bean>
 
+    <bean id="dataSourceMaster" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${master.driver}" />
+        <property name="url" value="${master.url}" />
+        <property name="username" value="${master.username}" />
+        <property name="password" value="${master.password}" />
+        <property name="maxActive" value="3" />
+        <property name="maxIdle" value="0" />
+        <property name="removeAbandoned" value="true"/>
+        <property name="removeAbandonedTimeout" value="300"/>
+        <property name="timeBetweenEvictionRunsMillis" value="300000"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="validationQuery" value="select 1" />
+    </bean>
+
     <bean id="simpleDocService" class="eea.eprtrcms.dao.SimpleDocServiceJdbc">
         <property name="dataSource" ref="dataSourceEprtrCms" />
     </bean>
@@ -163,6 +177,11 @@
 
     <bean id="storageService" class="eea.eprtr.dao.StorageServiceFiles">
         <property name="storageDir" value="${storage.dir}" />
+    </bean>
+
+    <bean id="writeRDFFiles" class="eea.eprtrcms.dao.WriteRDFFiles">
+        <property name="storageDir" value="${storage.dir}" />
+        <property name="dataSource" ref="dataSourceMaster"/>
     </bean>
 
     <bean id="mapurlService" class="eea.eprtr.dao.MapServiceUrlsRepository">

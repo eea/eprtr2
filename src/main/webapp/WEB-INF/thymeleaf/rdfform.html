@@ -8,6 +8,7 @@
       </div>
       <div id="workarea">
         <h1 th:text="${title}">Page title</h1>
+        <div th:if="${message}" th:text="${message}" class="system-msg">System message</div>
         <p>When clicking the button below you will generate new RDF files for the QA scripts.</p>
         <form action="rdfform.html" th:action="@{/cms/generaterdf}" method="post">
           <input type="submit" value="Generate" />

@@ -12,9 +12,8 @@ import javax.sql.DataSource;
 
 /**
  * A service to generate RDF files from the data in the database.
- * UNFINISHED.
  */
-class WriteRDFFiles {
+public class WriteRDFFiles {
     /**
      * The directory location where to store the uploaded files.
      */
@@ -30,31 +29,46 @@ class WriteRDFFiles {
         this.dataSource = dataSource;
     }
 
+    /**
+     * Write the RDF files.
+     */
     public void writeAll() throws Exception {
         Properties props = new Properties();
         InputStream inputStream = WriteRDFFiles.class.getResourceAsStream("/rdfexport.properties");
         props.load(inputStream);
         inputStream.close();
 
-        String[] filesToGenerate = getItems(props, "filenames");
-        String[] tablesToExport = getItems(props, "tables");
-
-        int fileInx = 0;
-        for (String table : tablesToExport) {
-            String fileName = filesToGenerate[fileInx];
-            OutputStream outputStream = new FileOutputStream(fileName);
-            GZIPOutputStream gzStream = new GZIPOutputStream(outputStream);
-            GenerateRDF exporter = new GenerateRDF(gzStream, dataSource.getConnection(), props);
-            exporter.exportTable(table);
-            exporter.exportDocumentInformation();
-            exporter.writeRdfFooter();
-            gzStream.finish();
-            gzStream.close();
-            outputStream.close();
-            fileInx++;
+        String[] filesToGenerate = getItems(props, "files");
+        for (String fileName : filesToGenerate) {
+            writeFile(fileName, props);
         }
+
     }
 
+    /**
+     * Write one RDF file, which can contain several tables.
+     */
+    private void writeFile(String fileName, Properties props) throws Exception {
+        OutputStream outputStream = new FileOutputStream(fileName);
+        GZIPOutputStream gzStream = new GZIPOutputStream(outputStream);
+        GenerateRDF exporter = new GenerateRDF(gzStream, dataSource.getConnection(), props);
+        String[] tablesToExport = getItems(props, "file." + fileName);
+        for (String table : tablesToExport) {
+            exporter.exportTable(table);
+        }
+        exporter.exportDocumentInformation();
+        exporter.writeRdfFooter();
+        gzStream.finish();
+        gzStream.close();
+        outputStream.close();
+    }
+
+    /**
+     * Split a property value into several items on whitespace.
+     *
+     * @param props - The properties hash table
+     * @param set - the key.
+     */
     private String[] getItems(Properties props, String set) {
         String filenamesProperty = props.getProperty(set);
         String[] filenames = {};

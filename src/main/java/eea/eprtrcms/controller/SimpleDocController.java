@@ -2,6 +2,7 @@ package eea.eprtrcms.controller;
 
 import eea.eprtrcms.model.SimpleDoc;
 import eea.eprtrcms.dao.SimpleDocService;
+import eea.eprtrcms.dao.WriteRDFFiles;
 import eea.eprtr.util.BreadCrumbs;
 import java.io.InputStream;
 import java.io.IOException;
@@ -24,6 +25,9 @@ public class SimpleDocController {
 
     @Autowired
     private SimpleDocService simpleDocService;
+
+    @Autowired
+    private WriteRDFFiles writeRDFFiles;
 
     @RequestMapping(value = "")
     public String redirect(Model model) {
@@ -133,14 +137,19 @@ public class SimpleDocController {
     }
 
     /**
-     * Generate RDF
+     * Generate RDF.
      */
     @RequestMapping(value = "/generaterdf", method = RequestMethod.POST)
-    public String generateRDF(Model model) {
+    public String generateRDF(Model model) throws Exception {
         String title = "Generate RDF";
         model.addAttribute("title", title);
         BreadCrumbs.set(model, title);
-        // Run the RDF generation here
+//      try {
+            writeRDFFiles.writeAll();
+            model.addAttribute("message", "RDF files are updated");
+//      } catch (Exception e) {
+//          model.addAttribute("message", "Failure creating RDF files");
+//      }
         return "rdfform";
     }
 }
