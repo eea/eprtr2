@@ -934,4 +934,13 @@
     </createTable>
   </changeSet>
 
+  <changeSet author="roug" id="rev-30">
+    <createTable tableName="LATEST_DATAIMPORT">
+      <column name="ReportingYear" type="INT"/>
+      <column name="LOV_CountryID" type="INT"/>
+      <column name="ForReview" type="DATETIME"><constraints nullable="true"/></column>
+      <column name="Published" type="DATETIME"><constraints nullable="true"/></column>
+    </createTable>
+  </changeSet>
+
 </databaseChangeLog>

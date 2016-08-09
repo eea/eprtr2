@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:include="layout :: headerFragment">
+  </head>
+  <body>
+    <div id="container">
+      <div th:include="layout :: bannerFragment">
+      </div>
+      <div id="workarea">
+        <h1 th:text="${title}">Page title</h1>
+        <p>When clicking the button below you will generate new RDF files for the QA scripts.</p>
+        <form action="rdfform.html" th:action="@{/cms/generaterdf}" method="post">
+          <input type="submit" value="Generate" />
+        </form>
+      </div>
+    </div> <!-- container -->
+    <div id="pagefoot" th:include="layout :: footerFragment">
+    Footer
+    </div>
+  </body>
+</html>

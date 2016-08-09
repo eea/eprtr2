@@ -17,9 +17,6 @@
           <li><a href="eprtrsurvey.html" th:href="@{/cms/eprtrsurvey}">E-PRTR Survey</a></li>
           <li><a href="filecatalogue.html" th:href="@{/cms/filecatalogue}">File catalogue</a></li>
         </ul>
-        <p>
-        Roles: <span sec:authorize="isAuthenticated()" sec:authentication="principal.authorities">[ROLE_USER, ROLE_ADMIN]</span>
-        </p>
       </div>
     </div>
     <!-- container -->

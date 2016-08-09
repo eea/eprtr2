@@ -120,4 +120,27 @@ public class SimpleDocController {
         model.addAttribute("content", doc.getContent());
         BreadCrumbs.set(model, doc.getTitle());
     }
+
+    /**
+     * Generate RDF button
+     */
+    @RequestMapping(value = "/generaterdf", method = RequestMethod.GET)
+    public String generateRDFForm(Model model) {
+        String title = "Generate RDF";
+        model.addAttribute("title", title);
+        BreadCrumbs.set(model, title);
+        return "rdfform";
+    }
+
+    /**
+     * Generate RDF
+     */
+    @RequestMapping(value = "/generaterdf", method = RequestMethod.POST)
+    public String generateRDF(Model model) {
+        String title = "Generate RDF";
+        model.addAttribute("title", title);
+        BreadCrumbs.set(model, title);
+        // Run the RDF generation here
+        return "rdfform";
+    }
 }
