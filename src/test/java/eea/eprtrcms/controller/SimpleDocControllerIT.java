@@ -102,4 +102,30 @@ public class SimpleDocControllerIT {
                 .andExpect(view().name("editpage"))
                 .andExpect(content().contentType("text/html;charset=UTF-8"));
     }
+
+    /**
+     * Write a Cyrillic content and check it comes back from the database correctly.
+     */
+    @Test
+    public void saveSerbian() throws Exception {
+        this.mockMvc.perform(post("/cms/edittext")
+                .param("resourceValueID", "1176")
+                .param("content", "Serbian / Српски")
+                .with(csrf())
+                .with(user("admin").roles("ADMIN")))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("title", "document"))
+                .andExpect(model().attribute("document", isA(SimpleDoc.class)))
+                .andExpect(view().name("editpage"))
+                .andExpect(content().contentType("text/html;charset=UTF-8"));
+
+        this.mockMvc.perform(get("/cms/edittext")
+                .param("key", "1176")
+                .with(user("uploader")))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("title", "document"))
+                .andExpect(model().attribute("document", hasProperty("content", equalTo("Serbian / Српски"))))
+                .andExpect(view().name("editpage"))
+                .andExpect(content().contentType("text/html;charset=UTF-8"));
+    }
 }
