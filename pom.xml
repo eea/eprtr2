@@ -170,7 +170,7 @@
                         <wait>
                           <log>Deployment of web application archive /usr/local/tomcat/webapps/ROOT.war has finished in</log>
                           <!-- Check for this URL to return a 200 return code .... -->
-                          <url>http://${docker.host.address}:${tomcat.port}/</url>
+                          <!-- <url>http://${docker.host.address}:${tomcat.port}/</url> -->
                           <time>120000</time>
                         </wait>
                         <links>
