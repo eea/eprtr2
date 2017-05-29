@@ -77,7 +77,7 @@ var myApp = angular.module('myApp', [
      	 }; 
     	//var co = document.cookie.split(';');
     	if(!$scope.checkCookie('eprtrsurvey') && !$scope.surveyopened){
-    		$scope.openSurvey();
+    		//$scope.openSurvey();
     	}
     })
     .controller('ModalEprtrSurveyCtrl', function ($scope, $modalInstance) {
