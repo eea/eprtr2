@@ -145,6 +145,7 @@
  <!-- 
 POLLUTANT MODAL
  -->
+ <!--
     <script type="text/ng-template" id="eprtrSurveyContent.html">
 		<div class="modal-header ">
         <button type="button" class="close" ng-click="ok()" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -156,7 +157,7 @@ POLLUTANT MODAL
 			</div>
         </div>
     </script>
- 
+--> 
  
 <footer class="footer">
 	<div class="container-fluid bs-footer">
@@ -214,6 +215,7 @@ POLLUTANT MODAL
   <script src="bower_components/restangular/dist/restangular.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+  <script src="bower_components/leaflet-plugins/control/Distance.js"></script>
   <script src="bower_components/leaflet-plugins/control/Layers.Load.js"></script>
   <script src="bower_components/leaflet-plugins/control/Permalink.js"></script>
   <script src="bower_components/leaflet-plugins/control/Permalink.Layer.js"></script>
@@ -224,12 +226,14 @@ POLLUTANT MODAL
   <script src="bower_components/leaflet-plugins/layer/Layer.Deferred.js"></script>
   <script src="bower_components/leaflet-plugins/layer/Marker.Rotate.js"></script>
   <script src="bower_components/leaflet-plugins/layer/Marker.Text.js"></script>
+  <script src="bower_components/leaflet-plugins/layer/OpenStreetBugs.js"></script>
   <script src="bower_components/leaflet-plugins/layer/vector/GPX.js"></script>
   <script src="bower_components/leaflet-plugins/layer/vector/GPX.Speed.js"></script>
   <script src="bower_components/leaflet-plugins/layer/vector/KML.js"></script>
   <script src="bower_components/leaflet-plugins/layer/vector/OSM.js"></script>
   <script src="bower_components/leaflet-plugins/layer/vector/TOPOJSON.js"></script>
   <script src="bower_components/leaflet-plugins/layer/tile/Bing.js"></script>
+  <script src="bower_components/leaflet-plugins/layer/tile/Google.js"></script>
   <script src="bower_components/leaflet-plugins/layer/tile/Yandex.js"></script>
   <script src="bower_components/esri-leaflet/dist/esri-leaflet.js"></script>
   <script src="bower_components/esri-leaflet-clustered-feature-layer/dist/esri-leaflet-clustered-feature-layer.js"></script>
@@ -237,7 +241,8 @@ POLLUTANT MODAL
   <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
   <script src="bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js"></script>
   <script src="bower_components/underscore/underscore.js"></script>
-  <script src="bower_components/angular-spinner/dist/angular-spinner.min.js"></script>
+  <script src="bower_components/spin.js/spin.js"></script>
+  <script src="bower_components/angular-spinner/angular-spinner.js"></script>
   <script src="bower_components/spin/javascripts/jquery.spin.js"></script>
   <script src="bower_components/ng-csv/build/ng-csv.min.js"></script>
   <script src="bower_components/angu-fixed-header-table/angu-fixed-header-table.js"></script>
