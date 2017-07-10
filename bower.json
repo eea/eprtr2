@@ -35,6 +35,6 @@
   },
   "appPath": "src/main/webapp",
   "resolutions": {
-    "leaflet": "~1.0.1"
+    "leaflet": "0.7.7"
   }
 }
