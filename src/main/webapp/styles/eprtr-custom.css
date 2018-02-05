@@ -641,23 +641,48 @@ vertical-align: top;
 	width:100%;
 }
 
-/* Sticky footer styles
+/* Sticky footer styles - updated february 2018
 -------------------------------------------------- */
 html {
   position: relative;
   min-height: 100%;
 }
+
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 100px;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
+
+body > #container {
+  width: 100%;
+  flex: 1;
+}
+
 .footer {
-  position: absolute;
-  bottom: 0;
+  margin-top: 1rem;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 100px;
+  min-height: 100px;
   background-color: #f5f5f5;
+}
+
+.footer .bs-footer > .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+
+.footer .bs-footer > .row  > div {
+  width: auto;
+  flex-grow: 1;
+}
+
+@media (max-width: 768px) {
+  .footer .bs-footer > .row {
+    flex-direction: column;
+  }
 }
 
 label.simple{
@@ -712,5 +737,17 @@ label.simple{
   }
   .navbar-default .navbar-toggle .icon-bar {
     background-color: #fff;
+  }
+}
+
+@media (max-width: 768px) {
+  .no-padding-xs {
+    padding: 0!important;
+  }
+}
+
+@media(min-width: 768px){
+  .no-padding-lg {
+    padding: 0!important;
   }
 }
