@@ -120,9 +120,9 @@
           <build>
             <plugins>
               <plugin>
-                <groupId>org.jolokia</groupId>
+                <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.13.6</version>
+                <version>0.23.0</version>
                 <configuration>
                   <verbose>true</verbose>
                   <logDate>default</logDate>
@@ -132,9 +132,9 @@
                   <images>
                     <image>
                       <alias>service</alias>
-                      <name>dockerrepo.eionet.europa.eu:5000/${project.groupId}/${project.artifactId}</name>
+                      <name>docker.io/eeacms/${project.artifactId}</name>
                       <build>
-                        <from>tomcat:8.0.32-jre8</from>
+                        <from>tomcat:8-jre7</from>
                         <maintainer>Søren Roug &lt;soren.roug@eea.europa.eu&gt;</maintainer>
                         <tags>
                           <tag>latest</tag>
@@ -185,7 +185,8 @@
 
                     <image>
                       <alias>database</alias>
-                      <name>dockerrepo.eionet.europa.eu:5000/${project.groupId}/${project.artifactId}-testdb</name>
+                      <name>docker.io/eeacms/${project.artifactId}-testdb</name>
+                      <!--
                       <build>
                         <from>java:8</from>
                         <maintainer>Søren Roug &lt;soren.roug@eea.europa.eu&gt;</maintainer>
@@ -193,7 +194,6 @@
                           <tag>latest</tag>
                         </tags>
                         <env>
-                          <!--H2_RELEASE_DATE>2015-10-11</H2_RELEASE_DATE-->
                           <H2_RELEASE_DATE>2014-04-05</H2_RELEASE_DATE>
                         </env>
                         <workdir>/tmp</workdir>
@@ -205,12 +205,12 @@
                         </runCmds>
                         <optimise>true</optimise>
 
-                        <!-- Expose ports -->
                         <ports>
                           <port>1521</port>
                         </ports>
                         <cmd>java -cp /opt/h2/bin/h2*.jar org.h2.tools.Server -tcp -tcpAllowOthers -tcpPort 1521 -baseDir /var/tmp</cmd>
                       </build>
+                      -->
                       <run>
                         <ports>
                           <port>database.port:1521</port>
