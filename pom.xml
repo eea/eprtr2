@@ -338,13 +338,10 @@
 
     <build>
         <plugins>
-
-            <!-- Configure maven compiler -->
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.0</version>
+                <version>3.7.0</version>
                 <inherited>true</inherited>
                 <configuration>
                     <verbose>false</verbose>
@@ -559,7 +556,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>3.8</version>
                 <configuration>
                     <linkXref>false</linkXref>
                     <sourceEncoding>utf-8</sourceEncoding>
