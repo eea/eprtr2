@@ -326,6 +326,40 @@ POLLUTANT MODAL
   <script src="directives/print-content.js"></script>
   <script src="directives/myEnter.js"></script>
   <!-- endbuild -->
+<script>
 
+    $.fn.isOnScreen = function(){
+        var win = $(window);
+
+        var viewport = {
+            top : win.scrollTop(),
+            left : win.scrollLeft()
+        };
+        viewport.right = viewport.left + win.width();
+        viewport.bottom = viewport.top + win.height();
+
+        var bounds = this.offset();
+        bounds.right = bounds.left + this.outerWidth();
+        bounds.bottom = bounds.top + this.outerHeight();
+
+        return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+
+    };
+
+    $(document).ready(function () {
+            $('body').on('click', '.map-overlay', function () {
+                $(this).addClass('clicked');
+            })
+
+            $(window).scroll(function() {
+                console.log('scrolling')
+                if($('body').find('.map-overlay').length > 0) {
+                    if ($('.map-overlay').isOnScreen() == false && $('.map-overlay').hasClass('clicked')) {
+                        $('.map-overlay').removeClass('clicked')
+                    }
+                }
+            });
+    })
+</script>
 </body>
 </html>

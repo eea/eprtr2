@@ -763,4 +763,25 @@ label.simple{
         display: inline-block;
         margin-bottom: 2rem;
     }
+    .map-overlay {
+        position: absolute;
+        background: rgba(160, 160, 160, 0.6);
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        color: white;
+        font-size: 4rem;
+        font-weight: bold;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .map-overlay.clicked {
+        z-index: -1000;
+        background-color: transparent;
+        opacity: 0;
+    }
 }
+
