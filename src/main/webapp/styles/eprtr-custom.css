@@ -751,3 +751,16 @@ label.simple{
     padding: 0!important;
   }
 }
+
+@media(max-width: 768px){
+    .nav-tabs {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+    .nav-tabs > li {
+        float: none;
+        display: inline-block;
+        margin-bottom: 2rem;
+    }
+}
