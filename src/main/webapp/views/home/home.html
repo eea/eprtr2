@@ -12,8 +12,8 @@
 			</div>
 		</div>
 		
-	<div class="col-md-12">
-		<div class="well gradient-green" style="height:130px;">
+	<div class="col-md-12 no-padding-xs">
+		<div class="well gradient-green" style="min-height:130px;">
 			<div class="col-md-1"><em class="white-big fa fa-bar-chart fa-3x"></em></div>
 			<div class="col-md-11 text">
 				<span class="white-big">Search the register</span>
@@ -33,8 +33,8 @@
 		</div>
 	</div>
 
-	<div class="col-md-12">
-		<div class="well gradient-blue" style="height:100px;">
+	<div class="col-md-12 no-padding-xs">
+		<div class="well gradient-blue" style="min-height:100px;">
 			<div class="col-md-1"><em class="white-big fa fa-leaf fa-3x"></em></div>
 			<div class="col-md-11 text">
 				<span class="white-big" >Diffuse emissions</span>
@@ -46,8 +46,8 @@
 		</div>
 	</div>
 
-	<div class="col-md-12">
-		<div class="well bg-border-blue" style="height:100px;">
+	<div class="col-md-12 no-padding-xs">
+		<div class="well bg-border-blue" style="min-height:100px;">
 			<div class="col-md-4"><em class="blue-big fa fa-info fa-3x"></em>
 				<a class="blue" href="#pollutantinfo">Pollutant description</a>
 			</div>
@@ -63,8 +63,11 @@
 
 	<div class="col-md-6"  >
      	<h2>E-PRTR Facilities</h2>
-     	<div  ng-style="{height: mapheight}">
+     	<div  ng-style="{height: mapheight}" style="position:relative;">
      	<esri-leaf-map queryparams="queryParams" control="mapctrl"/>
+			<div class="map-overlay">
+				Tab on the map to start using it
+			</div>
      	</div>
      </div>	
   </div>

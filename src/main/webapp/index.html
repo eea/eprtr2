@@ -34,6 +34,15 @@
 <cookie-law-banner policy-button="true" message="We use cookies to record some preference settings and to analyse how visitors use our web site. Cookies do not contain any personal information about you. If you wish, see how to<a style='color:orange;margin: 0;' href='http://www.aboutcookies.org/how-to-delete-cookies/'>delete/disable cookies</a>in your web browser but then our site may not work correctly. See also our privacy policy." policy-url="http://www.eea.europa.eu/legal/privacy"></cookie-law-banner>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
       <div class="row bs-header">
        	<div class="col-sm-6">
        		<a href="#home" accesskey="0" title="European Pollutant Release and Transfer Register">
@@ -317,6 +326,40 @@ POLLUTANT MODAL
   <script src="directives/print-content.js"></script>
   <script src="directives/myEnter.js"></script>
   <!-- endbuild -->
+<script>
 
+    $.fn.isOnScreen = function(){
+        var win = $(window);
+
+        var viewport = {
+            top : win.scrollTop(),
+            left : win.scrollLeft()
+        };
+        viewport.right = viewport.left + win.width();
+        viewport.bottom = viewport.top + win.height();
+
+        var bounds = this.offset();
+        bounds.right = bounds.left + this.outerWidth();
+        bounds.bottom = bounds.top + this.outerHeight();
+
+        return (!(viewport.right < bounds.left || viewport.left > bounds.right || viewport.bottom < bounds.top || viewport.top > bounds.bottom));
+
+    };
+
+    $(document).ready(function () {
+            $('body').on('click', '.map-overlay', function () {
+                $(this).addClass('clicked');
+            })
+
+            $(window).scroll(function() {
+                console.log('scrolling')
+                if($('body').find('.map-overlay').length > 0) {
+                    if ($('.map-overlay').isOnScreen() == false && $('.map-overlay').hasClass('clicked')) {
+                        $('.map-overlay').removeClass('clicked')
+                    }
+                }
+            });
+    })
+</script>
 </body>
 </html>

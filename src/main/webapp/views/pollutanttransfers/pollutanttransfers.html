@@ -34,12 +34,15 @@
 
 		</div>
 		<div class="col-md-9 minor-padding">
-			<div class="{{mapclss}} minor-padding" ng-style="{height: mapheight}">
+			<div class="{{mapclss}} minor-padding" ng-style="{height: mapheight}" style="position:relative;">
 				<button type="button" ng-click="togglemapview()" title="{{maptooltip}}"
 				class="btn btn-default pull-right" style="position:absolute; right:5px; margin:5px;z-index:110;" >
 				<span class="{{resize_icon}}" aria-hidden="true"></span>
 			</button><esri-leaf-map contenttype="'pollutanttransfer'"
 					queryparams="queryParams" control="mapctrl"/>
+				<div class="map-overlay">
+					Tab on the map to start using it
+				</div>
 			</div>
 			<div class="{{resclss}}">
 				<div class="col-md-12 top-buffer10" ng-if="beforesearch">
