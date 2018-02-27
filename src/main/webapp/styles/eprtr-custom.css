@@ -783,5 +783,13 @@ label.simple{
         background-color: transparent;
         opacity: 0;
     }
+
+    .polluant-row > div {
+        padding: 0;
+    }
+
+    .polluant-row .container-fluid {
+        padding: 0;
+    }
 }
 
