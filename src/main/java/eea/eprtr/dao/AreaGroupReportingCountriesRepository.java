@@ -42,8 +42,7 @@ public class AreaGroupReportingCountriesRepository {
 		CriteriaQuery<Reportingcountry> cq2 = cb2.createQuery(Reportingcountry.class);
 		Root<Reportingcountry> qr2 = cq2.from(Reportingcountry.class);
 		cq2.select(qr2);
-		//cq2.orderBy(cb2.asc(qr2.get(Reportingcountry_.LOV_CountryID)));
-		cq2.orderBy(cb2.asc(qr2.get(Reportingcountry_.name)));
+		cq2.orderBy(cb2.asc(qr2.get(Reportingcountry_.LOV_CountryID)));
 		TypedQuery<Reportingcountry> q2 = em.createQuery(cq2);
 		List<Reportingcountry> countries = q2.getResultList();
 		
