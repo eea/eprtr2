@@ -21,6 +21,12 @@
         <property name="contexts" value="${deploy.contexts}" />
     </bean>
 
+    <bean id="liquibaseCmsUpdate" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataSourceEprtrCms" />
+        <property name="changeLog" value="classpath:database/eprtr_update.xml" />
+        <property name="contexts" value="${deploy.contexts}" />
+    </bean>
+
     <bean id="initialUser" class="eea.eprtrcms.dao.InitialUser"
          init-method="createUser">
         <property name="userManagementService" ref="userService"/>
