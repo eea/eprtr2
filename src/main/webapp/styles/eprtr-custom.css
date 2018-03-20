@@ -771,6 +771,7 @@ label.simple{
         bottom: 0;
         right: 0;
         color: white;
+        cursor: pointer;
         font-size: 4rem;
         font-weight: bold;
         text-align: center;
@@ -783,6 +784,10 @@ label.simple{
         z-index: -1000;
         background-color: transparent;
         opacity: 0;
+    }
+
+    div[ng-style="{height: mapheight"] {
+        min-height:500px;
     }
 
     .polluant-row > div {
