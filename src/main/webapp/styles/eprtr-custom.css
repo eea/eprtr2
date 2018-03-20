@@ -656,7 +656,7 @@ body {
 
 body > #container {
   width: 100%;
-  flex: 1;
+  flex: 1 0 auto;
 }
 
 .footer {
@@ -750,6 +750,9 @@ label.simple{
   .no-padding-lg {
     padding: 0!important;
   }
+    .map-overlay {
+        display: none;
+    }
 }
 
 @media(max-width: 768px){
@@ -771,6 +774,7 @@ label.simple{
         bottom: 0;
         right: 0;
         color: white;
+        cursor: pointer;
         font-size: 4rem;
         font-weight: bold;
         text-align: center;
@@ -784,6 +788,10 @@ label.simple{
         opacity: 0;
     }
 
+    div[ng-style="{height: mapheight"] {
+        min-height:500px;
+    }
+
     .polluant-row > div {
         padding: 0;
     }
@@ -791,5 +799,15 @@ label.simple{
     .polluant-row .container-fluid {
         padding: 0;
     }
+
+    .leaflet-control-layers.legend.leaflet-control {
+        transform: scale(0.8);
+        margin-right: -11%;
+    }
 }
 
+@media(min-width: 768px) and (max-width: 1111px) {
+    body > #container {
+        margin-top: 5rem;
+    }
+}

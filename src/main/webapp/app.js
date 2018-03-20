@@ -80,6 +80,8 @@ var myApp = angular.module('myApp', [
     		//$scope.openSurvey();
     	}
     })
+
+
     .controller('ModalEprtrSurveyCtrl', function ($scope, $modalInstance) {
 
 	$scope.ok = function () {
@@ -95,6 +97,17 @@ var myApp = angular.module('myApp', [
 	};
 
 })
+    .controller('GlobalCtrl', function ($scope, $timeout) {
+        $scope.$on('$routeChangeStart', function($event, next, current) {
+            var toggle = angular.element('.navbar-toggle')
+            var navbar = angular.element('.navbar-collapse')
+            if(navbar.hasClass('in')) {
+                $timeout(function(){
+                    toggle.click();
+                })
+            }
+        });
+    })
     ;
 /*
 google.setOnLoadCallback(function() {

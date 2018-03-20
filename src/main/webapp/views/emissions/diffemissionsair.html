@@ -19,13 +19,13 @@
             </div>
         </div>
 <div class="col-md-9 minor-padding">
-<div class="{{mapclss}}" ng-style="{height: mapheight}" style="position:relative;">
+<div class="{{mapclss}}" ng-style="{height: mapheight}" style="position:relative;min-height: 410px;">
             <button type="button" ng-click="togglemapview()" title="{{maptooltip}}"
 				class="btn btn-default pull-right" style="position:absolute; right:5px; margin:5px;z-index:110;" >
 				<span class="{{resize_icon}}" aria-hidden="true"></span>
 			</button><emission-map-air layerid="searchFilter.selectedLayer" control="mapctrl"/>
 	<div class="map-overlay">
-		Tab on the map to start using it
+		Tap on the map to start using it
 	</div>
    			</div>
 
