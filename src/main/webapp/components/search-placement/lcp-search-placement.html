@@ -1,6 +1,6 @@
 <div class="form-group">
 	<label class="control-label" for="inputCountry">{{tr_c.Country}}</label>
-	<select class="form-control" ng-model="searchFilter.selectedReportingCountry" ng-options="c.name for c in reportingCountries" id="inputCountry"></select>
+	<select class="form-control" ng-model="searchFilter.selectedReportingCountry" ng-options="c.name for c in reportingCountries | orderBy:'name'" id="inputCountry"></select>
 </div>
 
 
