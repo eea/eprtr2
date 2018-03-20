@@ -776,6 +776,7 @@ label.simple{
         text-align: center;
         display: flex;
         justify-content: center;
+        z-index: 9999;
         align-items: center;
     }
     .map-overlay.clicked {
