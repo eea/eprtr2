@@ -796,5 +796,10 @@ label.simple{
     .polluant-row .container-fluid {
         padding: 0;
     }
+
+    .leaflet-control-layers.legend.leaflet-control {
+        transform: scale(0.8);
+        margin-right: -11%;
+    }
 }
 
