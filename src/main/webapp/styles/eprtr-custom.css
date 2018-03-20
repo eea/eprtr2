@@ -750,6 +750,9 @@ label.simple{
   .no-padding-lg {
     padding: 0!important;
   }
+    .map-overlay {
+        display: none;
+    }
 }
 
 @media(max-width: 768px){
@@ -803,3 +806,8 @@ label.simple{
     }
 }
 
+@media(min-width: 768px)and(max-width: 1111px) {
+    body > #container {
+        margin-top: 5rem;
+    }
+}
