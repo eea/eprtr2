@@ -23,9 +23,9 @@
 		"PollutantReleases": "Pollutant Releases",
 		"PollutantTransfers": "Pollutant Transfers",
 		"Quantity": "Quantity",
-		"ReleasesOf": "Releases of {0}",
+		"ReleasesOf": "Releases of",
 		"Subheadline": "This report will display the aggregated releases and transfers of a specific area",
-		"TransfersOf": "Transfers of {0}",
+		"TransfersOf": "Transfers of",
 		"WasteTransfers": "Waste Transfers"
 	},
 	"ChartLabels": {
