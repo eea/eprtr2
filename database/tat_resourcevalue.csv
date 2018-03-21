@@ -989,8 +989,8 @@ ResourceValueID,ResourceKeyID,CultureCode,ResourceValue,ChangedDate
 5225,5225,en-GB,Confidential,2010-03-17 00:00:00.0
 5226,5226,en-GB,Confidential,2010-03-17 00:00:00.0
 5227,5227,en-GB,Confidential,2010-03-17 00:00:00.0
-5228,5228,en-GB,Releases of {0},2010-03-17 00:00:00.0
-5229,5229,en-GB,Transfers of {0},2010-03-17 00:00:00.0
+5228,5228,en-GB,Releases of,2010-03-17 00:00:00.0
+5229,5229,en-GB,Transfers of,2010-03-17 00:00:00.0
 5230,5230,en-GB,Facilities,2010-03-17 00:00:00.0
 5231,5231,en-GB,Quantity,2010-03-17 00:00:00.0
 5232,5232,en-GB,Tools,2010-03-17 00:00:00.0

@@ -6,4 +6,8 @@
   <changeSet author="ivascu" id="update-1">
     <loadUpdateData tableName="tAT_ResourceValue" file="database/update_faq.csv" primaryKey="ResourceValueID"/>
   </changeSet>
+
+  <changeSet author="claudia" id="update-2">
+    <loadUpdateData tableName="tAT_ResourceValue" file="database/update_label_areaoverview.csv" primaryKey="ResourceValueID"/>
+  </changeSet>
 </databaseChangeLog>
