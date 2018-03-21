@@ -116,7 +116,7 @@ angular.module('myApp.areaOverviewPrTab', ['restangular','ngSanitize','angularSp
 	        	$scope.pttotal = [];
 	        	//first col:
 	        	var _o = 0;
-	        	var first = {'txt': $scope.tr_ao.TransfersOf + $scope.tr_lpo[$scope.pollutant.code], 'align':'text-left col-Min200 ', 'order':_o};
+	        	var first = {'txt': $scope.tr_ao.ReleasesOf + $scope.tr_lpo[$scope.pollutant.code], 'align':'text-left col-Min200 ', 'order':_o};
 	        	$scope.headeritems.push(first);
 	        	_o++;
 	        	var second = {'txt': '', 'align':'text-left', 'order':_o};
