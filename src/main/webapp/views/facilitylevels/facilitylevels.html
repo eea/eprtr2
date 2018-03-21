@@ -111,56 +111,55 @@
 						</div>
 					</div>
 
-					<table
-						class="table table-striped table-condensed table-hover top-buffer10">
-						<thead>
-							<tr>
-								<th></th>
-								<th class="facilityName" custom-sort order="'facilityName'"
-									sort="sort">{{tr_f.FacilityName}}</th>
-								<th class="postalCode" custom-sort order="'postalCode'"
-									sort="sort">{{tr_f.PostalCode}}</th>
-								<th class="address" custom-sort order="'address'" sort="sort">{{tr_f.Address}}</th>
-								<th class="city" custom-sort order="'city'" sort="sort">{{tr_f.TownVillage}}</th>
-								<th class="iaactivityCode" custom-sort order="'IAActivityCode'"
-									sort="sort">{{tr_f.Activity}}</th>
-								<th class="countryCode" custom-sort order="'countryCode'"
-									sort="sort">{{tr_f.Country}}</th>
-							</tr>
-						</thead>
-						<tfoot>
+					<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && !hasItems())">
+						<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+					</div>
+					<div class="col-md-12 table-responsive top-buffer10" >
+						<table class="table table-striped table-condensed table-hover top-buffer10">
+							<thead>
+								<tr>
+									<th></th>
+									<th class="facilityName" custom-sort order="'facilityName'"
+										sort="sort">{{tr_f.FacilityName}}</th>
+									<th class="postalCode" custom-sort order="'postalCode'"
+										sort="sort">{{tr_f.PostalCode}}</th>
+									<th class="address" custom-sort order="'address'" sort="sort">{{tr_f.Address}}</th>
+									<th class="city" custom-sort order="'city'" sort="sort">{{tr_f.TownVillage}}</th>
+									<th class="iaactivityCode" custom-sort order="'IAActivityCode'"
+										sort="sort">{{tr_f.Activity}}</th>
+									<th class="countryCode" custom-sort order="'countryCode'"
+										sort="sort">{{tr_f.Country}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="item in items">
+									<td><a target="_blank" title="Open as external link" href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}" style="cursor:pointer;"><i class="fa fa-external-link"></i></a></td>
+									<td><a
+										ng-click="openFDmodal(item.facilityID, item.facilityReportID, item.reportingYear)" style="cursor:pointer;">{{formatText(item.facilityName,
+											item.confidentialIndicator)}}</a></td>
+									<td>{{formatText(item.postalCode,
+										item.confidentialIndicator)}}</td>
+									<td>{{formatText(item.address,
+										item.confidentialIndicator)}}</td>
+									<td>{{formatText(item.city, item.confidentialIndicator)}}</td>
+									<td>{{item.iaactivityCode}}</td>
+									<td>{{item.countryCode}}</td>
+								</tr>
+							</tbody>
+							<tfoot>
 							<td colspan="6">
 								<div class='pagination' ng-show="hasItems()">
 									<pagination boundary-links="true"
-										ng-model="$parent.currentPage" total-items="totalItemCount"
-										items-per-page="itemsPerPage" max-size="gap"
-										class="pagination pull-right" previous-text="&lsaquo;"
-										next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+												ng-model="$parent.currentPage" total-items="totalItemCount"
+												items-per-page="itemsPerPage" max-size="gap"
+												class="pagination pull-right" previous-text="&lsaquo;"
+												next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
 								</div>
 							</td>
-						</tfoot>
-						<tbody>
-							<tr ng-repeat="item in items">
-								<td><a target="_blank" title="Open as external link" href="#/facilitydetails?FacilityID={{item.facilityID}}&ReportingYear={{item.reportingYear}}" style="cursor:pointer;"><i class="fa fa-external-link"></i></a></td>
-								<td><a
-									ng-click="openFDmodal(item.facilityID, item.facilityReportID, item.reportingYear)" style="cursor:pointer;">{{formatText(item.facilityName,
-										item.confidentialIndicator)}}</a></td>
-								<td>{{formatText(item.postalCode,
-									item.confidentialIndicator)}}</td>
-								<td>{{formatText(item.address,
-									item.confidentialIndicator)}}</td>
-								<td>{{formatText(item.city, item.confidentialIndicator)}}</td>
-								<td>{{item.iaactivityCode}}</td>
-								<td>{{item.countryCode}}</td>
-							</tr>
-						</tbody>
+							</tfoot>
 					</table>
-				
-				</div>
-
-				<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && !items.hasItems())">
-     					<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
 					</div>
+				</div>
 				
 				</tab> <tab heading="{{tr_c.ContentConfidientiality}}"
 					active="active.confidentiality"> <br />

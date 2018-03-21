@@ -234,9 +234,6 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp
      };
 
      $scope.hasItems = function() {
-         console.dir("xxx");
-         console.dir($scope.items.length > 0);
-         console.dir("xxx");
      	return $scope.items.length > 0;
      };
 
