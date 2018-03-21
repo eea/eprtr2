@@ -226,9 +226,6 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp
      	$scope.queryParams = queryParams;
 
      	facilitySearch.getList(queryParams).then(function(response) {
-            console.dir("xxx");
-            console.dir(response);
-            console.dir("xxx");
      		$scope.items = response.data;
      		$scope.totalItemCount = response.headers('X-Count');
      		$scope.confidentialFacilities = response.headers('X-Confidentiality');
@@ -237,6 +234,9 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp
      };
 
      $scope.hasItems = function() {
+         console.dir("xxx");
+         console.dir($scope.items.length > 0);
+         console.dir("xxx");
      	return $scope.items.length > 0;
      };
 
