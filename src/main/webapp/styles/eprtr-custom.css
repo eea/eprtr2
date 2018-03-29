@@ -811,3 +811,10 @@ label.simple{
         margin-top: 5rem;
     }
 }
+
+
+@media(min-width: 768px) and (max-width: 856px) {
+    body > #container {
+        margin-top: 9rem;
+    }
+}
