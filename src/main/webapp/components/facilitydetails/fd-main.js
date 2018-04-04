@@ -583,7 +583,6 @@ $scope.infoitms.push({'order':2, 'clss':'fdSubTitles',
      		}
      	}
 
-	    //'FacilityID': $scope.fid, 'ReportingYear': $scope.year
 	    qp.FacilityID = $scope.fid;
 	    qp.ReportingYear = $scope.year;
 	    qp.FacilityReportID = $scope.frid;
@@ -600,17 +599,16 @@ $scope.infoitms.push({'order':2, 'clss':'fdSubTitles',
 	    var modalInstance = $modal.open({
 	    	templateUrl: 'components/timeseries/tsmodal.html',
 	    	controller: 'ModalTimeSeriesCtrl',
-//          size: size,
-resolve: {
-	isoContType: function () {
-		return contentype;
-	},
-	isoQP: function () {
-		return qp;
-	}
-
-}
-});
+			// size: size,
+			resolve: {
+				isoContType: function () {
+					return contentype;
+				},
+				isoQP: function () {
+					return qp;
+				}
+			}
+		});
 	};
 
 }])
