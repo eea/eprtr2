@@ -65,7 +65,7 @@
 									<td>{{ plantdata.length }}</td>
 								</tr>
 								<tr>
-									<td class="fdTitles">Filter:</td>
+									<td class="fdTitles">Search:</td>
 									<td><input type="text" class="form-control ng-pristine ng-valid" ng-model="searchKeyword"></td>
 								</tr>
 							</table>
@@ -74,12 +74,10 @@
 							<!-- <button class="print-button btn btn-default pull-right" ng-print
 								print-element-id="plants">
 								<i class="fa fa-print"></i>
-							</button>
-							<button class="btn btn-default pull-right"
-								ng-click="downloadClick()">
-								<span class="glyphicon glyphicon-download-alt"
-									aria-hidden="true"></span>
-							</button> -->
+							</button>-->
+							<!--<button class="btn btn-default pull-right" ng-click="downloadClick()">-->
+								<!--<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>-->
+							<!--</button>-->
 						</div>
 					</div>
 					<table class="table table-striped table-condensed table-hover top-buffer10">
@@ -121,8 +119,8 @@
 				</div>
 				
 				<div class="row" style="padding-top:10px;" ng-show="(!beforesearch && !plantdata.length)">
-     <div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
-</div>
+     				<div class="col-md-10 col-md-offset-1 alert alert-warning"><strong>{{tr_c.NoResultsFound}}</strong></div>
+				</div>
 				
 				</tab> 
 			  </tabset>
