@@ -132,7 +132,6 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 	    	var arrQue = []
 	    	for (var key in queryparams){
 	    		if (elmconf.passInFilter.indexOf(key)>=0){
-	    			//console.log('queryparams passed: True');
 	        		var qstr = ""
 	        		if (queryparams[key] && queryparams[key] != ''){
 		        		if (typeof queryparams[key] === 'number'){
