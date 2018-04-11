@@ -30,12 +30,11 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     $scope.ff = formatStrFactory;
 
     $scope.resize_icon = "fa fa-arrow-left"
-    $scope.bigmap = false;
-    $scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
-    $scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
-    $scope.mapctrl = {};
+	$scope.bigmap = false;
+	$scope.mapclss = "col-md-4 col-md-push-8 minor-padding";
+	$scope.resclss = "col-md-8 col-md-pull-4 minor-padding";
+	$scope.mapctrl = {};
 	$scope.mapheight = window.innerHeight > 820 ? 600+'px' : (window.innerHeight -230)+'px';
-	
 
 //	Requesting text and title resources 
 	eprtrcms.get('Facility',null).then(function (data) {
@@ -84,7 +83,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
     		$scope.maptooltip = $scope.tr_c['ShowReducedMap'];
     	}
     	$scope.mapctrl.redraw();
-    }
+    };
     
     $scope.active = {
     		plants: true
@@ -292,7 +291,7 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
 			$scope.plantdata.push(_pl);
 		});
     }
-	
+
 	$scope.ldopen = function(plantid){
     	var modalInstance = $modal.open({
             templateUrl: 'components/lcp/lcpmodal.html',
@@ -306,7 +305,4 @@ angular.module('myApp.lcplevels', ['ngRoute', 'myApp.search-filter', 'myApp.lcpd
             }
           });
     };
-}])
-
-
-;
+}]);
