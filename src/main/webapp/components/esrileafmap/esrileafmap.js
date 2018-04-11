@@ -525,9 +525,7 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 		    },true);
 			 scope.internalControl = scope.control || {};
 			 scope.internalControl.redraw = function() {
-				if (scope.queryparams !== undefined){
-					scope.redraw();
-				}
+			 	scope.redraw();
 		    };
 		}
 	};
