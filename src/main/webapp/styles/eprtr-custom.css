@@ -755,13 +755,13 @@ label.simple{
     }
 }
 
+select option {
+    border-bottom: 1px solid #e6e6e6;
+    white-space: normal;
+    margin-bottom: 5px;    
+ }
+
 @media(max-width: 768px){
-    select option {
-      border-bottom: 1px solid #e6e6e6;
-      white-space: normal;
-      margin-bottom: 5px;    
-    }
-	
     .nav-tabs {
         overflow-x: scroll;
         overflow-y: hidden;
