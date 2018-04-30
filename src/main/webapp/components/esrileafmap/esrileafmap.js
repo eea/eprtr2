@@ -331,11 +331,14 @@ angular.module('myApp.esrileafmap', ['ngRoute','leaflet-directive'])
 	};
 
 	$scope.$watch('mapurls', function() {
+        var maxBounds = L.latLngBounds(new L.LatLng(-60, -170), new L.LatLng(85, 179));
+
 		if($scope.mapurls){
 			//Here we initialize the map
 			leafletData.getMap().then(function(map) {
 				//Initial extent
 				map.invalidateSize();
+                map.setMaxBounds(maxBounds);
 				map.setView(elmconf.europebounds, elmconf.europezoom);
 				map.attributionControl = false;
 				

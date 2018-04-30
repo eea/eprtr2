@@ -185,12 +185,15 @@ angular.module('myApp.lcpmap', ['ngRoute','leaflet-directive'])
     };
 
 	$scope.$watch('mapurls', function() {
+        var maxBounds = L.latLngBounds(new L.LatLng(-60, -170), new L.LatLng(85, 179));
+
 		if($scope.mapurls){
 
 			//Here we initialize the map
 			leafletData.getMap().then(function(map) {
 				//Initial extent
 				map.invalidateSize();
+                map.setMaxBounds(maxBounds);
 				map.setView(lcpconf.europebounds, lcpconf.europezoom);
 				map.attributionControl = false;
 				
