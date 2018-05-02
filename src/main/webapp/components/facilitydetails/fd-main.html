@@ -419,19 +419,22 @@ CONFIDENTIALITY
  -->
 
 		<tab heading="{{tr_f.FacilitylevelConfidentiality}}" active="active.fdconf">
-	
-    <div class="row">
-    	<br />
-		<div class="col-md-12" ng-bind-html="tr_c.ConfidentialityExplanationFacilityLevel" ></div>
-   </div>
+            <div ng-show="details != undefined && details.confidentialIndicator == true && details.confidentialIndicatorCode != null" class="row">
+                <div class="alert alert-info"><strong>Confidentiality code for this facility: </strong>{{details.confidentialIndicatorCode}}</div>
+            </div>
+
+            <div class="row">
+                <br />
+                <div class="col-md-12" ng-bind-html="tr_c.ConfidentialityExplanationFacilityLevel" ></div>
+            </div>
 		
-    <!-- Disclaimer -->
-    <div class="row" >
-		<div class="alert alert-warning">
-		<h4>{{tr_c.DisclaimerHeader}}</h4>
-		<div ng-bind-html="tr_f.DisclaimerTextConfidentiality"></div>
-		</div>
-	</div>
+            <!-- Disclaimer -->
+            <div class="row" >
+                <div class="alert alert-warning">
+                <h4>{{tr_c.DisclaimerHeader}}</h4>
+                <div ng-bind-html="tr_f.DisclaimerTextConfidentiality"></div>
+                </div>
+            </div>
 		</tab>
 		</tabset>
 
