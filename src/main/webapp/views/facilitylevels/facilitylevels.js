@@ -269,9 +269,10 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp
      	facilitySearch.getList(qp).then(function(response) {
      		$scope.updateFacilitiesDownload(response.data);
 
+			console.dir('test message');
      		console.dir(response.data);
 
-            var csvContent = "data:text/csv;charset=utf-8,";
+            var csvContent = "";//"text/csv;encoding:utf-8";
             $scope.facilitiesDownload.forEach(function(infoArray, index){
 
                 var dataString = infoArray.join(';').split();
@@ -279,19 +280,33 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp
 
             });
 
-            var encodedUri = encodeURI(csvContent);
-            var link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "EPRTR_Facility_Level_Facilities"+dateString+".csv");
+            var blob = new Blob([csvContent], {type: 'text/csv'});
+            var filename =  "EPRTR_Facility_Level_Facilities"+dateString+".csv";
+            if(window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveBlob(blob, filename);
+            }
+            else{
+                var elem = window.document.createElement('a');
+                elem.href = window.URL.createObjectURL(blob);
+                elem.download = filename;
+                document.body.appendChild(elem);
+                elem.click();
+                document.body.removeChild(elem);
+            }
 
-            link.click(); // This will download the data file named "my_data.csv".
+            // var encodedUri = encodeURI(csvContent);
+            // var link = document.createElement("a");
+            // link.setAttribute("href", encodedUri);
+            // link.setAttribute("download", "EPRTR_Facility_Level_Facilities"+dateString+".csv");
+            //
+            // link.click(); // This will download the data file named "my_data.csv".
 
             $scope.stopSpin();
 		});
      }
 
-
      $scope.updateFacilitiesDownload = function(items){
+     	console.dir(items);
      	$scope.facilitiesDownload = new Array();
 
      	$scope.facilitiesDownload[1]= new Array();
