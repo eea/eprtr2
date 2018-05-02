@@ -269,27 +269,28 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp
      	facilitySearch.getList(qp).then(function(response) {
      		$scope.updateFacilitiesDownload(response.data);
 
-     		var csvContent = "data:text/csv;charset=utf-8,";
-     		$scope.facilitiesDownload.forEach(function(infoArray, index){
+            var csvContent = "data:text/csv;charset=utf-8,";
+            $scope.facilitiesDownload.forEach(function(infoArray, index){
 
-     			var dataString = infoArray.join(';').split();
-     			csvContent += dataString + "\n";
+                var dataString = infoArray.join(';').split();
+                csvContent += dataString + "\n";
 
-     		}); 
+            });
 
-     		var encodedUri = encodeURI(csvContent);
-     		var link = document.createElement("a");
-     		link.setAttribute("href", encodedUri);
-     		link.setAttribute("download", "EPRTR_Facility_Level_Facilities"+dateString+".csv");
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "EPRTR_Facility_Level_Facilities"+dateString+".csv");
 
-		    link.click(); // This will download the data file named "my_data.csv".
-		    
-		    $scope.stopSpin();
+            link.click(); // This will download the data file named "my_data.csv".
+
+            $scope.stopSpin();
 		});
      }
 
+
      $scope.updateFacilitiesDownload = function(items){
-     	$scope.facilitiesDownload= new Array();
+     	$scope.facilitiesDownload = new Array();
 
      	$scope.facilitiesDownload[1]= new Array();
      	$scope.facilitiesDownload[1][0] = $scope.tr_c.Year;
@@ -313,7 +314,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp
         $scope.facilitiesDownload[top_fields][5] = $scope.tr_f.ParentCompanyName;
        	$scope.facilitiesDownload[top_fields][6] = $scope.tr_f.PostalCode;
        	$scope.facilitiesDownload[top_fields][7] = $scope.tr_c.Address;
-        $scope.facilitiesDownload[top_fields][8] = 'City';//$scope.tr_f.City;
+        $scope.facilitiesDownload[top_fields][8] = $scope.tr_f.City;
         $scope.facilitiesDownload[top_fields][9] = $scope.tr_c.ActivityCode;
         $scope.facilitiesDownload[top_fields][10] = $scope.tr_c.ActivityName;
         $scope.facilitiesDownload[top_fields][11] = $scope.tr_c.CountryCode;
