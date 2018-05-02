@@ -269,6 +269,8 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp
      	facilitySearch.getList(qp).then(function(response) {
      		$scope.updateFacilitiesDownload(response.data);
 
+     		console.dir(response.data);
+
             var csvContent = "data:text/csv;charset=utf-8,";
             $scope.facilitiesDownload.forEach(function(infoArray, index){
 
@@ -328,7 +330,7 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp
 
      	top_fields += 1;
 
-     	for(var i =0; i<items.length;i++){
+     	for(var i = 0, len = items.length; i< len; i++){
      		var facility = items[i];
      		$scope.facilitiesDownload[i+top_fields]= new Array();
             $scope.facilitiesDownload[i+top_fields][0] = facility.reportingYear;
