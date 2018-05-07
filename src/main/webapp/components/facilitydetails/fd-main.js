@@ -17,6 +17,16 @@ angular.module('myApp.fd-main', ['ngRoute','restangular','ngSanitize'])
  $scope.infoitms = [{'order':0,	'clss':'fdTitles', 	'title':'Facility Details',	'val': ' '}];
  $scope.infoitms2 = [];
  $scope.showalert = false;
+ $scope.reason_text = {
+     'A42a': 'Article 4(2)(a)',
+     'A42b': 'Article 4(2)(b)',
+     'A42c': 'Article 4(2)(c)',
+     'A42d': 'Article 4(2)(d)',
+     'A42e': 'Article 4(2)(e)',
+     'A42f': 'Article 4(2)(f)',
+     'A42g': 'Article 4(2)(g)',
+     'A42h': 'Article 4(2)(h)',
+ };
  var degrees = "°";
 
 

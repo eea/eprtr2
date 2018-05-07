@@ -420,7 +420,7 @@ CONFIDENTIALITY
 
 		<tab heading="{{tr_f.FacilitylevelConfidentiality}}" active="active.fdconf">
             <div ng-show="details != undefined && details.confidentialIndicator == true && details.confidentialIndicatorCode != null" class="row">
-                <div class="alert alert-info"><strong>Confidentiality code for this facility: </strong>{{details.confidentialIndicatorCode}}</div>
+                <div class="alert alert-info"><strong>Confidentiality code for this facility: </strong>{{reason_text[details.confidentialIndicatorCode] != undefined ? reason_text[details.confidentialIndicatorCode] : details.confidentialIndicatorCode}}</div>
             </div>
 
             <div class="row">
