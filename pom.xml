@@ -608,8 +608,6 @@
                             <goal>install-node-and-npm</goal>
                         </goals>
                         <configuration>
-                            <!--<nodeVersion>v0.10.18</nodeVersion>-->
-                            <!--<npmVersion>1.3.8</npmVersion>-->
                             <nodeVersion>v8.9.4</nodeVersion>
                             <npmVersion>5.7.1</npmVersion>
                         </configuration>
