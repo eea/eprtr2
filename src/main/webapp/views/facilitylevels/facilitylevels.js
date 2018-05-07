@@ -269,10 +269,13 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp
      	facilitySearch.getList(qp).then(function(response) {
      		$scope.updateFacilitiesDownload(response.data);
 
-			console.dir('test message');
-     		console.dir(response.data);
-
             var csvContent = "";//"text/csv;encoding:utf-8";
+
+            // for(var i = 0, len = $scope.facilitiesDownload.length; i < len; i++){
+            // 	var content = $scope.facilitiesDownload[i]
+            //
+            // }
+
             $scope.facilitiesDownload.forEach(function(infoArray, index){
 
                 var dataString = infoArray.join(';').split();
@@ -306,7 +309,6 @@ angular.module('myApp.facilitylevels', ['ngRoute', 'myApp.search-filter', 'myApp
      }
 
      $scope.updateFacilitiesDownload = function(items){
-     	console.dir(items);
      	$scope.facilitiesDownload = new Array();
 
      	$scope.facilitiesDownload[1]= new Array();
