@@ -86,12 +86,11 @@
 									</tr>
 									<tr>
 										<td class="fdTitles">{{ tr_c.Area }}:</td>
-										<td>{{ header.area
-											}}</td>
+										<td>{{ header.area }}</td>
 									</tr>
 									<tr>
 										<td class="fdTitles">{{tr_c.Facilities}}:</td>
-										<td>{{cf.getSubSum(activities,"facilityCount",false)}}</td>
+										<td>{{summaryItemsTotal}}</td>
 									</tr>
 								</table>
 							</div>
@@ -116,10 +115,10 @@
 
 						<div class="row top-buffer10">
 
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<div google-chart chart="summaryChart2" style="width: 100%"></div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<div google-chart chart="summaryChart1" style="width: 100%"></div>
 							</div>
 						</div>

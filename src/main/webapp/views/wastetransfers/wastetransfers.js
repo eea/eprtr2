@@ -138,6 +138,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
     $scope.pagedItems = [];
     $scope.currentPage = 1;
     $scope.totalItemCount = 0;
+    $scope.summaryItemsTotal = 0;
     
     $scope.$watch('mapctrl', function(value) {
     	if(typeof $scope.mapctrl.redraw == 'function'){
@@ -361,9 +362,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         $scope.getData = function(qp){
         	$scope.facilitySearch.getList(qp).then(function(response) {
         		$scope.items = response.data;
-        		console.dir('xxx');
-        		console.dir($scope.queryParams.SearchType.toUpperCase());
-                console.dir('xxx');
+        		;
     			switch($scope.queryParams.SearchType.toUpperCase())
                   {
                   	case "SUMMARY":
@@ -396,9 +395,10 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         
         $scope.updateSummaryData = function() {
        	  $scope.summaryItems = angular.copy($scope.items);
-       	  
-       	 	// Handle data
-       	  for(var i = 0; i <$scope.summaryItems.length;i++)
+          $scope.summaryItemsTotal = $scope.summaryItems.length > 0 ? $scope.summaryItems[0].facilityCount : 0;
+
+       	  // Handle data
+       	  for(var i = 0; i <$scope.summaryItems.length; i++)
           {
        		if($scope.summaryItems[i].quantityTotal > 0)
        		{
@@ -412,9 +412,10 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
        			$scope.summaryItems[i].dpct = 0.0;
        			$scope.summaryItems[i].upct = 0.0;
        		}
-   			$scope.summaryItems[i].wt = $scope.summaryItems[i].wastetype
-       		$scope.summaryItems[i].wastetype = $scope.tr_lovwt[$scope.summaryItems[i].wastetype]
+   			$scope.summaryItems[i].wt = $scope.summaryItems[i].wastetype;
+       		$scope.summaryItems[i].wastetype = $scope.tr_lovwt[$scope.summaryItems[i].wastetype];
           }
+
        	  // Create grafs
        	  var graphData = {};
        	  var graphData2 = {};
