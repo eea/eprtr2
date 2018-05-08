@@ -395,7 +395,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         
         $scope.updateSummaryData = function() {
        	  $scope.summaryItems = angular.copy($scope.items);
-          $scope.summaryItemsTotal = $scope.summaryItems.length > 0 ? $scope.summaryItems[0].facilityCount : 0;
+          $scope.summaryItemsTotal = 0;
 
        	  // Handle data
        	  for(var i = 0; i <$scope.summaryItems.length; i++)
@@ -414,6 +414,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
        		}
    			$scope.summaryItems[i].wt = $scope.summaryItems[i].wastetype;
        		$scope.summaryItems[i].wastetype = $scope.tr_lovwt[$scope.summaryItems[i].wastetype];
+       		$scope.summaryItemsTotal += $scope.summaryItems[i].facilityCount;
           }
 
        	  // Create grafs
