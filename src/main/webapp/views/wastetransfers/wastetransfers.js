@@ -145,7 +145,7 @@ angular.module('myApp.wastetransfers', ['ngRoute', 'myApp.search-filter', 'resta
         }
     });
 
-$scope.$watch('currentPage', function(value) {
+	$scope.$watch('currentPage', function(value) {
     	if ($scope.currentSearchFilter !== undefined) {
     		$scope.performSearch();
     	}
@@ -300,7 +300,6 @@ $scope.$watch('currentPage', function(value) {
         $scope.getTabData = function(type)
         {
             $scope.showhazreceivers = false;
-    		console.log('Set showareacomparison 2 false!');
     		$scope.showareacomparison = false;
         
         	if(type.toUpperCase() === "AREACOMPARISON" )
@@ -361,7 +360,10 @@ $scope.$watch('currentPage', function(value) {
         
         $scope.getData = function(qp){
         	$scope.facilitySearch.getList(qp).then(function(response) {
-        		$scope.items = response.data;  
+        		$scope.items = response.data;
+        		console.dir('xxx');
+        		console.dir($scope.queryParams.SearchType.toUpperCase());
+                console.dir('xxx');
     			switch($scope.queryParams.SearchType.toUpperCase())
                   {
                   	case "SUMMARY":
@@ -378,7 +380,7 @@ $scope.$watch('currentPage', function(value) {
                 	   $scope.totalItemCount = response.headers('X-Count');
                   	   $scope.updateFacilitiesData();
                   		break;
-                  	case "HAZ. TRANSBOUNDARY":
+                  	case "HAZTRANSBOUNDARY":
                   		 $scope.updateHaztransboundaryData();
                   		break;
                   	case "TODO1":
@@ -1013,7 +1015,7 @@ $scope.$watch('currentPage', function(value) {
         
         $scope.updateHaztransboundaryData = function()
         {
-        	
+        	console.dir('updateHaztransboundaryData');
         };
         
         $scope.updateTransboundaryDownloadData = function() {
