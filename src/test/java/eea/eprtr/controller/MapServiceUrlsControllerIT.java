@@ -30,13 +30,13 @@ public class MapServiceUrlsControllerIT {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE
                         + ";charset=UTF-8"))
                 .andExpect(jsonPath("$.facilitiesUrl")
-                        .value("http://air.discomap.eea.europa.eu/arcgis/rest/services/Air/EprtrFacilities_Dyna_WGS84/FeatureServer/0"))
+                        .value("https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/EprtrFacilities_Dyna_WGS84/FeatureServer/0"))
                 .andExpect(jsonPath("$.emissionwaterUrl")
-                        .value("http://air.discomap.eea.europa.eu/arcgis/rest/services/Air/EPRTRDiffuseEmissionsWater/MapServer"))
+                        .value("https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/EPRTRDiffuseEmissionsWater/MapServer"))
                 .andExpect(jsonPath("$.emissionairUrl")
-                        .value("http://air.discomap.eea.europa.eu/arcgis/rest/services/Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer"))
+                        .value("https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/EPRTRDiffuseEmissionsAir_Dyna_WGS84/MapServer"))
                 .andExpect(jsonPath("$.lcpUrl").
-                        value("http://air.discomap.eea.europa.eu/arcgis/rest/services/EPRTR/EPRTR_LCP/MapServer"));
+                        value("https://air.discomap.eea.europa.eu/arcgis/rest/services/EPRTR/EPRTR_LCP/MapServer"));
     }
 
 }

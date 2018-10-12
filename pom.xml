@@ -132,7 +132,7 @@
                   <images>
                     <image>
                       <alias>service</alias>
-                      <name>docker.io/eeacms/${project.artifactId}</name>
+                      <name>eeacms/${project.artifactId}</name>
                       <build>
                         <from>tomcat:8-jre7</from>
                         <maintainer>Søren Roug &lt;soren.roug@eea.europa.eu&gt;</maintainer>
@@ -185,7 +185,7 @@
 
                     <image>
                       <alias>database</alias>
-                      <name>docker.io/eeacms/${project.artifactId}-testdb</name>
+                      <name>eeacms/${project.artifactId}-testdb</name>
                       <!--
                       <build>
                         <from>java:8</from>
