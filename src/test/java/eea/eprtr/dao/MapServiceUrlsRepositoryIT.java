@@ -36,7 +36,7 @@ public class MapServiceUrlsRepositoryIT {
     public void testThatRepositoryReturnsTestFacilities() {
         repository.setProfile("test");
         MapServiceUrls results = repository.getMapUrls();
-        String expected = "http://air.discomap.eea.europa.eu/arcgis/rest/services/Air/EPRTRreviewFacilities_Dyna_WGS84/FeatureServer/0";
+        String expected = "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/EPRTRreviewFacilities_Dyna_WGS84/FeatureServer/0";
 
         assertEquals(expected, results.getFacilitiesUrl());
     }
@@ -48,7 +48,7 @@ public class MapServiceUrlsRepositoryIT {
     public void testThatRepositoryReturnsProdFacilities() {
         repository.setProfile("prod");
         MapServiceUrls results = repository.getMapUrls();
-        String expected = "http://air.discomap.eea.europa.eu/arcgis/rest/services/Air/EprtrFacilities_Dyna_WGS84/FeatureServer/0";
+        String expected = "https://air.discomap.eea.europa.eu/arcgis/rest/services/Air/EprtrFacilities_Dyna_WGS84/FeatureServer/0";
 
         assertEquals(expected, results.getFacilitiesUrl());
     }
