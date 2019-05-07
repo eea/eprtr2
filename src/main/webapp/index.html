@@ -1,210 +1,236 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> 
+<!--[if lt IE 7]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
 
 <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>E-PRTR</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>E-PRTR</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- bower:css -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-  <link rel="stylesheet" href="bower_components/bootstrap3-dialog/dist/css/bootstrap-dialog.min.css" />
-  <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
-  <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
-  <link rel="stylesheet" href="bower_components/Leaflet.EasyButton/src/easy-button.css" />
-  <link rel="stylesheet" href="bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css" />
-  <link rel="stylesheet" href="bower_components/spin/stylesheets/jquery.spin.css" />
-  <link rel="stylesheet" href="bower_components/angular-wizard/dist/angular-wizard.min.css" />
-  <link rel="stylesheet" href="bower_components/angular-cookie-law/dist/angular-cookie-law.min.css" />
-  <!-- endbower -->
-  <!-- build:css(.tmp) styles/main.css -->
-  <link href="styles/eprtr-custom.css" rel="stylesheet">
-  <!-- endbuild -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap3-dialog/dist/css/bootstrap-dialog.min.css" />
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="bower_components/Leaflet.EasyButton/src/easy-button.css" />
+    <link rel="stylesheet" href="bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.css" />
+    <link rel="stylesheet" href="bower_components/spin/stylesheets/jquery.spin.css" />
+    <link rel="stylesheet" href="bower_components/angular-wizard/dist/angular-wizard.min.css" />
+    <link rel="stylesheet" href="bower_components/angular-cookie-law/dist/angular-cookie-law.min.css" />
+    <!-- endbower -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link href="styles/eprtr-custom.css" rel="stylesheet">
+    <!-- endbuild -->
 
 </head>
 <body>
 
 <div ng-controller="HeaderController">
-<cookie-law-banner policy-button="true" message="We use cookies to record some preference settings and to analyse how visitors use our web site. Cookies do not contain any personal information about you. If you wish, see how to<a style='color:orange;margin: 0;' href='http://www.aboutcookies.org/how-to-delete-cookies/'>delete/disable cookies</a>in your web browser but then our site may not work correctly. See also our privacy policy." policy-url="http://www.eea.europa.eu/legal/privacy"></cookie-law-banner>
+    <cookie-law-banner policy-button="true"
+                       message="We use cookies to record some preference settings and to analyse how visitors use our web site. Cookies do not contain any personal information about you. If you wish, see how to<a style='color:orange;margin: 0;' href='http://www.aboutcookies.org/how-to-delete-cookies/'>delete/disable cookies</a>in your web browser but then our site may not work correctly. See also our privacy policy."
+                       policy-url="http://www.eea.europa.eu/legal/privacy"></cookie-law-banner>
     <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <div class="row bs-header">
-       	<div class="col-sm-6">
-       		<a href="#home" accesskey="0" title="European Pollutant Release and Transfer Register">
-       		<img id="logo" style="width:100px;margin-top:2px;" src="images/EPRTR-logo_white100_2.png"></a>
-       	</div>
-       	<div class="col-sm-6 text-right hidden-xs">
-       	<a href="http://www.eea.europa.eu" accesskey="2"><img src="images/eealogo_compact56.png"></a>
-       	<a href="http://ec.europa.eu/index_da.htm" accesskey="1"><img id="europeancommission" src="images/europeancommission.gif"></a>
-       	</div>
-       </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-         	<li ng-class="{ active: isActive('/home')}"><a href="#home" ng-click="subtitle = 'Welcome to E-PRTR'">Home</a></li>
-            <li ng-class="{ active: isActive('/facilitylevels')}" class="dropdown" dropdown>
-              <a href="#" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Search the register<span class="caret"></span></a>
-              <ul class="dropdown-menu" dropdown-menu role="menu">
-                <li><a href="#facilitylevels" ng-click="subtitle = 'Facility Level'">Facility Level</a></li>
-                <li><a href="#industrialactivity" ng-click="subtitle = 'Industrial Activity'">Industrial Activity</a></li>
-                <li><a href="#areaoverview" ng-click="subtitle = 'Area Overview'">Area Overview</a></li>
-                <li class="divider"></li>
-                <li><a href="#pollutantreleases" ng-click="subtitle = 'Pollutant Releases'">Pollutant Releases</a></li>
-                <li><a href="#pollutanttransfers" ng-click="subtitle = 'Pollutant Transfers'">Pollutant Transfers</a></li>
-                <li><a href="#wastetransfers" ng-click="subtitle = 'Waste Transfers'">Waste Transfers</a></li>
-                <!--li class="divider"></li>
-                <li><a href="#facilitydetails">Facility details</a></li -->
-              </ul>
-            </li>
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="row bs-header">
+                <div class="col-sm-6">
+                    <a href="#home" accesskey="0" title="European Pollutant Release and Transfer Register">
+                        <img id="logo" style="width:100px;margin-top:2px;" src="images/EPRTR-logo_white100_2.png"></a>
+                </div>
+                <div class="col-sm-6 text-right hidden-xs">
+                    <a href="http://www.eea.europa.eu" accesskey="2"><img src="images/eealogo_compact56.png"></a>
+                    <a href="http://ec.europa.eu/index_da.htm" accesskey="1"><img id="europeancommission"
+                                                                                  src="images/europeancommission.gif"></a>
+                </div>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li ng-class="{ active: isActive('/home')}"><a href="#home"
+                                                                   ng-click="subtitle = 'Welcome to E-PRTR'">Home</a>
+                    </li>
+                    <li ng-class="{ active: isActive('/facilitylevels')}" class="dropdown" dropdown>
+                        <a href="#" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Search
+                            the register<span class="caret"></span></a>
+                        <ul class="dropdown-menu" dropdown-menu role="menu">
+                            <li><a href="#facilitylevels" ng-click="subtitle = 'Facility Level'">Facility Level</a></li>
+                            <li><a href="#industrialactivity" ng-click="subtitle = 'Industrial Activity'">Industrial
+                                Activity</a></li>
+                            <li><a href="#areaoverview" ng-click="subtitle = 'Area Overview'">Area Overview</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#pollutantreleases" ng-click="subtitle = 'Pollutant Releases'">Pollutant
+                                Releases</a></li>
+                            <li><a href="#pollutanttransfers" ng-click="subtitle = 'Pollutant Transfers'">Pollutant
+                                Transfers</a></li>
+                            <li><a href="#wastetransfers" ng-click="subtitle = 'Waste Transfers'">Waste Transfers</a>
+                            </li>
+                            <!--li class="divider"></li>
+                            <li><a href="#facilitydetails">Facility details</a></li -->
+                        </ul>
+                    </li>
 
-            <li class="dropdown" dropdown>
-              <a href="#" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Diffuse emissions<span class="caret"></span></a>
-              <ul class="dropdown-menu" dropdown-menu role="menu">
-                <li><a href="#diffemissionsair" ng-click="subtitle = 'Diffuse emissions - releases to air'">Releases to air</a></li>
-                <li><a href="#diffemissionswater" ng-click="subtitle = 'Diffuse emissions - releases to water'">Releases to water</a></li>
-              </ul>
-            </li>
+                    <li class="dropdown" dropdown>
+                        <a href="#" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Diffuse
+                            emissions<span class="caret"></span></a>
+                        <ul class="dropdown-menu" dropdown-menu role="menu">
+                            <li><a href="#diffemissionsair" ng-click="subtitle = 'Diffuse emissions - releases to air'">Releases
+                                to air</a></li>
+                            <li><a href="#diffemissionswater"
+                                   ng-click="subtitle = 'Diffuse emissions - releases to water'">Releases to water</a>
+                            </li>
+                        </ul>
+                    </li>
 
-            <li ng-class="{ active: isActive('/about')}"><a href="#static?cont=about" ng-click="subtitle = 'About E-PRTR'">About E-PRTR</a></li>
-            <li><a href="#faq" ng-click="subtitle = 'faq'">FAQ</a></li>
-            <li><a href="#static?cont=feedback" ng-click="subtitle = 'faq'">Feedback</a></li>
-            <!--<li><a href="#lcplevels" ng-click="subtitle = 'Combustion Plants'">Combustion Plants</a></li>-->
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown" dropdown>
-              <a href="#" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Download<span class="caret"></span></a>
-              <ul class="dropdown-menu" dropdown-menu role="menu">
-                <li><a href="#static?cont=downloaddata" ng-click="subtitle = 'Download Data'">E-PRTR Dataset</a></li>
-                <li><a href="#downloadguidance" ng-click="subtitle = 'Download Guide'">E-PRTR Guidance document</a></li>
-              </ul>
-            </li>
-            <li class="dropdown" dropdown>
-              <a href="#" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Links<span class="caret"></span></a>
-              <ul class="dropdown-menu" dropdown-menu role="menu">
-                <li><a href="#static?cont=linksnational" ng-click="subtitle = 'Download Guide'">National Registers</a></li>
-                <li><a href="#static?cont=linkseu" ng-click="subtitle = 'Download Guide'">International Organisations</a></li>
-                <li><a href="#static?cont=linksresearch" ng-click="subtitle = 'Download Data'">Other Information Sources</a></li>
-              </ul>
-            </li>
-            <li class="dropdown" dropdown>
-              <a href="#" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Library<span class="caret"></span></a>
-              <ul class="dropdown-menu" dropdown-menu role="menu">
-                <li><a href="#glossary" ng-click="subtitle = 'Glossary'">Glossary</a></li>
-                <li><a href="#static?cont=activity" ng-click="subtitle = 'Activities'">Activities</a></li>
-                <li><a href="#pollutantinfo" ng-click="subtitle = 'Pollutants'">Pollutant Descriptions</a></li>
-                <li><a href="#static?cont=waste" ng-click="subtitle = 'Waste'">Waste</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
+                    <li ng-class="{ active: isActive('/about')}"><a href="#static?cont=about"
+                                                                    ng-click="subtitle = 'About E-PRTR'">About
+                        E-PRTR</a></li>
+                    <li><a href="#faq" ng-click="subtitle = 'faq'">FAQ</a></li>
+                    <li><a href="#static?cont=feedback" ng-click="subtitle = 'faq'">Feedback</a></li>
+                    <!--<li><a href="#lcplevels" ng-click="subtitle = 'Combustion Plants'">Combustion Plants</a></li>-->
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown" dropdown>
+                        <a href="#" class="dropdown-toggle" dropdown-toggle role="button" aria-expanded="false">Download<span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu" dropdown-menu role="menu">
+                            <li><a href="#static?cont=downloaddata" ng-click="subtitle = 'Download Data'">E-PRTR
+                                Dataset</a></li>
+                            <li><a href="#downloadguidance" ng-click="subtitle = 'Download Guide'">E-PRTR Guidance
+                                document</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" dropdown>
+                        <a href="#" class="dropdown-toggle" dropdown-toggle role="button"
+                           aria-expanded="false">Links<span class="caret"></span></a>
+                        <ul class="dropdown-menu" dropdown-menu role="menu">
+                            <li><a href="#static?cont=linksnational" ng-click="subtitle = 'Download Guide'">National
+                                Registers</a></li>
+                            <li><a href="#static?cont=linkseu" ng-click="subtitle = 'Download Guide'">International
+                                Organisations</a></li>
+                            <li><a href="#static?cont=linksresearch" ng-click="subtitle = 'Download Data'">Other
+                                Information Sources</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" dropdown>
+                        <a href="#" class="dropdown-toggle" dropdown-toggle role="button"
+                           aria-expanded="false">Library<span class="caret"></span></a>
+                        <ul class="dropdown-menu" dropdown-menu role="menu">
+                            <li><a href="#glossary" ng-click="subtitle = 'Glossary'">Glossary</a></li>
+                            <li><a href="#static?cont=activity" ng-click="subtitle = 'Activities'">Activities</a></li>
+                            <li><a href="#pollutantinfo" ng-click="subtitle = 'Pollutants'">Pollutant Descriptions</a>
+                            </li>
+                            <li><a href="#static?cont=waste" ng-click="subtitle = 'Waste'">Waste</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
     </nav>
 
-  <div id="content">
-      <!-- div class="container">
-       <div class="row">
-       	<div class="col-md-6">
-       		<img id="europeancommission" src="images/europeancommission.gif">
-       	</div>
-       	<div class="col-md-1">
-       	</div>
-       	<div class="col-md-5">
-       	<a href="http://www.eea.europa.eu" accesskey="2"><img src="images/logo.gif"></a>
-       	<a href="http://ec.europa.eu/index_da.htm" accesskey="1"><img id="europeancommission" src="images/europeancommission.gif"></a>
-       	</div>
-       </div-->
-<!--          <h2>{{subtitle}}</h2>  -->
-      </div>
+    <div id="content">
+        <div class="container">
+            <div class="alert alert-info" style="margin-top: 20px;">
+                <center>
+                    <strong>Please note that this site currently does not include data for Portugal.</strong>
+                </center>
+            </div>
+            <hr>
+        </div>
     </div>
-
 </div>
 
 
-
-    <div id="container" ng-controller="GlobalCtrl" class="container-fluid">
-  	    <div class="col-md-12"> 
-  	    <div ><!--  ng-controller="HeaderController"-->  
-<!--   	         <h2>{{subtitle}}</h2> -->
-  	     </div>   
-	    	<div id="workarea">
-	      		<div class="row">
-	        		<div ng-view></div>
-	        	</div>
-	      	</div> <!-- workarea -->      
-      	</div>
-    </div>  <!-- container -->
- 
- <!-- 
-POLLUTANT MODAL
- -->
- <!--
-    <script type="text/ng-template" id="eprtrSurveyContent.html">
-		<div class="modal-header ">
-        <button type="button" class="close" ng-click="ok()" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="eprtrSurveyTitel">E-PRTR Survey</h4>
-      </div>
-        <div class="modal-body">
-			<div class="top-buffer10 panel " >
-				<eprtrsurvey finish="finish"/>
-			</div>
+<div id="container" ng-controller="GlobalCtrl" class="container-fluid">
+    <div class="col-md-12">
+        <div><!--  ng-controller="HeaderController"-->
+            <!--   	         <h2>{{subtitle}}</h2> -->
         </div>
-    </script>
---> 
- 
+        <div id="workarea">
+            <div class="row">
+                <div ng-view></div>
+            </div>
+        </div> <!-- workarea -->
+    </div>
+</div>  <!-- container -->
+
+<!--
+POLLUTANT MODAL
+-->
+<!--
+   <script type="text/ng-template" id="eprtrSurveyContent.html">
+       <div class="modal-header ">
+       <button type="button" class="close" ng-click="ok()" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       <h4 class="modal-title" id="eprtrSurveyTitel">E-PRTR Survey</h4>
+     </div>
+       <div class="modal-body">
+           <div class="top-buffer10 panel " >
+               <eprtrsurvey finish="finish"/>
+           </div>
+       </div>
+   </script>
+-->
+
 <footer class="footer">
-	<div class="container-fluid bs-footer">
-		<div class="row" >
-			<div class="col-md-5"><small>			
-			European Environment Agency (EEA)<br />
-			Kongens Nytorv 6<br />
-			1050 Copenhagen K<br />
-			Denmark<br />
-			Phone: +45 3336 7100<br /></small> 
-			</div>
-			<div class="col-md-5" style="padding-top:10px;" >
-			<div class="col-md-1">
-		     	  <a id="twitter-link" title="Follow us on Twitter" href="http://twitter.com/euenvironment">&nbsp;</a>
-		    </div>
-			<div class="col-md-1">		     	
-		          <a id="facebook-link" title="Follow us on Facebook" href="http://www.facebook.com/European.Environment.Agency">&nbsp;</a>
-		     </div>
-		     	<div class="col-md-1">
-		   	      <a id="youtube-link" title="Follow us on YouTube" href="http://www.youtube.com/user/EEAvideos">&nbsp;</a>
-		     	</div>
-		     	<div class="col-md-1">   	
-		   	     	<a id="rss-link" title="Follow us on RSS-Feed" class="link-plain" href="http://www.eea.europa.eu/subscription/news-feeds">&nbsp;</a>
-		     	</div>
-		     	<div class="col-md-1">
-		   		   <a id="email-link" title="Subscribe via email" href="http://www.eea.europa.eu/subscription/targeted-subscription">&nbsp;</a>
-		    	</div>
-			</div>
-			<div class="col-md-2 text-right">
-				<div class="row">
-				<div class="col-md-9 text-left" >
-				<small>The European Environment<br />Agency (EEA) is an agency of<br /> the European Union.<br />
-				<a href="http://europa.eu/geninfo/legal_notices_en.htm">Legal notice</a></small>
-				</div>
-				<div  class="col-md-3" style="float: right;">
-				<img src="images/eu-flag.gif" alt="" />
-				</div></div>
-			</div>
-		</div>
-		<!-- http://www.eea.europa.eu/legal/ -->
-	</div>
+    <div class="container-fluid bs-footer">
+        <div class="row">
+            <div class="col-md-5">
+                <small>
+                    European Environment Agency (EEA)<br/>
+                    Kongens Nytorv 6<br/>
+                    1050 Copenhagen K<br/>
+                    Denmark<br/>
+                    Phone: +45 3336 7100<br/></small>
+            </div>
+            <div class="col-md-5" style="padding-top:10px;">
+                <div class="col-md-1">
+                    <a id="twitter-link" title="Follow us on Twitter" href="http://twitter.com/euenvironment">&nbsp;</a>
+                </div>
+                <div class="col-md-1">
+                    <a id="facebook-link" title="Follow us on Facebook"
+                       href="http://www.facebook.com/European.Environment.Agency">&nbsp;</a>
+                </div>
+                <div class="col-md-1">
+                    <a id="youtube-link" title="Follow us on YouTube" href="http://www.youtube.com/user/EEAvideos">&nbsp;</a>
+                </div>
+                <div class="col-md-1">
+                    <a id="rss-link" title="Follow us on RSS-Feed" class="link-plain"
+                       href="http://www.eea.europa.eu/subscription/news-feeds">&nbsp;</a>
+                </div>
+                <div class="col-md-1">
+                    <a id="email-link" title="Subscribe via email"
+                       href="http://www.eea.europa.eu/subscription/targeted-subscription">&nbsp;</a>
+                </div>
+            </div>
+            <div class="col-md-2 text-right">
+                <div class="row">
+                    <div class="col-md-9 text-left">
+                        <small>The European Environment<br/>Agency (EEA) is an agency of<br/> the European Union.<br/>
+                            <a href="http://europa.eu/geninfo/legal_notices_en.htm">Legal notice</a></small>
+                    </div>
+                    <div class="col-md-3" style="float: right;">
+                        <img src="images/eu-flag.gif" alt=""/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- http://www.eea.europa.eu/legal/ -->
+    </div>
 </footer>
 
 <!-- Matomo -->
@@ -213,133 +239,137 @@ POLLUTANT MODAL
     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
     _paq.push(['trackPageView']);
     _paq.push(['enableLinkTracking']);
-    (function() {
-        var u="https://matomo.eea.europa.eu/";
-        _paq.push(['setTrackerUrl', u+'piwik.php']);
+    (function () {
+        var u = "https://matomo.eea.europa.eu/";
+        _paq.push(['setTrackerUrl', u + 'piwik.php']);
         _paq.push(['setSiteId', '5']);
-        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+        g.type = 'text/javascript';
+        g.async = true;
+        g.defer = true;
+        g.src = u + 'piwik.js';
+        s.parentNode.insertBefore(g, s);
     })();
 </script>
-<noscript><p><img src="https://matomo.eea.europa.eu/piwik.php?idsite=5&rec=1" style="border:0;" alt="" /></p></noscript>
+<noscript><p><img src="https://matomo.eea.europa.eu/piwik.php?idsite=5&rec=1" style="border:0;" alt=""/></p></noscript>
 <!-- End Matomo Code -->
 
 
 <!-- build:js(src/main/webapp) scripts/vendor.js -->
-  <!-- bower:js -->
-  <script src="bower_components/jquery/dist/jquery.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/angular-loader/angular-loader.js"></script>
-  <script src="bower_components/angular-mocks/angular-mocks.js"></script>
-  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="bower_components/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js"></script>
-  <script src="bower_components/lodash/dist/lodash.compat.js"></script>
-  <script src="bower_components/restangular/dist/restangular.js"></script>
-  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-  <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
-  <script src="bower_components/leaflet-plugins/control/Layers.Load.js"></script>
-  <script src="bower_components/leaflet-plugins/control/Permalink.js"></script>
-  <script src="bower_components/leaflet-plugins/control/Permalink.Layer.js"></script>
-  <script src="bower_components/leaflet-plugins/control/Permalink.Line.js"></script>
-  <script src="bower_components/leaflet-plugins/control/Permalink.Marker.js"></script>
-  <script src="bower_components/leaflet-plugins/control/Permalink.Overlay.js"></script>
-  <script src="bower_components/leaflet-plugins/layer/Icon.Canvas.js"></script>
-  <script src="bower_components/leaflet-plugins/layer/Layer.Deferred.js"></script>
-  <script src="bower_components/leaflet-plugins/layer/Marker.Rotate.js"></script>
-  <script src="bower_components/leaflet-plugins/layer/Marker.Text.js"></script>
-  <script src="bower_components/leaflet-plugins/layer/vector/GPX.js"></script>
-  <script src="bower_components/leaflet-plugins/layer/vector/GPX.Speed.js"></script>
-  <script src="bower_components/leaflet-plugins/layer/vector/KML.js"></script>
-  <script src="bower_components/leaflet-plugins/layer/vector/OSM.js"></script>
-  <script src="bower_components/leaflet-plugins/layer/vector/TOPOJSON.js"></script>
-  <script src="bower_components/leaflet-plugins/layer/tile/Bing.js"></script>
-  <script src="bower_components/leaflet-plugins/layer/tile/Yandex.js"></script>
-  <script src="bower_components/esri-leaflet/dist/esri-leaflet.js"></script>
-  <script src="bower_components/esri-leaflet-clustered-feature-layer/dist/esri-leaflet-clustered-feature-layer.js"></script>
-  <script src="bower_components/Leaflet.EasyButton/src/easy-button.js"></script>
-  <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
-  <script src="bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js"></script>
-  <script src="bower_components/underscore/underscore.js"></script>
-  <script src="bower_components/angular-spinner/dist/angular-spinner.min.js"></script>
-  <script src="bower_components/spin/javascripts/jquery.spin.js"></script>
-  <script src="bower_components/ng-csv/build/ng-csv.min.js"></script>
-  <script src="bower_components/angu-fixed-header-table/angu-fixed-header-table.js"></script>
-  <script src="bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
-  <script src="bower_components/angular-cookie-law/dist/angular-cookie-law.min.js"></script>
-  <!-- endbower -->
-  <script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-  <!-- endbuild --> 
-  <!-- script type="text/javascript" src="https://www.google.com/jsapi"></script-->
- 
-  <!-- build:js(src/main/webapp) scripts/scripts.js -->
-  <script src="app.js"></script>
-  <script src="views/home/home.js"></script>
-  <script src="views/about/about.js"></script>
-  <script src="views/facilitylevels/facilitylevels.js"></script>
-  <script src="views/facilitydetails/facilitydetails.js"></script>
-  <script src="views/areaoverview/areaoverview.js"></script>
-  <script src="views/industrialactivity/industrialactivity.js"></script>
-  <script src="views/pollutantreleases/pollutantreleases.js"></script>
-  <script src="views/pollutanttransfers/pollutanttransfers.js"></script>
-  <script src="views/wastetransfers/wastetransfers.js"></script>
-  <script src="views/timeseriesview/timeseriesview.js"></script>
-  <script src="views/emissions/diffuseemissions.js"></script>
-  <script src="views/emissions/diffemissionsair.js"></script>
-  <script src="views/emissions/diffemissionswater.js"></script>
-  <script src="views/pollutantinfo/pollutantinfo.js"></script>
-  <script src="views/static/static.js"></script>
-  <script src="views/static/faq.js"></script>
-  <script src="views/static/downloadguidance.js"></script>
-  <script src="views/static/glossary.js"></script>
-  <script src="views/home/navsearch.js"></script>
-  <script src="views/home/navlibrary.js"></script>
-  <script src="views/lcp/lcplevels.js"></script>
-  <script src="views/lcp/lcpdetails.js"></script>
- 
-  <script src="components/search-filter/search-filter.js"></script>
-  <script src="components/facilitydetails/fd-main.js"></script>
-  <script src="components/esrileafmap/esrileafmap.js"></script>
-  <script src="components/esrileafmap/emissionmapair.js"></script>
-  <script src="components/esrileafmap/emissionmapwater.js"></script>
-  <script src="components/esrileafmap/lcpmap.js"></script>
-  <script src="components/search-placement/search-placement.js"></script>
-  <script src="components/activity-search-filter/activity-search-filter.js"></script>
-  <script src="components/facilitydetails/fd-main.js"></script>
-  <script src="components/pollutant-search-filter/pollutant-search-filter.js"></script>
-  <script src="components/waste-search-filter/waste-search-filter.js"></script>
-  <script src="components/timeseries/timeseries.js"></script>
-  <script src="components/emission-search-filter/emission-air-search-filter.js"></script>
-  <script src="components/emission-search-filter/emission-water-search-filter.js"></script>
-  <script src="components/wastetransfer/wastetransferconfidential.js"></script>
-  <script src="components/wastetransfer/wasteareacomparison.js"></script>
-  <script src="components/wastetransfer/haztransboundary.js"></script>
-  <script src="components/wastetransfer/hazreceivers.js"></script>
-  <script src="components/wastetransfer/hazreceiverstreatment.js"></script>
-  <script src="components/areaoverview/wt_tab.js"></script>
-  <script src="components/areaoverview/pr_tab.js"></script>
-  <script src="components/areaoverview/pt_tab.js"></script>
-  <script src="components/pollutants-details/pd-main.js"></script>
-  <script src="components/charts/ng-google-chart.js"></script>
-  <script src="components/lcp/lcpdetails.js"></script>
-  <script src="components/survey/survey.js"></script>
-  <script src="components/search-placement/lcp-search-placement.js"></script>
-  <script src="directives/dd-text-collapse.js"></script>
-  <script src="directives/wastetype-selector.js"></script>
-  <script src="directives/medium-selector.js"></script>
-  <script src="directives/searchfilter-pollutant.js"></script>
-  <script src="directives/print-content.js"></script>
-  <script src="directives/myEnter.js"></script>
-  <!-- endbuild -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/angular-loader/angular-loader.js"></script>
+<script src="bower_components/angular-mocks/angular-mocks.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/bootstrap3-dialog/dist/js/bootstrap-dialog.min.js"></script>
+<script src="bower_components/lodash/dist/lodash.compat.js"></script>
+<script src="bower_components/restangular/dist/restangular.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+<script src="bower_components/leaflet-plugins/control/Layers.Load.js"></script>
+<script src="bower_components/leaflet-plugins/control/Permalink.js"></script>
+<script src="bower_components/leaflet-plugins/control/Permalink.Layer.js"></script>
+<script src="bower_components/leaflet-plugins/control/Permalink.Line.js"></script>
+<script src="bower_components/leaflet-plugins/control/Permalink.Marker.js"></script>
+<script src="bower_components/leaflet-plugins/control/Permalink.Overlay.js"></script>
+<script src="bower_components/leaflet-plugins/layer/Icon.Canvas.js"></script>
+<script src="bower_components/leaflet-plugins/layer/Layer.Deferred.js"></script>
+<script src="bower_components/leaflet-plugins/layer/Marker.Rotate.js"></script>
+<script src="bower_components/leaflet-plugins/layer/Marker.Text.js"></script>
+<script src="bower_components/leaflet-plugins/layer/vector/GPX.js"></script>
+<script src="bower_components/leaflet-plugins/layer/vector/GPX.Speed.js"></script>
+<script src="bower_components/leaflet-plugins/layer/vector/KML.js"></script>
+<script src="bower_components/leaflet-plugins/layer/vector/OSM.js"></script>
+<script src="bower_components/leaflet-plugins/layer/vector/TOPOJSON.js"></script>
+<script src="bower_components/leaflet-plugins/layer/tile/Bing.js"></script>
+<script src="bower_components/leaflet-plugins/layer/tile/Yandex.js"></script>
+<script src="bower_components/esri-leaflet/dist/esri-leaflet.js"></script>
+<script src="bower_components/esri-leaflet-clustered-feature-layer/dist/esri-leaflet-clustered-feature-layer.js"></script>
+<script src="bower_components/Leaflet.EasyButton/src/easy-button.js"></script>
+<script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
+<script src="bower_components/Leaflet.awesome-markers/dist/leaflet.awesome-markers.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/angular-spinner/dist/angular-spinner.min.js"></script>
+<script src="bower_components/spin/javascripts/jquery.spin.js"></script>
+<script src="bower_components/ng-csv/build/ng-csv.min.js"></script>
+<script src="bower_components/angu-fixed-header-table/angu-fixed-header-table.js"></script>
+<script src="bower_components/angular-wizard/dist/angular-wizard.min.js"></script>
+<script src="bower_components/angular-cookie-law/dist/angular-cookie-law.min.js"></script>
+<!-- endbower -->
+<script src="bower_components/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+<!-- endbuild -->
+<!-- script type="text/javascript" src="https://www.google.com/jsapi"></script-->
+
+<!-- build:js(src/main/webapp) scripts/scripts.js -->
+<script src="app.js"></script>
+<script src="views/home/home.js"></script>
+<script src="views/about/about.js"></script>
+<script src="views/facilitylevels/facilitylevels.js"></script>
+<script src="views/facilitydetails/facilitydetails.js"></script>
+<script src="views/areaoverview/areaoverview.js"></script>
+<script src="views/industrialactivity/industrialactivity.js"></script>
+<script src="views/pollutantreleases/pollutantreleases.js"></script>
+<script src="views/pollutanttransfers/pollutanttransfers.js"></script>
+<script src="views/wastetransfers/wastetransfers.js"></script>
+<script src="views/timeseriesview/timeseriesview.js"></script>
+<script src="views/emissions/diffuseemissions.js"></script>
+<script src="views/emissions/diffemissionsair.js"></script>
+<script src="views/emissions/diffemissionswater.js"></script>
+<script src="views/pollutantinfo/pollutantinfo.js"></script>
+<script src="views/static/static.js"></script>
+<script src="views/static/faq.js"></script>
+<script src="views/static/downloadguidance.js"></script>
+<script src="views/static/glossary.js"></script>
+<script src="views/home/navsearch.js"></script>
+<script src="views/home/navlibrary.js"></script>
+<script src="views/lcp/lcplevels.js"></script>
+<script src="views/lcp/lcpdetails.js"></script>
+
+<script src="components/search-filter/search-filter.js"></script>
+<script src="components/facilitydetails/fd-main.js"></script>
+<script src="components/esrileafmap/esrileafmap.js"></script>
+<script src="components/esrileafmap/emissionmapair.js"></script>
+<script src="components/esrileafmap/emissionmapwater.js"></script>
+<script src="components/esrileafmap/lcpmap.js"></script>
+<script src="components/search-placement/search-placement.js"></script>
+<script src="components/activity-search-filter/activity-search-filter.js"></script>
+<script src="components/facilitydetails/fd-main.js"></script>
+<script src="components/pollutant-search-filter/pollutant-search-filter.js"></script>
+<script src="components/waste-search-filter/waste-search-filter.js"></script>
+<script src="components/timeseries/timeseries.js"></script>
+<script src="components/emission-search-filter/emission-air-search-filter.js"></script>
+<script src="components/emission-search-filter/emission-water-search-filter.js"></script>
+<script src="components/wastetransfer/wastetransferconfidential.js"></script>
+<script src="components/wastetransfer/wasteareacomparison.js"></script>
+<script src="components/wastetransfer/haztransboundary.js"></script>
+<script src="components/wastetransfer/hazreceivers.js"></script>
+<script src="components/wastetransfer/hazreceiverstreatment.js"></script>
+<script src="components/areaoverview/wt_tab.js"></script>
+<script src="components/areaoverview/pr_tab.js"></script>
+<script src="components/areaoverview/pt_tab.js"></script>
+<script src="components/pollutants-details/pd-main.js"></script>
+<script src="components/charts/ng-google-chart.js"></script>
+<script src="components/lcp/lcpdetails.js"></script>
+<script src="components/survey/survey.js"></script>
+<script src="components/search-placement/lcp-search-placement.js"></script>
+<script src="directives/dd-text-collapse.js"></script>
+<script src="directives/wastetype-selector.js"></script>
+<script src="directives/medium-selector.js"></script>
+<script src="directives/searchfilter-pollutant.js"></script>
+<script src="directives/print-content.js"></script>
+<script src="directives/myEnter.js"></script>
+<!-- endbuild -->
 <script>
 
-    $.fn.isOnScreen = function(){
+    $.fn.isOnScreen = function () {
         var win = $(window);
 
         var viewport = {
-            top : win.scrollTop(),
-            left : win.scrollLeft()
+            top: win.scrollTop(),
+            left: win.scrollLeft()
         };
         viewport.right = viewport.left + win.width();
         viewport.bottom = viewport.top + win.height();
@@ -353,18 +383,18 @@ POLLUTANT MODAL
     };
 
     $(document).ready(function () {
-            $('body').on('click', '.map-overlay', function () {
-                $(this).addClass('clicked');
-            })
+        $('body').on('click', '.map-overlay', function () {
+            $(this).addClass('clicked');
+        })
 
-            $(window).scroll(function() {
-                console.log('scrolling')
-                if($('body').find('.map-overlay').length > 0) {
-                    if ($('.map-overlay').isOnScreen() == false && $('.map-overlay').hasClass('clicked')) {
-                        $('.map-overlay').removeClass('clicked')
-                    }
+        $(window).scroll(function () {
+            console.log('scrolling')
+            if ($('body').find('.map-overlay').length > 0) {
+                if ($('.map-overlay').isOnScreen() == false && $('.map-overlay').hasClass('clicked')) {
+                    $('.map-overlay').removeClass('clicked')
                 }
-            });
+            }
+        });
     })
 </script>
 </body>
