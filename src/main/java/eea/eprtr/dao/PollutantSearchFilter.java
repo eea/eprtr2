@@ -114,7 +114,7 @@ public class PollutantSearchFilter {
 				case AIR:
 					mediumCodesWhereClause.getExpressions().add(qr.get(Pollutantrelease_.quantityAir).isNotNull());
 					break;
-				case SOIL:
+				case LAND:
 					mediumCodesWhereClause.getExpressions().add(qr.get(Pollutantrelease_.quantitySoil).isNotNull());
 					break;
 				case WATER:

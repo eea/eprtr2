@@ -117,7 +117,7 @@ myApp.directive('prSelector', ['$compile','$http', '$filter', 'Restangular', 'ep
  //                   sWATER += scope.tr_c.HazardouswasteWithinCountry + '</BR> (' + $filter('number')(scope.quantityWater) + ' ' + scope.tr_c.Facilities + ') </label>';
                     //var hWATER = $compile(sWATER)(scope);
 
-                    body += '<label class="radio-inline"  for="SOIL"><input type="radio" id="SOIL" name="prsel" ng-model="medfilter.prsel" value="SOIL" /> ';
+                    body += '<label class="radio-inline"  for="LAND"><input type="radio" id="SOIL" name="prsel" ng-model="medfilter.prsel" value="LAND" /> ';
                     body += scope.tr_c.Soil + ' <span class="label label-success label-as-badge" title="'+ $filter('number')(scope.quantitySoil);
                     body += ' ' + scope.tr_c.Facilities+'">' + $filter('number')(scope.quantitySoil) +  '</span></label>';
                     var hbody = $compile(body)(scope);
