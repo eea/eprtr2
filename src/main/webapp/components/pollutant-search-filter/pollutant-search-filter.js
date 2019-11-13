@@ -56,7 +56,7 @@ angular.module('myApp.pollutantSearchFilter', ['restangular', 'myApp.search-filt
                     mediumCodes = mediumCodes.concat('WATER');
                 }
                 if (this.releasesToSoil) {
-                    mediumCodes = mediumCodes.concat('SOIL');
+                    mediumCodes = mediumCodes.concat('LAND');
                 }
                 /*if (this.transfersToWasteWater && showTransfersToInputField) {
                     mediumCodes = mediumCodes.concat('WASTEWATER');

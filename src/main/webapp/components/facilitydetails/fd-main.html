@@ -202,7 +202,7 @@ POLLUTANT RELEASES
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in pollutantreleases | filter:{ pollutantTo: 'LAND' } ">
-	                   <td><img src="images/timeseries.png" class="timesericesImage" ng-click="openTSmodal('pollutantrelease',item.lov_PollutantID,'SOIL',null)" alt="" /></td>
+	                   <td><img src="images/timeseries.png" class="timesericesImage" ng-click="openTSmodal('pollutantrelease',item.lov_PollutantID,'LAND',null)" alt="" /></td>
                     <td>{{tr_lpo[item.pollutantCode]}}</td>
                     <td class="text-right">{{ff.formatQuantity(item.totalQuantity, item.totalQuantityUnitCode, item.confidentialIndicator)}}</td>
                     <td class="text-right">{{ff.formatQuantity(item.accidentalQuantity, item.accidentalQuantityUnitCode, item.confidentialIndicator)}}</td>
