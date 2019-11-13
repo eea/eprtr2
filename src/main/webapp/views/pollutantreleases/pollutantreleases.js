@@ -1258,7 +1258,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
 					$scope.mediumType = 'Water';
 					return 'quantityWater';
 					break;
-				case 'SOIL':
+				case 'LAND':
 					$scope.mediumType = 'Soil';
 					return 'quantitySoil';
 					break;
@@ -1279,7 +1279,7 @@ angular.module('myApp.pollutantreleases', ['ngRoute', 'myApp.search-filter', 're
 					//$scope.mediumType = 'Water';
 					return 'quantityAccidentalWater';
 					break;
-				case 'SOIL':
+				case 'LAND':
 					//$scope.mediumType = 'Soil';
 					return 'quantityAccidentalSoil';
 					break;

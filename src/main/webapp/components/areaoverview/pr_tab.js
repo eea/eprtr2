@@ -104,7 +104,7 @@ angular.module('myApp.areaOverviewPrTab', ['restangular','ngSanitize','angularSp
 					case 'WATER':
 						$scope.med = 'quantityWater';
 						break;
-					case 'SOIL':
+					case 'LAND':
 						$scope.med = 'quantitySoil';
 						break;
 					default:

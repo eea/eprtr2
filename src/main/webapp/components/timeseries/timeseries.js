@@ -179,7 +179,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 					$scope.title = 'Time Series - ' + $scope.tr_c.PollutantReleases;
 					$scope.ConfidentialityExplanation = $scope.tr_t.ConfidentialityExplanationPR1;
 					if ($scope.queryParams.MediumCode == undefined){
-						$scope.queryParams.MediumCode = ['AIR','SOIL','WATER'];
+						$scope.queryParams.MediumCode = ['AIR','LAND','WASTEWATER','WATER'];
 					}
 					if ($scope.queryParams.MediumCode.constructor === Array){
 						$scope.filter.prsel = $scope.queryParams.MediumCode[0];
@@ -668,7 +668,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 			else if ($scope.filter.prsel == 'WATER'){
 				colors = [tsconf.colors.ColorWaterTotal,tsconf.colors.ColorWaterAccidental];
 			}
-			else if ($scope.filter.prsel == 'SOIL'){
+			else if ($scope.filter.prsel == 'LAND'){
 				colors = [tsconf.colors.ColorSoilTotal,tsconf.colors.ColorSoilAccidental];
 			}
 			$scope.tsStackseriesObject.options.colors = colors;
@@ -684,7 +684,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 					ts.quantity = ts.quantityWater;
 					ts.quantityAccidental = ts.accidentalWater;
 				}
-				else if ($scope.filter.prsel == 'SOIL'){
+				else if ($scope.filter.prsel == 'LAND'){
 					ts.quantity = ts.quantitySoil;
 					ts.quantityAccidental = ts.accidentalSoil;
 				}
@@ -781,7 +781,7 @@ angular.module('myApp.timeseries', ['ngRoute','restangular','ngSanitize'])
 			else if ($scope.filter.prsel == 'WATER'){
 				colors = [tsconf.colors.ColorWaterTotal,tsconf.colors.ColorWaterAccidental];
 			}
-			else if ($scope.filter.prsel == 'SOIL'){
+			else if ($scope.filter.prsel == 'LAND'){
 				colors = [tsconf.colors.ColorSoilTotal,tsconf.colors.ColorSoilAccidental];
 			}
 			$scope.tsStackCompareObject.options.colors = colors;
