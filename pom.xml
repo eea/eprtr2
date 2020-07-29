@@ -618,6 +618,9 @@
                         <goals>
                             <goal>npm</goal>
                         </goals>
+                        <configuration>
+                            <arguments>install bower</arguments>
+                        </configuration>
                     </execution>
 
                     <execution>
