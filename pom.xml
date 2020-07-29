@@ -628,7 +628,6 @@
 
                         <configuration>
                             <arguments>install</arguments>
-                            <arguments>--allow-root</arguments>
                         </configuration>
                     </execution>
 
