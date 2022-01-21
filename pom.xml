@@ -19,7 +19,7 @@
         <eprtrdb.url>jdbc:h2:file:${project.build.directory}/eprtrtest</eprtrdb.url>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HHmm</maven.build.timestamp.format>
 
-        <h2.version>1.3.172</h2.version>
+        <h2.version>2.1.210</h2.version>
         <spring.version>4.1.6.RELEASE</spring.version>
         <spring.security.version>4.0.2.RELEASE</spring.security.version>
         <thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
